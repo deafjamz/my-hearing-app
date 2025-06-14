@@ -59,9 +59,7 @@
             </header>
 
             <main>
-                <div class="text-lg font-medium text-gray-700 mb-4" id="keyword-question-container">
-                    <!-- Keyword question will be injected here -->
-                </div>
+                <div class="text-lg font-medium text-gray-700 mb-4" id="keyword-question-container"></div>
                 <div id="progress-container" class="mb-6">
                     <p class="text-lg font-medium text-gray-700">Item <span id="current-question">1</span> of <span id="total-questions">10</span></p>
                     <div class="bg-gray-200 rounded-full h-2.5 mt-2"><div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full"></div></div>
@@ -94,24 +92,19 @@
 
         // --- FRIENDLY NAMES ---
         const friendlySetNames = {
-            // Word Sets
             "Set 1: Voicing Contrast": "Sound Starter", "Set 2: Nasal Contrast": "Nasal Nuances", "Set 3: Vowel Height": "Vowel Power",
             "Set 4: Ling Sounds Emphasis": "Frequency Focus", "Set 5: Place of Articulation": "Tongue Twisters", "Set 6: Manner of Articulation": "Fine-Tuning",
             "Set 7: Word Initial Clusters": "Cluster Challenge", "Set 8: Word Final Clusters": "Finishing Sounds", "Set 9: Multi-Syllabic Simple": "Syllable Steps",
-            "Set 10: Multi-Syllabic Complex": "Complex Combos",
-            // Sentence Sets
-            "Set 11: Simple Minimal Pairs": "Sentence Pairs", "Set 12: Different Verbs": "Action Words", "Set 13: Different Nouns": "Object Hunt",
-            "Set 14: Prepositions": "Location, Location", "Set 15: Questions vs. Statements": "Question Quest", "Set 16: Different Adjectives": "Describing Words",
-            "Set 17: Numbers": "Number Challenge", "Set 18: Similar Sounding Sentences": "Sound Alikes", "Set 19: Complex Sentences": "Sentence Puzzles",
-            "Set 20: Abstract Concepts": "Abstract Ideas",
-            // Keyword Sets
-            "Set 21: Who Questions": "Who Did It?", "Set 22: What Questions (Object)": "What's That?", "Set 23: Where Questions": "Where Is It?",
-            "Set 24: When Questions": "When Did It Happen?", "Set 25: Why Questions (Reason)": "What's the Reason?", "Set 26: Color Questions": "Color Quest",
-            "Set 27: Number Questions": "Count Em Up", "Set 28: What is happening?": "Action Detective", "Set 29: Adjectives & Adverbs": "How Was It?",
-            "Set 30: Multi-Step Directions": "Follow the Clues"
+            "Set 10: Multi-Syllabic Complex": "Complex Combos", "Set 11: Simple Minimal Pairs": "Sentence Pairs", "Set 12: Different Verbs": "Action Words", 
+            "Set 13: Different Nouns": "Object Hunt", "Set 14: Prepositions": "Location, Location", "Set 15: Questions vs. Statements": "Question Quest", 
+            "Set 16: Different Adjectives": "Describing Words", "Set 17: Numbers": "Number Challenge", "Set 18: Similar Sounding Sentences": "Sound Alikes", 
+            "Set 19: Complex Sentences": "Sentence Puzzles", "Set 20: Abstract Concepts": "Abstract Ideas", "Set 21: Who Questions": "Who Did It?", 
+            "Set 22: What Questions (Object)": "What's That?", "Set 23: Where Questions": "Where Is It?", "Set 24: When Questions": "When Did It Happen?", 
+            "Set 25: Why Questions (Reason)": "What's the Reason?", "Set 26: Color Questions": "Color Quest", "Set 27: Number Questions": "Count Em Up", 
+            "Set 28: What is happening?": "Action Detective", "Set 29: Adjectives & Adverbs": "How Was It?", "Set 30: Multi-Step Directions": "Follow the Clues"
         };
         
-        // --- DOM ELEMENTS ---
+        // --- DOM ELEMENTS (omitted for brevity) ---
         const loadingState = document.getElementById('loading-state');
         const activitySelectionScreen = document.getElementById('activity-selection-screen');
         const levelSelectionScreen = document.getElementById('level-selection-screen');
@@ -134,7 +127,6 @@
         const totalScoreEl = document.getElementById('total-score');
         const nextLevelBtn = document.getElementById('next-level-btn');
 
-        // --- STATE & DATA ---
         let allData = { words: [], sentences: [], keywords: [] };
         let currentActivityType = '';
         let currentLevelData = [];
@@ -145,12 +137,28 @@
         let correctWordForTrial = '';
 
         // --- HELPER FUNCTIONS ---
-        // --- MOVED: shuffleArray is now defined before it is called ---
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
+        }
+        
+        /**
+         * NEW: Creates a web-safe filename from any text.
+         * e.g., "...Hello There!..." becomes "hello-there"
+         */
+        function slugify(text) {
+            if (!text) return '';
+            return text
+                .toString()
+                .toLowerCase()
+                .replaceAll('...', '')      // Remove ellipses
+                .replace(/\s+/g, '-')       // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
+                .replace(/\-\-+/g, '-')     // Replace multiple - with single -
+                .replace(/^-+/, '')         // Trim - from start of text
+                .replace(/-+$/, '');        // Trim - from end of text
         }
 
         function parseCSV(csvText, headers) {
@@ -177,7 +185,6 @@
             return parseCSV(csvText, headers);
         }
 
-        // --- MAIN LOGIC FUNCTIONS ---
         async function loadAllData() {
             try {
                 const [words, sentences, keywords] = await Promise.all([
@@ -198,7 +205,6 @@
 
         function showActivitySelection() {
             loadingState.classList.add('hidden');
-            levelSelectionScreen.classList.add('hidden');
             appContent.classList.add('hidden');
             activitySelectionScreen.classList.remove('hidden');
         }
@@ -208,10 +214,8 @@
             activitySelectionScreen.classList.add('hidden');
             levelSelectionScreen.classList.remove('hidden');
             levelButtonsContainer.innerHTML = '';
-
             const dataForActivity = allData[activityType];
             const sets = [...new Set(dataForActivity.map(item => item.Set))];
-            
             sets.forEach(setName => {
                 const button = document.createElement('button');
                 button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none';
@@ -236,10 +240,8 @@
 
         function loadQuestion() {
             if (currentQuestionIndex >= currentLevelData.length) {
-                showCompletionScreen();
-                return;
+                showCompletionScreen(); return;
             }
-
             feedbackMessage.className = 'mt-6 text-xl font-semibold h-8';
             choice1Btn.className = 'w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed';
             choice2Btn.className = 'w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed';
@@ -270,7 +272,8 @@
             correctWordForTrial = audioText;
             
             const audioFolder = `${selectedVoice}_audio`;
-            const audioFileName = encodeURIComponent(audioText) + '.mp3';
+            // --- DEFINITIVE FIX: Use the slugify function to create a clean filename ---
+            const audioFileName = slugify(audioText) + '.mp3';
             const audioUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${audioFolder}/${audioFileName}`;
             
             currentAudio = new Audio(audioUrl);
