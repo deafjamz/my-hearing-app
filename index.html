@@ -236,9 +236,10 @@
             correctWordForTrial = Math.random() > 0.5 ? currentPair.Word1 : currentPair.Word2;
             
             const audioFolder = `${selectedVoice}_audio`;
-            // --- DEFINITIVE FIX: Properly encode the filename for the URL ---
             const audioFileName = encodeURIComponent(correctWordForTrial) + '.mp3';
-            const audioUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${audioFolder}/${audioFileName}`;
+            
+            // --- DEFINITIVE FIX: Use the raw GitHub content URL ---
+            const audioUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/main/${audioFolder}/${audioFileName}`;
 
             console.log("Attempting to load audio from:", audioUrl);
 
