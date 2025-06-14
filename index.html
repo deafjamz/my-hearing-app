@@ -80,15 +80,10 @@
     </div>
 
     <script>
-        // ===================================================================================
-        // --- YOUR CONFIGURATION GOES HERE ---
-        // ===================================================================================
         const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTOpNWzOsrU08iFaBECNU02TLXVoDQSOhM_ioLtGKcTG5dxEKxkil5l-hYWjR9HA1441VHGlke8bWLj/pub?gid=0&single=true&output=csv';
         const GITHUB_USERNAME = "deafjamz";
         const GITHUB_REPO_NAME = "hearing-rehab-audio";
 
-
-        // --- Application Logic (No need to edit below this line) ---
         const friendlySetNames = {
             "Set 1: Voicing Contrast": "Sound Starter",
             "Set 2: Nasal Contrast": "Nasal Nuances",
@@ -137,11 +132,6 @@
             }
         }
 
-        /**
-         * NEW: Robust CSV parser to handle quirks from Google Sheets.
-         * @param {string} csvText The raw CSV text from the fetch response.
-         * @returns {Array} An array of objects representing the parsed data.
-         */
         function parseCSV(csvText) {
             const lines = csvText.trim().split('\n');
             const result = [];
@@ -151,7 +141,6 @@
                 const line = lines[i].trim();
                 if (!line) continue;
                 
-                // This regex is a bit more robust for simple quoted fields
                 const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
                 const obj = {};
                 
@@ -170,7 +159,6 @@
 
         async function fetchSheetData() {
             const csvUrl = GOOGLE_SHEET_URL;
-            console.log('Fetching data from:', csvUrl);
             try {
                 const response = await fetch(csvUrl);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -179,8 +167,6 @@
                 if (!csvText || csvText.length < 10) throw new Error('CSV data appears to be empty.');
                 
                 allData = parseCSV(csvText);
-                console.log(`Parsed ${allData.length} rows of data.`);
-                
                 if (allData.length === 0) throw new Error('No valid data rows found after parsing.');
                 
                 displayLevelSelection();
@@ -200,11 +186,6 @@
 
             const sets = [...new Set(allData.map(item => item.Set))];
             
-            if (sets.length === 0) {
-                levelButtonsContainer.innerHTML = '<p class="text-red-500">No exercise sets could be loaded.</p>';
-                return;
-            }
-
             sets.forEach(setName => {
                 const button = document.createElement('button');
                 button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none';
@@ -255,13 +236,15 @@
             correctWordForTrial = Math.random() > 0.5 ? currentPair.Word1 : currentPair.Word2;
             
             const audioFolder = `${selectedVoice}_audio`;
-            const audioFileName = encodeURIComponent(`${correctWordForTrial}.mp3`);
+            // --- DEFINITIVE FIX: Properly encode the filename for the URL ---
+            const audioFileName = encodeURIComponent(correctWordForTrial) + '.mp3';
             const audioUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${audioFolder}/${audioFileName}`;
 
             console.log("Attempting to load audio from:", audioUrl);
 
             currentAudio = new Audio(audioUrl);
-            currentAudio.onerror = () => {
+            currentAudio.onerror = (e) => {
+                console.error("Audio loading error:", e);
                 feedbackMessage.textContent = `Error loading audio. Check console for URL.`;
                 playSoundBtn.disabled = true;
             };
