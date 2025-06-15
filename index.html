@@ -37,8 +37,11 @@
         </div>
 
         <div id="level-selection-screen" class="hidden">
-             <button id="back-to-activities" class="absolute top-4 left-4 text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Activities</button>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 pt-8">Choose an Exercise</h1>
+             <!-- FIXED: Re-structured the header to prevent overlap -->
+             <div class="w-full mb-4 text-left">
+                <button id="back-to-activities" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Activities</button>
+             </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Choose an Exercise</h1>
             <div class="mb-6">
                 <p class="text-gray-600 mb-2 font-semibold">Select a Voice</p>
                 <div id="voice-toggle" class="relative w-40 h-10 mx-auto rounded-full p-1 cursor-pointer voice-toggle-bg female">
@@ -104,7 +107,7 @@
             "Set 28: What is happening?": "Action Detective", "Set 29: Adjectives & Adverbs": "How Was It?", "Set 30: Multi-Step Directions": "Follow the Clues"
         };
         
-        // --- DOM ELEMENTS (omitted for brevity) ---
+        // --- DOM ELEMENTS ---
         const loadingState = document.getElementById('loading-state');
         const activitySelectionScreen = document.getElementById('activity-selection-screen');
         const levelSelectionScreen = document.getElementById('level-selection-screen');
@@ -127,6 +130,7 @@
         const totalScoreEl = document.getElementById('total-score');
         const nextLevelBtn = document.getElementById('next-level-btn');
 
+        // --- STATE & DATA ---
         let allData = { words: [], sentences: [], keywords: [] };
         let currentActivityType = '';
         let currentLevelData = [];
@@ -143,24 +147,12 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        
-        /**
-         * NEW: Creates a web-safe filename from any text.
-         * e.g., "...Hello There!..." becomes "hello-there"
-         */
+
         function slugify(text) {
             if (!text) return '';
-            return text
-                .toString()
-                .toLowerCase()
-                .replaceAll('...', '')      // Remove ellipses
-                .replace(/\s+/g, '-')       // Replace spaces with -
-                .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
-                .replace(/\-\-+/g, '-')     // Replace multiple - with single -
-                .replace(/^-+/, '')         // Trim - from start of text
-                .replace(/-+$/, '');        // Trim - from end of text
+            return text.toString().toLowerCase().replaceAll('...', '').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
         }
-
+        
         function parseCSV(csvText, headers) {
             const lines = csvText.trim().split('\n');
             const result = [];
@@ -185,6 +177,7 @@
             return parseCSV(csvText, headers);
         }
 
+        // --- MAIN LOGIC FUNCTIONS ---
         async function loadAllData() {
             try {
                 const [words, sentences, keywords] = await Promise.all([
@@ -205,6 +198,7 @@
 
         function showActivitySelection() {
             loadingState.classList.add('hidden');
+            levelSelectionScreen.classList.add('hidden');
             appContent.classList.add('hidden');
             activitySelectionScreen.classList.remove('hidden');
         }
@@ -272,7 +266,6 @@
             correctWordForTrial = audioText;
             
             const audioFolder = `${selectedVoice}_audio`;
-            // --- DEFINITIVE FIX: Use the slugify function to create a clean filename ---
             const audioFileName = slugify(audioText) + '.mp3';
             const audioUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${audioFolder}/${audioFileName}`;
             
