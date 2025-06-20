@@ -54,7 +54,15 @@
 
         <!-- Activity Selection -->
         <div id="activity-selection-screen" class="hidden fade-in">
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Choose a Category</h1>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6" id="category-title">Choose a Category</h1>
+            <!-- Hidden Admin QC Toggle -->
+            <div id="qc-mode-indicator" class="hidden mb-4 p-2 bg-red-100 border border-red-300 rounded text-center">
+                <span class="text-red-800 font-semibold">🔧 Admin QC Mode Active</span>
+                <div class="mt-2 flex gap-2 justify-center">
+                    <button id="export-qc-btn" class="px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">Export Data</button>
+                    <button id="disable-qc-btn" class="px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700">Disable</button>
+                </div>
+            </div>
             <div class="grid grid-cols-1 gap-4">
                 <button data-activity="words" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
                     <div class="flex items-center justify-between">
@@ -135,22 +143,30 @@
                         </svg>
                     </button>
                     
-                    <!-- Audio Status Indicator -->
-                    <div id="audio-status" class="mt-3 text-sm text-gray-500">
-                        <span id="audio-status-text">Click to play audio</span>
-                        <div id="preload-indicator" class="hidden mt-1">
-                            <div class="flex items-center justify-center text-xs text-blue-600">
-                                <div class="w-2 h-2 bg-blue-600 rounded-full mr-2 animate-pulse"></div>
-                                Preparing next audio...
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Choice Buttons -->
                 <div id="choice-container" class="grid grid-cols-1 gap-4">
                     <button id="choice1-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
                     <button id="choice2-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
+                </div>
+                
+                <!-- Admin QC Controls -->
+                <div id="admin-qc-controls" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <p class="text-sm font-semibold text-red-800 mb-2">Admin QC Mode</p>
+                    <div class="flex gap-2">
+                        <button id="flag-audio-btn" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition">Flag Audio Quality</button>
+                        <select id="issue-type" class="px-2 py-1 text-sm border rounded">
+                            <option value="unclear_pronunciation">Unclear Pronunciation</option>
+                            <option value="wrong_emphasis">Wrong Emphasis</option>
+                            <option value="robotic_voice">Robotic Voice</option>
+                            <option value="cut_off">Audio Cut Off</option>
+                            <option value="too_fast">Too Fast</option>
+                            <option value="too_slow">Too Slow</option>
+                            <option value="background_noise">Background Noise</option>
+                            <option value="volume_inconsistent">Volume Inconsistent</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Feedback -->
@@ -179,6 +195,7 @@
         const GITHUB_USERNAME = "deafjamz";
         const GITHUB_REPO_NAME = "hearing-rehab-audio";
         const GOOGLE_SHEET_ID = "1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek";
+        const GOOGLE_API_KEY = "AIzaSyDzpvre6oaVH9U7USUEiiqjUhY7KhdOzGM";
         
         // Cache settings
         const AUDIO_CACHE_SIZE = 50; // Max number of audio files to cache
@@ -241,6 +258,10 @@
         let currentAudio = null;
         let selectedVoice = 'female';
         let correctWordForTrial = '';
+        
+        // === ADMIN QC MODE ===
+        let adminQCMode = localStorage.getItem('adminQCMode') === 'true';
+        let qualityIssues = JSON.parse(localStorage.getItem('qualityIssues') || '[]');
         
         // Audio caching and preloading
         let audioCache = new Map();
@@ -411,23 +432,22 @@
             const cacheKey = getCacheKey(correctWordForTrial, selectedVoice);
             
             if (audioCache.has(cacheKey)) {
-                audioStatusText.textContent = 'Audio ready - click to play';
+                playSoundBtn.disabled = false;
                 playSoundBtn.classList.add('audio-ready');
                 return audioCache.get(cacheKey);
             }
             
             // Not in cache, load it
-            audioStatusText.textContent = 'Loading audio...';
+            playSoundBtn.disabled = true;
             playSoundBtn.classList.add('audio-loading');
             
             try {
                 const audio = await preloadAudio(correctWordForTrial, selectedVoice);
-                audioStatusText.textContent = 'Audio ready - click to play';
+                playSoundBtn.disabled = false;
                 playSoundBtn.classList.remove('audio-loading');
                 playSoundBtn.classList.add('audio-ready');
                 return audio;
             } catch (e) {
-                audioStatusText.textContent = 'Audio error - try again';
                 playSoundBtn.classList.remove('audio-loading');
                 playSoundBtn.classList.add('audio-error');
                 console.error('Audio loading error:', e);
@@ -589,10 +609,12 @@
             choice2Btn.className = 'w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed';
             choice1Btn.disabled = true;
             choice2Btn.disabled = true;
-            playSoundBtn.disabled = false;
+            playSoundBtn.disabled = true;
             playSoundBtn.classList.remove('audio-ready', 'audio-loading', 'audio-error');
             keywordQuestionContainer.classList.add('hidden');
-            audioStatusText.textContent = 'Preparing audio...';
+            
+            // Update QC display
+            updateQCDisplay();
 
             const currentItem = currentLevelData[currentQuestionIndex];
             let audioText = '';
@@ -746,10 +768,8 @@
                     await currentAudio.play();
                     choice1Btn.disabled = false;
                     choice2Btn.disabled = false;
-                    audioStatusText.textContent = 'Make your choice';
                 } catch (e) {
                     console.error("Error playing audio:", e);
-                    audioStatusText.textContent = 'Playback error - try again';
                 }
             }
         });
@@ -769,6 +789,231 @@
             updateProgressDisplay();
         });
 
+        // === ADMIN QC FUNCTIONS ===
+        function toggleAdminQCMode() {
+            adminQCMode = !adminQCMode;
+            localStorage.setItem('adminQCMode', adminQCMode.toString());
+            updateQCDisplay();
+        }
+        
+        function updateQCDisplay() {
+            const qcControls = document.getElementById('admin-qc-controls');
+            const qcIndicator = document.getElementById('qc-mode-indicator');
+            
+            if (adminQCMode) {
+                qcIndicator.classList.remove('hidden');
+                if (!completionScreen.classList.contains('hidden')) {
+                    qcControls.classList.add('hidden');
+                } else if (!appContent.classList.contains('hidden')) {
+                    qcControls.classList.remove('hidden');
+                } else {
+                    qcControls.classList.add('hidden');
+                }
+            } else {
+                qcControls.classList.add('hidden');
+                qcIndicator.classList.add('hidden');
+            }
+        }
+        
+        function flagAudioQuality() {
+            const issueType = document.getElementById('issue-type').value;
+            const qualityIssue = {
+                id: Date.now().toString(),
+                audioFile: `${slugify(correctWordForTrial)}.mp3`,
+                text: correctWordForTrial,
+                voice: selectedVoice,
+                activityType: currentActivityType,
+                set: userProgress.currentLevel,
+                issueType: issueType,
+                severity: 'medium', // Default, could make this selectable
+                dateFlagged: new Date().toISOString(),
+                status: 'flagged',
+                regenerationNotes: '',
+                questionIndex: currentQuestionIndex
+            };
+            
+            qualityIssues.push(qualityIssue);
+            localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+            
+            // Visual feedback
+            const flagBtn = document.getElementById('flag-audio-btn');
+            const originalText = flagBtn.textContent;
+            flagBtn.textContent = 'Flagged!';
+            flagBtn.classList.add('bg-green-600');
+            flagBtn.classList.remove('bg-red-600');
+            
+            setTimeout(() => {
+                flagBtn.textContent = originalText;
+                flagBtn.classList.remove('bg-green-600');
+                flagBtn.classList.add('bg-red-600');
+            }, 1500);
+        }
+        
+        async function createAudioQualitySheet() {
+            // Create new sheet named "AudioQuality" if it doesn't exist
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}:batchUpdate?key=${GOOGLE_API_KEY}`;
+            
+            const requestBody = {
+                requests: [{
+                    addSheet: {
+                        properties: {
+                            title: "AudioQuality"
+                        }
+                    }
+                }]
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (response.ok) {
+                    // Add headers to the new sheet
+                    await addHeadersToSheet();
+                    return true;
+                }
+            } catch (error) {
+                console.log('Sheet might already exist or API error:', error);
+            }
+            return false;
+        }
+        
+        async function addHeadersToSheet() {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/AudioQuality!A1:J1?valueInputOption=RAW&key=${GOOGLE_API_KEY}`;
+            
+            const headers = [
+                'AudioFile', 'Text', 'Voice', 'ActivityType', 'Set', 
+                'IssueType', 'Severity', 'DateFlagged', 'Status', 'RegenerationNotes'
+            ];
+            
+            const requestBody = {
+                values: [headers]
+            };
+            
+            try {
+                await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+            } catch (error) {
+                console.error('Failed to add headers:', error);
+            }
+        }
+        
+        async function submitToGoogleSheets(qualityIssue) {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${GOOGLE_SHEET_ID}/values/AudioQuality!A:J:append?valueInputOption=RAW&key=${GOOGLE_API_KEY}`;
+            
+            const row = [
+                qualityIssue.audioFile,
+                qualityIssue.text,
+                qualityIssue.voice,
+                qualityIssue.activityType,
+                qualityIssue.set,
+                qualityIssue.issueType,
+                qualityIssue.severity,
+                qualityIssue.dateFlagged,
+                'flagged', // status
+                '' // regenerationNotes (empty for now)
+            ];
+            
+            const requestBody = {
+                values: [row]
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Failed to submit to Google Sheets:', error);
+                return false;
+            }
+        }
+        
+        async function exportQualityData() {
+            // First, try to create AudioQuality sheet if it doesn't exist
+            await createAudioQualitySheet();
+            
+            // Submit all unsent quality issues to Google Sheets
+            let successCount = 0;
+            const unsentIssues = qualityIssues.filter(issue => !issue.sentToSheets);
+            
+            for (const issue of unsentIssues) {
+                const success = await submitToGoogleSheets(issue);
+                if (success) {
+                    issue.sentToSheets = true;
+                    successCount++;
+                }
+                // Small delay to avoid rate limiting
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // Update localStorage with sent status
+            localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+            
+            // Also create downloadable backup
+            const dataStr = JSON.stringify(qualityIssues, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = `audio-quality-backup-${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            if (successCount > 0) {
+                alert(`✅ Submitted ${successCount} issues to Google Sheets! Check the AudioQuality tab in your spreadsheet.`);
+            } else {
+                alert(`No new issues to submit. ${qualityIssues.length} total issues flagged.`);
+            }
+        }
+        
+        // === ADMIN QC EVENT LISTENERS ===
+        document.getElementById('flag-audio-btn').addEventListener('click', flagAudioQuality);
+        document.getElementById('disable-qc-btn').addEventListener('click', toggleAdminQCMode);
+        document.getElementById('export-qc-btn').addEventListener('click', exportQualityData);
+        
+        // Mobile QC mode enable: Triple-tap the title
+        let titleTapCount = 0;
+        let titleTapTimer = null;
+        document.getElementById('category-title').addEventListener('click', () => {
+            titleTapCount++;
+            if (titleTapTimer) clearTimeout(titleTapTimer);
+            
+            if (titleTapCount === 3) {
+                toggleAdminQCMode();
+                titleTapCount = 0;
+            } else {
+                titleTapTimer = setTimeout(() => {
+                    titleTapCount = 0;
+                }, 1000);
+            }
+        });
+        
+        // Admin QC mode toggle (keyboard shortcut for desktop)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'Q') {
+                toggleAdminQCMode();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                exportQualityData();
+            }
+        });
+        
         // === INITIALIZATION ===
         loadAllData();
     </script>
