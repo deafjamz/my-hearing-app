@@ -246,10 +246,7 @@
             const currentQuestion = currentLevelData[currentQuestionIndex];
             const issueType = document.getElementById('issue-type')?.value || 'unclear_pronunciation';
             
-            // Debug: log the current question data structure
-            console.log('Current question data:', currentQuestion);
-            console.log('Available keys:', Object.keys(currentQuestion));
-            console.log('correctWordForTrial:', correctWordForTrial);
+            // Capture actual audio filename and text content
             
             const qualityIssue = {
                 audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename || currentQuestion.audioFile || `${selectedVoice}_${currentActivityType}_${slugify(correctWordForTrial || 'unknown')}.mp3`,
@@ -639,11 +636,23 @@
 
             if (isCorrect) {
                 score++;
-                document.getElementById('feedback-message').textContent = 'Correct!';
+                const correctMessages = [
+                    'Excellent!', 'Perfect!', 'Great job!', 'Well done!', 'Nice work!', 
+                    'Outstanding!', 'Fantastic!', 'You got it!', 'Brilliant!', 'Superb!'
+                ];
+                const randomCorrect = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+                document.getElementById('feedback-message').textContent = randomCorrect;
                 document.getElementById('feedback-message').classList.add('text-green-500');
                 selectedButton.classList.add('correct-answer');
             } else {
-                document.getElementById('feedback-message').textContent = 'Try Again';
+                const encouragingMessages = [
+                    'Keep practicing!', 'Almost there!', 'Good effort!', 'You\'re learning!', 
+                    'Nice try!', 'Getting closer!', 'Keep going!', 'Stay focused!', 
+                    'You\'re improving!', 'Practice makes progress!', 'Keep listening!', 
+                    'You\'ve got this!', 'Learning in progress!'
+                ];
+                const randomEncouraging = encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+                document.getElementById('feedback-message').textContent = randomEncouraging;
                 document.getElementById('feedback-message').classList.add('text-orange-500');
                 selectedButton.classList.add('wrong-answer');
             }
