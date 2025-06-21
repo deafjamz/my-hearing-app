@@ -246,9 +246,14 @@
             const currentQuestion = currentLevelData[currentQuestionIndex];
             const issueType = document.getElementById('issue-type')?.value || 'unclear_pronunciation';
             
+            // Debug: log the current question data structure
+            console.log('Current question data:', currentQuestion);
+            console.log('Available keys:', Object.keys(currentQuestion));
+            console.log('correctWordForTrial:', correctWordForTrial);
+            
             const qualityIssue = {
-                audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename || `${selectedVoice}_audio_${currentActivityType}_${currentQuestionIndex + 1}.mp3`,
-                text: currentQuestion.Word1 || currentQuestion.Word2 || currentQuestion.Sentence1 || currentQuestion.Sentence2 || currentQuestion.Sentence || correctWordForTrial || 'N/A',
+                audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename || currentQuestion.audioFile || `${selectedVoice}_${currentActivityType}_${slugify(correctWordForTrial || 'unknown')}.mp3`,
+                text: currentQuestion.Word1 || currentQuestion.Word2 || currentQuestion.Sentence1 || currentQuestion.Sentence2 || currentQuestion.Sentence || currentQuestion.text || correctWordForTrial || 'N/A',
                 voice: selectedVoice,
                 activityType: currentActivityType,
                 set: currentQuestion.Set || currentQuestion.set || 'Unknown Set',
