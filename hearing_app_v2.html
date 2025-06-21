@@ -302,9 +302,14 @@
                     alert('✅ Successfully exported ' + unsentIssues.length + ' issues to Google Sheets!');
                 } catch (error) {
                     console.error('Export failed:', error);
-                    const fallback = confirm('Direct export failed. Fall back to Google Forms?\n\n' + error.message);
-                    if (fallback) {
+                    const options = 'Direct export failed. Choose fallback option:\n\n' + 
+                                  'OK = Google Forms (opens tabs)\n' + 
+                                  'Cancel = Download CSV file';
+                    const useForms = confirm(options);
+                    if (useForms) {
                         await exportToForms(unsentIssues);
+                    } else {
+                        downloadCSV(unsentIssues);
                     }
                 }
             }
@@ -312,35 +317,14 @@
         }
 
         async function submitToGoogleSheets(issues) {
-            console.log('Attempting direct Google Sheets submission...');
+            console.log('Attempting Google Apps Script submission...');
             
-            // Try method 1: Direct append to existing sheet
-            const sheetId = '1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek';
-            const sheetName = 'QC_Issues'; // We'll need to create this sheet
-            
-            // Convert issues to CSV format
-            const csvData = convertIssuesToCSV(issues);
-            console.log('CSV data prepared:', csvData);
-            
-            // Try multiple submission methods
-            const methods = [
-                () => submitViaGoogleAppsScript(csvData),
-                () => submitViaFormEndpoint(csvData),
-                () => submitViaDirectPost(sheetId, sheetName, csvData)
-            ];
-            
-            for (let i = 0; i < methods.length; i++) {
-                try {
-                    console.log('Trying submission method', i + 1);
-                    await methods[i]();
-                    console.log('Method', i + 1, 'succeeded!');
-                    return; // Success!
-                } catch (error) {
-                    console.log('Method', i + 1, 'failed:', error.message);
-                    if (i === methods.length - 1) {
-                        throw new Error('All submission methods failed. Last error: ' + error.message);
-                    }
-                }
+            try {
+                await submitViaGoogleAppsScript(issues);
+                console.log('Apps Script submission succeeded!');
+            } catch (error) {
+                console.error('Apps Script submission failed:', error.message);
+                throw error;
             }
         }
 
@@ -376,44 +360,34 @@
             throw new Error('Form endpoint method not yet implemented'); 
         }
 
-        async function submitViaGoogleAppsScript(csvData) {
-            // Method 1: Try the original Sheets API approach with better error handling
-            const sheetId = '1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek';
-            const apiKey = 'AIzaSyDzpvre6oaVH9U7USUEiiqjUhY7KhdOzGM';
+        async function submitViaGoogleAppsScript(issues) {
+            // Submit directly to Google Apps Script - no need to create sheet first
+            const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbynjk1Lu8Gq_z60ZbcOnJpfLYAFSE7rV4S2OCxJvX35AFNe-iyRUaE5-6QfI2Gi-VS1/exec';
             
-            // First, try to create the QC_Issues sheet if it doesn't exist
-            try {
-                await createQCSheet(sheetId, apiKey);
-            } catch (error) {
-                console.log('QC sheet might already exist or creation failed:', error.message);
-            }
+            console.log('Submitting to Apps Script:', issues);
             
-            // Try to append data to the sheet
-            const range = 'QC_Issues!A:I'; // A through I columns
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS&key=${apiKey}`;
-            
-            // Convert CSV back to values array
-            const rows = csvData.split('\n').map(row => {
-                // Simple CSV parsing - split by comma and remove quotes
-                return row.split(',').map(cell => cell.replace(/^"(.*)"$/, '$1').replace(/""/g, '"'));
-            });
-            
-            const response = await fetch(url, {
+            const response = await fetch(appsScriptUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    values: rows
+                    issues: issues
                 })
             });
             
             if (!response.ok) {
                 const errorText = await response.text();
-                throw new Error(`Sheets API failed: ${response.status} - ${errorText}`);
+                console.error('Apps Script Response:', response.status, errorText);
+                throw new Error(`Apps Script failed: ${response.status} - ${errorText.substring(0, 200)}`);
             }
             
-            console.log('Successfully submitted to Google Sheets via API');
+            const result = await response.json();
+            if (!result.success) {
+                throw new Error(`Apps Script error: ${result.error}`);
+            }
+            
+            console.log('Successfully submitted to Google Sheets via Apps Script:', result);
         }
         
         async function createQCSheet(sheetId, apiKey) {
