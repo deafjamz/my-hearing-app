@@ -309,7 +309,7 @@
                     if (useForms) {
                         await exportToForms(unsentIssues);
                     } else {
-                        downloadCSV(unsentIssues);
+                        downloadQCDataAsCSV(unsentIssues);
                     }
                 }
             }
@@ -347,6 +347,27 @@
             });
             
             return rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(',')).join('\n');
+        }
+
+        function downloadQCDataAsCSV(issues) {
+            const csvContent = convertIssuesToCSV(issues);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'qc-issues-' + new Date().toISOString().split('T')[0] + '.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Mark as exported
+                issues.forEach(issue => issue.sentToSheets = true);
+                localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+                alert('Downloaded ' + issues.length + ' QC issues as CSV file!');
+            }
         }
 
         async function submitViaDirectPost(sheetId, sheetName, csvData) {
