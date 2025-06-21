@@ -5,84 +5,299 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Hearing Rehabilitation Exercise</title>
       <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
       <style>
-          body { font-family: Arial, sans-serif; }
+          body { font-family: 'Inter', sans-serif; }
+          .correct-answer { background-color: #28a745 !important; color: white !important; border-color: #28a745 !important; }
+          .wrong-answer { background-color: #f97316 !important; color: white !important; border-color: #f97316 !important; }
           .loading-spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%;
   border-left-color: #09f; animation: spin 1s ease infinite; }
           @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+          .voice-toggle-bg { background-color: #e5e7eb; }
+          .voice-toggle-btn { transition: all 0.3s ease; }
+          .voice-toggle-bg.female .voice-toggle-btn { transform: translateX(0%); background-color: #ec4899; }
+          .voice-toggle-bg.male .voice-toggle-btn { transform: translateX(100%); background-color: #3b82f6; }
+          .audio-ready { border-color: #10b981 !important; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); }
+          .audio-loading { border-color: #f59e0b !important; }
+          .audio-error { border-color: #ef4444 !important; }
+          .fade-in { animation: fadeIn 0.3s ease-in; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-      <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 text-center">
 
+      <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8 text-center relative">
+
+          <!-- Loading State -->
           <div id="loading-state">
               <div class="loading-spinner mx-auto mb-4"></div>
               <p class="text-lg text-gray-600">Loading Exercises...</p>
-              <p class="text-sm text-gray-500 mt-2" id="loading-status">Initializing...</p>
+              <div id="loading-progress" class="mt-4">
+                  <div class="bg-gray-200 rounded-full h-2">
+                      <div id="loading-progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+  style="width: 0%"></div>
+                  </div>
+                  <p class="text-sm text-gray-500 mt-2" id="loading-status">Initializing...</p>
+              </div>
           </div>
 
-          <div id="activity-selection-screen" class="hidden">
-              <h1 class="text-2xl font-bold text-gray-800 mb-6" id="category-title">Choose a Category</h1>
-
+          <!-- Activity Selection -->
+          <div id="activity-selection-screen" class="hidden fade-in">
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6" id="category-title">Choose a Category</h1>
+              <!-- QC Mode Indicator -->
               <div id="qc-mode-indicator" class="hidden mb-4 p-2 bg-red-100 border border-red-300 rounded text-center">
-                  <span class="text-red-800 font-semibold">QC Mode Active</span>
-                  <div class="mt-2">
-                      <button id="export-qc-btn" class="px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 
-  mr-2">Export to Forms</button>
+                  <span class="text-red-800 font-semibold">🔧 Admin QC Mode Active</span>
+                  <div class="mt-2 flex gap-2 justify-center">
+                      <button id="export-qc-btn" class="px-2 py-1 bg-blue-600 text-white text-xs rounded 
+  hover:bg-blue-700">Export to Forms</button>
                       <button id="disable-qc-btn" class="px-2 py-1 bg-red-600 text-white text-xs rounded 
   hover:bg-red-700">Disable</button>
                   </div>
               </div>
-
-              <div class="space-y-4">
+              <div class="grid grid-cols-1 gap-4">
                   <button data-activity="words" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 
-  border-gray-300 hover:bg-gray-100">Word Practice</button>
+  border-gray-300 hover:bg-gray-100 transition">
+                      <div class="flex items-center justify-between">
+                          <span>Word Practice</span>
+                          <span id="words-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
+                      </div>
+                  </button>
                   <button data-activity="sentences" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg 
-  border-2 border-gray-300 hover:bg-gray-100">Sentence Recognition</button>
+  border-2 border-gray-300 hover:bg-gray-100 transition">
+                      <div class="flex items-center justify-between">
+                          <span>Sentence Recognition</span>
+                          <span id="sentences-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
+                      </div>
+                  </button>
                   <button data-activity="keywords" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2
-   border-gray-300 hover:bg-gray-100">Keyword Hunt</button>
+   border-gray-300 hover:bg-gray-100 transition">
+                      <div class="flex items-center justify-between">
+                          <span>Keyword Hunt</span>
+                          <span id="keywords-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/30</span>
+                      </div>
+                  </button>
+              </div>
+
+              <!-- Continue Previous Session -->
+              <div id="continue-session" class="hidden mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <p class="text-blue-800 font-medium">Continue where you left off?</p>
+                  <p class="text-blue-600 text-sm" id="continue-description"></p>
+                  <div class="mt-3 flex gap-3">
+                      <button id="continue-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
+  transition">Continue</button>
+                      <button id="start-fresh-btn" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 
+  transition">Start Fresh</button>
+                  </div>
               </div>
           </div>
 
-          <div id="test-screen" class="hidden">
-              <h2 class="text-xl font-bold mb-4">QC Test Mode</h2>
-              <div class="space-y-4">
-                  <input type="text" id="test-audio-file" class="w-full p-2 border rounded" placeholder="Audio filename" 
-  value="test_audio.mp3">
-                  <input type="text" id="test-text" class="w-full p-2 border rounded" placeholder="Text content" value="test 
-  word">
-                  <select id="test-issue-type" class="w-full p-2 border rounded">
-                      <option value="unclear_pronunciation">Unclear Pronunciation</option>
-                      <option value="robotic_voice">Robotic Voice</option>
-                      <option value="too_fast">Too Fast</option>
-                  </select>
-                  <button id="test-flag-btn" class="w-full py-2 bg-red-600 text-white rounded hover:bg-red-700">Flag Test
-  Issue</button>
-                  <button id="test-export-btn" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Export Test
-  Data</button>
-                  <button id="back-to-main-btn" class="w-full py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Back to
-  Main</button>
+          <!-- Level Selection -->
+          <div id="level-selection-screen" class="hidden fade-in">
+              <div class="w-full mb-4 text-left">
+                  <button id="back-to-activities" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to
+  Categories</button>
               </div>
-              <div id="test-console" class="mt-4 p-2 bg-gray-100 text-xs font-mono text-left max-h-40 overflow-y-auto"></div>
+              <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Choose an Exercise</h1>
+              <div class="mb-6">
+                  <p class="text-gray-600 mb-2 font-semibold">Select a Voice</p>
+                  <div id="voice-toggle" class="relative w-40 h-10 mx-auto rounded-full p-1 cursor-pointer voice-toggle-bg 
+  female">
+                      <div class="voice-toggle-btn absolute top-1 left-1 w-1/2 h-8 rounded-full shadow-md"></div>
+                      <div class="relative w-full h-full flex items-center text-white">
+                          <div class="w-1/2 text-center z-10">Female</div>
+                          <div class="w-1/2 text-center z-10">Male</div>
+                      </div>
+                  </div>
+              </div>
+              <div id="level-buttons-container" class="grid grid-cols-1 gap-4"></div>
+          </div>
+
+          <!-- Exercise Interface -->
+          <div id="app-content" class="hidden fade-in">
+              <header class="mb-6">
+                  <div class="flex justify-between items-center mb-4">
+                      <button id="back-to-levels" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to
+  Exercises</button>
+                      <div class="text-right">
+                          <div class="text-sm text-gray-600">Question <span id="current-question">1</span> of <span 
+  id="total-questions">10</span></div>
+                          <div class="text-sm text-gray-600">Score: <span id="current-score">0</span></div>
+                      </div>
+                  </div>
+                  <h1 id="exercise-title" class="text-xl md:text-2xl font-bold text-gray-800"></h1>
+                  <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                      <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-500"></div>
+                  </div>
+              </header>
+
+              <main>
+                  <!-- Audio Player Section -->
+                  <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                      <button id="play-sound-btn" class="bg-blue-600 text-white rounded-full p-6 shadow-md hover:bg-blue-700 
+  transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-gray-400 
+  disabled:cursor-not-allowed disabled:scale-100">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 
+  001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                          </svg>
+                      </button>
+                  </div>
+
+                  <!-- Choice Buttons -->
+                  <div id="choice-container" class="grid grid-cols-1 gap-4">
+                      <button id="choice1-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 
+  hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
+                      <button id="choice2-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 
+  hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
+                  </div>
+
+                  <!-- Admin QC Controls (Hidden by default) -->
+                  <div id="qc-controls" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded">
+                      <div class="flex flex-col gap-2">
+                          <button id="flag-audio-btn" class="w-full py-2 px-3 bg-red-600 text-white text-sm rounded 
+  hover:bg-red-700 transition">Flag Audio Quality</button>
+                          <div class="flex gap-2">
+                              <select id="issue-type" class="flex-1 text-xs p-1 border rounded">
+                                  <option value="unclear_pronunciation">Unclear Pronunciation</option>
+                                  <option value="wrong_emphasis">Wrong Emphasis</option>
+                                  <option value="robotic_voice">Robotic Voice</option>
+                                  <option value="cut_off">Audio Cut Off</option>
+                                  <option value="too_fast">Too Fast</option>
+                                  <option value="too_slow">Too Slow</option>
+                                  <option value="background_noise">Background Noise</option>
+                                  <option value="volume_inconsistent">Volume Inconsistent</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Keyword Question Container (Hidden by default) -->
+                  <div id="keyword-question-container" class="hidden mt-6">
+                      <h3 class="text-lg font-semibold text-gray-800 mb-2">What keyword did you hear?</h3>
+                      <div id="keyword-choices" class="grid grid-cols-2 gap-2"></div>
+                  </div>
+
+                  <!-- Feedback -->
+                  <div id="feedback-message" class="mt-6 text-xl font-semibold h-8"></div>
+              </main>
+
+              <!-- Completion Screen -->
+              <div id="completion-screen" class="hidden text-center fade-in">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-4">Level Complete!</h2>
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                      <p class="text-gray-600 mb-2">You scored <span id="final-score" class="font-bold text-green-600"></span>
+  out of <span id="total-score" class="font-bold"></span>.</p>
+                      <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                          <div id="final-progress-bar" class="bg-green-600 h-2 rounded-full transition-all duration-500"></div>
+                      </div>
+                  </div>
+                  <div class="flex gap-3 justify-center">
+                      <button id="retry-level-btn" class="bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700
+   transition">Retry Level</button>
+                      <button id="next-level-btn" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 
+  transition">Try Another Exercise</button>
+                  </div>
+              </div>
           </div>
       </div>
 
       <script>
-          console.log('App starting...');
+          console.log('Hearing Rehabilitation App starting...');
 
-          var qualityIssues = JSON.parse(localStorage.getItem('qualityIssues') || '[]');
+          // Configuration
+          var GITHUB_USERNAME = 'deafjamz';
+          var GITHUB_REPO_NAME = 'hearing-rehab-audio';
+          var AUDIO_CACHE_SIZE = 50;
+          var PRELOAD_NEXT_COUNT = 3;
+
+          // Friendly names for exercises
+          var friendlySetNames = {
+              'Set 1: Voicing Contrast': 'Sound Starter',
+              'Set 2: Nasal Contrast': 'Nasal Nuances',
+              'Set 3: Vowel Height': 'Vowel Power',
+              'Set 4: Ling Sounds Emphasis': 'Frequency Focus',
+              'Set 5: Place of Articulation': 'Tongue Twisters',
+              'Set 6: Manner of Articulation': 'Fine-Tuning',
+              'Set 7: Word Initial Clusters': 'Cluster Challenge',
+              'Set 8: Word Final Clusters': 'Finishing Sounds',
+              'Set 9: Multi-Syllabic Simple': 'Syllable Steps',
+              'Set 10: Multi-Syllabic Complex': 'Complex Combos',
+              'Set 11: Simple Minimal Pairs': 'Sentence Pairs',
+              'Set 12: Different Verbs': 'Action Words',
+              'Set 13: Different Nouns': 'Object Hunt',
+              'Set 14: Prepositions': 'Location, Location',
+              'Set 15: Questions vs. Statements': 'Question Quest',
+              'Set 16: Different Adjectives': 'Describing Words',
+              'Set 17: Numbers': 'Number Challenge',
+              'Set 18: Similar Sounding Sentences': 'Sound Alikes',
+              'Set 19: Complex Sentences': 'Sentence Puzzles',
+              'Set 20: Abstract Concepts': 'Abstract Ideas',
+              'Set 21: Who Questions': 'Who Did It?',
+              'Set 22: What Questions (Object)': 'What\'s That?',
+              'Set 23: Where Questions': 'Where Is It?',
+              'Set 24: When Questions': 'When Did It Happen?',
+              'Set 25: Why Questions (Reason)': 'What\'s the Reason?',
+              'Set 26: Color Questions': 'Color Quest',
+              'Set 27: Number Questions': 'Count Em Up',
+              'Set 28: What is happening?': 'Action Detective',
+              'Set 29: Adjectives & Adverbs': 'How Was It?',
+              'Set 30: Multi-Step Directions': 'Follow the Clues'
+          };
+
+          // State variables
+          var allData = { words: [], sentences: [], keywords: [] };
+          var currentActivityType = '';
+          var currentLevelData = [];
+          var currentQuestionIndex = 0;
+          var score = 0;
+          var currentAudio = null;
+          var selectedVoice = 'female';
+          var correctWordForTrial = '';
+
+          // Admin QC Mode
           var adminQCMode = localStorage.getItem('adminQCMode') === 'true';
-          var testMode = false;
+          var qualityIssues = JSON.parse(localStorage.getItem('qualityIssues') || '[]');
 
-          function log(message) {
-              console.log(message);
-              var testConsole = document.getElementById('test-console');
-              if (testConsole) {
-                  testConsole.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
-                  testConsole.scrollTop = testConsole.scrollHeight;
-              }
+          // Audio caching
+          var audioCache = new Map();
+          var preloadQueue = [];
+          var isPreloading = false;
+
+          // Progress persistence
+          var userProgress = {
+              currentActivity: null,
+              currentLevel: null,
+              currentQuestion: 0,
+              scores: {},
+              completedLevels: new Set()
+          };
+
+          // Helper Functions
+          function getAudioUrl(filename) {
+              return 'https://cdn.jsdelivr.net/gh/' + GITHUB_USERNAME + '/' + GITHUB_REPO_NAME + '@main/' + filename;
           }
 
+          function setButtonsDisabled(disabled) {
+              var choice1Btn = document.getElementById('choice1-btn');
+              var choice2Btn = document.getElementById('choice2-btn');
+              var playSoundBtn = document.getElementById('play-sound-btn');
+              choice1Btn.disabled = disabled;
+              choice2Btn.disabled = disabled;
+              playSoundBtn.disabled = disabled;
+          }
+
+          function updateProgress() {
+              var progress = ((currentQuestionIndex + 1) / currentLevelData.length) * 100;
+              var progressBar = document.getElementById('progress-bar');
+              progressBar.style.width = progress + '%';
+          }
+
+          function updateScore() {
+              var currentScoreEl = document.getElementById('current-score');
+              currentScoreEl.textContent = score;
+          }
+
+          // Google Forms Integration
           function submitToGoogleForms(qualityIssue) {
               var baseUrl =
   'https://docs.google.com/forms/d/e/1FAIpQLSdrZdSdORcvQkZm9A_ZWB3J4Q_XOY9HKKpD8GDQiyLEINqu2A/viewform';
@@ -90,145 +305,607 @@
                   'usp': 'pp_url',
                   'entry.2092258809': qualityIssue.audioFile,
                   'entry.2027416117': qualityIssue.text,
-                  'entry.2104356900': qualityIssue.voice || 'female',
-                  'entry.1322911479': qualityIssue.activityType || 'test',
-                  'entry.2105236424': qualityIssue.set || 'Test Set',
+                  'entry.2104356900': qualityIssue.voice,
+                  'entry.1322911479': qualityIssue.activityType,
+                  'entry.2105236424': qualityIssue.set,
                   'entry.64346061': qualityIssue.issueType,
-                  'entry.1007752238': qualityIssue.severity || 'Medium',
+                  'entry.1007752238': qualityIssue.severity,
                   'entry.215629918': qualityIssue.dateFlagged
               });
               var formUrl = baseUrl + '?' + params.toString();
-              log('Opening form: ' + qualityIssue.audioFile);
               window.open(formUrl, '_blank');
               return true;
           }
 
+          // Admin QC Functions
           function toggleAdminQCMode() {
               adminQCMode = !adminQCMode;
               localStorage.setItem('adminQCMode', adminQCMode.toString());
 
               var qcIndicator = document.getElementById('qc-mode-indicator');
+              var qcControls = document.getElementById('qc-controls');
+
               if (adminQCMode) {
                   if (qcIndicator) qcIndicator.classList.remove('hidden');
-                  log('QC Mode ENABLED');
+                  if (qcControls) qcControls.classList.remove('hidden');
+                  console.log('🔧 Admin QC Mode ENABLED');
               } else {
                   if (qcIndicator) qcIndicator.classList.add('hidden');
-                  log('QC Mode DISABLED');
+                  if (qcControls) qcControls.classList.add('hidden');
+                  console.log('🔧 Admin QC Mode DISABLED');
               }
           }
 
-          function exportQualityData() {
-              log('=== EXPORT START ===');
-              var unsentIssues = qualityIssues.filter(function(issue) { return !issue.sentToForms; });
-              log('Unsent issues: ' + unsentIssues.length);
+          function flagAudioQuality() {
+              if (!currentLevelData[currentQuestionIndex]) return;
 
-              if (unsentIssues.length === 0) {
-                  var retryAll = confirm('No new issues. Reset all and retry?');
-                  if (retryAll) {
-                      qualityIssues.forEach(function(issue) { delete issue.sentToForms; });
-                      localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
-                      return exportQualityData();
-                  }
-                  return;
-              }
+              var currentQuestion = currentLevelData[currentQuestionIndex];
+              var issueTypeEl = document.getElementById('issue-type');
+              var issueType = issueTypeEl ? issueTypeEl.value : 'unclear_pronunciation';
 
-              var message = 'Export ' + unsentIssues.length + ' issues to Google Forms?';
-              var confirmForms = confirm(message);
-
-              if (confirmForms) {
-                  for (var i = 0; i < unsentIssues.length; i++) {
-                      var issue = unsentIssues[i];
-                      submitToGoogleForms(issue);
-                      issue.sentToForms = true;
-                  }
-                  localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
-                  alert('Opened ' + unsentIssues.length + ' Google Forms!');
-              }
-              log('=== EXPORT COMPLETE ===');
-          }
-
-          function flagTestIssue() {
-              var issue = {
-                  audioFile: document.getElementById('test-audio-file').value,
-                  text: document.getElementById('test-text').value,
-                  voice: 'female',
-                  activityType: 'test',
-                  set: 'Test Set',
-                  issueType: document.getElementById('test-issue-type').value,
+              var qualityIssue = {
+                  audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename,
+                  text: currentQuestion.text || currentQuestion.word || currentQuestion.CorrectChoice || 'N/A',
+                  voice: selectedVoice,
+                  activityType: currentActivityType,
+                  set: currentQuestion.Set || currentQuestion.set || 'Unknown Set',
+                  issueType: issueType,
                   severity: 'Medium',
                   dateFlagged: new Date().toISOString(),
                   sentToForms: false
               };
 
-              qualityIssues.push(issue);
+              qualityIssues.push(qualityIssue);
               localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
-              log('Test issue flagged: ' + issue.audioFile);
-          }
 
-          function showTestMode() {
-              testMode = true;
-              document.getElementById('activity-selection-screen').classList.add('hidden');
-              document.getElementById('test-screen').classList.remove('hidden');
-              log('Test mode activated');
-          }
+              console.log('🚩 Audio flagged:', qualityIssue);
 
-          function showMainMode() {
-              testMode = false;
-              document.getElementById('test-screen').classList.add('hidden');
-              document.getElementById('activity-selection-screen').classList.remove('hidden');
-          }
+              // Visual feedback
+              var flagBtn = document.getElementById('flag-audio-btn');
+              var originalText = flagBtn.textContent;
+              flagBtn.textContent = 'Flagged!';
+              flagBtn.classList.add('bg-green-600');
+              flagBtn.classList.remove('bg-red-600');
 
-          function init() {
-              log('Initializing...');
-
-              // Simulate loading
               setTimeout(function() {
-                  document.getElementById('loading-state').classList.add('hidden');
-                  document.getElementById('activity-selection-screen').classList.remove('hidden');
+                  flagBtn.textContent = originalText;
+                  flagBtn.classList.remove('bg-green-600');
+                  flagBtn.classList.add('bg-red-600');
+              }, 1500);
+          }
 
-                  if (adminQCMode) {
-                      toggleAdminQCMode();
+          function exportQualityData() {
+              console.log('=== EXPORT START ===');
+              console.log('All quality issues:', qualityIssues);
+
+              var unsentIssues = qualityIssues.filter(function(issue) { return !issue.sentToForms; });
+              console.log('Unsent issues:', unsentIssues.length);
+
+              if (unsentIssues.length === 0) {
+                  var retryAll = confirm('No new issues to submit. ' + qualityIssues.length + ' total issues flagged.\n\nWould 
+  you like to retry submitting ALL flagged issues?');
+                  if (retryAll) {
+                      qualityIssues.forEach(function(issue) { delete issue.sentToForms; });
+                      localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+                      console.log('Reset all issues for retry');
+                      return exportQualityData();
+                  } else {
+                      return;
+                  }
+              }
+
+              console.log('Exporting ' + unsentIssues.length + ' quality issues via Google Forms...');
+
+              var message = 'Export ' + unsentIssues.length + ' flagged audio issues to Google Forms?\n\nThis will open ' +
+  unsentIssues.length + ' pre-filled form tabs for manual submission.';
+
+              var confirmForms = confirm(message);
+
+              if (confirmForms) {
+                  console.log('Opening Google Forms...');
+                  for (var i = 0; i < unsentIssues.length; i++) {
+                      var issue = unsentIssues[i];
+                      submitToGoogleForms(issue);
+                      issue.sentToForms = true;
                   }
 
-                  log('App loaded successfully!');
-              }, 1000);
+                  localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+                  alert('📋 Opened ' + unsentIssues.length + ' Google Forms with pre-filled data.\n\nPlease submit each form tab 
+  to complete the process.');
+              } else {
+                  alert('Export cancelled. ' + unsentIssues.length + ' issues remain unsent.');
+              }
+
+              console.log('=== EXPORT COMPLETE ===');
           }
 
-          // Event listeners
-          document.addEventListener('DOMContentLoaded', function() {
-              log('DOM loaded');
+          // Audio Functions
+          function createAudioElement(url) {
+              return new Promise(function(resolve, reject) {
+                  var audio = new Audio();
 
-              // QC buttons
-              var exportBtn = document.getElementById('export-qc-btn');
-              if (exportBtn) exportBtn.addEventListener('click', exportQualityData);
+                  audio.addEventListener('canplaythrough', function() { resolve(audio); }, { once: true });
+                  audio.addEventListener('error', function(e) { reject(e); }, { once: true });
+
+                  audio.preload = 'auto';
+                  audio.src = url;
+                  audio.load();
+              });
+          }
+
+          function getAudioElement(filename) {
+              if (audioCache.has(filename)) {
+                  return Promise.resolve(audioCache.get(filename));
+              }
+
+              var url = getAudioUrl(filename);
+              return createAudioElement(url).then(function(audio) {
+                  if (audioCache.size >= AUDIO_CACHE_SIZE) {
+                      var firstKey = audioCache.keys().next().value;
+                      audioCache.delete(firstKey);
+                  }
+
+                  audioCache.set(filename, audio);
+                  return audio;
+              }).catch(function(error) {
+                  console.error('Failed to load audio: ' + filename, error);
+                  throw error;
+              });
+          }
+
+          function playAudio(filename) {
+              if (currentAudio) {
+                  currentAudio.pause();
+                  currentAudio.currentTime = 0;
+              }
+
+              return getAudioElement(filename).then(function(audio) {
+                  currentAudio = audio;
+                  return currentAudio.play();
+              }).catch(function(error) {
+                  console.error('Audio playback failed:', error);
+                  throw error;
+              });
+          }
+
+          // Data Loading
+          function loadCSVData(url) {
+              console.log('Loading CSV from:', url);
+              return fetch(url).then(function(response) {
+                  if (!response.ok) throw new Error('Failed to fetch: ' + response.status);
+                  return response.text();
+              }).then(function(csvText) {
+                  var lines = csvText.split('\n');
+                  var headers = lines[0].split(',').map(function(h) { return h.trim().replace(/"/g, ''); });
+
+                  return lines.slice(1)
+                      .filter(function(line) { return line.trim(); })
+                      .map(function(line) {
+                          var values = line.split(',').map(function(v) { return v.trim().replace(/"/g, ''); });
+                          var obj = {};
+                          headers.forEach(function(header, index) {
+                              obj[header] = values[index] || '';
+                          });
+                          return obj;
+                      });
+              }).catch(function(error) {
+                  console.error('CSV loading error:', error);
+                  throw error;
+              });
+          }
+
+          function loadAllData() {
+              console.log('Starting data load...');
+              document.getElementById('loading-status').textContent = 'Loading exercise data...';
+
+              return Promise.all([
+
+  loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=csv&gid=0'),
+                  loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=
+  csv&gid=1935729170'),
+                  loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=
+  csv&gid=432156728')
+              ]).then(function(results) {
+                  var wordsData = results[0];
+                  var sentencesData = results[1];
+                  var keywordsData = results[2];
+
+                  console.log('Words loaded:', wordsData.length);
+                  console.log('Sentences loaded:', sentencesData.length);
+                  console.log('Keywords loaded:', keywordsData.length);
+
+                  allData = { words: wordsData, sentences: sentencesData, keywords: keywordsData };
+
+                  document.getElementById('loading-progress-bar').style.width = '100%';
+                  document.getElementById('loading-status').textContent = 'Ready!';
+
+                  loadUserProgress();
+
+                  setTimeout(function() {
+                      document.getElementById('loading-state').classList.add('hidden');
+                      document.getElementById('activity-selection-screen').classList.remove('hidden');
+                      updateActivityProgress();
+
+                      if (userProgress.currentActivity && userProgress.currentLevel !== null) {
+                          showContinueSession();
+                      }
+
+                      if (adminQCMode) {
+                          toggleAdminQCMode();
+                      }
+
+                      console.log('App loaded successfully!');
+                  }, 500);
+
+              }).catch(function(error) {
+                  document.getElementById('loading-status').textContent = 'Failed to load data. Please refresh.';
+                  console.error('Data loading failed:', error);
+              });
+          }
+
+          function updateLoadingProgress(percentage) {
+              var loadingProgressBar = document.getElementById('loading-progress-bar');
+              loadingProgressBar.style.width = percentage + '%';
+          }
+
+          function updateLoadingStatus(status) {
+              var loadingStatus = document.getElementById('loading-status');
+              loadingStatus.textContent = status;
+          }
+
+          // Progress Persistence
+          function loadUserProgress() {
+              var saved = localStorage.getItem('userProgress');
+              if (saved) {
+                  try {
+                      var parsed = JSON.parse(saved);
+                      userProgress.currentActivity = parsed.currentActivity;
+                      userProgress.currentLevel = parsed.currentLevel;
+                      userProgress.currentQuestion = parsed.currentQuestion;
+                      userProgress.scores = parsed.scores || {};
+                      userProgress.completedLevels = new Set(parsed.completedLevels || []);
+                  } catch (error) {
+                      console.error('Failed to load user progress:', error);
+                  }
+              }
+          }
+
+          function saveUserProgress() {
+              var toSave = {
+                  currentActivity: userProgress.currentActivity,
+                  currentLevel: userProgress.currentLevel,
+                  currentQuestion: userProgress.currentQuestion,
+                  scores: userProgress.scores,
+                  completedLevels: Array.from(userProgress.completedLevels)
+              };
+              localStorage.setItem('userProgress', JSON.stringify(toSave));
+          }
+
+          function showContinueSession() {
+              var activityName = currentActivityType === 'words' ? 'Word Practice' :
+                                currentActivityType === 'sentences' ? 'Sentence Recognition' : 'Keyword Hunt';
+              var setName = userProgress.currentLevel;
+
+              var continueDescription = document.getElementById('continue-description');
+              continueDescription.textContent = activityName + ' - ' + setName + ' (Question ' + (userProgress.currentQuestion +
+  1) + ')';
+
+              var continueSession = document.getElementById('continue-session');
+              continueSession.classList.remove('hidden');
+          }
+
+          // Activity Management
+          function updateActivityProgress() {
+              var activities = ['words', 'sentences', 'keywords'];
+
+              activities.forEach(function(activity) {
+                  var completed = Array.from(userProgress.completedLevels).filter(function(level) {
+                      return level.indexOf(activity) === 0;
+                  }).length;
+
+                  var total = activity === 'keywords' ? 1 : 10;
+                  var progressEl = document.getElementById(activity + '-progress');
+                  if (progressEl) {
+                      progressEl.textContent = completed + '/' + total;
+                  }
+              });
+          }
+
+          function selectActivity(activityType) {
+              currentActivityType = activityType;
+
+              document.getElementById('activity-selection-screen').classList.add('hidden');
+              document.getElementById('level-selection-screen').classList.remove('hidden');
+
+              populateLevelButtons();
+          }
+
+          function populateLevelButtons() {
+              var levelButtonsContainer = document.getElementById('level-buttons-container');
+              levelButtonsContainer.innerHTML = '';
+
+              var data = allData[currentActivityType];
+              if (!data || data.length === 0) {
+                  levelButtonsContainer.innerHTML = '<p class="text-gray-600">No exercises available.</p>';
+                  return;
+              }
+
+              var setGroups = {};
+              data.forEach(function(item) {
+                  var setName = item.Set || 'Unknown Set';
+                  if (!setGroups[setName]) {
+                      setGroups[setName] = [];
+                  }
+                  setGroups[setName].push(item);
+              });
+
+              Object.keys(setGroups).forEach(function(setName) {
+                  var friendlyName = friendlySetNames[setName] || setName;
+                  var isCompleted = userProgress.completedLevels.has(currentActivityType + '-' + setName);
+
+                  var button = document.createElement('button');
+                  button.className = 'level-btn w-full py-3 px-4 text-left rounded-lg border-2 transition ' +
+                      (isCompleted ? 'bg-green-50 border-green-300 text-green-800' : 'border-gray-300 hover:bg-gray-100');
+
+                  button.innerHTML =
+                      '<div class="flex justify-between items-center">' +
+                          '<span class="font-semibold">' + friendlyName + '</span>' +
+                          (isCompleted ? '<span class="text-green-600">✓</span>' : '') +
+                      '</div>' +
+                      '<div class="text-sm text-gray-600 mt-1">' + setGroups[setName].length + ' questions</div>';
+
+                  button.addEventListener('click', function() {
+                      startLevel(setName, setGroups[setName]);
+                  });
+                  levelButtonsContainer.appendChild(button);
+              });
+          }
+
+          // Level Management
+          function startLevel(setName, levelData) {
+              currentLevelData = levelData;
+              currentQuestionIndex = 0;
+              score = 0;
+
+              userProgress.currentActivity = currentActivityType;
+              userProgress.currentLevel = setName;
+              userProgress.currentQuestion = 0;
+              saveUserProgress();
+
+              document.getElementById('level-selection-screen').classList.add('hidden');
+              document.getElementById('app-content').classList.remove('hidden');
+
+              var friendlyName = friendlySetNames[setName] || setName;
+              var exerciseTitle = document.getElementById('exercise-title');
+              exerciseTitle.textContent = friendlyName;
+
+              var totalQuestionsEl = document.getElementById('total-questions');
+              totalQuestionsEl.textContent = levelData.length;
+
+              if (adminQCMode) {
+                  var qcControls = document.getElementById('qc-controls');
+                  if (qcControls) qcControls.classList.remove('hidden');
+              }
+
+              loadQuestion();
+          }
+
+          function loadQuestion() {
+              if (currentQuestionIndex >= currentLevelData.length) {
+                  showCompletionScreen();
+                  return;
+              }
+
+              var questionData = currentLevelData[currentQuestionIndex];
+              setButtonsDisabled(true);
+
+              var currentQuestionEl = document.getElementById('current-question');
+              currentQuestionEl.textContent = currentQuestionIndex + 1;
+              updateProgress();
+              updateScore();
+
+              var feedbackMessage = document.getElementById('feedback-message');
+              feedbackMessage.textContent = '';
+              feedbackMessage.className = 'mt-6 text-xl font-semibold h-8';
+
+              var choice1Btn = document.getElementById('choice1-btn');
+              var choice2Btn = document.getElementById('choice2-btn');
+              choice1Btn.className = 'w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 
+  hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed';
+              choice2Btn.className = 'w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 
+  hover:bg-gray-100 transition focus:outline-none disabled:bg-gray-200 disabled:cursor-not-allowed';
+
+              if (currentActivityType === 'keywords') {
+                  loadKeywordQuestion(questionData);
+              } else {
+                  loadRegularQuestion(questionData);
+              }
+
+              userProgress.currentQuestion = currentQuestionIndex;
+              saveUserProgress();
+          }
+
+          function loadRegularQuestion(questionData) {
+              var keywordQuestionContainer = document.getElementById('keyword-question-container');
+              keywordQuestionContainer.classList.add('hidden');
+              var choiceContainer = document.getElementById('choice-container');
+              choiceContainer.classList.remove('hidden');
+
+              var correctChoice = questionData.CorrectChoice || questionData.word || questionData.text;
+              var incorrectChoice = questionData.IncorrectChoice || 'Alternative option';
+
+              var isCorrectOnLeft = Math.random() < 0.5;
+              var choice1Btn = document.getElementById('choice1-btn');
+              var choice2Btn = document.getElementById('choice2-btn');
+
+              if (isCorrectOnLeft) {
+                  choice1Btn.textContent = correctChoice;
+                  choice2Btn.textContent = incorrectChoice;
+                  choice1Btn.dataset.isCorrect = 'true';
+                  choice2Btn.dataset.isCorrect = 'false';
+              } else {
+                  choice1Btn.textContent = incorrectChoice;
+                  choice2Btn.textContent = correctChoice;
+                  choice1Btn.dataset.isCorrect = 'false';
+                  choice2Btn.dataset.isCorrect = 'true';
+              }
+
+              var audioFilename = questionData.audioFilename || questionData.AudioFilename;
+              if (audioFilename) {
+                  var actualFilename = selectedVoice + '_' + audioFilename;
+                  getAudioElement(actualFilename).then(function() {
+                      var playSoundBtn = document.getElementById('play-sound-btn');
+                      playSoundBtn.classList.remove('audio-loading', 'audio-error');
+                      playSoundBtn.classList.add('audio-ready');
+                      setButtonsDisabled(false);
+                  }).catch(function(error) {
+                      console.error('Audio loading failed:', error);
+                      var playSoundBtn = document.getElementById('play-sound-btn');
+                      playSoundBtn.classList.remove('audio-loading', 'audio-ready');
+                      playSoundBtn.classList.add('audio-error');
+                      setButtonsDisabled(false);
+                  });
+              } else {
+                  setButtonsDisabled(false);
+              }
+          }
+
+          function loadKeywordQuestion(questionData) {
+              var choiceContainer = document.getElementById('choice-container');
+              choiceContainer.classList.add('hidden');
+              var keywordQuestionContainer = document.getElementById('keyword-question-container');
+              keywordQuestionContainer.classList.remove('hidden');
+
+              correctWordForTrial = questionData.CorrectWord || '';
+
+              var keywordChoices = document.getElementById('keyword-choices');
+              keywordChoices.innerHTML = '';
+
+              var keywords = [
+                  questionData.CorrectWord,
+                  questionData.Keyword2,
+                  questionData.Keyword3,
+                  questionData.Keyword4
+              ].filter(function(k) { return k; });
+
+              var shuffledKeywords = keywords.sort(function() { return Math.random() - 0.5; });
+
+              shuffledKeywords.forEach(function(keyword) {
+                  var button = document.createElement('button');
+                  button.className = 'keyword-choice-btn py-2 px-3 text-sm font-semibold rounded border-2 border-gray-300 
+  hover:bg-gray-100 transition';
+                  button.textContent = keyword;
+                  button.dataset.isCorrect = keyword === correctWordForTrial ? 'true' : 'false';
+                  button.addEventListener('click', function() {
+                      handleKeywordChoice(button);
+                  });
+                  keywordChoices.appendChild(button);
+              });
+
+              var audioFilename = questionData.audioFilename || questionData.AudioFilename;
+              if (audioFilename) {
+                  var actualFilename = selectedVoice + '_' + audioFilename;
+                  getAudioElement(actualFilename).then(function() {
+                      var playSoundBtn = document.getElementById('play-sound-btn');
+                      playSoundBtn.classList.remove('audio-loading', 'audio-error');
+                      playSoundBtn.classList.add('audio-ready');
+                      setButtonsDisabled(false);
+                  }).catch(function(error) {
+                      console.error('Audio loading failed:', error);
+                      var playSoundBtn = document.getElementById('play-sound-btn');
+                      playSoundBtn.classList.remove('audio-loading', 'audio-ready');
+                      playSoundBtn.classList.add('audio-error');
+                      setButtonsDisabled(false);
+                  });
+              } else {
+                  setButtonsDisabled(false);
+              }
+          }
+
+          // Answer Handling
+          function handleAnswer(selectedButton) {
+              if (selectedButton.disabled) return;
+
+              var isCorrect = selectedButton.dataset.isCorrect === 'true';
+              var feedbackMessage = document.getElementById('feedback-message');
+
+              if (isCorrect) {
+                  selectedButton.classList.add('correct-answer');
+                  feedbackMessage.textContent = 'Correct!';
+                  feedbackMessage.className = 'mt-6 text-xl font-semibold h-8 text-green-600';
+                  score++;
+                  updateScore();
+              } else {
+                  selectedButton.classList.add('wrong-answer');
+                  feedbackMessage.textContent = 'Try again!';
+                  feedbackMessage.className = 'mt-6 text-xl font-semibold h-8 text-orange-600';
+
+                  var correctButton = currentActivityType === 'keywords' ?
+                      document.querySelector('.keyword-choice-btn[data-is-correct="true"]') :
+                      document.querySelector('#choice1-btn[data-is-correct="true"], #choice2-btn[data-is-correct="true"]');
+                  if (correctButton) {
+                      correctButton.classList.add('correct-answer');
+                  }
+              }
+
+              if (currentActivityType === 'keywords') {
+                  var keywordBtns = document.querySelectorAll('.keyword-choice-btn');
+                  keywordBtns.forEach(function(btn) { btn.disabled = true; });
+              } else {
+                  setButtonsDisabled(true);
+              }
+
+              setTimeout(function() {
+                  currentQuestionIndex++;
+                  loadQuestion();
+              }, 1500);
+          }
+
+          function handleKeywordChoice(selectedButton) {
+              handleAnswer(selectedButton);
+          }
+
+          // Completion
+          function showCompletionScreen() {
+              document.getElementById('app-content').classList.add('hidden');
+              var completionScreen = document.getElementById('completion-screen');
+              completionScreen.classList.remove('hidden');
+
+              var percentage = Math.round((score / currentLevelData.length) * 100);
+
+              var finalScoreEl = document.getElementById('final-score');
+              var totalScoreEl = document.getElementById('total-score');
+              var finalProgressBar = document.getElementById('final-progress-bar');
+
+              finalScoreEl.textContent = score;
+              totalScoreEl.textContent = currentLevelData.length;
+              finalProgressBar.style.width = percentage + '%';
+
+              var levelKey = currentActivityType + '-' + userProgress.currentLevel;
+              userProgress.completedLevels.add(levelKey);
+
+              userProgress.currentActivity = null;
+              userProgress.currentLevel = null;
+              userProgress.currentQuestion = 0;
+
+              saveUserProgress();
+          }
+
+          // Event Listeners Setup
+          function setupEventListeners() {
+              console.log('Setting up event listeners...');
+
+              // QC Event Listeners
+              var flagBtn = document.getElementById('flag-audio-btn');
+              if (flagBtn) flagBtn.addEventListener('click', flagAudioQuality);
 
               var disableBtn = document.getElementById('disable-qc-btn');
               if (disableBtn) disableBtn.addEventListener('click', toggleAdminQCMode);
 
-              // Test buttons
-              var testFlagBtn = document.getElementById('test-flag-btn');
-              if (testFlagBtn) testFlagBtn.addEventListener('click', flagTestIssue);
+              var exportBtn = document.getElementById('export-qc-btn');
+              if (exportBtn) exportBtn.addEventListener('click', exportQualityData);
 
-              var testExportBtn = document.getElementById('test-export-btn');
-              if (testExportBtn) testExportBtn.addEventListener('click', exportQualityData);
-
-              var backBtn = document.getElementById('back-to-main-btn');
-              if (backBtn) backBtn.addEventListener('click', showMainMode);
-
-              // Activity buttons
-              var activityBtns = document.querySelectorAll('.activity-btn');
-              activityBtns.forEach(function(btn) {
-                  btn.addEventListener('click', function() {
-                      var activity = this.getAttribute('data-activity');
-                      if (activity === 'words') {
-                          showTestMode();
-                      } else {
-                          alert('Exercise not available in test mode');
-                      }
-                  });
-              });
-
-              // Triple-tap for QC
+              // Triple-tap for QC mode
               var titleTapCount = 0;
               var titleTapTimer = null;
               var categoryTitle = document.getElementById('category-title');
@@ -248,10 +925,153 @@
                   });
               }
 
-              init();
-          });
+              // Keyboard shortcuts
+              document.addEventListener('keydown', function(e) {
+                  if (e.ctrlKey && e.shiftKey && e.key === 'Q') {
+                      toggleAdminQCMode();
+                  }
+                  if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                      exportQualityData();
+                  }
+              });
 
-          log('Script loaded');
+              // Activity selection
+              var activityBtns = document.querySelectorAll('.activity-btn');
+              activityBtns.forEach(function(btn) {
+                  btn.addEventListener('click', function() {
+                      var activity = this.getAttribute('data-activity');
+                      selectActivity(activity);
+                  });
+              });
+
+              // Navigation
+              var backToActivitiesBtn = document.getElementById('back-to-activities');
+              if (backToActivitiesBtn) {
+                  backToActivitiesBtn.addEventListener('click', function() {
+                      document.getElementById('level-selection-screen').classList.add('hidden');
+                      document.getElementById('activity-selection-screen').classList.remove('hidden');
+                  });
+              }
+
+              var backToLevelsBtn = document.getElementById('back-to-levels');
+              if (backToLevelsBtn) {
+                  backToLevelsBtn.addEventListener('click', function() {
+                      document.getElementById('app-content').classList.add('hidden');
+                      document.getElementById('level-selection-screen').classList.remove('hidden');
+
+                      if (currentAudio) {
+                          currentAudio.pause();
+                          currentAudio = null;
+                      }
+                  });
+              }
+
+              // Voice toggle
+              var voiceToggle = document.getElementById('voice-toggle');
+              if (voiceToggle) {
+                  voiceToggle.addEventListener('click', function() {
+                      var isFemale = voiceToggle.classList.contains('female');
+
+                      if (isFemale) {
+                          voiceToggle.classList.remove('female');
+                          voiceToggle.classList.add('male');
+                          selectedVoice = 'male';
+                      } else {
+                          voiceToggle.classList.remove('male');
+                          voiceToggle.classList.add('female');
+                          selectedVoice = 'female';
+                      }
+
+                      audioCache.clear();
+                  });
+              }
+
+              // Audio playback
+              var playSoundBtn = document.getElementById('play-sound-btn');
+              if (playSoundBtn) {
+                  playSoundBtn.addEventListener('click', function() {
+                      if (playSoundBtn.disabled) return;
+
+                      var questionData = currentLevelData[currentQuestionIndex];
+                      var audioFilename = questionData.audioFilename || questionData.AudioFilename;
+
+                      if (audioFilename) {
+                          var actualFilename = selectedVoice + '_' + audioFilename;
+                          playAudio(actualFilename).catch(function(error) {
+                              console.error('Playback failed:', error);
+                              var feedbackMessage = document.getElementById('feedback-message');
+                              feedbackMessage.textContent = 'Audio playback failed. Please try again.';
+                              feedbackMessage.className = 'mt-6 text-xl font-semibold h-8 text-red-600';
+                          });
+                      }
+                  });
+              }
+
+              // Choice buttons
+              var choice1Btn = document.getElementById('choice1-btn');
+              var choice2Btn = document.getElementById('choice2-btn');
+              if (choice1Btn) choice1Btn.addEventListener('click', function() { handleAnswer(choice1Btn); });
+              if (choice2Btn) choice2Btn.addEventListener('click', function() { handleAnswer(choice2Btn); });
+
+              // Completion screen
+              var retryLevelBtn = document.getElementById('retry-level-btn');
+              var nextLevelBtn = document.getElementById('next-level-btn');
+              if (retryLevelBtn) {
+                  retryLevelBtn.addEventListener('click', function() {
+                      var completionScreen = document.getElementById('completion-screen');
+                      completionScreen.classList.add('hidden');
+                      startLevel(userProgress.currentLevel, currentLevelData);
+                  });
+              }
+              if (nextLevelBtn) {
+                  nextLevelBtn.addEventListener('click', function() {
+                      var completionScreen = document.getElementById('completion-screen');
+                      completionScreen.classList.add('hidden');
+                      document.getElementById('level-selection-screen').classList.remove('hidden');
+                      updateActivityProgress();
+                  });
+              }
+
+              // Continue session
+              var continueBtnEl = document.getElementById('continue-btn');
+              var startFreshBtn = document.getElementById('start-fresh-btn');
+              if (continueBtnEl) {
+                  continueBtnEl.addEventListener('click', function() {
+                      var continueSession = document.getElementById('continue-session');
+                      continueSession.classList.add('hidden');
+                      var setData = allData[userProgress.currentActivity].filter(function(item) {
+                          return (item.Set || 'Unknown Set') === userProgress.currentLevel;
+                      });
+                      startLevel(userProgress.currentLevel, setData);
+                      currentQuestionIndex = userProgress.currentQuestion;
+                      loadQuestion();
+                  });
+              }
+              if (startFreshBtn) {
+                  startFreshBtn.addEventListener('click', function() {
+                      userProgress.currentActivity = null;
+                      userProgress.currentLevel = null;
+                      userProgress.currentQuestion = 0;
+                      saveUserProgress();
+                      var continueSession = document.getElementById('continue-session');
+                      continueSession.classList.add('hidden');
+                  });
+              }
+          }
+
+          // Initialize App
+          function initializeApp() {
+              console.log('Initializing hearing rehabilitation app...');
+              setupEventListeners();
+              loadAllData();
+          }
+
+          // Start the app when DOM is ready
+          if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initializeApp);
+          } else {
+              initializeApp();
+          }
       </script>
   </body>
   </html>
