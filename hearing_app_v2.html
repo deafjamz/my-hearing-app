@@ -247,8 +247,8 @@
             const issueType = document.getElementById('issue-type')?.value || 'unclear_pronunciation';
             
             const qualityIssue = {
-                audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename,
-                text: currentQuestion.text || currentQuestion.word || currentQuestion.CorrectChoice || 'N/A',
+                audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename || `${selectedVoice}_audio_${currentActivityType}_${currentQuestionIndex + 1}.mp3`,
+                text: currentQuestion.Word1 || currentQuestion.Word2 || currentQuestion.Sentence1 || currentQuestion.Sentence2 || currentQuestion.Sentence || correctWordForTrial || 'N/A',
                 voice: selectedVoice,
                 activityType: currentActivityType,
                 set: currentQuestion.Set || currentQuestion.set || 'Unknown Set',
