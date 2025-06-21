@@ -255,6 +255,7 @@
                 issueType: issueType,
                 severity: 'Medium',
                 dateFlagged: new Date().toISOString(),
+                sentToSheets: false,
                 sentToForms: false
             };
             
@@ -277,35 +278,188 @@
         
         async function exportQualityData() {
             console.log('=== EXPORT START ===');
-            const unsentIssues = qualityIssues.filter(issue => !issue.sentToForms);
+            const unsentIssues = qualityIssues.filter(issue => !issue.sentToSheets);
             console.log('Unsent issues:', unsentIssues.length);
             
             if (unsentIssues.length === 0) {
                 const retryAll = confirm('No new issues to submit. Reset all and retry?');
                 if (retryAll) {
-                    qualityIssues.forEach(issue => delete issue.sentToForms);
+                    qualityIssues.forEach(issue => delete issue.sentToSheets);
                     localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
                     return exportQualityData();
                 }
                 return;
             }
             
-            const message = 'Export ' + unsentIssues.length + ' flagged audio issues to Google Forms? This will open ' + unsentIssues.length + ' pre-filled form tabs.';
-            const confirmForms = confirm(message);
+            const message = 'Export ' + unsentIssues.length + ' flagged audio issues directly to Google Sheets?';
+            const confirmExport = confirm(message);
             
-            if (confirmForms) {
-                for (let i = 0; i < unsentIssues.length; i++) {
-                    const issue = unsentIssues[i];
-                    submitToGoogleForms(issue);
-                    issue.sentToForms = true;
-                    if (i < unsentIssues.length - 1) {
-                        await new Promise(resolve => setTimeout(resolve, 1000));
+            if (confirmExport) {
+                try {
+                    await submitToGoogleSheets(unsentIssues);
+                    unsentIssues.forEach(issue => issue.sentToSheets = true);
+                    localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+                    alert('✅ Successfully exported ' + unsentIssues.length + ' issues to Google Sheets!');
+                } catch (error) {
+                    console.error('Export failed:', error);
+                    const fallback = confirm('Direct export failed. Fall back to Google Forms?\n\n' + error.message);
+                    if (fallback) {
+                        await exportToForms(unsentIssues);
                     }
                 }
-                localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
-                alert('Opened ' + unsentIssues.length + ' Google Forms! Please submit each form tab.');
             }
             console.log('=== EXPORT COMPLETE ===');
+        }
+
+        async function submitToGoogleSheets(issues) {
+            console.log('Attempting direct Google Sheets submission...');
+            
+            // Try method 1: Direct append to existing sheet
+            const sheetId = '1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek';
+            const sheetName = 'QC_Issues'; // We'll need to create this sheet
+            
+            // Convert issues to CSV format
+            const csvData = convertIssuesToCSV(issues);
+            console.log('CSV data prepared:', csvData);
+            
+            // Try multiple submission methods
+            const methods = [
+                () => submitViaGoogleAppsScript(csvData),
+                () => submitViaFormEndpoint(csvData),
+                () => submitViaDirectPost(sheetId, sheetName, csvData)
+            ];
+            
+            for (let i = 0; i < methods.length; i++) {
+                try {
+                    console.log('Trying submission method', i + 1);
+                    await methods[i]();
+                    console.log('Method', i + 1, 'succeeded!');
+                    return; // Success!
+                } catch (error) {
+                    console.log('Method', i + 1, 'failed:', error.message);
+                    if (i === methods.length - 1) {
+                        throw new Error('All submission methods failed. Last error: ' + error.message);
+                    }
+                }
+            }
+        }
+
+        function convertIssuesToCSV(issues) {
+            const headers = ['Audio File', 'Text', 'Voice', 'Activity Type', 'Set', 'Issue Type', 'Severity', 'Date Flagged', 'Status'];
+            const rows = [headers];
+            
+            issues.forEach(issue => {
+                rows.push([
+                    issue.audioFile || 'N/A',
+                    issue.text || 'N/A', 
+                    issue.voice || 'female',
+                    issue.activityType || 'N/A',
+                    issue.set || 'N/A',
+                    issue.issueType || 'unclear_pronunciation',
+                    issue.severity || 'Medium',
+                    issue.dateFlagged || new Date().toISOString(),
+                    'New'
+                ]);
+            });
+            
+            return rows.map(row => row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(',')).join('\n');
+        }
+
+        async function submitViaDirectPost(sheetId, sheetName, csvData) {
+            // Method 3: Try direct POST to sheet
+            const url = `https://docs.google.com/spreadsheets/d/${sheetId}/edit#gid=0`;
+            throw new Error('Direct POST method not yet implemented');
+        }
+
+        async function submitViaFormEndpoint(csvData) {
+            // Method 2: Try a webhook service
+            throw new Error('Form endpoint method not yet implemented'); 
+        }
+
+        async function submitViaGoogleAppsScript(csvData) {
+            // Method 1: Try the original Sheets API approach with better error handling
+            const sheetId = '1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek';
+            const apiKey = 'AIzaSyDzpvre6oaVH9U7USUEiiqjUhY7KhdOzGM';
+            
+            // First, try to create the QC_Issues sheet if it doesn't exist
+            try {
+                await createQCSheet(sheetId, apiKey);
+            } catch (error) {
+                console.log('QC sheet might already exist or creation failed:', error.message);
+            }
+            
+            // Try to append data to the sheet
+            const range = 'QC_Issues!A:I'; // A through I columns
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS&key=${apiKey}`;
+            
+            // Convert CSV back to values array
+            const rows = csvData.split('\n').map(row => {
+                // Simple CSV parsing - split by comma and remove quotes
+                return row.split(',').map(cell => cell.replace(/^"(.*)"$/, '$1').replace(/""/g, '"'));
+            });
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    values: rows
+                })
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Sheets API failed: ${response.status} - ${errorText}`);
+            }
+            
+            console.log('Successfully submitted to Google Sheets via API');
+        }
+        
+        async function createQCSheet(sheetId, apiKey) {
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}:batchUpdate?key=${apiKey}`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    requests: [{
+                        addSheet: {
+                            properties: {
+                                title: 'QC_Issues',
+                                gridProperties: {
+                                    rowCount: 1000,
+                                    columnCount: 10
+                                }
+                            }
+                        }
+                    }]
+                })
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Sheet creation failed: ${response.status} - ${errorText}`);
+            }
+            
+            console.log('QC_Issues sheet created successfully');
+        }
+
+        async function exportToForms(unsentIssues) {
+            // Fallback to original Google Forms method
+            console.log('Falling back to Google Forms...');
+            for (let i = 0; i < unsentIssues.length; i++) {
+                const issue = unsentIssues[i];
+                submitToGoogleForms(issue);
+                issue.sentToForms = true;
+                if (i < unsentIssues.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+            }
+            localStorage.setItem('qualityIssues', JSON.stringify(qualityIssues));
+            alert('Opened ' + unsentIssues.length + ' Google Forms! Please submit each form tab.');
         }
 
         function shuffleArray(array) {
