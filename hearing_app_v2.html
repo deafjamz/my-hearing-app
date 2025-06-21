@@ -350,9 +350,9 @@
                 document.getElementById('loading-status').textContent = 'Loading exercise data...';
                 
                 const [wordsData, sentencesData, keywordsData] = await Promise.all([
-                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=csv&gid=0'),
-                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=csv&gid=1935729170'),
-                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/export?format=csv&gid=432156728')
+                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Words'),
+                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Sentences'),
+                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Keywords')
                 ]);
                 
                 allData = { words: wordsData, sentences: sentencesData, keywords: keywordsData };
