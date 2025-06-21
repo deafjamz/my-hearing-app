@@ -66,13 +66,71 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Handle preflight requests
-  return ContentService
-    .createTextOutput('QC Issues API is running')
-    .setMimeType(ContentService.MimeType.TEXT)
-    .setHeader('Access-Control-Allow-Origin', '*')
-    .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  try {
+    console.log('GET request received:', e.parameter);
+    
+    if (e.parameter.action === 'addQCIssues' && e.parameter.data) {
+      // Parse the issues data from URL parameter
+      const issues = JSON.parse(e.parameter.data);
+      console.log('Processing QC issues via GET:', issues);
+      
+      // Open your spreadsheet
+      const spreadsheetId = '1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek';
+      const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
+      
+      // Get or create the QC_Issues sheet
+      let sheet = spreadsheet.getSheetByName('QC_Issues');
+      if (!sheet) {
+        sheet = spreadsheet.insertSheet('QC_Issues');
+        // Add headers
+        const headers = ['Audio File', 'Text', 'Voice', 'Activity Type', 'Set', 'Issue Type', 'Severity', 'Date Flagged', 'Status'];
+        sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+        sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+      }
+      
+      // Prepare the data rows
+      const rows = issues.map(issue => [
+        issue.audioFile || 'N/A',
+        issue.text || 'N/A',
+        issue.voice || 'female',
+        issue.activityType || 'N/A',
+        issue.set || 'N/A',
+        issue.issueType || 'unclear_pronunciation',
+        issue.severity || 'Medium',
+        issue.dateFlagged || new Date().toISOString(),
+        'New'
+      ]);
+      
+      // Append the data to the sheet
+      if (rows.length > 0) {
+        const lastRow = sheet.getLastRow();
+        sheet.getRange(lastRow + 1, 1, rows.length, 9).setValues(rows);
+        console.log(`Added ${rows.length} rows to QC_Issues sheet via GET`);
+      }
+      
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: true,
+          message: `Successfully added ${rows.length} QC issues via GET`,
+          rowsAdded: rows.length
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Default response for simple GET requests
+    return ContentService
+      .createTextOutput('QC Issues API is running')
+      .setMimeType(ContentService.MimeType.TEXT);
+      
+  } catch (error) {
+    console.error('Error in doGet:', error);
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        error: error.message
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 function doOptions(e) {
