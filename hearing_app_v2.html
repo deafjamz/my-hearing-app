@@ -68,6 +68,12 @@
                         <span id="keywords-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/30</span>
                     </div>
                 </button>
+                <button data-activity="stories" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
+                    <div class="flex items-center justify-between">
+                        <span>Story Practice</span>
+                        <span id="stories-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/5</span>
+                    </div>
+                </button>
             </div>
         </div>
 
@@ -140,6 +146,31 @@
                     <div id="keyword-choices" class="grid grid-cols-2 gap-2"></div>
                 </div>
 
+                <!-- Story Interface -->
+                <div id="story-interface" class="hidden mt-6">
+                    <!-- Caption Level Selector -->
+                    <div class="mb-4">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">Caption Level</p>
+                        <div class="flex gap-2 justify-center">
+                            <button data-caption-level="25" class="caption-btn px-3 py-1 text-xs rounded-full border bg-blue-600 text-white">25%</button>
+                            <button data-caption-level="50" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">50%</button>
+                            <button data-caption-level="75" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">75%</button>
+                            <button data-caption-level="100" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">100%</button>
+                        </div>
+                    </div>
+
+                    <!-- Story Text Display -->
+                    <div id="story-text" class="bg-gray-50 p-4 rounded-lg mb-4 text-left">
+                        <p id="story-caption" class="text-gray-800 leading-relaxed">Listen to the story, then answer the question below.</p>
+                    </div>
+
+                    <!-- Story Question -->
+                    <div id="story-question" class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3" id="story-question-text">What happened in the story?</h3>
+                        <div id="story-choices" class="space-y-2"></div>
+                    </div>
+                </div>
+
                 <!-- Feedback -->
                 <div id="feedback-message" class="mt-6 text-xl font-semibold h-8"></div>
             </main>
@@ -179,7 +210,74 @@
             "Set 10: Multi-Syllabic Complex": "Complex Combos"
         };
         
-        let allData = { words: [], sentences: [], keywords: [] };
+        let allData = { words: [], sentences: [], keywords: [], stories: [] };
+
+        // Sample story data - Phase 1 implementation
+        const sampleStories = [
+            {
+                id: "story1",
+                title: "The Lost Keys",
+                fullText: "Sarah looked everywhere for her car keys. She checked the kitchen table, the living room couch, and even under the bed. Finally, she found them in her jacket pocket where she had left them the night before.",
+                captions: {
+                    25: "Sarah... keys... kitchen... couch... bed... jacket pocket...",
+                    50: "Sarah looked keys kitchen table couch bed found jacket pocket",
+                    75: "Sarah looked everywhere for her [BLANK] keys. She checked the kitchen table, the [BLANK] room couch, and even under the bed. Finally, she [BLANK] them in her jacket pocket.",
+                    100: "Sarah looked everywhere for her car keys. She checked the kitchen table, the living room couch, and even under the bed. Finally, she found them in her jacket pocket where she had left them the night before."
+                },
+                question: "Where did Sarah finally find her keys?",
+                choices: [
+                    "In her jacket pocket",
+                    "On the kitchen table",
+                    "Under the bed",
+                    "On the couch"
+                ],
+                correctAnswer: 0,
+                difficulty: "easy",
+                audioFile: "story_lost_keys.mp3"
+            },
+            {
+                id: "story2", 
+                title: "The Helpful Neighbor",
+                fullText: "Mrs. Chen noticed her elderly neighbor struggling with heavy grocery bags. Without hesitation, she crossed the street and offered to help. Together, they carried the bags to the front door, and the neighbor thanked her with a warm smile.",
+                captions: {
+                    25: "Mrs. Chen... neighbor... grocery bags... help... door... smile...",
+                    50: "Mrs. Chen neighbor heavy grocery bags help street door thanked smile",
+                    75: "Mrs. Chen noticed her elderly [BLANK] struggling with heavy grocery bags. Without hesitation, she crossed the [BLANK] and offered to help. Together, they carried the bags to the front [BLANK].",
+                    100: "Mrs. Chen noticed her elderly neighbor struggling with heavy grocery bags. Without hesitation, she crossed the street and offered to help. Together, they carried the bags to the front door, and the neighbor thanked her with a warm smile."
+                },
+                question: "What did Mrs. Chen help her neighbor with?",
+                choices: [
+                    "Carrying grocery bags",
+                    "Opening the front door", 
+                    "Crossing the street",
+                    "Finding her keys"
+                ],
+                correctAnswer: 0,
+                difficulty: "easy",
+                audioFile: "story_helpful_neighbor.mp3"
+            },
+            {
+                id: "story3",
+                title: "The Birthday Surprise",
+                fullText: "Tom wanted to surprise his sister for her birthday. He quietly decorated the living room with balloons and streamers while she was at work. When she arrived home, all her friends jumped out from behind the furniture and shouted 'Surprise!'",
+                captions: {
+                    25: "Tom... sister... birthday... decorated... balloons... friends... surprise...",
+                    50: "Tom surprise sister birthday decorated balloons streamers work friends surprise",
+                    75: "Tom wanted to [BLANK] his sister for her birthday. He quietly decorated the living room with [BLANK] and streamers while she was at work. When she arrived home, all her [BLANK] jumped out.",
+                    100: "Tom wanted to surprise his sister for her birthday. He quietly decorated the living room with balloons and streamers while she was at work. When she arrived home, all her friends jumped out from behind the furniture and shouted 'Surprise!'"
+                },
+                question: "When did Tom decorate the living room?",
+                choices: [
+                    "While his sister was at work",
+                    "After his sister came home",
+                    "During the birthday party",
+                    "In the morning before breakfast"
+                ],
+                correctAnswer: 0,
+                difficulty: "medium",
+                audioFile: "story_birthday_surprise.mp3"
+            }
+        ];
         let currentActivityType = '';
         let currentLevelData = [];
         let currentQuestionIndex = 0;
@@ -187,6 +285,11 @@
         let currentAudio = null;
         let selectedVoice = 'female';
         let correctWordForTrial = '';
+        
+        // Story-specific variables
+        let currentStory = null;
+        let selectedCaptionLevel = 25; // Default to 25% captions
+        let currentQuestion = null;
         
         let adminQCMode = localStorage.getItem('adminQCMode') === 'true';
         let qualityIssues = JSON.parse(localStorage.getItem('qualityIssues') || '[]');
@@ -504,7 +607,7 @@
                     loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Keywords')
                 ]);
                 
-                allData = { words: wordsData, sentences: sentencesData, keywords: keywordsData };
+                allData = { words: wordsData, sentences: sentencesData, keywords: keywordsData, stories: sampleStories };
                 
                 document.getElementById('loading-progress-bar').style.width = '100%';
                 document.getElementById('loading-status').textContent = 'Ready!';
@@ -512,6 +615,9 @@
                 setTimeout(() => {
                     document.getElementById('loading-state').classList.add('hidden');
                     document.getElementById('activity-selection-screen').classList.remove('hidden');
+                    
+                    // Initialize caption buttons
+                    setupCaptionButtons();
                     
                     if (adminQCMode) {
                         toggleAdminQCMode();
@@ -539,16 +645,27 @@
             const levelButtonsContainer = document.getElementById('level-buttons-container');
             levelButtonsContainer.innerHTML = '';
             
-            const dataForActivity = allData[activityType];
-            const sets = [...new Set(dataForActivity.map(item => item.Set))];
-            
-            sets.forEach(setName => {
-                const button = document.createElement('button');
-                button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition';
-                button.textContent = friendlySetNames[setName] || setName;
-                button.onclick = () => startLevel(setName);
-                levelButtonsContainer.appendChild(button);
-            });
+            if (activityType === 'stories') {
+                // Handle stories differently - show story titles directly
+                sampleStories.forEach((story, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition';
+                    button.textContent = story.title;
+                    button.onclick = () => startStory(story);
+                    levelButtonsContainer.appendChild(button);
+                });
+            } else {
+                const dataForActivity = allData[activityType];
+                const sets = [...new Set(dataForActivity.map(item => item.Set))];
+                
+                sets.forEach(setName => {
+                    const button = document.createElement('button');
+                    button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition';
+                    button.textContent = friendlySetNames[setName] || setName;
+                    button.onclick = () => startLevel(setName);
+                    levelButtonsContainer.appendChild(button);
+                });
+            }
         }
         
         function startLevel(setName) {
@@ -566,11 +683,76 @@
             loadQuestion();
         }
 
+        function startStory(story) {
+            currentStory = story;
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            document.getElementById('exercise-title').textContent = story.title;
+            document.getElementById('level-selection-screen').classList.add('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            document.getElementById('app-content').classList.remove('hidden');
+            
+            loadStoryQuestion();
+        }
+
+        function loadStoryQuestion() {
+            // Show story interface, hide regular question interface
+            document.getElementById('choice-container').classList.add('hidden');
+            document.getElementById('keyword-question-container').classList.add('hidden');
+            document.getElementById('story-interface').classList.remove('hidden');
+            
+            // Reset UI state
+            document.getElementById('feedback-message').className = 'mt-6 text-xl font-semibold h-8';
+            document.getElementById('play-sound-btn').disabled = false;
+            
+            // Update story caption based on selected level
+            updateStoryCaption();
+            
+            // Setup story question
+            document.getElementById('story-question-text').textContent = currentStory.question;
+            
+            // Setup story choices
+            const choicesContainer = document.getElementById('story-choices');
+            choicesContainer.innerHTML = '';
+            
+            currentStory.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'w-full py-3 px-4 text-left font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition disabled:bg-gray-200 disabled:cursor-not-allowed';
+                button.textContent = choice;
+                button.disabled = true;
+                button.onclick = () => handleStoryAnswer(index);
+                button.id = `story-choice-${index}`;
+                choicesContainer.appendChild(button);
+            });
+            
+            // Setup audio
+            const audioFolder = `${selectedVoice}_audio`;
+            const audioUrl = getAudioUrl(`${audioFolder}/${currentStory.audioFile}`);
+            
+            currentAudio = new Audio(audioUrl);
+            currentAudio.onerror = (e) => {
+                console.error("Story audio loading error:", audioUrl, e);
+                document.getElementById('feedback-message').textContent = `Error loading story audio.`;
+                document.getElementById('play-sound-btn').disabled = true;
+            };
+            
+            // Update progress
+            document.getElementById('current-question').textContent = '1';
+            document.getElementById('total-questions').textContent = '1';
+            document.getElementById('progress-bar').style.width = '0%';
+        }
+
         function loadQuestion() {
             if (currentQuestionIndex >= currentLevelData.length) {
                 showCompletionScreen();
                 return;
             }
+            
+            // Show regular interface, hide story interface
+            document.getElementById('choice-container').classList.remove('hidden');
+            document.getElementById('story-interface').classList.add('hidden');
             
             // Reset UI state
             document.getElementById('feedback-message').className = 'mt-6 text-xl font-semibold h-8';
@@ -671,6 +853,75 @@
             document.getElementById('final-progress-bar').style.width = `${(score / currentLevelData.length) * 100}%`;
         }
 
+        // Story-specific functions
+        function updateStoryCaption() {
+            const captionElement = document.getElementById('story-caption');
+            captionElement.textContent = currentStory.captions[selectedCaptionLevel];
+        }
+
+        function handleStoryAnswer(selectedIndex) {
+            // Disable all story choice buttons
+            currentStory.choices.forEach((_, index) => {
+                document.getElementById(`story-choice-${index}`).disabled = true;
+            });
+            
+            const selectedButton = document.getElementById(`story-choice-${selectedIndex}`);
+            const isCorrect = selectedIndex === currentStory.correctAnswer;
+            
+            if (isCorrect) {
+                score++;
+                const correctMessages = [
+                    'Excellent!', 'Perfect!', 'Great job!', 'Well done!', 'Nice work!', 
+                    'Outstanding!', 'Fantastic!', 'You got it!', 'Brilliant!', 'Superb!'
+                ];
+                const randomCorrect = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+                document.getElementById('feedback-message').textContent = randomCorrect;
+                document.getElementById('feedback-message').classList.add('text-green-500');
+                selectedButton.classList.add('correct-answer');
+            } else {
+                const encouragingMessages = [
+                    'Keep practicing!', 'Almost there!', 'Good effort!', 'You\'re learning!', 
+                    'Nice try!', 'Getting closer!', 'Keep going!', 'Stay focused!', 
+                    'You\'re improving!', 'Practice makes progress!', 'Keep listening!', 
+                    'You\'ve got this!', 'Learning in progress!'
+                ];
+                const randomEncouraging = encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+                document.getElementById('feedback-message').textContent = randomEncouraging;
+                document.getElementById('feedback-message').classList.add('text-orange-500');
+                selectedButton.classList.add('wrong-answer');
+            }
+            
+            // Show correct answer
+            document.getElementById(`story-choice-${currentStory.correctAnswer}`).classList.add('correct-answer');
+            
+            // Progress to completion after delay
+            setTimeout(() => {
+                showCompletionScreen();
+            }, 2000);
+        }
+
+        // Caption level button handlers
+        function setupCaptionButtons() {
+            document.querySelectorAll('.caption-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update selected caption level
+                    selectedCaptionLevel = parseInt(btn.dataset.captionLevel);
+                    
+                    // Update button styles
+                    document.querySelectorAll('.caption-btn').forEach(b => {
+                        b.className = 'caption-btn px-3 py-1 text-xs rounded-full border border-gray-300';
+                    });
+                    btn.className = 'caption-btn px-3 py-1 text-xs rounded-full border bg-blue-600 text-white';
+                    
+                    // Update caption display
+                    if (currentStory) {
+                        updateStoryCaption();
+                    }
+                });
+            });
+        }
+
+
         // Event Listeners
         document.getElementById('flag-audio-btn')?.addEventListener('click', flagAudioQuality);
         document.getElementById('disable-qc-btn')?.addEventListener('click', toggleAdminQCMode);
@@ -694,8 +945,16 @@
         document.getElementById('play-sound-btn').addEventListener('click', () => {
             if (currentAudio) {
                 currentAudio.play().catch(e => console.error("Error playing audio:", e));
-                document.getElementById('choice1-btn').disabled = false;
-                document.getElementById('choice2-btn').disabled = false;
+                
+                // Enable appropriate choice buttons based on activity type
+                if (currentActivityType === 'stories') {
+                    currentStory.choices.forEach((_, index) => {
+                        document.getElementById(`story-choice-${index}`).disabled = false;
+                    });
+                } else {
+                    document.getElementById('choice1-btn').disabled = false;
+                    document.getElementById('choice2-btn').disabled = false;
+                }
             }
         });
 
