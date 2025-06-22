@@ -996,8 +996,11 @@
             document.querySelector('main').classList.add('hidden');
             document.getElementById('completion-screen').classList.remove('hidden');
             document.getElementById('final-score').textContent = score;
-            document.getElementById('total-score').textContent = currentLevelData.length;
-            document.getElementById('final-progress-bar').style.width = `${(score / currentLevelData.length) * 100}%`;
+            
+            // For stories, there's only 1 question. For other activities, use currentLevelData.length
+            const totalQuestions = currentActivityType === 'stories' ? 1 : currentLevelData.length;
+            document.getElementById('total-score').textContent = totalQuestions;
+            document.getElementById('final-progress-bar').style.width = `${(score / totalQuestions) * 100}%`;
         }
 
         // Story-specific functions
