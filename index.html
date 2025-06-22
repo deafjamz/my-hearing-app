@@ -454,6 +454,14 @@
             return `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${filename}`;
         }
 
+        function stopCurrentAudio() {
+            // Utility function to stop any currently playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+        }
+
         function submitToGoogleForms(qualityIssue) {
             const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdrZdSdORcvQkZm9A_ZWB3J4Q_XOY9HKKpD8GDQiyLEINqu2A/viewform";
             const params = new URLSearchParams({
@@ -778,6 +786,8 @@
         }
 
         function showActivitySelection() {
+            stopCurrentAudio();
+            
             document.getElementById('loading-state').classList.add('hidden');
             document.getElementById('level-selection-screen').classList.add('hidden');
             document.getElementById('app-content').classList.add('hidden');
@@ -785,6 +795,8 @@
         }
 
         function showLevelSelection(activityType) {
+            stopCurrentAudio();
+            
             currentActivityType = activityType;
             document.getElementById('activity-selection-screen').classList.add('hidden');
             document.getElementById('level-selection-screen').classList.remove('hidden');
@@ -1010,6 +1022,9 @@
         }
 
         function handleStoryAnswer(selectedIndex) {
+            // Stop any currently playing audio immediately
+            stopCurrentAudio();
+            
             // Disable all story choice buttons
             currentStory.choices.forEach((_, index) => {
                 document.getElementById(`story-choice-${index}`).disabled = true;
