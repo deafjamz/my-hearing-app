@@ -462,6 +462,32 @@
             }
         }
 
+        function randomizeStoryChoices(story) {
+            // Create a copy of the story to avoid modifying the original
+            const randomizedStory = { ...story };
+            
+            // Get the correct answer text before shuffling
+            const correctAnswerText = story.choices[story.correctAnswer];
+            
+            // Create array of choice objects with original indices
+            const choicesWithIndices = story.choices.map((choice, index) => ({
+                text: choice,
+                originalIndex: index
+            }));
+            
+            // Shuffle the choices
+            for (let i = choicesWithIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [choicesWithIndices[i], choicesWithIndices[j]] = [choicesWithIndices[j], choicesWithIndices[i]];
+            }
+            
+            // Update the story with shuffled choices and new correct answer index
+            randomizedStory.choices = choicesWithIndices.map(item => item.text);
+            randomizedStory.correctAnswer = choicesWithIndices.findIndex(item => item.text === correctAnswerText);
+            
+            return randomizedStory;
+        }
+
         function submitToGoogleForms(qualityIssue) {
             const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdrZdSdORcvQkZm9A_ZWB3J4Q_XOY9HKKpD8GDQiyLEINqu2A/viewform";
             const params = new URLSearchParams({
@@ -843,11 +869,12 @@
         }
 
         function startStory(story) {
-            currentStory = story;
+            // Randomize the story choices before setting currentStory
+            currentStory = randomizeStoryChoices(story);
             currentQuestionIndex = 0;
             score = 0;
             
-            document.getElementById('exercise-title').textContent = story.title;
+            document.getElementById('exercise-title').textContent = currentStory.title;
             document.getElementById('level-selection-screen').classList.add('hidden');
             document.getElementById('completion-screen').classList.add('hidden');
             document.querySelector('main').classList.remove('hidden');
