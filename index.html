@@ -1279,6 +1279,62 @@
             }
         });
 
+        // Practice mode toggle (Quiet/With Noise)
+        document.getElementById('quiet-mode').addEventListener('click', () => {
+            practiceMode = 'quiet';
+            // Update UI
+            document.getElementById('quiet-mode').classList.add('border-blue-600', 'bg-blue-600', 'text-white');
+            document.getElementById('quiet-mode').classList.remove('border-gray-300', 'text-gray-700');
+            document.getElementById('noise-mode').classList.remove('border-blue-600', 'bg-blue-600', 'text-white');
+            document.getElementById('noise-mode').classList.add('border-gray-300', 'text-gray-700');
+            // Hide noise level selector
+            document.getElementById('noise-level-selector').classList.add('hidden');
+            console.log('Practice mode set to: quiet');
+        });
+
+        document.getElementById('noise-mode').addEventListener('click', () => {
+            practiceMode = 'noise';
+            // Update UI
+            document.getElementById('noise-mode').classList.add('border-blue-600', 'bg-blue-600', 'text-white');
+            document.getElementById('noise-mode').classList.remove('border-gray-300', 'text-gray-700');
+            document.getElementById('quiet-mode').classList.remove('border-blue-600', 'bg-blue-600', 'text-white');
+            document.getElementById('quiet-mode').classList.add('border-gray-300', 'text-gray-700');
+            // Show noise level selector
+            document.getElementById('noise-level-selector').classList.remove('hidden');
+            console.log('Practice mode set to: noise');
+        });
+
+        // Noise level selection
+        document.querySelectorAll('.noise-level-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const level = e.target.getAttribute('data-noise-level');
+                noiseLevel = level;
+                
+                // Update UI - remove active state from all buttons
+                document.querySelectorAll('.noise-level-btn').forEach(b => {
+                    b.classList.remove('bg-green-500', 'bg-yellow-500', 'bg-red-500', 'text-white');
+                    b.classList.add('border-gray-300');
+                });
+                
+                // Add active state to clicked button
+                if (level === 'easy') {
+                    e.target.classList.add('bg-green-500', 'text-white');
+                } else if (level === 'medium') {
+                    e.target.classList.add('bg-yellow-500', 'text-white');
+                } else if (level === 'hard') {
+                    e.target.classList.add('bg-red-500', 'text-white');
+                }
+                e.target.classList.remove('border-gray-300');
+                
+                console.log(`Noise level set to: ${level}`);
+                
+                // Preload the background noise for this level
+                if (practiceMode === 'noise') {
+                    loadBackgroundNoise(level).catch(console.error);
+                }
+            });
+        });
+
         // Initialize
         loadAllData();
     </script>
