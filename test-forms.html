@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Quality Forms Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 5px; }
+        .qc-active { background: #fee; border: 1px solid #f88; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Audio Quality Control Test</h1>
+    
+    <div id="status">QC Mode: <span id="mode-status">Disabled</span></div>
+    
+    <div id="qc-controls" class="qc-active" style="display: none;">
+        <h3>🔧 QC Mode Active</h3>
+        <button onclick="flagAudio()">Flag Test Audio</button>
+        <button onclick="exportData()">Export to Forms</button>
+        <button onclick="toggleQC()">Disable QC</button>
+        <p>Flagged issues: <span id="count">0</span></p>
+    </div>
+    
+    <button onclick="toggleQC()">Toggle QC Mode</button>
+    <button onclick="clearAll()">Clear All Data</button>
+    
+    <h3>Console Output:</h3>
+    <div id="console" style="background: #f0f0f0; padding: 10px; font-family: monospace; white-space: pre-wrap;"></div>
+
+    <script>
+        let qcMode = false;
+        let flaggedIssues = JSON.parse(localStorage.getItem('testQualityIssues') || '[]');
+        
+        function log(message) {
+            console.log(message);
+            document.getElementById('console').textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+        }
+        
+        function updateUI() {
+            document.getElementById('mode-status').textContent = qcMode ? 'Enabled' : 'Disabled';
+            document.getElementById('qc-controls').style.display = qcMode ? 'block' : 'none';
+            document.getElementById('count').textContent = flaggedIssues.length;
+        }
+        
+        function toggleQC() {
+            qcMode = !qcMode;
+            log('QC Mode: ' + (qcMode ? 'ENABLED' : 'DISABLED'));
+            updateUI();
+        }
+        
+        function flagAudio() {
+            const issue = {
+                audioFile: 'test_audio_' + Date.now() + '.mp3',
+                text: 'Test audio sample',
+                voice: 'female',
+                activityType: 'words',
+                set: 'Test Set',
+                issueType: 'unclear_pronunciation',
+                severity: 'Medium',
+                dateFlagged: new Date().toISOString(),
+                sentToSheets: false,
+                sentToForms: false
+            };
+            
+            flaggedIssues.push(issue);
+            localStorage.setItem('testQualityIssues', JSON.stringify(flaggedIssues));
+            log('Audio flagged: ' + issue.audioFile);
+            updateUI();
+        }
+        
+        function submitToGoogleForms(issue) {
+            const baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdrZdSdORcvQkZm9A_ZWB3J4Q_XOY9HKKpD8GDQiyLEINqu2A/viewform";
+            
+            const params = new URLSearchParams({
+                'usp': 'pp_url',
+                'entry.2092258809': issue.audioFile,
+                'entry.2027416117': issue.text,
+                'entry.2104356900': issue.voice,
+                'entry.1322911479': issue.activityType,
+                'entry.2105236424': issue.set,
+                'entry.64346061': issue.issueType,
+                'entry.1007752238': issue.severity,
+                'entry.215629918': issue.dateFlagged
+            });
+            
+            const formUrl = baseUrl + '?' + params.toString();
+            log('Opening form: ' + issue.audioFile);
+            window.open(formUrl, '_blank');
+            return true;
+        }
+        
+        async function exportData() {
+            log('=== EXPORT START ===');
+            
+            const unsentIssues = flaggedIssues.filter(issue => !issue.sentToForms);
+            log('Unsent issues: ' + unsentIssues.length);
+            
+            if (unsentIssues.length === 0) {
+                const retry = confirm('No new issues. Reset all and retry?');
+                if (retry) {
+                    flaggedIssues.forEach(issue => delete issue.sentToForms);
+                    localStorage.setItem('testQualityIssues', JSON.stringify(flaggedIssues));
+                    return exportData();
+                }
+                return;
+            }
+            
+            const confirmed = confirm(`Export ${unsentIssues.length} issues to Google Forms?`);
+            if (!confirmed) {
+                log('Export cancelled');
+                return;
+            }
+            
+            log('Exporting to Google Forms...');
+            for (const issue of unsentIssues) {
+                submitToGoogleForms(issue);
+                issue.sentToForms = true;
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+            
+            localStorage.setItem('testQualityIssues', JSON.stringify(flaggedIssues));
+            alert(`Opened ${unsentIssues.length} form tabs!`);
+            log('=== EXPORT COMPLETE ===');
+        }
+        
+        function clearAll() {
+            localStorage.removeItem('testQualityIssues');
+            flaggedIssues = [];
+            log('All data cleared');
+            updateUI();
+        }
+        
+        // Initialize
+        updateUI();
+        log('Test page loaded');
+    </script>
+</body>
+</html>

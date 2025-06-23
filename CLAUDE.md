@@ -122,6 +122,11 @@ This is a web-based hearing rehabilitation application designed specifically for
 - **Maintain simplicity:** Resist over-engineering
 - **Document decisions:** Explain why choices were made
 
+### Git Commit Guidelines
+- **Author attribution:** Never use Claude as co-author in git commits
+- **Commit messages:** Create clear, descriptive commit messages
+- **Single developer:** All commits should be attributed to the human developer only
+
 ## ElevenLabs Integration
 
 ### Current Setup
