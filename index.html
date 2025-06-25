@@ -11,10 +11,10 @@
         .wrong-answer { background-color: #f97316 !important; color: white !important; }
         .loading-spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #09f; animation: spin 1s ease infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .voice-toggle-bg { background-color: #e5e7eb; }
-        .voice-toggle-btn { transition: all 0.3s ease; }
-        .voice-toggle-bg.female .voice-toggle-btn { transform: translateX(0%); background-color: #ec4899; }
-        .voice-toggle-bg.male .voice-toggle-btn { transform: translateX(100%); background-color: #3b82f6; }
+        /* Voice selection button styles */
+        .voice-btn.selected { border-color: #3b82f6 !important; background-color: #3b82f6 !important; color: white !important; }
+        .voice-btn.selected.female { border-color: #ec4899 !important; background-color: #ec4899 !important; }
+        .voice-btn { transition: all 0.3s ease; }
         .audio-ready { border-color: #10b981 !important; }
         .audio-error { border-color: #ef4444 !important; }
         .fade-in { animation: fadeIn 0.3s ease-in; }
@@ -36,6 +36,122 @@
             </div>
         </div>
 
+        <!-- Progress Dashboard -->
+        <div id="progress-dashboard-screen" class="hidden fade-in">
+            <div class="w-full mb-4 text-left">
+                <button id="back-to-activities-from-dashboard" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Activities</button>
+            </div>
+            
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">📊 My Progress Dashboard</h1>
+            
+            <!-- View Toggle -->
+            <div class="flex justify-center mb-6">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button id="view-progress" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-gray-200 rounded-l-lg hover:bg-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-500">
+                        My Progress
+                    </button>
+                    <button id="view-clinical" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-r border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-500">
+                        Clinical Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- "My Progress" View Content -->
+            <div id="progress-view" class="space-y-6">
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Total Practice Time</h3>
+                        <p class="mt-1 text-3xl font-semibold text-blue-600" id="total-time-display">--:--:--</p>
+                        <p class="text-xs text-gray-400 mt-1">Across all sessions</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Practice Sessions</h3>
+                        <p class="mt-1 text-3xl font-semibold text-green-600" id="total-sessions-display">--</p>
+                        <p class="text-xs text-gray-400 mt-1">Total sessions completed</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Overall Accuracy</h3>
+                        <p class="mt-1 text-3xl font-semibold text-purple-600" id="overall-accuracy-display">--%</p>
+                        <p class="text-xs text-gray-400 mt-1">Across all activities</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Summary -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">📈 Progress Overview (Last 30 Days)</h3>
+                    <div class="h-64 flex items-center justify-center" id="progress-chart-container">
+                        <canvas id="progress-overview-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Voice Performance Summary -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">🎤 Voice Training Progress</h3>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="voice-progress-cards">
+                        <!-- Voice cards will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Clinical Details" View Content (Initially Hidden) -->
+            <div id="clinical-view" class="hidden space-y-6">
+                <!-- Filters & Export -->
+                <div class="bg-white p-4 rounded-lg shadow border flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex flex-wrap gap-4">
+                        <select id="activity-filter" class="rounded-md border-gray-300 text-sm">
+                            <option value="all">All Activities</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="keywords">Keywords</option>
+                            <option value="stories">Stories</option>
+                            <option value="scenarios">Scenarios</option>
+                        </select>
+                        <select id="timeframe-filter" class="rounded-md border-gray-300 text-sm">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                            <option value="all">All time</option>
+                        </select>
+                    </div>
+                    <button id="export-csv-btn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
+                        📊 Export to CSV
+                    </button>
+                </div>
+
+                <!-- Detailed Analytics -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="font-semibold text-gray-800 mb-4">Accuracy by Voice</h3>
+                        <div class="h-64">
+                            <canvas id="voice-accuracy-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="font-semibold text-gray-800 mb-4">Performance by Noise Level</h3>
+                        <div class="h-64">
+                            <canvas id="noise-performance-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Breakdown -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">Activity Performance Breakdown</h3>
+                    <div class="h-80">
+                        <canvas id="activity-breakdown-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Session Timeline -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">Session Activity Timeline</h3>
+                    <div id="session-timeline" class="space-y-2 max-h-64 overflow-y-auto">
+                        <!-- Timeline entries will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Activity Selection -->
         <div id="activity-selection-screen" class="hidden fade-in">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6" id="category-title">Choose a Category</h1>
@@ -49,13 +165,161 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 gap-4">
-                <button data-activity="words" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
-                    <div class="flex items-center justify-between">
-                        <span>Word Practice</span>
-                        <span id="words-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
+            <!-- CI Rings Section -->
+            <div id="ci-rings-container" class="mb-6 p-4 bg-white rounded-lg shadow border">
+                <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Today's Progress</h2>
+                <div class="flex justify-center items-center gap-6">
+                    <!-- Consistency Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="consistency-ring-progress" class="stroke-current text-blue-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-blue-600">Consistency</div>
+                            <div id="consistency-goal" class="text-gray-500">0/20 min</div>
+                        </div>
                     </div>
-                </button>
+                    
+                    <!-- Clarity Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="clarity-ring-progress" class="stroke-current text-green-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-green-600">Clarity</div>
+                            <div id="clarity-goal" class="text-gray-500">0/75%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Challenge Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="challenge-ring-progress" class="stroke-current text-purple-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-purple-600">Challenge</div>
+                            <div id="challenge-goal" class="text-gray-500">0/50</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Listening Strain Feedback -->
+                <div id="strain-feedback" class="mt-3 text-center">
+                    <!-- Strain feedback will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Weekly Goals Section -->
+            <div id="weekly-goals-container" class="mb-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-lg font-semibold text-gray-700">This Week's Goal</h2>
+                    <button id="weekly-goals-settings" class="text-xs text-blue-600 hover:text-blue-800">⚙️ Customize</button>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="text-2xl">🎯</div>
+                        <div>
+                            <div id="weekly-goal-text" class="font-medium text-gray-800">Practice 5 days this week</div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span id="weekly-progress-text">2 of 5 days completed</span>
+                                <span id="weekly-streak-display" class="px-2 py-1 bg-orange-100 rounded text-orange-700 text-xs">🔥 2 week streak</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500">Streak Freezes</div>
+                        <div id="streak-freezes-count" class="text-sm font-medium text-blue-600">🛡️ 3 available</div>
+                    </div>
+                </div>
+                
+                <!-- Weekly Progress Bar -->
+                <div class="mt-3">
+                    <div class="flex justify-between text-xs text-gray-500 mb-1">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div id="weekly-progress-dots" class="flex justify-between">
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sound Garden Section -->
+            <div id="sound-garden-container" class="mb-6 p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg shadow border">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-700">🌸 My Sound Garden</h2>
+                    <div class="text-xs text-blue-600">
+                        <span id="garden-water-reserve">💧 0 drops</span>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Garden SVG Container -->
+                    <svg id="garden-svg" width="100%" height="300" viewBox="0 0 600 300" class="border rounded-lg bg-gradient-to-b from-sky-100 to-green-100">
+                        <!-- Sky Background -->
+                        <rect width="600" height="100" fill="url(#skyGradient)"/>
+                        
+                        <!-- Ground -->
+                        <rect y="200" width="600" height="100" fill="url(#groundGradient)"/>
+                        
+                        <!-- Central Tree -->
+                        <g id="central-tree" class="transition-all duration-500">
+                            <circle cx="300" cy="180" r="8" fill="#8B4513"/>
+                            <rect x="296" y="180" width="8" height="40" fill="#8B4513"/>
+                            <circle cx="300" cy="170" r="15" fill="#228B22" opacity="0.8"/>
+                        </g>
+                        
+                        <!-- Garden Paths -->
+                        <path d="M50,250 Q300,230 550,250" stroke="#D2B48C" stroke-width="3" fill="none"/>
+                        
+                        <!-- Plant containers will be added dynamically -->
+                        <g id="plants-container"></g>
+                        
+                        <!-- Butterflies container -->
+                        <g id="butterflies-container"></g>
+                        
+                        <!-- Define gradients -->
+                        <defs>
+                            <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9ACD32;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <!-- Garden Status Panel -->
+                    <div class="mt-3 flex justify-between items-center text-xs text-gray-600">
+                        <div class="flex items-center gap-4">
+                            <span id="garden-plants-count">🌱 0 plants</span>
+                            <span id="garden-season">🌸 Spring</span>
+                            <span id="garden-tree-level">🌳 Level 1</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="daily-butterflies">🦋 0 today</span>
+                            <button id="tend-garden-btn" class="px-3 py-1 bg-green-500 text-white rounded-full text-xs hover:bg-green-600 transition">
+                                💧 Water Garden
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Word Practice removed due to ElevenLabs quality issues with single words -->
                 <button data-activity="sentences" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
                     <div class="flex items-center justify-between">
                         <span>Sentence Recognition</span>
@@ -74,6 +338,26 @@
                         <span id="stories-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
                     </div>
                 </button>
+                <button data-activity="scenarios" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gradient-to-r from-green-400 to-blue-400 bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span>☕</span>
+                            <span>Everyday Scenarios</span>
+                        </div>
+                        <span class="text-sm bg-green-100 px-2 py-1 rounded text-green-700">NEW</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">Real-world listening practice</div>
+                </button>
+                <button id="view-progress-dashboard" class="w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-purple-400 bg-purple-50 hover:bg-purple-100 transition shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span>📊</span>
+                            <span>Progress Dashboard</span>
+                        </div>
+                        <span class="text-sm bg-purple-100 px-2 py-1 rounded text-purple-700">NEW</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">View your improvement analytics</div>
+                </button>
             </div>
         </div>
 
@@ -85,12 +369,19 @@
             <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Choose an Exercise</h1>
             <div class="mb-6">
                 <p class="text-gray-600 mb-2 font-semibold">Select a Voice</p>
-                <div id="voice-toggle" class="relative w-40 h-10 mx-auto rounded-full p-1 cursor-pointer voice-toggle-bg female">
-                    <div class="voice-toggle-btn absolute top-1 left-1 w-1/2 h-8 rounded-full shadow-md"></div>
-                    <div class="relative w-full h-full flex items-center text-white">
-                        <div class="w-1/2 text-center z-10">Female</div>
-                        <div class="w-1/2 text-center z-10">Male</div>
-                    </div>
+                <div class="grid grid-cols-2 gap-2 max-w-sm mx-auto">
+                    <button id="voice-sarah" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-pink-500 bg-pink-500 text-white font-semibold">
+                        👩 Sarah<br><span class="text-xs opacity-80">Clear & Articulate</span>
+                    </button>
+                    <button id="voice-emma" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👩 Emma<br><span class="text-xs opacity-80">Bright & Energetic</span>
+                    </button>
+                    <button id="voice-david" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👨 David<br><span class="text-xs opacity-80">Warm & Friendly</span>
+                    </button>
+                    <button id="voice-marcus" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👨 Marcus<br><span class="text-xs opacity-80">Deep & Confident</span>
+                    </button>
                 </div>
             </div>
 
@@ -211,6 +502,20 @@
         </div>
     </div>
 
+    <!-- Enhanced Story Question Modal -->
+    <div id="question-modal-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-lg w-full mx-4">
+            <h3 id="question-title" class="text-xl font-bold mb-4 text-center">Question</h3>
+            <p id="question-text-element" class="text-gray-700 mb-6 text-lg leading-relaxed"></p>
+            <div id="question-choices-container" class="space-y-3">
+                <!-- Choice buttons will be dynamically inserted here -->
+            </div>
+            <div id="question-feedback-container" class="hidden mt-6 p-4 rounded-lg bg-gray-50">
+                <p id="feedback-text-element" class="text-lg"></p>
+            </div>
+        </div>
+    </div>
+
     <script>
         const GITHUB_USERNAME = "deafjamz";
         const GITHUB_REPO_NAME = "hearing-rehab-audio";
@@ -229,7 +534,7 @@
             "Set 10: Multi-Syllabic Complex": "Complex Combos"
         };
         
-        let allData = { words: [], sentences: [], keywords: [], stories: [] };
+        let allData = { sentences: [], keywords: [], stories: [] };
 
         // User's 10 custom stories - optimized for ElevenLabs generation
         const sampleStories = [
@@ -444,13 +749,344 @@
                 audioFile: "story_dust_everything.mp3"
             }
         ];
+
+        // Enhanced Multi-Question Story System (POC)
+        const enhancedStoryPOC = {
+            id: "story-compass-enhanced",
+            title: "The Lost Compass",
+            audioFiles: {
+                david: "story_audio/compass_david.mp3",
+                marcus: "story_audio/compass_marcus.mp3", 
+                sarah: "story_audio/compass_sarah.mp3",
+                emma: "story_audio/compass_emma.mp3"
+            },
+            fullText: "Sarah was an experienced hiker who loved exploring mountain trails. On this sunny Tuesday morning, she packed her backpack carefully with water, snacks, and her trusted compass. She had been hiking for about two hours when she stopped for a break beside a crystal-clear stream. As she reached for her compass to check her direction, her heart sank. The compass was gone! It must have fallen out somewhere along the trail. Sarah took a deep breath and remembered her training: stay calm, think clearly, and use what you know. She looked at the sun's position and remembered it was still morning, so the sun was in the east. She could see moss growing on the north side of the nearby trees. Using these natural clues, Sarah figured out which direction would lead her back to the trailhead. She walked slowly and carefully, marking her path with small stone cairns. After thirty minutes of careful navigation, she spotted something glinting in the sunlight. There was her compass, lying beside the trail where she had stopped earlier to take a photograph! Sarah smiled as she picked up her compass and continued on her hike, grateful for the natural navigation skills that had helped her find her way.",
+            duration: 142,
+            questions: [
+                {
+                    timestamp: 18.0,
+                    id: "compass-q1",
+                    type: "L3_IDENTIFICATION",
+                    difficulty: "easy", 
+                    text: "What day of the week was it when Sarah went hiking?",
+                    choices: ["Monday", "Tuesday", "Wednesday"],
+                    correctIndex: 1,
+                    feedback: "Correct! The story mentioned it was a sunny Tuesday morning."
+                },
+                {
+                    timestamp: 42.0,
+                    id: "compass-q2", 
+                    type: "L3_IDENTIFICATION",
+                    difficulty: "medium",
+                    text: "Where was Sarah when she discovered the problem?",
+                    choices: ["At the trailhead", "Beside a stream", "On a mountain peak"],
+                    correctIndex: 1,
+                    feedback: "Exactly! She was taking a break beside a crystal-clear stream."
+                },
+                {
+                    timestamp: 78.0,
+                    id: "compass-q3",
+                    type: "L4_COMPREHENSION",
+                    difficulty: "medium",
+                    text: "Why was Sarah able to find her way without the compass?", 
+                    choices: ["She had a GPS device", "She used natural clues", "She followed other hikers"],
+                    correctIndex: 1,
+                    feedback: "Excellent thinking! She used the sun's position and moss on trees as natural navigation clues.",
+                    fallbackQuestion: "compass-q2"
+                },
+                {
+                    timestamp: 142.0,
+                    id: "compass-q4",
+                    type: "L4_COMPREHENSION", 
+                    difficulty: "hard",
+                    text: "What is the main lesson Sarah learned from this experience?",
+                    choices: ["Always bring backup equipment", "Natural skills can be just as valuable as tools", "Hiking alone is dangerous"],
+                    correctIndex: 1,
+                    feedback: "Perfect! The story shows how her natural navigation knowledge was just as important as her compass.",
+                    fallbackQuestion: "compass-q1"
+                }
+            ],
+            captionLevels: [25, 50, 75, 100],
+            currentCaptionLevel: 25
+        };
+
+        // === FUNCTIONAL LISTENING SCENARIOS DATA MODEL ===
+        // TypeScript-style interfaces defined as JavaScript schemas for validation and documentation
+        
+        /**
+         * @typedef {Object} ScenarioChoice
+         * @property {string} text - The choice text to display
+         * @property {boolean} is_correct - Whether this choice is correct
+         * @property {string} [explanation] - Optional explanation for why this choice is right/wrong
+         */
+        
+        /**
+         * @typedef {Object} ScenarioQuestion
+         * @property {string} question_text - The question to ask the user
+         * @property {ScenarioChoice[]} choices - Array of possible answers
+         * @property {string} [feedback_correct] - Custom feedback for correct answers
+         * @property {string} [feedback_incorrect] - Custom feedback for incorrect answers
+         */
+        
+        /**
+         * @typedef {Object} ScenarioInteraction
+         * @property {string} interaction_id - Unique identifier for this interaction
+         * @property {string} level_id - Parent level identifier
+         * @property {number} order_in_level - Sequential order within the level (1, 2, 3...)
+         * @property {string} primary_audio_url - Main speech audio file
+         * @property {string} background_noise_id - Background noise identifier (maps to existing noise files)
+         * @property {ScenarioQuestion} question - The comprehension question
+         * @property {string} [follow_up_interaction_id] - Optional link to next interaction for conversations
+         * @property {Object} [metadata] - Additional data (speaker info, clinical notes, etc.)
+         */
+        
+        /**
+         * @typedef {Object} ScenarioLevel
+         * @property {string} level_id - Unique identifier for this level
+         * @property {string} scenario_id - Parent scenario identifier
+         * @property {number} level_number - Sequential level number (1, 2, 3...)
+         * @property {string} name - Display name for the level
+         * @property {string} description - Description of what this level practices
+         * @property {number} base_snr_db - Base signal-to-noise ratio for this level (adaptive system adjusts from here)
+         * @property {ScenarioInteraction[]} interactions - Array of interactions in this level
+         */
+        
+        /**
+         * @typedef {Object} FunctionalScenario
+         * @property {string} scenario_id - Unique identifier for this scenario
+         * @property {string} name - Display name for the scenario
+         * @property {string} description - User-facing description of skills practiced
+         * @property {string} icon - Icon identifier or class name
+         * @property {string} category - Scenario category (social, medical, commercial, etc.)
+         * @property {ScenarioLevel[]} levels - Array of difficulty levels
+         * @property {Object} [metadata] - Additional scenario data
+         */
+
+        // === COFFEE SHOP SCENARIO SEED DATA ===
+        /** @type {FunctionalScenario} */
+        const coffeeShopScenario = {
+            scenario_id: "SCN_COFFEE_SHOP",
+            name: "At the Coffee Shop",
+            description: "Practice ordering and understanding a barista in a busy café environment",
+            icon: "☕",
+            category: "social",
+            levels: [
+                {
+                    level_id: "LVL_COFFEE_1",
+                    scenario_id: "SCN_COFFEE_SHOP",
+                    level_number: 1,
+                    name: "Basic Orders",
+                    description: "Simple, direct questions and statements",
+                    base_snr_db: 12, // Higher SNR = easier listening
+                    interactions: [
+                        {
+                            interaction_id: "INT_COFFEE_1_1",
+                            level_id: "LVL_COFFEE_1",
+                            order_in_level: 1,
+                            primary_audio_url: "scenarios_coffee_basic_greeting.mp3",
+                            background_noise_id: "easy", // Maps to existing cafe_light.m4a
+                            question: {
+                                question_text: "What did the barista ask?",
+                                choices: [
+                                    { text: "What can I get for you?", is_correct: true },
+                                    { text: "What is your name?", is_correct: false }
+                                ],
+                                feedback_correct: "Excellent! This is the most common opening question at coffee shops.",
+                                feedback_incorrect: "Listen carefully for the barista's greeting. They usually ask what you'd like to order."
+                            },
+                            metadata: { speaker: "female_barista", duration_seconds: 3, clinical_focus: "social_greeting" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_1_2",
+                            level_id: "LVL_COFFEE_1",
+                            order_in_level: 2,
+                            primary_audio_url: "scenarios_coffee_price_simple.mp3",
+                            background_noise_id: "easy",
+                            question: {
+                                question_text: "How much did the barista say it costs?",
+                                choices: [
+                                    { text: "$4.50", is_correct: true },
+                                    { text: "$3.50", is_correct: false },
+                                    { text: "$5.50", is_correct: false }
+                                ],
+                                feedback_correct: "Perfect! You caught the exact price - this is crucial for real transactions.",
+                                feedback_incorrect: "Price comprehension is essential. Focus on the numbers - was it 'three fifty', 'four fifty', or 'five fifty'?"
+                            },
+                            metadata: { speaker: "male_barista", duration_seconds: 4, clinical_focus: "number_identification" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_1_3",
+                            level_id: "LVL_COFFEE_1",
+                            order_in_level: 3,
+                            primary_audio_url: "scenarios_coffee_confirmation_simple.mp3",
+                            background_noise_id: "easy",
+                            question: {
+                                question_text: "What did the barista confirm about your order?",
+                                choices: [
+                                    { text: "One large coffee", is_correct: true },
+                                    { text: "One small coffee", is_correct: false },
+                                    { text: "Two large coffees", is_correct: false }
+                                ],
+                                feedback_correct: "Great listening! Order confirmation helps prevent mistakes.",
+                                feedback_incorrect: "Focus on the quantity and size - did they say 'one' or 'two', 'large' or 'small'?"
+                            },
+                            metadata: { speaker: "female_barista", duration_seconds: 3, clinical_focus: "order_confirmation" }
+                        }
+                    ]
+                },
+                {
+                    level_id: "LVL_COFFEE_2",
+                    scenario_id: "SCN_COFFEE_SHOP",
+                    level_number: 2,
+                    name: "Options & Details",
+                    description: "Understanding choices and extracting key information",
+                    base_snr_db: 8, // Moderate SNR
+                    interactions: [
+                        {
+                            interaction_id: "INT_COFFEE_2_1",
+                            level_id: "LVL_COFFEE_2",
+                            order_in_level: 1,
+                            primary_audio_url: "scenarios_coffee_size_options.mp3",
+                            background_noise_id: "medium",
+                            question: {
+                                question_text: "What size options did the barista mention?",
+                                choices: [
+                                    { text: "Small, medium, and large", is_correct: true },
+                                    { text: "Regular and large", is_correct: false }
+                                ],
+                                feedback_correct: "Excellent! You caught all three size options - this shows good auditory memory.",
+                                feedback_incorrect: "Try to listen for the complete list. How many sizes were mentioned?"
+                            },
+                            metadata: { speaker: "male_barista", duration_seconds: 5, clinical_focus: "list_comprehension" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_2_2",
+                            level_id: "LVL_COFFEE_2",
+                            order_in_level: 2,
+                            primary_audio_url: "scenarios_coffee_milk_options.mp3",
+                            background_noise_id: "medium",
+                            question: {
+                                question_text: "Which of these milk options was NOT mentioned?",
+                                choices: [
+                                    { text: "Almond milk", is_correct: true },
+                                    { text: "Whole milk", is_correct: false }
+                                ],
+                                feedback_correct: "Perfect! You identified what was missing from the list - this requires careful attention.",
+                                feedback_incorrect: "Listen to the complete list and think about which option from the choices wasn't actually said."
+                            },
+                            metadata: { speaker: "female_barista", duration_seconds: 6, clinical_focus: "negative_identification" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_2_3",
+                            level_id: "LVL_COFFEE_2",
+                            order_in_level: 3,
+                            primary_audio_url: "scenarios_coffee_for_here_or_to_go.mp3",
+                            background_noise_id: "medium",
+                            question: {
+                                question_text: "What question did the barista ask about your order?",
+                                choices: [
+                                    { text: "For here or to go?", is_correct: true },
+                                    { text: "Hot or iced?", is_correct: false }
+                                ],
+                                feedback_correct: "Great! This is a very common follow-up question in coffee shops.",
+                                feedback_incorrect: "Think about what the barista needs to know to prepare your order correctly."
+                            },
+                            metadata: { speaker: "male_barista", duration_seconds: 4, clinical_focus: "common_questions" }
+                        }
+                    ]
+                },
+                {
+                    level_id: "LVL_COFFEE_3",
+                    scenario_id: "SCN_COFFEE_SHOP",
+                    level_number: 3,
+                    name: "Complex Orders",
+                    description: "Multi-step information and sequential details",
+                    base_snr_db: 5, // Lower SNR = more challenging
+                    interactions: [
+                        {
+                            interaction_id: "INT_COFFEE_3_1",
+                            level_id: "LVL_COFFEE_3",
+                            order_in_level: 1,
+                            primary_audio_url: "scenarios_coffee_complex_order.mp3",
+                            background_noise_id: "hard",
+                            question: {
+                                question_text: "What was the complete order the barista repeated back?",
+                                choices: [
+                                    { text: "Large iced coffee with oat milk and extra shot", is_correct: true },
+                                    { text: "Medium iced coffee with almond milk and extra shot", is_correct: false }
+                                ],
+                                feedback_correct: "Outstanding! You tracked multiple details in a complex order - this is advanced listening.",
+                                feedback_incorrect: "Complex orders have many details. Try to catch the size, temperature, milk type, and extras."
+                            },
+                            metadata: { speaker: "female_barista", duration_seconds: 8, clinical_focus: "complex_order_tracking" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_3_2",
+                            level_id: "LVL_COFFEE_3",
+                            order_in_level: 2,
+                            primary_audio_url: "scenarios_coffee_total_with_tax.mp3",
+                            background_noise_id: "hard",
+                            question: {
+                                question_text: "What was the total amount including tax?",
+                                choices: [
+                                    { text: "$6.47", is_correct: true },
+                                    { text: "$6.74", is_correct: false }
+                                ],
+                                feedback_correct: "Excellent! You caught the exact total with tax - crucial for payment.",
+                                feedback_incorrect: "Listen carefully for the final total. Numbers can sound similar - was it 'forty-seven', 'seventy-four', or 'ninety-seven' cents?"
+                            },
+                            metadata: { speaker: "male_barista", duration_seconds: 5, clinical_focus: "precise_numbers" }
+                        },
+                        {
+                            interaction_id: "INT_COFFEE_3_3",
+                            level_id: "LVL_COFFEE_3",
+                            order_in_level: 3,
+                            primary_audio_url: "scenarios_coffee_wait_time_explanation.mp3",
+                            background_noise_id: "hard",
+                            question: {
+                                question_text: "How long did the barista say you would need to wait?",
+                                choices: [
+                                    { text: "About 5 minutes because they're making a fresh batch", is_correct: true },
+                                    { text: "About 3 minutes because it's almost ready", is_correct: false }
+                                ],
+                                feedback_correct: "Perfect! You understood both the time and the reason - this shows excellent comprehension.",
+                                feedback_incorrect: "Listen for both the wait time and the explanation. Why did they say you need to wait?"
+                            },
+                            metadata: { speaker: "female_barista", duration_seconds: 7, clinical_focus: "time_and_reasoning" }
+                        }
+                    ]
+                }
+            ],
+            metadata: {
+                clinical_focus: "social_interaction_transactional",
+                estimated_duration_minutes: 10,
+                prerequisite_skills: ["basic_number_recognition", "common_vocabulary"],
+                created_date: "2025-01-23"
+            }
+        };
+
+        // Enhanced story system global variables
+        let processedQuestions = new Set();
+        let incorrectAnswerCount = 0;
+        let storyAudioPlayer = null;
+        let currentEnhancedStory = null;
+
+        // Functional scenarios system global variables
+        let currentScenario = null;
+        let currentScenarioLevel = null;
+        let currentInteraction = null;
+        let currentInteractionIndex = 0;
+        let scenarioScore = 0;
+        let scenarioAudioPlayer = null;
+        const availableScenarios = [coffeeShopScenario]; // Will expand this list
+
         let currentActivityType = '';
         let currentLevelData = [];
         let currentQuestionIndex = 0;
         let score = 0;
         let currentAudio = null;
-        let selectedVoice = 'female';
-        let correctWordForTrial = '';
+        let selectedVoice = 'sarah'; // Default to Sarah (Clear & Articulate - 171.6Hz)
+        // correctWordForTrial variable removed - was only used for deprecated words activity
         
         // Story-specific variables
         let currentStory = null;
@@ -466,6 +1102,7 @@
         let qualityIssues = JSON.parse(localStorage.getItem('qualityIssues') || '[]');
         
         let audioCache = new Map();
+        // Legacy userProgress object - now replaced by AnalyticsEngine
         let userProgress = {
             currentActivity: null,
             currentLevel: null,
@@ -473,6 +1110,1493 @@
             scores: {},
             completedLevels: new Set()
         };
+
+        // === COMPREHENSIVE ANALYTICS SYSTEM ===
+        const ANALYTICS_STORAGE_KEY = 'cochlearRehabAnalytics';
+
+        // Analytics Storage Helper
+        const analyticsStorage = {
+            getData: () => {
+                try {
+                    const data = localStorage.getItem(ANALYTICS_STORAGE_KEY);
+                    return data ? JSON.parse(data) : null;
+                } catch (error) {
+                    console.error("Error reading analytics from localStorage", error);
+                    return null;
+                }
+            },
+            setData: (data) => {
+                try {
+                    localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data));
+                } catch (error) {
+                    console.error("Error writing analytics to localStorage. Data may be too large.", error);
+                }
+            }
+        };
+
+        // Main Analytics Engine
+        class AnalyticsEngine {
+            constructor() {
+                this.data = analyticsStorage.getData();
+                if (!this.data) {
+                    this.initializeData();
+                }
+                this.startNewSession();
+                console.log("📊 Analytics Engine initialized");
+            }
+
+            initializeData() {
+                this.data = {
+                    version: "1.0.0",
+                    user: { 
+                        id: crypto.randomUUID ? crypto.randomUUID() : 'user-' + Date.now(), 
+                        createdAt: new Date().toISOString() 
+                    },
+                    sessions: [],
+                    events: [],
+                    summary: { 
+                        byActivity: {}, 
+                        overall: {
+                            totalTimeMs: 0,
+                            totalSessions: 0,
+                            totalExercises: 0,
+                            firstActivityDate: null,
+                            lastActivityDate: null
+                        }
+                    }
+                };
+                analyticsStorage.setData(this.data);
+            }
+
+            startNewSession() {
+                const now = new Date();
+                const lastSession = this.data.sessions[this.data.sessions.length - 1];
+                // Start new session if no last session or if it's been over 30 mins
+                if (!lastSession || (now - new Date(lastSession.endTime)) > 30 * 60 * 1000) {
+                    this.currentSessionId = crypto.randomUUID ? crypto.randomUUID() : 'session-' + Date.now();
+                    this.data.sessions.push({
+                        sessionId: this.currentSessionId,
+                        startTime: now.toISOString(),
+                        endTime: now.toISOString()
+                    });
+                    this.data.summary.overall.totalSessions++;
+                    analyticsStorage.setData(this.data);
+                    console.log("📊 New session started:", this.currentSessionId);
+                } else {
+                    this.currentSessionId = lastSession.sessionId;
+                    console.log("📊 Continuing session:", this.currentSessionId);
+                }
+            }
+
+            // The primary method for all tracking
+            trackEvent(type, payload) {
+                const event = {
+                    eventId: crypto.randomUUID ? crypto.randomUUID() : 'event-' + Date.now() + '-' + Math.random(),
+                    sessionId: this.currentSessionId,
+                    timestamp: new Date().toISOString(),
+                    type,
+                    payload
+                };
+
+                this.data.events.push(event);
+                
+                // Update session endTime
+                const currentSession = this.data.sessions.find(s => s.sessionId === this.currentSessionId);
+                if(currentSession) currentSession.endTime = event.timestamp;
+
+                // Update summary based on event type
+                this.updateSummary(event);
+
+                analyticsStorage.setData(this.data);
+                console.log("📊 Event tracked:", type, payload);
+            }
+
+            updateSummary(event) {
+                // Update overall stats
+                this.data.summary.overall.lastActivityDate = event.timestamp;
+                if (!this.data.summary.overall.firstActivityDate) {
+                    this.data.summary.overall.firstActivityDate = event.timestamp;
+                }
+
+                // Handle different event types
+                switch(event.type) {
+                    case 'EXERCISE_COMPLETED':
+                        this.updateExerciseCompletionSummary(event);
+                        break;
+                    case 'EXERCISE_STARTED':
+                        this.data.summary.overall.totalExercises++;
+                        break;
+                    case 'VOICE_CHANGED':
+                    case 'NOISE_LEVEL_CHANGED':
+                    case 'ACTIVITY_SELECTED':
+                        // These are tracked in events but don't need summary updates
+                        break;
+                }
+            }
+
+            updateExerciseCompletionSummary(event) {
+                const { activity, voice, noise, durationMs, score, itemsCorrect, itemsTotal } = event.payload;
+
+                // Ensure path exists in summary object
+                let summaryNode = this.data.summary.byActivity;
+                
+                // Create activity level
+                if (!summaryNode[activity]) {
+                    summaryNode[activity] = { byVoice: {} };
+                }
+                
+                // Create voice level
+                if (!summaryNode[activity].byVoice[voice]) {
+                    summaryNode[activity].byVoice[voice] = { byNoise: {} };
+                }
+                
+                // Create noise level
+                if (!summaryNode[activity].byVoice[voice].byNoise[noise]) {
+                    summaryNode[activity].byVoice[voice].byNoise[noise] = {
+                        totalTimeMs: 0,
+                        totalCorrect: 0,
+                        totalItems: 0,
+                        completions: 0,
+                        bestScore: 0,
+                        averageScore: 0
+                    };
+                }
+
+                // Update the specific leaf node
+                const node = summaryNode[activity].byVoice[voice].byNoise[noise];
+                node.completions += 1;
+                node.totalTimeMs += durationMs;
+                node.totalCorrect += itemsCorrect;
+                node.totalItems += itemsTotal;
+                node.bestScore = Math.max(node.bestScore, score);
+                node.averageScore = node.totalItems > 0 ? node.totalCorrect / node.totalItems : 0;
+
+                // Update overall time
+                this.data.summary.overall.totalTimeMs += durationMs;
+            }
+
+            // Get current session analytics
+            getCurrentSession() {
+                return this.data.sessions.find(s => s.sessionId === this.currentSessionId);
+            }
+
+            // Get accuracy trend for the last N days
+            getAccuracyTrend(activity = null, days = 30) {
+                const trend = {}; // { 'YYYY-MM-DD': { correct: 0, total: 0 } }
+                const now = new Date();
+                const startDate = new Date(now.setDate(now.getDate() - days));
+
+                const relevantEvents = this.data.events.filter(event =>
+                    event.type === 'EXERCISE_COMPLETED' &&
+                    (!activity || event.payload.activity === activity) &&
+                    new Date(event.timestamp) >= startDate
+                );
+
+                for (const event of relevantEvents) {
+                    const day = event.timestamp.substring(0, 10); // 'YYYY-MM-DD'
+                    trend[day] = trend[day] || { correct: 0, total: 0 };
+                    trend[day].correct += event.payload.itemsCorrect;
+                    trend[day].total += event.payload.itemsTotal;
+                }
+
+                // Convert to a chart-friendly format
+                return Object.entries(trend).map(([date, data]) => ({
+                    date,
+                    accuracy: data.total > 0 ? data.correct / data.total : 0
+                })).sort((a, b) => new Date(a.date) - new Date(b.date));
+            }
+
+            // Get overall statistics
+            getOverallStats() {
+                const totalSessions = this.data.sessions.length;
+                const totalEvents = this.data.events.length;
+                const completedExercises = this.data.events.filter(e => e.type === 'EXERCISE_COMPLETED').length;
+                
+                let totalCorrect = 0;
+                let totalItems = 0;
+                let totalTime = 0;
+                
+                this.data.events
+                    .filter(e => e.type === 'EXERCISE_COMPLETED')
+                    .forEach(e => {
+                        totalCorrect += e.payload.itemsCorrect;
+                        totalItems += e.payload.itemsTotal;
+                        totalTime += e.payload.durationMs;
+                    });
+
+                return {
+                    totalSessions,
+                    totalEvents,
+                    completedExercises,
+                    overallAccuracy: totalItems > 0 ? totalCorrect / totalItems : 0,
+                    totalTimeMs: totalTime,
+                    averageSessionTime: totalSessions > 0 ? totalTime / totalSessions : 0
+                };
+            }
+
+            // Export data as CSV
+            exportToCSV() {
+                const data = this.data.summary.byActivity;
+                let csvContent = "data:text/csv;charset=utf-8,";
+                csvContent += "Activity,Voice,Noise,Completions,Avg Accuracy,Best Score,Total Time (min),Avg Duration (s)\n";
+
+                for (const activity in data) {
+                    for (const voice in data[activity].byVoice) {
+                        for (const noise in data[activity].byVoice[voice].byNoise) {
+                            const node = data[activity].byVoice[voice].byNoise[noise];
+                            const avgAccuracy = (node.averageScore * 100).toFixed(1);
+                            const bestScore = (node.bestScore * 100).toFixed(1);
+                            const totalTimeMin = (node.totalTimeMs / 60000).toFixed(1);
+                            const avgDuration = node.completions > 0 ? (node.totalTimeMs / 1000 / node.completions).toFixed(1) : 'N/A';
+                            
+                            const row = [activity, voice, noise, node.completions, avgAccuracy + '%', bestScore + '%', totalTimeMin, avgDuration].join(",");
+                            csvContent += row + "\r\n";
+                        }
+                    }
+                }
+
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "hearing_progress_report.csv");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Initialize analytics engine
+        const analytics = new AnalyticsEngine();
+        
+        // Initialize progress dashboard
+        const progressDashboard = new ProgressDashboard(analytics);
+        progressDashboard.init();
+        
+        // === GAMIFICATION SYSTEM ===
+        class GamificationEngine {
+            constructor(analyticsEngine) {
+                this.analytics = analyticsEngine;
+                this.initializeGamificationData();
+                this.loadUserPreferences();
+            }
+            
+            initializeGamificationData() {
+                const existingData = this.analytics.data;
+                
+                // Add gamification data to analytics structure if not present
+                if (!existingData.gamification) {
+                    existingData.gamification = {
+                        dailyGoals: {
+                            consistencyMinutes: 20,
+                            clarityGoalAdaptive: true,
+                            challengeGoalAdaptive: true
+                        },
+                        weeklyGoals: {
+                            targetDays: 5,
+                            currentWeekStart: this.getWeekStart(new Date()),
+                            currentWeekCompletedDays: [],
+                            weeklyStreak: 0,
+                            streakFreezes: 3,
+                            currentWeekTotalMinutes: 0,
+                            currentWeekTotalSessions: 0,
+                            currentWeekTargetMinutes: 140, // 20 minutes * 7 days
+                            longestWeeklyStreak: 0,
+                            weeklyGoalsCompletedTotal: 0,
+                            lastWeekCompletedDays: [],
+                            perfectWeeks: 0,
+                            streakFreezeUsed: false
+                        },
+                        rings: {
+                            today: this.getTodayDateString(),
+                            consistency: { progress: 0, goal: 20, completed: false },
+                            clarity: { progress: 0, goal: 0.75, completed: false },
+                            challenge: { progress: 0, goal: 50, completed: false }
+                        },
+                        badges: [],
+                        listeningStrain: {
+                            dailyScore: 0,
+                            sessions: []
+                        },
+                        soundGarden: {
+                            elements: [],
+                            lastUpdated: new Date().toISOString()
+                        }
+                    };
+                    
+                    // Save updated data
+                    this.analytics.data = existingData;
+                    analyticsStorage.setData(existingData);
+                }
+            }
+            
+            loadUserPreferences() {
+                // Allow users to customize their daily goals
+                const preferences = localStorage.getItem('hearing_app_preferences');
+                if (preferences) {
+                    const parsed = JSON.parse(preferences);
+                    if (parsed.dailyGoalMinutes) {
+                        this.analytics.data.gamification.dailyGoals.consistencyMinutes = parsed.dailyGoalMinutes;
+                    }
+                    if (parsed.weeklyTargetDays) {
+                        this.analytics.data.gamification.weeklyGoals.targetDays = parsed.weeklyTargetDays;
+                    }
+                }
+            }
+            
+            // === CI RINGS SYSTEM ===
+            
+            updateRings() {
+                const today = this.getTodayDateString();
+                const rings = this.analytics.data.gamification.rings;
+                
+                // Reset rings if it's a new day
+                if (rings.today !== today) {
+                    rings.today = today;
+                    rings.consistency = { progress: 0, goal: this.analytics.data.gamification.dailyGoals.consistencyMinutes, completed: false };
+                    rings.clarity = { progress: 0, goal: this.calculateClarityGoal(), completed: false };
+                    rings.challenge = { progress: 0, goal: this.calculateChallengeGoal(), completed: false };
+                }
+                
+                // Update each ring
+                this.updateConsistencyRing();
+                this.updateClarityRing();
+                this.updateChallengeRing();
+                
+                // Check for perfect day achievement
+                if (rings.consistency.completed && rings.clarity.completed && rings.challenge.completed) {
+                    this.unlockBadge('perfect_day');
+                }
+                
+                // Save updated data
+                analyticsStorage.setData(this.analytics.data);
+            }
+            
+            updateConsistencyRing() {
+                const today = this.getTodayDateString();
+                const todayEvents = this.analytics.data.events.filter(e => 
+                    e.timestamp.startsWith(today) && e.type === 'EXERCISE_COMPLETED'
+                );
+                
+                const totalMinutesToday = todayEvents.reduce((sum, event) => {
+                    return sum + (event.payload.durationMs / (1000 * 60));
+                }, 0);
+                
+                const goal = this.analytics.data.gamification.rings.consistency.goal;
+                const progress = Math.min(1.0, totalMinutesToday / goal);
+                
+                this.analytics.data.gamification.rings.consistency.progress = progress;
+                this.analytics.data.gamification.rings.consistency.completed = progress >= 1.0;
+            }
+            
+            updateClarityRing() {
+                const today = this.getTodayDateString();
+                const todayEvents = this.analytics.data.events.filter(e => 
+                    e.timestamp.startsWith(today) && e.type === 'EXERCISE_COMPLETED'
+                );
+                
+                if (todayEvents.length === 0) {
+                    this.analytics.data.gamification.rings.clarity.progress = 0;
+                    return;
+                }
+                
+                // Calculate weighted accuracy
+                let weightedAccuracySum = 0;
+                let weightSum = 0;
+                
+                todayEvents.forEach(event => {
+                    const accuracy = event.payload.score;
+                    const difficultyWeight = this.calculateDifficultyWeight(
+                        event.payload.activity,
+                        event.payload.noise
+                    );
+                    
+                    weightedAccuracySum += accuracy * difficultyWeight;
+                    weightSum += difficultyWeight;
+                });
+                
+                const dailyAccuracy = weightSum > 0 ? weightedAccuracySum / weightSum : 0;
+                const goal = this.analytics.data.gamification.rings.clarity.goal;
+                const progress = Math.min(1.0, dailyAccuracy / goal);
+                
+                this.analytics.data.gamification.rings.clarity.progress = progress;
+                this.analytics.data.gamification.rings.clarity.completed = progress >= 1.0;
+            }
+            
+            updateChallengeRing() {
+                const today = this.getTodayDateString();
+                const todayEvents = this.analytics.data.events.filter(e => 
+                    e.timestamp.startsWith(today) && e.type === 'EXERCISE_COMPLETED'
+                );
+                
+                const totalChallengePoints = todayEvents.reduce((sum, event) => {
+                    const duration = event.payload.durationMs / (1000 * 60); // Convert to minutes
+                    const challengeMultiplier = this.calculateChallengeMultiplier(
+                        event.payload.activity,
+                        event.payload.noise
+                    );
+                    
+                    return sum + (duration * challengeMultiplier);
+                }, 0);
+                
+                const goal = this.analytics.data.gamification.rings.challenge.goal;
+                const progress = Math.min(1.0, totalChallengePoints / goal);
+                
+                this.analytics.data.gamification.rings.challenge.progress = progress;
+                this.analytics.data.gamification.rings.challenge.completed = progress >= 1.0;
+            }
+            
+            calculateDifficultyWeight(activity, noise) {
+                const exerciseWeights = {
+                    'keywords': 1.0,
+                    'sentences': 1.2,
+                    'stories': 1.5,
+                    'scenarios': 1.4
+                };
+                
+                const noiseWeights = {
+                    'quiet': 1.0,
+                    'easy': 1.1,
+                    'medium': 1.3,
+                    'hard': 1.5
+                };
+                
+                return (exerciseWeights[activity.toLowerCase()] || 1.0) * (noiseWeights[noise.toLowerCase()] || 1.0);
+            }
+            
+            calculateChallengeMultiplier(activity, noise) {
+                const noiseMultipliers = {
+                    'quiet': 1.0,
+                    'easy': 1.5,
+                    'medium': 2.0,
+                    'hard': 2.5
+                };
+                
+                const complexityMultipliers = {
+                    'keywords': 1.0,
+                    'sentences': 1.3,
+                    'stories': 1.6,
+                    'scenarios': 1.5
+                };
+                
+                return (noiseMultipliers[noise.toLowerCase()] || 1.0) * (complexityMultipliers[activity.toLowerCase()] || 1.0);
+            }
+            
+            calculateClarityGoal() {
+                // Calculate adaptive goal based on last 7 days
+                const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().substring(0, 10);
+                const recentEvents = this.analytics.data.events.filter(e => 
+                    e.type === 'EXERCISE_COMPLETED' && e.timestamp >= sevenDaysAgo
+                );
+                
+                if (recentEvents.length === 0) {
+                    return 0.70; // Default 70% for new users
+                }
+                
+                const avgAccuracy = recentEvents.reduce((sum, e) => sum + e.payload.score, 0) / recentEvents.length;
+                const adaptiveGoal = Math.min(0.95, Math.max(0.50, avgAccuracy * 1.05)); // 5% improvement, capped at 95%, floor at 50%
+                
+                return adaptiveGoal;
+            }
+            
+            calculateChallengeGoal() {
+                // Calculate adaptive goal based on last 7 days
+                const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().substring(0, 10);
+                const recentEvents = this.analytics.data.events.filter(e => 
+                    e.type === 'EXERCISE_COMPLETED' && e.timestamp >= sevenDaysAgo
+                );
+                
+                if (recentEvents.length === 0) {
+                    return 50; // Default 50 points for new users
+                }
+                
+                // Calculate average daily challenge points
+                const dailyTotals = {};
+                recentEvents.forEach(event => {
+                    const day = event.timestamp.substring(0, 10);
+                    const duration = event.payload.durationMs / (1000 * 60);
+                    const multiplier = this.calculateChallengeMultiplier(event.payload.activity, event.payload.noise);
+                    
+                    if (!dailyTotals[day]) dailyTotals[day] = 0;
+                    dailyTotals[day] += duration * multiplier;
+                });
+                
+                const avgDailyChallengePoints = Object.values(dailyTotals).reduce((a, b) => a + b, 0) / Math.max(1, Object.keys(dailyTotals).length);
+                const adaptiveGoal = Math.max(25, avgDailyChallengePoints * 1.10); // 10% improvement, minimum 25 points
+                
+                return adaptiveGoal;
+            }
+            
+            // === LISTENING STRAIN ALGORITHM ===
+            
+            calculateListeningStrain(sessionData) {
+                const { durationMs, activity, noise, score } = sessionData;
+                const sessionDurationMinutes = durationMs / (1000 * 60);
+                
+                // Get multipliers
+                const noiseMultiplier = {
+                    'quiet': 1.0,
+                    'easy': 1.2,
+                    'medium': 1.6,
+                    'hard': 2.2
+                }[noise.toLowerCase()] || 1.0;
+                
+                const complexityMultiplier = {
+                    'keywords': 1.0,
+                    'sentences': 1.3,
+                    'stories': 1.6,
+                    'scenarios': 1.5
+                }[activity.toLowerCase()] || 1.0;
+                
+                // Performance factor increases strain as accuracy drops
+                const performanceFactor = 1 + (1 - score); // Ranges from 1.0 (at 100%) to 2.0 (at 0%)
+                
+                const sessionStrain = sessionDurationMinutes * noiseMultiplier * complexityMultiplier * performanceFactor;
+                
+                return sessionStrain;
+            }
+            
+            updateListeningStrain(sessionData) {
+                const strain = this.calculateListeningStrain(sessionData);
+                const today = this.getTodayDateString();
+                
+                // Reset daily strain if new day
+                if (this.analytics.data.gamification.listeningStrain.today !== today) {
+                    this.analytics.data.gamification.listeningStrain.dailyScore = 0;
+                    this.analytics.data.gamification.listeningStrain.sessions = [];
+                    this.analytics.data.gamification.listeningStrain.today = today;
+                }
+                
+                this.analytics.data.gamification.listeningStrain.dailyScore += strain;
+                this.analytics.data.gamification.listeningStrain.sessions.push({
+                    timestamp: new Date().toISOString(),
+                    strain: strain,
+                    activity: sessionData.activity,
+                    duration: sessionData.durationMs / (1000 * 60)
+                });
+            }
+            
+            getListeningStrainFeedback() {
+                const dailyStrain = this.analytics.data.gamification.listeningStrain.dailyScore;
+                
+                if (dailyStrain === 0) {
+                    return { level: 'none', message: "Ready to start your hearing practice!" };
+                } else if (dailyStrain < 50) {
+                    return { level: 'low', message: "You're having a gentle practice day. Great work building consistency!" };
+                } else if (dailyStrain < 100) {
+                    return { level: 'moderate', message: "You're putting in solid effort today. Your brain is working hard!" };
+                } else if (dailyStrain < 150) {
+                    return { level: 'high', message: "Wow! You're really challenging yourself today. That's how improvement happens." };
+                } else {
+                    return { level: 'intense', message: "Your effort today has been incredible. Consider taking a gentler session next to help your brain recover." };
+                }
+            }
+            
+            // === BADGES SYSTEM ===
+            
+            unlockBadge(badgeId) {
+                // Check if badge already unlocked
+                if (this.analytics.data.gamification.badges.includes(badgeId)) {
+                    return false;
+                }
+                
+                const badge = this.getBadgeDefinition(badgeId);
+                if (!badge) return false;
+                
+                // Add to unlocked badges
+                this.analytics.data.gamification.badges.push(badgeId);
+                
+                // Track badge unlock event
+                this.analytics.trackEvent('BADGE_UNLOCKED', {
+                    badgeId: badgeId,
+                    badgeName: badge.name,
+                    category: badge.category
+                });
+                
+                // Show celebration UI
+                this.showBadgeCelebration(badge);
+                
+                return true;
+            }
+            
+            getBadgeDefinition(badgeId) {
+                const badges = {
+                    'first_steps': {
+                        name: 'First Steps',
+                        message: "You've taken the first step on your new hearing journey. We're here with you!",
+                        category: 'Onboarding',
+                        icon: '👣'
+                    },
+                    'goal_setter': {
+                        name: 'Goal Setter',
+                        message: "A goal is the first step to success. You're on your way!",
+                        category: 'Onboarding',
+                        icon: '🎯'
+                    },
+                    'consistent_week': {
+                        name: 'Consistent Week',
+                        message: "One week down! That consistency is how you build lasting progress. Amazing work.",
+                        category: 'Consistency',
+                        icon: '🗺️'
+                    },
+                    'noise_navigator': {
+                        name: 'Noise Navigator',
+                        message: "You faced the noise and came out on top! That's a huge milestone.",
+                        category: 'Challenge',
+                        icon: '🎧'
+                    },
+                    'clarity_champion': {
+                        name: 'Clarity Champion',
+                        message: "Your focus is paying off. Three days of clear listening is fantastic progress!",
+                        category: 'Performance',
+                        icon: '🌟'
+                    },
+                    'perfect_day': {
+                        name: 'Perfect Day',
+                        message: "Consistency, Clarity, and Challenge—you mastered them all today. Incredible effort!",
+                        category: 'Milestone',
+                        icon: '🏆'
+                    },
+                    'monthly_milestone': {
+                        name: 'Monthly Milestone',
+                        message: "An entire month of dedication. Look how far you've come. Be proud of this achievement.",
+                        category: 'Consistency',
+                        icon: '📅'
+                    },
+                    
+                    // Clinical Badge System - Dedication Category
+                    'streak_bronze': {
+                        name: 'Practice Streak',
+                        message: 'Three days of consistent practice! You\'re building the foundation for a strong rehabilitation habit.',
+                        category: 'Dedication',
+                        icon: '🔥',
+                        tier: 'bronze'
+                    },
+                    'streak_silver': {
+                        name: 'Weekly Warrior',
+                        message: 'One week of consistent practice is a significant milestone. This dedication builds the foundation for clearer hearing.',
+                        category: 'Dedication', 
+                        icon: '🔥',
+                        tier: 'silver'
+                    },
+                    'streak_gold': {
+                        name: 'Habit Master',
+                        message: 'Twenty-one days of dedication! You\'ve established a powerful rehabilitation habit that will serve you well.',
+                        category: 'Dedication',
+                        icon: '🔥',
+                        tier: 'gold'
+                    },
+                    'committed_bronze': {
+                        name: 'Committed Learner',
+                        message: 'Ten sessions completed! Your commitment to practice is building neural pathways for better hearing.',
+                        category: 'Dedication',
+                        icon: '📚',
+                        tier: 'bronze'
+                    },
+                    'committed_silver': {
+                        name: 'Dedicated Practitioner', 
+                        message: 'Fifty sessions is a remarkable achievement! Your persistence is rewiring your brain for improved sound processing.',
+                        category: 'Dedication',
+                        icon: '📚',
+                        tier: 'silver'
+                    },
+                    'committed_gold': {
+                        name: 'Rehabilitation Champion',
+                        message: 'One hundred sessions! You\'ve demonstrated extraordinary commitment to your hearing journey.',
+                        category: 'Dedication',
+                        icon: '📚',
+                        tier: 'gold'
+                    },
+                    
+                    // Clinical Badge System - Advancement Category
+                    'level_up': {
+                        name: 'Level Up',
+                        message: 'Moving to a new challenge level takes courage. By pushing your boundaries, you are actively training your hearing for more complex listening situations.',
+                        category: 'Advancement',
+                        icon: '⬆️'
+                    },
+                    'explorer_keywords': {
+                        name: 'Keyword Explorer',
+                        message: 'You\'ve explored keyword training! This focused practice helps sharpen your ability to catch important words in conversations.',
+                        category: 'Advancement',
+                        icon: '🔍'
+                    },
+                    'explorer_sentences': {
+                        name: 'Sentence Navigator',
+                        message: 'Sentence practice unlocked! You\'re training your brain to process complete thoughts and natural speech patterns.',
+                        category: 'Advancement',
+                        icon: '📝'
+                    },
+                    'explorer_stories': {
+                        name: 'Story Adventurer',
+                        message: 'Stories are complex listening challenges! You\'re building skills for following extended conversations and narratives.',
+                        category: 'Advancement',
+                        icon: '📖'
+                    },
+                    'explorer_scenarios': {
+                        name: 'Real-World Ready',
+                        message: 'You\'ve entered real-world training! These scenarios prepare you for actual conversations in everyday situations.',
+                        category: 'Advancement',
+                        icon: '🌍'
+                    },
+                    
+                    // Clinical Badge System - Precision Category
+                    'perfect_score': {
+                        name: 'Perfect Score',
+                        message: 'A perfect score! Your focused listening and neural adaptation are clearly paying off.',
+                        category: 'Precision',
+                        icon: '💯'
+                    },
+                    'personal_best': {
+                        name: 'Personal Best',
+                        message: 'You\'ve surpassed your previous best! This shows your brain is adapting and building new pathways for sound.',
+                        category: 'Precision',
+                        icon: '🎯'
+                    },
+                    'sharp_bronze': {
+                        name: 'Sharp Listener',
+                        message: 'Consistently sharp listening! You\'re developing reliable accuracy in your hearing practice.',
+                        category: 'Precision',
+                        icon: '👂',
+                        tier: 'bronze'
+                    },
+                    'sharp_silver': {
+                        name: 'Precise Listener',
+                        message: 'Excellent precision! Your consistent high accuracy shows remarkable progress in sound discrimination.',
+                        category: 'Precision',
+                        icon: '👂',
+                        tier: 'silver'
+                    },
+                    'sharp_gold': {
+                        name: 'Master Listener',
+                        message: 'Outstanding precision! You\'ve achieved master-level consistency in your hearing exercises.',
+                        category: 'Precision',
+                        icon: '👂',
+                        tier: 'gold'
+                    },
+                    
+                    // Weekly Goals System Badges
+                    'monthly_consistency': {
+                        name: 'Monthly Consistency',
+                        message: 'Four weeks of meeting your weekly goals! This sustained effort is building lasting hearing improvement.',
+                        category: 'Weekly Goals',
+                        icon: '📅'
+                    },
+                    'quarterly_consistency': {
+                        name: 'Quarterly Champion',
+                        message: 'Twelve weeks of weekly goal success! Your dedication over three months is truly exceptional.',
+                        category: 'Weekly Goals',
+                        icon: '🏆'
+                    }
+                };
+                
+                return badges[badgeId];
+            }
+            
+            checkForBadgeUnlocks() {
+                // Check various badge conditions
+                this.checkFirstStepsBadge();
+                this.checkConsistentWeekBadge();
+                this.checkNoiseNavigatorBadge();
+                this.checkClarityChampionBadge();
+                this.checkMonthlyMilestoneBadge();
+                
+                // Check new clinical badge system
+                this.checkStreakBadges();
+                this.checkCommittedBadges();
+                this.checkAdvancementBadges();
+                this.checkPrecisionBadges();
+            }
+            
+            checkFirstStepsBadge() {
+                const completedExercises = this.analytics.data.events.filter(e => e.type === 'EXERCISE_COMPLETED');
+                if (completedExercises.length >= 1) {
+                    this.unlockBadge('first_steps');
+                }
+            }
+            
+            checkConsistentWeekBadge() {
+                // Check if user met their weekly goal
+                const currentWeek = this.analytics.data.gamification.weeklyGoals;
+                if (currentWeek.currentWeekCompletedDays.length >= currentWeek.targetDays) {
+                    this.unlockBadge('consistent_week');
+                }
+            }
+            
+            checkNoiseNavigatorBadge() {
+                const hardNoiseEvents = this.analytics.data.events.filter(e => 
+                    e.type === 'EXERCISE_COMPLETED' && e.payload.noise === 'hard'
+                );
+                if (hardNoiseEvents.length >= 1) {
+                    this.unlockBadge('noise_navigator');
+                }
+            }
+            
+            checkClarityChampionBadge() {
+                // Check for 3 consecutive days of closing clarity ring
+                const last3Days = [];
+                for (let i = 0; i < 3; i++) {
+                    const date = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
+                    last3Days.push(date.toISOString().substring(0, 10));
+                }
+                
+                // This is a simplified check - in practice you'd want to store daily ring completion data
+                const clarityRingCompleted = this.analytics.data.gamification.rings.clarity.completed;
+                if (clarityRingCompleted) {
+                    this.unlockBadge('clarity_champion');
+                }
+            }
+            
+            checkMonthlyMilestoneBadge() {
+                const oneMonthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+                const monthlyEvents = this.analytics.data.events.filter(e => 
+                    e.type === 'EXERCISE_COMPLETED' && e.timestamp >= oneMonthAgo
+                );
+                
+                // Count unique days
+                const uniqueDays = new Set(monthlyEvents.map(e => e.timestamp.substring(0, 10)));
+                if (uniqueDays.size >= 20) {
+                    this.unlockBadge('monthly_milestone');
+                }
+            }
+            
+            // Clinical Badge System Checking Methods
+            checkStreakBadges() {
+                const currentStreak = this.getCurrentStreak();
+                
+                if (currentStreak >= 3 && !this.analytics.data.gamification.badges.includes('streak_bronze')) {
+                    this.unlockBadge('streak_bronze');
+                }
+                if (currentStreak >= 7 && !this.analytics.data.gamification.badges.includes('streak_silver')) {
+                    this.unlockBadge('streak_silver');
+                }
+                if (currentStreak >= 21 && !this.analytics.data.gamification.badges.includes('streak_gold')) {
+                    this.unlockBadge('streak_gold');
+                }
+            }
+            
+            checkCommittedBadges() {
+                const totalSessions = this.analytics.data.events.filter(e => e.type === 'EXERCISE_COMPLETED').length;
+                
+                if (totalSessions >= 10 && !this.analytics.data.gamification.badges.includes('committed_bronze')) {
+                    this.unlockBadge('committed_bronze');
+                }
+                if (totalSessions >= 50 && !this.analytics.data.gamification.badges.includes('committed_silver')) {
+                    this.unlockBadge('committed_silver');
+                }
+                if (totalSessions >= 100 && !this.analytics.data.gamification.badges.includes('committed_gold')) {
+                    this.unlockBadge('committed_gold');
+                }
+            }
+            
+            checkAdvancementBadges() {
+                const events = this.analytics.data.events;
+                
+                // Check for level up (harder difficulty)
+                const levelUpEvents = events.filter(e => 
+                    e.type === 'EXERCISE_COMPLETED' && 
+                    (e.payload.noise === 'medium' || e.payload.noise === 'hard')
+                );
+                if (levelUpEvents.length >= 1 && !this.analytics.data.gamification.badges.includes('level_up')) {
+                    this.unlockBadge('level_up');
+                }
+                
+                // Check activity exploration badges
+                const activityTypes = ['keywords', 'sentences', 'stories', 'scenarios'];
+                const badgeMap = {
+                    'keywords': 'explorer_keywords',
+                    'sentences': 'explorer_sentences', 
+                    'stories': 'explorer_stories',
+                    'scenarios': 'explorer_scenarios'
+                };
+                
+                activityTypes.forEach(activity => {
+                    const hasActivity = events.some(e => 
+                        e.type === 'EXERCISE_COMPLETED' && e.payload.activity === activity
+                    );
+                    const badgeId = badgeMap[activity];
+                    if (hasActivity && !this.analytics.data.gamification.badges.includes(badgeId)) {
+                        this.unlockBadge(badgeId);
+                    }
+                });
+            }
+            
+            checkPrecisionBadges() {
+                const events = this.analytics.data.events.filter(e => e.type === 'EXERCISE_COMPLETED');
+                
+                // Check for perfect score
+                const perfectScores = events.filter(e => e.payload.score === 1.0);
+                if (perfectScores.length >= 1 && !this.analytics.data.gamification.badges.includes('perfect_score')) {
+                    this.unlockBadge('perfect_score');
+                }
+                
+                // Check for personal best (simplified - would need more sophisticated tracking in real implementation)
+                if (events.length >= 2) {
+                    const recentEvent = events[events.length - 1];
+                    const previousBest = Math.max(...events.slice(0, -1).map(e => e.payload.score || 0));
+                    if (recentEvent.payload.score > previousBest && !this.analytics.data.gamification.badges.includes('personal_best')) {
+                        this.unlockBadge('personal_best');
+                    }
+                }
+                
+                // Check accuracy badges - get recent 10 sessions average
+                if (events.length >= 10) {
+                    const recent10 = events.slice(-10);
+                    const avgAccuracy = recent10.reduce((sum, e) => sum + (e.payload.score || 0), 0) / recent10.length;
+                    
+                    if (avgAccuracy > 0.80 && !this.analytics.data.gamification.badges.includes('sharp_bronze')) {
+                        this.unlockBadge('sharp_bronze');
+                    }
+                    if (avgAccuracy > 0.85 && !this.analytics.data.gamification.badges.includes('sharp_silver')) {
+                        this.unlockBadge('sharp_silver');
+                    }
+                    if (avgAccuracy > 0.90 && !this.analytics.data.gamification.badges.includes('sharp_gold')) {
+                        this.unlockBadge('sharp_gold');
+                    }
+                }
+            }
+            
+            showBadgeCelebration(badge) {
+                // Create a modal to celebrate the badge unlock
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                
+                // Determine tier display
+                const tierColors = {
+                    'bronze': 'text-orange-600 border-orange-200 bg-orange-50',
+                    'silver': 'text-gray-600 border-gray-300 bg-gray-50', 
+                    'gold': 'text-yellow-600 border-yellow-300 bg-yellow-50'
+                };
+                
+                const tierDisplay = badge.tier ? `
+                    <div class="inline-block px-3 py-1 rounded-full text-xs font-medium border ${tierColors[badge.tier]} mb-2">
+                        ${badge.tier.toUpperCase()} ACHIEVEMENT
+                    </div>
+                ` : '';
+                
+                modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center animate-bounce">
+                        <div class="text-6xl mb-4">${badge.icon}</div>
+                        ${tierDisplay}
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Achievement Unlocked!</h2>
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">${badge.name}</h3>
+                        <p class="text-gray-600 mb-6">${badge.message}</p>
+                        <div class="text-xs text-gray-500 mb-4">${badge.category} Progress</div>
+                        <button onclick="this.parentElement.parentElement.remove()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Continue
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                // Auto-remove after 12 seconds (slightly longer for reading the clinical message)
+                setTimeout(() => {
+                    if (modal.parentElement) {
+                        modal.remove();
+                    }
+                }, 12000);
+            }
+            
+            // === UTILITY FUNCTIONS ===
+            
+            getTodayDateString() {
+                return new Date().toISOString().substring(0, 10);
+            }
+            
+            getWeekStart(date) {
+                const start = new Date(date);
+                const day = start.getDay();
+                const diff = start.getDate() - day; // Adjust to start on Sunday
+                start.setDate(diff);
+                start.setHours(0, 0, 0, 0);
+                return start.toISOString().substring(0, 10);
+            }
+            
+            // Main update function - call this after each exercise completion
+            onExerciseCompleted(sessionData) {
+                this.updateListeningStrain(sessionData);
+                this.updateRings();
+                this.updateWeeklyGoals(sessionData);
+                this.checkForBadgeUnlocks();
+                
+                // Save all changes
+                analyticsStorage.setData(this.analytics.data);
+            }
+            
+            // === WEEKLY GOALS SYSTEM ===
+            
+            updateWeeklyGoals(sessionData) {
+                const today = this.getTodayDateString();
+                const currentWeekStart = this.getWeekStart(new Date());
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                
+                // Check if we need to roll over to a new week
+                if (weeklyGoals.currentWeekStart !== currentWeekStart) {
+                    this.rolloverWeek();
+                }
+                
+                // Add today to completed days if not already added
+                if (!weeklyGoals.currentWeekCompletedDays.includes(today)) {
+                    weeklyGoals.currentWeekCompletedDays.push(today);
+                    
+                    // Check if weekly goal is achieved
+                    if (weeklyGoals.currentWeekCompletedDays.length >= weeklyGoals.targetDays) {
+                        this.onWeeklyGoalAchieved();
+                    }
+                }
+                
+                // Update weekly totals for different goal types
+                this.updateWeeklyTotals(sessionData);
+            }
+            
+            rolloverWeek() {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                const newWeekStart = this.getWeekStart(new Date());
+                
+                // Check if last week's goal was met for streak tracking
+                const lastWeekGoalMet = weeklyGoals.currentWeekCompletedDays.length >= weeklyGoals.targetDays;
+                
+                if (lastWeekGoalMet) {
+                    weeklyGoals.weeklyStreak += 1;
+                    this.celebrateWeeklyStreak(weeklyGoals.weeklyStreak);
+                } else {
+                    // Check for streak freeze usage
+                    if (weeklyGoals.streakFreezes > 0 && weeklyGoals.useStreakFreeze) {
+                        weeklyGoals.streakFreezes -= 1;
+                        weeklyGoals.useStreakFreeze = false; // Reset flag
+                        // Don't break streak, just use a freeze
+                        this.showStreakFreezeUsed();
+                    } else {
+                        weeklyGoals.weeklyStreak = 0; // Reset streak
+                    }
+                }
+                
+                // Start new week
+                weeklyGoals.currentWeekStart = newWeekStart;
+                weeklyGoals.currentWeekCompletedDays = [];
+                weeklyGoals.currentWeekTotalMinutes = 0;
+                weeklyGoals.currentWeekTotalSessions = 0;
+            }
+            
+            updateWeeklyTotals(sessionData) {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                
+                // Update session count
+                weeklyGoals.currentWeekTotalSessions = (weeklyGoals.currentWeekTotalSessions || 0) + 1;
+                
+                // Update total minutes
+                const sessionMinutes = (sessionData.durationMs || 0) / (1000 * 60);
+                weeklyGoals.currentWeekTotalMinutes = (weeklyGoals.currentWeekTotalMinutes || 0) + sessionMinutes;
+                
+                // Check additional goal types
+                this.checkAdditionalWeeklyGoals();
+            }
+            
+            checkAdditionalWeeklyGoals() {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                const preferences = this.analytics.data.gamification.userPreferences;
+                
+                // Check minutes-based goal
+                if (preferences.weeklyGoalType === 'minutes' && preferences.weeklyTargetMinutes) {
+                    if (weeklyGoals.currentWeekTotalMinutes >= preferences.weeklyTargetMinutes) {
+                        this.onWeeklyGoalAchieved('minutes');
+                    }
+                }
+                
+                // Check sessions-based goal  
+                if (preferences.weeklyGoalType === 'sessions' && preferences.weeklyTargetSessions) {
+                    if (weeklyGoals.currentWeekTotalSessions >= preferences.weeklyTargetSessions) {
+                        this.onWeeklyGoalAchieved('sessions');
+                    }
+                }
+            }
+            
+            onWeeklyGoalAchieved(goalType = 'days') {
+                // Prevent duplicate celebrations
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                if (weeklyGoals.currentWeekGoalAchieved) return;
+                
+                weeklyGoals.currentWeekGoalAchieved = true;
+                
+                // Award streak freeze for goal achievement
+                weeklyGoals.streakFreezes = Math.min(3, (weeklyGoals.streakFreezes || 0) + 1);
+                
+                // Show celebration
+                this.showWeeklyGoalCelebration(goalType);
+                
+                // Check for weekly goal badges
+                this.checkWeeklyGoalBadges();
+            }
+            
+            celebrateWeeklyStreak(streakCount) {
+                const messages = {
+                    1: "One week down! You're building momentum.",
+                    2: "Two weeks of success! The habit is forming.",
+                    4: "One month of weekly goals! Outstanding commitment.",
+                    8: "Two months of consistency! You're truly dedicated.",
+                    12: "Three months of weekly success! Incredible achievement."
+                };
+                
+                const message = messages[streakCount] || `${streakCount} weeks of meeting your goals! Amazing consistency.`;
+                
+                this.showStreakCelebration(streakCount, message);
+            }
+            
+            showWeeklyGoalCelebration(goalType) {
+                const goalMessages = {
+                    'days': 'Weekly practice goal achieved! Your consistency is building stronger hearing skills.',
+                    'minutes': 'Weekly time goal completed! Every minute of practice strengthens your neural pathways.',
+                    'sessions': 'Weekly session goal reached! Your dedication to practice is remarkable.'
+                };
+                
+                const message = goalMessages[goalType] || goalMessages['days'];
+                
+                // Create celebration modal
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Weekly Goal Achieved!</h2>
+                        <p class="text-gray-600 mb-4">${message}</p>
+                        <div class="text-sm text-blue-600 mb-4">+1 Streak Freeze earned</div>
+                        <button onclick="this.parentElement.parentElement.remove()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                            Continue
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                setTimeout(() => {
+                    if (modal.parentElement) modal.remove();
+                }, 8000);
+            }
+            
+            showStreakCelebration(streakCount, message) {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+                        <div class="text-6xl mb-4">🔥</div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">${streakCount} Week Streak!</h2>
+                        <p class="text-gray-600 mb-6">${message}</p>
+                        <button onclick="this.parentElement.parentElement.remove()" class="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition">
+                            Keep Going!
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                setTimeout(() => {
+                    if (modal.parentElement) modal.remove();
+                }, 8000);
+            }
+            
+            showStreakFreezeUsed() {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+                        <div class="text-6xl mb-4">🛡️</div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Streak Protected!</h2>
+                        <p class="text-gray-600 mb-6">Your streak freeze kept your weekly goal streak alive. Life happens, and that's okay!</p>
+                        <button onclick="this.parentElement.parentElement.remove()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Back to Practice
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                setTimeout(() => {
+                    if (modal.parentElement) modal.remove();
+                }, 8000);
+            }
+            
+            checkWeeklyGoalBadges() {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                
+                // Weekly streak badges
+                if (weeklyGoals.weeklyStreak >= 4 && !this.analytics.data.gamification.badges.includes('monthly_consistency')) {
+                    this.unlockBadge('monthly_consistency');
+                }
+                if (weeklyGoals.weeklyStreak >= 12 && !this.analytics.data.gamification.badges.includes('quarterly_consistency')) {
+                    this.unlockBadge('quarterly_consistency');
+                }
+            }
+            
+            // User customization methods
+            setWeeklyGoal(goalType, targetValue) {
+                const preferences = this.analytics.data.gamification.userPreferences;
+                
+                preferences.weeklyGoalType = goalType; // 'days', 'minutes', 'sessions'
+                
+                if (goalType === 'days') {
+                    this.analytics.data.gamification.weeklyGoals.targetDays = targetValue;
+                } else if (goalType === 'minutes') {
+                    preferences.weeklyTargetMinutes = targetValue;
+                } else if (goalType === 'sessions') {
+                    preferences.weeklyTargetSessions = targetValue;
+                }
+                
+                analyticsStorage.setData(this.analytics.data);
+            }
+            
+            getWeeklyProgress() {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                const preferences = this.analytics.data.gamification.userPreferences;
+                
+                return {
+                    goalType: preferences.weeklyGoalType || 'days',
+                    current: {
+                        days: weeklyGoals.currentWeekCompletedDays.length,
+                        minutes: Math.round(weeklyGoals.currentWeekTotalMinutes || 0),
+                        sessions: weeklyGoals.currentWeekTotalSessions || 0
+                    },
+                    target: {
+                        days: weeklyGoals.targetDays,
+                        minutes: preferences.weeklyTargetMinutes || 0,
+                        sessions: preferences.weeklyTargetSessions || 0
+                    },
+                    weeklyStreak: weeklyGoals.weeklyStreak || 0,
+                    streakFreezes: weeklyGoals.streakFreezes || 0
+                };
+            }
+            
+            // Get current rings status for UI display
+            getRingsStatus() {
+                this.updateRings(); // Ensure current
+                return this.analytics.data.gamification.rings;
+            }
+            
+            // Get badges for display
+            getUnlockedBadges() {
+                return this.analytics.data.gamification.badges.map(badgeId => {
+                    return {
+                        id: badgeId,
+                        ...this.getBadgeDefinition(badgeId)
+                    };
+                });
+            }
+
+            // Sound Garden System
+            initializeSoundGarden() {
+                if (!this.analytics.data.gamification.soundGarden) {
+                    this.analytics.data.gamification.soundGarden = {
+                        plants: [],
+                        waterReserve: 0,
+                        centralTree: { level: 1, lastGrowth: new Date().toISOString() },
+                        butterflies: [],
+                        pathStones: 0,
+                        lastSeasonChange: null,
+                        gardenPlacements: this.generateGardenPlacements()
+                    };
+                }
+            }
+
+            generateGardenPlacements() {
+                const placements = [];
+                for (let row = 1; row <= 3; row++) {
+                    for (let col = 1; col <= 4; col++) {
+                        placements.push({
+                            id: `${row}-${col}`,
+                            x: 100 + (col * 120),
+                            y: 150 + (row * 100),
+                            occupied: false,
+                            plantType: null
+                        });
+                    }
+                }
+                return placements;
+            }
+
+            updateSoundGarden(dailyStats) {
+                const garden = this.analytics.data.gamification.soundGarden;
+                
+                let waterEarned = 0;
+                const rings = this.getRingsStatus();
+                
+                if (rings.consistency.completed) waterEarned += 10;
+                if (rings.clarity.completed) waterEarned += 10;  
+                if (rings.challenge.completed) waterEarned += 10;
+                
+                if (dailyStats.practiceTime > 0) {
+                    waterEarned += 2;
+                }
+                
+                garden.waterReserve += waterEarned;
+                
+                this.waterPlants(garden);
+                this.checkForNewPlants(garden);
+                this.updateButterflies(garden, rings);
+                this.updateCentralTree(garden);
+                
+                this.analytics.saveData();
+            }
+
+            waterPlants(garden) {
+                const thirstyPlants = garden.plants
+                    .filter(plant => plant.growthStage < 4)
+                    .sort((a, b) => a.currentWater - b.currentWater);
+                
+                for (const plant of thirstyPlants) {
+                    if (garden.waterReserve <= 0) break;
+                    
+                    const waterNeeded = Math.min(garden.waterReserve, 100 - plant.currentWater);
+                    plant.currentWater += waterNeeded;
+                    garden.waterReserve -= waterNeeded;
+                    
+                    if (plant.currentWater >= 100 && plant.growthStage < 4) {
+                        this.growPlant(plant);
+                    }
+                }
+            }
+
+            growPlant(plant) {
+                plant.growthStage++;
+                plant.currentWater = 0;
+                plant.lastGrowth = new Date().toISOString();
+                
+                this.triggerGrowthCelebration(plant);
+            }
+
+            checkForNewPlants(garden) {
+                const weeklyGoals = this.analytics.data.gamification.weeklyGoals;
+                const currentStreak = weeklyGoals.currentStreak;
+                
+                const plantsEarned = Math.floor(currentStreak / 2);
+                const currentPlantCount = garden.plants.length;
+                
+                if (plantsEarned > currentPlantCount) {
+                    this.addNewPlant(garden);
+                }
+            }
+
+            addNewPlant(garden) {
+                const plantTypes = [
+                    { type: 'sound_flower', name: 'Sound Flower', category: 'clarity' },
+                    { type: 'clarity_clover', name: 'Clarity Clover', category: 'clarity' },
+                    { type: 'pitch_tulip', name: 'Pitch Tulip', category: 'pitch' },
+                    { type: 'melody_rose', name: 'Melody Rose', category: 'challenge' },
+                    { type: 'harmony_lily', name: 'Harmony Lily', category: 'consistency' },
+                    { type: 'rhythm_daisy', name: 'Rhythm Daisy', category: 'challenge' }
+                ];
+                
+                const emptyPlacement = garden.gardenPlacements.find(p => !p.occupied);
+                if (!emptyPlacement) return;
+                
+                const plantType = plantTypes[garden.plants.length % plantTypes.length];
+                
+                const newPlant = {
+                    id: `plant_${Date.now()}`,
+                    type: plantType.type,
+                    name: plantType.name,
+                    category: plantType.category,
+                    growthStage: 0,
+                    currentWater: 0,
+                    placementId: emptyPlacement.id,
+                    unlockDate: new Date().toISOString()
+                };
+                
+                garden.plants.push(newPlant);
+                emptyPlacement.occupied = true;
+                emptyPlacement.plantType = plantType.type;
+                
+                this.triggerNewPlantCelebration(newPlant);
+            }
+
+            updateButterflies(garden, rings) {
+                garden.butterflies = garden.butterflies.filter(b => 
+                    new Date(b.date).toDateString() === new Date().toDateString()
+                );
+                
+                const today = new Date().toDateString();
+                
+                if (rings.consistency.completed) {
+                    garden.butterflies.push({ type: 'blue', date: today, activity: 'consistency' });
+                }
+                if (rings.clarity.completed) {
+                    garden.butterflies.push({ type: 'yellow', date: today, activity: 'clarity' });
+                }
+                if (rings.challenge.completed) {
+                    garden.butterflies.push({ type: 'orange', date: today, activity: 'challenge' });
+                }
+                
+                if (rings.consistency.completed && rings.clarity.completed && rings.challenge.completed) {
+                    garden.butterflies.push({ type: 'firefly', date: today, activity: 'perfect_day' });
+                }
+            }
+
+            updateCentralTree(garden) {
+                const monthsSinceStart = Math.floor(
+                    (new Date() - new Date(this.analytics.data.firstSessionDate)) / (1000 * 60 * 60 * 24 * 30)
+                );
+                
+                if (monthsSinceStart > garden.centralTree.level - 1) {
+                    garden.centralTree.level = monthsSinceStart + 1;
+                    garden.centralTree.lastGrowth = new Date().toISOString();
+                    this.triggerTreeGrowthCelebration();
+                }
+            }
+
+            getSoundGardenState() {
+                const garden = this.analytics.data.gamification.soundGarden;
+                if (!garden) return null;
+                
+                return {
+                    plants: garden.plants.map(plant => ({
+                        ...plant,
+                        progress: plant.currentWater / 100,
+                        stageDescription: this.getPlantStageDescription(plant.growthStage)
+                    })),
+                    waterReserve: garden.waterReserve,
+                    centralTree: garden.centralTree,
+                    butterflies: garden.butterflies,
+                    pathStones: garden.pathStones,
+                    seasonTheme: this.getCurrentSeasonTheme()
+                };
+            }
+
+            getPlantStageDescription(stage) {
+                const stages = ['Seed', 'Sprout', 'Budding', 'Blooming', 'Mature'];
+                return stages[stage] || 'Seed';
+            }
+
+            getCurrentSeasonTheme() {
+                const month = new Date().getMonth();
+                if (month >= 2 && month <= 4) return 'spring';
+                if (month >= 5 && month <= 7) return 'summer';
+                if (month >= 8 && month <= 10) return 'autumn';
+                return 'winter';
+            }
+
+            triggerGrowthCelebration(plant) {
+                setTimeout(() => {
+                    this.updateSoundGardenDisplay?.();
+                }, 100);
+            }
+
+            triggerNewPlantCelebration(plant) {
+                this.showCelebrationModal({
+                    title: '🌱 New Plant Unlocked!',
+                    message: `Your consistency has earned you a ${plant.name}! Keep practicing to help it grow.`,
+                    type: 'garden_unlock'
+                });
+            }
+
+            triggerTreeGrowthCelebration() {
+                this.showCelebrationModal({
+                    title: '🌳 Your Tree is Growing!',
+                    message: 'Another month of dedication! Your central tree grows stronger, representing your lasting progress.',
+                    type: 'tree_growth'
+                });
+            }
+        }
+        
+        // Initialize gamification engine
+        const gamification = new GamificationEngine(analytics);
+        gamification.initializeSoundGarden();
+        
+        // Exercise timing tracking
+        let exerciseStartTimestamp = null;
 
         function getAudioUrl(filename) {
             return `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${filename}`;
@@ -639,7 +2763,7 @@
             
             const qualityIssue = {
                 audioFile: currentQuestion.audioFilename || currentQuestion.AudioFilename || currentQuestion.audioFile || `${selectedVoice}_${currentActivityType}_${slugify(correctWordForTrial || 'unknown')}.mp3`,
-                text: currentQuestion.Word1 || currentQuestion.Word2 || currentQuestion.Sentence1 || currentQuestion.Sentence2 || currentQuestion.Sentence || currentQuestion.text || correctWordForTrial || 'N/A',
+                text: currentQuestion.Sentence1 || currentQuestion.Sentence2 || currentQuestion.Sentence || currentQuestion.text || 'N/A',
                 voice: selectedVoice,
                 activityType: currentActivityType,
                 set: currentQuestion.Set || currentQuestion.set || 'Unknown Set',
@@ -727,7 +2851,7 @@
                 rows.push([
                     issue.audioFile || 'N/A',
                     issue.text || 'N/A', 
-                    issue.voice || 'female',
+                    issue.voice || 'sarah',
                     issue.activityType || 'N/A',
                     issue.set || 'N/A',
                     issue.issueType || 'unclear_pronunciation',
@@ -887,13 +3011,12 @@
             try {
                 document.getElementById('loading-status').textContent = 'Loading exercise data...';
                 
-                const [wordsData, sentencesData, keywordsData] = await Promise.all([
-                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Words'),
+                const [sentencesData, keywordsData] = await Promise.all([
                     loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Sentences'),
                     loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Keywords')
                 ]);
                 
-                allData = { words: wordsData, sentences: sentencesData, keywords: keywordsData, stories: sampleStories };
+                allData = { sentences: sentencesData, keywords: keywordsData, stories: sampleStories };
                 
                 document.getElementById('loading-progress-bar').style.width = '100%';
                 document.getElementById('loading-status').textContent = 'Ready!';
@@ -904,6 +3027,9 @@
                     
                     // Initialize caption buttons
                     setupCaptionButtons();
+                    
+                    // Initialize voice selection
+                    selectVoice('sarah');
                     
                     if (adminQCMode) {
                         toggleAdminQCMode();
@@ -923,12 +3049,20 @@
             document.getElementById('level-selection-screen').classList.add('hidden');
             document.getElementById('app-content').classList.add('hidden');
             document.getElementById('activity-selection-screen').classList.remove('hidden');
+            
+            updateCIRingsDisplay(); // Update CI rings when showing activity selection
+            updateSoundGardenDisplay(); // Update Sound Garden when showing activity selection
         }
 
         function showLevelSelection(activityType) {
             stopCurrentAudio();
             
             currentActivityType = activityType;
+            
+            // Track activity selection
+            analytics.trackEvent('ACTIVITY_SELECTED', {
+                activityType: activityType
+            });
             document.getElementById('activity-selection-screen').classList.add('hidden');
             document.getElementById('level-selection-screen').classList.remove('hidden');
             
@@ -936,12 +3070,53 @@
             levelButtonsContainer.innerHTML = '';
             
             if (activityType === 'stories') {
+                // Add Enhanced Story Experience button first
+                const enhancedButton = document.createElement('button');
+                enhancedButton.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gradient-to-r from-purple-400 to-pink-400 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 transition shadow-md';
+                enhancedButton.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span>✨ Enhanced Story Experience</span>
+                        <span class="text-sm bg-purple-100 px-2 py-1 rounded text-purple-700">NEW</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">Multiple questions • Adaptive difficulty</div>
+                `;
+                enhancedButton.onclick = () => startEnhancedStory();
+                levelButtonsContainer.appendChild(enhancedButton);
+                
+                // Add separator
+                const separator = document.createElement('div');
+                separator.className = 'text-center text-gray-400 text-sm py-2';
+                separator.textContent = '— Regular Stories —';
+                levelButtonsContainer.appendChild(separator);
+                
                 // Handle stories differently - show story titles directly
                 sampleStories.forEach((story, index) => {
                     const button = document.createElement('button');
                     button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition';
                     button.textContent = story.title;
                     button.onclick = () => startStory(story);
+                    levelButtonsContainer.appendChild(button);
+                });
+            } else if (activityType === 'scenarios') {
+                // Handle functional scenarios - show available scenarios
+                availableScenarios.forEach(scenario => {
+                    const button = document.createElement('button');
+                    button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-green-300 bg-green-50 hover:bg-green-100 transition';
+                    button.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-2xl">${scenario.icon}</span>
+                                <div class="text-left">
+                                    <div class="font-bold">${scenario.name}</div>
+                                    <div class="text-sm text-gray-600">${scenario.description}</div>
+                                </div>
+                            </div>
+                            <div class="text-sm bg-green-100 px-2 py-1 rounded text-green-700">
+                                ${scenario.levels.length} levels
+                            </div>
+                        </div>
+                    `;
+                    button.onclick = () => showScenarioLevels(scenario);
                     levelButtonsContainer.appendChild(button);
                 });
             } else {
@@ -963,6 +3138,16 @@
             shuffleArray(currentLevelData);
             currentQuestionIndex = 0;
             score = 0;
+            exerciseStartTimestamp = Date.now();
+            
+            // Track exercise start
+            analytics.trackEvent('EXERCISE_STARTED', {
+                activity: currentActivityType,
+                level: setName,
+                voice: selectedVoice,
+                noise: practiceMode === 'noise' ? selectedNoiseLevel : 'quiet',
+                totalQuestions: currentLevelData.length
+            });
             
             document.getElementById('exercise-title').textContent = friendlySetNames[setName] || setName;
             document.getElementById('level-selection-screen').classList.add('hidden');
@@ -978,6 +3163,17 @@
             currentStory = randomizeStoryChoices(story);
             currentQuestionIndex = 0;
             score = 0;
+            exerciseStartTimestamp = Date.now();
+            
+            // Track story start
+            analytics.trackEvent('EXERCISE_STARTED', {
+                activity: 'Stories',
+                level: story.title,
+                voice: selectedVoice,
+                noise: practiceMode === 'noise' ? selectedNoiseLevel : 'quiet',
+                captionLevel: selectedCaptionLevel,
+                totalQuestions: 1
+            });
             
             document.getElementById('exercise-title').textContent = currentStory.title;
             document.getElementById('level-selection-screen').classList.add('hidden');
@@ -986,6 +3182,146 @@
             document.getElementById('app-content').classList.remove('hidden');
             
             loadStoryQuestion();
+        }
+
+        // === FUNCTIONAL SCENARIOS FUNCTIONS ===
+        
+        function showScenarioLevels(scenario) {
+            // Store the selected scenario
+            currentScenario = scenario;
+            
+            // Clear and repopulate the level selection with scenario levels
+            const levelButtonsContainer = document.getElementById('level-buttons-container');
+            levelButtonsContainer.innerHTML = '';
+            
+            // Add back button
+            const backButton = document.createElement('button');
+            backButton.className = 'w-full py-2 px-4 text-blue-600 hover:text-blue-800 font-semibold text-left mb-4';
+            backButton.innerHTML = '← Back to Scenarios';
+            backButton.onclick = () => showLevelSelection('scenarios');
+            levelButtonsContainer.appendChild(backButton);
+            
+            // Add scenario title
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'text-center mb-4';
+            titleDiv.innerHTML = `
+                <h2 class="text-2xl font-bold text-gray-800 flex items-center justify-center gap-2">
+                    <span class="text-3xl">${scenario.icon}</span>
+                    ${scenario.name}
+                </h2>
+                <p class="text-gray-600 mt-2">${scenario.description}</p>
+            `;
+            levelButtonsContainer.appendChild(titleDiv);
+            
+            // Add level buttons
+            scenario.levels.forEach(level => {
+                const button = document.createElement('button');
+                button.className = 'w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-blue-300 bg-blue-50 hover:bg-blue-100 transition mb-2';
+                button.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="text-left">
+                            <div class="font-bold">Level ${level.level_number}: ${level.name}</div>
+                            <div class="text-sm text-gray-600">${level.description}</div>
+                        </div>
+                        <div class="text-sm bg-blue-100 px-2 py-1 rounded text-blue-700">
+                            ${level.interactions.length} interactions
+                        </div>
+                    </div>
+                `;
+                button.onclick = () => startScenarioLevel(level);
+                levelButtonsContainer.appendChild(button);
+            });
+        }
+        
+        function startScenarioLevel(level) {
+            // Store the selected level
+            currentScenarioLevel = level;
+            currentInteractionIndex = 0;
+            scenarioScore = 0;
+            exerciseStartTimestamp = Date.now();
+            
+            // Track scenario start
+            analytics.trackEvent('EXERCISE_STARTED', {
+                activity: 'Scenarios',
+                level: `${currentScenario.name} - ${level.name}`,
+                voice: selectedVoice,
+                noise: practiceMode === 'noise' ? selectedNoiseLevel : 'quiet',
+                totalQuestions: level.interactions.length
+            });
+            
+            // Set activity type for scenario
+            currentActivityType = 'scenarios';
+            
+            // Set up the exercise screen
+            document.getElementById('exercise-title').textContent = `${currentScenario.name} - ${level.name}`;
+            document.getElementById('level-selection-screen').classList.add('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            document.getElementById('app-content').classList.remove('hidden');
+            
+            // Set up progress tracking
+            document.getElementById('current-question').textContent = '1';
+            document.getElementById('total-questions').textContent = level.interactions.length;
+            document.getElementById('current-score').textContent = '0';
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            // Load first interaction
+            loadScenarioInteraction();
+        }
+        
+        function loadScenarioInteraction() {
+            if (currentInteractionIndex >= currentScenarioLevel.interactions.length) {
+                // All interactions completed
+                showCompletionScreen();
+                return;
+            }
+            
+            // Get current interaction
+            currentInteraction = currentScenarioLevel.interactions[currentInteractionIndex];
+            
+            // Hide all interface types except the main choice interface
+            document.getElementById('choice-container').classList.remove('hidden');
+            document.getElementById('keyword-question-container').classList.add('hidden');
+            document.getElementById('story-interface').classList.add('hidden');
+            
+            // Reset UI state
+            document.getElementById('feedback-message').className = 'mt-6 text-xl font-semibold h-8';
+            document.getElementById('play-sound-btn').disabled = false;
+            
+            // Set up question display using the existing choice buttons
+            document.getElementById('choice1-btn').textContent = currentInteraction.question.choices[0].text;
+            document.getElementById('choice2-btn').textContent = currentInteraction.question.choices[1].text;
+            
+            // Enable choice buttons
+            document.getElementById('choice1-btn').disabled = true; // Disabled until audio plays
+            document.getElementById('choice2-btn').disabled = true;
+            
+            // Load the scenario audio (primary speech + background noise)
+            loadScenarioAudio(currentInteraction);
+        }
+        
+        function loadScenarioAudio(interaction) {
+            // Build voice-specific audio URL
+            const audioFolder = `${selectedVoice}_audio`;
+            const primaryAudioUrl = getAudioUrl(`${audioFolder}/${interaction.primary_audio_url}`);
+            
+            console.log(`Loading scenario audio: ${primaryAudioUrl} (Voice: ${selectedVoice})`);
+            console.log(`Background noise: ${interaction.background_noise_id}`);
+            
+            // Create or reuse audio element
+            if (scenarioAudioPlayer) {
+                scenarioAudioPlayer.pause();
+            }
+            
+            scenarioAudioPlayer = new Audio(primaryAudioUrl);
+            currentAudio = scenarioAudioPlayer; // For compatibility with existing systems
+            
+            // Load background noise if practice mode is 'noise'
+            if (practiceMode === 'noise') {
+                loadBackgroundNoise(interaction.background_noise_id).then(() => {
+                    console.log('Background noise loaded for scenario');
+                }).catch(console.error);
+            }
         }
 
         function loadStoryQuestion() {
@@ -1057,8 +3393,8 @@
             const currentItem = currentLevelData[currentQuestionIndex];
             let audioText = '';
             
-            if (currentActivityType === 'words' || currentActivityType === 'sentences') {
-                const options = [currentItem.Word1 || currentItem.Sentence1, currentItem.Word2 || currentItem.Sentence2];
+            if (currentActivityType === 'sentences') {
+                const options = [currentItem.Sentence1, currentItem.Sentence2];
                 shuffleArray(options);
                 document.getElementById('choice1-btn').textContent = (options[0] || '').replaceAll('...', '');
                 document.getElementById('choice2-btn').textContent = (options[1] || '').replaceAll('...', '');
@@ -1073,7 +3409,7 @@
                 audioText = currentItem.Sentence;
             }
             
-            correctWordForTrial = audioText;
+            // Legacy assignment removed - correctWordForTrial no longer needed
             
             const audioFolder = `${selectedVoice}_audio`;
             const audioFileName = slugify(audioText) + '.mp3';
@@ -1100,11 +3436,21 @@
             let isCorrect = false;
             const selectedText = selectedButton.textContent;
             
-            if (currentActivityType === 'keywords') {
+            // Handle scenarios differently
+            if (currentActivityType === 'scenarios') {
+                const selectedIndex = selectedButton.id === 'choice1-btn' ? 0 : 1;
+                const correctChoice = currentInteraction.question.choices.find(choice => choice.is_correct);
+                isCorrect = selectedText === correctChoice.text;
+                
+                // Handle scenario answer
+                handleScenarioAnswer(selectedIndex, isCorrect);
+                return;
+            } else if (currentActivityType === 'keywords') {
                 const correctKeywordClean = currentLevelData[currentQuestionIndex].Keyword1.replaceAll('...', '');
                 isCorrect = selectedText === correctKeywordClean;
             } else {
-                isCorrect = selectedText === correctWordForTrial.replaceAll('...', '');
+                console.error(`Unknown activity type: ${currentActivityType}`);
+                isCorrect = false;
             }
 
             if (isCorrect) {
@@ -1135,16 +3481,93 @@
                 loadQuestion();
             }, 1500);
         }
+        
+        function handleScenarioAnswer(selectedIndex, isCorrect) {
+            // Stop any audio
+            stopCurrentAudio();
+            
+            if (isCorrect) {
+                scenarioScore++;
+                const feedbackText = currentInteraction.question.feedback_correct || 'Excellent! You understood that perfectly.';
+                document.getElementById('feedback-message').textContent = feedbackText;
+                document.getElementById('feedback-message').classList.add('text-green-500');
+                document.getElementById(selectedIndex === 0 ? 'choice1-btn' : 'choice2-btn').classList.add('correct-answer');
+            } else {
+                const feedbackText = currentInteraction.question.feedback_incorrect || 'Not quite right. Listen again carefully.';
+                document.getElementById('feedback-message').textContent = feedbackText;
+                document.getElementById('feedback-message').classList.add('text-orange-500');
+                document.getElementById(selectedIndex === 0 ? 'choice1-btn' : 'choice2-btn').classList.add('wrong-answer');
+                
+                // Show correct answer
+                const correctChoice = currentInteraction.question.choices.find(choice => choice.is_correct);
+                const correctIndex = currentInteraction.question.choices.indexOf(correctChoice);
+                document.getElementById(correctIndex === 0 ? 'choice1-btn' : 'choice2-btn').classList.add('correct-answer');
+            }
+            
+            // Update progress
+            document.getElementById('current-score').textContent = scenarioScore;
+            const progressPercent = ((currentInteractionIndex + 1) / currentScenarioLevel.interactions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('current-question').textContent = currentInteractionIndex + 1;
+            
+            // Move to next interaction after delay
+            setTimeout(() => {
+                currentInteractionIndex++;
+                
+                // Reset button styles
+                document.getElementById('choice1-btn').classList.remove('correct-answer', 'wrong-answer');
+                document.getElementById('choice2-btn').classList.remove('correct-answer', 'wrong-answer');
+                document.getElementById('feedback-message').className = 'mt-6 text-xl font-semibold h-8';
+                
+                loadScenarioInteraction();
+            }, 2500);
+        }
 
         function showCompletionScreen() {
             document.querySelector('main').classList.add('hidden');
             document.getElementById('completion-screen').classList.remove('hidden');
-            document.getElementById('final-score').textContent = score;
             
-            // For stories, there's only 1 question. For other activities, use currentLevelData.length
-            const totalQuestions = currentActivityType === 'stories' ? 1 : currentLevelData.length;
+            // Handle different activity types for scoring
+            let finalScore, totalQuestions, levelName;
+            if (currentActivityType === 'scenarios') {
+                finalScore = scenarioScore;
+                totalQuestions = currentScenarioLevel.interactions.length;
+                levelName = `${currentScenario.name} - ${currentScenarioLevel.name}`;
+            } else if (currentActivityType === 'enhanced-stories') {
+                finalScore = score;
+                totalQuestions = processedQuestions.size; // Questions actually answered
+                levelName = currentStory.title + ' (Enhanced)';
+            } else if (currentActivityType === 'stories') {
+                finalScore = score;
+                totalQuestions = 1; // Regular stories have 1 question
+                levelName = currentStory.title;
+            } else {
+                finalScore = score;
+                totalQuestions = currentLevelData.length; // Other activities
+                levelName = document.getElementById('exercise-title').textContent;
+            }
+            
+            // Track exercise completion
+            const exerciseDuration = exerciseStartTimestamp ? Date.now() - exerciseStartTimestamp : 0;
+            const completionData = {
+                activity: currentActivityType,
+                level: levelName,
+                voice: selectedVoice,
+                noise: practiceMode === 'noise' ? selectedNoiseLevel : 'quiet',
+                score: totalQuestions > 0 ? finalScore / totalQuestions : 0,
+                itemsCorrect: finalScore,
+                itemsTotal: totalQuestions,
+                durationMs: exerciseDuration
+            };
+            
+            analytics.trackEvent('EXERCISE_COMPLETED', completionData);
+            
+            // Update gamification system
+            gamification.onExerciseCompleted(completionData);
+            
+            document.getElementById('final-score').textContent = finalScore;
             document.getElementById('total-score').textContent = totalQuestions;
-            document.getElementById('final-progress-bar').style.width = `${(score / totalQuestions) * 100}%`;
+            document.getElementById('final-progress-bar').style.width = `${(finalScore / totalQuestions) * 100}%`;
         }
 
         // Story-specific functions
@@ -1228,16 +3651,55 @@
             btn.addEventListener('click', () => showLevelSelection(btn.dataset.activity));
         });
 
-        document.getElementById('voice-toggle').addEventListener('click', () => {
-            selectedVoice = selectedVoice === 'female' ? 'male' : 'female';
-            document.getElementById('voice-toggle').classList.toggle('female');
-            document.getElementById('voice-toggle').classList.toggle('male');
-        });
+        // Voice selection event listeners
+        document.getElementById('voice-sarah').addEventListener('click', () => selectVoice('sarah'));
+        document.getElementById('voice-emma').addEventListener('click', () => selectVoice('emma'));
+        document.getElementById('voice-david').addEventListener('click', () => selectVoice('david'));
+        document.getElementById('voice-marcus').addEventListener('click', () => selectVoice('marcus'));
+        
+        function selectVoice(voiceName) {
+            const previousVoice = selectedVoice;
+            selectedVoice = voiceName;
+            
+            // Track voice selection
+            analytics.trackEvent('VOICE_CHANGED', {
+                previousVoice: previousVoice,
+                newVoice: voiceName
+            });
+            
+            // Update button states
+            document.querySelectorAll('.voice-btn').forEach(btn => {
+                btn.classList.remove('selected', 'female');
+                btn.classList.add('border-gray-300', 'text-gray-700');
+                btn.classList.remove('border-pink-500', 'bg-pink-500', 'border-blue-500', 'bg-blue-500', 'text-white');
+            });
+            
+            // Style selected button
+            const selectedBtn = document.getElementById(`voice-${voiceName}`);
+            selectedBtn.classList.add('selected');
+            selectedBtn.classList.remove('border-gray-300', 'text-gray-700');
+            
+            if (voiceName === 'sarah' || voiceName === 'emma') {
+                selectedBtn.classList.add('female', 'border-pink-500', 'bg-pink-500', 'text-white');
+            } else {
+                selectedBtn.classList.add('border-blue-500', 'bg-blue-500', 'text-white');
+            }
+            
+            console.log(`Voice selected: ${voiceName}`);
+        }
 
         document.getElementById('back-to-activities').addEventListener('click', showActivitySelection);
         document.getElementById('back-to-levels').addEventListener('click', () => showLevelSelection(currentActivityType));
         document.getElementById('next-level-btn').addEventListener('click', () => showLevelSelection(currentActivityType));
         document.getElementById('retry-level-btn').addEventListener('click', () => startLevel(document.getElementById('exercise-title').textContent));
+        document.getElementById('back-to-activities-from-dashboard').addEventListener('click', () => {
+            showActivitySelection();
+            updateCIRingsDisplay(); // Update CI rings when returning to activities
+            updateSoundGardenDisplay(); // Update Sound Garden when returning to activities
+        });
+        document.getElementById('weekly-goals-settings').addEventListener('click', () => {
+            showWeeklyGoalsSettings();
+        });
 
         document.getElementById('play-sound-btn').addEventListener('click', async () => {
             if (currentAudio) {
@@ -1249,6 +3711,9 @@
                         currentStory.choices.forEach((_, index) => {
                             document.getElementById(`story-choice-${index}`).disabled = false;
                         });
+                    } else if (currentActivityType === 'scenarios') {
+                        document.getElementById('choice1-btn').disabled = false;
+                        document.getElementById('choice2-btn').disabled = false;
                     } else {
                         document.getElementById('choice1-btn').disabled = false;
                         document.getElementById('choice2-btn').disabled = false;
@@ -1282,6 +3747,12 @@
         // Practice mode toggle (Quiet/With Noise)
         document.getElementById('quiet-mode').addEventListener('click', () => {
             practiceMode = 'quiet';
+            
+            // Track practice mode change
+            analytics.trackEvent('PRACTICE_MODE_CHANGED', {
+                mode: 'quiet'
+            });
+            
             // Update UI
             document.getElementById('quiet-mode').classList.add('border-blue-600', 'bg-blue-600', 'text-white');
             document.getElementById('quiet-mode').classList.remove('border-gray-300', 'text-gray-700');
@@ -1294,6 +3765,12 @@
 
         document.getElementById('noise-mode').addEventListener('click', () => {
             practiceMode = 'noise';
+            
+            // Track practice mode change
+            analytics.trackEvent('PRACTICE_MODE_CHANGED', {
+                mode: 'noise'
+            });
+            
             // Update UI
             document.getElementById('noise-mode').classList.add('border-blue-600', 'bg-blue-600', 'text-white');
             document.getElementById('noise-mode').classList.remove('border-gray-300', 'text-gray-700');
@@ -1308,7 +3785,14 @@
         document.querySelectorAll('.noise-level-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const level = e.target.getAttribute('data-noise-level');
+                const previousLevel = noiseLevel;
                 noiseLevel = level;
+                
+                // Track noise level change
+                analytics.trackEvent('NOISE_LEVEL_CHANGED', {
+                    previousLevel: previousLevel,
+                    newLevel: level
+                });
                 
                 // Update UI - remove active state from all buttons
                 document.querySelectorAll('.noise-level-btn').forEach(b => {
@@ -1334,6 +3818,968 @@
                 }
             });
         });
+
+        // Enhanced Multi-Question Story System Functions
+        
+        // Show question in unified modal
+        function showQuestion(question) {
+            console.log(`Showing question: ${question.id} - ${question.type} - ${question.difficulty}`);
+            
+            const modalContainer = document.getElementById('question-modal-container');
+            const questionTitle = document.getElementById('question-title');
+            const questionText = document.getElementById('question-text-element');
+            const choicesContainer = document.getElementById('question-choices-container');
+            const feedbackContainer = document.getElementById('question-feedback-container');
+            
+            // Reset modal to clean state
+            choicesContainer.innerHTML = '';
+            feedbackContainer.classList.add('hidden');
+            
+            // Set question title based on type and difficulty
+            const typeLabel = question.type === 'L3_IDENTIFICATION' ? 'Listening Check' : 'Think About It';
+            questionTitle.textContent = `${typeLabel} - ${question.difficulty}`;
+            
+            // Set question text
+            questionText.textContent = question.text;
+            
+            // Create choice buttons
+            question.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.textContent = choice;
+                button.className = 'w-full px-4 py-3 text-left rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition-colors';
+                button.setAttribute('data-choice-index', index);
+                
+                // Add click handler for this choice
+                button.addEventListener('click', () => {
+                    const isCorrect = index === question.correctIndex;
+                    
+                    // Disable all buttons immediately to prevent multiple clicks
+                    const allButtons = choicesContainer.querySelectorAll('button');
+                    allButtons.forEach(btn => btn.disabled = true);
+                    
+                    // Call the main answer handling logic
+                    handleQuestionAnswer(question, index, isCorrect);
+                });
+                
+                choicesContainer.appendChild(button);
+            });
+            
+            // Show the modal
+            modalContainer.classList.remove('hidden');
+            
+            // Focus first choice for accessibility
+            const firstButton = choicesContainer.querySelector('button');
+            if (firstButton) firstButton.focus();
+        }
+        
+        // Show feedback in the same modal
+        function showQuestionFeedback(question, isCorrect, selectedChoiceIndex) {
+            console.log(`Showing feedback for ${question.id}: ${isCorrect ? 'Correct' : 'Incorrect'}`);
+            
+            const choicesContainer = document.getElementById('question-choices-container');
+            const feedbackContainer = document.getElementById('question-feedback-container');
+            const feedbackText = document.getElementById('feedback-text-element');
+            
+            // Apply visual feedback to buttons
+            const allButtons = choicesContainer.querySelectorAll('button');
+            allButtons.forEach((button, index) => {
+                button.disabled = true;
+                
+                if (index === question.correctIndex) {
+                    // Always highlight the correct answer in green
+                    button.classList.remove('border-gray-300');
+                    button.classList.add('border-green-500', 'bg-green-100');
+                } else if (index === selectedChoiceIndex && !isCorrect) {
+                    // If this was the user's incorrect choice, highlight it in red
+                    button.classList.remove('border-gray-300');
+                    button.classList.add('border-red-500', 'bg-red-100');
+                } else {
+                    // Gray out other non-selected, incorrect choices
+                    button.classList.add('opacity-50');
+                }
+            });
+            
+            // Set feedback text
+            const feedbackPrefix = isCorrect ? '✓ Correct! ' : '✗ Not quite. ';
+            feedbackText.textContent = feedbackPrefix + question.feedback;
+            
+            // Apply feedback styling
+            if (isCorrect) {
+                feedbackText.className = 'text-green-700 font-semibold';
+            } else {
+                feedbackText.className = 'text-red-700 font-semibold';
+            }
+            
+            // Show feedback section
+            feedbackContainer.classList.remove('hidden');
+        }
+        
+        // Hide the modal (called after feedback timeout)
+        function hideQuestionModal() {
+            const modalContainer = document.getElementById('question-modal-container');
+            modalContainer.classList.add('hidden');
+            console.log('Question modal hidden');
+        }
+        
+        // Enhanced handleQuestionAnswer with modal management and fallback logic
+        function handleQuestionAnswer(question, selectedChoiceIndex, isCorrect) {
+            console.log(`Question answered: ${question.id}, Choice: ${selectedChoiceIndex}, Correct: ${isCorrect}`);
+            
+            if (!isCorrect) {
+                incorrectAnswerCount++;
+                
+                // Check if this L4 question has a valid, unprocessed fallback to L3
+                const fallbackId = question.fallbackQuestion;
+                const fallbackKey = fallbackId ? `${currentEnhancedStory.id}-${fallbackId}` : null;
+
+                if (question.type === 'L4_COMPREHENSION' && fallbackKey && !processedQuestions.has(fallbackKey)) {
+                    const fallbackQ = findQuestionById(fallbackId);
+                    if (fallbackQ) {
+                        console.log(`Incorrect L4 answer, showing unprocessed fallback: ${fallbackId}`);
+                        
+                        // Mark the fallback as processed NOW to prevent any re-triggering
+                        processedQuestions.add(fallbackKey);
+
+                        // Show feedback for the original incorrect answer first
+                        showQuestionFeedback(question, false, selectedChoiceIndex);
+                        
+                        // After feedback display time, show the fallback question
+                        setTimeout(() => {
+                            showQuestion(fallbackQ);
+                        }, 2500);
+                        return; // Don't resume audio or run further logic in this call
+                    }
+                }
+                
+                // Check if we need to offer caption help (after 3 incorrect answers)
+                if (incorrectAnswerCount >= 3) {
+                    offerCaptionHelp();
+                }
+            }
+            
+            // Show feedback for the current question (original or fallback)
+            showQuestionFeedback(question, isCorrect, selectedChoiceIndex);
+            
+            // Update progress tracking for enhanced stories
+            if (currentActivityType === 'enhanced-stories' && isCorrect) {
+                score++;
+                document.getElementById('current-score').textContent = score;
+            }
+            
+            // Update questions answered count and progress bar
+            if (currentActivityType === 'enhanced-stories') {
+                const totalQuestions = currentEnhancedStory.questions.length;
+                const questionsAnswered = processedQuestions.size;
+                document.getElementById('current-question').textContent = questionsAnswered;
+                document.getElementById('progress-bar').style.width = `${(questionsAnswered / totalQuestions) * 100}%`;
+            }
+            
+            // Hide modal and resume audio after feedback time
+            setTimeout(() => {
+                hideQuestionModal();
+                resumeStoryPlayback();
+            }, 2500);
+        }
+        
+        // Find question by ID (utility function)
+        function findQuestionById(questionId) {
+            return currentEnhancedStory ? currentEnhancedStory.questions.find(q => q.id === questionId) : null;
+        }
+        
+        // Play story with enhanced multi-question system
+        function playStoryWithQuestions(story) {
+            currentEnhancedStory = story;
+            processedQuestions.clear();
+            incorrectAnswerCount = 0;
+            
+            // Get the audio player element
+            storyAudioPlayer = document.getElementById('audio-player') || currentAudio;
+            
+            // Set audio source based on selected voice  
+            const audioUrl = getAudioUrl(story.audioFiles[selectedVoice]);
+            console.log(`Loading enhanced story audio: ${audioUrl}`);
+            
+            if (storyAudioPlayer) {
+                storyAudioPlayer.src = audioUrl;
+                storyAudioPlayer.currentTime = 0;
+            } else {
+                storyAudioPlayer = new Audio(audioUrl);
+                currentAudio = storyAudioPlayer;
+            }
+            
+            console.log(`Starting enhanced story: ${story.title} with ${story.questions.length} questions`);
+            
+            // Remove any existing event listeners to prevent duplicates
+            storyAudioPlayer.removeEventListener('timeupdate', handleStoryTimeUpdate);
+            
+            // Add the timeupdate listener for question timing
+            storyAudioPlayer.addEventListener('timeupdate', handleStoryTimeUpdate);
+            
+            // Add ended listener to handle story completion
+            storyAudioPlayer.addEventListener('ended', handleStoryEnded, { once: true });
+            
+            // Start playback with noise if enabled
+            if (practiceMode === 'noise') {
+                playAudioWithNoise(storyAudioPlayer).catch(console.error);
+            } else {
+                storyAudioPlayer.play().catch(console.error);
+            }
+        }
+        
+        // Handle audio time updates to trigger questions
+        function handleStoryTimeUpdate() {
+            if (!currentEnhancedStory || !storyAudioPlayer) return;
+            
+            const currentTime = storyAudioPlayer.currentTime;
+            
+            // Check each question's timestamp
+            for (let i = 0; i < currentEnhancedStory.questions.length; i++) {
+                const question = currentEnhancedStory.questions[i];
+                const questionKey = `${currentEnhancedStory.id}-${question.id}`;
+                
+                // Check if we've reached this question's timestamp and haven't processed it yet
+                if (currentTime >= question.timestamp && !processedQuestions.has(questionKey)) {
+                    // Mark as processed immediately to prevent re-triggering
+                    processedQuestions.add(questionKey);
+                    
+                    // Pause audio and show question
+                    storyAudioPlayer.pause();
+                    if (backgroundNoiseAudio) backgroundNoiseAudio.pause();
+                    
+                    console.log(`Triggering question at ${currentTime.toFixed(1)}s: ${question.text}`);
+                    
+                    // Show the question
+                    showQuestion(question);
+                    break; // Only process one question per timeupdate
+                }
+            }
+        }
+        
+        // Resume story playback after question
+        function resumeStoryPlayback() {
+            if (storyAudioPlayer && currentEnhancedStory) {
+                console.log('Resuming enhanced story playback');
+                if (practiceMode === 'noise') {
+                    playAudioWithNoise(storyAudioPlayer).catch(console.error);
+                } else {
+                    storyAudioPlayer.play().catch(console.error);
+                }
+            }
+        }
+        
+        // Handle story completion
+        function handleStoryEnded() {
+            console.log(`Enhanced story completed: ${currentEnhancedStory.title}`);
+            console.log(`Questions answered: ${processedQuestions.size}/${currentEnhancedStory.questions.length}`);
+            console.log(`Incorrect answers: ${incorrectAnswerCount}`);
+            
+            // Show the app's built-in completion screen
+            setTimeout(() => {
+                showCompletionScreen();
+            }, 1000);
+            
+            // Clean up
+            storyAudioPlayer.removeEventListener('timeupdate', handleStoryTimeUpdate);
+            currentEnhancedStory = null;
+            processedQuestions.clear();
+            incorrectAnswerCount = 0;
+        }
+        
+        // Caption help modal (simplified implementation)
+        function offerCaptionHelp() {
+            const currentCaptionLevel = currentEnhancedStory.currentCaptionLevel;
+            const nextLevel = getNextCaptionLevel(currentCaptionLevel);
+            
+            if (nextLevel > currentCaptionLevel) {
+                console.log(`Offering caption help: ${currentCaptionLevel}% → ${nextLevel}%`);
+                
+                const helpText = `This seems challenging! Would you like to increase captions from ${currentCaptionLevel}% to ${nextLevel}% for more support?`;
+                
+                if (confirm(helpText)) {
+                    currentEnhancedStory.currentCaptionLevel = nextLevel;
+                    console.log(`Caption level increased to ${nextLevel}%`);
+                }
+                // Reset incorrect counter after offering help
+                incorrectAnswerCount = 0;
+            }
+        }
+        
+        // Helper function to get next caption level
+        function getNextCaptionLevel(current) {
+            const levels = [25, 50, 75, 100];
+            const currentIndex = levels.indexOf(current);
+            return currentIndex < levels.length - 1 ? levels[currentIndex + 1] : current;
+        }
+        
+        // Story completion summary
+        function showStoryCompletionSummary() {
+            const totalQuestionsInStory = currentEnhancedStory.questions.length;
+            const questionsPresented = processedQuestions.size;
+            
+            // Guard against division by zero and calculate accuracy on attempted questions
+            let accuracy = 0;
+            if (questionsPresented > 0) {
+                const correctAnswers = questionsPresented - incorrectAnswerCount;
+                accuracy = Math.round((correctAnswers / questionsPresented) * 100);
+            }
+
+            const summaryText = `Enhanced Story Complete!\n\nQuestions Presented: ${questionsPresented} / ${totalQuestionsInStory}\nAccuracy: ${accuracy}%\n\nGreat listening work!`;
+            
+            alert(summaryText);
+        }
+
+        // Start enhanced multi-question story experience
+        function startEnhancedStory() {
+            console.log('Starting Enhanced Story Experience');
+            
+            // Set up the enhanced story mode
+            currentActivityType = 'enhanced-stories';
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            document.getElementById('exercise-title').textContent = enhancedStoryPOC.title;
+            document.getElementById('level-selection-screen').classList.add('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            document.getElementById('app-content').classList.remove('hidden');
+            
+            // Hide regular choice interface and story interface
+            document.getElementById('choice-container').classList.add('hidden');
+            document.getElementById('keyword-question-container').classList.add('hidden');
+            document.getElementById('story-interface').classList.add('hidden');
+            
+            // Reset UI state
+            document.getElementById('feedback-message').className = 'mt-6 text-xl font-semibold h-8';
+            document.getElementById('play-sound-btn').disabled = false;
+            
+            // Set up progress tracking for enhanced story (show questions answered)
+            const totalQuestions = enhancedStoryPOC.questions.length;
+            document.getElementById('current-question').textContent = '0';
+            document.getElementById('total-questions').textContent = totalQuestions;
+            document.getElementById('current-score').textContent = '0';
+            document.getElementById('progress-bar').style.width = '0%';
+            
+            // Load background noise if needed
+            if (practiceMode === 'noise') {
+                loadBackgroundNoise(noiseLevel).then(() => {
+                    console.log('Background noise loaded for enhanced story');
+                    playStoryWithQuestions(enhancedStoryPOC);
+                }).catch(console.error);
+            } else {
+                // Start enhanced story immediately
+                playStoryWithQuestions(enhancedStoryPOC);
+            }
+        }
+
+        // Weekly Goals Settings Modal
+        function showWeeklyGoalsSettings() {
+            const currentProgress = gamification.getWeeklyProgress();
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Weekly Goal Settings</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Goal Type</label>
+                            <select id="goal-type-select" class="w-full p-2 border border-gray-300 rounded-lg">
+                                <option value="days" ${currentProgress.goalType === 'days' ? 'selected' : ''}>Practice Days per Week</option>
+                                <option value="minutes" ${currentProgress.goalType === 'minutes' ? 'selected' : ''}>Total Minutes per Week</option>
+                                <option value="sessions" ${currentProgress.goalType === 'sessions' ? 'selected' : ''}>Sessions per Week</option>
+                            </select>
+                        </div>
+                        
+                        <div id="days-goal" ${currentProgress.goalType !== 'days' ? 'style="display:none"' : ''}>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Days per Week</label>
+                            <input type="range" id="days-slider" min="1" max="7" value="${currentProgress.target.days}" class="w-full">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <span>1 day</span>
+                                <span id="days-value">${currentProgress.target.days} days</span>
+                                <span>7 days</span>
+                            </div>
+                        </div>
+                        
+                        <div id="minutes-goal" ${currentProgress.goalType !== 'minutes' ? 'style="display:none"' : ''}>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Minutes per Week</label>
+                            <input type="range" id="minutes-slider" min="30" max="300" step="10" value="${currentProgress.target.minutes}" class="w-full">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <span>30 min</span>
+                                <span id="minutes-value">${currentProgress.target.minutes} minutes</span>
+                                <span>300 min</span>
+                            </div>
+                        </div>
+                        
+                        <div id="sessions-goal" ${currentProgress.goalType !== 'sessions' ? 'style="display:none"' : ''}>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sessions per Week</label>
+                            <input type="range" id="sessions-slider" min="1" max="21" value="${currentProgress.target.sessions}" class="w-full">
+                            <div class="flex justify-between text-sm text-gray-500">
+                                <span>1 session</span>
+                                <span id="sessions-value">${currentProgress.target.sessions} sessions</span>
+                                <span>21 sessions</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex gap-3">
+                            <button id="save-goals" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                Save Changes
+                            </button>
+                            <button onclick="this.parentElement.parentElement.parentElement.parentElement.remove()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add event listeners
+            const goalTypeSelect = modal.querySelector('#goal-type-select');
+            const daysSlider = modal.querySelector('#days-slider');
+            const minutesSlider = modal.querySelector('#minutes-slider');
+            const sessionsSlider = modal.querySelector('#sessions-slider');
+            
+            goalTypeSelect.addEventListener('change', () => {
+                modal.querySelector('#days-goal').style.display = goalTypeSelect.value === 'days' ? 'block' : 'none';
+                modal.querySelector('#minutes-goal').style.display = goalTypeSelect.value === 'minutes' ? 'block' : 'none';
+                modal.querySelector('#sessions-goal').style.display = goalTypeSelect.value === 'sessions' ? 'block' : 'none';
+            });
+            
+            daysSlider.addEventListener('input', () => {
+                modal.querySelector('#days-value').textContent = daysSlider.value + ' days';
+            });
+            
+            minutesSlider.addEventListener('input', () => {
+                modal.querySelector('#minutes-value').textContent = minutesSlider.value + ' minutes';
+            });
+            
+            sessionsSlider.addEventListener('input', () => {
+                modal.querySelector('#sessions-value').textContent = sessionsSlider.value + ' sessions';
+            });
+            
+            modal.querySelector('#save-goals').addEventListener('click', () => {
+                const goalType = goalTypeSelect.value;
+                let targetValue;
+                
+                if (goalType === 'days') {
+                    targetValue = parseInt(daysSlider.value);
+                } else if (goalType === 'minutes') {
+                    targetValue = parseInt(minutesSlider.value);
+                } else {
+                    targetValue = parseInt(sessionsSlider.value);
+                }
+                
+                gamification.setWeeklyGoal(goalType, targetValue);
+                updateWeeklyProgressDisplay();
+                modal.remove();
+                
+                // Show confirmation
+                showConfirmation('Weekly goal updated! Your new goal will take effect immediately.');
+            });
+        }
+        
+        function showConfirmation(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
+        // CI Rings UI Functions
+        function updateCIRingsDisplay() {
+            const rings = gamification.getRingsStatus();
+            const strainFeedback = gamification.getListeningStrainFeedback();
+            
+            // Update ring progress
+            updateRingProgress('consistency-ring-progress', rings.consistency.progress);
+            updateRingProgress('clarity-ring-progress', rings.clarity.progress);
+            updateRingProgress('challenge-ring-progress', rings.challenge.progress);
+            
+            // Update goals display
+            document.getElementById('consistency-goal').textContent = `${Math.round(rings.consistency.current)}/${rings.consistency.goal} min`;
+            document.getElementById('clarity-goal').textContent = `${Math.round(rings.clarity.current * 100)}/${rings.clarity.goal * 100}%`;
+            document.getElementById('challenge-goal').textContent = `${Math.round(rings.challenge.current)}/${rings.challenge.goal}`;
+            
+            // Update strain feedback
+            if (strainFeedback) {
+                const strainElement = document.getElementById('strain-feedback');
+                if (strainElement) {
+                    strainElement.innerHTML = `
+                        <div class="text-sm">
+                            <span class="font-medium">${strainFeedback.level}:</span>
+                            <span class="text-gray-600">${strainFeedback.message}</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Update weekly goals display
+            updateWeeklyProgressDisplay();
+        }
+
+        function updateRingProgress(ringId, progress) {
+            const ring = document.getElementById(ringId);
+            if (ring) {
+                const circumference = 2 * Math.PI * 15.91549430918954; // radius of 15.91549430918954 gives circumference of 100
+                const strokeDasharray = `${progress * 100}, 100`;
+                ring.style.strokeDasharray = strokeDasharray;
+            }
+        }
+
+        function updateWeeklyProgressDisplay() {
+            const weeklyProgress = gamification.getWeeklyProgress();
+            
+            // Update weekly goal text
+            const goalTypes = {
+                'days': `Practice ${weeklyProgress.target.days} days this week`,
+                'minutes': `Practice ${weeklyProgress.target.minutes} minutes this week`,
+                'sessions': `Complete ${weeklyProgress.target.sessions} sessions this week`
+            };
+            
+            document.getElementById('weekly-goal-text').textContent = goalTypes[weeklyProgress.goalType] || goalTypes['days'];
+            
+            // Update progress text
+            const progressTexts = {
+                'days': `${weeklyProgress.current.days} of ${weeklyProgress.target.days} days completed`,
+                'minutes': `${weeklyProgress.current.minutes} of ${weeklyProgress.target.minutes} minutes completed`,
+                'sessions': `${weeklyProgress.current.sessions} of ${weeklyProgress.target.sessions} sessions completed`
+            };
+            
+            document.getElementById('weekly-progress-text').textContent = progressTexts[weeklyProgress.goalType] || progressTexts['days'];
+            
+            // Update streak display
+            const streakDisplay = document.getElementById('weekly-streak-display');
+            if (weeklyProgress.weeklyStreak > 0) {
+                streakDisplay.textContent = `🔥 ${weeklyProgress.weeklyStreak} week streak`;
+                streakDisplay.style.display = 'block';
+            } else {
+                streakDisplay.style.display = 'none';
+            }
+            
+            // Update streak freezes
+            document.getElementById('streak-freezes-count').textContent = `🛡️ ${weeklyProgress.streakFreezes} available`;
+            
+            // Update weekly progress dots
+            const weeklyData = gamification.analytics.data.gamification.weeklyGoals;
+            const today = new Date();
+            const weekStart = new Date(weeklyData.currentWeekStart);
+            const dots = document.querySelectorAll('#weekly-progress-dots > div');
+            
+            dots.forEach((dot, index) => {
+                const dayDate = new Date(weekStart);
+                dayDate.setDate(weekStart.getDate() + index);
+                const dayString = dayDate.toISOString().substring(0, 10);
+                
+                if (weeklyData.currentWeekCompletedDays.includes(dayString)) {
+                    dot.className = 'w-4 h-4 rounded-full bg-green-500';
+                } else if (dayDate.toDateString() === today.toDateString()) {
+                    dot.className = 'w-4 h-4 rounded-full bg-blue-400'; // Today
+                } else {
+                    dot.className = 'w-4 h-4 rounded-full bg-gray-200';
+                }
+            });
+        }
+
+        // CI Rings UI Functions
+        function updateCIRingsDisplay() {
+            if (!gamification) return;
+            
+            const rings = gamification.getRingsStatus();
+            const strainFeedback = gamification.getListeningStrainFeedback();
+            
+            // Update ring progress
+            updateRingProgress('consistency', rings.consistency.progress);
+            updateRingProgress('clarity', rings.clarity.progress);
+            updateRingProgress('challenge', rings.challenge.progress);
+            
+            // Update ring labels
+            document.getElementById('consistency-label').textContent = 
+                `${Math.round(rings.consistency.current)}/${rings.consistency.goal} min`;
+            document.getElementById('clarity-label').textContent = 
+                `${Math.round(rings.clarity.current * 100)}%`;
+            document.getElementById('challenge-label').textContent = 
+                `${rings.challenge.current}/${rings.challenge.goal}`;
+            
+            // Update strain feedback
+            const strainElement = document.getElementById('strain-feedback');
+            if (strainElement && strainFeedback) {
+                strainElement.textContent = strainFeedback.message;
+                strainElement.className = `text-sm ${strainFeedback.color}`;
+            }
+            
+            // Update weekly progress
+            updateWeeklyProgressDisplay();
+        }
+
+        function updateRingProgress(ringType, progress) {
+            const progressElement = document.getElementById(`${ringType}-ring-progress`);
+            if (progressElement) {
+                const circumference = 2 * Math.PI * 15; // radius = 15
+                const strokeDasharray = `${progress * circumference}, ${circumference}`;
+                progressElement.style.strokeDasharray = strokeDasharray;
+            }
+        }
+
+        function updateWeeklyProgressDisplay() {
+            if (!gamification) return;
+            
+            const weeklyGoals = gamification.getWeeklyGoalsStatus();
+            const goalsContainer = document.getElementById('weekly-goals-display');
+            
+            if (!goalsContainer) return;
+            
+            goalsContainer.innerHTML = '';
+            
+            weeklyGoals.forEach(goal => {
+                const goalElement = document.createElement('div');
+                goalElement.className = 'flex justify-between items-center p-2 border rounded';
+                
+                const progressPercent = Math.round((goal.current / goal.target) * 100);
+                const statusIcon = goal.completed ? '✅' : progressPercent >= 80 ? '🔥' : '📈';
+                
+                goalElement.innerHTML = `
+                    <span class="text-sm font-medium">${goal.type}</span>
+                    <span class="text-xs text-gray-600">${goal.current}/${goal.target} ${statusIcon}</span>
+                `;
+                
+                goalsContainer.appendChild(goalElement);
+            });
+        }
+
+        // Sound Garden UI Functions
+        function updateSoundGardenDisplay() {
+            if (!gamification) return;
+            
+            const gardenState = gamification.getSoundGardenState();
+            if (!gardenState) return;
+            
+            // Update garden status
+            document.getElementById('garden-water-reserve').textContent = `💧 ${gardenState.waterReserve} drops`;
+            document.getElementById('garden-plants-count').textContent = `🌱 ${gardenState.plants.length} plants`;
+            document.getElementById('garden-season').textContent = getSeasonEmoji(gardenState.seasonTheme);
+            document.getElementById('garden-tree-level').textContent = `🌳 Level ${gardenState.centralTree.level}`;
+            document.getElementById('daily-butterflies').textContent = `🦋 ${gardenState.butterflies.length} today`;
+            
+            // Update central tree
+            updateCentralTree(gardenState.centralTree);
+            
+            // Render plants
+            renderPlants(gardenState.plants);
+            
+            // Render butterflies
+            renderButterflies(gardenState.butterflies);
+        }
+
+        function getSeasonEmoji(season) {
+            const seasonEmojis = {
+                'spring': '🌸 Spring',
+                'summer': '☀️ Summer', 
+                'autumn': '🍂 Autumn',
+                'winter': '❄️ Winter'
+            };
+            return seasonEmojis[season] || '🌸 Spring';
+        }
+
+        function updateCentralTree(tree) {
+            const treeElement = document.getElementById('central-tree');
+            const baseRadius = 15;
+            const leafRadius = baseRadius + (tree.level * 3);
+            
+            // Update tree size based on level
+            const leafCircle = treeElement.querySelector('circle:last-child');
+            leafCircle.setAttribute('r', leafRadius);
+            
+            // Add more foliage for higher levels
+            if (tree.level > 1) {
+                // Check if additional foliage exists
+                let additionalFoliage = treeElement.querySelectorAll('.additional-foliage');
+                if (additionalFoliage.length === 0) {
+                    // Add additional leaf clusters
+                    for (let i = 1; i < tree.level; i++) {
+                        const foliage = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        foliage.setAttribute('cx', 300 + (i % 2 ? 10 : -10));
+                        foliage.setAttribute('cy', 170 - (i * 5));
+                        foliage.setAttribute('r', 12);
+                        foliage.setAttribute('fill', '#32CD32');
+                        foliage.setAttribute('opacity', '0.7');
+                        foliage.classList.add('additional-foliage');
+                        treeElement.appendChild(foliage);
+                    }
+                }
+            }
+        }
+
+        function renderPlants(plants) {
+            const plantsContainer = document.getElementById('plants-container');
+            plantsContainer.innerHTML = '';
+            
+            plants.forEach(plant => {
+                const placement = getPlantPlacement(plant.placementId);
+                if (!placement) return;
+                
+                const plantGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                plantGroup.setAttribute('id', `plant-${plant.id}`);
+                plantGroup.setAttribute('transform', `translate(${placement.x}, ${placement.y})`);
+                plantGroup.classList.add('plant-group', 'transition-all', 'duration-500');
+                
+                // Create plant visual based on growth stage and type
+                const plantVisual = createPlantVisual(plant);
+                plantGroup.appendChild(plantVisual);
+                
+                // Add growth progress indicator
+                if (plant.growthStage < 4) {
+                    const progressRing = createProgressRing(plant.progress);
+                    plantGroup.appendChild(progressRing);
+                }
+                
+                plantsContainer.appendChild(plantGroup);
+            });
+        }
+
+        function getPlantPlacement(placementId) {
+            // Generate placement coordinates based on grid pattern
+            const [row, col] = placementId.split('-').map(Number);
+            return {
+                x: 100 + (col * 120),
+                y: 220 + (row * 30)
+            };
+        }
+
+        function createPlantVisual(plant) {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            const stage = plant.growthStage;
+            
+            // Plant stem
+            if (stage > 0) {
+                const stem = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                stem.setAttribute('x1', '0');
+                stem.setAttribute('y1', '0');
+                stem.setAttribute('x2', '0');
+                stem.setAttribute('y2', stage * -8);
+                stem.setAttribute('stroke', '#228B22');
+                stem.setAttribute('stroke-width', '2');
+                group.appendChild(stem);
+            }
+            
+            // Plant growth stages
+            switch (stage) {
+                case 0: // Seed
+                    const seed = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    seed.setAttribute('cx', '0');
+                    seed.setAttribute('cy', '0');
+                    seed.setAttribute('r', '3');
+                    seed.setAttribute('fill', '#8B4513');
+                    group.appendChild(seed);
+                    break;
+                    
+                case 1: // Sprout  
+                    const leaf1 = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                    leaf1.setAttribute('cx', '-3');
+                    leaf1.setAttribute('cy', '-6');
+                    leaf1.setAttribute('rx', '3');
+                    leaf1.setAttribute('ry', '2');
+                    leaf1.setAttribute('fill', '#90EE90');
+                    group.appendChild(leaf1);
+                    break;
+                    
+                case 2: // Budding
+                    const leaf2 = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                    leaf2.setAttribute('cx', '3');
+                    leaf2.setAttribute('cy', '-12');
+                    leaf2.setAttribute('rx', '4');
+                    leaf2.setAttribute('ry', '3');
+                    leaf2.setAttribute('fill', '#32CD32');
+                    group.appendChild(leaf2);
+                    
+                    const bud = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    bud.setAttribute('cx', '0');
+                    bud.setAttribute('cy', '-16');
+                    bud.setAttribute('r', '2');
+                    bud.setAttribute('fill', getPlantColor(plant.type));
+                    group.appendChild(bud);
+                    break;
+                    
+                case 3: // Blooming
+                case 4: // Mature
+                    // Multiple leaves
+                    for (let i = 0; i < 3; i++) {
+                        const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                        leaf.setAttribute('cx', (i - 1) * 4);
+                        leaf.setAttribute('cy', -8 - (i * 3));
+                        leaf.setAttribute('rx', '4');
+                        leaf.setAttribute('ry', '3');
+                        leaf.setAttribute('fill', '#228B22');
+                        group.appendChild(leaf);
+                    }
+                    
+                    // Flower
+                    const flower = createFlower(plant.type);
+                    flower.setAttribute('transform', 'translate(0, -20)');
+                    group.appendChild(flower);
+                    break;
+            }
+            
+            return group;
+        }
+
+        function getPlantColor(plantType) {
+            const colors = {
+                'sound_flower': '#FF69B4',
+                'clarity_clover': '#98FB98', 
+                'pitch_tulip': '#FFB6C1',
+                'melody_rose': '#FF1493',
+                'harmony_lily': '#DDA0DD',
+                'rhythm_daisy': '#FFFF00'
+            };
+            return colors[plantType] || '#FF69B4';
+        }
+
+        function createFlower(plantType) {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            const color = getPlantColor(plantType);
+            
+            // Simple flower - 5 petals
+            for (let i = 0; i < 5; i++) {
+                const angle = (i * 72) * Math.PI / 180;
+                const petal = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+                petal.setAttribute('cx', Math.cos(angle) * 6);
+                petal.setAttribute('cy', Math.sin(angle) * 6);
+                petal.setAttribute('rx', '4');
+                petal.setAttribute('ry', '2');
+                petal.setAttribute('fill', color);
+                petal.setAttribute('transform', `rotate(${i * 72} ${Math.cos(angle) * 6} ${Math.sin(angle) * 6})`);
+                group.appendChild(petal);
+            }
+            
+            // Flower center
+            const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            center.setAttribute('cx', '0');
+            center.setAttribute('cy', '0');
+            center.setAttribute('r', '3');
+            center.setAttribute('fill', '#FFD700');
+            group.appendChild(center);
+            
+            return group;
+        }
+
+        function createProgressRing(progress) {
+            const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            ring.setAttribute('cx', '0');
+            ring.setAttribute('cy', '0');
+            ring.setAttribute('r', '12');
+            ring.setAttribute('fill', 'none');
+            ring.setAttribute('stroke', '#E0E0E0');
+            ring.setAttribute('stroke-width', '2');
+            
+            const progressRing = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            progressRing.setAttribute('cx', '0');
+            progressRing.setAttribute('cy', '0');
+            progressRing.setAttribute('r', '12');
+            progressRing.setAttribute('fill', 'none');
+            progressRing.setAttribute('stroke', '#4CAF50');
+            progressRing.setAttribute('stroke-width', '2');
+            
+            const circumference = 2 * Math.PI * 12;
+            const strokeDasharray = `${progress * circumference}, ${circumference}`;
+            progressRing.setAttribute('stroke-dasharray', strokeDasharray);
+            
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            group.appendChild(ring);
+            group.appendChild(progressRing);
+            
+            return group;
+        }
+
+        function renderButterflies(butterflies) {
+            const butterfliesContainer = document.getElementById('butterflies-container');
+            butterfliesContainer.innerHTML = '';
+            
+            butterflies.forEach((butterfly, index) => {
+                const butterflyElement = createButterfly(butterfly.type);
+                butterflyElement.setAttribute('transform', `translate(${150 + index * 80}, ${120 + Math.sin(index) * 20})`);
+                butterflyElement.classList.add('animate-pulse');
+                butterfliesContainer.appendChild(butterflyElement);
+            });
+        }
+
+        function createButterfly(type) {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            
+            const colors = {
+                'blue': '#4169E1',
+                'yellow': '#FFD700',
+                'orange': '#FF8C00',
+                'firefly': '#FFFF00'
+            };
+            
+            const color = colors[type] || '#4169E1';
+            
+            // Simple butterfly shape
+            const wing1 = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+            wing1.setAttribute('cx', '-3');
+            wing1.setAttribute('cy', '-2');
+            wing1.setAttribute('rx', '4');
+            wing1.setAttribute('ry', '2');
+            wing1.setAttribute('fill', color);
+            wing1.setAttribute('opacity', type === 'firefly' ? '0.8' : '0.6');
+            
+            const wing2 = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+            wing2.setAttribute('cx', '3');
+            wing2.setAttribute('cy', '-2');
+            wing2.setAttribute('rx', '4');
+            wing2.setAttribute('ry', '2');
+            wing2.setAttribute('fill', color);
+            wing2.setAttribute('opacity', type === 'firefly' ? '0.8' : '0.6');
+            
+            const body = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            body.setAttribute('x1', '0');
+            body.setAttribute('y1', '-4');
+            body.setAttribute('x2', '0');
+            body.setAttribute('y2', '2');
+            body.setAttribute('stroke', '#8B4513');
+            body.setAttribute('stroke-width', '1');
+            
+            group.appendChild(wing1);
+            group.appendChild(wing2);
+            group.appendChild(body);
+            
+            return group;
+        }
+
+        // Tend Garden Button Handler
+        document.getElementById('tend-garden-btn').addEventListener('click', function() {
+            if (!gamification) return;
+            
+            const dailyStats = {
+                practiceTime: 15, // Mock daily practice time
+                ringsCompleted: 2  // Mock rings completed
+            };
+            
+            gamification.updateSoundGarden(dailyStats);
+            updateSoundGardenDisplay();
+            
+            // Show watering animation
+            showWateringAnimation();
+        });
+
+        function showWateringAnimation() {
+            const button = document.getElementById('tend-garden-btn');
+            const originalText = button.textContent;
+            
+            button.textContent = '💧 Watering...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 1500);
+        }
 
         // Initialize
         loadAllData();

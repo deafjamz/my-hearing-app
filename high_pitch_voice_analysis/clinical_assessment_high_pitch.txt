@@ -1,0 +1,27 @@
+================================================================================
+CLINICAL VOICE ANALYSIS REPORT - COCHLEAR IMPLANT OPTIMIZATION
+================================================================================
+
+EXECUTIVE SUMMARY:
+• Total voices analyzed: 8
+• Male voices: 0
+• Female voices: 1
+
+F0 ANALYSIS FOR COCHLEAR IMPLANT USERS:
+(Optimal ranges: Male 85-180Hz, Female 165-265Hz)
+
+FEMALE VOICES:
+  CURRENT_FEMALE:
+    F0: 146.2Hz (Range: 157.7Hz)
+    Voice Quality: Jitter=0.0082, Shimmer=0.0782
+    HNR: 13.52dB, Voiced: 0.738
+    CI Suitability: Suboptimal F0, Good Quality
+
+CLINICAL RECOMMENDATIONS:
+• Recommended female voice: current_female (F0: 146.2Hz)
+
+METHODOLOGY:
+• Analysis based on Rainbow Passage clinical standard
+• Praat analysis with CI-optimized parameters
+• F0 ranges optimized for cochlear implant pitch discrimination
+• Voice quality assessed via jitter (PPQ5) and shimmer (APQ11)

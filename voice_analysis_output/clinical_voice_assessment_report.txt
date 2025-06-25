@@ -1,0 +1,65 @@
+================================================================================
+CLINICAL VOICE ANALYSIS REPORT - COCHLEAR IMPLANT OPTIMIZATION
+================================================================================
+
+EXECUTIVE SUMMARY:
+• Total voices analyzed: 7
+• Male voices: 3
+• Female voices: 4
+
+F0 ANALYSIS FOR COCHLEAR IMPLANT USERS:
+(Optimal ranges: Male 85-180Hz, Female 165-265Hz)
+
+MALE VOICES:
+  CURRENT_MALE:
+    F0: 118.4Hz (Range: 156.3Hz)
+    Voice Quality: Jitter=0.0119, Shimmer=0.0799
+    HNR: 7.42dB, Voiced: 0.722
+    CI Suitability: Excellent F0, Good Quality
+
+  MALE_DEEP:
+    F0: 144.4Hz (Range: 132.3Hz)
+    Voice Quality: Jitter=0.0122, Shimmer=0.1070
+    HNR: 10.04dB, Voiced: 0.677
+    CI Suitability: Excellent F0, Fair Quality
+
+  MALE_NARRATOR:
+    F0: 155.8Hz (Range: 123.8Hz)
+    Voice Quality: Jitter=0.0076, Shimmer=0.0800
+    HNR: 10.50dB, Voiced: 0.631
+    CI Suitability: Excellent F0, Fair Quality
+
+FEMALE VOICES:
+  CURRENT_FEMALE:
+    F0: 147.4Hz (Range: 154.3Hz)
+    Voice Quality: Jitter=0.0101, Shimmer=0.0821
+    HNR: 12.97dB, Voiced: 0.726
+    CI Suitability: Suboptimal F0, Fair Quality
+
+  FEMALE_WARM:
+    F0: 142.2Hz (Range: 132.9Hz)
+    Voice Quality: Jitter=0.0096, Shimmer=0.1012
+    HNR: 11.22dB, Voiced: 0.624
+    CI Suitability: Suboptimal F0, Fair Quality
+
+  FEMALE_CLEAR:
+    F0: 143.7Hz (Range: 141.7Hz)
+    Voice Quality: Jitter=0.0115, Shimmer=0.0797
+    HNR: 11.22dB, Voiced: 0.657
+    CI Suitability: Suboptimal F0, Good Quality
+
+  FEMALE_YOUNG:
+    F0: 137.2Hz (Range: 133.4Hz)
+    Voice Quality: Jitter=0.0089, Shimmer=0.0854
+    HNR: 14.75dB, Voiced: 0.576
+    CI Suitability: Suboptimal F0, Fair Quality
+
+CLINICAL RECOMMENDATIONS:
+• Recommended male voice: current_male (F0: 118.4Hz)
+• Recommended female voice: female_clear (F0: 143.7Hz)
+
+METHODOLOGY:
+• Analysis based on Rainbow Passage clinical standard
+• Praat analysis with CI-optimized parameters
+• F0 ranges optimized for cochlear implant pitch discrimination
+• Voice quality assessed via jitter (PPQ5) and shimmer (APQ11)

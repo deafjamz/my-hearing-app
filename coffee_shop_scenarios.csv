@@ -1,0 +1,10 @@
+Text,Filename,Level,Interaction_ID,Clinical_Focus,Speaker,Duration_Seconds
+"What can I get for you?",scenarios_coffee_basic_greeting.mp3,1,INT_COFFEE_1_1,social_greeting,female_barista,3
+"That'll be four dollars and fifty cents.",scenarios_coffee_price_simple.mp3,1,INT_COFFEE_1_2,number_identification,male_barista,4
+"So that's one large coffee for you.",scenarios_coffee_confirmation_simple.mp3,1,INT_COFFEE_1_3,order_confirmation,female_barista,3
+"What size would you like? We have small, medium, and large.",scenarios_coffee_size_options.mp3,2,INT_COFFEE_2_1,list_comprehension,male_barista,5
+"For milk, we have whole milk and oat milk available today.",scenarios_coffee_milk_options.mp3,2,INT_COFFEE_2_2,negative_identification,female_barista,6
+"Would you like that for here or to go?",scenarios_coffee_for_here_or_to_go.mp3,2,INT_COFFEE_2_3,common_questions,male_barista,4
+"Alright, so that's a large iced coffee with oat milk and an extra shot.",scenarios_coffee_complex_order.mp3,3,INT_COFFEE_3_1,complex_order_tracking,female_barista,8
+"Your total comes to six dollars and forty-seven cents with tax.",scenarios_coffee_total_with_tax.mp3,3,INT_COFFEE_3_2,precise_numbers,male_barista,5
+"It'll be about five minutes for that because we're making a fresh batch right now.",scenarios_coffee_wait_time_explanation.mp3,3,INT_COFFEE_3_3,time_and_reasoning,female_barista,7
