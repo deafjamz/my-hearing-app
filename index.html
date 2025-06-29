@@ -3357,8 +3357,9 @@
             currentAudio = new Audio(audioUrl);
             currentAudio.onerror = (e) => {
                 console.error("Story audio loading error:", audioUrl, e);
-                document.getElementById('feedback-message').textContent = `Error loading story audio.`;
+                document.getElementById('feedback-message').textContent = `Story audio not available. You can still read the story and answer questions.`;
                 document.getElementById('play-sound-btn').disabled = true;
+                document.getElementById('play-sound-btn').textContent = 'Audio Unavailable';
             };
             
             // Update progress
@@ -3414,8 +3415,9 @@
             currentAudio = new Audio(audioUrl);
             currentAudio.onerror = (e) => {
                 console.error("Audio loading error:", audioUrl, e);
-                document.getElementById('feedback-message').textContent = `Error loading audio.`;
+                document.getElementById('feedback-message').textContent = `Audio file not available. You can still read the text and select your answer.`;
                 document.getElementById('play-sound-btn').disabled = true;
+                document.getElementById('play-sound-btn').textContent = 'Audio Unavailable';
             };
 
             document.getElementById('total-questions').textContent = currentLevelData.length;
@@ -4395,11 +4397,11 @@
             updateRingProgress('challenge', rings.challenge.progress);
             
             // Update ring labels
-            document.getElementById('consistency-label').textContent = 
+            document.getElementById('consistency-goal').textContent = 
                 `${Math.round(rings.consistency.current)}/${rings.consistency.goal} min`;
-            document.getElementById('clarity-label').textContent = 
+            document.getElementById('clarity-goal').textContent = 
                 `${Math.round(rings.clarity.current * 100)}%`;
-            document.getElementById('challenge-label').textContent = 
+            document.getElementById('challenge-goal').textContent = 
                 `${rings.challenge.current}/${rings.challenge.goal}`;
             
             // Update strain feedback
