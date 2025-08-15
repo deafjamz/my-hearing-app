@@ -755,10 +755,10 @@
             id: "story-compass-enhanced",
             title: "The Lost Compass",
             audioFiles: {
-                david: "story_audio/compass_david.mp3",
-                marcus: "story_audio/compass_marcus.mp3", 
-                sarah: "story_audio/compass_sarah.mp3",
-                emma: "story_audio/compass_emma.mp3"
+                david: "male_audio/story_compass_north.mp3",
+                marcus: "male_audio/story_compass_north.mp3", 
+                sarah: "female_audio/story_compass_north.mp3",
+                emma: "female_audio/story_compass_north.mp3"
             },
             fullText: "Sarah was an experienced hiker who loved exploring mountain trails. On this sunny Tuesday morning, she packed her backpack carefully with water, snacks, and her trusted compass. She had been hiking for about two hours when she stopped for a break beside a crystal-clear stream. As she reached for her compass to check her direction, her heart sank. The compass was gone! It must have fallen out somewhere along the trail. Sarah took a deep breath and remembered her training: stay calm, think clearly, and use what you know. She looked at the sun's position and remembered it was still morning, so the sun was in the east. She could see moss growing on the north side of the nearby trees. Using these natural clues, Sarah figured out which direction would lead her back to the trailhead. She walked slowly and carefully, marking her path with small stone cairns. After thirty minutes of careful navigation, she spotted something glinting in the sunlight. There was her compass, lying beside the trail where she had stopped earlier to take a photograph! Sarah smiled as she picked up her compass and continued on her hike, grateful for the natural navigation skills that had helped her find her way.",
             duration: 142,
@@ -2594,8 +2594,12 @@
         // Exercise timing tracking
         let exerciseStartTimestamp = null;
 
+        // GitHub repository configuration for audio files
+        const GITHUB_USERNAME = 'deafjamz';
+        const GITHUB_REPO_NAME = 'hearing-rehab-audio';
+
         function getAudioUrl(filename) {
-            return `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${filename}`;
+            return `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/main/${filename}`;
         }
 
         function stopCurrentAudio() {
@@ -3297,8 +3301,16 @@
         }
         
         function loadScenarioAudio(interaction) {
+            // Voice folder mapping to match repository structure
+            const voiceFolderMap = {
+                'sarah': 'female_audio',
+                'emma': 'female_audio',
+                'david': 'male_audio', 
+                'marcus': 'male_audio'
+            };
+            
             // Build voice-specific audio URL
-            const audioFolder = `${selectedVoice}_audio`;
+            const audioFolder = voiceFolderMap[selectedVoice] || `${selectedVoice}_audio`;
             const primaryAudioUrl = getAudioUrl(`${audioFolder}/${interaction.primary_audio_url}`);
             
             console.log(`Loading scenario audio: ${primaryAudioUrl} (Voice: ${selectedVoice})`);
@@ -3350,8 +3362,17 @@
                 choicesContainer.appendChild(button);
             });
             
-            // Setup audio
-            const audioFolder = `${selectedVoice}_audio`;
+            // Setup audio with voice folder mapping
+            const voiceFolderMap = {
+                'sarah': 'female_audio',
+                'emma': 'female_audio',
+                'david': 'male_audio', 
+                'marcus': 'male_audio'
+            };
+            console.log('Selected voice for story:', selectedVoice, 'Type:', typeof selectedVoice);
+            console.log('Voice folder map lookup:', voiceFolderMap[selectedVoice]);
+            const audioFolder = voiceFolderMap[selectedVoice] || `${selectedVoice}_audio`;
+            console.log('Audio folder determined:', audioFolder);
             const audioUrl = getAudioUrl(`${audioFolder}/${currentStory.audioFile}`);
             
             currentAudio = new Audio(audioUrl);
@@ -3408,9 +3429,16 @@
             
             // Legacy assignment removed - correctWordForTrial no longer needed
             
-            const audioFolder = `${selectedVoice}_audio`;
+            // Voice folder mapping to match repository structure
+            const voiceFolderMap = {
+                'sarah': 'female_audio',
+                'emma': 'female_audio',
+                'david': 'male_audio', 
+                'marcus': 'male_audio'
+            };
+            const audioFolder = voiceFolderMap[selectedVoice] || `${selectedVoice}_audio`;
             const audioFileName = slugify(audioText) + '.mp3';
-            const audioUrl = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}@main/${audioFolder}/${audioFileName}`;
+            const audioUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/main/${audioFolder}/${audioFileName}`;
             
             currentAudio = new Audio(audioUrl);
             currentAudio.onerror = (e) => {
