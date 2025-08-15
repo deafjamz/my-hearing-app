@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 text-center">
+        <div id="status">Loading...</div>
+        <button id="test-btn" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">Test Audio</button>
+        <div id="results" class="mt-4 text-left text-sm"></div>
+    </div>
+    
+    <script>
+        const GITHUB_USERNAME = "deafjamz";
+        const GITHUB_REPO_NAME = "hearing-rehab-audio";
+        
+        function log(msg) {
+            document.getElementById('results').innerHTML += '<p>' + msg + '</p>';
+            console.log(msg);
+        }
+        
+        function getAudioUrl(filename) {
+            return `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO_NAME}/main/${filename}`;
+        }
+        
+        async function testAudio() {
+            log('Testing audio loading...');
+            const audioUrl = getAudioUrl('female_audio/story_fork_spoon.mp3');
+            log('Audio URL: ' + audioUrl);
+            
+            const audio = new Audio(audioUrl);
+            audio.onloadeddata = () => log('✅ Audio loaded successfully');
+            audio.onerror = (e) => log('❌ Audio failed: ' + e.message);
+        }
+        
+        async function testCSV() {
+            log('Testing CSV loading...');
+            try {
+                const response = await fetch('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Sentences');
+                const text = await response.text();
+                log('✅ CSV loaded: ' + text.length + ' characters');
+                log('First 100 chars: ' + text.substring(0, 100));
+            } catch (e) {
+                log('❌ CSV failed: ' + e.message);
+            }
+        }
+        
+        document.getElementById('test-btn').onclick = () => {
+            testAudio();
+            testCSV();
+        };
+        
+        document.getElementById('status').textContent = 'Ready to test';
+        log('Simple test page loaded - no syntax errors!');
+    </script>
+</body>
+</html>
