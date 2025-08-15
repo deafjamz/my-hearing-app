@@ -3034,7 +3034,11 @@
         }
 
         async function loadAllData() {
+            console.log('loadAllData() called - starting initialization');
+            document.getElementById('loading-status').textContent = 'Starting initialization...';
+            
             try {
+                console.log('Attempting to load exercise data from Google Sheets');
                 document.getElementById('loading-status').textContent = 'Loading exercise data...';
                 
                 const [sentencesData, keywordsData] = await Promise.all([
@@ -3048,18 +3052,37 @@
                 document.getElementById('loading-status').textContent = 'Ready!';
                 
                 setTimeout(() => {
+                    console.log('Success path: hiding loading, showing activity selection');
                     document.getElementById('loading-state').classList.add('hidden');
                     document.getElementById('activity-selection-screen').classList.remove('hidden');
                     
-                    // Initialize caption buttons
-                    setupCaptionButtons();
-                    
-                    // Initialize voice selection
-                    selectVoice('sarah');
-                    
-                    if (adminQCMode) {
-                        toggleAdminQCMode();
+                    // Initialize caption buttons safely
+                    try {
+                        setupCaptionButtons();
+                        console.log('Caption buttons initialized');
+                    } catch (e) {
+                        console.error('Caption buttons failed:', e);
                     }
+                    
+                    // Initialize voice selection safely
+                    try {
+                        selectVoice('sarah');
+                        console.log('Voice selection initialized');
+                    } catch (e) {
+                        console.error('Voice selection failed:', e);
+                    }
+                    
+                    // Admin QC mode safely
+                    try {
+                        if (adminQCMode) {
+                            toggleAdminQCMode();
+                        }
+                        console.log('Admin QC mode checked');
+                    } catch (e) {
+                        console.error('Admin QC mode failed:', e);
+                    }
+                    
+                    console.log('Initialization completed successfully');
                 }, 500);
                 
             } catch (error) {
@@ -3081,18 +3104,37 @@
                 
                 // Still show the app after a delay
                 setTimeout(() => {
+                    console.log('Fallback path: hiding loading, showing activity selection');
                     document.getElementById('loading-state').classList.add('hidden');
                     document.getElementById('activity-selection-screen').classList.remove('hidden');
                     
-                    // Initialize caption buttons
-                    setupCaptionButtons();
-                    
-                    // Initialize voice selection
-                    selectVoice('sarah');
-                    
-                    if (adminQCMode) {
-                        toggleAdminQCMode();
+                    // Initialize caption buttons safely
+                    try {
+                        setupCaptionButtons();
+                        console.log('Fallback: Caption buttons initialized');
+                    } catch (e) {
+                        console.error('Fallback: Caption buttons failed:', e);
                     }
+                    
+                    // Initialize voice selection safely
+                    try {
+                        selectVoice('sarah');
+                        console.log('Fallback: Voice selection initialized');
+                    } catch (e) {
+                        console.error('Fallback: Voice selection failed:', e);
+                    }
+                    
+                    // Admin QC mode safely
+                    try {
+                        if (adminQCMode) {
+                            toggleAdminQCMode();
+                        }
+                        console.log('Fallback: Admin QC mode checked');
+                    } catch (e) {
+                        console.error('Fallback: Admin QC mode failed:', e);
+                    }
+                    
+                    console.log('Fallback initialization completed');
                 }, 1000);
             }
         }
