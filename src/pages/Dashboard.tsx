@@ -31,7 +31,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="relative h-screen flex flex-col bg-gray-50 pb-32">
+    <div className="relative h-screen flex flex-col bg-transparent pb-32">
 
 
       <motion.div 
@@ -58,7 +58,7 @@ export function Dashboard() {
         </motion.header>
 
         {/* Main Stats Card (Flexible Height) */}
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none overflow-hidden">
+        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50">
 
           <button
               onClick={handleEditGoal}
@@ -78,8 +78,8 @@ export function Dashboard() {
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'today'
-                      ? "bg-brand-background dark:bg-brand-dark text-brand-dark dark:text-brand-light shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-105"
-                      : "text-slate-600 dark:text-slate-400 hover:text-brand-dark dark:hover:text-brand-light"
+                      ? "bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
                   Today
@@ -89,8 +89,8 @@ export function Dashboard() {
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'week'
-                      ? "bg-brand-background dark:bg-brand-dark text-brand-dark dark:text-brand-light shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-105"
-                      : "text-slate-600 dark:text-slate-400 hover:text-brand-dark dark:hover:text-brand-light"
+                      ? "bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
                   Week
@@ -146,7 +146,7 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none p-6 rounded-[2rem]">
+            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 p-6 rounded-[2rem]">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
                   <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">

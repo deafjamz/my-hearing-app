@@ -18,7 +18,9 @@ export function Layout({ className }: LayoutProps) {
 
   return (
     <div className={cn("flex flex-col flex-1 bg-slate-100 dark:bg-slate-950", className)}>
-      <div className="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px] -z-10" />
+      {/* Atmospheric Background */}
+      <div className="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-[100px] -z-10" />
+      
       {/* Main Content Area */}
       <main className="flex-1 pb-28">
         <Outlet />
