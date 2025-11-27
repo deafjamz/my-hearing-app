@@ -35,4 +35,43 @@ function App() {
   );
 }
 
-export default App;
+export default App;import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Layout } from '@/components/Layout';
+import { Dashboard } from '@/pages/Dashboard';
+import { ActivityList } from '@/pages/ActivityList';
+import { RapidFire } from '@/pages/RapidFire';
+import { Settings } from '@/pages/Settings';
+import { PracticeHub } from '@/pages/PracticeHub';
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <Dashboard />
+      },
+      {
+        path: '/practice',
+        element: <ActivityList />
+      },
+      {
+        path: '/rapid-fire',
+        element: <RapidFire />
+      },
+      {
+        path: '/settings',
+        element: <Settings />
+      },
+      {
+        path: '/practice/hub',
+        element: <PracticeHub />
+      }
+      // Add other routes here, they'll all inherit the Layout
+    ]
+  }
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}
