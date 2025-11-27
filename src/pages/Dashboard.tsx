@@ -125,11 +125,13 @@ export function Dashboard() {
                     transition={{ duration: 0.2 }}
                     className="w-full h-full flex flex-col"
                   >
-                    <div className="flex items-center justify-between mb-6 text-gray-400 font-medium text-sm uppercase tracking-wider px-2">
-                      <div className="flex items-center gap-2">
-                          <Activity size={16} /> Activity Trends
+                    <div className="flex items-center justify-between mb-6 px-2">
+                      <div className="flex items-center gap-2 text-gray-500 font-semibold text-xs">
+                        <Activity size={16} /> ACTIVITY TRENDS
                       </div>
-                      <span className="text-xs bg-brand-primary/10 text-brand-primary px-2 py-1 rounded-md font-bold">Goal: {dailyGoal}m</span>
+                      <span className="text-gray-500 font-semibold text-xs bg-brand-primary/10 px-2 py-1 rounded-md">
+                        GOAL: {dailyGoal}M
+                      </span>
                     </div>
                     <div className="flex-1 min-h-[200px]">
                       <ProgressHistory data={weeklyHistory} goal={dailyGoal} />
@@ -144,7 +146,7 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-brand-background dark:bg-brand-dark p-6 rounded-[2rem] shadow-neumo-convex dark:shadow-dark-neumo-convex transition-all transform active:scale-95 hover:scale-[1.02] border border-gray-100 dark:border-gray-800">
+            <div className="relative overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200 p-6 rounded-[2rem]">
               <div className="relative z-10 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-1.5 text-gray-600 text-[10px] font-bold uppercase tracking-wider">
@@ -153,8 +155,8 @@ export function Dashboard() {
                   </div>
                   <h3 className="text-gray-900 text-2xl font-extrabold">Coffee Shop Chaos</h3>
                 </div>
-                <div className="bg-brand-primary/10 text-brand-primary w-16 h-16 rounded-full flex items-center justify-center shadow-neumo-concave group-hover:shadow-neumo-convex transition-all duration-300">
-                  <ArrowRight size={28} />
+                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                  <ArrowRight size={24} className="text-purple-600" />
                 </div>
               </div>
             </div>
