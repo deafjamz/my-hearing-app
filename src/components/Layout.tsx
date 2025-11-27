@@ -17,7 +17,7 @@ export function Layout({ className }: LayoutProps) {
   ];
 
   return (
-    <div className={cn("flex flex-col flex-1 bg-slate-50 dark:bg-slate-950", className)}>
+    <div className={cn("min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950", className)}>
       {/* Global Atmospheric Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-[100px]" />
@@ -29,8 +29,8 @@ export function Layout({ className }: LayoutProps) {
         <Outlet />
       </main>
 
-      {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 bg-white/90 backdrop-blur-md shadow-lg">
+      {/* Bottom Navigation Bar - Updated shadow and border */}
+      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg">
         <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
           {navItems.map((item) => {
             // Temporarily exclude 'Progress' until implemented

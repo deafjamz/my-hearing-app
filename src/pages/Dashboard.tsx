@@ -13,10 +13,20 @@ export function Dashboard() {
   const { dailyGoal, setDailyGoal, dailyProgress, weeklyHistory } = useUser();
   const { theme, toggleTheme } = useTheme();
 
+  const [isEditingGoal, setIsEditingGoal] = useState(false);
+  const [tempGoal, setTempGoal] = useState(dailyGoal.toString());
+
   const handleEditGoal = () => {
-    const newGoal = window.prompt("Set your daily practice goal (minutes):", dailyGoal.toString());
-    if (newGoal && !isNaN(Number(newGoal))) {
-      setDailyGoal(Number(newGoal));
+    setIsEditingGoal(true);
+  };
+
+  const handleGoalEdit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const newGoal = Number(tempGoal);
+      if (!isNaN(newGoal) && newGoal > 0) {
+        setDailyGoal(newGoal);
+      }
+      setIsEditingGoal(false);
     }
   };
 
@@ -62,10 +72,10 @@ export function Dashboard() {
 
           <button
               onClick={handleEditGoal}
-              className="absolute top-6 right-6 z-20 p-3 bg-brand-background dark:bg-brand-dark shadow-neumo-concave dark:shadow-dark-neumo-concave rounded-full text-brand-dark dark:text-brand-light hover:shadow-neumo-convex dark:hover:shadow-dark-neumo-convex hover:text-brand-primary transition-all duration-300 transform active:scale-95"
+              className="absolute top-6 right-6 z-20 p-3 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Adjust Goal"
           >
-              <SettingsIcon size={24} />
+              <SettingsIcon className="w-5 h-5 text-slate-400" />
           </button>
           
           {/* Card Content Layer */}
@@ -132,9 +142,26 @@ export function Dashboard() {
                       <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest">
                         ACTIVITY TRENDS
                       </span>
-                      <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 px-2 py-1 rounded-md">
-                        GOAL: {dailyGoal} MIN
-                      </span>
+                      <div className="relative">
+                        {isEditingGoal ? (
+                          <input
+                            type="number"
+                            value={tempGoal}
+                            onChange={(e) => setTempGoal(e.target.value)}
+                            onKeyDown={handleGoalEdit}
+                            onBlur={() => setIsEditingGoal(false)}
+                            className="w-16 px-2 py-1 text-xs font-bold bg-white dark:bg-slate-800 border border-purple-200 dark:border-purple-800 rounded-md text-slate-900 dark:text-white"
+                            autoFocus
+                          />
+                        ) : (
+                          <button
+                            onClick={() => setIsEditingGoal(true)}
+                            className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 dark:bg-purple-900/30 px-2 py-1 rounded-md hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
+                          >
+                            GOAL: {dailyGoal} MIN
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <div className="flex-1 w-full min-h-[200px]">
                       <ProgressHistory data={weeklyHistory} goal={dailyGoal} />
