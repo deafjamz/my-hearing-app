@@ -58,7 +58,7 @@ export function Dashboard() {
         </motion.header>
 
         {/* Main Stats Card (Flexible Height) */}
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2.5rem] bg-brand-background dark:bg-brand-dark shadow-neumo-convex dark:shadow-dark-neumo-convex overflow-hidden">
+        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none overflow-hidden">
 
           <button
               onClick={handleEditGoal}
@@ -111,8 +111,8 @@ export function Dashboard() {
                     className="flex flex-col items-center"
                   >
                     <HeaRing current={dailyProgress} goal={dailyGoal} size={200} />
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
-                      <span className="text-purple-600 font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
+                      <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
                       <br/>until you close your ring!
                     </p>
                   </motion.div>
@@ -126,10 +126,10 @@ export function Dashboard() {
                     className="w-full h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between w-full px-2 mb-6">
-                      <span className="text-xs font-black tracking-widest text-slate-400 uppercase">
+                      <span className="text-xs font-black tracking-widest text-slate-500 dark:text-slate-400 uppercase">
                         ACTIVITY TRENDS
                       </span>
-                      <span className="text-xs font-black tracking-widest text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
+                      <span className="text-xs font-black tracking-widest text-slate-500 dark:text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
                         GOAL: {dailyGoal} MIN
                       </span>
                     </div>
@@ -146,15 +146,15 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200 p-6 rounded-[2rem]">
+            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none p-6 rounded-[2rem]">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
-                  <div className="flex items-center gap-2 mb-1.5 text-purple-600 text-[10px] font-bold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">
                     <Play size={10} fill="currentColor" />
                     <span>Up Next</span>
                   </div>
-                  <h3 className="text-gray-900 text-2xl font-extrabold">Coffee Shop Chaos</h3>
-                  <div className="text-xs font-medium text-slate-500 mt-1">
+                  <h3 className="text-slate-900 dark:text-white text-2xl font-extrabold">Coffee Shop Chaos</h3>
+                  <div className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">
                     Intermediate • 5 min
                   </div>
                 </div>
