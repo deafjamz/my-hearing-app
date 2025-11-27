@@ -87,32 +87,3 @@ my-hearing-app/
 *   **New Activities:** Add data to `src/data/` and create a route in `App.tsx`.
 
 
-## 🎨 Design System & Style Guide (The "Superwarm" Aesthetic)
-
-We prioritize **"Approachable Depth"**: Interfaces should look simple and inviting at a glance (No Scroll) but reveal complexity through interaction (Progressive Disclosure).
-
-### 1. Color Palette
-*   **Primary Gradient ("Superwarm"):** Used for progress rings, charts, and high-energy accents.
-    *   Stops: `Yellow-400 (#facc15)` → `Orange-500 (#f97316)` → `Purple-600 (#9333ea)`.
-*   **Background ("Aurora"):** A subtle, living backdrop.
-    *   Composition: Fixed `bg-white` overlaying pulsing blobs of `Teal-200` and `Orange-200` (blurred 100px).
-*   **Action Anchor:** Deep Charcoal (`gray-900`) for primary "Start" buttons to visually ground the airy, light UI.
-
-### 2. Surfaces & Texture
-*   **Glassmorphism:** Cards should not be solid white. Use `bg-white/80 backdrop-blur-xl` to let the "Aurora" bleed through.
-*   **Colored Shadows:** Avoid harsh black shadows. Use colored shadows to create a glow effect.
-    *   Standard: `shadow-xl shadow-orange-500/10`.
-*   **Hyper-Rounding:** Use `rounded-3xl` or `rounded-[2rem]` for main containers. This creates a friendly, organic, non-medical feel.
-
-### 3. Motion & Interaction ("Juice")
-*   **Entrance:** Elements must not pop in. Use `framer-motion` to stagger children (`staggerChildren: 0.1`) with a slide-up effect.
-*   **Tactile Feedback:** All interactive elements must respond to touch.
-    *   Press: `active:scale-95`.
-    *   Hover: `hover:scale-[1.02]`.
-*   **Visceral Feedback:** Success/Failure states (in quizzes) use full-screen color overlays (Green/Red) rather than small text labels.
-
-### 4. Typography
-*   **Headers:** Use `tracking-tight` (tight letter spacing) for a modern, "App-like" appearance.
-*   **Hierarchy:** Use Uppercase + Tracking Widest (`text-xs font-bold uppercase tracking-wider`) for labels (e.g., "UP NEXT", "ACTIVITY TRENDS") to differentiate them from content.
-
----
