@@ -62,9 +62,9 @@ export function HeaRing({ current, goal, size = 200, className }: HeaRingProps) 
 
       {/* Center Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <div className="text-3xl font-bold text-gray-900">
+        <div className="text-slate-900 dark:text-white text-3xl font-bold">
           <span className="text-4xl">{current}</span>
-          <span className="text-xl text-gray-400 font-medium">/{goal}</span>
+          <span className="text-xl text-slate-400 dark:text-slate-500 font-medium">/{goal}</span>
         </div>
         <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">
           Minutes

@@ -72,13 +72,13 @@ export function Dashboard() {
           <div className="relative z-10 flex flex-col h-full p-6">
             {/* Segmented Control */}
             <div className="flex justify-center mb-6 shrink-0">
-              <div className="bg-brand-background dark:bg-brand-dark p-1.5 rounded-full flex items-center shadow-neumo-concave dark:shadow-dark-neumo-concave">
+              <div className="bg-slate-100 dark:bg-slate-800 p-1 rounded-full flex items-center">
                 <button
                   onClick={() => setViewMode('today')}
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'today'
-                      ? "bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+                      ? "bg-white dark:bg-slate-600 shadow-sm text-slate-900 dark:text-white"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
@@ -89,7 +89,7 @@ export function Dashboard() {
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'week'
-                      ? "bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white"
+                      ? "bg-white dark:bg-slate-600 shadow-sm text-slate-900 dark:text-white"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
