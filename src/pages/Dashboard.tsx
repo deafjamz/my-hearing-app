@@ -126,9 +126,9 @@ export function Dashboard() {
                     className="w-full h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between w-full px-2 mb-6">
-                      <div className="flex items-center gap-2 text-xs font-black tracking-widest text-slate-400 uppercase">
-                        <Activity size={16} /> ACTIVITY TRENDS
-                      </div>
+                      <span className="text-xs font-black tracking-widest text-slate-400 uppercase">
+                        ACTIVITY TRENDS
+                      </span>
                       <span className="text-xs font-black tracking-widest text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
                         GOAL: {dailyGoal} MIN
                       </span>
@@ -155,7 +155,7 @@ export function Dashboard() {
                   </div>
                   <h3 className="text-gray-900 text-2xl font-extrabold">Coffee Shop Chaos</h3>
                   <div className="text-xs font-medium text-slate-500 mt-1">
-                    Intermediate • 5 min • 120 XP
+                    Intermediate • 5 min
                   </div>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0"> {/* Add shrink-0 */}
