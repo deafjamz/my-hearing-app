@@ -51,7 +51,7 @@ export function Dashboard() {
           </button>
           <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 bg-brand-primary/10 backdrop-blur-sm text-brand-primary px-3 py-1.5 rounded-full font-bold text-xs shadow-sm border border-brand-primary/20">
-                <Flame size={14} className="text-orange-500" />
+                <Flame size={14} className="fill-orange-500 text-orange-500" />
                 <span>12 Day Streak</span>
               </div>
           </div>
@@ -126,14 +126,14 @@ export function Dashboard() {
                     className="w-full h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between w-full px-2 mb-6">
-                      <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase">
+                      <div className="flex items-center gap-2 text-xs font-black tracking-widest text-slate-400 uppercase">
                         <Activity size={16} /> ACTIVITY TRENDS
                       </div>
-                      <span className="text-xs font-bold tracking-widest text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
+                      <span className="text-xs font-black tracking-widest text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
                         GOAL: {dailyGoal} MIN
                       </span>
                     </div>
-                    <div className="flex-1 min-h-[200px]">
+                    <div className="flex-1 w-full min-h-[200px]">
                       <ProgressHistory data={weeklyHistory} goal={dailyGoal} />
                     </div>
                   </motion.div>
@@ -154,6 +154,9 @@ export function Dashboard() {
                     <span>Up Next</span>
                   </div>
                   <h3 className="text-gray-900 text-2xl font-extrabold">Coffee Shop Chaos</h3>
+                  <div className="text-xs font-medium text-slate-500 mt-1">
+                    Intermediate • 5 min • 120 XP
+                  </div>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0"> {/* Add shrink-0 */}
                   <ArrowRight size={24} className="text-purple-600" />
