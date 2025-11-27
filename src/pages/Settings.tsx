@@ -48,4 +48,48 @@ export function Settings() {
       </div>
     </div>
   );
+}import { Switch } from '@/components/ui/Switch';
+import { useTheme } from '@/store/ThemeContext';
+
+export function Settings() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
+      <div className="max-w-md mx-auto">
+        <h1 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Settings</h1>
+
+        {/* Appearance Section */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 mb-6 shadow-lg shadow-slate-200/50 dark:shadow-none">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Appearance</h2>
+          <div className="flex items-center justify-between">
+            <span className="text-slate-500 dark:text-slate-400">Dark Mode</span>
+            <Switch
+              checked={theme === 'dark'}
+              onCheckedChange={toggleTheme}
+              aria-label="Toggle dark mode"
+            />
+          </div>
+        </div>
+
+        {/* Instructor Section */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 shadow-lg shadow-slate-200/50 dark:shadow-none">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Instructor Voice</h2>
+          <div className="space-y-2">
+            {['Sarah', 'David', 'Emma', 'Marcus'].map((voice) => (
+              <label key={voice} className="flex items-center p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
+                <input
+                  type="radio"
+                  name="voice"
+                  value={voice}
+                  className="mr-3"
+                />
+                <span className="text-slate-500 dark:text-slate-400">{voice}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

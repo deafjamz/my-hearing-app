@@ -13,22 +13,8 @@ export function Dashboard() {
   const { dailyGoal, setDailyGoal, dailyProgress, weeklyHistory } = useUser();
   const { theme, toggleTheme } = useTheme();
 
-  const [isEditingGoal, setIsEditingGoal] = useState(false);
+  const [showGoalModal, setShowGoalModal] = useState(false);
   const [tempGoal, setTempGoal] = useState(dailyGoal.toString());
-
-  const handleEditGoal = () => {
-    setIsEditingGoal(true);
-  };
-
-  const handleGoalEdit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const newGoal = Number(tempGoal);
-      if (!isNaN(newGoal) && newGoal > 0) {
-        setDailyGoal(newGoal);
-      }
-      setIsEditingGoal(false);
-    }
-  };
 
   const container = {
     hidden: { opacity: 0 },
@@ -42,11 +28,6 @@ export function Dashboard() {
 
   return (
     <div className="relative h-screen flex flex-col bg-transparent pb-32">
-      {/* Add global atmosphere */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/20 dark:bg-purple-500/10 blur-[100px] rounded-full" />
-      </div>
-
       <motion.div 
         variants={container}
         initial="hidden"
@@ -54,10 +35,7 @@ export function Dashboard() {
         className="relative z-10 p-6 max-w-md mx-auto flex-1 flex flex-col justify-between"
       >
         {/* Header */}
-        <motion.header variants={item} className="flex justify-between items-center shrink-0 mb-4">
-          <Link to="/settings" className="p-3 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <SettingsIcon className="w-5 h-5 text-slate-400" />
-          </Link>
+        <motion.header variants={item} className="flex justify-end items-center shrink-0 mb-4">
           <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 bg-brand-primary/10 backdrop-blur-sm text-brand-primary px-3 py-1.5 rounded-full font-bold text-xs shadow-sm border border-brand-primary/20">
                 <Flame size={14} className="fill-orange-500 text-orange-500" />
@@ -70,7 +48,7 @@ export function Dashboard() {
         <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none">
 
           <button
-              onClick={handleEditGoal}
+              onClick={() => setShowGoalModal(true)}
               className="absolute top-6 right-6 z-20 p-3 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Adjust Goal"
           >
@@ -139,15 +117,7 @@ export function Dashboard() {
                         ACTIVITY TRENDS
                       </span>
                       <button
-                        onClick={() => {
-                          const newGoal = window.prompt('Enter new daily goal (in minutes):', dailyGoal.toString());
-                          if (newGoal) {
-                            const parsed = parseInt(newGoal, 10);
-                            if (!isNaN(parsed) && parsed > 0) {
-                              setDailyGoal(parsed);
-                            }
-                          }
-                        }}
+                        onClick={() => setShowGoalModal(true)}
                         className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 dark:bg-purple-900/30 px-2 py-1 rounded-md hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
                       >
                         GOAL: {dailyGoal} MIN
@@ -186,6 +156,40 @@ export function Dashboard() {
           </Link>
         </motion.div>
       </motion.div>
+      {showGoalModal && (
+        <div className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-6 w-[90%] max-w-sm border border-slate-200 dark:border-slate-800 shadow-xl">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Set Daily Goal</h3>
+            <input
+              type="number"
+              value={tempGoal}
+              onChange={(e) => setTempGoal(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white mb-4"
+              min="1"
+            />
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowGoalModal(false)}
+                className="px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  const newGoal = Number(tempGoal);
+                  if (!isNaN(newGoal) && newGoal > 0) {
+                    setDailyGoal(newGoal);
+                  }
+                  setShowGoalModal(false);
+                }}
+                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -63,4 +63,48 @@ export function useUser() {
     throw new Error('useUser must be used within a UserProvider');
   }
   return context;
+}import { createContext, useContext, useState, useEffect } from 'react';
+
+interface UserContextType {
+  dailyGoal: number;
+  setDailyGoal: (goal: number) => void;
+  dailyProgress: number;
+  setDailyProgress: (progress: number) => void;
+  weeklyHistory: number[];
+}
+
+const UserContext = createContext<UserContextType | undefined>(undefined);
+
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [dailyGoal, setDailyGoal] = useState(() => {
+    const saved = localStorage.getItem('dailyGoal');
+    return saved ? parseInt(saved, 10) : 25;
+  });
+
+  const [dailyProgress, setDailyProgress] = useState(13); // Example progress
+  const [weeklyHistory] = useState([15, 20, 25, 18, 22, 30, 13]); // Example data
+
+  useEffect(() => {
+    localStorage.setItem('dailyGoal', dailyGoal.toString());
+  }, [dailyGoal]);
+
+  return (
+    <UserContext.Provider value={{
+      dailyGoal,
+      setDailyGoal,
+      dailyProgress,
+      setDailyProgress,
+      weeklyHistory,
+    }}>
+      {children}
+    </UserContext.Provider>
+  );
+}
+
+export function useUser() {
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+  return context;
 }
