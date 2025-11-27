@@ -126,11 +126,11 @@ export function Dashboard() {
                     className="w-full h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between mb-6 px-2">
-                      <div className="flex items-center gap-2 text-gray-500 font-semibold text-xs">
+                      <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
                         <Activity size={16} /> ACTIVITY TRENDS
                       </div>
-                      <span className="text-gray-500 font-semibold text-xs bg-brand-primary/10 px-2 py-1 rounded-md">
-                        GOAL: {dailyGoal}M
+                      <span className="text-xs font-bold text-gray-400 uppercase tracking-wider bg-brand-primary/10 px-2 py-1 rounded-md">
+                        GOAL: {dailyGoal} MINUTES
                       </span>
                     </div>
                     <div className="flex-1 min-h-[200px]">
@@ -147,15 +147,15 @@ export function Dashboard() {
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
             <div className="relative overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200 p-6 rounded-[2rem]">
-              <div className="relative z-10 flex items-center justify-between">
-                <div>
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
                   <div className="flex items-center gap-2 mb-1.5 text-gray-600 text-[10px] font-bold uppercase tracking-wider">
                     <Play size={10} fill="currentColor" />
                     <span>Up Next</span>
                   </div>
                   <h3 className="text-gray-900 text-2xl font-extrabold">Coffee Shop Chaos</h3>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0"> {/* Add shrink-0 */}
                   <ArrowRight size={24} className="text-purple-600" />
                 </div>
               </div>
