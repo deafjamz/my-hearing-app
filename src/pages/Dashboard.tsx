@@ -79,7 +79,7 @@ export function Dashboard() {
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'today'
                       ? "bg-brand-background dark:bg-brand-dark text-brand-dark dark:text-brand-light shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-105"
-                      : "text-gray-500 dark:text-gray-400 hover:text-brand-dark dark:hover:text-brand-light"
+                      : "text-slate-600 dark:text-slate-400 hover:text-brand-dark dark:hover:text-brand-light"
                   )}
                 >
                   Today
@@ -90,7 +90,7 @@ export function Dashboard() {
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'week'
                       ? "bg-brand-background dark:bg-brand-dark text-brand-dark dark:text-brand-light shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-105"
-                      : "text-gray-500 dark:text-gray-400 hover:text-brand-dark dark:hover:text-brand-light"
+                      : "text-slate-600 dark:text-slate-400 hover:text-brand-dark dark:hover:text-brand-light"
                   )}
                 >
                   Week
@@ -111,8 +111,8 @@ export function Dashboard() {
                     className="flex flex-col items-center"
                   >
                     <HeaRing current={dailyProgress} goal={dailyGoal} size={200} />
-                    <p className="text-gray-500 dark:text-gray-400 text-sm mt-4 font-medium text-center px-8">
-                      <span className="text-brand-primary font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
+                      <span className="text-purple-600 font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
                       <br/>until you close your ring!
                     </p>
                   </motion.div>
@@ -125,12 +125,12 @@ export function Dashboard() {
                     transition={{ duration: 0.2 }}
                     className="w-full h-full flex flex-col"
                   >
-                    <div className="flex items-center justify-between mb-6 px-2">
-                      <div className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    <div className="flex items-center justify-between w-full px-2 mb-6">
+                      <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase">
                         <Activity size={16} /> ACTIVITY TRENDS
                       </div>
-                      <span className="text-xs font-bold text-gray-400 uppercase tracking-wider bg-brand-primary/10 px-2 py-1 rounded-md">
-                        GOAL: {dailyGoal} MINUTES
+                      <span className="text-xs font-bold tracking-widest text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
+                        GOAL: {dailyGoal} MIN
                       </span>
                     </div>
                     <div className="flex-1 min-h-[200px]">
@@ -149,7 +149,7 @@ export function Dashboard() {
             <div className="relative overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200 p-6 rounded-[2rem]">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
-                  <div className="flex items-center gap-2 mb-1.5 text-gray-600 text-[10px] font-bold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 mb-1.5 text-purple-600 text-[10px] font-bold uppercase tracking-wider">
                     <Play size={10} fill="currentColor" />
                     <span>Up Next</span>
                   </div>
