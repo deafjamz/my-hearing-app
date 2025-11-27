@@ -10,17 +10,17 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // 1. Initialize from localStorage or System Preference
+  // Initialize theme from localStorage or system preference
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
       if (saved === 'light' || saved === 'dark') return saved;
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
     }
-    return 'light'; // Default fallback
+    return 'light';
   });
 
-  // 2. The Engine: Apply the class to the HTML tag
+  // Apply theme class to HTML element
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
@@ -35,7 +35,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
-    </Theme-Context.Provider>
+    </ThemeContext.Provider>
   );
 }
 
