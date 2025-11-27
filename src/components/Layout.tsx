@@ -27,7 +27,7 @@ export function Layout({ className }: LayoutProps) {
       </main>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-gray-200 bg-white/90 backdrop-blur-md shadow-lg">
+      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 bg-white/90 backdrop-blur-md shadow-lg">
         <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
           {navItems.map((item) => {
             // Temporarily exclude 'Progress' until implemented
@@ -43,8 +43,8 @@ export function Layout({ className }: LayoutProps) {
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive
-                    ? "text-brand-primary bg-brand-primary/5 shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-115"
-                    : "text-gray-600 dark:text-gray-400 hover:text-brand-dark dark:hover:text-brand-light hover:shadow-neumo-flat"
+                    ? "text-purple-600 bg-purple-100"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                 )}
               >
                 <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />

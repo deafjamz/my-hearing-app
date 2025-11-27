@@ -58,7 +58,7 @@ export function Dashboard() {
         </motion.header>
 
         {/* Main Stats Card (Flexible Height) */}
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none ring-1 ring-white/10 before:absolute before:inset-0 before:rounded-[2rem] before:bg-gradient-to-b before:from-white/5 before:to-transparent before:pointer-events-none">
+        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none">
 
           <button
               onClick={handleEditGoal}
@@ -79,7 +79,7 @@ export function Dashboard() {
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'today'
                       ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      : "text-slate-500 dark:text-slate-400"
                   )}
                 >
                   Today
@@ -90,7 +90,7 @@ export function Dashboard() {
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'week'
                       ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      : "text-slate-500 dark:text-slate-400"
                   )}
                 >
                   Week
@@ -129,10 +129,10 @@ export function Dashboard() {
                     className="w-full h-full flex flex-col"
                   >
                     <div className="flex items-center justify-between w-full px-2 mb-6">
-                      <span className="text-xs font-black tracking-widest text-slate-500 dark:text-slate-400 uppercase">
+                      <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest">
                         ACTIVITY TRENDS
                       </span>
-                      <span className="text-xs font-black tracking-widest text-slate-500 dark:text-slate-400 uppercase bg-brand-primary/10 px-2 py-1 rounded-md">
+                      <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 px-2 py-1 rounded-md">
                         GOAL: {dailyGoal} MIN
                       </span>
                     </div>
@@ -149,19 +149,19 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block">
-            <div className="relative overflow-hidden bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none p-6 rounded-[2rem] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 ease-out cursor-pointer">
+            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none p-6 rounded-[2rem] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
                   <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">
                     <Play size={10} fill="currentColor" />
                     <span>Up Next</span>
                   </div>
-                  <h3 className="text-slate-900 dark:text-white text-2xl font-extrabold">Coffee Shop Chaos</h3>
-                  <div className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1">
+                  <h3 className="text-slate-900 dark:text-white text-2xl font-black tracking-tight">Coffee Shop Chaos</h3>
+                  <div className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">
                     Intermediate • 5 min
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0"> {/* Add shrink-0 */}
+                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center">
                   <ArrowRight size={24} className="text-purple-600" />
                 </div>
               </div>
