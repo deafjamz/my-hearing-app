@@ -51,7 +51,7 @@ export function ActivityList() {
           <Link
             key={activity.id}
             to={activity.path}
-            className="group flex items-center p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-[2rem] shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer"
+            className="group flex items-center p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-[2rem] shadow-lg shadow-slate-200/50 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
             {/* Icon Container - keep existing color classes */}
             <div className={`w-14 h-14 rounded-2xl ${activity.color} flex items-center justify-center mr-4 shadow-sm shrink-0`}>
