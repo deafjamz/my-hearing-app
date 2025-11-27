@@ -58,7 +58,7 @@ export function Dashboard() {
         </motion.header>
 
         {/* Main Stats Card (Flexible Height) */}
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50">
+        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none">
 
           <button
               onClick={handleEditGoal}
@@ -78,7 +78,7 @@ export function Dashboard() {
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'today'
-                      ? "bg-white dark:bg-slate-600 shadow-sm text-slate-900 dark:text-white"
+                      ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
@@ -89,7 +89,7 @@ export function Dashboard() {
                   className={cn(
                     "px-6 py-2 rounded-full text-sm font-bold transition-all duration-300",
                     viewMode === 'week'
-                      ? "bg-white dark:bg-slate-600 shadow-sm text-slate-900 dark:text-white"
+                      ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
@@ -146,7 +146,7 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 p-6 rounded-[2rem]">
+            <div className="relative overflow-hidden bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none p-6 rounded-[2rem]">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
                   <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">
