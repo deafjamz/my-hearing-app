@@ -31,7 +31,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="relative h-screen flex flex-col bg-brand-background dark:bg-brand-dark">
+    <div className="relative h-screen flex flex-col bg-gray-50 dark:bg-brand-dark pb-32">
 
 
       <motion.div 
@@ -144,7 +144,7 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-brand-background dark:bg-brand-dark p-6 rounded-[2rem] shadow-neumo-convex dark:shadow-dark-neumo-convex transition-all transform active:scale-95 hover:scale-[1.02] border-2 border-red-500">
+            <div className="relative overflow-hidden bg-brand-background dark:bg-brand-dark p-6 rounded-[2rem] shadow-neumo-convex dark:shadow-dark-neumo-convex transition-all transform active:scale-95 hover:scale-[1.02]">
               
               <div className="relative z-10 flex items-center justify-between">
                 <div>

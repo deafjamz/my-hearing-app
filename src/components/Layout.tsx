@@ -19,13 +19,13 @@ export function Layout({ className }: LayoutProps) {
   return (
     <div className={cn("flex flex-col flex-1", className)}>
       {/* Main Content Area */}
-      <main className="flex-1 pb-28">
+      <main className="flex-1 pb-28 bg-gray-50 dark:bg-brand-dark">
         <Outlet />
       </main>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-brand-background dark:bg-brand-dark shadow-neumo-convex dark:shadow-dark-neumo-convex px-6 py-3 z-50 safe-area-bottom rounded-t-3xl">
-        <div className="flex justify-between items-center max-w-md mx-auto">
+      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-gray-200 bg-white/90 backdrop-blur-md shadow-lg">
+        <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
           {navItems.map((item) => {
             // Temporarily exclude 'Progress' until implemented
             if (item.path === '/progress') return null;
