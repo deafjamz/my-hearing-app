@@ -40,7 +40,7 @@ export function Layout({ className }: LayoutProps) {
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive
-                    ? "text-brand-primary shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-115 bg-brand-background dark:bg-brand-dark"
+                    ? "text-brand-primary bg-brand-primary/5 shadow-neumo-convex dark:shadow-dark-neumo-convex transform scale-115"
                     : "text-gray-600 dark:text-gray-400 hover:text-brand-dark dark:hover:text-brand-light hover:shadow-neumo-flat"
                 )}
               >

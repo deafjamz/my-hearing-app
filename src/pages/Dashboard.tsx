@@ -51,7 +51,19 @@ export function Dashboard() {
           </button>
           <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 bg-brand-primary/10 backdrop-blur-sm text-brand-primary px-3 py-1.5 rounded-full font-bold text-xs shadow-sm border border-brand-primary/20">
-                <Flame size={14} fill="currentColor" className="animate-pulse" />
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    background: ["linear-gradient(45deg, #FFD93D, #FF6B6B, #6C5CE7)"] 
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }}
+                >
+                  <Flame size={14} className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-purple-600" />
+                </motion.div>
                 <span>12 Day Streak</span>
               </div>
           </div>
@@ -144,17 +156,16 @@ export function Dashboard() {
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-brand-background dark:bg-brand-dark p-6 rounded-[2rem] shadow-neumo-convex dark:shadow-dark-neumo-convex transition-all transform active:scale-95 hover:scale-[1.02]">
-              
+            <div className="relative overflow-hidden bg-brand-background dark:bg-brand-dark p-6 rounded-[2rem] shadow-neumo-convex dark:shadow-dark-neumo-convex transition-all transform active:scale-95 hover:scale-[1.02] border border-gray-100 dark:border-gray-800">
               <div className="relative z-10 flex items-center justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-1.5 text-[#333333] text-[10px] font-bold uppercase tracking-wider">
+                  <div className="flex items-center gap-2 mb-1.5 text-gray-600 dark:text-gray-300 text-[10px] font-bold uppercase tracking-wider">
                     <Play size={10} fill="currentColor" />
                     <span>Up Next</span>
                   </div>
-                  <h3 className="text-[#000000] text-2xl font-extrabold">Coffee Shop Chaos</h3>
+                  <h3 className="text-gray-900 dark:text-white text-2xl font-extrabold">Coffee Shop Chaos</h3>
                 </div>
-                <div className="bg-brand-background dark:bg-brand-dark text-brand-primary w-16 h-16 rounded-full flex items-center justify-center shadow-neumo-concave dark:shadow-dark-neumo-concave group-hover:shadow-neumo-convex dark:group-hover:shadow-dark-neumo-convex transition-all duration-300">
+                <div className="bg-brand-primary/10 text-brand-primary w-16 h-16 rounded-full flex items-center justify-center shadow-neumo-concave dark:shadow-dark-neumo-concave group-hover:shadow-neumo-convex dark:group-hover:shadow-dark-neumo-convex transition-all duration-300">
                   <ArrowRight size={28} />
                 </div>
               </div>
