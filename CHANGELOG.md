@@ -27,3 +27,11 @@
 ### ⚠️ Known Issues / Pending
 - **Minimal Pair Audio:** The audio files for "Rapid Fire" (e.g., `pear.mp3`) are placeholders or missing. Run `generate_minimal_pairs.py` once ElevenLabs credits are restored.
 - **Story Voices:** Only 'Sarah' (female) and generic 'Male' have full story audio. 'David', 'Marcus', 'Emma' will fallback to these default folders for stories (but work fully for Scenarios).
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
