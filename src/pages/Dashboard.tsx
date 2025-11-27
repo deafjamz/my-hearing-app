@@ -58,7 +58,7 @@ export function Dashboard() {
         </motion.header>
 
         {/* Main Stats Card (Flexible Height) */}
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none">
+        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none ring-1 ring-white/10 before:absolute before:inset-0 before:rounded-[2rem] before:bg-gradient-to-b before:from-white/5 before:to-transparent before:pointer-events-none">
 
           <button
               onClick={handleEditGoal}
@@ -108,8 +108,11 @@ export function Dashboard() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.4, type: "spring" }}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center relative" // Added relative
                   >
+                    {/* Add the glow effect */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-purple-500/20 dark:bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
+                    
                     <HeaRing current={dailyProgress} goal={dailyGoal} size={200} />
                     <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
                       <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
@@ -145,8 +148,8 @@ export function Dashboard() {
 
         {/* Bottom Action Area (Anchored) */}
         <motion.div variants={item} className="mt-6 shrink-0">
-          <Link to="/practice" className="block group">
-            <div className="relative overflow-hidden bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none p-6 rounded-[2rem]">
+          <Link to="/practice" className="block">
+            <div className="relative overflow-hidden bg-white dark:bg-[#0B1120] border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/60 dark:shadow-none p-6 rounded-[2rem] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 ease-out cursor-pointer">
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex-1 mr-6"> {/* Add margin-right for spacing */}
                   <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">
