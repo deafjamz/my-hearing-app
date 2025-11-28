@@ -6,53 +6,46 @@ interface UserContextType {
   dailyGoal: number;
   setDailyGoal: (goal: number) => void;
   voice: string;
-  setVoice: (voice: string) => void;
+  setVoice: (v: string) => void;
   history: DailyRecord[];
-  addToHistory: (minutes: number) => void;
+  addToHistory: (mins: number) => void;
+  // NEW: Accuracy Streak
+  currentStreak: number;
+  incrementStreak: () => void;
+  resetStreak: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  // 1. Goal (Default 25)
-  const [dailyGoal, setDailyGoal] = useState<number>(() => {
-    if (typeof window !== 'undefined') return parseInt(localStorage.getItem('dailyGoal') || '25');
-    return 25;
-  });
+  const [dailyGoal, setDailyGoal] = useState<number>(() => parseInt(typeof window !== 'undefined' ? localStorage.getItem('dailyGoal') || '25' : '25'));
+  const [voice, setVoice] = useState<string>(() => (typeof window !== 'undefined' ? localStorage.getItem('voice') || 'sarah' : 'sarah'));
+  const [history, setHistory] = useState<DailyRecord[]>(() => JSON.parse(typeof window !== 'undefined' ? localStorage.getItem('history') || '[]' : '[]'));
+  
+  // NEW: Streak State
+  const [currentStreak, setCurrentStreak] = useState<number>(() => parseInt(typeof window !== 'undefined' ? localStorage.getItem('currentStreak') || '0' : '0'));
 
-  // 2. Voice (Default 'sarah')
-  const [voice, setVoice] = useState<string>(() => {
-    if (typeof window !== 'undefined') return localStorage.getItem('voice') || 'sarah';
-    return 'sarah';
-  });
-
-  // 3. History (Array)
-  const [history, setHistory] = useState<DailyRecord[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('history');
-      return saved ? JSON.parse(saved) : [];
-    }
-    return [];
-  });
-
-  // Persist effects
+  // Persist Effects
   useEffect(() => { localStorage.setItem('dailyGoal', dailyGoal.toString()); }, [dailyGoal]);
   useEffect(() => { localStorage.setItem('voice', voice); }, [voice]);
   useEffect(() => { localStorage.setItem('history', JSON.stringify(history)); }, [history]);
+  useEffect(() => { localStorage.setItem('currentStreak', currentStreak.toString()); }, [currentStreak]);
 
   const addToHistory = (minutes: number) => {
     const today = new Date().toISOString().split('T')[0];
     setHistory(prev => {
       const existing = prev.find(r => r.date === today);
-      if (existing) {
-        return prev.map(r => r.date === today ? { ...r, minutes: r.minutes + minutes } : r);
-      }
-      return [...prev, { date: today, minutes }];
+      return existing 
+        ? prev.map(r => r.date === today ? { ...r, minutes: r.minutes + minutes } : r)
+        : [...prev, { date: today, minutes }];
     });
   };
 
+  const incrementStreak = () => setCurrentStreak(s => s + 1);
+  const resetStreak = () => setCurrentStreak(0);
+
   return (
-    <UserContext.Provider value={{ dailyGoal, setDailyGoal, voice, setVoice, history, addToHistory }}>
+    <UserContext.Provider value={{ dailyGoal, setDailyGoal, voice, setVoice, history, addToHistory, currentStreak, incrementStreak, resetStreak }}>
       {children}
     </UserContext.Provider>
   );

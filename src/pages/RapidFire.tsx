@@ -1,24 +1,21 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, XCircle, CheckCircle, Flame } from 'lucide-react';
+import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
 import { cn } from '@/lib/utils';
+import { StreakFlame } from '@/components/ui/StreakFlame';
 
 export function RapidFire() {
-  const { voice } = useUser();
+  const { voice, incrementStreak, resetStreak } = useUser();
   const { play, isPlaying } = useAudio();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
   
   // Safety Check
   if (!WORD_PAIRS || WORD_PAIRS.length === 0) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="text-slate-500">Loading Game...</div>
-      </div>
-    );
+    return <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950 text-slate-500">Loading Game...</div>;
   }
   
   const currentPair = WORD_PAIRS[currentIndex];
@@ -27,6 +24,12 @@ export function RapidFire() {
   const handleGuess = (guess: string) => {
     if (hasGuessed) return;
     setSelectedGuess(guess);
+
+    if (guess === currentPair.correct) {
+      incrementStreak();
+    } else {
+      resetStreak();
+    }
   };
 
   const nextRound = () => {
@@ -49,13 +52,10 @@ export function RapidFire() {
             <ArrowLeft size={24} />
           </Link>
           <h1 className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</h1>
-          <div className="flex items-center gap-1 bg-orange-100 dark:bg-orange-900/30 px-3 py-1 rounded-full">
-            <Flame className="text-orange-500 fill-orange-500" size={16} />
-            <span className="text-orange-700 dark:text-orange-300 font-bold text-xs">12</span>
-          </div>
+          <StreakFlame />
         </div>
 
-        {/* Game Content (Scrollable Area) */}
+        {/* Game Content */}
         <div className="flex-1 overflow-y-auto px-6 pb-40">
            <div className="flex justify-center py-10">
              <button 
@@ -105,7 +105,7 @@ export function RapidFire() {
         </div>
 
         {/* Sticky Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-20 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.2)]">
+        <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-md z-20">
           <div className="max-w-md mx-auto">
              <button 
                 onClick={nextRound} 
