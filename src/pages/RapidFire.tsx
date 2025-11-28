@@ -1,60 +1,38 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, XCircle, CheckCircle, Flame, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Play, XCircle, CheckCircle, Flame } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
 import { cn } from '@/lib/utils';
 
-// Helper to shuffle arrays (Fisher-Yates algorithm)
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-};
-
-type WordPair = typeof WORD_PAIRS[0];
-
 export function RapidFire() {
   const { voice, currentStreak, incrementStreak, resetStreak } = useUser();
   const { play, isPlaying } = useAudio();
   
-  // State for shuffled data
-  const [shuffledPairs, setShuffledPairs] = useState<WordPair[]>([]);
-  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
-  
+  // Game State
+  const [shuffledPairs, setShuffledPairs] = useState<typeof WORD_PAIRS>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
 
-  // 1. On mount, shuffle the entire deck of word pairs once.
+  // Shuffle on Mount
   useEffect(() => {
-    setShuffledPairs(shuffleArray(WORD_PAIRS));
+    setShuffledPairs([...WORD_PAIRS].sort(() => Math.random() - 0.5));
   }, []);
 
-  const currentPair = shuffledPairs[currentIndex];
-  const hasGuessed = selectedGuess !== null;
-  const isCorrect = hasGuessed && selectedGuess === currentPair?.correct;
-
-  // 2. When the current pair changes, shuffle its answer options.
-  useEffect(() => {
-    if (currentPair) {
-      setShuffledOptions(shuffleArray(currentPair.options));
-    }
-  }, [currentPair]);
-
-  // Guard Clause for initial shuffle
-  if (!currentPair) {
+  if (!shuffledPairs || shuffledPairs.length === 0) {
     return (
-      <div className="h-[100dvh] flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="text-slate-500 animate-pulse">Shuffling questions...</div>
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="text-slate-500">Loading Game...</div>
       </div>
     );
   }
 
+  const currentPair = shuffledPairs[currentIndex];
+  const hasGuessed = selectedGuess !== null;
+
   const playAudio = () => {
+    if (!currentPair) return;
     const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
     play(path);
   };
@@ -62,6 +40,7 @@ export function RapidFire() {
   const handleGuess = (guess: string) => {
     if (hasGuessed) return;
     setSelectedGuess(guess);
+    
     if (guess === currentPair.correct) {
       incrementStreak();
     } else {
@@ -69,61 +48,48 @@ export function RapidFire() {
     }
   };
 
-  const nextRound = () => {
+  const handleNext = () => {
     setSelectedGuess(null);
     setCurrentIndex((prev) => (prev + 1) % shuffledPairs.length);
   };
 
-  const handleActionClick = () => {
-    if (hasGuessed) {
-      nextRound();
-    } else {
-      playAudio();
-    }
-  };
-
   return (
-    <div className="h-[100dvh] flex flex-col bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <div className="fixed inset-0 flex flex-col bg-slate-50 dark:bg-slate-950 z-50">
       
-      <header className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
+      {/* 1. Header */}
+      <div className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
           <ArrowLeft size={24} />
         </Link>
-        <h1 className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</h1>
+        <div className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</div>
         <div className="flex items-center gap-1.5 bg-orange-100 dark:bg-orange-900/30 px-3 py-1.5 rounded-full">
           <Flame className="text-orange-500 fill-orange-500" size={16} />
           <span className="text-orange-700 dark:text-orange-300 font-bold text-sm tabular-nums">{currentStreak}</span>
         </div>
-      </header>
+      </div>
 
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-md mx-auto w-full flex flex-col justify-center min-h-full p-6 space-y-4">
+      {/* 2. Game Content (Centered Vertically) */}
+      <div className="flex-1 overflow-y-auto px-6 pb-32 flex flex-col justify-center">
+        <div className="max-w-md mx-auto w-full space-y-8" key={currentIndex}>
           
           <div className="flex justify-center">
             <button 
-              onClick={handleActionClick}
+              onClick={playAudio}
               className={cn(
-                "w-28 h-28 rounded-full bg-gradient-to-tr shadow-xl flex items-center justify-center text-white transition-all duration-300",
-                "hover:scale-105 active:scale-95",
-                isPlaying && 'scale-110',
-                !hasGuessed && "from-purple-500 to-purple-600 shadow-purple-500/30",
-                isCorrect && "from-green-500 to-green-600 shadow-green-500/30",
-                hasGuessed && !isCorrect && "from-red-500 to-red-600 shadow-red-500/30"
+                "w-28 h-28 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all",
+                isPlaying ? 'scale-110' : 'hover:scale-105 active:scale-95'
               )}
             >
-              {hasGuessed 
-                ? <ArrowRight size={48} /> 
-                : <Play size={48} fill="currentColor" className="ml-2" />
-              }
+              <Play size={48} fill="currentColor" className="ml-2" />
             </button>
           </div>
 
-          <div className="text-center">
-            <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">Which word did you hear?</h2>
+          <div className="text-center space-y-2">
+            <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">Which word?</h2>
           </div>
 
           <div className="space-y-3">
-            {shuffledOptions.map((option) => {
+            {currentPair.options.map((option) => {
               const isSelected = selectedGuess === option;
               const isTheCorrectAnswer = option === currentPair.correct;
               
@@ -139,29 +105,33 @@ export function RapidFire() {
                   key={option}
                   onClick={() => handleGuess(option)}
                   disabled={hasGuessed}
-                  className={`w-full p-5 text-left font-bold text-lg rounded-2xl border-2 transition-all shadow-sm flex justify-between items-center ${cardStyle}`}
+                  className={`w-full p-6 text-left font-bold text-xl rounded-2xl border-2 transition-all shadow-sm flex justify-between items-center ${cardStyle}`}
                 >
                   <span>{option}</span>
-                  {hasGuessed && isTheCorrectAnswer && <CheckCircle size={20} className="text-green-600" />}
-                  {hasGuessed && isSelected && !isTheCorrectAnswer && <XCircle size={20} className="text-red-500" />}
+                  {hasGuessed && isTheCorrectAnswer && <CheckCircle size={24} className="text-green-600" />}
+                  {hasGuessed && isSelected && !isTheCorrectAnswer && <XCircle size={24} className="text-red-500" />}
                 </button>
               );
             })}
           </div>
-
-          {/* Fixed-height container to prevent layout jump */}
-          <div className="h-32 flex items-center justify-center">
-            {hasGuessed && (
-              <div className="w-full animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
-                <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
-                <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
-                  The key difference here is in the <span className="font-bold">{currentPair.category}</span>. Listen for that subtle change!
-                </p>
-              </div>
-            )}
-          </div>
         </div>
-      </main>
+      </div>
+
+      {/* 3. Footer (Always Visible) */}
+      <div className="absolute bottom-0 left-0 right-0 w-full p-4 pb-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.2)] z-50">
+        <button 
+          onClick={handleNext}
+          disabled={!hasGuessed}
+          className={cn(
+            "w-full max-w-md mx-auto py-4 rounded-2xl font-bold text-lg transition-all shadow-lg",
+            hasGuessed 
+              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:scale-[1.02] active:scale-[0.98]' 
+              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
+          )}
+        >
+          {hasGuessed ? 'Next Round' : 'Select an Answer'}
+        </button>
+      </div>
     </div>
   );
 }
