@@ -46,32 +46,29 @@ export function ActivityList() {
         Select an activity to begin.
       </p>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {activities.map((activity) => (
           <Link
             key={activity.id}
             to={activity.path}
-            className="group flex items-center p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-[2rem] shadow-lg shadow-slate-200/50 dark:shadow-none hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+            className="group flex items-center p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:border-purple-200 dark:hover:border-purple-800 hover:ring-1 hover:ring-purple-500/20 transition-all cursor-pointer"
           >
-            {/* Icon Container - keep existing color classes */}
-            <div className={`w-14 h-14 rounded-2xl ${activity.color} flex items-center justify-center mr-4 shadow-sm shrink-0`}>
+            <div className={`w-12 h-12 rounded-full ${activity.color} flex items-center justify-center mr-4 shadow-sm shrink-0`}>
               <activity.icon size={24} strokeWidth={2.5} />
             </div>
 
-            {/* Text Content */}
             <div className="flex-1 min-w-0">
               <h3 className="text-slate-900 dark:text-white font-bold text-lg leading-tight mb-1">
                 {activity.title}
               </h3>
-              <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-relaxed opacity-90">
+              <p className="text-slate-500 dark:text-slate-400 text-xs font-medium leading-relaxed">
                 {activity.description}
               </p>
             </div>
 
-            {/* Chevron */}
             <ChevronRight 
-              className="text-slate-300 dark:text-slate-600 group-hover:text-purple-500 transition-colors ml-2 shrink-0" 
-              size={24} 
+              className="text-slate-300 dark:text-slate-600 group-hover:text-purple-500 transition-colors ml-4 shrink-0" 
+              size={20} 
             />
           </Link>
         ))}

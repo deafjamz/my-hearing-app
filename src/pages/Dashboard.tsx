@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Play, Flame, ArrowRight, Activity, Settings as SettingsIcon, Sun, Moon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,25 +9,33 @@ import { useUser } from '@/store/UserContext';
 
 export function Dashboard() {
   const [viewMode, setViewMode] = useState<'today' | 'week'>('today');
-  const { dailyGoal = 25, setDailyGoal } = useUser();
+  const { history, dailyGoal, todayMinutes, setDailyGoal } = useUser();
 
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [tempGoal, setTempGoal] = useState(dailyGoal.toString());
 
-  // Mock data - replace with real data later
-  const dailyProgress = 13; // Example progress
-  const weekData = [
-    { day: 'Mon', minutes: 15 },
-    { day: 'Tue', minutes: 20 },
-    { day: 'Wed', minutes: 25 },
-    { day: 'Thu', minutes: 18 },
-    { day: 'Fri', minutes: 22 },
-    { day: 'Sat', minutes: 30 },
-    { day: 'Sun', minutes: dailyProgress },
-  ];
+  // Generate week data from history
+  const weekData = useMemo(() => {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = new Date();
+    const weekAgo = new Date(today);
+    weekAgo.setDate(weekAgo.getDate() - 6);
+
+    return days.map((day, i) => {
+      const date = new Date(today);
+      date.setDate(date.getDate() - (6 - i));
+      const dateStr = date.toISOString().split('T')[0];
+      const record = history.find(h => h.date === dateStr);
+      
+      return {
+        day,
+        minutes: record?.minutes || 0
+      };
+    });
+  }, [history]);
 
   // Safe calculation of remaining minutes
-  const remainingMinutes = Math.max(0, (dailyGoal || 0) - (dailyProgress || 0));
+  const remainingMinutes = Math.max(0, (dailyGoal || 0) - (todayMinutes || 0));
 
   const container = {
     hidden: { opacity: 0 },
@@ -110,7 +118,7 @@ export function Dashboard() {
                     transition={{ duration: 0.4, type: "spring" }}
                     className="flex flex-col items-center relative" // Added relative
                   >
-                    <HeaRing current={dailyProgress} goal={dailyGoal} size={200} />
+                    <HeaRing current={todayMinutes} goal={dailyGoal} size={200} />
                     <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
                       <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{remainingMinutes} mins</span>
                       <br/>until you close your ring!
