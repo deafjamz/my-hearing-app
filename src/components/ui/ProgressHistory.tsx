@@ -1,109 +1,74 @@
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from 'recharts';
+import { useTheme } from '../../store/ThemeContext';
 
-interface DailyStat {
-  date: string; // 'Mon', 'Tue' etc.
+interface ProgressData {
+  day: string;
   minutes: number;
 }
 
 interface ProgressHistoryProps {
-  data: DailyStat[];
-  goal: number;
-}
-
-export function ProgressHistory({ data, goal }: ProgressHistoryProps) {
-  return (
-    <div className="w-full h-48">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <defs>
-            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6C5CE7" /> {/* Violet (Top) */}
-              <stop offset="100%" stopColor="#FFD93D" /> {/* Sunshine (Bottom) */}
-            </linearGradient>
-          </defs>
-          <XAxis 
-            dataKey="date" 
-            axisLine={false} 
-            tickLine={false} 
-            tick={{ fill: '#9ca3af', fontSize: 12 }} 
-            dy={10}
-          />
-          <Tooltip 
-            cursor={{ fill: '#f3f4f6' }}
-            contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-          />
-          <ReferenceLine y={goal} stroke="#FF6B6B" strokeDasharray="3 3" opacity={0.8} />
-          <Bar dataKey="minutes" radius={[4, 4, 4, 4]} barSize={32}>
-            {data.map((entry, index) => (
-              <Cell 
-                key={`cell-${index}`} 
-                fill={entry.minutes >= goal ? 'url(#barGradient)' : '#e5e7eb'} 
-              />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}import { cn } from '@/lib/utils';
-
-interface ProgressHistoryProps {
-  data?: { day: string; minutes: number }[];
-  goal?: number;
+  data?: ProgressData[]; // Optional prop
+  goal?: number;         // Optional prop
   className?: string;
 }
 
 export function ProgressHistory({ 
   data = [], 
   goal = 25,
-  className 
+  className = "" 
 }: ProgressHistoryProps) {
-  // Ensure we have data to work with
-  const safeData = data || [];
-  const maxValue = Math.max(goal, ...safeData.map(d => d.minutes));
+  
+  // Safe default: Ensure we always have 7 days even if data is empty
+  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  
+  // If data is empty, generate zero-data for safety
+  const safeData = weekDays.map(day => {
+    const found = data.find(d => d.day === day);
+    return found || { day, minutes: 0 };
+  });
 
-  // Default data if none provided
-  if (safeData.length === 0) {
-    safeData.push(
-      ...['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => ({
-        day,
-        minutes: 0
-      }))
-    );
-  }
+  const maxVal = Math.max(goal, ...safeData.map(d => d.minutes), 1); // Avoid div by zero
 
   return (
-    <div className={cn("w-full h-full flex flex-col", className)}>
-      {/* Chart Container */}
-      <div className="grid grid-cols-7 gap-2 w-full h-[160px] relative">
-        {/* Goal Line */}
+    <div className={`w-full ${className}`}>
+      {/* Chart Grid */}
+      <div className="grid grid-cols-7 gap-2 h-32 items-end mb-2 relative">
+        {/* Goal Line Overlay */}
         <div 
-          className="absolute w-full border-t-2 border-dashed border-red-300/50 dark:border-red-500/30"
-          style={{ 
-            top: `${Math.max(0, 100 - (goal / maxValue) * 100)}%`,
-            transition: 'top 0.3s ease-out'
-          }}
+          className="absolute w-full border-t border-dashed border-red-300 dark:border-red-800 z-0 opacity-50"
+          style={{ bottom: `${(goal / maxVal) * 100}%` }}
         />
-        
-        {/* Bars */}
-        {safeData.map((item, index) => (
-          <div key={index} className="flex flex-col justify-end h-full">
-            <div 
-              className="w-full bg-purple-500/90 dark:bg-purple-400/90 rounded-t-lg transition-all duration-300"
-              style={{ 
-                height: `${(item.minutes / maxValue) * 100}%`,
-                minHeight: item.minutes > 0 ? '4px' : '0'
-              }}
-            />
-          </div>
-        ))}
+
+        {safeData.map((item, index) => {
+          const heightPercent = Math.min((item.minutes / maxVal) * 100, 100);
+          const isToday = index === new Date().getDay() - 1; // Approx check
+
+          return (
+            <div key={item.day} className="flex flex-col items-center justify-end h-full z-10 group">
+              <div 
+                className={`w-full rounded-t-md transition-all duration-500 ease-out ${
+                  item.minutes > 0 
+                    ? 'bg-purple-500/50 dark:bg-purple-600/60 group-hover:bg-purple-500' 
+                    : 'bg-slate-100 dark:bg-slate-800'
+                }`}
+                style={{ height: `${heightPercent}%`, minHeight: '4px' }}
+              >
+                {/* Tooltip on Hover */}
+                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-900 text-white text-[10px] px-2 py-1 rounded transition-opacity whitespace-nowrap">
+                  {item.minutes}m
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* X-axis Labels */}
-      <div className="grid grid-cols-7 gap-2 w-full mt-2">
-        {safeData.map((item, index) => (
-          <div key={index} className="text-center text-slate-500 dark:text-slate-400 text-xs font-medium">
-            {item.day}
+      {/* X-Axis Labels */}
+      <div className="grid grid-cols-7 gap-2">
+        {safeData.map((item) => (
+          <div key={item.day} className="text-center">
+            <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+              {item.day}
+            </span>
           </div>
         ))}
       </div>
