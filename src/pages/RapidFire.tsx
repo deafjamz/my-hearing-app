@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Play, XCircle, CheckCircle, Flame } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
@@ -40,22 +40,23 @@ export function RapidFire() {
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-50 dark:bg-slate-950 z-50 flex flex-col">
-      {/* Centered container with standard width */}
+    <div className="fixed inset-0 flex flex-col bg-slate-50 dark:bg-slate-950 z-50">
       <div className="max-w-lg mx-auto w-full flex-1 flex flex-col relative">
         
         {/* Header */}
-        <div className="flex-none p-4 flex items-center justify-between z-10">
+        <div className="flex-none p-4 px-6 flex items-center justify-between z-10">
           <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
             <ArrowLeft size={24} />
           </Link>
           <h1 className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</h1>
-          <div className="w-8 h-8" /> {/* Spacer for centering */}
+          <div className="flex items-center gap-1 bg-orange-100 dark:bg-orange-900/30 px-3 py-1 rounded-full">
+            <Flame className="text-orange-500 fill-orange-500" size={16} />
+            <span className="text-orange-700 dark:text-orange-300 font-bold text-xs">12</span>
+          </div>
         </div>
 
         {/* Game Content (Scrollable Area) */}
         <div className="flex-1 overflow-y-auto px-6 pb-40">
-           {/* Play Button */}
            <div className="flex justify-center py-10">
              <button 
                onClick={playAudio} 
@@ -68,7 +69,6 @@ export function RapidFire() {
              </button>
            </div>
            
-           {/* Question & Answers */}
            <h2 className="text-center text-slate-900 dark:text-white font-bold text-xl mb-4">Which word did you hear?</h2>
            <div className="space-y-3">
             {currentPair.options.map((option) => (
@@ -94,7 +94,6 @@ export function RapidFire() {
             ))}
            </div>
 
-           {/* Feedback */}
            {hasGuessed && (
             <div className="mt-6 animate-in fade-in slide-in-from-bottom-4 duration-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
               <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
@@ -106,7 +105,7 @@ export function RapidFire() {
         </div>
 
         {/* Sticky Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-md z-20">
+        <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-20 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] dark:shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.2)]">
           <div className="max-w-md mx-auto">
              <button 
                 onClick={nextRound} 
