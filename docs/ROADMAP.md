@@ -15,6 +15,13 @@
 - [ ] Wire up the Dashboard Graph to read from `user.history`.
 - [ ] Add "Level Up" animations when XP/Minutes goals are met.
 
+## Phase 2.5: Long-Term Analytics (The "Rehab Journey")
+- **Problem:** Current graph only shows 7 days. Rehab takes 6+ months.
+- **Solution:** Implement a "Zoomable" Progress View.
+    - **Toggle:** Day / Week / Month view selector on Dashboard.
+    - **Visual:** "Contribution Heatmap" (GitHub style) for the 6-month view.
+    - **Data:** Update `UserContext` to aggregate minutes by month.
+
 ## Phase 3: New Activities
 - [ ] **Interactive Stories:** Text-highlighting reader.
 - [ ] **Scenarios:** Chat-based audio roleplay.
