@@ -1,39 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, XCircle, CheckCircle, Flame, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Play, ArrowRight, XCircle, CheckCircle, Flame } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
-import { cn } from '@/lib/utils';
 
 export function RapidFire() {
   const { voice, currentStreak, incrementStreak, resetStreak } = useUser();
-  const { play, isPlaying } = useAudio();
-  
-  const [shuffledPairs, setShuffledPairs] = useState<typeof WORD_PAIRS>([]);
+  const { play } = useAudio(); // isPlaying is not needed for the new button logic
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
 
-  useEffect(() => {
-    setShuffledPairs([...WORD_PAIRS].sort(() => Math.random() - 0.5));
-  }, []);
+  // Guard Clause for data loading
+  if (!WORD_PAIRS || WORD_PAIRS.length === 0) return <div className="p-10">Loading...</div>;
 
-  if (!shuffledPairs || shuffledPairs.length === 0) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="text-slate-500">Loading Game...</div>
-      </div>
-    );
-  }
-
-  const currentPair = shuffledPairs[currentIndex];
+  const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
-  const isCorrect = hasGuessed && selectedGuess === currentPair.correct;
+  const isCorrect = selectedGuess === currentPair.correct;
 
-  const playAudio = () => {
-    if (!currentPair) return;
-    const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
-    play(path);
+  const handleAction = () => {
+    if (!hasGuessed) {
+      // State 1: Play Audio
+      const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
+      play(path);
+    } else {
+      // State 2: Go to Next Round
+      setSelectedGuess(null);
+      setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
+    }
   };
 
   const handleGuess = (guess: string) => {
@@ -46,62 +40,42 @@ export function RapidFire() {
     }
   };
 
-  const nextRound = () => {
-    setSelectedGuess(null);
-    setCurrentIndex((prev) => (prev + 1) % shuffledPairs.length);
-  };
-
-  // Unified action handler for the morphing button
-  const handleActionClick = () => {
-    if (hasGuessed) {
-      nextRound();
-    } else {
-      playAudio();
-    }
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
-      <header className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 px-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+      {/* Header */}
+      <header className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
           <ArrowLeft size={24} />
         </Link>
-        <h1 className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</h1>
+        <div className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</div>
         <div className="flex items-center gap-1.5 bg-orange-100 dark:bg-orange-900/30 px-3 py-1.5 rounded-full">
           <Flame className="text-orange-500 fill-orange-500" size={16} />
           <span className="text-orange-700 dark:text-orange-300 font-bold text-sm tabular-nums">{currentStreak}</span>
         </div>
       </header>
 
-      <main className="max-w-lg mx-auto w-full px-6 py-8 pb-20 flex-1" key={currentIndex}>
+      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
         
-        {/* The Morphing Action Button */}
+        {/* Unified Action Button */}
         <div className="flex justify-center mb-8">
           <button 
-            onClick={handleActionClick} 
-            className={cn(
-              "w-24 h-24 rounded-full bg-gradient-to-tr shadow-xl flex items-center justify-center text-white transition-all duration-300",
-              "hover:scale-105 active:scale-95",
-              isPlaying && 'scale-110',
-              !hasGuessed && "from-purple-500 to-purple-600 shadow-purple-500/30",
-              isCorrect && "from-green-500 to-green-600 shadow-green-500/30",
-              hasGuessed && !isCorrect && "from-red-500 to-red-600 shadow-red-500/30"
-            )}
+            onClick={handleAction}
+            className={`w-28 h-28 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 active:scale-95 ${
+              hasGuessed 
+                ? 'bg-gradient-to-tr from-green-500 to-green-600 hover:scale-105 shadow-green-500/30' 
+                : 'bg-gradient-to-tr from-purple-500 to-purple-600 hover:scale-105 shadow-purple-500/30'
+            }`}
           >
-            {hasGuessed 
-              ? <ArrowRight size={40} /> 
-              : <Play size={40} fill="currentColor" className="ml-1 text-white" />
-            }
+            {hasGuessed ? <ArrowRight size={48} /> : <Play size={48} fill="currentColor" className="ml-1" />}
           </button>
         </div>
 
         <h2 className="text-center text-slate-900 dark:text-white font-bold text-xl mb-6">
-          {hasGuessed 
-            ? (isCorrect ? "Correct!" : "Nice Try!")
-            : "Which word did you hear?"}
+          {hasGuessed ? (isCorrect ? "Correct!" : "Nice try!") : "Which word did you hear?"}
         </h2>
 
-        <div className="space-y-3">
+        {/* Answer Cards */}
+        <div className="space-y-3 mb-8">
           {currentPair.options.map((option) => {
             const isSelected = selectedGuess === option;
             const isTheCorrectAnswer = option === currentPair.correct;
@@ -127,8 +101,6 @@ export function RapidFire() {
             );
           })}
         </div>
-        
-        {/* NO SEPARATE NEXT BUTTON OR FOOTER */}
       </main>
     </div>
   );
