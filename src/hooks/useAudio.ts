@@ -1,98 +1,46 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
-interface UseAudioProps {
-  src: string;
-  onEnded?: () => void;
-}
-
-export function useAudio({ src, onEnded }: UseAudioProps) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+export function useAudio() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
-    const audio = new Audio(src);
-    audioRef.current = audio;
-    setIsLoading(true);
-    setError(null);
-
-    const handleCanPlay = () => {
-      setIsLoading(false);
-      setDuration(audio.duration);
-    };
-
-    const handleTimeUpdate = () => {
-      setProgress((audio.currentTime / audio.duration) * 100);
-    };
-
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setProgress(100);
-      if (onEnded) onEnded();
-    };
-
-    const handleError = (e: Event) => {
-      setIsLoading(false);
-      setIsPlaying(false);
-      const target = e.target as HTMLAudioElement;
-      setError(`Error loading audio: ${target.error?.message || 'Unknown error'}`);
-      console.error("Audio Error:", e);
-    };
-
-    audio.addEventListener('canplay', handleCanPlay);
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('error', handleError);
-
-    // Attempt to preload metadata
-    audio.load();
-
-    return () => {
-      audio.pause();
-      audio.removeEventListener('canplay', handleCanPlay);
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('error', handleError);
-      audioRef.current = null;
-    };
-  }, [src, onEnded]);
-
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-
-    if (isPlaying) {
+  const play = useCallback((path: string) => {
+    // Stop any currently playing audio from this hook instance
+    if (audioRef.current) {
       audioRef.current.pause();
-    } else {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.error("Playback failed:", err);
-          setIsPlaying(false);
-          setError("Playback failed. Please check audio settings.");
-        });
+      audioRef.current.currentTime = 0;
+    }
+
+    const newAudio = new Audio(path);
+    audioRef.current = newAudio;
+
+    newAudio.onplay = () => setIsPlaying(true);
+    newAudio.onended = () => setIsPlaying(false);
+    newAudio.onpause = () => setIsPlaying(false); // Handle pausing as well
+    newAudio.onerror = (e) => {
+      console.error("Audio Error:", e, path);
+      setIsPlaying(false);
+    };
+    
+    newAudio.play().catch(e => {
+      // Don't log the common user-interrupt error
+      if ((e as DOMException).name !== 'AbortError') {
+        console.error("Playback failed:", e);
       }
-    }
-    setIsPlaying(!isPlaying);
-  };
+      setIsPlaying(false);
+    });
 
-  const seek = (value: number) => {
-    if (audioRef.current && duration) {
-      const newTime = (value / 100) * duration;
-      audioRef.current.currentTime = newTime;
-      setProgress(value);
-    }
-  };
+  }, []);
 
-  return {
-    isPlaying,
-    isLoading,
-    error,
-    progress,
-    duration,
-    togglePlay,
-    seek
-  };
+  // Effect for component unmount cleanup
+  useEffect(() => {
+    const audio = audioRef.current;
+    return () => {
+      if (audio) {
+        audio.pause(); // Stop audio when the component unmounts
+      }
+    };
+  }, []);
+
+  return { play, isPlaying };
 }

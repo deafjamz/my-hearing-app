@@ -1,48 +1,38 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
-import { cn } from '@/lib/utils'; // For cleaner class management
+import { cn } from '@/lib/utils';
 
-const WORD_PAIRS = [
-  { id: 1, correct: 'Bear', options: ['Bear', 'Pear'], audio: '/audio/bear.mp3' },
-  { id: 2, correct: 'Pie', options: ['Pie', 'Buy'], audio: '/audio/pie.mp3' },
-  { id: 3, correct: 'Time', options: ['Time', 'Dime'], audio: '/audio/time.mp3' },
-  { id: 4, correct: 'Fan', options: ['Fan', 'Van'], audio: '/audio/fan.mp3' },
-];
+// Data and Hook Imports
+import { WORD_PAIRS } from '@/data/wordPairs';
+import { useUser } from '@/store/UserContext';
+import { useAudio } from '@/hooks/useAudio';
 
 export function RapidFire() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
-  const [isPreparing, setIsPreparing] = useState(false); // For visual indicator
+  const [isPreparing, setIsPreparing] = useState(false);
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  
+  // Custom hooks
+  const { voice } = useUser();
+  const { play, isPlaying } = useAudio();
+
   const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
 
-  // Effect to manage the audio object source
-  useEffect(() => {
-    if (currentPair?.audio) {
-      audioRef.current = new Audio(currentPair.audio);
-    }
-    // Cleanup function to pause audio if component unmounts while playing
-    return () => {
-      audioRef.current?.pause();
-    }
-  }, [currentPair]);
-  
   // Effect for "Polite Auto-Play"
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (!hasGuessed && currentPair) {
       setIsPreparing(true);
       timer = setTimeout(() => {
-        playAudio();
+        // Construct the dynamic audio path
+        const audioPath = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
+        play(audioPath);
         setIsPreparing(false);
       }, 500); // 500ms delay for cognitive settling
     }
 
-    // Cleanup: clear timeout if user guesses or navigates away
     return () => {
       clearTimeout(timer);
       if (isPreparing) {
@@ -51,8 +41,9 @@ export function RapidFire() {
     };
   }, [currentIndex, hasGuessed]); // Re-run when round changes
 
-  const playAudio = () => {
-    audioRef.current?.play().catch(e => console.error("Audio play failed", e));
+  const handleManualPlay = () => {
+    const audioPath = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
+    play(audioPath);
   };
   
   const handleGuess = (guess: string) => {
@@ -65,6 +56,7 @@ export function RapidFire() {
     setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
+  // Guard Clause for data loading
   if (!currentPair) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
@@ -89,14 +81,13 @@ export function RapidFire() {
       <div className="flex-1 overflow-y-auto px-4 pb-40">
         <div className="max-w-md mx-auto space-y-6 pt-4">
           
-          {/* Play Button with Visual Indicator */}
           <div className="flex justify-center py-8">
             <button 
-              onClick={playAudio}
+              onClick={handleManualPlay}
               className={cn(
                 "w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all duration-300",
                 "hover:scale-105 active:scale-95",
-                isPreparing && "scale-110 ring-4 ring-purple-500/30" // Visual indicator for auto-play
+                (isPreparing || isPlaying) && "scale-110 ring-4 ring-purple-500/30"
               )}
             >
               <Play size={40} fill="currentColor" className="ml-1" />
@@ -107,7 +98,6 @@ export function RapidFire() {
             Which word did you hear?
           </h2>
 
-          {/* Answer Cards */}
           <div className="space-y-3">
             {currentPair.options.map((option) => (
               <button
@@ -135,7 +125,6 @@ export function RapidFire() {
             ))}
           </div>
 
-          {/* Feedback Box */}
           {hasGuessed && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
               <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
