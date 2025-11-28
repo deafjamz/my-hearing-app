@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Zap, BookOpen, Coffee, Mic } from 'lucide-react';
+import { ChevronRight, Zap, BookOpen, Coffee, Mic, LayoutGrid } from 'lucide-react';
 
 export function ActivityList() {
   const activities = [
@@ -35,6 +35,14 @@ export function ActivityList() {
       color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', 
       path: '/practice/sentences' 
     },
+    {
+      id: 'all-activities',
+      title: 'All Activities',
+      description: 'Browse and select from all available practice modules.',
+      icon: LayoutGrid,
+      color: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+      path: '/practice/all'
+    }
   ];
 
   return (
