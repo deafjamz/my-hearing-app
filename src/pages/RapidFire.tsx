@@ -1,73 +1,61 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { minimalPairs, createMinimalPairActivity } from '@/data/minimalPairs';
-import { ActivityData, Question } from '@/types/activity';
-import { ArrowLeft, Play, CheckCircle, XCircle } from 'lucide-react';
-import { useUser } from '@/store/UserContext';
-import { cn } from '@/lib/utils';
+import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
+
+const WORD_PAIRS = [
+  { id: 1, correct: 'Bear', options: ['Bear', 'Pear'], audio: '/audio/bear.mp3' },
+  { id: 2, correct: 'Pie', options: ['Pie', 'Buy'], audio: '/audio/pie.mp3' },
+  { id: 3, correct: 'Time', options: ['Time', 'Dime'], audio: '/audio/time.mp3' },
+  { id: 4, correct: 'Fan', options: ['Fan', 'Van'], audio: '/audio/fan.mp3' },
+];
 
 export function RapidFire() {
-  const [activity, setActivity] = useState<ActivityData | null>(null);
-  const [currentPairIndex, setCurrentPairIndex] = useState(0);
-  const [hasGuessed, setHasGuessed] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
-  
-  const { voice } = useUser();
-  const audioRef = useRef<HTMLAudioElement>(null);
 
-  useEffect(() => {
-    loadNextActivity();
-  }, [voice, currentPairIndex]);
+  const currentPair = WORD_PAIRS[currentIndex];
+  const hasGuessed = selectedGuess !== null;
 
-  const loadNextActivity = () => {
-    const pair = minimalPairs[currentPairIndex % minimalPairs.length];
-    setActivity(createMinimalPairActivity(pair, voice));
-    setHasGuessed(false);
-    setSelectedGuess(null);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-  };
-
-  const playAudio = () => {
-    audioRef.current?.play();
-  };
+  // CRITICAL FIX: Prevent crash if data is missing or out of bounds.
+  if (!currentPair) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="text-slate-500">Loading Game Data...</div>
+      </div>
+    );
+  }
 
   const handleGuess = (guess: string) => {
-    if (hasGuessed || !activity) return;
+    if (hasGuessed) return;
     setSelectedGuess(guess);
-    setHasGuessed(true);
   };
 
   const nextRound = () => {
-    setCurrentPairIndex(prev => prev + 1);
+    setSelectedGuess(null);
+    setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
-  if (!activity) {
-    return <div className="fixed inset-0 bg-slate-50 dark:bg-slate-950" />;
-  }
-  
-  const question: Question = activity.questions[0];
+  const playAudio = () => {
+    console.log(`Playing: ${currentPair.audio}`);
+    // Future implementation: new Audio(currentPair.audio).play();
+  };
 
   return (
     <div className="fixed inset-0 flex flex-col bg-slate-50 dark:bg-slate-950 z-50">
       
-      {/* 1. Header (Fixed Height) */}
+      {/* 1. Header (Fixed) */}
       <div className="flex-none p-4 flex items-center justify-between z-10">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors">
           <ArrowLeft size={24} />
         </Link>
         <div className="text-slate-900 dark:text-white font-black text-lg">Rapid Fire</div>
-        <div className="w-8 h-8" /> {/* Spacer for centering */}
+        <div className="w-8 h-8" />
       </div>
 
-      {/* 2. Scrollable Game Area */}
+      {/* 2. Scrollable Content (Takes up remaining space) */}
       <div className="flex-1 overflow-y-auto px-4 pb-40">
         <div className="max-w-md mx-auto space-y-6 pt-4">
           
-          <audio ref={audioRef} src={activity.audioSrc} preload="auto" />
-
           {/* Play Button */}
           <div className="flex justify-center py-8">
             <button 
@@ -84,27 +72,25 @@ export function RapidFire() {
 
           {/* Answer Cards */}
           <div className="space-y-3">
-            {question.options.map((option) => (
+            {currentPair.options.map((option) => (
               <button
-                key={option.id}
-                onClick={() => handleGuess(option.text)}
+                key={option}
+                onClick={() => handleGuess(option)}
                 disabled={hasGuessed}
-                className={cn(
-                  "w-full p-5 text-left font-bold text-lg rounded-2xl border-2 transition-all duration-200 shadow-sm",
-                  "disabled:cursor-not-allowed",
-                  hasGuessed && option.text === question.correctAnswer
+                className={`w-full p-5 text-left font-bold text-lg rounded-2xl border-2 transition-all shadow-sm disabled:cursor-not-allowed ${
+                  hasGuessed && option === currentPair.correct 
                     ? 'bg-green-50 border-green-500 text-green-700 dark:bg-green-900/20 dark:border-green-600 dark:text-green-300'
-                    : hasGuessed && option.text === selectedGuess && option.text !== question.correctAnswer
+                    : hasGuessed && option === selectedGuess && option !== currentPair.correct
                     ? 'bg-red-50 border-red-500 text-red-700 dark:bg-red-900/20 dark:border-red-600 dark:text-red-300'
                     : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:border-purple-300 dark:hover:border-purple-600'
-                )}
+                }`}
               >
                 <div className="flex justify-between items-center">
-                  <span>{option.text}</span>
-                  {hasGuessed && option.text === question.correctAnswer && (
+                  <span>{option}</span>
+                  {hasGuessed && option === currentPair.correct && (
                     <CheckCircle size={20} className="text-green-500" />
                   )}
-                  {hasGuessed && option.text === selectedGuess && option.text !== question.correctAnswer && (
+                  {hasGuessed && option === selectedGuess && option !== currentPair.correct && (
                     <XCircle size={20} className="text-red-500" />
                   )}
                 </div>
@@ -115,18 +101,16 @@ export function RapidFire() {
           {/* Feedback Box */}
           {hasGuessed && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
-              <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1 flex items-center gap-2">
-                Did you know?
-              </h3>
+              <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
               <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
-                The difference between "{question.options[0].text}" and "{question.options[1].text}" is often a subtle change in vowel sound or voicing.
+                The difference is in the Voicing. "{currentPair.correct}" uses your vocal cords!
               </p>
             </div>
           )}
         </div>
       </div>
 
-      {/* 3. Footer */}
+      {/* 3. Fixed Footer */}
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-md z-20">
         <div className="max-w-md mx-auto">
           <button 
