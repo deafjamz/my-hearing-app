@@ -4,6 +4,7 @@ import { ArrowLeft, Play, XCircle, CheckCircle, Flame } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
+import { cn } from '@/lib/utils';
 
 export function RapidFire() {
   const { voice, currentStreak, incrementStreak, resetStreak } = useUser();
@@ -13,19 +14,24 @@ export function RapidFire() {
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
 
   // Guard Clause
-  if (!WORD_PAIRS || WORD_PAIRS.length === 0) return <div>Loading...</div>;
+  if (!WORD_PAIRS || WORD_PAIRS.length === 0) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="text-slate-500">Loading Game...</div>
+      </div>
+    );
+  }
 
   const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
 
-  // Play audio when "Play" is clicked
-  const handlePlay = () => {
+  const playAudio = () => {
     const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
     play(path);
   };
 
   const handleGuess = (guess: string) => {
-    if (hasGuessed) return;
+    if (hasGuessed) return; // Prevent double guessing
     setSelectedGuess(guess);
     
     if (guess === currentPair.correct) {
@@ -36,15 +42,16 @@ export function RapidFire() {
   };
 
   const handleNext = () => {
+    // Strict Reset Order: Reset UI state FIRST, then advance data.
     setSelectedGuess(null);
     setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
   return (
-    // 1. Main Container (Full Height, Flex Column)
+    // Main Container: Flexbox column for robust full-height layout
     <div className="h-[100dvh] flex flex-col bg-slate-50 dark:bg-slate-950 overflow-hidden">
       
-      {/* 2. Header (Fixed at top by Flex) */}
+      {/* Header (flex-none) */}
       <div className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
           <ArrowLeft size={24} />
@@ -56,45 +63,37 @@ export function RapidFire() {
         </div>
       </div>
 
-      {/* 3. Scrollable Game Area (Takes remaining space) */}
+      {/* Game Content (flex-1 and scrollable) */}
       <div className="flex-1 overflow-y-auto px-6" key={currentIndex}>
         <div className="max-w-md mx-auto space-y-8 pt-4 pb-8">
           
-          {/* Play Button */}
           <div className="flex justify-center py-4">
             <button 
-              onClick={handlePlay}
-              className={`w-28 h-28 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all ${isPlaying ? 'scale-110' : 'hover:scale-105 active:scale-95'}`}
+              onClick={playAudio}
+              className={cn(
+                "w-28 h-28 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all",
+                isPlaying ? 'scale-110' : 'hover:scale-105 active:scale-95'
+              )}
             >
               <Play size={48} fill="currentColor" className="ml-2" />
             </button>
           </div>
 
           <div className="text-center space-y-2">
-            <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">
-              Which word?
-            </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
-              Listen carefully to the difference.
-            </p>
+            <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">Which word did you hear?</h2>
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Listen carefully to the difference.</p>
           </div>
 
-          {/* Options */}
           <div className="space-y-3">
             {currentPair.options.map((option) => {
               const isSelected = selectedGuess === option;
               const isTheCorrectAnswer = option === currentPair.correct;
               
               let cardStyle = "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-purple-300 dark:hover:border-purple-700";
-              
               if (hasGuessed) {
-                if (isTheCorrectAnswer) {
-                  cardStyle = "bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-700 text-green-700 dark:text-green-300 ring-1 ring-green-500/50";
-                } else if (isSelected && !isTheCorrectAnswer) {
-                  cardStyle = "bg-red-50 dark:bg-red-900/20 border-red-500 dark:border-red-700 text-red-700 dark:text-red-400 ring-1 ring-red-500/50";
-                } else {
-                  cardStyle = "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 opacity-60 grayscale";
-                }
+                if (isTheCorrectAnswer) cardStyle = "bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-700 text-green-700 dark:text-green-300 ring-1 ring-green-500/50";
+                else if (isSelected) cardStyle = "bg-red-50 dark:bg-red-900/20 border-red-500 dark:border-red-700 text-red-700 dark:text-red-400 ring-1 ring-red-500/50";
+                else cardStyle = "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 opacity-60 grayscale";
               }
 
               return (
@@ -112,9 +111,9 @@ export function RapidFire() {
             })}
           </div>
 
-          {/* Feedback */}
+          {/* Feedback Box (Solid Background) */}
           {hasGuessed && (
-            <div className="animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
+            <div className="relative z-10 animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
               <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
               <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
                 The key difference here is in the <span className="font-bold">{currentPair.category}</span>. Listen for that subtle change!
@@ -124,8 +123,8 @@ export function RapidFire() {
         </div>
       </div>
 
-      {/* 4. Footer (Pinned to bottom via Flex) */}
-      <div className="flex-none p-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 z-20">
+      {/* Footer (flex-none, pinned to bottom) */}
+      <div className="flex-none p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 z-50">
         <button 
           onClick={handleNext}
           disabled={!hasGuessed}
