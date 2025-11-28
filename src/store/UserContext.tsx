@@ -3,6 +3,8 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 interface UserContextType {
   dailyGoal: number;
   setDailyGoal: (goal: number) => void;
+  voice: string;
+  setVoice: (voice: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -16,12 +18,23 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return 25;
   });
 
+  const [voice, setVoice] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('voice') || 'sarah';
+    }
+    return 'sarah';
+  });
+
   useEffect(() => {
     localStorage.setItem('dailyGoal', dailyGoal.toString());
   }, [dailyGoal]);
 
+  useEffect(() => {
+    localStorage.setItem('voice', voice);
+  }, [voice]);
+
   return (
-    <UserContext.Provider value={{ dailyGoal, setDailyGoal }}>
+    <UserContext.Provider value={{ dailyGoal, setDailyGoal, voice, setVoice }}>
       {children}
     </UserContext.Provider>
   );

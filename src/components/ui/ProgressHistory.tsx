@@ -42,18 +42,11 @@ export function ProgressHistory({
         {safeData.map((item, index) => {
           const heightPercent = Math.min((item.minutes / maxVal) * 100, 100);
           return (
-            <div key={item.day} className="flex flex-col items-center justify-end h-full z-10 group">
+            <div key={item.day} className="flex flex-col items-center justify-end h-full z-10">
               <div 
-                className="w-full rounded-t-md transition-all duration-500 ease-out bg-purple-500/50 dark:bg-purple-600/60 group-hover:bg-purple-500"
+                className="w-full rounded-t-md transition-all duration-500 ease-out bg-purple-500/50 dark:bg-purple-600/60"
                 style={{ height: `${heightPercent}%`, minHeight: item.minutes > 0 ? '4px' : '0' }}
-              >
-                {/* Tooltip */}
-                {item.minutes > 0 && (
-                  <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap transition-opacity">
-                    {item.minutes}m
-                  </div>
-                )}
-              </div>
+              />
             </div>
           );
         })}

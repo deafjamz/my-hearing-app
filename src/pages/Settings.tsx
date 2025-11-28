@@ -1,8 +1,10 @@
 import { useTheme } from '../store/ThemeContext';
+import { useUser } from '../store/UserContext';
 import { Mic, Moon, Sun, Check, Settings as SettingsIcon } from 'lucide-react';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
+  const { voice, setVoice } = useUser();
 
   const voices = [
     { id: 'sarah', name: 'Sarah', desc: 'Clear & Articulate' },
@@ -12,7 +14,7 @@ export function Settings() {
   ];
 
   return (
-    <div className="max-w-md mx-auto w-full">
+    <div className="max-w-md mx-auto w-full p-6">
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
           <SettingsIcon size={20} />
@@ -46,33 +48,36 @@ export function Settings() {
 
       {/* Instructor Voice Section */}
       <section>
-        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Instructor Voice</h2>
+        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">
+          Instructor Voice
+        </h2>
         <div className="space-y-3">
-          {voices.map((voice) => (
+          {voices.map((v) => (
             <div 
-              key={voice.id}
+              key={v.id}
+              onClick={() => setVoice(v.id)}
               className={`flex items-center justify-between p-4 border rounded-[2rem] transition-all cursor-pointer ${
-                voice.id === 'sarah' 
+                v.id === voice
                   ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 ring-1 ring-purple-500/20' 
                   : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-purple-200'
               }`}
             >
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  voice.id === 'sarah' ? 'bg-purple-100 text-purple-600' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
+                  v.id === voice ? 'bg-purple-100 text-purple-600' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
                 }`}>
                   <Mic size={20} />
                 </div>
                 <div>
-                  <h3 className={`font-bold ${voice.id === 'sarah' ? 'text-purple-900 dark:text-purple-100' : 'text-slate-900 dark:text-white'}`}>
-                    {voice.name}
+                  <h3 className={`font-bold ${v.id === voice ? 'text-purple-900 dark:text-purple-100' : 'text-slate-900 dark:text-white'}`}>
+                    {v.name}
                   </h3>
-                  <p className={`text-xs font-medium ${voice.id === 'sarah' ? 'text-purple-600 dark:text-purple-300' : 'text-slate-500'}`}>
-                    {voice.desc}
+                  <p className={`text-xs font-medium ${v.id === voice ? 'text-purple-600 dark:text-purple-300' : 'text-slate-500'}`}>
+                    {v.desc}
                   </p>
                 </div>
               </div>
-              {voice.id === 'sarah' && <Check size={20} className="text-purple-600" />}
+              {v.id === voice && <Check size={20} className="text-purple-600" />}
             </div>
           ))}
         </div>
