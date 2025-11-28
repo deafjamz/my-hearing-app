@@ -1,95 +1,82 @@
-import { useVoice } from '@/store/VoiceContext';
-import { Check, User } from 'lucide-react';
-import { cn } from '@/lib/utils';
-
-export function Settings() {
-  const { currentVoice, setVoice, availableVoices } = useVoice();
-
-  return (
-    <div className="p-6 max-w-md mx-auto space-y-8 bg-brand-background dark:bg-brand-dark min-h-screen">
-      <header>
-        <h1 className="text-2xl font-bold text-brand-dark dark:text-brand-light">Settings</h1>
-        <p className="text-gray-500 dark:text-gray-400">Customize your hearing experience.</p>
-      </header>
-
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold text-brand-dark dark:text-brand-light flex items-center gap-3">
-          <div className="bg-brand-background dark:bg-brand-dark shadow-neumo-concave dark:shadow-dark-neumo-concave p-2 rounded-full">
-            <User size={24} className="text-brand-primary" />
-          </div>
-          Preferred Voice
-        </h2>
-        
-        <div className="grid grid-cols-1 gap-3">
-          {availableVoices.map((voice) => {
-            const isSelected = currentVoice === voice.id;
-            return (
-              <button
-                key={voice.id}
-                onClick={() => setVoice(voice.id)}
-                className={cn(
-                  "flex items-center justify-between p-4 rounded-2xl border-2 transition-all duration-300 transform active:scale-[0.98]",
-                  isSelected
-                    ? "bg-brand-background dark:bg-brand-dark shadow-neumo-convex dark:shadow-dark-neumo-convex border-brand-primary text-brand-dark dark:text-brand-light transform scale-[1.01]"
-                    : "bg-brand-background dark:bg-brand-dark shadow-neumo-concave dark:shadow-dark-neumo-concave hover:shadow-neumo-convex dark:hover:shadow-dark-neumo-convex border-transparent text-gray-700 dark:text-gray-300"
-                )}
-              >
-                <div className="text-left">
-                  <p className={cn("font-semibold", "text-brand-dark dark:text-brand-light")}>
-                    {voice.name}
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{voice.description}</p>
-                </div>
-                {isSelected && <Check className="text-brand-primary" />}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}import { Switch } from '@/components/ui/Switch';
-import { useTheme } from '@/store/ThemeContext';
+import { useTheme } from '../store/ThemeContext';
+import { Mic, Moon, Sun, Check, Settings as SettingsIcon } from 'lucide-react';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
 
+  const voices = [
+    { id: 'sarah', name: 'Sarah', desc: 'Clear & Articulate' },
+    { id: 'david', name: 'David', desc: 'Warm & Friendly' },
+    { id: 'marcus', name: 'Marcus', desc: 'Deep & Confident' },
+    { id: 'emma', name: 'Emma', desc: 'Bright & Energetic' },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-6">
-      <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Settings</h1>
-
-        {/* Appearance Section */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 mb-6 shadow-lg shadow-slate-200/50 dark:shadow-none">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Appearance</h2>
-          <div className="flex items-center justify-between">
-            <span className="text-slate-500 dark:text-slate-400">Dark Mode</span>
-            <Switch
-              checked={theme === 'dark'}
-              onCheckedChange={toggleTheme}
-              aria-label="Toggle dark mode"
-            />
-          </div>
+    <div className="max-w-md mx-auto w-full">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+          <SettingsIcon size={20} />
         </div>
-
-        {/* Instructor Section */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] p-6 shadow-lg shadow-slate-200/50 dark:shadow-none">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Instructor Voice</h2>
-          <div className="space-y-2">
-            {['Sarah', 'David', 'Emma', 'Marcus'].map((voice) => (
-              <label key={voice} className="flex items-center p-3 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
-                <input
-                  type="radio"
-                  name="voice"
-                  value={voice}
-                  className="mr-3"
-                />
-                <span className="text-slate-500 dark:text-slate-400">{voice}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Settings</h1>
       </div>
+
+      {/* Appearance Section */}
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Appearance</h2>
+        <div 
+          onClick={toggleTheme}
+          className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm cursor-pointer hover:scale-[1.02] transition-transform duration-200"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400">
+              {theme === 'dark' ? <Moon size={20} /> : <Sun size={20} />}
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 dark:text-white">Dark Mode</h3>
+              <p className="text-xs text-slate-500 font-medium">Adjust the app brightness</p>
+            </div>
+          </div>
+          
+          {/* Toggle Switch Visual */}
+          <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${theme === 'dark' ? 'bg-purple-600' : 'bg-slate-200'}`}>
+            <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-300 ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'}`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Instructor Voice Section */}
+      <section>
+        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Instructor Voice</h2>
+        <div className="space-y-3">
+          {voices.map((voice) => (
+            <div 
+              key={voice.id}
+              className={`flex items-center justify-between p-4 border rounded-[2rem] transition-all cursor-pointer ${
+                voice.id === 'sarah' 
+                  ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 ring-1 ring-purple-500/20' 
+                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-purple-200'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  voice.id === 'sarah' ? 'bg-purple-100 text-purple-600' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
+                }`}>
+                  <Mic size={20} />
+                </div>
+                <div>
+                  <h3 className={`font-bold ${voice.id === 'sarah' ? 'text-purple-900 dark:text-purple-100' : 'text-slate-900 dark:text-white'}`}>
+                    {voice.name}
+                  </h3>
+                  <p className={`text-xs font-medium ${voice.id === 'sarah' ? 'text-purple-600 dark:text-purple-300' : 'text-slate-500'}`}>
+                    {voice.desc}
+                  </p>
+                </div>
+              </div>
+              {voice.id === 'sarah' && <Check size={20} className="text-purple-600" />}
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
