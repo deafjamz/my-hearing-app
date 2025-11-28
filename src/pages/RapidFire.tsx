@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Play, XCircle, CheckCircle, Flame, ArrowRight } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
@@ -6,25 +6,53 @@ import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
 import { cn } from '@/lib/utils';
 
+// Helper to shuffle arrays (Fisher-Yates algorithm)
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
+type WordPair = typeof WORD_PAIRS[0];
+
 export function RapidFire() {
   const { voice, currentStreak, incrementStreak, resetStreak } = useUser();
   const { play, isPlaying } = useAudio();
   
+  // State for shuffled data
+  const [shuffledPairs, setShuffledPairs] = useState<WordPair[]>([]);
+  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
 
-  // Guard Clause
-  if (!WORD_PAIRS || WORD_PAIRS.length === 0) {
+  // 1. On mount, shuffle the entire deck of word pairs once.
+  useEffect(() => {
+    setShuffledPairs(shuffleArray(WORD_PAIRS));
+  }, []);
+
+  const currentPair = shuffledPairs[currentIndex];
+  const hasGuessed = selectedGuess !== null;
+  const isCorrect = hasGuessed && selectedGuess === currentPair?.correct;
+
+  // 2. When the current pair changes, shuffle its answer options.
+  useEffect(() => {
+    if (currentPair) {
+      setShuffledOptions(shuffleArray(currentPair.options));
+    }
+  }, [currentPair]);
+
+  // Guard Clause for initial shuffle
+  if (!currentPair) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="text-slate-500">Loading Game...</div>
+      <div className="h-[100dvh] flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="text-slate-500 animate-pulse">Shuffling questions...</div>
       </div>
     );
   }
-
-  const currentPair = WORD_PAIRS[currentIndex];
-  const hasGuessed = selectedGuess !== null;
-  const isCorrect = hasGuessed && selectedGuess === currentPair.correct;
 
   const playAudio = () => {
     const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
@@ -34,7 +62,6 @@ export function RapidFire() {
   const handleGuess = (guess: string) => {
     if (hasGuessed) return;
     setSelectedGuess(guess);
-    
     if (guess === currentPair.correct) {
       incrementStreak();
     } else {
@@ -43,9 +70,8 @@ export function RapidFire() {
   };
 
   const nextRound = () => {
-    // Strict Reset Order
     setSelectedGuess(null);
-    setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
+    setCurrentIndex((prev) => (prev + 1) % shuffledPairs.length);
   };
 
   const handleActionClick = () => {
@@ -59,7 +85,6 @@ export function RapidFire() {
   return (
     <div className="h-[100dvh] flex flex-col bg-slate-50 dark:bg-slate-950 overflow-hidden">
       
-      {/* Header (flex-none) */}
       <header className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
           <ArrowLeft size={24} />
@@ -71,11 +96,9 @@ export function RapidFire() {
         </div>
       </header>
 
-      {/* Main Game Area (Vertically Centered) */}
-      <main className="flex-1 overflow-y-auto" key={currentIndex}>
-        <div className="max-w-md mx-auto w-full flex flex-col justify-center min-h-full p-6 space-y-8">
+      <main className="flex-1 overflow-y-auto">
+        <div className="max-w-md mx-auto w-full flex flex-col justify-center min-h-full p-6 space-y-4">
           
-          {/* Unified Action Button */}
           <div className="flex justify-center">
             <button 
               onClick={handleActionClick}
@@ -95,12 +118,12 @@ export function RapidFire() {
             </button>
           </div>
 
-          <div className="text-center space-y-2">
+          <div className="text-center">
             <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">Which word did you hear?</h2>
           </div>
 
           <div className="space-y-3">
-            {currentPair.options.map((option) => {
+            {shuffledOptions.map((option) => {
               const isSelected = selectedGuess === option;
               const isTheCorrectAnswer = option === currentPair.correct;
               
@@ -126,19 +149,19 @@ export function RapidFire() {
             })}
           </div>
 
-          {/* Feedback Box */}
-          {hasGuessed && (
-            <div className="animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
-              <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
-              <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
-                The key difference here is in the <span className="font-bold">{currentPair.category}</span>. Listen for that subtle change!
-              </p>
-            </div>
-          )}
+          {/* Fixed-height container to prevent layout jump */}
+          <div className="h-32 flex items-center justify-center">
+            {hasGuessed && (
+              <div className="w-full animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
+                <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
+                <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
+                  The key difference here is in the <span className="font-bold">{currentPair.category}</span>. Listen for that subtle change!
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </main>
-
-      {/* NO FOOTER */}
     </div>
   );
 }
