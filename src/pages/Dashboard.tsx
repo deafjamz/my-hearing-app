@@ -49,7 +49,7 @@ export function Dashboard() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 p-6 max-w-xl mx-auto flex-1 flex flex-col justify-between"
+        className="relative z-10 max-w-lg mx-auto w-full px-6 pt-6 flex-1 flex flex-col justify-between"
       >
         <motion.header variants={item} className="flex justify-end items-center shrink-0 mb-4">
           <div className="flex items-center gap-3">
