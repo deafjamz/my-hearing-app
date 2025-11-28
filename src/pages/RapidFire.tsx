@@ -11,18 +11,48 @@ export function RapidFire() {
   const { play } = useAudio();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
+
+  // State for the de-duplicated and shuffled list of pairs for the session
+  const [shuffledPairs, setShuffledPairs] = useState<(typeof WORD_PAIRS)[0][]>([]);
+  // State for the shuffled options for the *current* pair
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
 
-  // Guard Clause for data loading
-  if (!WORD_PAIRS || WORD_PAIRS.length === 0) return <div className="p-10">Loading...</div>;
-
-  const currentPair = WORD_PAIRS[currentIndex];
-  
-  // Effect to shuffle options when the word pair changes
+  // "Smart Shuffle" Effect: Runs once on mount to create a unique game session
   useEffect(() => {
-    setShuffledOptions([...currentPair.options].sort(() => Math.random() - 0.5));
-  }, [currentIndex]);
+    // 1. Group by unique pair (e.g., "Bear-Pear") to handle reciprocals
+    const groups: Record<string, typeof WORD_PAIRS> = {};
+    WORD_PAIRS.forEach(pair => {
+      const key = [...pair.options].sort().join('-'); // Creates a consistent key like "Bear-Pear"
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+      groups[key].push(pair);
+    });
 
+    // 2. Pick one random variant from each group (e.g., either "Bear/Pear" or "Pear/Bear")
+    const selectedPairs = Object.values(groups).map(group => {
+      return group[Math.floor(Math.random() * group.length)];
+    });
+
+    // 3. Shuffle the final, unique list for the session
+    setShuffledPairs(selectedPairs.sort(() => Math.random() - 0.5));
+  }, []);
+
+  // Effect to shuffle answer options whenever the current pair changes
+  useEffect(() => {
+    if (shuffledPairs.length > 0) {
+      const currentPair = shuffledPairs[currentIndex];
+      setShuffledOptions([...currentPair.options].sort(() => Math.random() - 0.5));
+    }
+  }, [currentIndex, shuffledPairs]);
+
+
+  // Guard Clause: Wait until the session list is prepared
+  if (shuffledPairs.length === 0) {
+    return <div className="p-10 text-center text-slate-500">Preparing your session...</div>;
+  }
+
+  const currentPair = shuffledPairs[currentIndex];
   const hasGuessed = selectedGuess !== null;
   const isCorrect = selectedGuess === currentPair.correct;
 
@@ -32,7 +62,8 @@ export function RapidFire() {
       play(path);
     } else {
       setSelectedGuess(null);
-      setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
+      // Use the length of the de-duplicated list for the modulo
+      setCurrentIndex((prev) => (prev + 1) % shuffledPairs.length);
     }
   };
 
