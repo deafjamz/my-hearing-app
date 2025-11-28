@@ -32,30 +32,27 @@ export function ProgressHistory({
     <div className={`w-full ${className}`}>
       {/* Chart Grid */}
       <div className="grid grid-cols-7 gap-2 h-32 items-end mb-2 relative">
-        {/* Goal Line Overlay */}
+        {/* Goal Line */}
         <div 
           className="absolute w-full border-t border-dashed border-red-300 dark:border-red-800 z-0 opacity-50"
           style={{ bottom: `${(goal / maxVal) * 100}%` }}
         />
 
+        {/* Bars with Tooltips */}
         {safeData.map((item, index) => {
           const heightPercent = Math.min((item.minutes / maxVal) * 100, 100);
-          const isToday = index === new Date().getDay() - 1; // Approx check
-
           return (
             <div key={item.day} className="flex flex-col items-center justify-end h-full z-10 group">
               <div 
-                className={`w-full rounded-t-md transition-all duration-500 ease-out ${
-                  item.minutes > 0 
-                    ? 'bg-purple-500/50 dark:bg-purple-600/60 group-hover:bg-purple-500' 
-                    : 'bg-slate-100 dark:bg-slate-800'
-                }`}
-                style={{ height: `${heightPercent}%`, minHeight: '4px' }}
+                className="w-full rounded-t-md transition-all duration-500 ease-out bg-purple-500/50 dark:bg-purple-600/60 group-hover:bg-purple-500"
+                style={{ height: `${heightPercent}%`, minHeight: item.minutes > 0 ? '4px' : '0' }}
               >
-                {/* Tooltip on Hover */}
-                <div className="opacity-0 group-hover:opacity-100 absolute -top-8 bg-slate-900 text-white text-[10px] px-2 py-1 rounded transition-opacity whitespace-nowrap">
-                  {item.minutes}m
-                </div>
+                {/* Tooltip */}
+                {item.minutes > 0 && (
+                  <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap transition-opacity">
+                    {item.minutes}m
+                  </div>
+                )}
               </div>
             </div>
           );
