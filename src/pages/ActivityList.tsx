@@ -38,7 +38,7 @@ export function ActivityList() {
   ];
 
   return (
-    <div className="p-6 max-w-md mx-auto w-full">
+    <div className="p-6 max-w-xl mx-auto w-full">
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
           <Headphones size={20} />

@@ -49,7 +49,7 @@ export function Dashboard() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="relative z-10 p-6 max-w-md mx-auto flex-1 flex flex-col justify-between"
+        className="relative z-10 p-6 max-w-xl mx-auto flex-1 flex flex-col justify-between"
       >
         <motion.header variants={item} className="flex justify-end items-center shrink-0 mb-4">
           <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ export function Dashboard() {
                   </div>
                   <h3 className="text-slate-900 dark:text-white text-2xl font-black tracking-tight">Word Pairs</h3>
                   <div className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">
-                    Intermediate • 5 min
+                    5 min session
                   </div>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center">

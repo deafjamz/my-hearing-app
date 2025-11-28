@@ -14,7 +14,7 @@ export function Settings() {
   ];
 
   return (
-    <div className="max-w-md mx-auto w-full p-6 pb-24"> {/* Padding for bottom nav */}
+    <div className="max-w-xl mx-auto w-full p-6 pb-24"> {/* Padding for bottom nav */}
       <div className="flex items-center gap-3 mb-8">
         <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
           <SettingsIcon size={20} />
