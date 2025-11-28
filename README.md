@@ -1,13 +1,13 @@
 # 🎵 SoundSteps: Digital Hearing Rehabilitation Platform
 
+> **⚠️ AI AGENT INSTRUCTIONS:** Before writing code, you MUST read `docs/CONTRIBUTING.md`.
+
 ## 📐 Development Standards
 This project follows strict development and design standards to ensure consistency and prevent regressions.
 
 ### Required Reading
 - 📘 [Style Guide](docs/STYLE_GUIDE.md) - UI/UX standards and component patterns
 - 🛠️ [Contributing Guide](docs/CONTRIBUTING.md) - Engineering protocols and safety standards
-
-> **Important:** All AI agents working on this repo MUST read `docs/CONTRIBUTING.md` before writing code.
 
 ---
 
