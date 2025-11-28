@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-// Data and Hook Imports
 import { WORD_PAIRS } from '@/data/wordPairs';
 import { useUser } from '@/store/UserContext';
 import { useAudio } from '@/hooks/useAudio';
@@ -13,37 +11,37 @@ export function RapidFire() {
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
   const [isPreparing, setIsPreparing] = useState(false);
 
-  // Custom hooks
   const { voice } = useUser();
   const { play, isPlaying } = useAudio();
 
   const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
 
-  // Effect for "Polite Auto-Play"
+  // Refined Auto-Play Logic: Triggers only when the round changes.
   useEffect(() => {
     let timer: NodeJS.Timeout;
+    // CRITICAL: Only auto-play if the user hasn't guessed for the current round.
     if (!hasGuessed && currentPair) {
       setIsPreparing(true);
       timer = setTimeout(() => {
-        // Construct the dynamic audio path
         const audioPath = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
         play(audioPath);
         setIsPreparing(false);
-      }, 500); // 500ms delay for cognitive settling
+      }, 500);
     }
-
+    
+    // Cleanup function to prevent ghost sounds on navigation or fast guessing.
     return () => {
       clearTimeout(timer);
-      if (isPreparing) {
-        setIsPreparing(false);
-      }
+      if (isPreparing) setIsPreparing(false);
     };
-  }, [currentIndex, hasGuessed]); // Re-run when round changes
+  }, [currentIndex]); // Dependency is ONLY currentIndex to trigger on a new round.
 
   const handleManualPlay = () => {
-    const audioPath = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
-    play(audioPath);
+    if (currentPair) {
+      const audioPath = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
+      play(audioPath);
+    }
   };
   
   const handleGuess = (guess: string) => {
@@ -51,8 +49,11 @@ export function RapidFire() {
     setSelectedGuess(guess);
   };
 
+  // Fixed Game Loop Logic
   const nextRound = () => {
+    // 1. Reset state for the current round completely.
     setSelectedGuess(null);
+    // 2. Then, advance to the next round.
     setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
@@ -77,7 +78,8 @@ export function RapidFire() {
         <div className="w-8 h-8" />
       </div>
 
-      {/* 2. Scrollable Content */}
+      {/* 2. Scrollable Content Area */}
+      {/* Padding bottom prevents content from being hidden by the absolute footer */}
       <div className="flex-1 overflow-y-auto px-4 pb-40">
         <div className="max-w-md mx-auto space-y-6 pt-4">
           
@@ -104,22 +106,19 @@ export function RapidFire() {
                 key={option}
                 onClick={() => handleGuess(option)}
                 disabled={hasGuessed}
-                className={`w-full p-5 text-left font-bold text-lg rounded-2xl border-2 transition-all shadow-sm disabled:cursor-not-allowed ${
+                className={cn(
+                  'w-full p-5 text-left font-bold text-lg rounded-2xl border-2 transition-all shadow-sm disabled:cursor-not-allowed',
                   hasGuessed && option === currentPair.correct 
                     ? 'bg-green-50 border-green-500 text-green-700 dark:bg-green-900/20 dark:border-green-600 dark:text-green-300'
                     : hasGuessed && option === selectedGuess && option !== currentPair.correct
                     ? 'bg-red-50 border-red-500 text-red-700 dark:bg-red-900/20 dark:border-red-600 dark:text-red-300'
                     : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:border-purple-300 dark:hover:border-purple-600'
-                }`}
+                )}
               >
                 <div className="flex justify-between items-center">
                   <span>{option}</span>
-                  {hasGuessed && option === currentPair.correct && (
-                    <CheckCircle size={20} className="text-green-500" />
-                  )}
-                  {hasGuessed && option === selectedGuess && option !== currentPair.correct && (
-                    <XCircle size={20} className="text-red-500" />
-                  )}
+                  {hasGuessed && option === currentPair.correct && (<CheckCircle size={20} className="text-green-500" />)}
+                  {hasGuessed && option === selectedGuess && option !== currentPair.correct && (<XCircle size={20} className="text-red-500" />)}
                 </div>
               </button>
             ))}
@@ -136,8 +135,9 @@ export function RapidFire() {
         </div>
       </div>
 
-      {/* 3. Fixed Footer */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-md z-20">
+      {/* 3. Fixed Footer with Visual Glitch Fix */}
+      {/* `absolute bottom-0` ensures it's at the very bottom. `pb-8` adds safe area padding for devices with a home bar. */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-white/90 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-md z-20">
         <div className="max-w-md mx-auto">
           <button 
             onClick={nextRound}
