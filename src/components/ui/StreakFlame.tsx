@@ -4,25 +4,48 @@ import { useUser } from '../../store/UserContext';
 export function StreakFlame() {
   const { currentStreak } = useUser();
 
-  // Dynamic Styles based on Streak
-  let colorClass = "text-slate-300 dark:text-slate-600"; // Default (0)
-  let animationClass = "";
-  
-  if (currentStreak > 0) colorClass = "text-orange-400 dark:text-orange-500";
-  if (currentStreak >= 5) colorClass = "text-orange-500 dark:text-orange-400 fill-orange-500"; // Solid Fill
-  if (currentStreak >= 10) {
-    colorClass = "text-red-500 dark:text-red-400 fill-red-500 drop-shadow-lg";
-    animationClass = "animate-pulse"; 
+  // 1. Determine Tier
+  let color = "text-slate-300 dark:text-slate-600";
+  let fill = "none";
+  let animation = "";
+  let scale = "scale-100";
+  let shadow = "";
+
+  if (currentStreak >= 1) {
+    color = "text-orange-400";
+    fill = "currentColor"; // Solid fill starts immediately
   }
-  if (currentStreak >= 20) {
-    colorClass = "text-purple-500 dark:text-purple-400 fill-purple-500 drop-shadow-xl";
-    animationClass = "animate-bounce";
+  if (currentStreak >= 5) {
+    color = "text-orange-500";
+    animation = "animate-pulse"; // Gentle pulse
+    scale = "scale-105";
+  }
+  if (currentStreak >= 10) {
+    color = "text-red-500";
+    fill = "red";
+    animation = "animate-bounce"; // Bouncing excitement
+    shadow = "drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"; // Red Glow
+  }
+  if (currentStreak >= 25) {
+    color = "text-purple-500";
+    fill = "purple";
+    animation = "animate-spin-slow"; // Or a complex keyframe
+    shadow = "drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]"; // Purple Plasma
+  }
+  if (currentStreak >= 50) {
+    color = "text-yellow-400"; // GOLD
+    fill = "gold";
+    shadow = "drop-shadow-[0_0_15px_rgba(250,204,21,1)]"; // Golden God Mode
   }
 
   return (
-    <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 transition-all duration-500 ${currentStreak > 0 ? 'scale-100' : 'opacity-80'}`}>
-      <Flame size={18} className={`transition-all duration-300 ${colorClass} ${animationClass}`} />
-      <span className={`font-bold text-sm tabular-nums ${colorClass}`}>
+    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 transition-all duration-500 ${scale} ${shadow}`}>
+      <Flame 
+        size={20} 
+        className={`transition-colors duration-300 ${color} ${animation}`} 
+        fill={currentStreak >= 1 ? "currentColor" : "none"}
+      />
+      <span className={`font-black text-sm tabular-nums ${color}`}>
         {currentStreak}
       </span>
     </div>
