@@ -114,10 +114,16 @@ export function RapidFire() {
             const isTheCorrectAnswer = option === currentPair.correct;
             
             let cardStyle = "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-purple-300 dark:hover:border-purple-700";
+            
             if (hasGuessed) {
-              if (isTheCorrectAnswer) cardStyle = "bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-700 text-green-700 dark:text-green-300 ring-1 ring-green-500/50";
-              else if (isSelected) cardStyle = "bg-red-50 dark:bg-red-900/20 border-red-500 dark:border-red-700 text-red-700 dark:text-red-400 ring-1 ring-red-500/50";
-              else cardStyle = "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 opacity-60 grayscale";
+              if (isTheCorrectAnswer) {
+                cardStyle = "bg-green-50 dark:bg-green-900/20 border-green-500 dark:border-green-700 text-green-700 dark:text-green-300 ring-1 ring-green-500/50";
+              } else if (isSelected && !isTheCorrectAnswer) {
+                cardStyle = "bg-red-50 dark:bg-red-900/20 border-red-500 dark:border-red-700 text-red-700 dark:text-red-400 ring-1 ring-red-500/50";
+              } else {
+                // The Fix: Ensure contrast for unselected, dimmed items
+                cardStyle = "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800 opacity-50 grayscale dark:text-slate-500";
+              }
             }
 
             return (
