@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Loading</title>
+</head>
+<body>
+    <div id="status">Testing loading...</div>
+    <div id="results"></div>
+    
+    <script>
+        const statusEl = document.getElementById('status');
+        const resultsEl = document.getElementById('results');
+        
+        function log(message) {
+            console.log(message);
+            resultsEl.innerHTML += '<p>' + message + '</p>';
+        }
+        
+        async function loadCSVData(url) {
+            try {
+                log('Loading CSV from: ' + url);
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+                
+                const csvText = await response.text();
+                log('CSV response length: ' + csvText.length);
+                log('CSV first 200 chars: ' + csvText.substring(0, 200));
+                
+                const lines = csvText.split('\n');
+                if (lines.length < 2) throw new Error('CSV has no data rows');
+                
+                const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+                log('CSV headers: ' + JSON.stringify(headers));
+                
+                const data = lines.slice(1)
+                    .filter(line => line.trim())
+                    .map(line => {
+                        const values = line.split(',').map(v => v.trim().replace(/"/g, ''));
+                        const obj = {};
+                        headers.forEach((header, index) => {
+                            obj[header] = values[index] || '';
+                        });
+                        return obj;
+                    });
+                
+                log(`CSV parsed: ${data.length} rows`);
+                return data;
+            } catch (error) {
+                log('CSV loading error: ' + error.message);
+                throw error;
+            }
+        }
+        
+        async function testLoading() {
+            try {
+                statusEl.textContent = 'Testing Google Sheets loading...';
+                
+                const [sentencesData, keywordsData] = await Promise.all([
+                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Sentences'),
+                    loadCSVData('https://docs.google.com/spreadsheets/d/1CNDRfgqSdMEyc0JgW6DerCRX1jUftWSX49nsiBPUbek/gviz/tq?tqx=out:csv&sheet=Keywords')
+                ]);
+                
+                log('Sentences loaded: ' + sentencesData.length + ' rows');
+                log('Keywords loaded: ' + keywordsData.length + ' rows');
+                log('First sentence: ' + JSON.stringify(sentencesData[0]));
+                log('First keyword: ' + JSON.stringify(keywordsData[0]));
+                
+                statusEl.textContent = 'Loading completed successfully!';
+                statusEl.style.color = 'green';
+                
+            } catch (error) {
+                log('FATAL ERROR: ' + error.message);
+                statusEl.textContent = 'Loading failed: ' + error.message;
+                statusEl.style.color = 'red';
+            }
+        }
+        
+        testLoading();
+    </script>
+</body>
+</html>

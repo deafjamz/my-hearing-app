@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearing Rehab - Apple Health Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Apple-style card system */
+        .apple-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .apple-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+        }
+        
+        .apple-card:active {
+            transform: translateY(0px);
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Activity rings */
+        .activity-ring {
+            width: 70px;
+            height: 70px;
+            transform: rotate(-90deg);
+            padding: 5px;
+        }
+        
+        .activity-ring-large {
+            width: 140px;
+            height: 140px;
+            transform: rotate(-90deg);
+            padding: 10px;
+        }
+        
+        /* Apple-style gradients */
+        .gradient-red { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%); }
+        .gradient-green { background: linear-gradient(135deg, #51cf66 0%, #40c057 100%); }
+        .gradient-blue { background: linear-gradient(135deg, #339af0 0%, #228be6 100%); }
+        .gradient-orange { background: linear-gradient(135deg, #ff8c42 0%, #ff7c2a 100%); }
+        .gradient-purple { background: linear-gradient(135deg, #9775fa 0%, #845ef7 100%); }
+        .gradient-pink { background: linear-gradient(135deg, #f06292 0%, #ec407a 100%); }
+        
+        /* Typography */
+        .apple-title { font-weight: 700; letter-spacing: -0.025em; }
+        .apple-subtitle { font-weight: 500; opacity: 0.8; }
+        .apple-body { font-weight: 400; }
+        .apple-caption { font-weight: 500; font-size: 0.75rem; opacity: 0.7; }
+        
+        /* Buttons */
+        .apple-button {
+            background: linear-gradient(135deg, #007AFF 0%, #0056CC 100%);
+            border: none;
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .apple-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 122, 255, 0.4);
+        }
+        
+        .apple-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes apple-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .apple-bounce { animation: apple-bounce 0.6s ease-in-out; }
+        
+        /* Status indicators */
+        .status-complete { color: #30d158; }
+        .status-progress { color: #ff9f0a; }
+        .status-new { color: #007aff; }
+        
+        /* Frosted glass effect */
+        .frosted {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Status Bar -->
+    <div class="frosted px-4 py-2 text-center">
+        <div class="max-w-md mx-auto flex items-center justify-between text-sm">
+            <span class="apple-caption">Today</span>
+            <span class="apple-caption font-semibold">3 of 5 exercises</span>
+            <span class="apple-caption">🔥 7 days</span>
+        </div>
+    </div>
+
+    <div class="max-w-md mx-auto p-4 space-y-6">
+        
+        <!-- Header Section -->
+        <div class="apple-card rounded-3xl p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h1 class="apple-title text-2xl text-gray-900">Hearing Practice</h1>
+                    <p class="apple-subtitle text-gray-600 mt-1">Keep up the great work</p>
+                </div>
+                <div class="activity-ring-large">
+                    <svg viewBox="0 0 42 42" class="w-full h-full" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
+                        <!-- Background rings with thick black borders - all same width -->
+                        <path d="M21 3.0845 a 17.9155 17.9155 0 0 1 0 35.831 a 17.9155 17.9155 0 0 1 0 -35.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                        <path d="M21 3.0845 a 17.9155 17.9155 0 0 1 0 35.831 a 17.9155 17.9155 0 0 1 0 -35.831"
+                              fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                        
+                        <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                        <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                              fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                        
+                        <path d="M21 9.0845 a 11.9155 11.9155 0 0 1 0 23.831 a 11.9155 11.9155 0 0 1 0 -23.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                        <path d="M21 9.0845 a 11.9155 11.9155 0 0 1 0 23.831 a 11.9155 11.9155 0 0 1 0 -23.831"
+                              fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                        
+                        <!-- Progress rings with uniform widths -->
+                        <path d="M21 3.0845 a 17.9155 17.9155 0 0 1 0 35.831 a 17.9155 17.9155 0 0 1 0 -35.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                              stroke-dasharray="70, 100"/>
+                        <path d="M21 3.0845 a 17.9155 17.9155 0 0 1 0 35.831 a 17.9155 17.9155 0 0 1 0 -35.831"
+                              fill="none" stroke="#FF2D55" stroke-width="3" stroke-linecap="round"
+                              stroke-dasharray="70, 100"/>
+                        
+                        <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                              stroke-dasharray="85, 100"/>
+                        <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                              fill="none" stroke="#30D158" stroke-width="3" stroke-linecap="round"
+                              stroke-dasharray="85, 100"/>
+                        
+                        <path d="M21 9.0845 a 11.9155 11.9155 0 0 1 0 23.831 a 11.9155 11.9155 0 0 1 0 -23.831"
+                              fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                              stroke-dasharray="60, 100"/>
+                        <path d="M21 9.0845 a 11.9155 11.9155 0 0 1 0 23.831 a 11.9155 11.9155 0 0 1 0 -23.831"
+                              fill="none" stroke="#007AFF" stroke-width="3" stroke-linecap="round"
+                              stroke-dasharray="60, 100"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Ring Legend -->
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <div class="w-5 h-5 rounded-full mx-auto mb-1 shadow-md border-2 border-black border-opacity-30" style="background: #FF2D55;"></div>
+                    <p class="apple-caption">Practice</p>
+                    <p class="apple-caption font-semibold">3/5</p>
+                </div>
+                <div>
+                    <div class="w-5 h-5 rounded-full mx-auto mb-1 shadow-md border-2 border-black border-opacity-30" style="background: #30D158;"></div>
+                    <p class="apple-caption">Accuracy</p>
+                    <p class="apple-caption font-semibold">85%</p>
+                </div>
+                <div>
+                    <div class="w-5 h-5 rounded-full mx-auto mb-1 shadow-md border-2 border-black border-opacity-30" style="background: #007AFF;"></div>
+                    <p class="apple-caption">Streak</p>
+                    <p class="apple-caption font-semibold">7 days</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Cards -->
+        <div class="space-y-4">
+            <!-- Word Practice -->
+            <div class="apple-card rounded-2xl p-5 cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="gradient-green p-3 rounded-2xl">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="apple-title text-xl text-gray-900">Word Practice</h3>
+                            <p class="apple-subtitle text-base text-gray-600 mt-2">Building blocks of hearing</p>
+                            <div class="flex items-center space-x-2 mt-3">
+                                <span class="status-complete text-sm font-medium">7 completed</span>
+                                <span class="text-gray-300">•</span>
+                                <span class="apple-caption text-sm">3 remaining</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="activity-ring mb-2">
+                            <svg viewBox="0 0 42 42" class="w-full h-full" style="filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));">
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                                      stroke-dasharray="70, 100"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#30D158" stroke-width="3" stroke-linecap="round"
+                                      stroke-dasharray="70, 100"/>
+                            </svg>
+                        </div>
+                        <p class="apple-caption font-semibold">70%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentence Recognition -->
+            <div class="apple-card rounded-2xl p-5 cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="gradient-blue p-3 rounded-2xl">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="apple-title text-xl text-gray-900">Sentence Recognition</h3>
+                            <p class="apple-subtitle text-base text-gray-600 mt-2">Advanced comprehension</p>
+                            <div class="flex items-center space-x-2 mt-3">
+                                <span class="status-progress text-sm font-medium">4 completed</span>
+                                <span class="text-gray-300">•</span>
+                                <span class="apple-caption text-sm">6 remaining</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="activity-ring mb-2">
+                            <svg viewBox="0 0 42 42" class="w-full h-full" style="filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));">
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                                      stroke-dasharray="40, 100"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#FF2D55" stroke-width="3" stroke-linecap="round"
+                                      stroke-dasharray="40, 100"/>
+                            </svg>
+                        </div>
+                        <p class="apple-caption font-semibold">40%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keyword Hunt -->
+            <div class="apple-card rounded-2xl p-5 cursor-pointer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="gradient-purple p-3 rounded-2xl">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="apple-title text-xl text-gray-900">Keyword Hunt</h3>
+                            <p class="apple-subtitle text-base text-gray-600 mt-2">Challenge mode</p>
+                            <div class="flex items-center space-x-2 mt-3">
+                                <span class="status-new text-sm font-medium">3 completed</span>
+                                <span class="text-gray-300">•</span>
+                                <span class="apple-caption text-sm">27 remaining</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="activity-ring mb-2">
+                            <svg viewBox="0 0 42 42" class="w-full h-full" style="filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));">
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" opacity="0.3"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#e8e8e8" stroke-width="3" opacity="0.6"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" opacity="0.4"
+                                      stroke-dasharray="10, 100"/>
+                                <path d="M21 6.0845 a 14.9155 14.9155 0 0 1 0 29.831 a 14.9155 14.9155 0 0 1 0 -29.831"
+                                      fill="none" stroke="#007AFF" stroke-width="3" stroke-linecap="round"
+                                      stroke-dasharray="10, 100"/>
+                            </svg>
+                        </div>
+                        <p class="apple-caption font-semibold">10%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="apple-card rounded-2xl p-5">
+            <h3 class="apple-title text-lg text-gray-900 mb-4">Recent Achievements</h3>
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-orange rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg">🎯</span>
+                    </div>
+                    <div>
+                        <p class="apple-title text-sm text-gray-900">Perfect Score</p>
+                        <p class="apple-caption text-gray-600">Completed "Sound Starter" with 100%</p>
+                    </div>
+                    <div class="ml-auto">
+                        <span class="apple-caption text-gray-500">Today</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 gradient-pink rounded-full flex items-center justify-center">
+                        <span class="text-white text-lg">🔥</span>
+                    </div>
+                    <div>
+                        <p class="apple-title text-sm text-gray-900">Week Warrior</p>
+                        <p class="apple-caption text-gray-600">7-day practice streak</p>
+                    </div>
+                    <div class="ml-auto">
+                        <span class="apple-caption text-gray-500">Yesterday</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Interface Preview -->
+        <div class="apple-card rounded-2xl p-6 mt-8">
+            <h3 class="apple-title text-lg text-gray-900 mb-4 text-center">Exercise Interface</h3>
+            
+            <!-- Progress Header -->
+            <div class="flex items-center justify-between mb-6">
+                <button class="apple-button text-white px-4 py-2 rounded-xl text-sm font-medium">
+                    ← Back
+                </button>
+                <div class="text-center">
+                    <p class="apple-caption text-gray-600">Question 3 of 10</p>
+                    <div class="w-32 bg-gray-200 rounded-full h-1.5 mt-2">
+                        <div class="gradient-blue h-1.5 rounded-full" style="width: 30%"></div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="apple-caption text-gray-600">Sound Starter</p>
+                </div>
+            </div>
+
+            <!-- Audio Player -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-3xl p-8 text-center mb-6">
+                <button class="apple-button text-white rounded-full p-6 shadow-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+                <p class="apple-subtitle text-gray-700 mt-4">Tap to hear the word</p>
+            </div>
+
+            <!-- Choice Buttons -->
+            <div class="space-y-3 mb-6">
+                <button class="apple-card w-full p-4 text-left rounded-xl border border-gray-200 hover:border-blue-300 transition-all">
+                    <span class="apple-title text-gray-900">cat</span>
+                </button>
+                <button class="apple-card w-full p-4 text-left rounded-xl border border-gray-200 hover:border-blue-300 transition-all">
+                    <span class="apple-title text-gray-900">bat</span>
+                </button>
+            </div>
+
+            <!-- Feedback Examples -->
+            <div class="space-y-3">
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="apple-title text-green-900">Excellent!</p>
+                            <p class="apple-caption text-green-700">You're building great listening skills</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-2xl p-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="apple-title text-amber-900">Keep practicing!</p>
+                            <p class="apple-caption text-amber-700">Every attempt helps you improve</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Apple-style interactions
+        document.querySelectorAll('.apple-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('button')) return;
+                
+                this.classList.add('apple-bounce');
+                setTimeout(() => this.classList.remove('apple-bounce'), 600);
+            });
+        });
+
+        // Subtle ring animation
+        setInterval(() => {
+            const rings = document.querySelectorAll('.activity-ring path[stroke-dasharray]');
+            rings.forEach(ring => {
+                ring.style.strokeDashoffset = ring.style.strokeDashoffset === '5' ? '0' : '5';
+            });
+        }, 3000);
+    </script>
+</body>
+</html>

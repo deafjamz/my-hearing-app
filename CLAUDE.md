@@ -123,7 +123,8 @@ This is a web-based hearing rehabilitation application designed specifically for
 - **Document decisions:** Explain why choices were made
 
 ### Git Commit Guidelines
-- **Author attribution:** Never use Claude as co-author in git commits
+- **UNIVERSAL LAW: NEVER include "Co-Authored-By: Claude" or any Claude attribution in commits, code, or documentation**
+- **Author attribution:** All commits must appear as if written entirely by the human developer
 - **Commit messages:** Create clear, descriptive commit messages
 - **Single developer:** All commits should be attributed to the human developer only
 
@@ -153,6 +154,71 @@ This is a web-based hearing rehabilitation application designed specifically for
 - Memory usage stable during long sessions
 - Accessibility score > 95% (WAVE, axe tools)
 - Performance > 90% Lighthouse score
+
+## Notion Project Log Integration
+
+### 📝 **Logging Development Sessions to Notion**
+
+**ALWAYS log significant development sessions to maintain project documentation and IP tracking.**
+
+#### **Quick Steps for Claude:**
+1. **Create logging script** using the template below
+2. **Use existing notion_logger.py system** (located in `/Users/clyle/Desktop/Desktop:Hearing Rehab/`)
+3. **Import with dotenv** for environment variables
+4. **Call quick_log_session()** with individual parameters (NOT dictionaries)
+
+#### **Template Script Structure:**
+```python
+#!/usr/bin/env python3
+import sys
+import os
+sys.path.append('/Users/clyle/Desktop/Desktop:Hearing Rehab')
+from dotenv import load_dotenv
+from notion_logger import quick_log_session
+
+# Load environment variables
+load_dotenv('/Users/clyle/Desktop/Desktop:Hearing Rehab/.env')
+
+# Call quick_log_session with individual parameters:
+result = quick_log_session(
+    title="Session Title Here",
+    duration_minutes=180,
+    session_type="Development|Bug Fix|Planning|Research", 
+    topics=["Topic 1", "Topic 2", "Topic 3"],
+    decisions="Key decisions made during session",
+    action_items="1. Next step\n2. Another step\n3. Final step",
+    conversation_url="https://claude.ai/chat/current-session",
+    costs=0.0,  # Any expenses incurred
+    notes="Additional context and achievements"
+)
+```
+
+#### **Success Detection:**
+- ✅ **Success**: `result` contains `'id'` field (Notion page ID)
+- ❌ **Failure**: `result` is None or missing 'id'
+- 📝 **Console**: Look for "✅ Session logged successfully: [title]"
+
+#### **Common Gotchas:**
+- ❌ **Don't pass dictionaries** - use individual parameters
+- ❌ **Don't use .env in current directory** - use full path to existing .env
+- ❌ **Don't expect {'success': True}** - check for 'id' field instead
+- ✅ **Do include sys.path.append** for notion_logger import
+- ✅ **Do use load_dotenv()** with full path
+
+#### **When to Log:**
+- Major feature implementations
+- Critical bug fixes and deployments
+- Architecture decisions
+- Production milestones
+- Research breakthroughs
+- Any session longer than 2 hours
+
+#### **Session Types:**
+- **Development**: Feature implementation, coding
+- **Bug Fix**: Critical issue resolution
+- **Research**: Analysis, investigation, planning
+- **Deployment**: Production releases, infrastructure
+- **Planning**: Strategy, architecture decisions
 
 ## Contact & Context
 - **Developer:** deafjamz (Bruce)

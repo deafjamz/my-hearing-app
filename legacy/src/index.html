@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hearing Rehabilitation Exercise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .correct-answer { background-color: #28a745 !important; color: white !important; }
+        .wrong-answer { background-color: #f97316 !important; color: white !important; }
+        .loading-spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #09f; animation: spin 1s ease infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Voice selection button styles */
+        .voice-btn.selected { border-color: #3b82f6 !important; background-color: #3b82f6 !important; color: white !important; }
+        .voice-btn.selected.female { border-color: #ec4899 !important; background-color: #ec4899 !important; }
+        .voice-btn { transition: all 0.3s ease; }
+        .audio-ready { border-color: #10b981 !important; }
+        .audio-error { border-color: #ef4444 !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8 text-center relative">
+        
+        <!-- Loading State -->
+        <div id="loading-state">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p class="text-lg text-gray-600">Loading Exercises...</p>
+            <div id="loading-progress" class="mt-4">
+                <div class="bg-gray-200 rounded-full h-2">
+                    <div id="loading-progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-2" id="loading-status">Initializing...</p>
+            </div>
+        </div>
+
+        <!-- Progress Dashboard -->
+        <div id="progress-dashboard-screen" class="hidden fade-in">
+            <div class="w-full mb-4 text-left">
+                <button id="back-to-activities-from-dashboard" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Activities</button>
+            </div>
+            
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">📊 My Progress Dashboard</h1>
+            
+            <!-- View Toggle -->
+            <div class="flex justify-center mb-6">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button id="view-progress" type="button" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-gray-200 rounded-l-lg hover:bg-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-500">
+                        My Progress
+                    </button>
+                    <button id="view-clinical" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-r border-gray-200 rounded-r-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-500">
+                        Clinical Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- "My Progress" View Content -->
+            <div id="progress-view" class="space-y-6">
+                <!-- KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Total Practice Time</h3>
+                        <p class="mt-1 text-3xl font-semibold text-blue-600" id="total-time-display">--:--:--</p>
+                        <p class="text-xs text-gray-400 mt-1">Across all sessions</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Practice Sessions</h3>
+                        <p class="mt-1 text-3xl font-semibold text-green-600" id="total-sessions-display">--</p>
+                        <p class="text-xs text-gray-400 mt-1">Total sessions completed</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="text-sm font-medium text-gray-500">Overall Accuracy</h3>
+                        <p class="mt-1 text-3xl font-semibold text-purple-600" id="overall-accuracy-display">--%</p>
+                        <p class="text-xs text-gray-400 mt-1">Across all activities</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Summary -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">📈 Progress Overview (Last 30 Days)</h3>
+                    <div class="h-64 flex items-center justify-center" id="progress-chart-container">
+                        <canvas id="progress-overview-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Voice Performance Summary -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">🎤 Voice Training Progress</h3>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="voice-progress-cards">
+                        <!-- Voice cards will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- "Clinical Details" View Content (Initially Hidden) -->
+            <div id="clinical-view" class="hidden space-y-6">
+                <!-- Filters & Export -->
+                <div class="bg-white p-4 rounded-lg shadow border flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex flex-wrap gap-4">
+                        <select id="activity-filter" class="rounded-md border-gray-300 text-sm">
+                            <option value="all">All Activities</option>
+                            <option value="sentences">Sentences</option>
+                            <option value="keywords">Keywords</option>
+                            <option value="stories">Stories</option>
+                            <option value="scenarios">Scenarios</option>
+                        </select>
+                        <select id="timeframe-filter" class="rounded-md border-gray-300 text-sm">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                            <option value="all">All time</option>
+                        </select>
+                    </div>
+                    <button id="export-csv-btn" class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
+                        📊 Export to CSV
+                    </button>
+                </div>
+
+                <!-- Detailed Analytics -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="font-semibold text-gray-800 mb-4">Accuracy by Voice</h3>
+                        <div class="h-64">
+                            <canvas id="voice-accuracy-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border">
+                        <h3 class="font-semibold text-gray-800 mb-4">Performance by Noise Level</h3>
+                        <div class="h-64">
+                            <canvas id="noise-performance-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Breakdown -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">Activity Performance Breakdown</h3>
+                    <div class="h-80">
+                        <canvas id="activity-breakdown-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Session Timeline -->
+                <div class="bg-white p-4 rounded-lg shadow border">
+                    <h3 class="font-semibold text-gray-800 mb-4">Session Activity Timeline</h3>
+                    <div id="session-timeline" class="space-y-2 max-h-64 overflow-y-auto">
+                        <!-- Timeline entries will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Selection -->
+        <div id="activity-selection-screen" class="hidden fade-in">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6" id="category-title">Choose a Category</h1>
+            
+            <!-- QC Mode Indicator -->
+            <div id="qc-mode-indicator" class="hidden mb-4 p-2 bg-red-100 border border-red-300 rounded text-center">
+                <span class="text-red-800 font-semibold">🔧 Admin QC Mode Active</span>
+                <div class="mt-2 flex gap-2 justify-center">
+                    <button id="export-qc-btn" class="px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">Export to Forms</button>
+                    <button id="disable-qc-btn" class="px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700">Disable</button>
+                </div>
+            </div>
+            
+            <!-- CI Rings Section -->
+            <div id="ci-rings-container" class="mb-6 p-4 bg-white rounded-lg shadow border">
+                <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Today's Progress</h2>
+                <div class="flex justify-center items-center gap-6">
+                    <!-- Consistency Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="consistency-ring-progress" class="stroke-current text-blue-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-blue-600">Consistency</div>
+                            <div id="consistency-goal" class="text-gray-500">0/20 min</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clarity Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="clarity-ring-progress" class="stroke-current text-green-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-green-600">Clarity</div>
+                            <div id="clarity-goal" class="text-gray-500">0/75%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Challenge Ring -->
+                    <div class="relative w-16 h-16 flex flex-col items-center">
+                        <svg class="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="stroke-current text-gray-200" stroke-width="3" fill="none" stroke-linecap="round" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                            <path id="challenge-ring-progress" class="stroke-current text-purple-600" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+                        </svg>
+                        <div class="text-xs text-center mt-1">
+                            <div class="font-medium text-purple-600">Challenge</div>
+                            <div id="challenge-goal" class="text-gray-500">0/50</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Listening Strain Feedback -->
+                <div id="strain-feedback" class="mt-3 text-center">
+                    <!-- Strain feedback will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- Weekly Goals Section -->
+            <div id="weekly-goals-container" class="mb-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-lg font-semibold text-gray-700">This Week's Goal</h2>
+                    <button id="weekly-goals-settings" class="text-xs text-blue-600 hover:text-blue-800">⚙️ Customize</button>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="text-2xl">🎯</div>
+                        <div>
+                            <div id="weekly-goal-text" class="font-medium text-gray-800">Practice 5 days this week</div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <span id="weekly-progress-text">2 of 5 days completed</span>
+                                <span id="weekly-streak-display" class="px-2 py-1 bg-orange-100 rounded text-orange-700 text-xs">🔥 2 week streak</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-right">
+                        <div class="text-xs text-gray-500">Streak Freezes</div>
+                        <div id="streak-freezes-count" class="text-sm font-medium text-blue-600">🛡️ 3 available</div>
+                    </div>
+                </div>
+                
+                <!-- Weekly Progress Bar -->
+                <div class="mt-3">
+                    <div class="flex justify-between text-xs text-gray-500 mb-1">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div id="weekly-progress-dots" class="flex justify-between">
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                        <div class="w-4 h-4 rounded-full bg-gray-200"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sound Garden Section -->
+            <div id="sound-garden-container" class="mb-6 p-4 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg shadow border">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-700">🌸 My Sound Garden</h2>
+                    <div class="text-xs text-blue-600">
+                        <span id="garden-water-reserve">💧 0 drops</span>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Garden SVG Container -->
+                    <svg id="garden-svg" width="100%" height="300" viewBox="0 0 600 300" class="border rounded-lg bg-gradient-to-b from-sky-100 to-green-100">
+                        <!-- Sky Background -->
+                        <rect width="600" height="100" fill="url(#skyGradient)"/>
+                        
+                        <!-- Ground -->
+                        <rect y="200" width="600" height="100" fill="url(#groundGradient)"/>
+                        
+                        <!-- Central Tree -->
+                        <g id="central-tree" class="transition-all duration-500">
+                            <circle cx="300" cy="180" r="8" fill="#8B4513"/>
+                            <rect x="296" y="180" width="8" height="40" fill="#8B4513"/>
+                            <circle cx="300" cy="170" r="15" fill="#228B22" opacity="0.8"/>
+                        </g>
+                        
+                        <!-- Garden Paths -->
+                        <path d="M50,250 Q300,230 550,250" stroke="#D2B48C" stroke-width="3" fill="none"/>
+                        
+                        <!-- Plant containers will be added dynamically -->
+                        <g id="plants-container"></g>
+                        
+                        <!-- Butterflies container -->
+                        <g id="butterflies-container"></g>
+                        
+                        <!-- Define gradients -->
+                        <defs>
+                            <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9ACD32;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <!-- Garden Status Panel -->
+                    <div class="mt-3 flex justify-between items-center text-xs text-gray-600">
+                        <div class="flex items-center gap-4">
+                            <span id="garden-plants-count">🌱 0 plants</span>
+                            <span id="garden-season">🌸 Spring</span>
+                            <span id="garden-tree-level">🌳 Level 1</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="daily-butterflies">🦋 0 today</span>
+                            <button id="tend-garden-btn" class="px-3 py-1 bg-green-500 text-white rounded-full text-xs hover:bg-green-600 transition">
+                                💧 Water Garden
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Word Practice removed due to ElevenLabs quality issues with single words -->
+                <button data-activity="sentences" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
+                    <div class="flex items-center justify-between">
+                        <span>Sentence Recognition</span>
+                        <span id="sentences-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
+                    </div>
+                </button>
+                <button data-activity="keywords" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
+                    <div class="flex items-center justify-between">
+                        <span>Keyword Hunt</span>
+                        <span id="keywords-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/30</span>
+                    </div>
+                </button>
+                <button data-activity="stories" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition">
+                    <div class="flex items-center justify-between">
+                        <span>Story Practice</span>
+                        <span id="stories-progress" class="text-sm bg-gray-100 px-2 py-1 rounded">0/10</span>
+                    </div>
+                </button>
+                <button data-activity="scenarios" class="activity-btn w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-gradient-to-r from-green-400 to-blue-400 bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span>☕</span>
+                            <span>Everyday Scenarios</span>
+                        </div>
+                        <span class="text-sm bg-green-100 px-2 py-1 rounded text-green-700">NEW</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">Real-world listening practice</div>
+                </button>
+                <button id="view-progress-dashboard" class="w-full py-4 px-5 text-xl font-semibold rounded-lg border-2 border-purple-400 bg-purple-50 hover:bg-purple-100 transition shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span>📊</span>
+                            <span>Progress Dashboard</span>
+                        </div>
+                        <span class="text-sm bg-purple-100 px-2 py-1 rounded text-purple-700">NEW</span>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">View your improvement analytics</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Level Selection -->
+        <div id="level-selection-screen" class="hidden fade-in">
+            <div class="w-full mb-4 text-left">
+                <button id="back-to-activities" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Categories</button>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Choose an Exercise</h1>
+            <div class="mb-6">
+                <p class="text-gray-600 mb-2 font-semibold">Select a Voice</p>
+                <div class="grid grid-cols-2 gap-2 max-w-sm mx-auto">
+                    <button id="voice-sarah" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-pink-500 bg-pink-500 text-white font-semibold">
+                        👩 Sarah<br><span class="text-xs opacity-80">Clear & Articulate</span>
+                    </button>
+                    <button id="voice-emma" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👩 Emma<br><span class="text-xs opacity-80">Bright & Energetic</span>
+                    </button>
+                    <button id="voice-david" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👨 David<br><span class="text-xs opacity-80">Warm & Friendly</span>
+                    </button>
+                    <button id="voice-marcus" class="voice-btn px-3 py-2 text-sm rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">
+                        👨 Marcus<br><span class="text-xs opacity-80">Deep & Confident</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hearing in Noise Toggle -->
+            <div class="mb-6">
+                <p class="text-gray-600 mb-2 font-semibold">Practice Environment</p>
+                <div class="flex gap-2 justify-center">
+                    <button id="quiet-mode" class="practice-mode-btn px-4 py-2 rounded-lg border-2 border-blue-600 bg-blue-600 text-white font-semibold">Quiet</button>
+                    <button id="noise-mode" class="practice-mode-btn px-4 py-2 rounded-lg border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-100">With Noise</button>
+                </div>
+                
+                <!-- Noise Level Selector (hidden by default) -->
+                <div id="noise-level-selector" class="hidden mt-3">
+                    <p class="text-sm text-gray-600 mb-2">Background Noise Level</p>
+                    <div class="flex gap-2 justify-center">
+                        <button data-noise-level="easy" class="noise-level-btn px-3 py-1 text-sm rounded-full border border-green-500 bg-green-500 text-white">Easy</button>
+                        <button data-noise-level="medium" class="noise-level-btn px-3 py-1 text-sm rounded-full border border-gray-300">Medium</button>
+                        <button data-noise-level="hard" class="noise-level-btn px-3 py-1 text-sm rounded-full border border-gray-300">Hard</button>
+                    </div>
+                </div>
+            </div>
+            <div id="level-buttons-container" class="grid grid-cols-1 gap-4"></div>
+        </div>
+
+        <!-- Exercise Interface -->
+        <div id="app-content" class="hidden fade-in">
+            <header class="mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <button id="back-to-levels" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Exercises</button>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-600">Question <span id="current-question">1</span> of <span id="total-questions">10</span></div>
+                        <div class="text-sm text-gray-600">Score: <span id="current-score">0</span></div>
+                    </div>
+                </div>
+                <h1 id="exercise-title" class="text-xl md:text-2xl font-bold text-gray-800"></h1>
+                <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                    <div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-500"></div>
+                </div>
+            </header>
+
+            <main>
+                <!-- Audio Player -->
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <button id="play-sound-btn" class="bg-blue-600 text-white rounded-full p-6 shadow-md hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Choice Buttons -->
+                <div id="choice-container" class="grid grid-cols-1 gap-4">
+                    <button id="choice1-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
+                    <button id="choice2-btn" class="w-full py-3 px-4 text-lg font-semibold rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition disabled:bg-gray-200 disabled:cursor-not-allowed"></button>
+                </div>
+
+                <!-- QC Controls -->
+                <div id="qc-controls" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded">
+                    <button id="flag-audio-btn" class="w-full py-2 px-3 bg-red-600 text-white text-sm rounded hover:bg-red-700 mb-2">Flag Audio Quality</button>
+                    <select id="issue-type" class="w-full text-xs p-1 border rounded">
+                        <option value="unclear_pronunciation">Unclear Pronunciation</option>
+                        <option value="robotic_voice">Robotic Voice</option>
+                        <option value="too_fast">Too Fast</option>
+                        <option value="too_slow">Too Slow</option>
+                        <option value="background_noise">Background Noise</option>
+                    </select>
+                </div>
+
+                <!-- Keyword Question Container -->
+                <div id="keyword-question-container" class="hidden mt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">What keyword did you hear?</h3>
+                    <div id="keyword-choices" class="grid grid-cols-2 gap-2"></div>
+                </div>
+
+                <!-- Story Interface -->
+                <div id="story-interface" class="hidden mt-6">
+                    <!-- Caption Level Selector -->
+                    <div class="mb-4">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">Caption Level</p>
+                        <div class="flex gap-2 justify-center">
+                            <button data-caption-level="25" class="caption-btn px-3 py-1 text-xs rounded-full border bg-blue-600 text-white">25%</button>
+                            <button data-caption-level="50" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">50%</button>
+                            <button data-caption-level="75" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">75%</button>
+                            <button data-caption-level="100" class="caption-btn px-3 py-1 text-xs rounded-full border border-gray-300">100%</button>
+                        </div>
+                    </div>
+
+                    <!-- Story Text Display -->
+                    <div id="story-text" class="bg-gray-50 p-4 rounded-lg mb-4 text-left">
+                        <p id="story-caption" class="text-gray-800 leading-relaxed">Listen to the story, then answer the question below.</p>
+                    </div>
+
+                    <!-- Story Question -->
+                    <div id="story-question" class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3" id="story-question-text">What happened in the story?</h3>
+                        <div id="story-choices" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Feedback -->
+                <div id="feedback-message" class="mt-6 text-xl font-semibold h-8"></div>
+            </main>
+            
+            <!-- Completion Screen -->
+            <div id="completion-screen" class="hidden text-center fade-in">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Level Complete!</h2>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <p class="text-gray-600 mb-2">You scored <span id="final-score" class="font-bold text-green-600"></span> out of <span id="total-score" class="font-bold"></span>.</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div id="final-progress-bar" class="bg-green-600 h-2 rounded-full transition-all duration-500"></div>
+                    </div>
+                </div>
+                <div class="flex gap-3 justify-center">
+                    <button id="retry-level-btn" class="bg-gray-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-700 transition">Retry Level</button>
+                    <button id="next-level-btn" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Try Another Exercise</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Story Question Modal -->
+    <div id="question-modal-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-lg w-full mx-4">
+            <h3 id="question-title" class="text-xl font-bold mb-4 text-center">Question</h3>
+            <p id="question-text-element" class="text-gray-700 mb-6 text-lg leading-relaxed"></p>
+            <div id="question-choices-container" class="space-y-3">
+                <!-- Choice buttons will be dynamically inserted here -->
+            </div>
+            <div id="question-feedback-container" class="hidden mt-6 p-4 rounded-lg bg-gray-50">
+                <p id="feedback-text-element" class="text-lg"></p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/main.js"></script>\n</body>\n</html>

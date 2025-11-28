@@ -1,7 +1,7 @@
 # ==============================================================================
 # PART 1: INSTALL LIBRARIES
 # ==============================================================================
-!pip install --upgrade --quiet google-api-python-client google-auth-httplib2 google-auth-oauthlib pandas requests
+# !pip install --upgrade --quiet google-api-python-client google-auth-httplib2 google-auth-oauthlib pandas requests
 
 # ==============================================================================
 # PART 2: IMPORTS
@@ -40,13 +40,13 @@ except Exception as e:
     print(f"❌ ERROR: Could not load secrets. Please ensure all 7 secrets are created. Error: {e}")
 
 # --- Generation Controls ---
-GENERATE_WORDS = True
-GENERATE_SENTENCES = True
-GENERATE_KEYWORDS = True
-GENERATE_STORIES = True  # 🆕 NEW: Added story generation control
+GENERATE_WORDS = False          # Change to False
+GENERATE_SENTENCES = False      # Change to False  
+GENERATE_KEYWORDS = False       # Change to False
+GENERATE_STORIES = True         # Add this line
 
-GENERATE_FEMALE_VOICE = True
-GENERATE_MALE_VOICE = True
+GENERATE_FEMALE_VOICE = True    # Keep as True
+GENERATE_MALE_VOICE = False     # Change to False
 
 RUN_CLEANUP = False # Set to True to delete old/unused files from GitHub
 
@@ -199,36 +199,36 @@ def upload_folder_to_github(folder_name):
         
         time.sleep(1.2) # Delay between each file to be polite to the API
 
-# 🆕 NEW: Story processing function
-def process_stories(creds):
-    """Process story data from Google Sheets and return text + filenames for audio generation."""
-    print("\n▶️ Processing stories from Google Sheets...")
-    
-    # Try to get stories from your main sheet (assuming you added them)
-    df_stories = get_sheet_as_df(creds, 'Sheet1')  # or whatever your main sheet is called
-    
+def process_stories_test(creds):
+    print("\n▶️ Processing SINGLE STORY for testing from Stories tab...")
+    df_stories = get_sheet_as_df(creds, 'Stories')
     if df_stories.empty:
-        print("    - ❌ No story data found in Sheet1. Make sure you've added the story data to your Google Sheet.")
+        print("    - ❌ No Stories tab found or no data in Stories tab.")
         return [], []
-    
-    # Look for story data (assuming it's in the format from our CSV)
     story_texts = []
     story_filenames = []
-    
-    # Filter for rows that look like stories (you may need to adjust this based on your sheet structure)
-    for _, row in df_stories.iterrows():
-        # Check if this row contains story data by looking for story filename patterns
-        if len(row) >= 4 and 'story_' in str(row.iloc[3]):  # Assuming filename is in 4th column
-            title = row.iloc[0] if pd.notna(row.iloc[0]) else ""
-            text = row.iloc[1] if pd.notna(row.iloc[1]) else ""
-            filename = row.iloc[3] if pd.notna(row.iloc[3]) else ""
-            
+    print(f"    - 📊 Found {len(df_stories)} rows in Stories tab")
+    if len(df_stories) > 0:
+        row = df_stories.iloc[0]
+        try:
+            set_name = row['Set'] if 'Set' in row and pd.notna(row['Set']) else ""
+            title = row['Title'] if 'Title' in row and pd.notna(row['Title']) else ""
+            text = row['Text'] if 'Text' in row and pd.notna(row['Text']) else ""
+            filename = row['Filename'] if 'Filename' in row and pd.notna(row['Filename']) else ""
+            print(f"    - 📋 Set: {set_name}")
+            print(f"    - 📖 Title: {title}")
+            print(f"    - 📄 Text length: {len(text)} characters")
+            print(f"    - 🎵 Filename: {filename}")
             if text and filename:
                 story_texts.append(text)
                 story_filenames.append(filename)
-                print(f"    - Found story: {title} ({filename})")
-    
-    print(f"✅ Found {len(story_texts)} stories to generate.")
+                print(f"    - 🧪 TEST: Found story: {title} -> {filename}")
+                print(f"    - 📝 Text preview: {text[:100]}...")
+            else:
+                print(f"    - ❌ Missing text or filename in first row")
+        except Exception as e:
+            print(f"    - ⚠️ Error processing test story row: {e}")
+    print(f"✅ Found {len(story_texts)} story for testing.")
     return story_texts, story_filenames
 
 # ==============================================================================
@@ -260,8 +260,10 @@ if __name__ == "__main__":
         # 🆕 NEW: Process stories separately to preserve custom filenames
         story_texts = []
         story_filenames = []
+        
+        # 🧪 Process ONLY first story for testing
         if GENERATE_STORIES:
-            story_texts, story_filenames = process_stories(google_creds)
+            story_texts, story_filenames = process_stories_test(google_creds)
         
         unique_text_items = sorted(list(all_text_to_generate))
         total_items = len(unique_text_items) + len(story_texts)
@@ -274,9 +276,9 @@ if __name__ == "__main__":
             # Generate regular items
             failed_logs['female'] = generate_audio_for_voice(unique_text_items, FEMALE_VOICE_ID, "female", existing_female_files)
             
-            # 🆕 NEW: Generate stories with custom filenames
+            # Generate stories with custom filenames
             if story_texts:
-                print(f"\n▶️ Generating {len(story_texts)} stories for FEMALE voice...")
+                print(f"\n🧪 TEST: Generating {len(story_texts)} stories for FEMALE voice...")
                 story_failures = generate_audio_for_voice(story_texts, FEMALE_VOICE_ID, "female", existing_female_files, story_filenames)
                 failed_logs['female'].extend(story_failures)
             
