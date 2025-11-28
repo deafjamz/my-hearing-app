@@ -6,15 +6,28 @@ import { HeaRing } from '@/components/ui/HeaRing';
 import { ProgressHistory } from '@/components/ui/ProgressHistory';
 import { cn } from '@/lib/utils';
 import { useUser } from '@/store/UserContext';
-import { useTheme } from '@/store/ThemeContext';
 
 export function Dashboard() {
   const [viewMode, setViewMode] = useState<'today' | 'week'>('today');
-  const { dailyGoal, setDailyGoal, dailyProgress, weeklyHistory } = useUser();
-  const { theme, toggleTheme } = useTheme();
+  const { dailyGoal = 25, setDailyGoal } = useUser();
 
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [tempGoal, setTempGoal] = useState(dailyGoal.toString());
+
+  // Mock data - replace with real data later
+  const dailyProgress = 13; // Example progress
+  const weekData = [
+    { day: 'Mon', minutes: 15 },
+    { day: 'Tue', minutes: 20 },
+    { day: 'Wed', minutes: 25 },
+    { day: 'Thu', minutes: 18 },
+    { day: 'Fri', minutes: 22 },
+    { day: 'Sat', minutes: 30 },
+    { day: 'Sun', minutes: dailyProgress },
+  ];
+
+  // Safe calculation of remaining minutes
+  const remainingMinutes = Math.max(0, (dailyGoal || 0) - (dailyProgress || 0));
 
   const container = {
     hidden: { opacity: 0 },
@@ -27,7 +40,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="relative h-screen flex flex-col bg-transparent pb-32">
+    <div className="relative min-h-screen flex flex-col bg-transparent pb-32">
       <motion.div 
         variants={container}
         initial="hidden"
@@ -99,7 +112,7 @@ export function Dashboard() {
                   >
                     <HeaRing current={dailyProgress} goal={dailyGoal} size={200} />
                     <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
-                      <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{Math.max(0, dailyGoal - dailyProgress)} mins</span>
+                      <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{remainingMinutes} mins</span>
                       <br/>until you close your ring!
                     </p>
                   </motion.div>
@@ -120,11 +133,11 @@ export function Dashboard() {
                         onClick={() => setShowGoalModal(true)}
                         className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 dark:bg-purple-900/30 px-2 py-1 rounded-md hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
                       >
-                        GOAL: {dailyGoal} MIN
+                        GOAL: {dailyGoal || 25} MIN
                       </button>
                     </div>
                     <div className="flex-1 w-full min-h-[200px]">
-                      <ProgressHistory data={weeklyHistory} goal={dailyGoal} />
+                      <ProgressHistory data={weekData} goal={dailyGoal} />
                     </div>
                   </motion.div>
                 )}

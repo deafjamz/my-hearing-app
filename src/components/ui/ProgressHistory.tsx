@@ -45,4 +45,68 @@ export function ProgressHistory({ data, goal }: ProgressHistoryProps) {
       </ResponsiveContainer>
     </div>
   );
+}import { cn } from '@/lib/utils';
+
+interface ProgressHistoryProps {
+  data?: { day: string; minutes: number }[];
+  goal?: number;
+  className?: string;
+}
+
+export function ProgressHistory({ 
+  data = [], 
+  goal = 25,
+  className 
+}: ProgressHistoryProps) {
+  // Ensure we have data to work with
+  const safeData = data || [];
+  const maxValue = Math.max(goal, ...safeData.map(d => d.minutes));
+
+  // Default data if none provided
+  if (safeData.length === 0) {
+    safeData.push(
+      ...['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => ({
+        day,
+        minutes: 0
+      }))
+    );
+  }
+
+  return (
+    <div className={cn("w-full h-full flex flex-col", className)}>
+      {/* Chart Container */}
+      <div className="grid grid-cols-7 gap-2 w-full h-[160px] relative">
+        {/* Goal Line */}
+        <div 
+          className="absolute w-full border-t-2 border-dashed border-red-300/50 dark:border-red-500/30"
+          style={{ 
+            top: `${Math.max(0, 100 - (goal / maxValue) * 100)}%`,
+            transition: 'top 0.3s ease-out'
+          }}
+        />
+        
+        {/* Bars */}
+        {safeData.map((item, index) => (
+          <div key={index} className="flex flex-col justify-end h-full">
+            <div 
+              className="w-full bg-purple-500/90 dark:bg-purple-400/90 rounded-t-lg transition-all duration-300"
+              style={{ 
+                height: `${(item.minutes / maxValue) * 100}%`,
+                minHeight: item.minutes > 0 ? '4px' : '0'
+              }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* X-axis Labels */}
+      <div className="grid grid-cols-7 gap-2 w-full mt-2">
+        {safeData.map((item, index) => (
+          <div key={index} className="text-center text-slate-500 dark:text-slate-400 text-xs font-medium">
+            {item.day}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
