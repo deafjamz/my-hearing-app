@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Play, XCircle, CheckCircle } from 'lucide-react';
+import { cn } from '@/lib/utils'; // For cleaner class management
 
 const WORD_PAIRS = [
   { id: 1, correct: 'Bear', options: ['Bear', 'Pear'], audio: '/audio/bear.mp3' },
@@ -12,19 +13,48 @@ const WORD_PAIRS = [
 export function RapidFire() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
+  const [isPreparing, setIsPreparing] = useState(false); // For visual indicator
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
   const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
 
-  // CRITICAL FIX: Prevent crash if data is missing or out of bounds.
-  if (!currentPair) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="text-slate-500">Loading Game Data...</div>
-      </div>
-    );
-  }
+  // Effect to manage the audio object source
+  useEffect(() => {
+    if (currentPair?.audio) {
+      audioRef.current = new Audio(currentPair.audio);
+    }
+    // Cleanup function to pause audio if component unmounts while playing
+    return () => {
+      audioRef.current?.pause();
+    }
+  }, [currentPair]);
+  
+  // Effect for "Polite Auto-Play"
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!hasGuessed && currentPair) {
+      setIsPreparing(true);
+      timer = setTimeout(() => {
+        playAudio();
+        setIsPreparing(false);
+      }, 500); // 500ms delay for cognitive settling
+    }
 
+    // Cleanup: clear timeout if user guesses or navigates away
+    return () => {
+      clearTimeout(timer);
+      if (isPreparing) {
+        setIsPreparing(false);
+      }
+    };
+  }, [currentIndex, hasGuessed]); // Re-run when round changes
+
+  const playAudio = () => {
+    audioRef.current?.play().catch(e => console.error("Audio play failed", e));
+  };
+  
   const handleGuess = (guess: string) => {
     if (hasGuessed) return;
     setSelectedGuess(guess);
@@ -35,10 +65,13 @@ export function RapidFire() {
     setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
-  const playAudio = () => {
-    console.log(`Playing: ${currentPair.audio}`);
-    // Future implementation: new Audio(currentPair.audio).play();
-  };
+  if (!currentPair) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="text-slate-500">Loading Game Data...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 flex flex-col bg-slate-50 dark:bg-slate-950 z-50">
@@ -52,15 +85,19 @@ export function RapidFire() {
         <div className="w-8 h-8" />
       </div>
 
-      {/* 2. Scrollable Content (Takes up remaining space) */}
+      {/* 2. Scrollable Content */}
       <div className="flex-1 overflow-y-auto px-4 pb-40">
         <div className="max-w-md mx-auto space-y-6 pt-4">
           
-          {/* Play Button */}
+          {/* Play Button with Visual Indicator */}
           <div className="flex justify-center py-8">
             <button 
               onClick={playAudio}
-              className="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-all"
+              className={cn(
+                "w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all duration-300",
+                "hover:scale-105 active:scale-95",
+                isPreparing && "scale-110 ring-4 ring-purple-500/30" // Visual indicator for auto-play
+              )}
             >
               <Play size={40} fill="currentColor" className="ml-1" />
             </button>
