@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, XCircle, CheckCircle, Flame } from 'lucide-react';
+import { ArrowLeft, Play, XCircle, CheckCircle, Flame, ArrowRight } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { WORD_PAIRS } from '../data/wordPairs';
@@ -24,6 +24,7 @@ export function RapidFire() {
 
   const currentPair = WORD_PAIRS[currentIndex];
   const hasGuessed = selectedGuess !== null;
+  const isCorrect = hasGuessed && selectedGuess === currentPair.correct;
 
   const playAudio = () => {
     const path = `/hearing-rehab-audio/${voice}_audio/${currentPair.file}.mp3`;
@@ -31,7 +32,7 @@ export function RapidFire() {
   };
 
   const handleGuess = (guess: string) => {
-    if (hasGuessed) return; // Prevent double guessing
+    if (hasGuessed) return;
     setSelectedGuess(guess);
     
     if (guess === currentPair.correct) {
@@ -41,47 +42,61 @@ export function RapidFire() {
     }
   };
 
-  const handleNext = () => {
-    // Strict Reset Order: Reset UI state FIRST, then advance data.
+  const nextRound = () => {
+    // Strict Reset Order
     setSelectedGuess(null);
     setCurrentIndex((prev) => (prev + 1) % WORD_PAIRS.length);
   };
 
+  const handleActionClick = () => {
+    if (hasGuessed) {
+      nextRound();
+    } else {
+      playAudio();
+    }
+  };
+
   return (
-    // Main Container: Flexbox column for robust full-height layout
     <div className="h-[100dvh] flex flex-col bg-slate-50 dark:bg-slate-950 overflow-hidden">
       
       {/* Header (flex-none) */}
-      <div className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
+      <header className="flex-none p-4 px-6 flex items-center justify-between z-10 border-b border-slate-100 dark:border-slate-800">
         <Link to="/practice" className="p-2 -ml-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
           <ArrowLeft size={24} />
         </Link>
-        <div className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</div>
+        <h1 className="text-slate-900 dark:text-white font-black text-lg">Word Pairs</h1>
         <div className="flex items-center gap-1.5 bg-orange-100 dark:bg-orange-900/30 px-3 py-1.5 rounded-full">
           <Flame className="text-orange-500 fill-orange-500" size={16} />
           <span className="text-orange-700 dark:text-orange-300 font-bold text-sm tabular-nums">{currentStreak}</span>
         </div>
-      </div>
+      </header>
 
-      {/* Game Content (flex-1 and scrollable) */}
-      <div className="flex-1 overflow-y-auto px-6" key={currentIndex}>
-        <div className="max-w-md mx-auto space-y-8 pt-4 pb-8">
+      {/* Main Game Area (Vertically Centered) */}
+      <main className="flex-1 overflow-y-auto" key={currentIndex}>
+        <div className="max-w-md mx-auto w-full flex flex-col justify-center min-h-full p-6 space-y-8">
           
-          <div className="flex justify-center py-4">
+          {/* Unified Action Button */}
+          <div className="flex justify-center">
             <button 
-              onClick={playAudio}
+              onClick={handleActionClick}
               className={cn(
-                "w-28 h-28 rounded-full bg-gradient-to-tr from-purple-500 to-purple-600 shadow-xl shadow-purple-500/30 flex items-center justify-center text-white transition-all",
-                isPlaying ? 'scale-110' : 'hover:scale-105 active:scale-95'
+                "w-28 h-28 rounded-full bg-gradient-to-tr shadow-xl flex items-center justify-center text-white transition-all duration-300",
+                "hover:scale-105 active:scale-95",
+                isPlaying && 'scale-110',
+                !hasGuessed && "from-purple-500 to-purple-600 shadow-purple-500/30",
+                isCorrect && "from-green-500 to-green-600 shadow-green-500/30",
+                hasGuessed && !isCorrect && "from-red-500 to-red-600 shadow-red-500/30"
               )}
             >
-              <Play size={48} fill="currentColor" className="ml-2" />
+              {hasGuessed 
+                ? <ArrowRight size={48} /> 
+                : <Play size={48} fill="currentColor" className="ml-2" />
+              }
             </button>
           </div>
 
           <div className="text-center space-y-2">
             <h2 className="text-slate-900 dark:text-white font-black text-2xl tracking-tight">Which word did you hear?</h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Listen carefully to the difference.</p>
           </div>
 
           <div className="space-y-3">
@@ -111,9 +126,9 @@ export function RapidFire() {
             })}
           </div>
 
-          {/* Feedback Box (Solid Background) */}
+          {/* Feedback Box */}
           {hasGuessed && (
-            <div className="relative z-10 animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
+            <div className="animate-in fade-in zoom-in-95 duration-300 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-5 rounded-2xl">
               <h3 className="text-blue-700 dark:text-blue-300 font-bold mb-1">Did you know?</h3>
               <p className="text-blue-600 dark:text-blue-200 text-sm leading-relaxed">
                 The key difference here is in the <span className="font-bold">{currentPair.category}</span>. Listen for that subtle change!
@@ -121,23 +136,9 @@ export function RapidFire() {
             </div>
           )}
         </div>
-      </div>
+      </main>
 
-      {/* Footer (flex-none, pinned to bottom) */}
-      <div className="flex-none p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 z-50">
-        <button 
-          onClick={handleNext}
-          disabled={!hasGuessed}
-          className={`w-full max-w-md mx-auto py-4 rounded-2xl font-bold text-lg transition-all shadow-lg ${
-            hasGuessed 
-              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:scale-[1.02] active:scale-[0.98]' 
-              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-          }`}
-        >
-          {hasGuessed ? 'Next Round' : 'Select an Answer'}
-        </button>
-      </div>
-
+      {/* NO FOOTER */}
     </div>
   );
 }
