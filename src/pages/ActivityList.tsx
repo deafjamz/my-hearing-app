@@ -9,7 +9,7 @@ export function ActivityList() {
       description: 'Train your ear with fast-paced minimal pairs.', 
       icon: Zap, 
       color: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400', 
-      path: '/rapid-fire' 
+      path: '/practice/rapid-fire' 
     },
     { 
       id: 'stories', 
@@ -17,7 +17,7 @@ export function ActivityList() {
       description: 'Follow narratives with comprehension checks.', 
       icon: BookOpen, 
       color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400', 
-      path: '/stories' 
+      path: '/practice/stories' 
     },
     { 
       id: 'scenarios', 
@@ -25,7 +25,7 @@ export function ActivityList() {
       description: 'Practice coffee shop orders, appointments, and more.', 
       icon: Coffee, 
       color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', 
-      path: '/scenarios' 
+      path: '/practice/scenarios' 
     },
     { 
       id: 'sentences', 
@@ -33,7 +33,7 @@ export function ActivityList() {
       description: 'Quick-fire sentence recognition drills.', 
       icon: Mic, 
       color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', 
-      path: '/sentences' 
+      path: '/practice/sentences' 
     },
   ];
 

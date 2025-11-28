@@ -1,47 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import { Dashboard } from './pages/Dashboard';
-import { PracticeHub } from './pages/PracticeHub';
-import { ActivityList } from './pages/ActivityList';
-import { Settings } from './pages/Settings';
-import { Player } from './pages/Player';
-import { RapidFire } from './pages/RapidFire';
-import { AudioQA } from './pages/AudioQA';
-import { VoiceProvider } from '@/store/VoiceContext';
-import { UserProvider } from '@/store/UserContext';
-import { ThemeProvider } from '@/store/ThemeContext';
-
-function App() {
-  return (
-    <ThemeProvider>
-      <UserProvider>
-        <VoiceProvider>
-          <Router>
-            <Routes>
-              <Route element={<Layout className="bg-brand-background dark:bg-brand-dark" />}>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/practice" element={<PracticeHub />} />
-                <Route path="/practice/rapid-fire" element={<RapidFire />} />
-                <Route path="/practice/:category" element={<ActivityList />} />
-                <Route path="/player/:id" element={<Player />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/qa" element={<AudioQA />} />
-              </Route>
-            </Routes>
-          </Router>
-        </VoiceProvider>
-      </UserProvider>
-    </ThemeProvider>
-  );
-}
-
-export default App;import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { Dashboard } from '@/pages/Dashboard';
 import { ActivityList } from '@/pages/ActivityList';
 import { RapidFire } from '@/pages/RapidFire';
 import { Settings } from '@/pages/Settings';
-import { PracticeHub } from '@/pages/PracticeHub';
+import { Player } from '@/pages/Player';
+import { AudioQA } from '@/pages/AudioQA';
 
 const router = createBrowserRouter([
   {
@@ -49,27 +13,34 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
         path: '/practice',
-        element: <ActivityList />
+        element: <ActivityList />,
       },
       {
-        path: '/rapid-fire',
-        element: <RapidFire />
+        path: '/practice/rapid-fire',
+        element: <RapidFire />,
+      },
+      {
+        path: '/practice/:category',
+        element: <ActivityList />,
+      },
+      {
+        path: '/player/:id',
+        element: <Player />,
       },
       {
         path: '/settings',
-        element: <Settings />
+        element: <Settings />,
       },
       {
-        path: '/practice/hub',
-        element: <PracticeHub />
-      }
-      // Add other routes here, they'll all inherit the Layout
-    ]
-  }
+        path: '/qa',
+        element: <AudioQA />,
+      },
+    ],
+  },
 ]);
 
 export default function App() {
