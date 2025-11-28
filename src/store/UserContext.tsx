@@ -14,19 +14,19 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  // 1. Goal
+  // 1. Goal (Default 25)
   const [dailyGoal, setDailyGoal] = useState<number>(() => {
     if (typeof window !== 'undefined') return parseInt(localStorage.getItem('dailyGoal') || '25');
     return 25;
   });
 
-  // 2. Voice
+  // 2. Voice (Default 'sarah')
   const [voice, setVoice] = useState<string>(() => {
     if (typeof window !== 'undefined') return localStorage.getItem('voice') || 'sarah';
     return 'sarah';
   });
 
-  // 3. History
+  // 3. History (Array)
   const [history, setHistory] = useState<DailyRecord[]>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('history');
