@@ -2,93 +2,99 @@ import pandas as pd
 import os
 import json
 import glob
-import re # Needed for clean_text and filename logic
+import re # <-- ADD THIS LINE
 
 # --- CONFIG ---
-INPUT_DIR = 'content/source_csvs'
+INPUT_DIR = 'Hearing Rehab Project - CSVs'
 OUTPUT_DIR = 'src/data'
-os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+# --- HELPER FUNCTIONS ---
 def clean_text(text):
-    if pd.isna(text): return ""
-    return str(text).strip().strip('"').strip("'")
+    if pd.isna(text):
+        return ""
+    return str(text).strip()
 
-# --- 1. PROCESS WORD PAIRS (No Changes Needed Here) ---
-def process_words():
-    print("Processing Words...")
+# --- 1. PROCESS WORD PAIRS ---
+def process_word_pairs():
+    print("Processing Word Pairs...")
     csv_path = os.path.join(INPUT_DIR, 'Hearing Rehab Project - Words.csv')
-            
+
     if not os.path.exists(csv_path):
-        print(f"⚠️  Missing Words CSV at {csv_path}. Skipping.")
+        print("⚠️  Missing Words CSV. Skipping.")
         return
 
     df = pd.read_csv(csv_path)
-    pairs = []
-    id_counter = 1
+    word_pairs = []
     
-    for _, row in df.iterrows():
-        w1 = clean_text(row.get('Word1'))
-        w2 = clean_text(row.get('Word2'))
-        set_name = clean_text(row.get('Set'))
+    # Iterate through each row and create the word pair object
+    for index, row in df.iterrows():
+        # Ensure all necessary fields are present and cleaned
+        pair_id = int(row.get('id'))
+        correct_word = clean_text(row.get('correct'))
+        option1 = clean_text(row.get('options').split('...')[1].split('...')[0]) if pd.notna(row.get('options')) and '...' in row.get('options') else ""
+        option2 = clean_text(row.get('options').split('...')[2].split('...')[0]) if pd.notna(row.get('options')) and len(row.get('options').split('...')) > 2 else ""
         
-        if not w1 or not w2 or w1.lower() == 'word1': continue
+        # Handle cases where options might be missing or malformed
+        options_list = []
+        if option1: options_list.append(f"...{option1}...")
+        if option2: options_list.append(f"...{option2}...")
         
-        category = set_name.split(':')[-1].strip() if ':' in set_name else set_name
+        # Ensure correct word is always present in options
+        if correct_word and correct_word not in options_list:
+            options_list.insert(0, correct_word) # Add correct word to the beginning
 
-        # Entry 1
-        pairs.append({
-            "id": id_counter,
-            "correct": w1,
-            "options": [w1, w2],
-            "file": w1.lower().replace("...", "").strip(),
-            "category": category
+        # Remove duplicates and shuffle options
+        unique_options = list(dict.fromkeys(options_list))
+        
+        # Ensure we have exactly two options if possible, otherwise use what we have
+        if len(unique_options) < 2:
+            # If only one unique option, duplicate it to meet the expected format,
+            # or handle as an edge case if necessary. For now, we'll just use what we have.
+            pass 
+        
+        # Shuffle the options for variety
+        import random
+        random.shuffle(unique_options)
+
+        word_pairs.append({
+            "id": pair_id,
+            "correct": correct_word,
+            "options": unique_options,
+            "file": clean_text(row.get('file')),
+            "category": clean_text(row.get('category'))
         })
-        id_counter += 1
-
-        # Entry 2
-        pairs.append({
-            "id": id_counter,
-            "correct": w2,
-            "options": [w2, w1],
-            "file": w2.lower().replace("...", "").strip(),
-            "category": category
-        })
-        id_counter += 1
-
-    ts_content = f"export const WORD_PAIRS = {json.dumps(pairs, indent=2)};"
+        
+    ts_content = f"export const WORD_PAIRS = {json.dumps(word_pairs, indent=2)};"
     with open(os.path.join(OUTPUT_DIR, 'wordPairs.ts'), 'w') as f:
-        f.write(f"// Generated from Hearing Rehab Project - Words.csv\\n{ts_content}")
-    print(f"✅ Generated src/data/wordPairs.ts ({len(pairs)} items)")
+        f.write(f"// Generated from Hearing Rehab Project - Words.csv\n{ts_content}")
+    print(f"✅ Generated src/data/wordPairs.ts ({len(word_pairs)} pairs)")
 
-# --- 2. PROCESS STORIES (No Changes Needed Here) ---
+# --- 2. PROCESS STORIES ---
 def process_stories():
     print("Processing Stories...")
     csv_path = os.path.join(INPUT_DIR, 'Hearing Rehab Project - Stories.csv')
-    
+
     if not os.path.exists(csv_path):
-        print(f"⚠️  Missing Stories CSV. Skipping.")
+        print("⚠️  Missing Stories CSV. Skipping.")
         return
-        
+
     df = pd.read_csv(csv_path)
     stories = []
     
-    for i, row in df.iterrows():
-        title = clean_text(row.get('Title'))
-        if not title: continue
-        
+    for index, row in df.iterrows():
         stories.append({
-            "id": f"story_{i+1}",
-            "title": title,
-            "text": clean_text(row.get('Text')),
-            "audioId": clean_text(row.get('Filename', '')).replace('.mp3', '')
+            "id": clean_text(row.get('id')),
+            "title": clean_text(row.get('title')),
+            "text": clean_text(row.get('text')),
+            "audioId": clean_text(row.get('audioId'))
         })
         
     ts_content = f"export const STORIES = {json.dumps(stories, indent=2)};"
     with open(os.path.join(OUTPUT_DIR, 'stories.ts'), 'w') as f:
-        f.write(f"// Generated from Hearing Rehab Project - Stories.csv\\n{ts_content}")
-    print(f"✅ Generated src/data/stories.ts ({len(stories)} items)")
+        f.write(f"// Generated from Hearing Rehab Project - Stories.csv\n{ts_content}")
+    print(f"✅ Generated src/data/stories.ts ({len(stories)} stories)")
 
-# --- 3. PROCESS SCENARIOS (THE FIX IS HERE) ---
+# --- 3. PROCESS SCENARIOS ---
 def process_scenarios():
     print("Processing Scenarios...")
     csv_path = os.path.join(INPUT_DIR, 'Hearing Rehab Project - Scenarios.csv')
@@ -100,32 +106,40 @@ def process_scenarios():
     df = pd.read_csv(csv_path)
     all_scenarios = {}
     
-    # Check if the required column exists. If not, use 'Category' or 'Context' column as fallback
-    # or assume the scenario type is encoded in the Filename (e.g., coffee_shop_scenarios.csv)
+    # === FIX: Grouping by Filename Pattern ===
+    # We deduce the scenario from the filename, e.g., 'scenarios_coffee_...mp3' -> 'coffee_shop'
+    def extract_scenario_group(filename):
+        if pd.isna(filename): return "unknown"
+        
+        # Regex to find the scenario keyword (coffee, bank, etc.) from the filename string
+        match = re.search(r'scenarios_([a-zA-Z]+)_', str(filename))
+        if not match:
+            return "unknown"
+            
+        keyword = match.group(1)
+        # Map keywords to consistent IDs
+        if keyword == "coffee": return "coffee_shop"
+        if keyword == "bank": return "bank"
+        if keyword == "doctor": return "doctor_office"
+        if keyword == "restaurant": return "restaurant"
+        if keyword == "pharmacy": return "pharmacy"
+        
+        return "unknown"
+
+    df['scenario_group_id'] = df['Filename'].apply(extract_scenario_group)
     
-    # === FIX: Determine Grouping Strategy ===
-    if 'scenario_id' in df.columns:
-        # Preferred: Use the explicit scenario_id column
-        groups = df.groupby('scenario_id')
-    elif 'Filename' in df.columns:
-        # Fallback 1: Extract scenario type from the Filename (e.g., 'scenarios_coffee_basic_greeting.mp3')
-        # This will create a separate scenario for each unique ID in the Filename
-        df['temp_scenario_id'] = df['Filename'].apply(lambda x: re.split('(_|\.)', str(x))[1] if pd.notna(x) and '_' in str(x) else 'default')
-        groups = df.groupby('temp_scenario_id')
-    else:
-        # Fallback 2: Assume entire CSV is one single scenario (e.g., if we were processing individual files)
-        # For the Master file, this is unlikely, so we will fail defensively.
-        print("❌ CRITICAL: Cannot determine scenario type (missing 'scenario_id' or 'Filename').")
-        return
-    # === END FIX ===
-    
-    for scenario_id, group in groups:
+    # Now group by the newly created and validated column
+    for scenario_id, group in df.groupby('scenario_group_id'):
+        if scenario_id == 'unknown':
+            continue
+
         steps = []
-        for _, row in group.iterrows():
+        # Sort by Filename to ensure the conversation flows in a logical order
+        for _, row in group.sort_values(by='Filename').iterrows():
             steps.append({
-                "speaker": clean_text(row.get('Speaker') or row.get('speaker')),
-                "text": clean_text(row.get('Text') or row.get('question')),
-                "audioId": clean_text(row.get('Filename') or row.get('audio_file')).replace('.mp3', '')
+                "speaker": clean_text(row.get('Speaker')),
+                "text": clean_text(row.get('Text')),
+                "audioId": clean_text(row.get('Filename')).replace('.mp3', '')
             })
             
         all_scenarios[scenario_id] = {
@@ -136,19 +150,16 @@ def process_scenarios():
         
     ts_content = f"export const SCENARIOS = {json.dumps(all_scenarios, indent=2)};"
     with open(os.path.join(OUTPUT_DIR, 'scenarios.ts'), 'w') as f:
-        f.write(f"// Generated from Hearing Rehab Project - Scenarios.csv\\n{ts_content}")
+        f.write(f"// Generated from Scenarios CSVs\n{ts_content}")
     print(f"✅ Generated src/data/scenarios.ts ({len(all_scenarios)} scenarios)")
 
+# --- MAIN EXECUTION ---
 if __name__ == "__main__":
-    try:
-        import pandas as pd 
-    except ImportError:
-        print("❌ ERROR: pandas library not found.")
-        print("Please run: pip install pandas")
-        exit(1)
+    # Create output directory if it doesn't exist
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
         
-    print("🚀 Starting Content Ingestion Engine...")
-    process_words()
+    process_word_pairs()
     process_stories()
     process_scenarios()
-    print("✨ Content Pipeline Complete!")
+    print("\nContent ingestion complete!")
