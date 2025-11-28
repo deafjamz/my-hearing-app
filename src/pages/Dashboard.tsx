@@ -125,6 +125,7 @@ export function Dashboard() {
                     transition={{ duration: 0.2 }}
                     className="w-full h-full flex flex-col"
                   >
+                    {/* Simplified Header */}
                     <div className="flex items-center justify-between w-full px-2 mb-6">
                       <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest">
                         ACTIVITY TRENDS
