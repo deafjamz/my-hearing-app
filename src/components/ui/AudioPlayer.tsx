@@ -9,10 +9,11 @@ interface AudioPlayerProps {
   className?: string;
   onEnded?: () => void;
   onPlay?: () => void;
+  onTimeUpdate?: (currentTime: number) => void; // New prop
 }
 
-export function AudioPlayer({ src, title, className, onEnded, onPlay }: AudioPlayerProps) {
-  const { isPlaying, isLoading, error, togglePlay } = useAudio({ src, onEnded });
+export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpdate }: AudioPlayerProps) {
+  const { isPlaying, isLoading, error, togglePlay } = useAudio({ src, onEnded, onTimeUpdate });
 
   const handleToggle = () => {
     togglePlay();

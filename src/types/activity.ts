@@ -11,6 +11,13 @@ export interface Question {
   feedback?: string; // Optional educational feedback
 }
 
+// Updated to match the actual API response we are seeing
+export interface AlignmentData {
+  characters: string[];
+  character_start_times_seconds: number[];
+  character_end_times_seconds: number[];
+}
+
 export interface ActivityData {
   id: string;
   title: string;
@@ -18,4 +25,21 @@ export interface ActivityData {
   noiseSrc?: string;
   transcript?: string;
   questions: Question[];
+  tier?: 'free' | 'standard' | 'premium';
+}
+
+export interface ScenarioItem {
+  id: string;
+  speaker: string;
+  text: string;
+  difficulty: string;
+}
+
+export interface Scenario {
+  id: string;
+  title: string;
+  difficulty: string;
+  description: string;
+  items: ScenarioItem[];
+  tier?: 'free' | 'standard' | 'premium';
 }

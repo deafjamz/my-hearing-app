@@ -3,9 +3,11 @@ import { Layout } from '@/components/Layout';
 import { Dashboard } from '@/pages/Dashboard';
 import { ActivityList } from '@/pages/ActivityList';
 import { RapidFire } from '@/pages/RapidFire';
-import { Settings } from '@/pages/Settings';
+import { StoryList } from '@/pages/StoryList';
 import { Player } from '@/pages/Player';
 import { AudioQA } from '@/pages/AudioQA';
+import { Settings } from '@/pages/Settings';
+import { QualityControl } from '@/pages/QualityControl';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
         element: <RapidFire />,
       },
       {
+        path: '/practice/stories',
+        element: <StoryList />,
+      },
+      {
         path: '/practice/:category',
         element: <ActivityList />,
       },
@@ -34,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/settings',
         element: <Settings />,
+      },
+      {
+        path: '/qc',
+        element: <QualityControl />,
       },
       {
         path: '/qa',
