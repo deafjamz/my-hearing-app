@@ -26,6 +26,7 @@
     - Built a `ProgressSummary` dashboard component to display key metrics (accuracy, total exercises).
     - Fixed distracting decimal displays for time tracking, now showing whole minutes.
     - Fixed UX bug in "Rapid Fire" to prevent guessing before hearing audio.
+    - Resolved `NaN` bug for time display by making data parsing more robust.
 
 ## 🛠️ Technical Artifacts
 - `scripts/generate_assets_premier.py`: Production engine for words/stories.

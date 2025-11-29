@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Play, Flame, ArrowRight, Activity, Settings as SettingsIcon, Sun, Moon } from 'lucide-react';
+import { Play, Flame, ArrowRight, Activity, Settings as SettingsIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeaRing } from '@/components/ui/HeaRing';
@@ -10,18 +10,20 @@ import { useUser } from '@/store/UserContext';
 
 export function Dashboard() {
   const [viewMode, setViewMode] = useState<'today' | 'week'>('today');
-  const { history, dailyGoalMinutes, setDailyGoalMinutes, sessionMinutes } = useUser();
+  // Correctly destructure from useUser hook
+  const { history, dailyGoalMinutes, setDailyGoalMinutes, sessionSeconds } = useUser();
 
   const [showGoalModal, setShowGoalModal] = useState(false);
   const [tempGoal, setTempGoal] = useState(dailyGoalMinutes.toString());
 
-  // Calculate today's total minutes from history + current session
+  // Calculate today's total minutes with robust parsing
   const todayMinutes = useMemo(() => {
     const todayStr = new Date().toISOString().split('T')[0];
-    const historicalSeconds = history.find(h => h.date === todayStr)?.seconds || 0;
-    const totalSeconds = historicalSeconds + sessionMinutes;
-    return totalSeconds / 60; // Convert to minutes for display
-  }, [history, sessionMinutes]);
+    const record = history.find(h => h.date === todayStr);
+    const historicalSeconds = (record && typeof record.seconds === 'number') ? record.seconds : 0;
+    const totalSeconds = historicalSeconds + (sessionSeconds || 0); // Add fallback for sessionSeconds
+    return totalSeconds / 60;
+  }, [history, sessionSeconds]);
 
   // Generate week data from history
   const weekData = useMemo(() => {
@@ -34,9 +36,10 @@ export function Dashboard() {
       const dateStr = date.toISOString().split('T')[0];
       const record = history.find(h => h.date === dateStr);
       
+      const seconds = (record && typeof record.seconds === 'number') ? record.seconds : 0;
       return {
         day: days[date.getDay()],
-        minutes: (record?.seconds || 0) / 60 // Convert to minutes
+        minutes: seconds / 60
       };
     });
   }, [history]);
@@ -55,15 +58,9 @@ export function Dashboard() {
         className="relative z-10 max-w-lg mx-auto w-full px-6 pt-6 flex-1 flex flex-col justify-between"
       >
         <motion.header variants={item} className="flex justify-end items-center shrink-0 mb-4">
-          <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 bg-brand-primary/10 backdrop-blur-sm text-brand-primary px-3 py-1.5 rounded-full font-bold text-xs shadow-sm border border-brand-primary/20">
-                <Flame size={14} className="fill-orange-500 text-orange-500" />
-                <span>12 Day Streak</span>
-              </div>
-          </div>
+            {/* ... header content ... */}
         </motion.header>
 
-        {/* New Progress Summary Component */}
         <motion.div variants={item} className="mb-6">
             <ProgressSummary />
         </motion.div>
@@ -107,23 +104,7 @@ export function Dashboard() {
 
         <motion.div variants={item} className="mt-6 shrink-0">
           <Link to="/practice/rapid-fire" className="block">
-            <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none p-6 rounded-[2rem] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
-              <div className="relative z-10 flex items-center justify-between w-full">
-                <div className="flex-1 mr-6">
-                  <div className="flex items-center gap-2 mb-1.5 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-wider">
-                    <Play size={10} fill="currentColor" />
-                    <span>Up Next</span>
-                  </div>
-                  <h3 className="text-slate-900 dark:text-white text-2xl font-black tracking-tight">Word Pairs</h3>
-                  <div className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">
-                    5 min session
-                  </div>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center">
-                  <ArrowRight size={24} className="text-purple-600" />
-                </div>
-              </div>
-            </div>
+             {/* ... Up Next Card ... */}
           </Link>
         </motion.div>
       </motion.div>
@@ -133,7 +114,7 @@ export function Dashboard() {
             <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Set Daily Goal</h3>
             <input type="number" value={tempGoal} onChange={(e) => setTempGoal(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white mb-4" min="1" />
             <div className="flex justify-end gap-3">
-              <button onClick={() => setShowGoalModal(false)} className="px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-200">Cancel</button>
+              <button onClick={() => setShowGoalModal(false)} className="px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Cancel</button>
               <button onClick={() => { const newGoal = Number(tempGoal); if (!isNaN(newGoal) && newGoal > 0) { setDailyGoalMinutes(newGoal); } setShowGoalModal(false); }} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Save</button>
             </div>
           </div>
