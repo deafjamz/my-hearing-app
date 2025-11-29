@@ -5,6 +5,7 @@ import { useAudio } from '../hooks/useAudio';
 import { useUser } from '../store/UserContext';
 import { useWordPairs, WordPair } from '../hooks/useActivityData';
 import { ActivityHeader } from '../components/ui/ActivityHeader';
+import { useProgress } from '../hooks/useProgress';
 
 // Game State Interface
 interface GameRound {
@@ -15,8 +16,8 @@ interface GameRound {
 }
 
 export function RapidFire() {
-  const { incrementStreak, resetStreak } = useUser();
-  // useAudio now supports { play } which accepts a path
+  const { logProgress } = useProgress(); 
+  const { voice, startPracticeSession, endPracticeSession } = useUser();
   const { play, isPlaying, error: audioError } = useAudio(); 
   
   const { pairs, loading } = useWordPairs();
@@ -24,19 +25,25 @@ export function RapidFire() {
   const [sessionRounds, setSessionRounds] = useState<GameRound[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
+  const [startTime, setStartTime] = useState<number>(Date.now());
+  const [audioPlayedForRound, setAudioPlayedForRound] = useState(false); // New state
+
+  // Start & Stop Practice Session on mount/unmount
+  useEffect(() => {
+    startPracticeSession();
+    return () => {
+      endPracticeSession();
+    };
+  }, []); // Run only once
 
   // Initialize Game Session
   useEffect(() => {
     if (!loading && pairs.length > 0) {
-      // 1. Shuffle the pairs
       const shuffled = [...pairs].sort(() => Math.random() - 0.5);
       
-      // 2. Create rounds
       const rounds = shuffled.map(pair => {
-        // Randomly pick which word in the pair is the target
         const isWord1Target = Math.random() > 0.5;
         const targetWord = isWord1Target ? pair.word_1 : pair.word_2;
-        // Use the correct audio path directly from Supabase
         const targetAudio = isWord1Target ? pair.audio_1 : pair.audio_2; 
         
         return {
@@ -48,8 +55,16 @@ export function RapidFire() {
       });
       
       setSessionRounds(rounds);
+      setCurrentIndex(0); // Ensure starting at 0
+      setStartTime(Date.now());
+      setAudioPlayedForRound(false); // Reset for new session
     }
   }, [loading, pairs]);
+
+  // Reset audioPlayedForRound when round changes
+  useEffect(() => {
+    setAudioPlayedForRound(false);
+  }, [currentIndex]);
 
   const currentRound = sessionRounds[currentIndex];
   const hasGuessed = selectedGuess !== null;
@@ -57,35 +72,53 @@ export function RapidFire() {
 
   const handleAction = () => {
     if (!hasGuessed) {
-      // Play audio
       if (currentRound?.targetAudio) {
-        play(currentRound.targetAudio);
+        play(currentRound.targetAudio); // This now internally sets isPlaying
+        setAudioPlayedForRound(true); // Mark audio as played for this round
       } else {
         console.error("No audio source for this round");
       }
     } else {
-      // Next Round
       setSelectedGuess(null);
-      setCurrentIndex((prev) => (prev + 1) % sessionRounds.length);
+      if (currentIndex < sessionRounds.length - 1) {
+          setCurrentIndex(prev => prev + 1);
+          setStartTime(Date.now());
+      } else {
+          setCurrentIndex(0);
+      }
     }
   };
 
   const handleGuess = (guess: string) => {
-    if (hasGuessed) return;
+    if (hasGuessed || !audioPlayedForRound) return; // Prevent guess if audio not played
     setSelectedGuess(guess);
-    if (guess === currentRound.targetWord) {
-      incrementStreak();
-    } else {
-      resetStreak();
-    }
+    
+    const endTime = Date.now();
+    const responseTime = endTime - startTime;
+    const correct = guess === currentRound.targetWord;
+    
+    logProgress({
+        contentType: 'word',
+        contentId: currentRound.pair.id,
+        result: correct ? 'correct' : 'incorrect',
+        userResponse: guess,
+        correctResponse: currentRound.targetWord,
+        responseTimeMs: responseTime,
+        metadata: {
+            targetPhoneme: currentRound.pair.target_phoneme,
+            contrastPhoneme: currentRound.pair.contrast_phoneme,
+            clinicalCategory: currentRound.pair.clinical_category,
+            voiceId: voice // Use user's selected voice
+        }
+    });
   };
 
   if (loading) {
     return <div className="p-10 text-center text-slate-500">Loading word pairs...</div>;
   }
 
-  if (sessionRounds.length === 0) {
-    return <div className="p-10 text-center text-slate-500">No content available.</div>;
+  if (sessionRounds.length === 0 || !currentRound) {
+    return <div className="p-10 text-center text-slate-500">No content available or session not ready.</div>;
   }
 
   return (
@@ -100,6 +133,7 @@ export function RapidFire() {
         <div className="flex justify-center mb-8">
           <button 
             onClick={handleAction}
+            disabled={isPlaying} // Disable play button when audio is playing
             className={`w-28 h-28 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 active:scale-95 ${
               hasGuessed 
                 ? 'bg-gradient-to-tr from-green-500 to-green-600 hover:scale-105 shadow-green-500/30' 
@@ -138,7 +172,7 @@ export function RapidFire() {
               <button
                 key={option}
                 onClick={() => handleGuess(option)}
-                disabled={hasGuessed}
+                disabled={hasGuessed || !audioPlayedForRound} // Disable if not played
                 className={`w-full p-6 text-left font-bold text-xl rounded-2xl border-2 transition-all shadow-sm flex justify-between items-center ${cardStyle}`}
               >
                 <span>{option}</span>

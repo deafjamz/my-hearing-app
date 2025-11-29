@@ -108,7 +108,7 @@ We will utilize a set of four clinically-chosen voices to provide varied acousti
 
 - [ ] **Phase 4: Content Scaling & Advanced Features**
     -   [ ] Add Emma and David voices to generation pipeline.
-    -   [ ] Develop Sentence generation and integration.
-    -   [ ] Implement Scenario generation and integration (with ElevenLabs Sound Effects).
+    -   [x] Develop Sentence generation and integration.
+    -   [x] Implement Scenario generation and integration (with ElevenLabs Sound Effects).
     -   [ ] Develop User Progress Tracking (Supabase DB).
     -   [ ] Implement Subscription Logic (Supabase Auth/Edge Functions).

@@ -8,6 +8,8 @@ import { Player } from '@/pages/Player';
 import { AudioQA } from '@/pages/AudioQA';
 import { Settings } from '@/pages/Settings';
 import { QualityControl } from '@/pages/QualityControl';
+import { ScenarioPlayer } from '@/pages/ScenarioPlayer';
+import { ScenarioList } from '@/pages/ScenarioList';
 
 const router = createBrowserRouter([
   {
@@ -30,12 +32,20 @@ const router = createBrowserRouter([
         element: <StoryList />,
       },
       {
+        path: '/practice/scenarios',
+        element: <ScenarioList />,
+      },
+      {
         path: '/practice/:category',
         element: <ActivityList />,
       },
       {
         path: '/player/:id',
         element: <Player />,
+      },
+      {
+        path: '/player/scenario/:id',
+        element: <ScenarioPlayer />,
       },
       {
         path: '/settings',

@@ -9,7 +9,7 @@ interface HeaRingProps {
 }
 
 export function HeaRing({ current, goal, size = 200, className }: HeaRingProps) {
-  const percentage = Math.min(100, Math.max(0, (current / goal) * 100));
+  const percentage = goal > 0 ? Math.min(100, Math.max(0, (current / goal) * 100)) : 0;
   const strokeWidth = 12;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -63,7 +63,7 @@ export function HeaRing({ current, goal, size = 200, className }: HeaRingProps) 
       {/* Center Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <div className="text-slate-900 dark:text-white text-3xl font-bold">
-          <span className="text-4xl">{current}</span>
+          <span className="text-4xl">{Math.round(current)}</span>
           <span className="text-xl text-slate-400 dark:text-slate-500 font-medium">/{goal}</span>
         </div>
         <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-1">

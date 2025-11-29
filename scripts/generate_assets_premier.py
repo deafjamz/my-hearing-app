@@ -7,14 +7,22 @@ import re
 import time
 import subprocess
 import uuid
-from dotenv import load_dotenv
-from supabase import create_client, Client
+
+# --- Custom .env Loader (Bypasses python-dotenv issues) ---
+def get_key_from_env_file(key_name, file_path=".env"):
+    if not os.path.exists(file_path):
+        return None
+    with open(file_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith(f'{key_name}=')}:
+                return line.split('=', 1)[1].strip()
+    return None
 
 # --- CONFIGURATION ---
-load_dotenv()
-ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+ELEVENLABS_API_KEY = get_key_from_env_file("ELEVENLABS_API_KEY")
+SUPABASE_URL = get_key_from_env_file("SUPABASE_URL")
+SUPABASE_KEY = get_key_from_env_file("SUPABASE_SERVICE_ROLE_KEY")
 
 VOICES = {
     'sarah': 'EXAVITQu4vr4xnSDxMaL',
@@ -57,8 +65,8 @@ def upload_to_supabase(bucket, file_path, destination_path, content_type="audio/
         return None
 
 def crop_audio(input_path, output_path, start_s, end_s):
-    # Buffer: 50ms before, 100ms after for natural decay
-    start = max(0, start_s - 0.05)
+    buffer = 0.05 
+    start = max(0, start_s - buffer)
     duration = (end_s - start) + 0.1
     
     cmd = [
@@ -79,12 +87,9 @@ def crop_audio(input_path, output_path, start_s, end_s):
 # --- PREMIER GENERATION LOGIC ---
 
 def generate_word_premier(word, voice_name, voice_id):
-    # 1. Prepare Prompt with Carrier Phrase
-    # Use simple text to avoid SSML issues, but enough to set context
     carrier = "The word is"
     text_input = f"{carrier} {word}." 
     
-    # 2. Call API (With Timestamps)
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}/with-timestamps"
     headers = { "Content-Type": "application/json", "xi-api-key": ELEVENLABS_API_KEY }
     data = {
@@ -101,37 +106,18 @@ def generate_word_premier(word, voice_name, voice_id):
             
         json_response = response.json()
         audio_base64 = json_response.get("audio_base64")
-        alignment = json_response.get("alignment") # keys: characters, character_start_times_seconds, ...
+        alignment = json_response.get("alignment") 
         
         if not audio_base64 or not alignment:
             print("      ❌ Invalid API Response")
             return "failed"
 
-        # 3. Find Timing of Target Word
-        # We look for the characters of the word AFTER the carrier phrase length
-        # Carrier "The word is " is ~12 chars.
-        # Let's search for the sequence of characters matching the word
-        
         chars = alignment.get('characters', [])
         starts = alignment.get('character_start_times_seconds', [])
         ends = alignment.get('character_end_times_seconds', [])
         
-        # Simple heuristic: The word usually appears at the end.
-        # Let's find the contiguous sequence of chars that matches our word
-        # This is a bit tricky with raw chars because of spaces/punctuation.
-        
-        # Better: We know the text ends with " {word}."
-        # We can look at the last N characters where N is length of word.
-        
-        # Clean word for matching
         clean_target = word.lower().replace(" ", "")
-        
-        # Reconstruct full string from alignment to map indices
         full_aligned_text = "".join(chars).lower()
-        
-        # Find index where word starts
-        # Search from right to handle "is" vs "is"
-        # We expect it near the end.
         
         start_idx = full_aligned_text.rfind(clean_target)
         if start_idx == -1:
@@ -140,11 +126,9 @@ def generate_word_premier(word, voice_name, voice_id):
             
         end_idx = start_idx + len(clean_target) - 1
         
-        # Get timestamps
         word_start_s = starts[start_idx]
         word_end_s = ends[end_idx]
         
-        # 4. Save & Crop
         temp_raw = f"temp_raw_{uuid.uuid4()}.mp3"
         temp_crop = f"temp_crop_{uuid.uuid4()}.mp3"
         
@@ -152,12 +136,9 @@ def generate_word_premier(word, voice_name, voice_id):
             f.write(base64.b64decode(audio_base64))
             
         if crop_audio(temp_raw, temp_crop, word_start_s, word_end_s):
-            # 5. Upload
             final_path = f"words/{voice_name}/{slugify(word)}.mp3"
             upload_to_supabase("audio", temp_crop, final_path)
-            # print(f"      ✅ Uploaded {word}")
             
-            # Cleanup
             os.remove(temp_raw)
             os.remove(temp_crop)
             return "generated"
@@ -192,10 +173,6 @@ def process_words_batch():
             print(f"\n   Processing batch {i//BATCH_SIZE + 1}...")
             
         for v_name, v_id in VOICES.items():
-            # Check exist?
-            # Skipping existence check for now to FORCE REGENERATION with better quality
-            # If you want to skip, uncomment check_file_exists logic from previous scripts
-            
             print(f"   🎙️ {word} ({v_name})...")
             generate_word_premier(word, v_name, v_id)
             time.sleep(0.2) 

@@ -1,9 +1,18 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { ActivityData, Scenario, AlignmentData } from '@/types/activity';
+import { ActivityData, Scenario, AlignmentData, content_tier } from '@/types/activity';
 
 interface StoryDataExtended extends ActivityData {
-  alignmentData?: AlignmentData; // Optional alignment data for karaoke
+  alignmentData?: AlignmentData; 
+}
+
+// Interface for data fetched from user_clinical_summary view
+export interface ClinicalSummaryData {
+  practice_date: string; // ISO date string
+  total_exercises: number;
+  correct_count: number;
+  accuracy_percentage: number;
+  avg_reaction_time: number;
 }
 
 export function useActivityData(id: string | undefined) {
@@ -19,12 +28,14 @@ export function useActivityData(id: string | undefined) {
       setError(null);
       
       try {
-        // 1. Try to fetch from Stories
-        let { data: storyData, error: storyError } = await supabase
+        // ---------------------------------------------------------
+        // 1. Try Fetching as a STORY
+        // ---------------------------------------------------------
+        let { data: storyData } = await supabase
           .from('stories')
           .select('*')
           .eq('id', id)
-          .single();
+          .maybeSingle(); // Use maybeSingle to avoid error if not found
 
         if (storyData) {
           const mappedStory: StoryDataExtended = {
@@ -32,42 +43,76 @@ export function useActivityData(id: string | undefined) {
             title: storyData.title,
             transcript: storyData.transcript,
             audioSrc: storyData.audio_male_path || '', 
-            tier: storyData.tier,
+            tier: storyData.tier as content_tier, // Cast to content_tier
             questions: [] 
           };
 
           // Fetch Alignment Data if available
           if (storyData.alignment_male_path) {
-            const urlParts = storyData.alignment_male_path.split('/alignment/');
-            if (urlParts.length > 1) {
-                const relativePath = urlParts[1];
-                const { data: alignmentFile, error: alignmentError } = await supabase.storage
+             // Extract relative path logic...
+             const urlParts = storyData.alignment_male_path.split('/alignment/');
+             if (urlParts.length > 1) {
+                const { data: alignmentFile } = await supabase.storage
                   .from('alignment')
-                  .download(relativePath);
+                  .download(urlParts[1]);
                 
-                if (alignmentError) {
-                  console.error("Error downloading alignment file:", alignmentError);
-                } else if (alignmentFile) {
-                  const text = await alignmentFile.text(); // Use .text() for Blob
+                if (alignmentFile) {
                   try {
+                    const text = await alignmentFile.text();
                     mappedStory.alignmentData = JSON.parse(text);
-                  } catch (parseError) {
-                    console.error("Error parsing alignment JSON:", parseError);
-                  }
+                  } catch (e) { console.error("Alignment parse error", e); }
                 }
-            }
+             }
           }
           
           setData(mappedStory);
           setLoading(false);
           return;
         }
-        
-        if (storyError) {
-           console.error("Error fetching story:", storyError);
+
+        // ---------------------------------------------------------
+        // 2. Try Fetching as a SCENARIO
+        // ---------------------------------------------------------
+        // Scenarios table uses UUIDs now too.
+        let { data: scenarioData } = await supabase
+          .from('scenarios')
+          .select('*')
+          .eq('id', id)
+          .maybeSingle();
+
+        if (scenarioData) {
+            // Fetch items for this scenario
+            const { data: items } = await supabase
+                .from('scenario_items')
+                .select('*')
+                .eq('scenario_id', scenarioData.id)
+                .order('order');
+
+            const mappedScenario: Scenario = {
+                id: scenarioData.id,
+                title: scenarioData.title,
+                description: scenarioData.description,
+                difficulty: scenarioData.difficulty,
+                tier: scenarioData.tier as content_tier, // Cast to content_tier
+                ambience_path: scenarioData.ambience_path,
+                items: items?.map(i => ({
+                    id: i.id,
+                    speaker: i.speaker,
+                    text: i.text,
+                    difficulty: 'easy', 
+                    audio_path: i.audio_path
+                })) || []
+            };
+            
+            setData(mappedScenario);
+            setLoading(false);
+            return;
         }
         
-        setData(null); // Not found
+        // 3. Not found in either
+        console.warn("Content not found for ID:", id);
+        setData(null);
+
       } catch (err) {
         console.error("Supabase fetch error:", err);
         setError("Failed to load content.");
@@ -102,7 +147,7 @@ export function useStoriesList() {
           transcript: s.transcript,
           audioSrc: s.audio_male_path || '', 
           questions: [],
-          tier: s.tier
+          tier: s.tier as content_tier
         }));
         setStories(mappedStories);
       }
@@ -121,8 +166,12 @@ export interface WordPair {
   word_2: string;
   audio_1: string;
   audio_2: string;
-  category: string;
-  tier: string;
+  clinical_category?: string; // Changed from 'category' to 'clinical_category'
+  tier: content_tier;
+  target_phoneme?: string;
+  contrast_phoneme?: string;
+  position?: string;
+  vowel_context?: string;
 }
 
 export function useWordPairs() {
@@ -133,22 +182,23 @@ export function useWordPairs() {
     const fetchPairs = async () => {
       const { data, error } = await supabase
         .from('word_pairs')
-        .select('*');
+        .select('*'); 
 
       if (error) {
         console.error("Error fetching word pairs:", error);
       } else if (data) {
-        // Map DB structure to simpler frontend structure
-        // Note: We need logic to choose which audio path (1 vs 2) matches the correct answer later
-        // But the game logic handles swapping.
         const mappedPairs = data.map(p => ({
           id: p.id,
           word_1: p.word_1,
           word_2: p.word_2,
-          audio_1: p.audio_1_path || '', // Supabase URL
-          audio_2: p.audio_2_path || '', // Supabase URL
-          category: p.clinical_category || 'General',
-          tier: p.tier
+          audio_1: p.audio_1_path || '', 
+          audio_2: p.audio_2_path || '', 
+          clinical_category: p.clinical_category || 'General',
+          tier: p.tier as content_tier,
+          target_phoneme: p.target_phoneme,
+          contrast_phoneme: p.contrast_phoneme,
+          position: p.position,
+          vowel_context: p.vowel_context
         }));
         setPairs(mappedPairs);
       }
@@ -159,4 +209,37 @@ export function useWordPairs() {
   }, []);
 
   return { pairs, loading };
+}
+
+// New hook for fetching clinical summary data
+export function useClinicalSummary() {
+  const [summary, setSummary] = useState<ClinicalSummaryData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { data: userSession } = supabase.auth.getUser(); // Get user for RLS
+  const userId = userSession?.user?.id;
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      if (!userId) {
+        setLoading(false);
+        return;
+      }
+      const { data, error } = await supabase
+        .from('user_clinical_summary')
+        .select('*')
+        .eq('user_id', userId) // RLS should handle this, but explicit is safer
+        .order('practice_date', { ascending: false });
+
+      if (error) {
+        console.error("Error fetching clinical summary:", error);
+      } else if (data) {
+        setSummary(data as ClinicalSummaryData[]);
+      }
+      setLoading(false);
+    };
+
+    fetchSummary();
+  }, [userId]);
+
+  return { summary, loading };
 }

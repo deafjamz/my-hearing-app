@@ -1,0 +1,8 @@
+scenario_id,order,speaker,gender,text
+coffee_shop,1,Barista,female,"Hi there! What can I get started for you today?"
+coffee_shop,2,Customer,male,"I'd like a medium oat milk latte, please."
+coffee_shop,3,Barista,female,"Hot or iced?"
+coffee_shop,4,Customer,male,"Hot, please. And no foam if possible."
+coffee_shop,5,Barista,female,"You got it. That'll be five fifty."
+doctor_office,1,Receptionist,female,"Hi, please sign in on the tablet."
+doctor_office,2,Patient,male,"Sure. Do you need my insurance card?"

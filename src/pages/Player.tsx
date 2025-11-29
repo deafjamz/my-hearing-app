@@ -8,14 +8,20 @@ import { useVoice } from '@/store/VoiceContext';
 import { getAudioPath } from '@/lib/audioUtils';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
-import { KaraokeTranscript } from '@/components/ui/KaraokeTranscript'; // Import new component
+import { KaraokeTranscript } from '@/components/ui/KaraokeTranscript';
+import { useProgress } from '@/hooks/useProgress'; // Import tracker
 
 export function Player() {
   const { id } = useParams<{ id: string }>();
   const { currentVoice } = useVoice();
   const { data: activityData, loading, error } = useActivityData(id);
+  const { logProgress } = useProgress(); // Initialize tracker
+  
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
-  const [currentTime, setCurrentTime] = useState(0); // State to track audio playback time
+  const [currentTime, setCurrentTime] = useState(0);
+  
+  // Track time spent on activity
+  const [startTime] = useState<number>(Date.now());
 
   // Clear feedback timer
   useEffect(() => {
@@ -25,7 +31,6 @@ export function Player() {
     }
   }, [feedback]);
 
-  // Callback to update current time from AudioPlayer
   const handleTimeUpdate = useCallback((time: number) => {
     setCurrentTime(time);
   }, []);
@@ -42,8 +47,22 @@ export function Player() {
   const dynamicAudioSrc = getAudioPath(activityData, currentVoice);
   const isScenario = !!activityData.noiseSrc;
 
-  const handleAnswer = (isCorrect: boolean) => {
+  const handleAnswer = (isCorrect: boolean, questionId: string, userAnswer: string) => {
     setFeedback(isCorrect ? 'correct' : 'incorrect');
+    
+    // Log to Smart Coach
+    logProgress({
+        contentType: 'story', // or scenario, ideally passed in metadata
+        contentId: activityData.id,
+        result: isCorrect ? 'correct' : 'incorrect',
+        userResponse: userAnswer,
+        correctResponse: 'TODO: Fetch correct answer text', 
+        responseTimeMs: Date.now() - startTime, // Rough estimate of time spent
+        metadata: {
+            voiceId: currentVoice,
+            noiseLevel: isScenario ? 'mixed' : 'quiet'
+        }
+    });
   };
 
   return (
@@ -59,17 +78,17 @@ export function Player() {
           {isScenario ? (
             <SNRMixer voiceSrc={dynamicAudioSrc} noiseSrc={activityData.noiseSrc!} />
           ) : (
-            <AudioPlayer src={dynamicAudioSrc} onTimeUpdate={handleTimeUpdate} /> // Pass onTimeUpdate
+            <AudioPlayer src={dynamicAudioSrc} onTimeUpdate={handleTimeUpdate} />
           )}
           
           <div className="p-4 bg-gray-50 rounded-lg text-left text-sm text-gray-600">
             <p className="font-semibold mb-1">Transcript:</p>
-            {activityData.transcript && activityData.alignmentData ? (
+            {activityData.transcript && (activityData as any).alignmentData ? (
               <KaraokeTranscript 
                 transcript={activityData.transcript} 
-                alignmentData={activityData.alignmentData} 
+                alignmentData={(activityData as any).alignmentData} 
                 currentTime={currentTime}
-                voiceId={currentVoice} // Pass voiceId for potential future use
+                voiceId={currentVoice}
               />
             ) : (
               <p>{activityData.transcript}</p>
@@ -78,18 +97,22 @@ export function Player() {
         </div>
 
         <div className="space-y-6">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-1 bg-brand-primary-500 rounded-full" />
-            <h2 className="text-xl font-bold text-brand-dark-800">Comprehension Check</h2>
-          </div>
-          
-          {activityData.questions.map(q => (
-            <QuizCard 
-              key={q.id} 
-              question={q} 
-              onAnswer={handleAnswer} 
-            />
-          ))}
+          {activityData.questions.length > 0 && (
+            <>
+              <div className="flex items-center gap-2">
+                <div className="h-8 w-1 bg-brand-primary-500 rounded-full" />
+                <h2 className="text-xl font-bold text-brand-dark-800">Comprehension Check</h2>
+              </div>
+              
+              {activityData.questions.map(q => (
+                <QuizCard 
+                  key={q.id} 
+                  question={q} 
+                  onAnswer={(isCorrect) => handleAnswer(isCorrect, q.id, "selected_choice_id")} 
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

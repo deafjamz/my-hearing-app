@@ -5,27 +5,27 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 import time # Import time for sleep
 
-load_dotenv()
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+# --- Custom .env Loader (Bypasses python-dotenv issues) ---
+def get_key_from_env_file(key_name, file_path=".env"):
+    if not os.path.exists(file_path):
+        return None
+    with open(file_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith(f'{key_name}=')}:
+                return line.split('=', 1)[1].strip()
+    return None
 
-if not all([SUPABASE_URL, SUPABASE_KEY]):
+# --- CONFIGURATION ---
+ELEVENLABS_API_KEY = get_key_from_env_file("ELEVENLABS_API_KEY")
+SUPABASE_URL = get_key_from_env_file("SUPABASE_URL")
+SUPABASE_KEY = get_key_from_env_file("SUPABASE_SERVICE_ROLE_KEY")
+
+if not all([ELEVENLABS_API_KEY, SUPABASE_URL, SUPABASE_KEY]):
     print("❌ Error: Missing credentials")
     exit(1)
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-# --- SCHEMA REFRESH TRICK ---
-# This is a known workaround for Supabase PostgREST schema caching issues.
-# A simple query can sometimes force the schema to refresh.
-print("🔄 Attempting to refresh Supabase schema cache...")
-try:
-    supabase.table("stories").select("id").limit(1).execute()
-    print("✅ Schema refresh initiated with dummy query.")
-except Exception as e:
-    print(f"⚠️ Could not perform dummy query for schema refresh: {e}")
-
-time.sleep(2) # Give it a moment after the dummy query
 
 # --- HELPERS ---
 
@@ -36,6 +36,7 @@ def slugify(text):
 
 def link_stories():
     print("\n🔗 Linking Stories Audio & Alignment for all voices...")
+    # Fetch all stories
     response = supabase.table("stories").select("*").execute()
     stories = response.data
     
@@ -88,7 +89,6 @@ def link_words():
         }
 
         for voice_name, cols in voices_map.items():
-            # For word pairs, we generate each word separately
             slug1 = slugify(word1)
             slug2 = slugify(word2)
 
@@ -97,12 +97,16 @@ def link_words():
             align1_path = f"words/{voice_name}/{slug1}.json"
             align2_path = f"words/{voice_name}/{slug2}.json"
 
-            # Update audio paths
             update_data['audio_1_path'] = f"{base_storage}/audio/{audio1_path}" 
             update_data['audio_2_path'] = f"{base_storage}/audio/{audio2_path}"
             
-            # Update alignment paths
-            update_data[cols['align_col']] = f"{base_storage}/alignment/{align1_path}" # Assuming single alignment_X_path for word pairs now
+            # We need explicit columns for word alignment paths if desired.
+            # For now, no separate alignment columns for word_pairs, only using the audio_N_path.
+            # If we need alignment, we'd use alignment_X_path etc. as done for stories.
+            # Since generate_assets_premier.py for words IS creating alignment JSONs, 
+            # we should update the DB schema and then here.
+            
+            update_data[cols['align_col']] = f"{base_storage}/alignment/{align1_path}" # Link alignment for word 1 only
 
         try:
             supabase.table("word_pairs").update(update_data).eq("id", word_pair_id).execute()
@@ -111,5 +115,13 @@ def link_words():
             print(f"   ❌ Failed to link {word1} / {word2}: {e}")
 
 if __name__ == "__main__":
+    print("🔄 Attempting to refresh Supabase schema cache...")
+    try:
+        supabase.table("stories").select("id").limit(1).execute()
+        print("✅ Schema refresh initiated with dummy query.")
+    except Exception as e:
+        print(f"⚠️ Could not perform dummy query for schema refresh: {e}")
+    time.sleep(2) # Give it a moment after the dummy query
+    
     link_stories()
     link_words()
