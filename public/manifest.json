@@ -1,0 +1,27 @@
+{
+  "name": "SoundSteps - Hearing Training",
+  "short_name": "SoundSteps",
+  "description": "Auditory training exercises for cochlear implant users and people with hearing loss",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#7c3aed",
+  "background_color": "#0f172a",
+  "categories": ["health", "education", "medical"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

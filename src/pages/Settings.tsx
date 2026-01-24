@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import { useTheme } from '../store/ThemeContext';
 import { useUser } from '../store/UserContext';
-import { Mic, Moon, Sun, Check, Settings as SettingsIcon } from 'lucide-react';
+import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight } from 'lucide-react';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
@@ -76,6 +77,44 @@ export function Settings() {
               {voice === v.id && <Check size={20} className="text-purple-600" />}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Legal */}
+      <section className="mt-8">
+        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Legal</h2>
+        <div className="space-y-3">
+          <Link
+            to="/privacy"
+            className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:scale-[1.02] transition-transform duration-200"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                <Shield size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 dark:text-white">Privacy Policy</h3>
+                <p className="text-xs text-slate-500 font-medium">How we handle your data</p>
+              </div>
+            </div>
+            <ChevronRight size={20} className="text-slate-400" />
+          </Link>
+
+          <Link
+            to="/terms"
+            className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:scale-[1.02] transition-transform duration-200"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
+                <FileText size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 dark:text-white">Terms of Service</h3>
+                <p className="text-xs text-slate-500 font-medium">Usage terms and conditions</p>
+              </div>
+            </div>
+            <ChevronRight size={20} className="text-slate-400" />
+          </Link>
         </div>
       </section>
     </div>

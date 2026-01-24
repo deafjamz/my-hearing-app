@@ -1,3 +1,40 @@
 node_modules
 .aider*
 .env
+.env.local
+.env.production
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# Capacitor
+ios/App/Podfile.lock
+ios/App/Pods/
+android/app/build/
+android/.gradle/
+
+# Audio cache
+audio_cache/
+
+# Large audio directories (hosted in Supabase Storage)
+public/hearing-rehab-audio/
+public/audio_quality_test/
+public/noise_files/
+
+# Backup files
+*.bak
+*.backup
+
+# macOS
+.DS_Store
+
+# Build
+dist/
