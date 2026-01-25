@@ -1,0 +1,280 @@
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { supabase } from '@/lib/supabase';
+import { SessionSummary } from '@/components/SessionSummary';
+import { ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+/**
+ * Category Player - Quick Practice mode for word pairs by category
+ * Loads 10 random pairs from a specific contrast category
+ */
+
+interface WordPair {
+  id: string;
+  word1: string;
+  word2: string;
+  audioPath?: string;
+}
+
+export function CategoryPlayer() {
+  const { category } = useParams<{ category: string }>();
+  const navigate = useNavigate();
+
+  const [pairs, setPairs] = useState<WordPair[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
+  const [selectedVoice] = useState<string>('sarah');
+
+  // Performance tracking
+  const [responses, setResponses] = useState<Array<{ correct: boolean; responseTime: number }>>([]);
+  const [trialStartTime, setTrialStartTime] = useState<number>(Date.now());
+  const [isComplete, setIsComplete] = useState(false);
+
+  // Autoplay state
+  const [autoplayEnabled, setAutoplayEnabled] = useState(() => {
+    const saved = localStorage.getItem('wordPairAutoplay');
+    return saved ? saved === 'true' : false;
+  });
+  const [hasPlayed, setHasPlayed] = useState(false);
+
+  useEffect(() => {
+    if (category) {
+      fetchCategoryPairs();
+    }
+  }, [category]);
+
+  useEffect(() => {
+    // Auto-play only if enabled
+    if (autoplayEnabled && pairs[currentIndex]?.audioPath && !hasPlayed) {
+      playAudio(pairs[currentIndex].audioPath!);
+      setHasPlayed(true);
+    }
+  }, [currentIndex, autoplayEnabled, pairs]);
+
+  const fetchCategoryPairs = async () => {
+    try {
+      const decodedCategory = decodeURIComponent(category || '');
+
+      // Fetch word pairs from this category
+      const { data: stimuli, error } = await supabase
+        .from('stimuli_catalog')
+        .select(`
+          id,
+          clinical_metadata,
+          audio_assets (
+            id,
+            voice_id,
+            storage_path
+          )
+        `)
+        .eq('content_type', 'word_pair');
+
+      if (error) throw error;
+
+      // Filter by category and shuffle
+      const categoryPairs = stimuli
+        .filter((s: any) => s.clinical_metadata?.contrast_category === decodedCategory)
+        .map((s: any) => {
+          const audio = s.audio_assets?.find((a: any) => a.voice_id === selectedVoice);
+          return {
+            id: s.id,
+            word1: s.clinical_metadata?.word_1 || '',
+            word2: s.clinical_metadata?.word_2 || '',
+            audioPath: audio?.storage_path,
+          };
+        })
+        .filter((p: WordPair) => p.audioPath); // Only pairs with audio
+
+      // Shuffle and take 10
+      const shuffled = categoryPairs.sort(() => Math.random() - 0.5);
+      const selected = shuffled.slice(0, 10);
+
+      setPairs(selected);
+      setTrialStartTime(Date.now());
+    } catch (err) {
+      console.error('Error fetching category pairs:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const playAudio = async (storagePath: string) => {
+    try {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      const { data } = supabase.storage.from('audio').getPublicUrl(storagePath);
+      const audio = new Audio(data.publicUrl);
+      setCurrentAudio(audio);
+      await audio.play();
+    } catch (err) {
+      console.error('Error playing audio:', err);
+    }
+  };
+
+  const toggleAutoplay = () => {
+    const newValue = !autoplayEnabled;
+    setAutoplayEnabled(newValue);
+    localStorage.setItem('wordPairAutoplay', newValue.toString());
+  };
+
+  const handleAnswer = (selectedWord: string) => {
+    const responseTime = Date.now() - trialStartTime;
+    const currentPair = pairs[currentIndex];
+
+    // Determine correct answer from audio path
+    let correctWord = '';
+    if (currentPair.audioPath) {
+      const filename = currentPair.audioPath.split('/').pop() || '';
+      correctWord = filename.replace('.mp3', '').toLowerCase();
+    }
+
+    const isCorrect = selectedWord.toLowerCase() === correctWord;
+    setResponses([...responses, { correct: isCorrect, responseTime }]);
+
+    // Move to next or complete
+    if (currentIndex < pairs.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setTrialStartTime(Date.now());
+      setHasPlayed(false);
+    } else {
+      setIsComplete(true);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-slate-400">Loading pairs...</div>
+      </div>
+    );
+  }
+
+  if (pairs.length === 0) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-slate-400 mb-4">No pairs found for this category</div>
+          <Link to="/categories" className="text-violet-400 hover:text-violet-300">
+            ← Back to Categories
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (isComplete) {
+    const accuracy = (responses.filter(r => r.correct).length / responses.length) * 100;
+    return (
+      <SessionSummary
+        sessionTitle={`${decodeURIComponent(category || '')} Practice`}
+        accuracy={accuracy}
+        totalItems={pairs.length}
+        correctCount={responses.filter(r => r.correct).length}
+        onContinue={() => navigate('/categories')}
+      />
+    );
+  }
+
+  const currentPair = pairs[currentIndex];
+  const progressPercent = ((currentIndex + 1) / pairs.length) * 100;
+
+  return (
+    <div className="min-h-screen bg-slate-950 p-6">
+      <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="mb-6">
+          <Link
+            to="/categories"
+            className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-300 mb-4"
+          >
+            <ChevronLeft className="h-5 w-5" />
+            <span>Back to Categories</span>
+          </Link>
+
+          <h1 className="text-2xl font-bold text-white mb-2">
+            {decodeURIComponent(category || '')} Practice
+          </h1>
+          <p className="text-slate-400 text-sm">Quick practice mode</p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between text-sm text-slate-400 mb-2">
+            <span>Progress</span>
+            <span>{currentIndex + 1} / {pairs.length}</span>
+          </div>
+          <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-violet-500 to-purple-600 rounded-full transition-all duration-300"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Word Pair Player */}
+        <div className="space-y-6">
+          {/* Autoplay Toggle */}
+          <div className="flex items-center justify-between p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
+            <div className="flex items-center gap-3">
+              <div className="text-2xl">🔄</div>
+              <div>
+                <p className="text-white font-medium text-sm">Autoplay Audio</p>
+                <p className="text-slate-500 text-xs">Play automatically on each item</p>
+              </div>
+            </div>
+            <button
+              onClick={toggleAutoplay}
+              className={`relative w-14 h-8 rounded-full transition-all ${
+                autoplayEnabled ? 'bg-violet-600' : 'bg-slate-700'
+              }`}
+            >
+              <div
+                className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${
+                  autoplayEnabled ? 'translate-x-6' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Audio Button */}
+          <button
+            onClick={() => {
+              if (currentPair.audioPath) {
+                playAudio(currentPair.audioPath);
+                setHasPlayed(true);
+              }
+            }}
+            className="w-full p-8 bg-gradient-to-br from-violet-900/40 to-purple-900/40 border-2 border-violet-700 rounded-3xl hover:from-violet-900/60 hover:to-purple-900/60 transition-all"
+          >
+            <div className="text-center">
+              <div className="text-6xl mb-4">🔊</div>
+              <p className="text-white font-bold text-lg">Listen</p>
+            </div>
+          </button>
+
+          {/* Answer Buttons */}
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={() => handleAnswer(currentPair.word1)}
+              className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
+            >
+              <p className="text-white font-bold text-2xl">{currentPair.word1}</p>
+            </button>
+
+            <button
+              onClick={() => handleAnswer(currentPair.word2)}
+              className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
+            >
+              <p className="text-white font-bold text-2xl">{currentPair.word2}</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
