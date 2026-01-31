@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-html { 
+html {
   scroll-behavior: smooth;
+}
+
+@media print {
+  /* Hide navigation and interactive elements */
+  nav,
+  .print\\:hidden,
+  button:not(.print\\:block) {
+    display: none !important;
+  }
+
+  /* Reset backgrounds for clean printing */
+  body,
+  .dark body,
+  .min-h-screen,
+  .bg-slate-50,
+  .bg-slate-950,
+  .dark .bg-slate-950 {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure charts render cleanly */
+  .recharts-wrapper {
+    page-break-inside: avoid;
+  }
+
+  /* Remove shadows and borders for clean output */
+  .shadow-sm,
+  .shadow-lg,
+  .shadow-xl {
+    box-shadow: none !important;
+  }
 }

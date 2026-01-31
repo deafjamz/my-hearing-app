@@ -1,30 +1,49 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/Layout';
 import { Dashboard } from '@/pages/Dashboard';
-import { ActivityList } from '@/pages/ActivityList';
-import { RapidFire } from '@/pages/RapidFire';
-import { StoryList } from '@/pages/StoryList';
-import { Player } from '@/pages/Player';
-import { Settings } from '@/pages/Settings';
-import { ScenarioPlayer } from '@/pages/ScenarioPlayer';
-import { ScenarioList } from '@/pages/ScenarioList';
-import { StoryPlayer } from '@/pages/StoryPlayer';
-import { SentenceTraining } from '@/pages/SentenceTraining';
-import { Detection } from '@/pages/Detection';
-import { GrossDiscrimination } from '@/pages/GrossDiscrimination';
-import { ProgramLibrary } from '@/pages/ProgramLibrary';
-import { ProgramDetail } from '@/pages/ProgramDetail';
-import { SessionPlayer } from '@/pages/SessionPlayer';
-import { CategoryLibrary } from '@/pages/CategoryLibrary';
-import { CategoryPlayer } from '@/pages/CategoryPlayer';
-import { PrivacyPolicy } from '@/pages/PrivacyPolicy';
-import { TermsOfService } from '@/pages/TermsOfService';
 
-// Dev-only page imports - tree-shaken in production
-import { AudioQA } from '@/pages/AudioQA';
-import { QualityControl } from '@/pages/QualityControl';
-import { DatabaseTest } from '@/pages/DatabaseTest';
-import { SNRMixerTest } from '@/pages/SNRMixerTest';
+// Inline page loader for Suspense fallback
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="w-8 h-8 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+    </div>
+  );
+}
+
+// Lazy-loaded pages (named export adapter)
+const ActivityList = lazy(() => import('@/pages/ActivityList').then(m => ({ default: m.ActivityList })));
+const RapidFire = lazy(() => import('@/pages/RapidFire').then(m => ({ default: m.RapidFire })));
+const StoryList = lazy(() => import('@/pages/StoryList').then(m => ({ default: m.StoryList })));
+const Player = lazy(() => import('@/pages/Player').then(m => ({ default: m.Player })));
+const Settings = lazy(() => import('@/pages/Settings').then(m => ({ default: m.Settings })));
+const ScenarioPlayer = lazy(() => import('@/pages/ScenarioPlayer').then(m => ({ default: m.ScenarioPlayer })));
+const ScenarioList = lazy(() => import('@/pages/ScenarioList').then(m => ({ default: m.ScenarioList })));
+const StoryPlayer = lazy(() => import('@/pages/StoryPlayer').then(m => ({ default: m.StoryPlayer })));
+const SentenceTraining = lazy(() => import('@/pages/SentenceTraining').then(m => ({ default: m.SentenceTraining })));
+const Detection = lazy(() => import('@/pages/Detection').then(m => ({ default: m.Detection })));
+const GrossDiscrimination = lazy(() => import('@/pages/GrossDiscrimination').then(m => ({ default: m.GrossDiscrimination })));
+const ProgramLibrary = lazy(() => import('@/pages/ProgramLibrary').then(m => ({ default: m.ProgramLibrary })));
+const ProgramDetail = lazy(() => import('@/pages/ProgramDetail').then(m => ({ default: m.ProgramDetail })));
+const SessionPlayer = lazy(() => import('@/pages/SessionPlayer').then(m => ({ default: m.SessionPlayer })));
+const CategoryLibrary = lazy(() => import('@/pages/CategoryLibrary').then(m => ({ default: m.CategoryLibrary })));
+const CategoryPlayer = lazy(() => import('@/pages/CategoryPlayer').then(m => ({ default: m.CategoryPlayer })));
+const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
+const TermsOfService = lazy(() => import('@/pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
+const ProgressReport = lazy(() => import('@/pages/ProgressReport').then(m => ({ default: m.ProgressReport })));
+
+// Dev-only page imports - lazy loaded too
+const AudioQA = lazy(() => import('@/pages/AudioQA').then(m => ({ default: m.AudioQA })));
+const QualityControl = lazy(() => import('@/pages/QualityControl').then(m => ({ default: m.QualityControl })));
+const DatabaseTest = lazy(() => import('@/pages/DatabaseTest').then(m => ({ default: m.DatabaseTest })));
+const SNRMixerTest = lazy(() => import('@/pages/SNRMixerTest').then(m => ({ default: m.SNRMixerTest })));
+
+// Helper to wrap lazy components in Suspense
+function S({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={<PageLoader />}>{children}</Suspense>;
+}
 
 // Production routes
 const productionRoutes = [
@@ -34,83 +53,87 @@ const productionRoutes = [
   },
   {
     path: '/practice',
-    element: <ActivityList />,
+    element: <S><ActivityList /></S>,
   },
   {
     path: '/categories',
-    element: <CategoryLibrary />,
+    element: <S><CategoryLibrary /></S>,
   },
   {
     path: '/practice/category/:category',
-    element: <CategoryPlayer />,
+    element: <S><CategoryPlayer /></S>,
   },
   {
     path: '/practice/rapid-fire',
-    element: <RapidFire />,
+    element: <S><RapidFire /></S>,
   },
   {
     path: '/practice/detection',
-    element: <Detection />,
+    element: <S><Detection /></S>,
   },
   {
     path: '/practice/gross-discrimination',
-    element: <GrossDiscrimination />,
+    element: <S><GrossDiscrimination /></S>,
   },
   {
     path: '/practice/stories',
-    element: <StoryList />,
+    element: <S><StoryList /></S>,
   },
   {
     path: '/practice/scenarios',
-    element: <ScenarioList />,
+    element: <S><ScenarioList /></S>,
   },
   {
     path: '/scenarios',
-    element: <ScenarioPlayer />,
+    element: <S><ScenarioPlayer /></S>,
   },
   {
     path: '/sentences',
-    element: <SentenceTraining />,
+    element: <S><SentenceTraining /></S>,
   },
   {
     path: '/programs',
-    element: <ProgramLibrary />,
+    element: <S><ProgramLibrary /></S>,
   },
   {
     path: '/programs/:programId',
-    element: <ProgramDetail />,
+    element: <S><ProgramDetail /></S>,
   },
   {
     path: '/session/:sessionId',
-    element: <SessionPlayer />,
+    element: <S><SessionPlayer /></S>,
   },
   {
     path: '/practice/:category',
-    element: <ActivityList />,
+    element: <S><ActivityList /></S>,
   },
   {
     path: '/player/story/:id',
-    element: <StoryPlayer />,
+    element: <S><StoryPlayer /></S>,
   },
   {
     path: '/player/:id',
-    element: <Player />,
+    element: <S><Player /></S>,
   },
   {
     path: '/player/scenario/:id',
-    element: <ScenarioPlayer />,
+    element: <S><ScenarioPlayer /></S>,
   },
   {
     path: '/settings',
-    element: <Settings />,
+    element: <S><Settings /></S>,
   },
   {
     path: '/privacy',
-    element: <PrivacyPolicy />,
+    element: <S><PrivacyPolicy /></S>,
   },
   {
     path: '/terms',
-    element: <TermsOfService />,
+    element: <S><TermsOfService /></S>,
+  },
+  {
+    path: '/progress',
+    element: <S><ProgressReport /></S>,
   },
 ];
 
@@ -118,19 +141,19 @@ const productionRoutes = [
 const devRoutes = import.meta.env.DEV ? [
   {
     path: '/qc',
-    element: <QualityControl />,
+    element: <S><QualityControl /></S>,
   },
   {
     path: '/qa',
-    element: <AudioQA />,
+    element: <S><AudioQA /></S>,
   },
   {
     path: '/db-test',
-    element: <DatabaseTest />,
+    element: <S><DatabaseTest /></S>,
   },
   {
     path: '/snr-test',
-    element: <SNRMixerTest />,
+    element: <S><SNRMixerTest /></S>,
   },
 ] : [];
 
@@ -142,5 +165,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+    </ErrorBoundary>
+  );
 }

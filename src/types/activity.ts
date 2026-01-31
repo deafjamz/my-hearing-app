@@ -43,3 +43,5 @@ export interface Scenario {
   items: ScenarioItem[];
   tier?: 'free' | 'standard' | 'premium';
 }
+
+export type content_tier = 'free' | 'standard' | 'premium';

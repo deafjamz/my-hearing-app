@@ -1,125 +1,265 @@
-import { useState, useMemo } from 'react';
-import { Play, Flame, ArrowRight, Activity, Settings as SettingsIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HeaRing } from '@/components/ui/HeaRing';
-import { ProgressHistory } from '@/components/ui/ProgressHistory';
-import { ProgressSummary } from '@/components/ui/ProgressSummary';
-import { cn } from '@/lib/utils';
-import { useUser } from '@/store/UserContext';
+import { Play, Volume2, HeadphonesIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useProgressData } from '@/hooks/useProgressData';
+import { useState, useEffect } from 'react';
 
+/**
+ * Dashboard - Premium Bento Grid Layout
+ * Inspired by Amie.so, Stark Minimalism
+ */
 export function Dashboard() {
-  const [viewMode, setViewMode] = useState<'today' | 'week'>('today');
-  // Correctly destructure from useUser hook
-  const { history, dailyGoalMinutes, setDailyGoalMinutes, sessionSeconds } = useUser();
+  const { stats, loading, isGuest } = useProgressData();
+  const [dailySteps, setDailySteps] = useState(0);
 
-  const [showGoalModal, setShowGoalModal] = useState(false);
-  const [tempGoal, setTempGoal] = useState(dailyGoalMinutes.toString());
+  // Calculate daily steps
+  useEffect(() => {
+    if (isGuest) {
+      const guestSteps = localStorage.getItem('guest_daily_steps');
+      const lastDate = localStorage.getItem('guest_steps_date');
+      const today = new Date().toDateString();
 
-  // Calculate today's total minutes with robust parsing
-  const todayMinutes = useMemo(() => {
-    const todayStr = new Date().toISOString().split('T')[0];
-    const record = history.find(h => h.date === todayStr);
-    const historicalSeconds = (record && typeof record.seconds === 'number') ? record.seconds : 0;
-    const totalSeconds = historicalSeconds + (sessionSeconds || 0); // Add fallback for sessionSeconds
-    return totalSeconds / 60;
-  }, [history, sessionSeconds]);
+      if (lastDate !== today) {
+        localStorage.setItem('guest_daily_steps', '0');
+        localStorage.setItem('guest_steps_date', today);
+        setDailySteps(0);
+      } else {
+        setDailySteps(parseInt(guestSteps || '0'));
+      }
+    } else {
+      const today = new Date().toDateString();
+      const todaysData = stats.progressData.filter(entry => {
+        const entryDate = new Date(entry.date).toDateString();
+        return entryDate === today;
+      });
+      const todayTrials = todaysData.reduce((sum, entry) => sum + entry.trials, 0);
+      setDailySteps(todayTrials);
+    }
+  }, [isGuest, stats.progressData]);
 
-  // Generate week data from history
-  const weekData = useMemo(() => {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const today = new Date();
-    
-    return Array.from({ length: 7 }).map((_, i) => {
-      const date = new Date(today);
-      date.setDate(date.getDate() - (today.getDay() - i + 7) % 7);
-      const dateStr = date.toISOString().split('T')[0];
-      const record = history.find(h => h.date === dateStr);
-      
-      const seconds = (record && typeof record.seconds === 'number') ? record.seconds : 0;
-      return {
-        day: days[date.getDay()],
-        minutes: seconds / 60
-      };
-    });
-  }, [history]);
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-slate-400">Loading...</div>
+      </div>
+    );
+  }
 
-  const remainingMinutes = Math.max(0, (dailyGoalMinutes || 0) - (todayMinutes || 0));
+  const goal = 100;
+  const progress = Math.min((dailySteps / goal) * 100, 100);
+  const isGoalReached = dailySteps >= goal;
 
-  const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.1 } } };
-  const item = { hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } };
+  // SNR Progress (circular)
+  const snrProgress = Math.min(Math.abs(stats.currentSNR) / 20 * 100, 100);
+
+  // Stagger animation
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-transparent pb-32">
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 max-w-lg mx-auto w-full px-6 pt-6 flex-1 flex flex-col justify-between"
-      >
-        <motion.header variants={item} className="flex justify-end items-center shrink-0 mb-4">
-            {/* ... header content ... */}
-        </motion.header>
+    <div className="min-h-screen bg-slate-950 p-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-1">Dashboard</h1>
+            <p className="text-slate-400 text-sm">Welcome back to your practice</p>
+          </div>
+          <Link
+            to="/practice"
+            className="px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 rounded-xl hover:bg-slate-800 transition-colors text-sm font-medium"
+          >
+            Practice Hub
+          </Link>
+        </div>
 
-        <motion.div variants={item} className="mb-6">
-            <ProgressSummary />
-        </motion.div>
+        {/* Bento Grid */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-4 gap-6"
+        >
+          {/* Top Left - Daily Ascent (Large, horizontal) */}
+          <motion.div
+            variants={item}
+            className="md:col-span-2 md:row-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-8"
+          >
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-6">
+              Daily Ascent
+            </h3>
 
-        <motion.div variants={item} className="flex-1 min-h-0 flex flex-col relative group rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg shadow-slate-200/50 dark:shadow-none">
-          <button onClick={() => setShowGoalModal(true)} className="absolute top-6 right-6 z-20 p-3 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Adjust Goal">
-              <SettingsIcon className="w-5 h-5 text-slate-400" />
-          </button>
-          
-          <div className="relative z-10 flex flex-col h-full p-6">
-            <div className="flex justify-center mb-6 shrink-0">
-              <div className="bg-slate-100 dark:bg-slate-800 p-1 rounded-full flex items-center">
-                <button onClick={() => setViewMode('today')} className={cn("px-6 py-2 rounded-full text-sm font-bold transition-all duration-300", viewMode === 'today' ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 dark:text-slate-400")}>Today</button>
-                <button onClick={() => setViewMode('week')} className={cn("px-6 py-2 rounded-full text-sm font-bold transition-all duration-300", viewMode === 'week' ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 dark:text-slate-400")}>Week</button>
+            {/* Horizontal Progress Bar */}
+            <div className="relative">
+              <div className="h-3 bg-slate-800 rounded-full overflow-hidden mb-4">
+                <motion.div
+                  className={`h-full rounded-full ${
+                    isGoalReached
+                      ? 'bg-gradient-to-r from-teal-500 to-teal-400'
+                      : 'bg-gradient-to-r from-teal-600 to-teal-500'
+                  }`}
+                  initial={{ width: 0 }}
+                  animate={{
+                    width: `${progress}%`,
+                    boxShadow: isGoalReached
+                      ? [
+                          '0 0 10px rgba(0, 167, 157, 0.6)',
+                          '0 0 20px rgba(0, 167, 157, 0.8)',
+                          '0 0 10px rgba(0, 167, 157, 0.6)',
+                        ]
+                      : '0 0 0px rgba(0, 167, 157, 0)',
+                  }}
+                  transition={{
+                    width: { duration: 1.2, ease: 'easeOut' },
+                    boxShadow: isGoalReached
+                      ? { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+                      : { duration: 0 },
+                  }}
+                />
+              </div>
+
+              <div className="flex items-baseline gap-2">
+                <p className="text-5xl font-black text-white">
+                  {dailySteps}
+                </p>
+                <span className="text-xl font-normal text-slate-500">
+                  / {goal}
+                </span>
+              </div>
+              <p className="text-sm text-slate-400 mt-2">
+                {isGoalReached ? '🎯 Goal Reached!' : 'Steps Today'}
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Top Right - Current Level (Medium, circular) */}
+          <motion.div
+            variants={item}
+            className="md:col-span-2 md:row-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-8 flex items-center gap-8"
+          >
+            {/* Circular Progress */}
+            <div className="relative w-28 h-28 flex-shrink-0">
+              <svg className="transform -rotate-90 w-28 h-28">
+                <circle
+                  cx="56"
+                  cy="56"
+                  r="50"
+                  stroke="currentColor"
+                  strokeWidth="8"
+                  fill="transparent"
+                  className="text-slate-800"
+                />
+                <motion.circle
+                  cx="56"
+                  cy="56"
+                  r="50"
+                  stroke="currentColor"
+                  strokeWidth="8"
+                  fill="transparent"
+                  strokeDasharray={314}
+                  initial={{ strokeDashoffset: 314 }}
+                  animate={{ strokeDashoffset: 314 - (314 * snrProgress) / 100 }}
+                  transition={{ duration: 1.5, ease: 'easeOut' }}
+                  className="text-teal-500"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <p className="text-xl font-bold text-white">
+                    {stats.currentSNR > 0 ? '+' : ''}{stats.currentSNR}
+                  </p>
+                  <p className="text-xs text-slate-500">dB</p>
+                </div>
               </div>
             </div>
 
-            <div className="flex-1 flex items-center justify-center relative w-full">
-              <AnimatePresence mode="wait">
-                {viewMode === 'today' ? (
-                  <motion.div key="today" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.4, type: "spring" }} className="flex flex-col items-center relative">
-                    <HeaRing current={todayMinutes} goal={dailyGoalMinutes} size={200} />
-                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 font-medium text-center px-8">
-                      <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{Math.round(remainingMinutes)} minutes</span>
-                      <br/>until you hit your goal!
-                    </p>
-                  </motion.div>
-                ) : (
-                  <motion.div key="week" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }} className="w-full h-full flex flex-col">
-                    <div className="flex items-center justify-between w-full px-2 mb-6">
-                      <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest">ACTIVITY TRENDS</span>
-                      <button onClick={() => setShowGoalModal(true)} className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-widest bg-purple-100 dark:bg-purple-900/30 px-2 py-1 rounded-md hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">GOAL: {dailyGoalMinutes || 25} MIN</button>
-                    </div>
-                    <div className="flex-1 w-full min-h-[200px]"><ProgressHistory data={weekData} goal={dailyGoalMinutes} /></div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            {/* Label */}
+            <div>
+              <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">
+                Current Level
+              </h3>
+              <p className="text-2xl font-bold text-white mb-1">
+                {stats.currentSNR <= 0 ? 'Advanced' : stats.currentSNR <= 10 ? 'Intermediate' : 'Beginner'}
+              </p>
+              <p className="text-sm text-slate-400">
+                Signal-to-Noise Ratio
+              </p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.div variants={item} className="mt-6 shrink-0">
-          <Link to="/practice/rapid-fire" className="block">
-             {/* ... Up Next Card ... */}
-          </Link>
-        </motion.div>
-      </motion.div>
-      {showGoalModal && (
-        <div className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-6 w-[90%] max-w-sm border border-slate-200 dark:border-slate-800 shadow-xl">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Set Daily Goal</h3>
-            <input type="number" value={tempGoal} onChange={(e) => setTempGoal(e.target.value)} className="w-full px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white mb-4" min="1" />
-            <div className="flex justify-end gap-3">
-              <button onClick={() => setShowGoalModal(false)} className="px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Cancel</button>
-              <button onClick={() => { const newGoal = Number(tempGoal); if (!isNaN(newGoal) && newGoal > 0) { setDailyGoalMinutes(newGoal); } setShowGoalModal(false); }} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Save</button>
+          {/* Bottom Left - Quick Start (Wide) */}
+          <motion.div
+            variants={item}
+            className="md:col-span-3 md:row-span-1 bg-gradient-to-br from-violet-900/30 to-purple-900/30 border border-violet-800/50 rounded-3xl p-8 relative overflow-hidden group"
+          >
+            {/* Aura Background Effect */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-20">
+              <div className="w-64 h-64 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 blur-3xl" />
             </div>
-          </div>
-        </div>
-      )}
+
+            <div className="relative z-10 flex items-center justify-between">
+              <div>
+                <h3 className="text-xs font-bold text-violet-400 uppercase tracking-wide mb-3">
+                  Quick Start
+                </h3>
+                <p className="text-3xl font-bold text-white mb-2">
+                  Begin Practice
+                </p>
+                <p className="text-sm text-slate-400">
+                  Jump into word pairs, sentences, or stories
+                </p>
+              </div>
+
+              <Link
+                to="/practice"
+                className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform group"
+              >
+                <Play className="h-10 w-10 text-white ml-1" />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Bottom Right - Words Heard (Small) */}
+          <motion.div
+            variants={item}
+            className="md:col-span-1 md:row-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-6"
+          >
+            <div className="flex flex-col h-full justify-between">
+              <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
+                <HeadphonesIcon className="text-purple-400" size={24} />
+              </div>
+
+              <div>
+                <p className="text-4xl font-black text-white mb-2">
+                  {isGuest ? '—' : stats.totalTrials}
+                </p>
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+                  Words Heard
+                </p>
+                <Link
+                  to="/progress"
+                  className="text-xs text-purple-400 hover:text-purple-300 font-medium mt-2 inline-block transition-colors"
+                >
+                  View Full Report →
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }

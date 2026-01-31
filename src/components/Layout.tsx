@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Home, Headphones, Settings, Activity, User as UserIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useUser } from '@/store/UserContext';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { hapticSelection } from '@/lib/haptics';
 
 interface LayoutProps {
   className?: string;
@@ -37,8 +39,11 @@ export function Layout({ className }: LayoutProps) {
          <div className="pointer-events-auto">
              {/* Logo or Title could go here */}
          </div>
-         <button 
-            onClick={() => !user && setShowAuthModal(true)}
+         <button
+            onClick={() => {
+              hapticSelection();
+              !user && setShowAuthModal(true);
+            }}
             className="pointer-events-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all"
          >
              {user ? (
@@ -53,15 +58,23 @@ export function Layout({ className }: LayoutProps) {
 
       {/* Main Content */}
       <main className="flex-1 pb-28 pt-16 relative">
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* Bottom Navigation Bar */}
       <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg">
         <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
           {navItems.map((item) => {
-            if (item.path === '/progress') return null; // Keep hidden for now
-
             const Icon = item.icon;
             const isActive = location.pathname === item.path || (location.pathname.startsWith('/practice') && item.path === '/practice');
             
@@ -69,6 +82,7 @@ export function Layout({ className }: LayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={() => hapticSelection()} // Tactile feedback on tap
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive

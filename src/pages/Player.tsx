@@ -5,20 +5,23 @@ import { SNRMixer } from '@/components/ui/SNRMixer';
 import { QuizCard } from '@/components/ui/QuizCard';
 import { useActivityData } from '@/hooks/useActivityData';
 import { useVoice } from '@/store/VoiceContext';
+import { useUser } from '@/store/UserContext';
 import { getAudioPath } from '@/lib/audioUtils';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
 import { KaraokeTranscript } from '@/components/ui/KaraokeTranscript';
-import { useProgress } from '@/hooks/useProgress'; // Import tracker
+import { useProgress } from '@/hooks/useProgress';
 
 export function Player() {
   const { id } = useParams<{ id: string }>();
   const { currentVoice } = useVoice();
+  const { hardMode } = useUser();
   const { data: activityData, loading, error } = useActivityData(id);
-  const { logProgress } = useProgress(); // Initialize tracker
-  
+  const { logProgress } = useProgress();
+
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const [audioHasPlayed, setAudioHasPlayed] = useState(false);
   
   // Track time spent on activity
   const [startTime] = useState<number>(Date.now());
@@ -33,6 +36,7 @@ export function Player() {
 
   const handleTimeUpdate = useCallback((time: number) => {
     setCurrentTime(time);
+    if (time > 0) setAudioHasPlayed(true);
   }, []);
 
   if (loading) {
@@ -83,10 +87,12 @@ export function Player() {
           
           <div className="p-4 bg-gray-50 rounded-lg text-left text-sm text-gray-600">
             <p className="font-semibold mb-1">Transcript:</p>
-            {activityData.transcript && (activityData as any).alignmentData ? (
-              <KaraokeTranscript 
-                transcript={activityData.transcript} 
-                alignmentData={(activityData as any).alignmentData} 
+            {hardMode && !audioHasPlayed ? (
+              <p className="text-slate-400 italic">Listen to the audio first...</p>
+            ) : activityData.transcript && (activityData as any).alignmentData ? (
+              <KaraokeTranscript
+                transcript={activityData.transcript}
+                alignmentData={(activityData as any).alignmentData}
                 currentTime={currentTime}
                 voiceId={currentVoice}
               />

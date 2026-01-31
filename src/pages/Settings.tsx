@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../store/ThemeContext';
 import { useUser } from '../store/UserContext';
-import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight } from 'lucide-react';
+import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight, EyeOff } from 'lucide-react';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
-  const { voice, setVoice } = useUser(); // Connect to Context
+  const { voice, setVoice, hardMode, setHardMode } = useUser();
 
   const voices = [
     { id: 'sarah', name: 'Sarah', desc: 'Clear & Articulate' },
@@ -41,6 +41,28 @@ export function Settings() {
           </div>
           <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${theme === 'dark' ? 'bg-purple-600' : 'bg-slate-200'}`}>
             <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-300 ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'}`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Training Mode */}
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Training Mode</h2>
+        <div
+          onClick={() => setHardMode(!hardMode)}
+          className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm cursor-pointer hover:scale-[1.02] transition-transform duration-200"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+              <EyeOff size={20} />
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 dark:text-white">Hard Mode</h3>
+              <p className="text-xs text-slate-500 font-medium">Hide answer text until audio plays</p>
+            </div>
+          </div>
+          <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${hardMode ? 'bg-amber-500' : 'bg-slate-200'}`}>
+            <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-300 ${hardMode ? 'translate-x-5' : 'translate-x-0'}`} />
           </div>
         </div>
       </section>
