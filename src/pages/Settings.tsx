@@ -1,18 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useTheme } from '../store/ThemeContext';
 import { useUser } from '../store/UserContext';
+import { useVoice } from '../store/VoiceContext';
 import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight, EyeOff } from 'lucide-react';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
   const { voice, setVoice, hardMode, setHardMode } = useUser();
-
-  const voices = [
-    { id: 'sarah', name: 'Sarah', desc: 'Clear & Articulate' },
-    { id: 'david', name: 'David', desc: 'Warm & Friendly' },
-    { id: 'marcus', name: 'Marcus', desc: 'Deep & Confident' },
-    { id: 'emma', name: 'Emma', desc: 'Bright & Energetic' },
-  ];
+  const { availableVoices } = useVoice();
 
   return (
     <div className="max-w-lg mx-auto w-full px-6 pt-6 pb-32"> {/* Padding for bottom nav */}
@@ -71,13 +66,13 @@ export function Settings() {
       <section>
         <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Instructor Voice</h2>
         <div className="space-y-3">
-          {voices.map((v) => (
-            <div 
+          {availableVoices.map((v) => (
+            <div
               key={v.id}
-              onClick={() => setVoice(v.id)} // ACTUAL LOGIC
+              onClick={() => setVoice(v.id)}
               className={`flex items-center justify-between p-4 border rounded-[2rem] transition-all cursor-pointer ${
-                voice === v.id 
-                  ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 ring-1 ring-purple-500/20' 
+                voice === v.id
+                  ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 ring-1 ring-purple-500/20'
                   : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-purple-200'
               }`}
             >
@@ -92,7 +87,7 @@ export function Settings() {
                     {v.name}
                   </h3>
                   <p className={`text-xs font-medium ${voice === v.id ? 'text-purple-600 dark:text-purple-300' : 'text-slate-500'}`}>
-                    {v.desc}
+                    {v.description}
                   </p>
                 </div>
               </div>
