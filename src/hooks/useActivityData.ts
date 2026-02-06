@@ -2,6 +2,28 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { ActivityData, Scenario, AlignmentData, content_tier } from '@/types/activity';
 
+/**
+ * =============================================================================
+ * VOICE AUDIO ARCHITECTURE - READ BEFORE MODIFYING
+ * =============================================================================
+ *
+ * Audio URLs are constructed DYNAMICALLY from Supabase Storage paths.
+ * We do NOT use database columns for audio paths.
+ *
+ * Pattern: {SUPABASE_URL}/storage/v1/object/public/audio/words_v2/{voice}/{word}.mp3
+ *
+ * To add a new voice:
+ * 1. Generate audio files to Supabase Storage: audio/words_v2/{voice}/
+ * 2. Add voice ID to AVAILABLE_VOICES array below
+ * 3. Add voice to VOICES array in src/store/VoiceContext.tsx
+ * 4. Update docs/VOICE_LIBRARY.md
+ *
+ * NO database migrations needed. NO TypeScript types changes needed.
+ *
+ * See: docs/VOICE_LIBRARY.md for full documentation.
+ * =============================================================================
+ */
+
 interface StoryDataExtended extends ActivityData {
   alignmentData?: AlignmentData; 
 }
