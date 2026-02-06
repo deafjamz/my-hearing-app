@@ -174,39 +174,52 @@ export interface WordPair {
   vowel_context?: string;
 }
 
-export function useWordPairs() {
+export function useWordPairs(voice?: string) {
   const [pairs, setPairs] = useState<WordPair[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPairs = async () => {
-      const { data, error } = await supabase
-        .from('word_pairs')
-        .select('*'); 
+      try {
+        const { data, error } = await supabase
+          .from('word_pairs')
+          .select('*');
 
-      if (error) {
-        console.error("Error fetching word pairs:", error);
-      } else if (data) {
-        const mappedPairs = data.map(p => ({
-          id: p.id,
-          word_1: p.word_1,
-          word_2: p.word_2,
-          audio_1: p.audio_1_path || '', 
-          audio_2: p.audio_2_path || '', 
-          clinical_category: p.clinical_category || 'General',
-          tier: p.tier as content_tier,
-          target_phoneme: p.target_phoneme,
-          contrast_phoneme: p.contrast_phoneme,
-          position: p.position,
-          vowel_context: p.vowel_context
-        }));
-        setPairs(mappedPairs);
+        if (error) {
+          console.error("Error fetching word pairs:", error);
+        } else if (data) {
+          // Default to 'sarah' if no voice specified
+          const selectedVoice = voice || 'sarah';
+
+          // Voices with audio columns in database
+          const voicesWithAudio = ['sarah', 'david', 'marcus', 'emma'];
+          const effectiveVoice = voicesWithAudio.includes(selectedVoice) ? selectedVoice : 'sarah';
+
+          const mappedPairs = data.map(p => ({
+            id: p.id,
+            word_1: p.word_1,
+            word_2: p.word_2,
+            // Select audio paths based on voice, fallback to sarah if column missing
+            audio_1: p[`audio_1_path_${effectiveVoice}`] || p.audio_1_path_sarah || '',
+            audio_2: p[`audio_2_path_${effectiveVoice}`] || p.audio_2_path_sarah || '',
+            clinical_category: p.clinical_category || 'General',
+            tier: p.tier as content_tier,
+            target_phoneme: p.target_phoneme,
+            contrast_phoneme: p.contrast_phoneme,
+            position: p.position,
+            vowel_context: p.vowel_context
+          }));
+          setPairs(mappedPairs);
+        }
+      } catch (err) {
+        console.error('[useWordPairs] Failed to fetch:', err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchPairs();
-  }, []);
+  }, [voice]);
 
   return { pairs, loading };
 }

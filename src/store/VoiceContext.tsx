@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type VoiceId = 'sarah' | 'david' | 'marcus' | 'emma';
+/**
+ * Voice Configuration - Voices with Generated Audio
+ *
+ * Only includes voices that have audio columns in word_pairs table.
+ * See docs/VOICE_LIBRARY.md for full specifications.
+ */
+
+type VoiceId = 'sarah' | 'emma' | 'david' | 'marcus';
 
 interface Voice {
   id: VoiceId;
@@ -10,10 +17,10 @@ interface Voice {
 }
 
 const VOICES: Voice[] = [
-  { id: 'sarah', name: 'Sarah', description: 'Clear & Articulate', gender: 'female' },
-  { id: 'david', name: 'David', description: 'Warm & Friendly', gender: 'male' },
-  { id: 'marcus', name: 'Marcus', description: 'Deep & Confident', gender: 'male' },
-  { id: 'emma', name: 'Emma', description: 'Bright & Energetic', gender: 'female' },
+  { id: 'sarah', name: 'Sarah', description: 'Clear & Articulate (Female)', gender: 'female' },
+  { id: 'emma', name: 'Emma', description: 'Bright & Energetic (Female)', gender: 'female' },
+  { id: 'david', name: 'David', description: 'Clear & Steady (Male)', gender: 'male' },
+  { id: 'marcus', name: 'Marcus', description: 'Deep & Natural (Male)', gender: 'male' },
 ];
 
 interface VoiceContextType {
