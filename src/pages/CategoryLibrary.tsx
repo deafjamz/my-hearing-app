@@ -26,18 +26,17 @@ export function CategoryLibrary() {
 
   const fetchCategories = async () => {
     try {
-      // Get all word pairs with their categories
+      // Get all word pairs with their categories from word_pairs table
       const { data: wordPairs, error } = await supabase
-        .from('stimuli_catalog')
-        .select('clinical_metadata')
-        .eq('content_type', 'word_pair');
+        .from('word_pairs')
+        .select('clinical_category');
 
       if (error) throw error;
 
       // Count pairs per category
       const categoryMap: Record<string, number> = {};
       wordPairs?.forEach((pair) => {
-        const category = pair.clinical_metadata?.contrast_category;
+        const category = pair.clinical_category;
         if (category) {
           categoryMap[category] = (categoryMap[category] || 0) + 1;
         }
