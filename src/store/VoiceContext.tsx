@@ -1,26 +1,37 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 /**
- * Voice Configuration - Voices with Generated Audio
+ * Voice Configuration - 9-Voice Roster
  *
- * Only includes voices that have audio columns in word_pairs table.
+ * All voices have generated audio in Supabase storage.
+ * Audio path: audio/words_v2/{voice}/{word}.mp3
  * See docs/VOICE_LIBRARY.md for full specifications.
  */
 
-type VoiceId = 'sarah' | 'emma' | 'david' | 'marcus';
+type VoiceId = 'sarah' | 'emma' | 'bill' | 'michael' | 'alice' | 'daniel' | 'matilda' | 'charlie' | 'aravind';
 
 interface Voice {
   id: VoiceId;
   name: string;
   description: string;
   gender: 'female' | 'male';
+  region: 'US' | 'UK' | 'AU' | 'IN';
 }
 
 const VOICES: Voice[] = [
-  { id: 'sarah', name: 'Sarah', description: 'Clear & Articulate (Female)', gender: 'female' },
-  { id: 'emma', name: 'Emma', description: 'Bright & Energetic (Female)', gender: 'female' },
-  { id: 'david', name: 'David', description: 'Clear & Steady (Male)', gender: 'male' },
-  { id: 'marcus', name: 'Marcus', description: 'Deep & Natural (Male)', gender: 'male' },
+  // US Voices
+  { id: 'sarah', name: 'Sarah', description: 'Clear & Articulate', gender: 'female', region: 'US' },
+  { id: 'emma', name: 'Emma', description: 'Bright & Energetic', gender: 'female', region: 'US' },
+  { id: 'bill', name: 'Bill', description: 'Steady & Natural', gender: 'male', region: 'US' },
+  { id: 'michael', name: 'Michael', description: 'Deep & Clear', gender: 'male', region: 'US' },
+  // UK Voices
+  { id: 'alice', name: 'Alice', description: 'British RP', gender: 'female', region: 'UK' },
+  { id: 'daniel', name: 'Daniel', description: 'News Anchor Clarity', gender: 'male', region: 'UK' },
+  // AU Voices
+  { id: 'matilda', name: 'Matilda', description: 'Bright Australian', gender: 'female', region: 'AU' },
+  { id: 'charlie', name: 'Charlie', description: 'Clear Australian', gender: 'male', region: 'AU' },
+  // IN Voice
+  { id: 'aravind', name: 'Aravind', description: 'Global English', gender: 'male', region: 'IN' },
 ];
 
 interface VoiceContextType {

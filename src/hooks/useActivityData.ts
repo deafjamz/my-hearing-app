@@ -174,6 +174,19 @@ export interface WordPair {
   vowel_context?: string;
 }
 
+// Construct audio URL from Supabase storage
+// Pattern: {SUPABASE_URL}/storage/v1/object/public/audio/words_v2/{voice}/{word}.mp3
+const SUPABASE_STORAGE_URL = (import.meta.env.VITE_SUPABASE_URL || '').replace(/[\n\r\s]+/g, '').trim();
+
+function buildAudioUrl(voice: string, word: string): string {
+  // Normalize word: lowercase, replace spaces with underscores
+  const normalized = word.toLowerCase().replace(/\s+/g, '_');
+  return `${SUPABASE_STORAGE_URL}/storage/v1/object/public/audio/words_v2/${voice}/${normalized}.mp3`;
+}
+
+// All 9 voices with generated audio
+const AVAILABLE_VOICES = ['sarah', 'emma', 'bill', 'michael', 'alice', 'daniel', 'matilda', 'charlie', 'aravind'];
+
 export function useWordPairs(voice?: string) {
   const [pairs, setPairs] = useState<WordPair[]>([]);
   const [loading, setLoading] = useState(true);
@@ -188,20 +201,16 @@ export function useWordPairs(voice?: string) {
         if (error) {
           console.error("Error fetching word pairs:", error);
         } else if (data) {
-          // Default to 'sarah' if no voice specified
-          const selectedVoice = voice || 'sarah';
-
-          // Voices with audio columns in database
-          const voicesWithAudio = ['sarah', 'david', 'marcus', 'emma'];
-          const effectiveVoice = voicesWithAudio.includes(selectedVoice) ? selectedVoice : 'sarah';
+          // Default to 'sarah' if no voice specified or voice not available
+          const selectedVoice = voice && AVAILABLE_VOICES.includes(voice) ? voice : 'sarah';
 
           const mappedPairs = data.map(p => ({
             id: p.id,
             word_1: p.word_1,
             word_2: p.word_2,
-            // Select audio paths based on voice, fallback to sarah if column missing
-            audio_1: p[`audio_1_path_${effectiveVoice}`] || p.audio_1_path_sarah || '',
-            audio_2: p[`audio_2_path_${effectiveVoice}`] || p.audio_2_path_sarah || '',
+            // Build audio URLs dynamically from Supabase storage
+            audio_1: buildAudioUrl(selectedVoice, p.word_1),
+            audio_2: buildAudioUrl(selectedVoice, p.word_2),
             clinical_category: p.clinical_category || 'General',
             tier: p.tier as content_tier,
             target_phoneme: p.target_phoneme,
