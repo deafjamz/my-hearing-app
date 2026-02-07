@@ -1,18 +1,59 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 
+const LOAD_TIMEOUT_MS = 10_000;
+
 interface UseAudioProps {
   src?: string;
   onEnded?: () => void;
-  onTimeUpdate?: (currentTime: number) => void; // New prop
+  onTimeUpdate?: (currentTime: number) => void;
+}
+
+/** Map HTMLMediaElement error codes to user-friendly messages */
+function describeMediaError(audio: HTMLAudioElement): string {
+  const err = audio.error;
+  if (!err) return 'Playback failed';
+
+  switch (err.code) {
+    case MediaError.MEDIA_ERR_ABORTED:
+      return 'Playback was interrupted';
+    case MediaError.MEDIA_ERR_NETWORK:
+      return 'Network error — check your connection';
+    case MediaError.MEDIA_ERR_DECODE:
+      return 'Audio could not be decoded';
+    case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+      return 'Audio format not supported';
+    default:
+      return 'Playback failed';
+  }
 }
 
 export function useAudio(props?: UseAudioProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
-  const audioRef = useRef<HTMLInputElement | null>(null);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const srcRef = useRef<string | undefined>(props?.src);
+  const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /** Clear any pending load timeout */
+  const clearLoadTimeout = useCallback(() => {
+    if (loadTimeoutRef.current) {
+      clearTimeout(loadTimeoutRef.current);
+      loadTimeoutRef.current = null;
+    }
+  }, []);
+
+  /** Start a load timeout — if audio doesn't become playable in time, show error */
+  const startLoadTimeout = useCallback(() => {
+    clearLoadTimeout();
+    loadTimeoutRef.current = setTimeout(() => {
+      if (isLoading) {
+        setIsLoading(false);
+        setError('Audio is taking too long — tap to retry');
+      }
+    }, LOAD_TIMEOUT_MS);
+  }, [clearLoadTimeout, isLoading]);
 
   // Initialize audio instance
   useEffect(() => {
@@ -24,11 +65,12 @@ export function useAudio(props?: UseAudioProps) {
     const handlePlay = () => {
       setIsPlaying(true);
       setIsLoading(false);
-      setError(null); // Clear error on play attempt
+      setError(null);
+      clearLoadTimeout();
     };
-    
+
     const handlePause = () => setIsPlaying(false);
-    
+
     const handleEnded = () => {
       setIsPlaying(false);
       if (props?.onEnded) props.onEnded();
@@ -40,21 +82,25 @@ export function useAudio(props?: UseAudioProps) {
       }
     };
 
-    const handleError = (e: Event | string) => {
+    const handleError = () => {
       setIsLoading(false);
       setIsPlaying(false);
-      const errorMessage = typeof e === 'string' ? e : "Playback failed";
-      console.error("Audio Error:", e);
-      setError("Failed to load audio");
+      clearLoadTimeout();
+      const message = describeMediaError(audio);
+      console.error('Audio Error:', audio.error);
+      setError(message);
     };
 
     const handleWaiting = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
+    const handleCanPlay = () => {
+      setIsLoading(false);
+      clearLoadTimeout();
+    };
 
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('timeupdate', handleTimeUpdate); // Add timeupdate listener
+    audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('error', handleError);
     audio.addEventListener('waiting', handleWaiting);
     audio.addEventListener('canplay', handleCanPlay);
@@ -63,11 +109,12 @@ export function useAudio(props?: UseAudioProps) {
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('timeupdate', handleTimeUpdate); // Clean up
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('error', handleError);
       audio.removeEventListener('waiting', handleWaiting);
       audio.removeEventListener('canplay', handleCanPlay);
       audio.pause();
+      clearLoadTimeout();
     };
   }, []); // Run once on mount
 
@@ -76,16 +123,16 @@ export function useAudio(props?: UseAudioProps) {
     if (props?.src && props.src !== srcRef.current) {
       srcRef.current = props.src;
       if (audioRef.current) {
-        // Reset state
         setIsPlaying(false);
         setError(null);
         setIsLoading(true);
-        
+        startLoadTimeout();
+
         audioRef.current.src = props.src;
         audioRef.current.load();
       }
     }
-  }, [props?.src]);
+  }, [props?.src, startLoadTimeout]);
 
   const play = useCallback((path?: string) => {
     const audio = audioRef.current;
@@ -97,13 +144,13 @@ export function useAudio(props?: UseAudioProps) {
     }
 
     if (!audio.src) {
-        setError("No audio source provided.");
+        setError('No audio source provided.');
         return;
     }
 
     setIsLoading(true);
     setError(null);
-    
+
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise
@@ -111,11 +158,14 @@ export function useAudio(props?: UseAudioProps) {
           setIsLoading(false);
         })
         .catch((e) => {
-          console.warn("Play interrupted:", e);
+          console.warn('Play interrupted:', e);
           setIsPlaying(false);
           setIsLoading(false);
-          if (e.name !== 'AbortError') {
-             setError("Couldn't play audio");
+          if (e.name === 'AbortError') return;
+          if (e.name === 'NotAllowedError') {
+            setError('Tap to enable audio playback');
+          } else {
+            setError("Couldn't play audio — tap to retry");
           }
         });
     }
@@ -127,25 +177,38 @@ export function useAudio(props?: UseAudioProps) {
     }
   }, []);
 
+  const retry = useCallback(() => {
+    setError(null);
+    if (srcRef.current) {
+      play(srcRef.current);
+    }
+  }, [play]);
+
   const togglePlay = useCallback(() => {
     if (isPlaying) {
       pause();
     } else {
-      if (props?.src && (!audioRef.current?.src || audioRef.current.src !== new URL(props.src, window.location.href).href)) {
+      try {
+        if (props?.src && (!audioRef.current?.src || audioRef.current.src !== new URL(props.src, window.location.href).href)) {
           play(props.src);
-      } else {
+        } else {
           play();
+        }
+      } catch {
+        // new URL() can throw on malformed src — fall through to play()
+        play(props?.src);
       }
     }
   }, [isPlaying, pause, play, props?.src]);
 
-  return { 
-    isPlaying, 
-    isLoading, 
-    error, 
-    play, 
-    pause, 
+  return {
+    isPlaying,
+    isLoading,
+    error,
+    play,
+    pause,
     togglePlay,
-    currentTime: audioRef.current?.currentTime || 0 // Expose current time
+    retry,
+    currentTime: audioRef.current?.currentTime || 0,
   };
 }

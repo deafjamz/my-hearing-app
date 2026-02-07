@@ -10,6 +10,8 @@ export function FeedbackOverlay({ type }: FeedbackOverlayProps) {
     <AnimatePresence>
       {type === 'correct' && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -21,13 +23,15 @@ export function FeedbackOverlay({ type }: FeedbackOverlayProps) {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="text-white flex flex-col items-center"
           >
-            <CheckCircle size={120} strokeWidth={3} />
+            <CheckCircle size={120} strokeWidth={3} aria-hidden="true" />
             <h2 className="text-4xl font-bold mt-4">Correct!</h2>
           </motion.div>
         </motion.div>
       )}
       {type === 'incorrect' && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -39,7 +43,7 @@ export function FeedbackOverlay({ type }: FeedbackOverlayProps) {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="text-white flex flex-col items-center"
           >
-            <XCircle size={120} strokeWidth={3} />
+            <XCircle size={120} strokeWidth={3} aria-hidden="true" />
             <h2 className="text-4xl font-bold mt-4">Not quite</h2>
           </motion.div>
         </motion.div>

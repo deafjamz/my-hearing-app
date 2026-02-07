@@ -164,10 +164,5 @@ export function useSentence(sentenceId: string, voiceId: 'sarah' | 'marcus') {
   return { sentence, loading, error, refetch: fetchSentence };
 }
 
-/**
- * Generate audio URL from storage path
- */
-export function getAudioUrl(storagePath: string): string {
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-  return `${SUPABASE_URL}/storage/v1/object/public/audio/${storagePath}`;
-}
+// Re-export shared audio URL helper for backward compat
+export { getStorageUrl as getAudioUrl } from '@/lib/audio';

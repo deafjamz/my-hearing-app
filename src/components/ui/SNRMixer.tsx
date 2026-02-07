@@ -39,10 +39,11 @@ export function SNRMixer({ voiceSrc, noiseSrc, className }: SNRMixerProps) {
         <button
           onClick={togglePlay}
           disabled={isLoading}
+          aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
           className={cn(
             "relative z-10 flex items-center justify-center w-20 h-20 rounded-full transition-all transform active:scale-95 shadow-xl hover:shadow-2xl hover:scale-105",
-            isPlaying 
-              ? "bg-brand-light text-brand-primary border-2 border-brand-primary/20" 
+            isPlaying
+              ? "bg-brand-light text-brand-primary border-2 border-brand-primary/20"
               : "bg-brand-primary text-white hover:bg-brand-primary/90"
           )}
         >
@@ -70,6 +71,8 @@ export function SNRMixer({ voiceSrc, noiseSrc, className }: SNRMixerProps) {
           step="0.05"
           value={noiseLevel}
           onChange={(e) => setNoiseLevel(Number(e.target.value))}
+          aria-label="Background Noise Level"
+          aria-valuetext={`${Math.round(noiseLevel * 100)}% background noise`}
           className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-primary"
         />
         

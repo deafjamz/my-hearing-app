@@ -44,6 +44,7 @@ export function Layout({ className }: LayoutProps) {
               hapticSelection();
               !user && setShowAuthModal(true);
             }}
+            aria-label={user ? 'Account' : 'Sign in'}
             className="pointer-events-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all"
          >
              {user ? (
@@ -72,7 +73,7 @@ export function Layout({ className }: LayoutProps) {
       </main>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg">
+      <nav aria-label="Main navigation" className="fixed bottom-0 left-0 right-0 w-full z-50 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg">
         <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -82,7 +83,8 @@ export function Layout({ className }: LayoutProps) {
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={() => hapticSelection()} // Tactile feedback on tap
+                onClick={() => hapticSelection()}
+                aria-current={isActive ? 'page' : undefined}
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive

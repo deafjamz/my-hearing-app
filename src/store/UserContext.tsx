@@ -61,7 +61,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [dailyGoalMinutes, setDailyGoalMinutes] = useState<number>(() => parseInt(localStorage.getItem('dailyGoalMinutes') || '25'));
   const [voice, setVoice] = useState<string>(() => (localStorage.getItem('voice') || 'sarah'));
   const [hardMode, setHardMode] = useState<boolean>(() => localStorage.getItem('hardMode') === 'true');
-  const [history, setHistory] = useState<DailyRecord[]>(() => JSON.parse(localStorage.getItem('history') || '[]'));
+  const [history, setHistory] = useState<DailyRecord[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('history') || '[]');
+    } catch (e) {
+      console.error('Corrupted history in localStorage, resetting:', e);
+      localStorage.removeItem('history');
+      return [];
+    }
+  });
   const [currentStreak, setCurrentStreak] = useState<number>(() => parseInt(localStorage.getItem('currentStreak') || '0'));
   
   // Active Engagement State

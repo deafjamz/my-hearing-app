@@ -27,12 +27,13 @@ interface Program {
 }
 
 export function ProgramLibrary() {
-  const { user } = useUser();
+  const { user, profile } = useUser();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // User's tier (for now, everyone is 'free')
-  const userTier = 'free'; // TODO: Get from user profile
+  // Map subscription tier to program tier scheme
+  const tierMap: Record<string, string> = { 'Free': 'free', 'Standard': 'tier1', 'Premium': 'tier2' };
+  const userTier = tierMap[profile?.subscription_tier ?? 'Free'] ?? 'free';
 
   useEffect(() => {
     fetchPrograms();

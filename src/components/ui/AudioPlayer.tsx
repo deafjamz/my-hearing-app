@@ -13,9 +13,13 @@ interface AudioPlayerProps {
 }
 
 export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpdate }: AudioPlayerProps) {
-  const { isPlaying, isLoading, error, togglePlay } = useAudio({ src, onEnded, onTimeUpdate });
+  const { isPlaying, isLoading, error, togglePlay, retry } = useAudio({ src, onEnded, onTimeUpdate });
 
   const handleToggle = () => {
+    if (error) {
+      retry();
+      return;
+    }
     togglePlay();
     if (!isPlaying && onPlay) {
       onPlay();
@@ -45,7 +49,7 @@ export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpda
 
         <button
           onClick={handleToggle}
-          disabled={isLoading || !!error}
+          disabled={isLoading}
           className={cn(
             "relative z-10 flex items-center justify-center w-20 h-20 rounded-full transition-all duration-300",
             error 

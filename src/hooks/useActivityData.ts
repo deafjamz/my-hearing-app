@@ -196,15 +196,10 @@ export interface WordPair {
   vowel_context?: string;
 }
 
-// Construct audio URL from Supabase storage
-// Pattern: {SUPABASE_URL}/storage/v1/object/public/audio/words_v2/{voice}/{word}.mp3
-const SUPABASE_STORAGE_URL = (import.meta.env.VITE_SUPABASE_URL || '').replace(/[\n\r\s]+/g, '').trim();
+import { buildWordAudioUrl } from '@/lib/audio';
 
-function buildAudioUrl(voice: string, word: string): string {
-  // Normalize word: lowercase, replace spaces with underscores
-  const normalized = word.toLowerCase().replace(/\s+/g, '_');
-  return `${SUPABASE_STORAGE_URL}/storage/v1/object/public/audio/words_v2/${voice}/${normalized}.mp3`;
-}
+// Alias for backward compat within this file
+const buildAudioUrl = buildWordAudioUrl;
 
 // All 9 voices with generated audio
 const AVAILABLE_VOICES = ['sarah', 'emma', 'bill', 'michael', 'alice', 'daniel', 'matilda', 'charlie', 'aravind'];

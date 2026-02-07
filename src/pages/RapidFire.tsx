@@ -306,6 +306,8 @@ export function RapidFire() {
         {/* Noise Toggle (Silent Sentinel Pattern) */}
         <HapticButton
           onClick={handleNoiseToggle}
+          aria-label="Toggle background noise"
+          aria-pressed={noiseEnabled}
           className={`p-3 rounded-full transition-all duration-200 ${
             noiseEnabled
               ? 'bg-teal-500/20 text-teal-400 ring-2 ring-teal-500/30'
@@ -338,6 +340,7 @@ export function RapidFire() {
         </div>
 
         <motion.h2
+          aria-live="polite"
           animate={{ opacity: isTargetPlaying ? 0.2 : 1 }}
           transition={{ duration: 0.3 }}
           className="text-center text-slate-900 dark:text-white font-bold text-xl mb-6"

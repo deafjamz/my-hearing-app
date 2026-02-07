@@ -3,6 +3,7 @@
  * Visual feedback shown between batches of 10 trials
  */
 
+import { useEffect, useRef } from 'react';
 import { TrendingUp, TrendingDown, Minus, Sparkles, Volume2, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -79,6 +80,12 @@ export function SmartCoachFeedback({
   };
 
   const colors = getColorScheme();
+  const continueRef = useRef<HTMLButtonElement>(null);
+
+  // Auto-focus the primary action button when modal opens
+  useEffect(() => {
+    continueRef.current?.focus();
+  }, []);
 
   const getIcon = () => {
     switch (action) {
@@ -111,7 +118,12 @@ export function SmartCoachFeedback({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="coach-title"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+    >
       <div
         className={`max-w-md w-full rounded-2xl border-2 ${colors.border} ${colors.bg} shadow-2xl ${colors.glow} p-8 space-y-6 animate-in fade-in zoom-in duration-300`}
       >
@@ -125,9 +137,9 @@ export function SmartCoachFeedback({
         {/* Title */}
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2">
-            <Sparkles size={20} className={colors.icon} />
-            <h2 className={`text-2xl font-bold ${colors.title}`}>{getTitle()}</h2>
-            <Sparkles size={20} className={colors.icon} />
+            <Sparkles size={20} className={colors.icon} aria-hidden="true" />
+            <h2 id="coach-title" className={`text-2xl font-bold ${colors.title}`}>{getTitle()}</h2>
+            <Sparkles size={20} className={colors.icon} aria-hidden="true" />
           </div>
           <p className="text-slate-600 dark:text-slate-400 text-lg">{message}</p>
         </div>
@@ -176,6 +188,7 @@ export function SmartCoachFeedback({
           </div>
         ) : (
           <button
+            ref={continueRef}
             onClick={() => {
               if (action === 'Enable Noise' && onEnableNoise) {
                 onEnableNoise(); // Enable noise

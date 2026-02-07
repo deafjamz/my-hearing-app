@@ -163,10 +163,5 @@ export function useScenario(scenarioId: string) {
   return { scenario, loading, error, refetch: fetchScenario };
 }
 
-/**
- * Generate audio URL from storage path
- */
-export function getAudioUrl(storagePath: string): string {
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-  return `${SUPABASE_URL}/storage/v1/object/public/audio/${storagePath}`;
-}
+// Re-export shared audio URL helper for backward compat
+export { getStorageUrl as getAudioUrl } from '@/lib/audio';

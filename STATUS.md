@@ -1,8 +1,8 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-06
-> **Last Session:** Launch Prep - Code Splitting, Hard Mode, Tier Locking, 9-Voice Fix
-> **Build Status:** ✅ PASSING (272KB main bundle, vendor chunks split)
+> **Last Updated:** 2026-02-07
+> **Last Session:** Production Readiness Review & Fixes
+> **Build Status:** ✅ PASSING (5.25s, 272KB main bundle)
 > **Deployment:** ✅ LIVE at https://my-hearing-app.vercel.app
 > **Tests:** ✅ 58 PASSING
 
@@ -346,6 +346,47 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-07 (Session 13: Production Readiness Review & Fixes)
+
+**Summary:** Full 4-section code review (Architecture, Code Quality, Deployment Readiness, User-Facing Edge Cases). Triaged top 10 issues, fixed all critical and high-severity items.
+
+**Build Fixes (was broken, now passing):**
+- Created `src/lib/syncService.ts` — stub no-op implementations for cloud sync functions
+- Created `src/components/ErrorBoundary.tsx` — app-wide crash boundary with retry/home UI
+- Created `src/lib/api.ts` — Smart Coach SNR evaluation + Supabase babble/SNR queries
+- Fixed `ClinicalReport.tsx` broken import path (`supabaseClient` → `supabase`)
+
+**Audio Playback Hardening (`useAudio.ts`):**
+- Added 10-second loading timeout (prevents infinite spinner on slow connections)
+- Fixed `new URL()` crash in `togglePlay` (try-catch on malformed src)
+- Differentiated error messages via `MediaError` codes (network, format, decode, etc.)
+- Added `retry()` function; `AudioPlayer` error state now tappable to retry
+
+**Data Integrity:**
+- Wrapped `JSON.parse` of localStorage history in try-catch (prevents app crash on corruption)
+
+**Accessibility (hearing rehab audience):**
+- `FeedbackOverlay`: Added `role="status"`, `aria-live="polite"`, `aria-hidden` on icons
+- `SNRMixer`: Added `aria-label`, `aria-valuetext` on slider; `aria-label` on play button
+- `SmartCoachFeedback`: Added `role="dialog"`, `aria-modal`, `aria-labelledby`, auto-focus
+- `Layout`: Added `aria-label` on nav, `aria-current="page"` on active link, `aria-label` on user button
+- `RapidFire`: Added `aria-live` on result heading, `aria-pressed` on noise toggle
+- Global `focus-visible` ring in `index.css` for keyboard navigation
+
+**Code Quality:**
+- Created `src/lib/audio.ts` — shared `getStorageUrl()` + `buildWordAudioUrl()` (DRY)
+- Updated `useActivityData.ts`, `useSentenceData.ts`, `useScenarioData.ts` to use shared helper
+- Fixed `ProgramLibrary.tsx` hardcoded `userTier = 'free'` → reads from user profile
+
+**Also Fixed:**
+- Removed broken symlink `legacy/src/public/hearing-rehab-audio` (was crashing GitHub Pages)
+- Added `.nojekyll` to skip Jekyll builds
+
+**Deferred (post-launch):**
+- #8: Standardize error handling across hooks (refactor sprint)
+- #9: Reusable loading/empty state components (UI polish phase)
+- #10 partial: Frontend route guards (backend RLS is primary enforcement)
 
 ### 2026-02-06 (Session 12: Launch Prep & 9-Voice Fix)
 
