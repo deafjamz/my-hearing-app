@@ -36,6 +36,9 @@ public/noise_files/
 # macOS
 .DS_Store
 
+# Testing screenshots
+screenshots/
+
 # Build
 dist/
 .vercel

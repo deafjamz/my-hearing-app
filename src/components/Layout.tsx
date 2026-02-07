@@ -88,8 +88,8 @@ export function Layout({ className }: LayoutProps) {
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive
-                    ? "text-purple-600 bg-purple-100"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "text-purple-400 bg-purple-500/20"
+                    : "text-slate-400 hover:text-white"
                 )}
               >
                 <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />

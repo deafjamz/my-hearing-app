@@ -1,10 +1,11 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-07
-> **Last Session:** Production Readiness Review & Fixes
-> **Build Status:** ✅ PASSING (5.25s, 272KB main bundle)
+> **Last Session:** Manual Testing & Triage Fixes (Session 14)
+> **Build Status:** ✅ PASSING (4.14s, 268KB main bundle)
 > **Deployment:** ✅ LIVE at https://my-hearing-app.vercel.app
 > **Tests:** ✅ 58 PASSING
+> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (6 fixed, 2 partial, 9 open)
 
 ---
 
@@ -346,6 +347,41 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-07 (Session 14: Manual Testing & Triage Fixes)
+
+**Summary:** Manual testing of live app at https://my-hearing-app.vercel.app. Documented 17 findings (3× P0, 7× P1, 4× P2) in `docs/TESTING_FINDINGS.md`. Fixed 6 findings in Batch 2.
+
+**Pages Tested:** Dashboard, Practice Hub, Detection, Word Pairs (CategoryPlayer), Progress
+
+**Findings documented:**
+- F-001: No onboarding (P1)
+- F-002→F-009: Audio carrier phrase contamination escalated to P0 (~80% of words affected)
+- F-003: Theme inconsistency → **FIXED** (dark mode globally)
+- F-004: Stats behind user icon → **FIXED** (margin dodge)
+- F-005/F-007/F-008: Activity session framework (no progress, no end, no briefing) → **F-007 FIXED** (10 rounds + completion screen)
+- F-006: Play button no feedback → **FIXED** (visual disabled state)
+- F-009: Carrier phrase P0 → OPEN (needs audio audit)
+- F-010: Guest progress silently lost → OPEN (product decision)
+- F-011: Should require sign-in → OPEN (product decision)
+- F-012: Audiologist sharing compliance → OPEN
+- F-013-F-016: Word Pairs UX cluster → OPEN (F-014 partial, F-015 **FIXED**)
+- F-017: No dev mode → OPEN
+
+**Code Changes (Batch 2):**
+- `index.html`: Added `class="dark"` to `<html>` — activates all Tailwind dark: variants globally
+- `src/pages/PracticeHub.tsx`: Converted from light to dark theme (colors, cards, text)
+- `src/components/Layout.tsx`: Fixed bottom nav active state colors for dark mode
+- `src/pages/Detection.tsx`: Session reduced 50→10 rounds; completion shows SessionSummary; stats dodged with mr-14; play button visual disabled state
+- `src/pages/CategoryPlayer.tsx`: Uses user's voice from context (was hardcoded 'sarah'); falls back to any available voice if preferred has no audio
+- `src/components/SessionSummary.tsx`: Praise scaled to session length (< 5 items = muted feedback)
+
+**Remaining P0s:**
+1. F-009: Audio carrier phrase contamination — needs audit of audio files
+2. F-010: Guest mode silently discards progress — needs product decision on sign-in requirement
+
+**New Documentation:**
+- `docs/TESTING_FINDINGS.md` — full testing tracker with fix status table and severity guide
 
 ### 2026-02-07 (Session 13: Production Readiness Review & Fixes)
 

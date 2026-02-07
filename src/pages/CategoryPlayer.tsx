@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase';
 import { SessionSummary } from '@/components/SessionSummary';
 import { ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useUser } from '@/store/UserContext';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -20,12 +21,13 @@ interface WordPair {
 export function CategoryPlayer() {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
+  const { voice } = useUser();
 
   const [pairs, setPairs] = useState<WordPair[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-  const [selectedVoice] = useState<string>('sarah');
+  const selectedVoice = voice || 'sarah';
 
   // Performance tracking
   const [responses, setResponses] = useState<Array<{ correct: boolean; responseTime: number }>>([]);
@@ -77,7 +79,9 @@ export function CategoryPlayer() {
       const categoryPairs = stimuli
         .filter((s: any) => s.clinical_metadata?.contrast_category === decodedCategory)
         .map((s: any) => {
-          const audio = s.audio_assets?.find((a: any) => a.voice_id === selectedVoice);
+          // Try selected voice first, fall back to any available voice
+          const audio = s.audio_assets?.find((a: any) => a.voice_id === selectedVoice)
+            || s.audio_assets?.[0];
           return {
             id: s.id,
             word1: s.clinical_metadata?.word_1 || '',
@@ -87,7 +91,7 @@ export function CategoryPlayer() {
         })
         .filter((p: WordPair) => p.audioPath); // Only pairs with audio
 
-      // Shuffle and take 10
+      // Shuffle and take 10 (minimum 5 for a meaningful session)
       const shuffled = categoryPairs.sort(() => Math.random() - 0.5);
       const selected = shuffled.slice(0, 10);
 
@@ -158,7 +162,8 @@ export function CategoryPlayer() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-slate-400 mb-4">No pairs found for this category</div>
+          <div className="text-slate-400 mb-4">No audio available for this category yet.</div>
+          <p className="text-slate-500 text-sm mb-4">Audio for this category hasn't been generated. Try a different category.</p>
           <Link to="/categories" className="text-violet-400 hover:text-violet-300">
             ← Back to Categories
           </Link>

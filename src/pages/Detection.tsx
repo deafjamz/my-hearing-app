@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Play, ArrowRight, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useWordPairs } from '../hooks/useActivityData';
 import { ActivityHeader } from '../components/ui/ActivityHeader';
+import { SessionSummary } from '../components/SessionSummary';
 import { useProgress } from '../hooks/useProgress';
 import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
+
+const SESSION_LENGTH = 10;
 
 /**
  * Detection Activity - Erber Level 1 (Easiest)
@@ -29,6 +33,7 @@ interface DetectionRound {
 }
 
 export function Detection() {
+  const navigate = useNavigate();
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
@@ -39,6 +44,7 @@ export function Detection() {
   const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
 
   // Stats
@@ -51,8 +57,8 @@ export function Detection() {
   // Generate rounds from available words
   useEffect(() => {
     if (!loading && pairs.length > 0) {
-      // Shuffle pairs and take first 50
-      const shuffled = [...pairs].sort(() => Math.random() - 0.5).slice(0, 50);
+      // Shuffle pairs and take session length
+      const shuffled = [...pairs].sort(() => Math.random() - 0.5).slice(0, SESSION_LENGTH);
 
       // Create detection rounds - 70% sound, 30% silence
       const detectionRounds: DetectionRound[] = shuffled.map((pair, i) => {
@@ -158,14 +164,22 @@ export function Detection() {
       setAudioPlayed(false);
       setStartTime(Date.now());
     } else {
-      // Session complete - could show summary
-      setCurrentIndex(0);
-      setSelectedAnswer(null);
-      setAudioPlayed(false);
-      setCorrect(0);
-      setTotal(0);
+      setIsComplete(true);
     }
   };
+
+  if (isComplete) {
+    const finalAccuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+    return (
+      <SessionSummary
+        sessionTitle="Sound Detection"
+        accuracy={finalAccuracy}
+        totalItems={total}
+        correctCount={correct}
+        onContinue={() => navigate('/practice')}
+      />
+    );
+  }
 
   if (loading || rounds.length === 0) {
     return (
@@ -187,7 +201,7 @@ export function Detection() {
         className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50"
       >
         <ActivityHeader title="Sound Detection" backPath="/practice" />
-        <div className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="text-sm text-slate-500 dark:text-slate-400 mr-14">
           {total > 0 && `${accuracy}% · ${correct}/${total}`}
         </div>
       </motion.header>
@@ -218,7 +232,9 @@ export function Detection() {
                 ? isCorrectAnswer
                   ? 'bg-gradient-to-tr from-teal-500 to-teal-600 shadow-teal-500/30'
                   : 'bg-gradient-to-tr from-amber-500 to-amber-600 shadow-amber-500/30'
-                : 'bg-gradient-to-tr from-purple-500 to-purple-600 shadow-purple-500/30 hover:scale-105'
+                : audioPlayed
+                  ? 'bg-gradient-to-tr from-slate-600 to-slate-700 shadow-none opacity-50 cursor-not-allowed'
+                  : 'bg-gradient-to-tr from-purple-500 to-purple-600 shadow-purple-500/30 hover:scale-105'
             }`}
           >
             {hasAnswered ? (

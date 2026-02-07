@@ -20,8 +20,15 @@ export function SessionSummary({
   correctCount,
   onContinue,
 }: SessionSummaryProps) {
-  // Determine performance level
+  // Determine performance level — scale praise to session length
+  const isShortSession = totalItems < 5;
   const getPerformanceMessage = () => {
+    if (isShortSession) {
+      // Muted praise for very short sessions — not enough data for strong claims
+      if (accuracy >= 80) return { message: 'Good Start!', color: 'text-teal-400' };
+      if (accuracy >= 50) return { message: 'Nice Try!', color: 'text-green-400' };
+      return { message: 'Keep Going!', color: 'text-yellow-400' };
+    }
     if (accuracy >= 90) return { message: 'Excellent Work!', color: 'text-teal-400' };
     if (accuracy >= 75) return { message: 'Great Progress!', color: 'text-green-400' };
     if (accuracy >= 60) return { message: 'Good Effort!', color: 'text-yellow-400' };
@@ -120,7 +127,9 @@ export function SessionSummary({
           className="p-6 bg-slate-900/50 border border-slate-800 rounded-2xl mb-8"
         >
           <p className="text-slate-400 text-center leading-relaxed">
-            {accuracy >= 90
+            {isShortSession
+              ? "Complete a full session for a better picture of your skills. Keep practicing!"
+              : accuracy >= 90
               ? "Outstanding performance! You're mastering these skills with confidence."
               : accuracy >= 75
               ? "You're making great strides. Consistency is key to continued improvement."
