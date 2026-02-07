@@ -38,3 +38,5 @@ public/noise_files/
 
 # Build
 dist/
+.vercel
+.env*.local
