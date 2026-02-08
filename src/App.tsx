@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/Layout';
+import { RequireAuth } from '@/components/RequireAuth';
 import { Dashboard } from '@/pages/Dashboard';
 
 // Inline page loader for Suspense fallback
@@ -61,35 +62,35 @@ const productionRoutes = [
   },
   {
     path: '/practice/category/:category',
-    element: <S><CategoryPlayer /></S>,
+    element: <S><RequireAuth><CategoryPlayer /></RequireAuth></S>,
   },
   {
     path: '/practice/rapid-fire',
-    element: <S><RapidFire /></S>,
+    element: <S><RequireAuth><RapidFire /></RequireAuth></S>,
   },
   {
     path: '/practice/detection',
-    element: <S><Detection /></S>,
+    element: <S><RequireAuth><Detection /></RequireAuth></S>,
   },
   {
     path: '/practice/gross-discrimination',
-    element: <S><GrossDiscrimination /></S>,
+    element: <S><RequireAuth><GrossDiscrimination /></RequireAuth></S>,
   },
   {
     path: '/practice/stories',
-    element: <S><StoryList /></S>,
+    element: <S><RequireAuth><StoryList /></RequireAuth></S>,
   },
   {
     path: '/practice/scenarios',
-    element: <S><ScenarioList /></S>,
+    element: <S><RequireAuth><ScenarioList /></RequireAuth></S>,
   },
   {
     path: '/scenarios',
-    element: <S><ScenarioPlayer /></S>,
+    element: <S><RequireAuth><ScenarioPlayer /></RequireAuth></S>,
   },
   {
     path: '/sentences',
-    element: <S><SentenceTraining /></S>,
+    element: <S><RequireAuth><SentenceTraining /></RequireAuth></S>,
   },
   {
     path: '/programs',
@@ -101,7 +102,7 @@ const productionRoutes = [
   },
   {
     path: '/session/:sessionId',
-    element: <S><SessionPlayer /></S>,
+    element: <S><RequireAuth><SessionPlayer /></RequireAuth></S>,
   },
   {
     path: '/practice/:category',
@@ -109,15 +110,15 @@ const productionRoutes = [
   },
   {
     path: '/player/story/:id',
-    element: <S><StoryPlayer /></S>,
+    element: <S><RequireAuth><StoryPlayer /></RequireAuth></S>,
   },
   {
     path: '/player/:id',
-    element: <S><Player /></S>,
+    element: <S><RequireAuth><Player /></RequireAuth></S>,
   },
   {
     path: '/player/scenario/:id',
-    element: <S><ScenarioPlayer /></S>,
+    element: <S><RequireAuth><ScenarioPlayer /></RequireAuth></S>,
   },
   {
     path: '/settings',

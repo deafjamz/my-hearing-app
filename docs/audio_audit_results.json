@@ -1,0 +1,558 @@
+{
+  "audit_date": "2026-02-07",
+  "voices": [
+    "sarah",
+    "alice",
+    "charlie"
+  ],
+  "words": [
+    "bat",
+    "cat",
+    "dog",
+    "food",
+    "pond",
+    "chair",
+    "cheese",
+    "house",
+    "phone",
+    "train",
+    "apple",
+    "basket",
+    "finger",
+    "garden",
+    "market",
+    "river",
+    "silver",
+    "water",
+    "yellow",
+    "bottle"
+  ],
+  "total_files": 60,
+  "summary": {
+    "CLEAN": 31,
+    "CARRIER_BLEED": 0,
+    "POSSIBLE_CLIP": 5,
+    "LATE_ONSET": 0,
+    "TOO_SHORT": 0,
+    "ERROR": 0,
+    "MISSING": 24
+  },
+  "results": [
+    {
+      "voice": "sarah",
+      "word": "bat",
+      "category": "CLEAN",
+      "duration_s": 0.398,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.004225,
+      "notes": "Duration 0.4s, onset at 0.012s"
+    },
+    {
+      "voice": "sarah",
+      "word": "cat",
+      "category": "CLEAN",
+      "duration_s": 0.411,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.002645,
+      "notes": "Duration 0.4s, onset at 0.046s"
+    },
+    {
+      "voice": "sarah",
+      "word": "dog",
+      "category": "CLEAN",
+      "duration_s": 0.412,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.01198,
+      "notes": "Duration 0.4s, onset at 0.046s"
+    },
+    {
+      "voice": "sarah",
+      "word": "food",
+      "category": "CLEAN",
+      "duration_s": 0.427,
+      "onset_s": 0.07,
+      "rms_before_onset": 0.00266,
+      "notes": "Duration 0.4s, onset at 0.070s"
+    },
+    {
+      "voice": "sarah",
+      "word": "pond",
+      "category": "CLEAN",
+      "duration_s": 0.481,
+      "onset_s": 0.058,
+      "rms_before_onset": 0.000727,
+      "notes": "Duration 0.5s, onset at 0.058s"
+    },
+    {
+      "voice": "sarah",
+      "word": "chair",
+      "category": "CLEAN",
+      "duration_s": 0.424,
+      "onset_s": 0.058,
+      "rms_before_onset": 0.004163,
+      "notes": "Duration 0.4s, onset at 0.058s"
+    },
+    {
+      "voice": "sarah",
+      "word": "cheese",
+      "category": "POSSIBLE_CLIP",
+      "duration_s": 0.632,
+      "onset_s": 0.07,
+      "rms_before_onset": 0.002142,
+      "notes": "Speech starts immediately (0.070s) \u2014 may have onset clipped"
+    },
+    {
+      "voice": "sarah",
+      "word": "house",
+      "category": "CLEAN",
+      "duration_s": 0.427,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.002062,
+      "notes": "Duration 0.4s, onset at 0.012s"
+    },
+    {
+      "voice": "sarah",
+      "word": "phone",
+      "category": "CLEAN",
+      "duration_s": 0.472,
+      "onset_s": 0.081,
+      "rms_before_onset": 0.002902,
+      "notes": "Duration 0.5s, onset at 0.081s"
+    },
+    {
+      "voice": "sarah",
+      "word": "train",
+      "category": "CLEAN",
+      "duration_s": 0.438,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.00492,
+      "notes": "Duration 0.4s, onset at 0.046s"
+    },
+    {
+      "voice": "sarah",
+      "word": "apple",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "basket",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "finger",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "garden",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "market",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "river",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "silver",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "sarah",
+      "word": "water",
+      "category": "CLEAN",
+      "duration_s": 0.393,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.006562,
+      "notes": "Duration 0.4s, onset at 0.012s"
+    },
+    {
+      "voice": "sarah",
+      "word": "yellow",
+      "category": "CLEAN",
+      "duration_s": 0.38,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.006859,
+      "notes": "Duration 0.4s, onset at 0.012s"
+    },
+    {
+      "voice": "sarah",
+      "word": "bottle",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "bat",
+      "category": "CLEAN",
+      "duration_s": 0.455,
+      "onset_s": 0.035,
+      "rms_before_onset": 0.000343,
+      "notes": "Duration 0.5s, onset at 0.035s"
+    },
+    {
+      "voice": "alice",
+      "word": "cat",
+      "category": "CLEAN",
+      "duration_s": 0.49,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.006816,
+      "notes": "Duration 0.5s, onset at 0.023s"
+    },
+    {
+      "voice": "alice",
+      "word": "dog",
+      "category": "CLEAN",
+      "duration_s": 0.408,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.004982,
+      "notes": "Duration 0.4s, onset at 0.023s"
+    },
+    {
+      "voice": "alice",
+      "word": "food",
+      "category": "CLEAN",
+      "duration_s": 0.472,
+      "onset_s": 0.093,
+      "rms_before_onset": 0.006537,
+      "notes": "Duration 0.5s, onset at 0.093s"
+    },
+    {
+      "voice": "alice",
+      "word": "pond",
+      "category": "CLEAN",
+      "duration_s": 0.478,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.004537,
+      "notes": "Duration 0.5s, onset at 0.046s"
+    },
+    {
+      "voice": "alice",
+      "word": "chair",
+      "category": "CLEAN",
+      "duration_s": 0.478,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.002369,
+      "notes": "Duration 0.5s, onset at 0.023s"
+    },
+    {
+      "voice": "alice",
+      "word": "cheese",
+      "category": "POSSIBLE_CLIP",
+      "duration_s": 0.676,
+      "onset_s": 0.035,
+      "rms_before_onset": 0.005316,
+      "notes": "Speech starts immediately (0.035s) \u2014 may have onset clipped"
+    },
+    {
+      "voice": "alice",
+      "word": "house",
+      "category": "POSSIBLE_CLIP",
+      "duration_s": 0.543,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.005716,
+      "notes": "Speech starts immediately (0.046s) \u2014 may have onset clipped"
+    },
+    {
+      "voice": "alice",
+      "word": "phone",
+      "category": "CLEAN",
+      "duration_s": 0.508,
+      "onset_s": 0.116,
+      "rms_before_onset": 0.003856,
+      "notes": "Duration 0.5s, onset at 0.116s"
+    },
+    {
+      "voice": "alice",
+      "word": "train",
+      "category": "POSSIBLE_CLIP",
+      "duration_s": 0.582,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.000965,
+      "notes": "Speech starts immediately (0.023s) \u2014 may have onset clipped"
+    },
+    {
+      "voice": "alice",
+      "word": "apple",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "basket",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "finger",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "garden",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "market",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "river",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "silver",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "alice",
+      "word": "water",
+      "category": "CLEAN",
+      "duration_s": 0.462,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.00137,
+      "notes": "Duration 0.5s, onset at 0.012s"
+    },
+    {
+      "voice": "alice",
+      "word": "yellow",
+      "category": "CLEAN",
+      "duration_s": 0.38,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.012956,
+      "notes": "Duration 0.4s, onset at 0.023s"
+    },
+    {
+      "voice": "alice",
+      "word": "bottle",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "bat",
+      "category": "CLEAN",
+      "duration_s": 0.367,
+      "onset_s": 0.058,
+      "rms_before_onset": 0.006658,
+      "notes": "Duration 0.4s, onset at 0.058s"
+    },
+    {
+      "voice": "charlie",
+      "word": "cat",
+      "category": "CLEAN",
+      "duration_s": 0.33,
+      "onset_s": 0.046,
+      "rms_before_onset": 0.00399,
+      "notes": "Duration 0.3s, onset at 0.046s"
+    },
+    {
+      "voice": "charlie",
+      "word": "dog",
+      "category": "CLEAN",
+      "duration_s": 0.377,
+      "onset_s": 0.07,
+      "rms_before_onset": 0.007064,
+      "notes": "Duration 0.4s, onset at 0.070s"
+    },
+    {
+      "voice": "charlie",
+      "word": "food",
+      "category": "CLEAN",
+      "duration_s": 0.415,
+      "onset_s": 0.104,
+      "rms_before_onset": 0.009099,
+      "notes": "Duration 0.4s, onset at 0.104s"
+    },
+    {
+      "voice": "charlie",
+      "word": "pond",
+      "category": "POSSIBLE_CLIP",
+      "duration_s": 0.547,
+      "onset_s": 0.058,
+      "rms_before_onset": 0.005787,
+      "notes": "Speech starts immediately (0.058s) \u2014 may have onset clipped"
+    },
+    {
+      "voice": "charlie",
+      "word": "chair",
+      "category": "CLEAN",
+      "duration_s": 0.408,
+      "onset_s": 0.035,
+      "rms_before_onset": 0.006462,
+      "notes": "Duration 0.4s, onset at 0.035s"
+    },
+    {
+      "voice": "charlie",
+      "word": "cheese",
+      "category": "CLEAN",
+      "duration_s": 0.443,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.000787,
+      "notes": "Duration 0.4s, onset at 0.012s"
+    },
+    {
+      "voice": "charlie",
+      "word": "house",
+      "category": "CLEAN",
+      "duration_s": 0.426,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.010435,
+      "notes": "Duration 0.4s, onset at 0.023s"
+    },
+    {
+      "voice": "charlie",
+      "word": "phone",
+      "category": "CLEAN",
+      "duration_s": 0.403,
+      "onset_s": 0.07,
+      "rms_before_onset": 0.009159,
+      "notes": "Duration 0.4s, onset at 0.070s"
+    },
+    {
+      "voice": "charlie",
+      "word": "train",
+      "category": "CLEAN",
+      "duration_s": 0.455,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.00754,
+      "notes": "Duration 0.5s, onset at 0.023s"
+    },
+    {
+      "voice": "charlie",
+      "word": "apple",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "basket",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "finger",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "garden",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "market",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "river",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "silver",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    },
+    {
+      "voice": "charlie",
+      "word": "water",
+      "category": "CLEAN",
+      "duration_s": 0.449,
+      "onset_s": 0.023,
+      "rms_before_onset": 0.009139,
+      "notes": "Duration 0.4s, onset at 0.023s"
+    },
+    {
+      "voice": "charlie",
+      "word": "yellow",
+      "category": "CLEAN",
+      "duration_s": 0.345,
+      "onset_s": 0.012,
+      "rms_before_onset": 0.00327,
+      "notes": "Duration 0.3s, onset at 0.012s"
+    },
+    {
+      "voice": "charlie",
+      "word": "bottle",
+      "category": "MISSING",
+      "duration_s": 0,
+      "onset_s": 0,
+      "notes": "File not found in storage"
+    }
+  ]
+}

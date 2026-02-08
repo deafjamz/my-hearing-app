@@ -80,7 +80,10 @@ export function ProgramLibrary() {
     }
   };
 
+  const devUnlock = import.meta.env.VITE_DEV_UNLOCK_ALL === 'true';
+
   const isLocked = (program: Program) => {
+    if (devUnlock) return false;
     if (program.tier === 'free') return false;
     if (program.tier === 'tier1' && (userTier === 'tier1' || userTier === 'tier2')) return false;
     if (program.tier === 'tier2' && userTier === 'tier2') return false;

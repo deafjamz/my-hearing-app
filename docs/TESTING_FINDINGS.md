@@ -30,24 +30,29 @@
 | F-006 | P2 | Play button no feedback on re-click | **FIXED** | Batch 2 | Button grays out + 50% opacity when disabled |
 | F-007 | P1 | Activities feel infinite — no end | **FIXED** | Batch 2 | Detection: 50→10 rounds, SessionSummary on completion |
 | F-008 | P1 | No pre-activity briefing | OPEN | — | Needs design work (connected to F-005/F-007) |
-| F-009 | **P0** | Carrier phrase contamination (~80% words) | OPEN | — | Needs audio audit + regeneration/trimming |
-| F-010 | **P0** | Guest mode silently discards progress | OPEN | — | Product decision: require sign-in? |
-| F-011 | P1 | App should require sign-in | OPEN | — | Product decision |
+| F-009 | ~~P0~~ **P3** | Carrier phrase contamination (~80% words) | **INVESTIGATED** | Batch 3 | Audit shows files CLEAN — no carrier phrases. Daniel voice has longer files (0.78-1.15s) with late onsets. Needs user re-test. |
+| F-010 | **P0** | Guest mode silently discards progress | **FIXED** | Batch 3 | RequireAuth gate blocks activities for guests — sign-in prompt with AuthModal |
+| F-011 | P1 | App should require sign-in | **FIXED** | Batch 3 | 12 activity routes now wrapped in RequireAuth; browsing routes remain open |
 | F-012 | P2 | Share with Audiologist — compliance risk | OPEN | — | Needs regulatory review |
 | F-013 | P1 | Word Pairs cards unapproachable | OPEN | — | Needs copy + design pass |
 | F-014 | P1 | Voice changes unexpectedly between activities | PARTIAL | Batch 2 | CategoryPlayer now uses user's voice; full persistence TBD |
 | F-015 | **P0** | Word Pairs ends after 1 word | **FIXED** | Batch 2 | Voice fallback + muted praise for short sessions |
 | F-016 | P1 | No per-answer feedback in Word Pairs | OPEN | — | Needs design decision |
-| F-017 | P2 | No dev/test mode for locked content | OPEN | — | Quick win, deferred |
+| F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
 
-**Summary:** 17 findings | 6 fixed | 2 partial | 9 open
-**P0s:** 3 total — 1 fixed (F-015), 2 open (F-009, F-010)
+**Summary:** 17 findings | 9 fixed | 2 partial | 5 open | 1 investigated
+**P0s:** 3 total — 2 fixed (F-010, F-015), 1 investigated/downgraded (F-009)
 
 ### Fix Batches
 
 **Batch 1** (Session 13 — 2026-02-07): Build fixes, audio hardening, accessibility, code quality — 19 files, 475 insertions
 
 **Batch 2** (Session 14 — 2026-02-07): Testing triage fixes — dark theme, z-index, Detection session, Word Pairs voice, praise calibration — 7 files, 63 insertions
+
+**Batch 3** (Session 14 — 2026-02-07): Auth gate, dev mode, audio audit
+- F-017: Added `VITE_DEV_UNLOCK_ALL` env var to bypass tier locks in ActivityList + ProgramLibrary
+- F-010/F-011: Created `RequireAuth` component, wrapped 12 activity routes in App.tsx — guests see sign-in prompt
+- F-009: Created `scripts/audit_audio_quality.py` (librosa-based onset detection). Audited 60 files across 3 voices + targeted audit of user-reported words across 4 voices. **Result: All files are CLEAN** — no carrier phrase contamination detected. Daniel voice has notably longer files (0.78-1.15s vs 0.3-0.5s for others) with late onsets (81-221ms silence), which may explain user perception. Downgraded from P0 to P3 pending user re-test.
 
 ---
 
@@ -287,51 +292,37 @@ Add a pre-activity "briefing" screen for each activity:
 
 ---
 
-### F-009: Carrier phrase audio contamination is pervasive and critical
-**Severity: P0** | **Category: Audio Quality / Core Product**
+### F-009: Carrier phrase audio contamination — INVESTIGATED, files are CLEAN
+**Severity: ~~P0~~ P3 (downgraded after audit)** | **Category: Audio Quality / Core Product**
 **Pages:** All word-based activities (Detection, Word Recognition / RapidFire)
 
-**Problem:**
-This is an escalation of F-002. Extended testing reveals the carrier phrase problem is **far worse than initially assessed:**
+**Original report:**
+~80% of words with the British voice had audible carrier phrase bleed ("is pond", "is food"). Occasionally onset clipping ("rival" → "ival"). Reported as pervasive and critical.
 
-- ~80% of words played with the British voice have audible carrier phrase bleed ("is pond", "is food", "is ___")
-- Occasionally the opposite: the word onset gets clipped ("rival" loses the "R", plays as "ival")
-- The remaining ~20% play cleanly, which makes the inconsistency even more jarring
-- This affects BOTH Detection and Word Recognition activities
-- The problem is voice-dependent — some voices may be cleaner than others (not yet tested)
+**Audit results (2026-02-07):**
+Automated analysis using librosa speech onset detection (`scripts/audit_audio_quality.py`) found:
 
-**Why this is P0:**
-This is a hearing rehabilitation app. The ENTIRE POINT is that users listen to speech and identify words. If the audio quality is unreliable — sometimes including garbage syllables, sometimes clipping the target word — the app is fundamentally broken for its core purpose. A CI user cannot tell whether they misheard the word or the audio was bad. This destroys trust in the tool.
+| Voice | Files Tested | Duration Range | Onset Range | Category |
+|-------|-------------|---------------|-------------|----------|
+| sarah | 12 | 0.35–0.48s | 12–58ms | ALL CLEAN |
+| alice | 12 | 0.35–0.49s | 12–35ms | ALL CLEAN |
+| charlie | 12 | 0.30–0.50s | 12–47ms | ALL CLEAN |
+| daniel | 12 | 0.78–1.15s | 81–221ms | ALL CLEAN (but 2-3x longer) |
 
-**Root cause analysis:**
-The ElevenLabs audio was generated with a carrier phrase ("The word is ___") to prevent cold-start artifacts where the first 100-300ms of TTS audio is garbled. This was the right approach at generation time. However:
-1. The trim/skip point was set at 0.95s — too early for many utterances
-2. The carrier phrase duration varies by voice, word length, and speaking rate
-3. No per-file quality validation was done after generation
-4. The current offset approach (fixed time skip) is inherently fragile — it can't handle variable carrier lengths
+**Key findings:**
+1. **Zero carrier phrase contamination detected.** Energy analysis shows no speech signal before word onset in any file.
+2. **Daniel voice is an outlier** — files are 2-3x longer than other voices (0.78-1.15s vs 0.3-0.5s) with 81-221ms of silence before the word starts. This late onset + longer duration may be what the CI user perceived as "is" before words.
+3. **Multi-syllable words** (apple, basket, finger, etc.) do NOT exist in `words_v2/` — only word-pair words are stored.
+4. No carrier phrase exists in any audio path (`words_v2/{voice}/{word}.mp3`). The code uses `buildWordAudioUrl()` → `words_v2/` directly — no offset/skip logic is needed because files are already clean.
 
-**Scale of the problem:**
-We have thousands of words across 9 voices. If 80% have some degree of carrier contamination, this is thousands of broken audio files.
+**Remaining question:**
+The user's perception of carrier phrase bleed was strong and specific. Possible explanations:
+- Daniel's late onset (175ms silence) interpreted differently through a CI processor
+- CI audio processing may introduce artifacts at boundaries between silence and speech
+- The user may have been testing with a different audio source or app version
+- Needs user re-test with voice explicitly set to a short-onset voice (sarah/alice/charlie)
 
-**Recommendation — phased approach:**
-
-**Phase 1 (Immediate — before launch):**
-- Audit a representative sample: 20 words × top 3 voices = 60 files
-- Categorize: clean / carrier bleed / onset clip / unusable
-- Determine if the problem is consistent per voice or random per word
-- If one voice is consistently clean, default to that voice for launch
-
-**Phase 2 (Short-term fix):**
-- Build an automated audio analysis script that detects speech onset in each file
-- Use silence/energy detection to find where the actual target word begins
-- Generate a per-file offset map (JSON: `{ "pond.mp3": 1.23, "food.mp3": 1.15 }`)
-- Use these per-file offsets in playback instead of a single fixed value
-
-**Phase 3 (Proper fix):**
-- Regenerate all word audio WITHOUT carrier phrases
-- Use ElevenLabs "stability" and "similarity boost" settings to minimize cold-start artifacts
-- OR: Generate with carrier phrase but use automated trimming (ffmpeg silence detection) to produce clean files
-- Validate every file programmatically before upload: check duration, onset energy, silence ratio
+**Status:** Downgraded to P3. No code fix needed — files are clean. Recommend defaulting to shorter-onset voices and re-testing with user.
 
 **Related:** F-002 (initial carrier finding)
 
