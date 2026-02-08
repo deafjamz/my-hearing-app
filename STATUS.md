@@ -1,9 +1,9 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-07
-> **Last Session:** Auth gate, session lengths, color sweep, chunk fix (Session 16)
-> **Build Status:** ✅ PASSING (3.2s, 272KB main bundle)
-> **Deployment:** ✅ LIVE at https://my-hearing-app.vercel.app
+> **Last Session:** Auth hardening, dark mode fix, OAuth/Magic Link/Forgot Password (Session 17)
+> **Build Status:** ✅ PASSING (3.3s, 278KB main bundle)
+> **Deployment:** ✅ LIVE at https://soundsteps.app (+ https://my-hearing-app.vercel.app)
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (17 fixed)
 
@@ -241,7 +241,15 @@ python3 scripts/generate_sentences_v2.py
 
 ## Next Actions (Priority Order)
 
-### Immediate
+### TODO — Next Session
+- [ ] **Configure Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → paste into Supabase Dashboard → Authentication → Providers → Google. Callback URL: `https://padfntxzoxhozfjsqnzc.supabase.co/auth/v1/callback`. Full instructions in `docs/AUTH_SETUP.md`.
+- [ ] **Configure Apple OAuth** — Apple Developer account → Sign in with Apple service ID → paste into Supabase Dashboard → Authentication → Providers → Apple. Full instructions in `docs/AUTH_SETUP.md`.
+- [ ] **Configure custom SMTP** — Supabase free tier limits email sends (~3-4/hr). Set up Resend, Postmark, or SendGrid for reliable delivery. Dashboard → Settings → Auth → SMTP.
+- [ ] **Customize email templates** — Supabase Dashboard → Authentication → Email Templates. Brand confirmation, magic link, and password reset emails.
+- [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
+- [ ] **Remove VITE_DEV_UNLOCK_ALL from Vercel** production env (was added for testing)
+
+### Completed
 - [x] ~~Verify programs schema exists in Supabase~~ ✅ Confirmed (224 session_items)
 - [x] ~~Voice audit~~ ✅ 9-voice roster confirmed, deprecated Marcus/David
 - [x] ~~Update VoiceContext.tsx~~ ✅ Removed deprecated, added new voices
@@ -351,6 +359,39 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-07 (Session 17: Auth Hardening, Dark Mode, OAuth/Magic Link/Forgot Password)
+
+**Summary:** Fixed white UI root cause, built complete auth system with 5 sign-in methods, connected custom domain, comprehensive auth documentation.
+
+**Dark Mode Fix (root cause of white UI):**
+- ThemeContext defaulted to `'light'` — overrode `class="dark"` on `<html>` — all `dark:` variants were inactive
+- Changed default to `'dark'` — fixes every screen at once
+- Layout: hardcoded `bg-slate-950` (removed light/dark split), hid nav/top bar for unauthenticated users
+- index.html: theme-color meta `#7c3aed` (purple) → `#020617` (slate-950)
+
+**Auth System (5 methods):**
+- Google OAuth — `signInWithOAuth({ provider: 'google' })` — UI ready, needs Google Cloud + Supabase config
+- Apple OAuth — `signInWithOAuth({ provider: 'apple' })` — UI ready, needs Apple Developer + Supabase config
+- Magic Link — `signInWithOtp({ email })` — fully working, no extra config
+- Forgot Password — `resetPasswordForEmail()` + `/reset-password` page — fully working
+- Email + Password — improved error handling, email confirmation screen
+
+**AuthModal Rewrite:**
+- 5 views: sign-in, sign-up, magic-link, forgot-password, check-email
+- Extracted shared primitives: Backdrop, Card, EmailField, SubmitButton, ErrorMessage, BackButton
+- Inline Google/Apple SVG icons (no external deps)
+- Always-dark styling (hardcoded, no theme dependency)
+
+**Custom Domain:**
+- Connected `soundsteps.app` to Vercel (DNS A record → 76.76.21.21)
+- SSL auto-provisioned via Let's Encrypt
+- Supabase redirect URLs configured for soundsteps.app
+
+**Documentation:**
+- Created `docs/AUTH_SETUP.md` — complete setup guide for all 5 auth methods, Google/Apple config steps, redirect URL config, troubleshooting, production checklist
+
+**Build:** ✅ PASSING (3.3s) | **Tests:** ✅ 31 PASSING
 
 ### 2026-02-07 (Session 16: Auth Gate, Session Lengths, Color Sweep, Chunk Fix)
 
