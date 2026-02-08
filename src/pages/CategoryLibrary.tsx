@@ -61,18 +61,20 @@ export function CategoryLibrary() {
     }
   };
 
+  // Friendly names + examples for approachable cards (F-013)
+  const categoryInfo: Record<string, { friendly: string; description: string; example: string }> = {
+    'Vowels': { friendly: 'Vowel Sounds', description: 'Hear the difference between similar vowel sounds', example: "e.g., 'bit' vs 'bet'" },
+    'Consonant Voicing': { friendly: 'Similar Sounds', description: 'Tell apart sounds that are almost identical', example: "e.g., 'bat' vs 'pat'" },
+    'Manner': { friendly: 'Sound Patterns', description: 'Focus on how different sounds are made', example: "e.g., 'mat' vs 'bat'" },
+    'Place': { friendly: 'Sound Positions', description: 'Spot where sounds are made in the mouth', example: "e.g., 'tea' vs 'key'" },
+    'Sibilants': { friendly: 'Hissing Sounds', description: 'Master the sharp S, Z, and SH sounds', example: "e.g., 'sip' vs 'zip'" },
+    'Plosives': { friendly: 'Pop & Burst Sounds', description: 'Practice quick, punchy sounds', example: "e.g., 'pin' vs 'bin'" },
+    'Fricatives': { friendly: 'Friction Sounds', description: 'Work on the breathy F, V, and TH sounds', example: "e.g., 'fan' vs 'van'" },
+    'Nasals': { friendly: 'Nasal Sounds', description: 'Distinguish the humming M, N, and NG sounds', example: "e.g., 'map' vs 'nap'" },
+  };
+
   const getCategoryDescription = (category: string): string => {
-    const descriptions: Record<string, string> = {
-      'Vowels': 'Practice distinguishing different vowel sounds',
-      'Consonant Voicing': 'Tell the difference between voiced and unvoiced consonants',
-      'Manner': 'Focus on how sounds are produced',
-      'Place': 'Practice sounds made in different parts of the mouth',
-      'Sibilants': 'Master S, Z, SH, and similar hissing sounds',
-      'Plosives': 'Practice explosive sounds like P, B, T, D, K, G',
-      'Fricatives': 'Work on friction sounds like F, V, TH',
-      'Nasals': 'Distinguish M, N, and NG sounds',
-    };
-    return descriptions[category] || `Practice ${category.toLowerCase()} sound distinctions`;
+    return categoryInfo[category]?.description || `Practice ${category.toLowerCase()} sound distinctions`;
   };
 
   const getCategoryColor = (category: string): string => {
@@ -144,21 +146,31 @@ export function CategoryLibrary() {
                       <Zap className="h-6 w-6 text-white" strokeWidth={2.5} />
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-violet-400 transition-colors">
-                      {category.name}
+                    {/* Title — friendly name with clinical subtitle */}
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-violet-400 transition-colors">
+                      {categoryInfo[category.name]?.friendly || category.name}
                     </h3>
+                    {categoryInfo[category.name] && (
+                      <p className="text-xs text-slate-500 mb-2">{category.name}</p>
+                    )}
 
                     {/* Description */}
-                    <p className="text-slate-400 text-sm mb-4 leading-relaxed">
+                    <p className="text-slate-400 text-sm mb-2 leading-relaxed">
                       {category.description}
                     </p>
 
-                    {/* Count */}
+                    {/* Example word pair */}
+                    {categoryInfo[category.name]?.example && (
+                      <p className="text-sm text-violet-400/80 mb-4 italic">
+                        {categoryInfo[category.name].example}
+                      </p>
+                    )}
+
+                    {/* Session info instead of raw count */}
                     <div className="flex items-center gap-2">
                       <div className="px-3 py-1 bg-slate-800 rounded-full">
                         <span className="text-slate-300 text-xs font-medium">
-                          {category.count} pairs
+                          10 per session · ~2 min
                         </span>
                       </div>
                     </div>

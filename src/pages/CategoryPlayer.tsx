@@ -5,6 +5,7 @@ import { SessionSummary } from '@/components/SessionSummary';
 import { ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useUser } from '@/store/UserContext';
+import { ActivityBriefing } from '@/components/ActivityBriefing';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -22,6 +23,9 @@ export function CategoryPlayer() {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { voice } = useUser();
+
+  // Briefing state
+  const [hasStarted, setHasStarted] = useState(false);
 
   const [pairs, setPairs] = useState<WordPair[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -158,6 +162,18 @@ export function CategoryPlayer() {
       }
     }, 1500);
   };
+
+  if (!hasStarted) {
+    return (
+      <ActivityBriefing
+        title={`${decodeURIComponent(category || '')} Practice`}
+        description="Practice hearing the difference between similar sounds."
+        instructions="Listen to the audio, then pick which word you heard. You'll get instant feedback after each answer."
+        sessionInfo="10 pairs · About 2 minutes"
+        onStart={() => setHasStarted(true)}
+      />
+    );
+  }
 
   if (loading) {
     return (

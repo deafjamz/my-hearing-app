@@ -10,6 +10,7 @@ import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
+import { ActivityBriefing } from '../components/ActivityBriefing';
 
 const SESSION_LENGTH = 10;
 
@@ -37,6 +38,9 @@ export function Detection() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
+
+  // Briefing state
+  const [hasStarted, setHasStarted] = useState(false);
 
   // Session state
   const [rounds, setRounds] = useState<DetectionRound[]>([]);
@@ -167,6 +171,18 @@ export function Detection() {
       setIsComplete(true);
     }
   };
+
+  if (!hasStarted) {
+    return (
+      <ActivityBriefing
+        title="Sound Detection"
+        description="Can you tell when a word is played?"
+        instructions="You'll hear either a word or silence. After listening, tap Yes if you heard a word, or No if it was silent."
+        sessionInfo="10 rounds · About 2 minutes"
+        onStart={() => setHasStarted(true)}
+      />
+    );
+  }
 
   if (isComplete) {
     const finalAccuracy = total > 0 ? Math.round((correct / total) * 100) : 0;

@@ -13,6 +13,7 @@ import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { evaluateSession, getClinicalBabble, getUserSNR, saveUserSNR, SmartCoachResponse } from '../lib/api';
+import { ActivityBriefing } from '../components/ActivityBriefing';
 
 // Game State Interface
 interface GameRound {
@@ -31,6 +32,9 @@ export function RapidFire() {
 
   // Force 'sarah' if no voice is found (e.g. user is logged out)
   const { pairs, loading } = useWordPairs(voice || 'sarah');
+
+  // Briefing state
+  const [hasStarted, setHasStarted] = useState(false);
 
   // Session state
   const [sessionRounds, setSessionRounds] = useState<GameRound[]>([]);
@@ -290,6 +294,18 @@ export function RapidFire() {
       }
     }
   };
+
+  if (!hasStarted) {
+    return (
+      <ActivityBriefing
+        title="Word Pairs"
+        description="Can you tell similar-sounding words apart?"
+        instructions="Listen to a word, then pick which one you heard from two options. The words will sound similar — listen carefully!"
+        sessionInfo="15 rounds · About 3 minutes"
+        onStart={() => setHasStarted(true)}
+      />
+    );
+  }
 
   if (isComplete) {
     const correctCount = trialHistory.filter(Boolean).length;

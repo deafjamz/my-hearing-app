@@ -29,18 +29,18 @@
 | F-005 | P1 | No progress indicator during activities | **FIXED** | Batch 2+4 | Detection, CategoryPlayer already had bars; RapidFire now has progress bar + session limit |
 | F-006 | P2 | Play button no feedback on re-click | **FIXED** | Batch 2 | Button grays out + 50% opacity when disabled |
 | F-007 | P1 | Activities feel infinite — no end | **FIXED** | Batch 2+4 | Detection: 10 rounds, RapidFire: 15 rounds, CategoryPlayer: 10 rounds — all have SessionSummary |
-| F-008 | P1 | No pre-activity briefing | OPEN | — | Needs design work (connected to F-005/F-007) |
+| F-008 | P1 | No pre-activity briefing | **FIXED** | Batch 5 | ActivityBriefing component added to all 4 activities — title, instructions, session info, Begin button |
 | F-009 | ~~P0~~ **P3** | Carrier phrase contamination (~80% words) | **INVESTIGATED** | Batch 3 | Audit shows files CLEAN — no carrier phrases. Daniel voice has longer files (0.78-1.15s) with late onsets. Needs user re-test. |
 | F-010 | **P0** | Guest mode silently discards progress | **FIXED** | Batch 3 | RequireAuth gate blocks activities for guests — sign-in prompt with AuthModal |
 | F-011 | P1 | App should require sign-in | **FIXED** | Batch 3 | 12 activity routes now wrapped in RequireAuth; browsing routes remain open |
 | F-012 | P2 | Share with Audiologist — compliance risk | OPEN | — | Needs regulatory review |
-| F-013 | P1 | Word Pairs cards unapproachable | OPEN | — | Needs copy + design pass |
+| F-013 | P1 | Word Pairs cards unapproachable | **FIXED** | Batch 5 | Friendly names, example pairs, session info badges; clinical names as subtitles |
 | F-014 | P1 | Voice changes unexpectedly between activities | **FIXED** | Batch 2+4 | All activities use voice from UserContext; SessionPlayer fixed in Batch 4 |
 | F-015 | **P0** | Word Pairs ends after 1 word | **FIXED** | Batch 2 | Voice fallback + muted praise for short sessions |
 | F-016 | P1 | No per-answer feedback in Word Pairs | **FIXED** | Batch 4 | CategoryPlayer shows correct/incorrect with 1.5s feedback delay; RapidFire already had it |
 | F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
 
-**Summary:** 17 findings | 12 fixed | 3 open | 1 superseded | 1 investigated
+**Summary:** 17 findings | 14 fixed | 1 open | 1 superseded | 1 investigated
 **P0s:** 3 total — 2 fixed (F-010, F-015), 1 investigated/downgraded (F-009)
 
 ### Fix Batches
@@ -58,6 +58,11 @@
 - F-005/F-007: RapidFire now has SESSION_LENGTH=15, progress bar ("Round X of Y"), and SessionSummary on completion instead of infinite loop
 - F-016: CategoryPlayer shows per-answer feedback — correct (teal) / incorrect (red) with 1.5s auto-advance delay, reveals correct word on miss
 - F-014: SessionPlayer voice now initialized from UserContext instead of hardcoded 'sarah' — all 5 activity pages now use user's voice
+
+**Batch 5** (Session 14 — 2026-02-07): Approachability & briefing screens
+- F-008: Created `ActivityBriefing` component — reusable pre-activity screen with title, description, instructions, session info, and Begin button. Added to Detection, RapidFire, CategoryPlayer, GrossDiscrimination.
+- F-013: CategoryLibrary cards overhauled — clinical names replaced with friendly names (e.g., "Consonant Voicing" → "Similar Sounds"), clinical name as subtitle, example word pairs added (e.g., "'bat' vs 'pat'"), raw pair count replaced with "10 per session · ~2 min"
+- Bonus: GrossDiscrimination infinite loop fixed — added SESSION_LENGTH=15, SessionSummary completion screen (same fix as F-007 for Detection/RapidFire)
 
 ---
 

@@ -1,13 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Play, ArrowRight, CheckCircle, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useWordPairs, WordPair } from '../hooks/useActivityData';
 import { ActivityHeader } from '../components/ui/ActivityHeader';
+import { SessionSummary } from '../components/SessionSummary';
 import { useProgress } from '../hooks/useProgress';
 import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
+import { ActivityBriefing } from '../components/ActivityBriefing';
 
 /**
  * Gross Discrimination Activity - Between Detection and Minimal Pairs
@@ -152,13 +155,20 @@ function countSyllables(word: string): number {
   return Math.max(1, count);
 }
 
+const SESSION_LENGTH = 15;
+
 export function GrossDiscrimination() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
+  const navigate = useNavigate();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
+
+  // Briefing state
+  const [hasStarted, setHasStarted] = useState(false);
 
   // Session state
   const [rounds, setRounds] = useState<GrossRound[]>([]);
+  const [isComplete, setIsComplete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [audioPlayed, setAudioPlayed] = useState(false);
@@ -176,7 +186,7 @@ export function GrossDiscrimination() {
   // Generate rounds
   useEffect(() => {
     if (!loading && pairs.length > 0) {
-      const grossRounds = createGrossPairs(pairs);
+      const grossRounds = createGrossPairs(pairs).slice(0, SESSION_LENGTH);
       setRounds(grossRounds);
       setCurrentIndex(0);
       setStartTime(Date.now());
@@ -254,14 +264,34 @@ export function GrossDiscrimination() {
       setAudioPlayed(false);
       setStartTime(Date.now());
     } else {
-      // Reset for new session
-      setCurrentIndex(0);
-      setSelectedAnswer(null);
-      setAudioPlayed(false);
-      setCorrect(0);
-      setTotal(0);
+      setIsComplete(true);
     }
   };
+
+  if (!hasStarted) {
+    return (
+      <ActivityBriefing
+        title="Word Basics"
+        description="Start with words that sound very different."
+        instructions="Listen to a word, then pick which one you heard. These words sound quite different from each other — a great warm-up exercise!"
+        sessionInfo={`${SESSION_LENGTH} rounds · About 3 minutes`}
+        onStart={() => setHasStarted(true)}
+      />
+    );
+  }
+
+  if (isComplete) {
+    const finalAccuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+    return (
+      <SessionSummary
+        sessionTitle="Word Basics"
+        accuracy={finalAccuracy}
+        totalItems={total}
+        correctCount={correct}
+        onContinue={() => navigate('/practice')}
+      />
+    );
+  }
 
   if (loading || rounds.length === 0) {
     return (
