@@ -154,7 +154,7 @@ export function ProgramLibrary() {
             <div className="flex items-center gap-3 mb-4">
               <h2 className="text-xl font-bold text-white">Premium Programs</h2>
               {userTier === 'free' && (
-                <span className="px-3 py-1 bg-gradient-to-r from-violet-500 to-purple-600 text-white text-xs font-bold rounded-full">
+                <span className="px-3 py-1 bg-gradient-to-r from-teal-500 to-teal-600 text-white text-xs font-bold rounded-full">
                   UPGRADE
                 </span>
               )}
@@ -266,8 +266,8 @@ function ProgramCard({ program, locked }: { program: Program; locked: boolean })
         {/* Upgrade CTA */}
         {locked && (
           <div className="mt-4">
-            <div className="px-4 py-2 bg-gradient-to-r from-violet-500/20 to-purple-600/20 border border-violet-500/30 rounded-lg text-center">
-              <p className="text-sm font-medium text-violet-300">Unlock with Premium</p>
+            <div className="px-4 py-2 bg-gradient-to-r from-teal-500/20 to-teal-600/20 border border-teal-500/30 rounded-lg text-center">
+              <p className="text-sm font-medium text-teal-300">Unlock with Premium</p>
             </div>
           </div>
         )}

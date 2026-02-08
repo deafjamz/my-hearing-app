@@ -10,7 +10,7 @@ import { SessionSummary } from '@/components/SessionSummary';
 export function SentenceTraining() {
   const navigate = useNavigate();
   const { currentVoice } = useVoice();
-  const { sentences, loading, error } = useSentenceData({ limit: 20, voiceId: currentVoice as 'sarah' | 'marcus' });
+  const { sentences, loading, error } = useSentenceData({ limit: 10, voiceId: currentVoice as 'sarah' | 'marcus' });
   const { logProgress } = useProgress();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -161,7 +161,7 @@ export function SentenceTraining() {
           <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
             isPlaying ? 'scale-110' : 'scale-100'
           }`}>
-            <div className={`relative w-32 h-32 rounded-full bg-gradient-to-br from-violet-400 to-purple-600 shadow-2xl flex items-center justify-center ${
+            <div className={`relative w-32 h-32 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 shadow-2xl flex items-center justify-center ${
               isPlaying ? 'animate-pulse' : ''
             }`}>
               <Volume2 className="h-12 w-12 text-white" />

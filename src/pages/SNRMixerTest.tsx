@@ -104,7 +104,7 @@ export function SNRMixerTest() {
         <div className="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Volume2 className="text-purple-500" size={24} />
+              <Volume2 className="text-teal-500" size={24} />
               <div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">Current SNR</p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -133,7 +133,7 @@ export function SNRMixerTest() {
             className={`w-full py-4 rounded-lg font-semibold text-white transition-all flex items-center justify-center gap-2 ${
               isPlaying
                 ? 'bg-red-500 hover:bg-red-600'
-                : 'bg-purple-500 hover:bg-purple-600'
+                : 'bg-teal-500 hover:bg-teal-400'
             } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
             {isLoading ? (
@@ -166,7 +166,7 @@ export function SNRMixerTest() {
               step="1"
               value={targetSNR}
               onChange={handleSNRChange}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
 
             <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400">

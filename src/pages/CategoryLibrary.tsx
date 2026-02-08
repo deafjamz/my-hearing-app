@@ -90,7 +90,7 @@ export function CategoryLibrary() {
       'Fricatives': 'from-teal-500 to-cyan-600',
       'Nasals': 'from-yellow-500 to-orange-600',
     };
-    return colors[category] || 'from-violet-500 to-purple-600';
+    return colors[category] || 'from-teal-500 to-teal-600';
   };
 
   if (loading) {

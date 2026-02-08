@@ -27,10 +27,10 @@ export function StreakFlame() {
     shadow = "drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]"; // Red Glow
   }
   if (currentStreak >= 25) {
-    color = "text-purple-500";
-    fill = "purple";
+    color = "text-teal-400";
+    fill = "teal";
     animation = "animate-spin-slow"; // Or a complex keyframe
-    shadow = "drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]"; // Purple Plasma
+    shadow = "drop-shadow-[0_0_12px_rgba(0,167,157,0.8)]"; // Teal Plasma
   }
   if (currentStreak >= 50) {
     color = "text-yellow-400"; // GOLD

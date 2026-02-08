@@ -52,7 +52,7 @@ export function ProgressSummary() {
 
         {/* Avg Reaction Time */}
         <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg col-span-2">
-          <Clock size={20} className="text-purple-500" />
+          <Clock size={20} className="text-teal-500" />
           <div>
             <p className="text-xs text-slate-500 dark:text-slate-400">Avg. Reaction Time</p>
             <p className="font-semibold text-lg">{latestSummary.avg_reaction_time?.toFixed(0)} ms</p>

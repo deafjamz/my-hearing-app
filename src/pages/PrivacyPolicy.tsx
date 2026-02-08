@@ -15,8 +15,8 @@ export function PrivacyPolicy() {
         </Link>
 
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-            <Shield className="text-purple-600 dark:text-purple-400" size={24} />
+          <div className="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center">
+            <Shield className="text-teal-600 dark:text-teal-400" size={24} />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Privacy Policy</h1>

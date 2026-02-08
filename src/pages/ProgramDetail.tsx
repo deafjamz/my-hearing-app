@@ -186,11 +186,11 @@ export function ProgramDetail() {
         {nextSessionId && (
           <Link
             to={`/session/${nextSessionId}`}
-            className="block mb-8 p-6 bg-gradient-to-r from-violet-600 to-purple-700 rounded-2xl hover:from-violet-500 hover:to-purple-600 transition-all group"
+            className="block mb-8 p-6 bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl hover:from-teal-400 hover:to-teal-500 transition-all group"
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-violet-200 mb-1">
+                <p className="text-sm font-medium text-teal-200 mb-1">
                   {completedCount === 0 ? 'Start Program' : 'Continue Training'}
                 </p>
                 <p className="text-white font-bold text-lg">

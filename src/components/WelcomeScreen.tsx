@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Headphones, TrendingUp, Clock } from 'lucide-react';
 
 interface WelcomeScreenProps {
-  onSkip: () => void;
+  onSignIn: () => void;
 }
 
 const VALUE_PROPS = [
@@ -30,14 +29,8 @@ const VALUE_PROPS = [
   },
 ];
 
-export function WelcomeScreen({ onSkip }: WelcomeScreenProps) {
-  const navigate = useNavigate();
+export function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const prefersReducedMotion = useReducedMotion();
-
-  const handleStart = () => {
-    localStorage.setItem('soundsteps_welcomed', 'true');
-    navigate('/practice/detection');
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden">
@@ -98,10 +91,10 @@ export function WelcomeScreen({ onSkip }: WelcomeScreenProps) {
           transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0 : 0.5 }}
           whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
           whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
-          onClick={handleStart}
+          onClick={onSignIn}
           className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
         >
-          Start Your First Exercise
+          Get Started
         </motion.button>
 
         {/* Subtext */}
@@ -111,23 +104,8 @@ export function WelcomeScreen({ onSkip }: WelcomeScreenProps) {
           transition={{ delay: prefersReducedMotion ? 0 : 0.55, duration: prefersReducedMotion ? 0 : 0.4 }}
           className="text-slate-500 text-sm text-center mt-3"
         >
-          About 2 minutes
+          Free account required
         </motion.p>
-
-        {/* Skip link */}
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 0.6, duration: prefersReducedMotion ? 0 : 0.4 }}
-          className="text-center mt-6"
-        >
-          <button
-            onClick={onSkip}
-            className="text-slate-500 hover:text-slate-400 text-sm font-medium transition-colors cursor-pointer"
-          >
-            Skip for now
-          </button>
-        </motion.div>
       </motion.div>
     </div>
   );

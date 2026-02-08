@@ -73,7 +73,7 @@ const KaraokeDisplay = ({ story, onEnded, textVisibility }: { story: Story; onEn
             <span
               key={index}
               className={`
-                ${isActive ? 'text-purple-600 dark:text-purple-400' : ''}
+                ${isActive ? 'text-teal-500 dark:text-teal-400' : ''}
                 ${isHidden ? 'text-slate-300 dark:text-slate-700' : ''}
               `}
             >
@@ -94,7 +94,7 @@ const KaraokeDisplay = ({ story, onEnded, textVisibility }: { story: Story; onEn
       </main>
       <footer className="sticky bottom-0 z-10 p-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
         <div className="flex items-center justify-center">
-          <button onClick={togglePlay} className="p-6 rounded-full bg-purple-600 text-white font-bold text-lg">
+          <button onClick={togglePlay} className="p-6 rounded-full bg-teal-500 text-white font-bold text-lg">
             {isPlaying ? 'Pause' : 'Play'}
           </button>
         </div>
@@ -138,7 +138,7 @@ const QuizChallenge = ({ questions, onSubmit }: { questions: StoryQuestion[], on
             onClick={() => handleSelectAnswer(option)}
             className={`p-4 rounded-lg text-left w-full border
               ${selectedAnswer === option 
-                ? 'bg-purple-100 dark:bg-purple-900 border-purple-500' 
+                ? 'bg-teal-100 dark:bg-teal-900 border-teal-500' 
                 : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700'
               }`
             }
@@ -150,7 +150,7 @@ const QuizChallenge = ({ questions, onSubmit }: { questions: StoryQuestion[], on
       <button 
         onClick={handleNextQuestion} 
         disabled={!selectedAnswer}
-        className="mt-8 w-full px-6 py-3 bg-purple-600 text-white rounded-lg disabled:bg-slate-400"
+        className="mt-8 w-full px-6 py-3 bg-teal-500 text-white rounded-lg disabled:bg-slate-400"
       >
         {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish'}
       </button>

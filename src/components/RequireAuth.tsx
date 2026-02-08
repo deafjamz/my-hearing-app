@@ -22,8 +22,8 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
       <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
 
       <div className="text-center max-w-sm">
-        <div className="w-20 h-20 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-6">
-          <Lock className="h-10 w-10 text-purple-400" />
+        <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6">
+          <Lock className="h-10 w-10 text-teal-400" />
         </div>
 
         <h2 className="text-2xl font-bold text-white mb-3">
@@ -35,7 +35,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
 
         <button
           onClick={() => setShowAuth(true)}
-          className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-lg shadow-purple-500/30 transition-all active:scale-[0.98] mb-4"
+          className="w-full py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all active:scale-[0.98] mb-4"
         >
           Sign In or Create Account
         </button>

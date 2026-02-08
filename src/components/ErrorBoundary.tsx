@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="flex gap-3 justify-center pt-2">
               <button
                 onClick={this.handleRetry}
-                className="px-5 py-2.5 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-500 transition-colors"
+                className="px-5 py-2.5 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-400 transition-colors"
               >
                 Try Again
               </button>

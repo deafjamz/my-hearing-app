@@ -35,7 +35,7 @@ interface GameRound {
   options: string[]; // [word_1, word_2] shuffled
 }
 
-const SESSION_LENGTH = 15;
+const SESSION_LENGTH = 10;
 
 export function RapidFire() {
   const { logProgress } = useProgress();

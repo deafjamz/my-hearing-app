@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Play, Volume2, HeadphonesIcon } from 'lucide-react';
+import { Play, HeadphonesIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useProgressData } from '@/hooks/useProgressData';
+import { useUser } from '@/store/UserContext';
 import { useState, useEffect } from 'react';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
+import { AuthModal } from '@/components/auth/AuthModal';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
@@ -11,45 +13,31 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
  * Inspired by Amie.so, Stark Minimalism
  */
 export function Dashboard() {
-  const { stats, loading, isGuest } = useProgressData();
+  const { stats, loading } = useProgressData();
+  const { user, loading: authLoading } = useUser();
   const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
-  const [showWelcome, setShowWelcome] = useState(() => {
-    return !localStorage.getItem('soundsteps_welcomed');
-  });
-
-  const dismissWelcome = () => {
-    localStorage.setItem('soundsteps_welcomed', 'true');
-    setShowWelcome(false);
-  };
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Calculate daily steps
   useEffect(() => {
-    if (isGuest) {
-      const guestSteps = localStorage.getItem('guest_daily_steps');
-      const lastDate = localStorage.getItem('guest_steps_date');
-      const today = new Date().toDateString();
+    const today = new Date().toDateString();
+    const todaysData = stats.progressData.filter(entry => {
+      const entryDate = new Date(entry.date).toDateString();
+      return entryDate === today;
+    });
+    const todayTrials = todaysData.reduce((sum, entry) => sum + entry.trials, 0);
+    setDailySteps(todayTrials);
+  }, [stats.progressData]);
 
-      if (lastDate !== today) {
-        localStorage.setItem('guest_daily_steps', '0');
-        localStorage.setItem('guest_steps_date', today);
-        setDailySteps(0);
-      } else {
-        setDailySteps(parseInt(guestSteps || '0'));
-      }
-    } else {
-      const today = new Date().toDateString();
-      const todaysData = stats.progressData.filter(entry => {
-        const entryDate = new Date(entry.date).toDateString();
-        return entryDate === today;
-      });
-      const todayTrials = todaysData.reduce((sum, entry) => sum + entry.trials, 0);
-      setDailySteps(todayTrials);
-    }
-  }, [isGuest, stats.progressData]);
-
-  if (showWelcome) {
-    return <WelcomeScreen onSkip={dismissWelcome} />;
+  // Show welcome/auth gate for unauthenticated users
+  if (!authLoading && !user) {
+    return (
+      <>
+        <WelcomeScreen onSignIn={() => setShowAuthModal(true)} />
+        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      </>
+    );
   }
 
   if (loading) {
@@ -254,7 +242,7 @@ export function Dashboard() {
 
               <div>
                 <p className="text-4xl font-bold text-white mb-2">
-                  {isGuest ? '—' : stats.totalTrials}
+                  {stats.totalTrials}
                 </p>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wide">
                   Words Heard

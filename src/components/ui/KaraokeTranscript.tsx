@@ -98,7 +98,7 @@ export function KaraokeTranscript({ transcript, alignmentData, currentTime }: Ka
                 className={cn(
                   "transition-colors duration-100", 
                   isPlayed 
-                    ? "text-purple-600 dark:text-purple-400 opacity-100" 
+                    ? "text-teal-500 dark:text-teal-400 opacity-100" 
                     : "opacity-40"
                 )}
               >

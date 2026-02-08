@@ -141,7 +141,7 @@ export function ScenarioPlayer() {
               <Rewind size={24} />
             </button>
             
-            <button onClick={togglePlayback} className="w-20 h-20 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all">
+            <button onClick={togglePlayback} className="w-20 h-20 rounded-full bg-teal-500 text-white flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all">
               {isPlaying ? <Pause size={40} fill="currentColor" /> : <Play size={40} fill="currentColor" className="ml-1" />}
             </button>
             
@@ -155,7 +155,7 @@ export function ScenarioPlayer() {
             <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-bold text-slate-400 uppercase">Background Ambience</span>
                 {/* Debug Button */}
-                <button onClick={toggleAmbienceOnly} className="text-xs text-purple-500 hover:underline flex items-center gap-1">
+                <button onClick={toggleAmbienceOnly} className="text-xs text-teal-500 hover:underline flex items-center gap-1">
                     {isAmbiencePlaying ? <Pause size={12} /> : <Play size={12} />} Test Only Ambience
                 </button>
             </div>
@@ -169,7 +169,7 @@ export function ScenarioPlayer() {
                 step="0.05"
                 value={ambienceVolume}
                 onChange={(e) => setAmbienceVolume(parseFloat(e.target.value))}
-                className="flex-1 accent-purple-600 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                className="flex-1 accent-teal-500 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
                 disabled={!scenario.ambience_path}
                 />
                 <Volume2 size={18} />

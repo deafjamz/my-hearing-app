@@ -44,7 +44,7 @@ export function ProgressHistory({
           return (
             <div key={item.day} className="flex flex-col items-center justify-end h-full z-10">
               <div 
-                className="w-full rounded-t-md transition-all duration-500 ease-out bg-purple-500/50 dark:bg-purple-600/60"
+                className="w-full rounded-t-md transition-all duration-500 ease-out bg-teal-500/50 dark:bg-teal-600/60"
                 style={{ height: `${heightPercent}%`, minHeight: item.minutes > 0 ? '4px' : '0' }}
               />
             </div>

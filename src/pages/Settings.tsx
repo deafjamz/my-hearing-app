@@ -12,7 +12,7 @@ export function Settings() {
   return (
     <div className="max-w-lg mx-auto w-full px-6 pt-6 pb-32"> {/* Padding for bottom nav */}
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+        <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
           <SettingsIcon size={20} />
         </div>
         <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Settings</h1>
@@ -34,7 +34,7 @@ export function Settings() {
               <p className="text-xs text-slate-500 font-medium">Adjust brightness</p>
             </div>
           </div>
-          <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${theme === 'dark' ? 'bg-purple-600' : 'bg-slate-200'}`}>
+          <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${theme === 'dark' ? 'bg-teal-500' : 'bg-slate-200'}`}>
             <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-300 ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'}`} />
           </div>
         </div>
@@ -72,26 +72,26 @@ export function Settings() {
               onClick={() => setVoice(v.id)}
               className={`flex items-center justify-between p-4 border rounded-[2rem] transition-all cursor-pointer ${
                 voice === v.id
-                  ? 'bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800 ring-1 ring-purple-500/20'
-                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-purple-200'
+                  ? 'bg-teal-50 dark:bg-teal-900/10 border-teal-200 dark:border-teal-800 ring-1 ring-teal-500/20'
+                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-teal-200'
               }`}
             >
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  voice === v.id ? 'bg-purple-100 text-purple-600' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
+                  voice === v.id ? 'bg-teal-100 text-teal-600' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
                 }`}>
                   <Mic size={20} />
                 </div>
                 <div>
-                  <h3 className={`font-bold ${voice === v.id ? 'text-purple-900 dark:text-purple-100' : 'text-slate-900 dark:text-white'}`}>
+                  <h3 className={`font-bold ${voice === v.id ? 'text-teal-900 dark:text-teal-100' : 'text-slate-900 dark:text-white'}`}>
                     {v.name}
                   </h3>
-                  <p className={`text-xs font-medium ${voice === v.id ? 'text-purple-600 dark:text-purple-300' : 'text-slate-500'}`}>
+                  <p className={`text-xs font-medium ${voice === v.id ? 'text-teal-600 dark:text-teal-300' : 'text-slate-500'}`}>
                     {v.description}
                   </p>
                 </div>
               </div>
-              {voice === v.id && <Check size={20} className="text-purple-600" />}
+              {voice === v.id && <Check size={20} className="text-teal-500" />}
             </div>
           ))}
         </div>
@@ -106,7 +106,7 @@ export function Settings() {
             className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm hover:scale-[1.02] transition-transform duration-200"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+              <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
                 <Shield size={20} />
               </div>
               <div>

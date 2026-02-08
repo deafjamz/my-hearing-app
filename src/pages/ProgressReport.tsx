@@ -49,7 +49,7 @@ export function ProgressReport() {
           disabled={!canPrint}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors print:hidden ${
             canPrint
-              ? 'bg-purple-600 text-white hover:bg-purple-700'
+              ? 'bg-teal-500 text-white hover:bg-teal-400'
               : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
           }`}
           title={canPrint ? 'Print / Save as PDF' : 'Premium feature'}

@@ -15,7 +15,7 @@ const activities = [
     title: 'Interactive Stories',
     description: 'Follow narratives with comprehension checks.',
     icon: BookOpen,
-    color: 'bg-purple-500/20 text-purple-400',
+    color: 'bg-indigo-500/20 text-indigo-400',
     path: '/practice/stories'
   },
   {

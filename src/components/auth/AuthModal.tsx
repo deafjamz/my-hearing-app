@@ -5,9 +5,10 @@ import { X, Loader2, Mail, Lock } from 'lucide-react';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  dismissible?: boolean;
 }
 
-export function AuthModal({ isOpen, onClose }: AuthModalProps) {
+export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProps) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,12 +44,14 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-800 p-8 relative animate-in fade-in zoom-in-95 duration-200">
-        <button 
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
-        >
-          <X size={20} />
-        </button>
+        {dismissible && (
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+          >
+            <X size={20} />
+          </button>
+        )}
 
         <div className="text-center mb-8">
           <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2">
@@ -70,7 +73,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition-all text-slate-900 dark:text-white"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-900 dark:text-white"
                 placeholder="you@example.com"
                 required 
               />
@@ -85,7 +88,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 type="password" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 transition-all text-slate-900 dark:text-white"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-teal-500 transition-all text-slate-900 dark:text-white"
                 placeholder="••••••••"
                 required 
                 minLength={6}
@@ -102,7 +105,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <button 
             type="submit" 
             disabled={loading}
-            className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-lg shadow-purple-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+            className="w-full py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
           >
             {loading ? <Loader2 className="animate-spin" /> : (isSignUp ? "Sign Up" : "Sign In")}
           </button>
@@ -111,7 +114,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         <div className="mt-6 text-center">
           <button 
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-slate-500 hover:text-purple-600 transition-colors font-medium"
+            className="text-sm text-slate-500 hover:text-teal-400 transition-colors font-medium"
           >
             {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
           </button>

@@ -63,7 +63,7 @@ export function ActivityList() {
       title: 'Stories',
       description: 'Follow along with short stories.',
       icon: BookOpen,
-      color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
+      color: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400',
       path: '/practice/stories',
       requiredTier: 'Standard'
     },
@@ -99,7 +99,7 @@ export function ActivityList() {
     const interactiveClass = canAccess
       ? (isOnramp
           ? "hover:border-emerald-300 dark:hover:border-emerald-700 hover:scale-[1.02] transition-all cursor-pointer"
-          : "hover:border-purple-200 dark:hover:border-purple-800 hover:scale-[1.02] transition-all cursor-pointer")
+          : "hover:border-teal-200 dark:hover:border-teal-800 hover:scale-[1.02] transition-all cursor-pointer")
       : "opacity-60 cursor-pointer";
 
     const content = (
@@ -135,7 +135,7 @@ export function ActivityList() {
         </div>
 
         <ChevronRight
-          className={`${isOnramp ? 'text-emerald-300 dark:text-emerald-700 group-hover:text-emerald-500' : 'text-slate-300 dark:text-slate-600 group-hover:text-purple-500'} transition-colors ml-4 shrink-0`}
+          className={`${isOnramp ? 'text-emerald-300 dark:text-emerald-700 group-hover:text-emerald-500' : 'text-slate-300 dark:text-slate-600 group-hover:text-teal-500'} transition-colors ml-4 shrink-0`}
           size={20}
         />
       </>
@@ -171,7 +171,7 @@ export function ActivityList() {
   return (
     <div className="max-w-lg mx-auto w-full px-6 pt-6 pb-32">
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+        <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
           <Headphones size={20} />
         </div>
         <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Practice Hub</h1>
@@ -198,10 +198,10 @@ export function ActivityList() {
       {/* Upsell Banner */}
       {upsellTier && (
         <div className="fixed bottom-20 left-0 right-0 z-50 px-4">
-          <div className="max-w-lg mx-auto bg-gradient-to-r from-purple-600 to-violet-600 rounded-2xl p-4 shadow-xl flex items-center justify-between">
+          <div className="max-w-lg mx-auto bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-4 shadow-xl flex items-center justify-between">
             <div>
               <p className="text-white font-bold text-sm">Unlock {upsellTier} activities</p>
-              <p className="text-purple-200 text-xs">Upgrade your plan to access this content</p>
+              <p className="text-teal-200 text-xs">Upgrade your plan to access this content</p>
             </div>
             <button
               onClick={() => setUpsellTier(null)}

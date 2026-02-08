@@ -26,14 +26,14 @@ export function StoryList() {
               <Link
                 key={story.id}
                 to={`/player/${story.id}`}
-                className="group bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 hover:border-purple-200 dark:hover:border-purple-800"
+                className="group bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 hover:border-teal-200 dark:hover:border-teal-800"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 shrink-0">
                     <BookOpen size={24} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    <h3 className="font-bold text-slate-900 dark:text-white text-lg mb-2 group-hover:text-teal-500 dark:group-hover:text-teal-400 transition-colors">
                       {story.title}
                     </h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm line-clamp-2">
@@ -41,7 +41,7 @@ export function StoryList() {
                     </p>
                   </div>
                   <ChevronRight 
-                    className="text-slate-300 dark:text-slate-600 group-hover:text-purple-500 transition-colors mt-1" 
+                    className="text-slate-300 dark:text-slate-600 group-hover:text-teal-500 transition-colors mt-1" 
                     size={20} 
                   />
                 </div>

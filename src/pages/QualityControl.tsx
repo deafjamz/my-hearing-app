@@ -82,7 +82,7 @@ export function QualityControl() {
                 <td className="p-4 font-mono text-xs text-slate-400">{pair.id.slice(0,8)}</td>
                 <td className="p-4 font-medium">
                   <div className="flex gap-2">
-                    <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded">{pair.word_1}</span>
+                    <span className="px-2 py-1 bg-teal-100 text-teal-700 rounded">{pair.word_1}</span>
                     <span className="text-slate-300">/</span>
                     <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded">{pair.word_2}</span>
                   </div>
@@ -95,7 +95,7 @@ export function QualityControl() {
                         onClick={() => handlePlay(getVoiceUrl(pair.word_1, voice), `${pair.id}-${voice}-1`)}
                         className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                           playingId === `${pair.id}-${voice}-1` && isPlaying 
-                            ? "bg-purple-600 text-white animate-pulse" 
+                            ? "bg-teal-500 text-white animate-pulse" 
                             : "bg-slate-100 hover:bg-slate-200 text-slate-600"
                         }`}
                       >

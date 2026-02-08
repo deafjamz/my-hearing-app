@@ -156,7 +156,7 @@ function countSyllables(word: string): number {
   return Math.max(1, count);
 }
 
-const SESSION_LENGTH = 15;
+const SESSION_LENGTH = 10;
 
 export function GrossDiscrimination() {
   const { logProgress } = useProgress();

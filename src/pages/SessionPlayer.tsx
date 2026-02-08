@@ -369,7 +369,7 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
           onPlayAudio();
           setHasPlayed(true);
         }}
-        className="w-full p-8 bg-gradient-to-br from-violet-900/40 to-purple-900/40 border-2 border-violet-700 rounded-3xl hover:from-violet-900/60 hover:to-purple-900/60 transition-all"
+        className="w-full p-8 bg-gradient-to-br from-teal-900/40 to-teal-800/40 border-2 border-teal-700 rounded-3xl hover:from-teal-900/60 hover:to-teal-800/60 transition-all"
       >
         <div className="text-center">
           <div className="text-6xl mb-4">🔊</div>
@@ -442,7 +442,7 @@ function SentencePlayer({ questionText, correctAnswer, distractors, audioPath, o
           onPlayAudio();
           setHasPlayed(true);
         }}
-        className="w-full p-8 bg-gradient-to-br from-violet-400 to-purple-600 rounded-3xl hover:from-violet-500 hover:to-purple-700 transition-all shadow-lg"
+        className="w-full p-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl hover:from-teal-500 hover:to-teal-500 transition-all shadow-lg"
       >
         <div className="text-center">
           <div className="text-6xl mb-2">🔊</div>
