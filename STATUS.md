@@ -15,7 +15,7 @@
 1. Read STATUS.md (this file)
 2. For voice/audio questions, see docs/VOICE_LIBRARY.md (CRITICAL architecture info)
 3. For infrastructure, see docs/INFRASTRUCTURE_AUDIT.md
-4. Deploy with: vercel --prod (git-triggered deploys are broken)
+4. Deploy: git push to main (auto-deploys via Vercel)
 ```
 
 ---
@@ -30,14 +30,11 @@
 - **Progress Reports:** /progress page with charts and print-to-PDF
 
 ### Known Issues (Low Priority)
-- Git-triggered Vercel deploys failing (use `vercel --prod` CLI)
 - PWA meta tag deprecation warning in console
 - Auth spinner on login (cosmetic)
 
-### Deployment Command
-```bash
-vercel --prod
-```
+### Deployment
+Git push to `main` auto-deploys to production via Vercel.
 
 ---
 
@@ -244,10 +241,24 @@ python3 scripts/generate_sentences_v2.py
 ### TODO — Next Session
 - [ ] **Configure Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → paste into Supabase Dashboard → Authentication → Providers → Google. Callback URL: `https://padfntxzoxhozfjsqnzc.supabase.co/auth/v1/callback`. Full instructions in `docs/AUTH_SETUP.md`.
 - [ ] **Configure Apple OAuth** — Apple Developer account → Sign in with Apple service ID → paste into Supabase Dashboard → Authentication → Providers → Apple. Full instructions in `docs/AUTH_SETUP.md`.
-- [ ] **Configure custom SMTP** — Supabase free tier limits email sends (~3-4/hr). Set up Resend, Postmark, or SendGrid for reliable delivery. Dashboard → Settings → Auth → SMTP.
-- [ ] **Customize email templates** — Supabase Dashboard → Authentication → Email Templates. Brand confirmation, magic link, and password reset emails.
+- [x] ~~Configure custom SMTP~~ ✅ Done (Resend via noreply@soundsteps.app)
+- [x] ~~Customize email templates~~ ✅ Branded templates written for all 4 email types. Paste into Supabase Dashboard → Authentication → Email Templates.
+- [x] ~~Configure custom SMTP~~ ✅ Resend configured (noreply@soundsteps.app), DNS verified (SPF/DKIM/MX)
+- [ ] **Paste email templates into Supabase** — 4 templates ready: Confirm Signup, Magic Link, Reset Password, Change Email. See session notes or `docs/AUTH_SETUP.md`.
 - [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
 - [ ] **Remove VITE_DEV_UNLOCK_ALL from Vercel** production env (was added for testing)
+
+### Future Opportunities
+
+#### P0 — Core UX
+- [ ] **Bluetooth/CI audio relay: Silent Sentinel persistent audio** — Cochlear Phone Clip and similar Bluetooth relay devices (Resound HAs, Cochlear CIs) have 3-4 second audio route delay. Short isolated clips (Detection, word pairs) get cut off before transmitting. Fix: maintain a persistent near-silent audio stream (~0.0001 gain) on the Web Audio API to keep the Bluetooth route alive. When a word plays, it transmits instantly with no delay. Already spec'd in `audio.md` rules as "Silent Sentinel" pattern — needs implementation across all activity pages. This is critical for the core CI user demographic.
+- [ ] **Guided new-user onboarding flow** — After completing first activity (e.g., Detection), user has no idea what to do next. SessionSummary shows results but no guidance. New users need an "on rails" experience: (1) Assessment sequence to determine starting level, (2) Clear "Next: Try this" CTA after each activity, (3) Progressive unlocking so users don't get lost or overwhelmed. Think Duolingo's first-run: guided path, not an open menu. Should determine difficulty level early and route accordingly.
+- [ ] **Redesign Home as propulsive landing, not data dashboard** — Current Dashboard shows empty metrics (0/100, +10 dB, "Intermediate") to new users. Cold, clinical, uninviting. Home should be warm and action-oriented: greeting, one big CTA to start practicing, maybe a streak/encouragement card. Move SNR, Current Level, Daily Ascent metrics to Progress page or a second-level "Stats" view. First screen = propulsive ("Start today's practice"), deeper screens = data.
+
+#### P1 — Auth & Account
+- [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings. Email template (#4) already written.
+- [ ] **Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → Supabase. See `docs/AUTH_SETUP.md`.
+- [ ] **Apple OAuth** — Apple Developer → Sign in with Apple. See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
 
 ### Completed
 - [x] ~~Verify programs schema exists in Supabase~~ ✅ Confirmed (224 session_items)
@@ -354,7 +365,7 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 
 ### Phase 10: Code Optimization
 - [x] ~~Code splitting (bundle size reduction)~~ ✅ DONE 2026-02-06 (797KB → 272KB)
-- [ ] Fix git-triggered Vercel deploys (currently using CLI workaround)
+- [x] ~~Fix git-triggered Vercel deploys~~ ✅ Working (auto-deploys on push to main)
 
 ---
 
@@ -577,7 +588,7 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 
 **Deployment Fixes**
 - Fixed Supabase env var sanitization (newlines/whitespace breaking Headers)
-- Git-triggered deploys failing; using `vercel --prod` CLI as workaround
+- Git-triggered deploys now working (were previously failing)
 
 **Documentation Added**
 - `docs/VOICE_LIBRARY.md`: Added "CRITICAL: Audio URL Architecture" section
