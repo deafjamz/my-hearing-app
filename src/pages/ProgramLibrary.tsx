@@ -1,7 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Lock, ChevronLeft } from 'lucide-react';
-import * as Icons from 'lucide-react';
+import {
+  Lock, ChevronLeft, Sparkles, Zap, BookOpen, Coffee, Mic, Headphones,
+  Volume2, Ear, Target, TrendingUp, Music, Brain, Heart, Star, Award,
+  Play, Clock, Flame, Shield, Eye, MessageCircle, Globe, Users,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+
+/** Map of icon names the programs table may reference. Avoids importing all 1000+ lucide icons. */
+const ICON_MAP: Record<string, LucideIcon> = {
+  Sparkles, Zap, BookOpen, Coffee, Mic, Headphones, Volume2, Ear, Target,
+  TrendingUp, Music, Brain, Heart, Star, Award, Play, Clock, Flame, Shield,
+  Eye, MessageCircle, Globe, Users, Lock,
+};
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -202,8 +212,7 @@ export function ProgramLibrary() {
 
 function ProgramCard({ program, locked }: { program: Program; locked: boolean }) {
   const prefersReducedMotion = useReducedMotion();
-  const IconLookup = Icons as Record<string, LucideIcon>;
-  const Icon = IconLookup[program.icon_name] || Icons.Sparkles;
+  const Icon = ICON_MAP[program.icon_name] || Sparkles;
   const progress = program.completed_sessions && program.total_sessions
     ? (program.completed_sessions / program.total_sessions) * 100
     : 0;

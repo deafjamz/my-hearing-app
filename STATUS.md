@@ -1,11 +1,11 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-07
-> **Last Session:** F-009 Fix, Design Sweep, Smart Coach, Word Scrub (Session 15)
-> **Build Status:** ✅ PASSING (4.19s, 272KB main bundle)
+> **Last Session:** Auth gate, session lengths, color sweep, chunk fix (Session 16)
+> **Build Status:** ✅ PASSING (3.2s, 272KB main bundle)
 > **Deployment:** ✅ LIVE at https://my-hearing-app.vercel.app
 > **Tests:** ✅ 31 PASSING (Vitest)
-> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (15 fixed, 1 fixing, 1 open)
+> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (17 fixed)
 
 ---
 
@@ -131,7 +131,7 @@ To add a new voice:
 | Bill | US | 11.4 dB | 100% (regen complete) | ✅ Ready |
 | Michael | US | 12.4 dB | 100% (regen complete) | ✅ Ready |
 | Alice | UK | 11.2 dB | 100% (regen complete) | ✅ Ready |
-| Daniel | UK | 12.1 dB | 99.9% (1845/1847) | ⚠️ F-009: 179 files regenerated locally, awaiting upload |
+| Daniel | UK | 12.1 dB | 100% (regen complete) | ✅ Ready (F-009 fixed, 350 files uploaded) |
 | Matilda | AU | 11.4 dB | 100% (regen complete) | ✅ Ready |
 | Charlie | AU | 10.6 dB | 100% (regen complete) | ✅ Ready |
 | Aravind | IN | 10.2 dB | 100% (1847/1847) | ✅ Ready |
@@ -140,15 +140,15 @@ To add a new voice:
 
 **Note:** All voices verified in Supabase storage `audio/words_v2/{voice}/` on 2026-01-19
 
-**F-009 Status:** Daniel had 92.5% carrier phrase contamination ("is [word]" prefix). 179 files regenerated locally with ellipsis padding method. 19 new word files (non-word replacements) generated for all 9 voices. All files in `regen_output/` — blocked on valid Supabase service role key (JWT format) for upload.
+**F-009 Status:** ✅ RESOLVED. Daniel had 92.5% carrier phrase contamination. 350 files regenerated and uploaded to Supabase Storage (179 daniel + 19 new words × 9 voices).
 
 ---
 
 ## Blockers
 
 1. ~~**Voice Audio Gaps**~~ - ✅ RESOLVED: All 9 voices now have full word coverage
-2. **Authentication** - Login flow has spinner issue (low priority, guest mode works)
-3. **Supabase Service Role Key** - Need valid JWT-format key from Supabase Dashboard > Settings > API. The `sb_secret_` format key doesn't work for Storage API uploads. Blocks: F-009 audio upload, word pair CSV sync, non-word cleanup migration.
+2. ~~**Authentication**~~ - ✅ RESOLVED: Mandatory sign-in, no guest mode
+3. ~~**Supabase Service Role Key**~~ - ✅ RESOLVED: Key obtained, F-009 audio uploaded
 
 ---
 
@@ -351,6 +351,42 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-07 (Session 16: Auth Gate, Session Lengths, Color Sweep, Chunk Fix)
+
+**Summary:** Mandatory sign-in (no guest bypass), standardized all session lengths to 10, eliminated all purple/violet UI chrome, fixed ProgramLibrary 576KB chunk, uploaded F-009 audio to Supabase.
+
+**Auth Gate (F-010/F-011 resolved):**
+- WelcomeScreen converted from guest-permissive to auth gate (removed "Skip for now")
+- Dashboard gates on `useUser()` — unauthenticated users see WelcomeScreen + AuthModal
+- AuthModal gets `dismissible` prop, full teal color conversion
+- No more guest mode — sign-in required to access any activity
+
+**Session Length Standardization:**
+- All activities now use 10-trial sessions for predictability
+- RapidFire: 15→10, GrossDiscrimination: 15→10, SentenceTraining: 20→10
+- Detection and CategoryPlayer already at 10
+
+**Purple/Violet → Teal Sweep:**
+- Batch 7: Converted all `purple-*` references across 28 files
+- Batch 8: Converted all remaining `violet-*` references (SentenceTraining, SessionPlayer, ProgramDetail, WelcomeScreen)
+- Only intentional exception: Sibilants category badge color in CategoryLibrary
+
+**ProgramLibrary Chunk Fix:**
+- Replaced `import * as Icons from 'lucide-react'` (all 1000+ icons) with explicit ICON_MAP (24 icons)
+- Chunk size: 576KB → 8.4KB (98.5% reduction)
+- Vite chunk size warning eliminated
+
+**F-009 Audio Upload:**
+- Obtained Supabase service role key (JWT format) from Dashboard
+- Uploaded 350 regenerated files to Supabase Storage (daniel 198 + 8 voices × 19 new words)
+- All 9 voices now at 100% coverage
+
+**Untracked Files:**
+- Added `regen_output/` to .gitignore
+- Committed project docs (core_docs, design system, audio regen plan, etc.)
+
+**Build:** ✅ PASSING (3.2s) | **Tests:** ✅ 31 PASSING | **No chunk warnings**
 
 ### 2026-02-07 (Session 15: F-009 Fix, Word Scrub, Design Sweep, Smart Coach)
 

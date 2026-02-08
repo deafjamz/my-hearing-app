@@ -170,8 +170,8 @@ export function SentenceTraining() {
             {/* Pulsing rings */}
             {isPlaying && (
               <>
-                <div className="absolute w-40 h-40 rounded-full border-4 border-violet-300 animate-ping opacity-30" />
-                <div className="absolute w-48 h-48 rounded-full border-4 border-violet-200 animate-ping opacity-20" style={{ animationDelay: '0.2s' }} />
+                <div className="absolute w-40 h-40 rounded-full border-4 border-teal-300 animate-ping opacity-30" />
+                <div className="absolute w-48 h-48 rounded-full border-4 border-teal-200 animate-ping opacity-20" style={{ animationDelay: '0.2s' }} />
               </>
             )}
           </div>
@@ -180,7 +180,7 @@ export function SentenceTraining() {
           {!isPlaying && !showQuestion && (
             <button
               onClick={handlePlay}
-              className="absolute z-10 w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-violet-600 hover:bg-violet-50 transition-colors"
+              className="absolute z-10 w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors"
             >
               <Play className="h-8 w-8 ml-1" />
             </button>
@@ -208,7 +208,7 @@ export function SentenceTraining() {
                     disabled={selectedAnswer !== null}
                     className={`
                       py-6 px-4 rounded-xl font-bold text-center transition-all text-lg flex items-center justify-center gap-2
-                      ${!showResult && 'bg-violet-50 text-violet-700 hover:bg-violet-100 active:scale-95 border-2 border-violet-200'}
+                      ${!showResult && 'bg-teal-50 text-teal-700 hover:bg-teal-100 active:scale-95 border-2 border-teal-200'}
                       ${showResult && isSelected && isCorrect && 'bg-teal-500 text-white scale-105 border-2 border-teal-600'}
                       ${showResult && isSelected && !isCorrect && 'bg-slate-700 text-white scale-95 border-2 border-slate-800'}
                       ${showResult && !isSelected && isCorrect && 'bg-teal-100 text-teal-700 border-2 border-teal-400 ring-2 ring-teal-400 ring-offset-2'}

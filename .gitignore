@@ -36,6 +36,9 @@ public/noise_files/
 # macOS
 .DS_Store
 
+# Regenerated audio output (uploaded to Supabase Storage)
+regen_output/
+
 # Testing screenshots
 screenshots/
 

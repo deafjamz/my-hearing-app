@@ -352,7 +352,7 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
         <button
           onClick={toggleAutoplay}
           className={`relative w-14 h-8 rounded-full transition-all ${
-            autoplayEnabled ? 'bg-violet-600' : 'bg-slate-700'
+            autoplayEnabled ? 'bg-teal-500' : 'bg-slate-700'
           }`}
         >
           <div
@@ -381,14 +381,14 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
       <div className="grid grid-cols-2 gap-4">
         <button
           onClick={() => handleAnswer(word1)}
-          className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
+          className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-teal-500 transition-all"
         >
           <p className="text-white font-bold text-2xl">{word1}</p>
         </button>
 
         <button
           onClick={() => handleAnswer(word2)}
-          className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
+          className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-teal-500 transition-all"
         >
           <p className="text-white font-bold text-2xl">{word2}</p>
         </button>
@@ -470,7 +470,7 @@ function SentencePlayer({ questionText, correctAnswer, distractors, audioPath, o
               disabled={selectedAnswer !== null}
               className={`
                 py-6 px-4 rounded-xl font-bold text-center transition-all text-lg flex items-center justify-center gap-2
-                ${!showResult && 'bg-violet-50 text-violet-700 hover:bg-violet-100 active:scale-95 border-2 border-violet-200'}
+                ${!showResult && 'bg-teal-50 text-teal-700 hover:bg-teal-100 active:scale-95 border-2 border-teal-200'}
                 ${showResult && isSelected && isCorrect && 'bg-teal-500 text-white scale-105 border-2 border-teal-600'}
                 ${showResult && isSelected && !isCorrect && 'bg-slate-700 text-white scale-95 border-2 border-slate-800'}
                 ${showResult && !isSelected && isCorrect && 'bg-teal-100 text-teal-700 border-2 border-teal-400 ring-2 ring-teal-400 ring-offset-2'}

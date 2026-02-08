@@ -22,8 +22,8 @@ const VALUE_PROPS = [
   },
   {
     icon: Clock,
-    iconBg: 'bg-violet-500/20',
-    iconColor: 'text-violet-400',
+    iconBg: 'bg-teal-500/20',
+    iconColor: 'text-teal-400',
     title: 'Quick sessions',
     description: 'Most exercises take just 2\u20133 minutes',
   },
@@ -36,7 +36,7 @@ export function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden">
       {/* Atmospheric orbs */}
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-violet-500/[0.08] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-slate-500/[0.08] rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0 }}

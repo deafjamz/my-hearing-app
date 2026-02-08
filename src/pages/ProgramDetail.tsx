@@ -247,7 +247,7 @@ function SessionCard({ session, isNext, delay }: { session: Session; isNext: boo
       <Link
         to={`/session/${session.id}`}
         className={`block p-5 bg-slate-900 border rounded-xl hover:border-slate-700 transition-all group ${
-          isNext ? 'border-violet-700' : 'border-slate-800'
+          isNext ? 'border-teal-700' : 'border-slate-800'
         }`}
       >
         <div className="flex items-center gap-4">
@@ -256,13 +256,13 @@ function SessionCard({ session, isNext, delay }: { session: Session; isNext: boo
             session.is_completed
               ? 'bg-teal-500/20 border-2 border-teal-600'
               : isNext
-              ? 'bg-violet-500/20 border-2 border-violet-600'
+              ? 'bg-teal-500/20 border-2 border-teal-600'
               : 'bg-slate-800 border-2 border-slate-700'
           }`}>
             {session.is_completed ? (
               <CheckCircle className="h-6 w-6 text-teal-400" />
             ) : isNext ? (
-              <Play className="h-5 w-5 text-violet-400 ml-0.5" fill="currentColor" />
+              <Play className="h-5 w-5 text-teal-400 ml-0.5" fill="currentColor" />
             ) : (
               <span className="text-slate-500 font-bold">{session.session_number}</span>
             )}
@@ -275,7 +275,7 @@ function SessionCard({ session, isNext, delay }: { session: Session; isNext: boo
                 Session {session.session_number}: {session.title}
               </h3>
               {isNext && (
-                <span className="px-2 py-0.5 bg-violet-500/20 text-violet-300 text-xs font-bold rounded">
+                <span className="px-2 py-0.5 bg-teal-500/20 text-teal-300 text-xs font-bold rounded">
                   UP NEXT
                 </span>
               )}

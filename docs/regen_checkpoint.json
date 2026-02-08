@@ -1,0 +1,50 @@
+{
+  "last_updated": "2026-02-07T19:30:16",
+  "completed_count": 9,
+  "completed": [
+    [
+      "alice",
+      "snappy"
+    ],
+    [
+      "aravind",
+      "snappy"
+    ],
+    [
+      "bill",
+      "snappy"
+    ],
+    [
+      "charlie",
+      "snappy"
+    ],
+    [
+      "daniel",
+      "snappy"
+    ],
+    [
+      "emma",
+      "snappy"
+    ],
+    [
+      "matilda",
+      "snappy"
+    ],
+    [
+      "michael",
+      "snappy"
+    ],
+    [
+      "sarah",
+      "snappy"
+    ]
+  ],
+  "stats": {
+    "started": "2026-02-07T19:30:06",
+    "success": 9,
+    "failed": 0,
+    "skipped": 0,
+    "errors": [],
+    "finished": "2026-02-07T19:30:16"
+  }
+}
