@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Play, ArrowRight, XCircle, CheckCircle, Volume2, VolumeX } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSNRMixer } from '../hooks/useSNRMixer';
@@ -8,6 +8,7 @@ import { useWordPairs, WordPair } from '../hooks/useActivityData';
 import { ActivityHeader } from '../components/ui/ActivityHeader';
 import { useProgress } from '../hooks/useProgress';
 import { SmartCoachFeedback } from '../components/SmartCoachFeedback';
+import { SessionSummary } from '../components/SessionSummary';
 import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
@@ -21,15 +22,19 @@ interface GameRound {
   options: string[]; // [word_1, word_2] shuffled
 }
 
+const SESSION_LENGTH = 15;
+
 export function RapidFire() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession, user, hardMode, hasAccess } = useUser();
+  const navigate = useNavigate();
 
   // Force 'sarah' if no voice is found (e.g. user is logged out)
   const { pairs, loading } = useWordPairs(voice || 'sarah');
 
   // Session state
   const [sessionRounds, setSessionRounds] = useState<GameRound[]>([]);
+  const [isComplete, setIsComplete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedGuess, setSelectedGuess] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<number>(Date.now());
@@ -111,7 +116,7 @@ export function RapidFire() {
         return true;
       });
 
-      const shuffled = [...(accessiblePairs.length > 0 ? accessiblePairs : pairs)].sort(() => Math.random() - 0.5);
+      const shuffled = [...(accessiblePairs.length > 0 ? accessiblePairs : pairs)].sort(() => Math.random() - 0.5).slice(0, SESSION_LENGTH);
 
       const rounds = shuffled.map(pair => {
         const isWord1Target = Math.random() > 0.5;
@@ -180,7 +185,8 @@ export function RapidFire() {
           setCurrentIndex(prev => prev + 1);
           setStartTime(Date.now());
       } else {
-          setCurrentIndex(0);
+          stopNoise();
+          setIsComplete(true);
       }
     }
   };
@@ -285,6 +291,20 @@ export function RapidFire() {
     }
   };
 
+  if (isComplete) {
+    const correctCount = trialHistory.filter(Boolean).length;
+    const finalAccuracy = trialHistory.length > 0 ? Math.round((correctCount / trialHistory.length) * 100) : 0;
+    return (
+      <SessionSummary
+        sessionTitle="Word Pairs"
+        accuracy={finalAccuracy}
+        totalItems={trialHistory.length}
+        correctCount={correctCount}
+        onContinue={() => navigate('/practice')}
+      />
+    );
+  }
+
   if (loading) {
     return <div className="p-10 text-center text-slate-500">Loading word pairs...</div>;
   }
@@ -386,23 +406,23 @@ export function RapidFire() {
           })}
         </div>
         
-        {/* Helper: Show Tier info - Dims during playback (Focus Mode) */}
+        {/* Progress Bar */}
         <motion.div
           animate={{ opacity: isTargetPlaying ? 0.2 : 1 }}
           transition={{ duration: 0.3 }}
-          className="text-center mt-auto"
+          className="mt-auto pt-8"
         >
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">
-                Tier: {currentRound.pair.tier}
-            </span>
-            <div className="text-xs text-slate-500 mt-2">
-              SNR: {currentSNR > 0 ? '+' : ''}{currentSNR} dB | Trials: {trialHistory.length}
-            </div>
-            {process.env.NODE_ENV === 'development' && (
-              <div className="text-xs text-slate-400 mt-1">
-                AudioContext: {audioContextState}
-              </div>
-            )}
+          <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
+            <span>Round {currentIndex + 1} of {sessionRounds.length}</span>
+            <span>{trialHistory.filter(Boolean).length} correct</span>
+          </div>
+          <div className="h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-purple-500 rounded-full"
+              animate={{ width: `${((currentIndex + 1) / sessionRounds.length) * 100}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
         </motion.div>
       </main>
 

@@ -54,7 +54,7 @@ interface Session {
 
 export function SessionPlayer() {
   const { sessionId } = useParams<{ sessionId: string }>();
-  const { user } = useUser();
+  const { user, voice } = useUser();
   const navigate = useNavigate();
 
   const [session, setSession] = useState<Session | null>(null);
@@ -75,7 +75,7 @@ export function SessionPlayer() {
 
   // Audio state
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-  const [selectedVoice, setSelectedVoice] = useState<string>('sarah');
+  const [selectedVoice, setSelectedVoice] = useState<string>(voice || 'sarah');
 
   useEffect(() => {
     if (sessionId) {

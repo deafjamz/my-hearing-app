@@ -40,6 +40,7 @@ export function CategoryPlayer() {
     return saved ? saved === 'true' : false;
   });
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctWord: string; selectedWord: string } | null>(null);
 
   useEffect(() => {
     if (category) {
@@ -127,6 +128,8 @@ export function CategoryPlayer() {
   };
 
   const handleAnswer = (selectedWord: string) => {
+    if (feedback) return; // Prevent double-tap during feedback
+
     const responseTime = Date.now() - trialStartTime;
     const currentPair = pairs[currentIndex];
 
@@ -138,16 +141,22 @@ export function CategoryPlayer() {
     }
 
     const isCorrect = selectedWord.toLowerCase() === correctWord;
-    setResponses([...responses, { correct: isCorrect, responseTime }]);
+    setResponses(prev => [...prev, { correct: isCorrect, responseTime }]);
+    setFeedback({ isCorrect, correctWord, selectedWord: selectedWord.toLowerCase() });
 
-    // Move to next or complete
-    if (currentIndex < pairs.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setTrialStartTime(Date.now());
-      setHasPlayed(false);
-    } else {
-      setIsComplete(true);
-    }
+    const isLast = currentIndex >= pairs.length - 1;
+
+    // Auto-advance after showing feedback
+    setTimeout(() => {
+      setFeedback(null);
+      if (!isLast) {
+        setCurrentIndex(prev => prev + 1);
+        setTrialStartTime(Date.now());
+        setHasPlayed(false);
+      } else {
+        setIsComplete(true);
+      }
+    }, 1500);
   };
 
   if (loading) {
@@ -262,21 +271,48 @@ export function CategoryPlayer() {
             </div>
           </button>
 
+          {/* Per-answer feedback */}
+          {feedback && (
+            <div className={`text-center py-3 rounded-xl ${
+              feedback.isCorrect
+                ? 'bg-teal-900/30 text-teal-300'
+                : 'bg-red-900/30 text-red-300'
+            }`}>
+              <p className="font-bold text-lg">
+                {feedback.isCorrect ? 'Correct!' : 'Not quite'}
+              </p>
+              {!feedback.isCorrect && (
+                <p className="text-sm opacity-80 mt-1">
+                  The word was "{feedback.correctWord}"
+                </p>
+              )}
+            </div>
+          )}
+
           {/* Answer Buttons */}
           <div className="grid grid-cols-2 gap-4">
-            <button
-              onClick={() => handleAnswer(currentPair.word1)}
-              className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
-            >
-              <p className="text-white font-bold text-2xl">{currentPair.word1}</p>
-            </button>
-
-            <button
-              onClick={() => handleAnswer(currentPair.word2)}
-              className="p-8 bg-slate-900 border-2 border-slate-700 rounded-2xl hover:border-violet-500 transition-all"
-            >
-              <p className="text-white font-bold text-2xl">{currentPair.word2}</p>
-            </button>
+            {[currentPair.word1, currentPair.word2].map((word) => {
+              let btnStyle = 'border-slate-700 hover:border-violet-500';
+              if (feedback) {
+                if (word.toLowerCase() === feedback.correctWord) {
+                  btnStyle = 'border-teal-500 bg-teal-900/20';
+                } else if (word.toLowerCase() === feedback.selectedWord && !feedback.isCorrect) {
+                  btnStyle = 'border-red-500 bg-red-900/20';
+                } else {
+                  btnStyle = 'border-slate-700 opacity-50';
+                }
+              }
+              return (
+                <button
+                  key={word}
+                  onClick={() => handleAnswer(word)}
+                  disabled={!!feedback}
+                  className={`p-8 bg-slate-900 border-2 rounded-2xl transition-all ${btnStyle}`}
+                >
+                  <p className="text-white font-bold text-2xl">{word}</p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
