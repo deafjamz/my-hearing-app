@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Home, Headphones, Settings, Activity } from 'lucide-react';
+import { Home, Headphones, Settings, Activity, User as UserIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useUser } from '@/store/UserContext';
@@ -33,15 +33,16 @@ export function Layout({ className }: LayoutProps) {
       {/* Top Bar (Mobile Header) — only for authenticated users */}
       {showChrome && (
         <div className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex justify-end items-center pointer-events-none">
-           <button
+           <Link
+              to="/settings"
               onClick={() => hapticSelection()}
-              aria-label="Account"
+              aria-label="Settings"
               className="pointer-events-auto bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-800 hover:scale-105 transition-all"
            >
-               <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center text-xs font-bold">
-                   {user?.email?.[0]?.toUpperCase() || '?'}
+               <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center">
+                   <UserIcon size={18} />
                </div>
-           </button>
+           </Link>
         </div>
       )}
 

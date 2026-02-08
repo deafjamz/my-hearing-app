@@ -14,33 +14,60 @@ function PageLoader() {
   );
 }
 
-// Lazy-loaded pages (named export adapter)
-const ActivityList = lazy(() => import('@/pages/ActivityList').then(m => ({ default: m.ActivityList })));
-const RapidFire = lazy(() => import('@/pages/RapidFire').then(m => ({ default: m.RapidFire })));
-const StoryList = lazy(() => import('@/pages/StoryList').then(m => ({ default: m.StoryList })));
-const Player = lazy(() => import('@/pages/Player').then(m => ({ default: m.Player })));
-const Settings = lazy(() => import('@/pages/Settings').then(m => ({ default: m.Settings })));
-const ScenarioPlayer = lazy(() => import('@/pages/ScenarioPlayer').then(m => ({ default: m.ScenarioPlayer })));
-const ScenarioList = lazy(() => import('@/pages/ScenarioList').then(m => ({ default: m.ScenarioList })));
-const StoryPlayer = lazy(() => import('@/pages/StoryPlayer').then(m => ({ default: m.StoryPlayer })));
-const SentenceTraining = lazy(() => import('@/pages/SentenceTraining').then(m => ({ default: m.SentenceTraining })));
-const Detection = lazy(() => import('@/pages/Detection').then(m => ({ default: m.Detection })));
-const GrossDiscrimination = lazy(() => import('@/pages/GrossDiscrimination').then(m => ({ default: m.GrossDiscrimination })));
-const ProgramLibrary = lazy(() => import('@/pages/ProgramLibrary').then(m => ({ default: m.ProgramLibrary })));
-const ProgramDetail = lazy(() => import('@/pages/ProgramDetail').then(m => ({ default: m.ProgramDetail })));
-const SessionPlayer = lazy(() => import('@/pages/SessionPlayer').then(m => ({ default: m.SessionPlayer })));
-const CategoryLibrary = lazy(() => import('@/pages/CategoryLibrary').then(m => ({ default: m.CategoryLibrary })));
-const CategoryPlayer = lazy(() => import('@/pages/CategoryPlayer').then(m => ({ default: m.CategoryPlayer })));
-const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
-const TermsOfService = lazy(() => import('@/pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
-const ProgressReport = lazy(() => import('@/pages/ProgressReport').then(m => ({ default: m.ProgressReport })));
-const ResetPassword = lazy(() => import('@/pages/ResetPassword').then(m => ({ default: m.ResetPassword })));
+// Retry wrapper for lazy imports — handles stale chunks after deploy
+function lazyRetry<T extends { default: React.ComponentType }>(
+  factory: () => Promise<T>
+): React.LazyExoticComponent<T['default']> {
+  return lazy(() =>
+    factory().catch(() => {
+      // Chunk failed to load (stale deploy) — reload once
+      const key = 'chunk_reload';
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, '1');
+        window.location.reload();
+        return new Promise(() => {}); // Never resolves (page is reloading)
+      }
+      sessionStorage.removeItem(key);
+      return factory(); // Second attempt after reload
+    })
+  );
+}
 
-// Dev-only page imports - lazy loaded too
-const AudioQA = lazy(() => import('@/pages/AudioQA').then(m => ({ default: m.AudioQA })));
-const QualityControl = lazy(() => import('@/pages/QualityControl').then(m => ({ default: m.QualityControl })));
-const DatabaseTest = lazy(() => import('@/pages/DatabaseTest').then(m => ({ default: m.DatabaseTest })));
-const SNRMixerTest = lazy(() => import('@/pages/SNRMixerTest').then(m => ({ default: m.SNRMixerTest })));
+// Named export adapter with retry
+function namedLazy<M, K extends keyof M>(
+  importFn: () => Promise<M>,
+  name: K
+) {
+  return lazyRetry(() => importFn().then(m => ({ default: m[name] as React.ComponentType })));
+}
+
+// Lazy-loaded pages (named export adapter with stale-chunk retry)
+const ActivityList = namedLazy(() => import('@/pages/ActivityList'), 'ActivityList');
+const RapidFire = namedLazy(() => import('@/pages/RapidFire'), 'RapidFire');
+const StoryList = namedLazy(() => import('@/pages/StoryList'), 'StoryList');
+const Player = namedLazy(() => import('@/pages/Player'), 'Player');
+const Settings = namedLazy(() => import('@/pages/Settings'), 'Settings');
+const ScenarioPlayer = namedLazy(() => import('@/pages/ScenarioPlayer'), 'ScenarioPlayer');
+const ScenarioList = namedLazy(() => import('@/pages/ScenarioList'), 'ScenarioList');
+const StoryPlayer = namedLazy(() => import('@/pages/StoryPlayer'), 'StoryPlayer');
+const SentenceTraining = namedLazy(() => import('@/pages/SentenceTraining'), 'SentenceTraining');
+const Detection = namedLazy(() => import('@/pages/Detection'), 'Detection');
+const GrossDiscrimination = namedLazy(() => import('@/pages/GrossDiscrimination'), 'GrossDiscrimination');
+const ProgramLibrary = namedLazy(() => import('@/pages/ProgramLibrary'), 'ProgramLibrary');
+const ProgramDetail = namedLazy(() => import('@/pages/ProgramDetail'), 'ProgramDetail');
+const SessionPlayer = namedLazy(() => import('@/pages/SessionPlayer'), 'SessionPlayer');
+const CategoryLibrary = namedLazy(() => import('@/pages/CategoryLibrary'), 'CategoryLibrary');
+const CategoryPlayer = namedLazy(() => import('@/pages/CategoryPlayer'), 'CategoryPlayer');
+const PrivacyPolicy = namedLazy(() => import('@/pages/PrivacyPolicy'), 'PrivacyPolicy');
+const TermsOfService = namedLazy(() => import('@/pages/TermsOfService'), 'TermsOfService');
+const ProgressReport = namedLazy(() => import('@/pages/ProgressReport'), 'ProgressReport');
+const ResetPassword = namedLazy(() => import('@/pages/ResetPassword'), 'ResetPassword');
+
+// Dev-only page imports
+const AudioQA = namedLazy(() => import('@/pages/AudioQA'), 'AudioQA');
+const QualityControl = namedLazy(() => import('@/pages/QualityControl'), 'QualityControl');
+const DatabaseTest = namedLazy(() => import('@/pages/DatabaseTest'), 'DatabaseTest');
+const SNRMixerTest = namedLazy(() => import('@/pages/SNRMixerTest'), 'SNRMixerTest');
 
 // Helper to wrap lazy components in Suspense
 function S({ children }: { children: React.ReactNode }) {
