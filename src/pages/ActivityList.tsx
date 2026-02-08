@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight, Zap, BookOpen, Coffee, Mic, Headphones, Sparkles, Ear, Volume2, Lock, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronRight, Zap, BookOpen, Coffee, Mic, Headphones, Ear, Volume2, Lock, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { hapticSelection } from '@/lib/haptics';
 import { useUser } from '@/store/UserContext';
+import { WelcomeScreen } from '@/components/WelcomeScreen';
+import { AuthModal } from '@/components/auth/AuthModal';
 
 interface Activity {
   id: string;
@@ -16,8 +19,43 @@ interface Activity {
 }
 
 export function ActivityList() {
-  const { hasAccess } = useUser();
+  const { user, hasAccess, loading: authLoading } = useUser();
+  const navigate = useNavigate();
   const [upsellTier, setUpsellTier] = useState<string | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(() => {
+    return !localStorage.getItem('soundsteps_welcomed');
+  });
+
+  // Welcome / auth gate — first-timers and unauthenticated users
+  if (!authLoading && showWelcome) {
+    return (
+      <>
+        <WelcomeScreen
+          isAuthenticated={!!user}
+          onSignIn={() => setShowAuthModal(true)}
+          onStart={() => {
+            localStorage.setItem('soundsteps_welcomed', 'true');
+            navigate('/practice/detection');
+          }}
+          onSkip={() => {
+            localStorage.setItem('soundsteps_welcomed', 'true');
+            setShowWelcome(false);
+          }}
+        />
+        {!user && (
+          <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} dismissible={false} />
+        )}
+      </>
+    );
+  }
+
+  // Auto-dismiss upsell after 3 seconds
+  useEffect(() => {
+    if (!upsellTier) return;
+    const timer = setTimeout(() => setUpsellTier(null), 3000);
+    return () => clearTimeout(timer);
+  }, [upsellTier]);
 
   const onrampActivities: Activity[] = [
     {
@@ -48,15 +86,6 @@ export function ActivityList() {
       icon: Zap,
       color: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400',
       path: '/categories'
-    },
-    {
-      id: 'programs',
-      title: 'Programs',
-      description: 'Structured training pathways.',
-      icon: Sparkles,
-      color: 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400',
-      path: '/programs',
-      requiredTier: 'Standard'
     },
     {
       id: 'stories',
@@ -195,23 +224,31 @@ export function ActivityList() {
         {activities.map((activity) => renderCard(activity, false))}
       </div>
 
-      {/* Upsell Banner */}
-      {upsellTier && (
-        <div className="fixed bottom-20 left-0 right-0 z-50 px-4">
-          <div className="max-w-lg mx-auto bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl p-4 shadow-xl flex items-center justify-between">
-            <div>
-              <p className="text-white font-bold text-sm">Unlock {upsellTier} activities</p>
-              <p className="text-teal-200 text-xs">Upgrade your plan to access this content</p>
+      {/* Upsell Toast — auto-dismisses after 3s */}
+      <AnimatePresence>
+        {upsellTier && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.25 }}
+            className="mt-6"
+          >
+            <div className="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex items-center justify-between">
+              <div>
+                <p className="text-white font-bold text-sm">{upsellTier} feature</p>
+                <p className="text-slate-400 text-xs">Available with {upsellTier} plan</p>
+              </div>
+              <button
+                onClick={() => setUpsellTier(null)}
+                className="p-2 text-slate-500 hover:text-slate-300 transition-colors"
+              >
+                <X size={16} />
+              </button>
             </div>
-            <button
-              onClick={() => setUpsellTier(null)}
-              className="p-2 text-white/70 hover:text-white transition-colors"
-            >
-              <X size={18} />
-            </button>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

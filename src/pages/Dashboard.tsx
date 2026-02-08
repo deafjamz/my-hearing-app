@@ -2,22 +2,17 @@ import { Link } from 'react-router-dom';
 import { Play, HeadphonesIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useProgressData } from '@/hooks/useProgressData';
-import { useUser } from '@/store/UserContext';
 import { useState, useEffect } from 'react';
-import { WelcomeScreen } from '@/components/WelcomeScreen';
-import { AuthModal } from '@/components/auth/AuthModal';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
- * Dashboard - Premium Bento Grid Layout
- * Inspired by Amie.so, Stark Minimalism
+ * Dashboard - Stats overview (accessible from Progress or direct URL)
+ * Not the default landing — Practice Hub is.
  */
 export function Dashboard() {
   const { stats, loading } = useProgressData();
-  const { user, loading: authLoading } = useUser();
   const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Calculate daily steps
   useEffect(() => {
@@ -29,16 +24,6 @@ export function Dashboard() {
     const todayTrials = todaysData.reduce((sum, entry) => sum + entry.trials, 0);
     setDailySteps(todayTrials);
   }, [stats.progressData]);
-
-  // Show welcome/auth gate for unauthenticated users
-  if (!authLoading && !user) {
-    return (
-      <>
-        <WelcomeScreen onSignIn={() => setShowAuthModal(true)} />
-        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} dismissible={false} />
-      </>
-    );
-  }
 
   if (loading) {
     return <LoadingSpinner />;
@@ -75,17 +60,9 @@ export function Dashboard() {
     <div className="min-h-screen bg-slate-950 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-white mb-1">Dashboard</h1>
-            <p className="text-slate-400 text-sm">Welcome back to your practice</p>
-          </div>
-          <Link
-            to="/practice"
-            className="px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 rounded-xl hover:bg-slate-800 transition-colors text-sm font-medium"
-          >
-            Practice Hub
-          </Link>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-white mb-1">Dashboard</h1>
+          <p className="text-slate-400 text-sm">Your training stats</p>
         </div>
 
         {/* Bento Grid */}
@@ -142,7 +119,7 @@ export function Dashboard() {
                 </span>
               </div>
               <p className="text-sm text-slate-400 mt-2">
-                {isGoalReached ? '🎯 Goal Reached!' : 'Steps Today'}
+                {isGoalReached ? 'Goal Reached!' : 'Steps Today'}
               </p>
             </div>
           </motion.div>
@@ -222,7 +199,7 @@ export function Dashboard() {
               </div>
 
               <Link
-                to="/practice"
+                to="/"
                 className="w-24 h-24 rounded-full bg-teal-500 hover:bg-teal-400 flex items-center justify-center shadow-2xl hover:scale-105 transition-all group"
               >
                 <Play className="h-10 w-10 text-white ml-1" />

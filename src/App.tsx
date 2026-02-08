@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/Layout';
 import { RequireAuth } from '@/components/RequireAuth';
-import { Dashboard } from '@/pages/Dashboard';
+const Dashboard = namedLazy(() => import('@/pages/Dashboard'), 'Dashboard');
 
 // Inline page loader for Suspense fallback
 function PageLoader() {
@@ -78,11 +78,15 @@ function S({ children }: { children: React.ReactNode }) {
 const productionRoutes = [
   {
     path: '/',
-    element: <Dashboard />,
+    element: <S><ActivityList /></S>,
   },
   {
     path: '/practice',
     element: <S><ActivityList /></S>,
+  },
+  {
+    path: '/dashboard',
+    element: <S><Dashboard /></S>,
   },
   {
     path: '/categories',

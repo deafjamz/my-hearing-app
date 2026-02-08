@@ -35,7 +35,7 @@ export interface SentenceWithAudio extends SentenceStimulus {
 interface UseSentenceDataOptions {
   difficulty?: number;
   scenario?: string;
-  voiceId?: 'sarah' | 'marcus';
+  voiceId?: string;
   limit?: number;
 }
 
@@ -115,7 +115,7 @@ export function useSentenceData(options: UseSentenceDataOptions = {}) {
 /**
  * Hook to get a single sentence with audio
  */
-export function useSentence(sentenceId: string, voiceId: 'sarah' | 'marcus') {
+export function useSentence(sentenceId: string, voiceId: string) {
   const [sentence, setSentence] = useState<SentenceWithAudio | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

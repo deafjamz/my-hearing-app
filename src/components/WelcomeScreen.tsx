@@ -1,8 +1,15 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Headphones, TrendingUp, Clock } from 'lucide-react';
 
 interface WelcomeScreenProps {
-  onSignIn: () => void;
+  /** Auth gate mode — opens sign-in/sign-up modal */
+  onSignIn?: () => void;
+  /** First-visit mode — starts first exercise */
+  onStart?: () => void;
+  /** First-visit mode — dismisses welcome, shows Dashboard */
+  onSkip?: () => void;
+  /** Whether the user is authenticated (determines which CTA to show) */
+  isAuthenticated?: boolean;
 }
 
 const VALUE_PROPS = [
@@ -29,7 +36,7 @@ const VALUE_PROPS = [
   },
 ];
 
-export function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
+export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: WelcomeScreenProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -84,28 +91,54 @@ export function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
           ))}
         </motion.div>
 
-        {/* CTA button */}
-        <motion.button
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0 : 0.5 }}
-          whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
-          whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
-          onClick={onSignIn}
-          className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
-        >
-          Get Started
-        </motion.button>
-
-        {/* Subtext */}
-        <motion.p
-          initial={prefersReducedMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 0.55, duration: prefersReducedMotion ? 0 : 0.4 }}
-          className="text-slate-500 text-sm text-center mt-3"
-        >
-          Free account required
-        </motion.p>
+        {/* CTA — switches based on auth state */}
+        <AnimatePresence mode="wait">
+          {isAuthenticated ? (
+            <motion.div
+              key="first-visit"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+            >
+              <motion.button
+                whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                onClick={onStart}
+                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
+              >
+                Start Your First Exercise
+              </motion.button>
+              <p className="text-slate-500 text-sm text-center mt-3">
+                About 2 minutes
+              </p>
+              <button
+                onClick={onSkip}
+                className="block mx-auto mt-4 text-slate-500 hover:text-slate-400 text-sm transition-colors cursor-pointer"
+              >
+                Skip for now
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="auth-gate"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
+              <motion.button
+                whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                onClick={onSignIn}
+                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
+              >
+                Get Started
+              </motion.button>
+              <p className="text-slate-500 text-sm text-center mt-3">
+                Free account required
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </div>
   );

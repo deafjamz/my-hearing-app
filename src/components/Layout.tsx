@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Home, Headphones, Settings, Activity, User as UserIcon } from 'lucide-react';
+import { Headphones, Settings, Activity, User as UserIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useUser } from '@/store/UserContext';
@@ -15,9 +15,8 @@ export function Layout({ className }: LayoutProps) {
   const showChrome = user || loading;  // Show nav during loading (avoid flash of empty)
 
   const navItems = [
-    { icon: Home, label: 'Home', path: '/' },
-    { icon: Headphones, label: 'Practice', path: '/practice' },
-    { icon: Activity, label: 'Progress', path: '/progress' }, 
+    { icon: Headphones, label: 'Practice', path: '/' },
+    { icon: Activity, label: 'Progress', path: '/progress' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
 
@@ -67,7 +66,9 @@ export function Layout({ className }: LayoutProps) {
           <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.path || (location.pathname.startsWith('/practice') && item.path === '/practice');
+              const isActive = item.path === '/'
+                ? (location.pathname === '/' || location.pathname.startsWith('/practice') || location.pathname.startsWith('/categories'))
+                : location.pathname === item.path;
 
               return (
                 <Link

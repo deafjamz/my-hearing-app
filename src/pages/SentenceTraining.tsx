@@ -1,17 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
+import { ArrowLeft, Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useSentenceData, getAudioUrl } from '@/hooks/useSentenceData';
 import { useVoice } from '@/store/VoiceContext';
 import { useProgress } from '@/hooks/useProgress';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
 import { SessionSummary } from '@/components/SessionSummary';
+import { ActivityBriefing } from '@/components/ActivityBriefing';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { useSilentSentinel } from '@/hooks/useSilentSentinel';
+
+const SESSION_LENGTH = 10;
 
 export function SentenceTraining() {
   const navigate = useNavigate();
   const { currentVoice } = useVoice();
-  const { sentences, loading, error } = useSentenceData({ limit: 10, voiceId: currentVoice as 'sarah' | 'marcus' });
+  const { sentences, loading, error } = useSentenceData({ limit: SESSION_LENGTH, voiceId: currentVoice });
   const { logProgress } = useProgress();
+  const { ensureResumed } = useSilentSentinel();
+
+  // Briefing state
+  const [hasStarted, setHasStarted] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -45,9 +55,10 @@ export function SentenceTraining() {
   }, [currentSentence, currentIndex, sentences]);
 
   // Handle audio playback
-  const handlePlay = () => {
+  const handlePlay = async () => {
     if (!audioRef.current || !currentSentence) return;
 
+    await ensureResumed();
     audioRef.current.play();
     setIsPlaying(true);
     setShowQuestion(false);
@@ -103,18 +114,32 @@ export function SentenceTraining() {
     }, 1500);
   };
 
-  // Render loading/error states
-  if (loading) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <p className="text-gray-500">Loading sentences...</p>
-    </div>
-  );
+  // ActivityBriefing before exercise starts
+  if (!hasStarted) {
+    return (
+      <ActivityBriefing
+        title="Sentences"
+        description="Listen to sentences and answer comprehension questions."
+        instructions="You'll hear a sentence, then choose the correct answer from four options. Listen carefully — the sentences get more challenging as you go."
+        sessionInfo="10 sentences · About 3 minutes"
+        onStart={() => { ensureResumed(); setHasStarted(true); }}
+      />
+    );
+  }
 
-  if (error || !sentences.length) return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <p className="text-red-500">Failed to load sentences</p>
-    </div>
-  );
+  // Loading state
+  if (loading) {
+    return <LoadingSpinner message="Loading sentences..." />;
+  }
+
+  // Error state
+  if (error || !sentences.length) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+        <p className="text-red-500 dark:text-red-400">Failed to load sentences</p>
+      </div>
+    );
+  }
 
   // Show completion screen
   if (isComplete) {
@@ -127,7 +152,12 @@ export function SentenceTraining() {
         accuracy={accuracy}
         totalItems={responses.length}
         correctCount={correctCount}
-        onContinue={() => navigate('/practice')}
+        onContinue={() => navigate('/')}
+        nextActivity={{
+          label: 'Everyday Scenarios',
+          description: 'Practice with real-world dialogue',
+          path: '/scenarios',
+        }}
       />
     );
   }
@@ -136,26 +166,34 @@ export function SentenceTraining() {
     ? getAudioUrl(currentSentence.audio_assets[0].storage_path)
     : '';
 
+  const totalRounds = sentences.length;
+
   return (
-    <div className="relative min-h-screen bg-slate-50">
+    <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <FeedbackOverlay type={feedback} />
 
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between">
+      <motion.header
+        animate={{ opacity: isPlaying ? 0.2 : 1 }}
+        transition={{ duration: 0.3 }}
+        className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50"
+      >
         <button
-          onClick={() => navigate('/dashboard')}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+          onClick={() => navigate('/practice')}
+          className="flex items-center text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
         >
-          <ChevronLeft className="h-5 w-5" />
-          <span className="font-medium">Back</span>
+          <ArrowLeft size={20} className="mr-1" /> Back
         </button>
-        <div className="text-sm text-gray-500">
-          {currentIndex + 1} / {sentences.length}
+        <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          Sentences
         </div>
-      </div>
+        <div className="text-sm text-slate-500 dark:text-slate-400">
+          {responses.length > 0 && `${Math.round((responses.filter(r => r.correct).length / responses.length) * 100)}%`}
+        </div>
+      </motion.header>
 
       {/* Main Content */}
-      <div className="max-w-md mx-auto p-6 space-y-8">
+      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
         {/* Aura Visualizer */}
         <div className="relative flex items-center justify-center h-64">
           <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
@@ -170,8 +208,8 @@ export function SentenceTraining() {
             {/* Pulsing rings */}
             {isPlaying && (
               <>
-                <div className="absolute w-40 h-40 rounded-full border-4 border-teal-300 animate-ping opacity-30" />
-                <div className="absolute w-48 h-48 rounded-full border-4 border-teal-200 animate-ping opacity-20" style={{ animationDelay: '0.2s' }} />
+                <div className="absolute w-40 h-40 rounded-full border-4 border-teal-300 dark:border-teal-700 animate-ping opacity-30" />
+                <div className="absolute w-48 h-48 rounded-full border-4 border-teal-200 dark:border-teal-800 animate-ping opacity-20" style={{ animationDelay: '0.2s' }} />
               </>
             )}
           </div>
@@ -180,7 +218,7 @@ export function SentenceTraining() {
           {!isPlaying && !showQuestion && (
             <button
               onClick={handlePlay}
-              className="absolute z-10 w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors"
+              className="absolute z-10 w-20 h-20 rounded-full bg-white dark:bg-slate-800 shadow-lg flex items-center justify-center text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-slate-700 transition-colors"
             >
               <Play className="h-8 w-8 ml-1" />
             </button>
@@ -189,8 +227,8 @@ export function SentenceTraining() {
 
         {/* Question Text */}
         {showQuestion && currentSentence && (
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
-            <p className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-800 text-center">
+            <p className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
               {currentSentence.clinical_metadata.question_text}
             </p>
 
@@ -208,11 +246,11 @@ export function SentenceTraining() {
                     disabled={selectedAnswer !== null}
                     className={`
                       py-6 px-4 rounded-xl font-bold text-center transition-all text-lg flex items-center justify-center gap-2
-                      ${!showResult && 'bg-teal-50 text-teal-700 hover:bg-teal-100 active:scale-95 border-2 border-teal-200'}
+                      ${!showResult && 'bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/50 active:scale-95 border-2 border-teal-200 dark:border-teal-800'}
                       ${showResult && isSelected && isCorrect && 'bg-teal-500 text-white scale-105 border-2 border-teal-600'}
                       ${showResult && isSelected && !isCorrect && 'bg-slate-700 text-white scale-95 border-2 border-slate-800'}
-                      ${showResult && !isSelected && isCorrect && 'bg-teal-100 text-teal-700 border-2 border-teal-400 ring-2 ring-teal-400 ring-offset-2'}
-                      ${showResult && !isSelected && !isCorrect && 'bg-slate-100 text-slate-400 opacity-50 border-2 border-slate-300'}
+                      ${showResult && !isSelected && isCorrect && 'bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 border-2 border-teal-400 dark:border-teal-600 ring-2 ring-teal-400 dark:ring-teal-600 ring-offset-2 dark:ring-offset-slate-900'}
+                      ${showResult && !isSelected && !isCorrect && 'bg-slate-100 dark:bg-slate-800 text-slate-400 opacity-50 border-2 border-slate-300 dark:border-slate-700'}
                       ${selectedAnswer !== null && 'cursor-not-allowed'}
                     `}
                   >
@@ -235,7 +273,23 @@ export function SentenceTraining() {
             preload="auto"
           />
         )}
-      </div>
+
+        {/* Progress indicator */}
+        <div className="mt-auto pt-8">
+          <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
+            <span>Round {currentIndex + 1} of {totalRounds}</span>
+            <span>Erber Level: Comprehension</span>
+          </div>
+          <div className="h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-teal-500"
+              initial={{ width: 0 }}
+              animate={{ width: `${((currentIndex + 1) / totalRounds) * 100}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
