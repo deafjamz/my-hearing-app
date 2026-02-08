@@ -275,20 +275,19 @@ AuthModal (forgot-password view)
 Add these to the **"Redirect URLs"** allowlist:
 
 ```
-http://localhost:5173           ← local development
-http://localhost:5173/**        ← local development (wildcard)
-https://your-app.vercel.app    ← production (your Vercel domain)
-https://your-app.vercel.app/** ← production (wildcard)
-https://soundsteps.app         ← custom domain (if applicable)
-https://soundsteps.app/**      ← custom domain (wildcard)
+http://localhost:5173
+http://localhost:5173/**
+https://soundsteps.app
+https://soundsteps.app/**
+https://my-hearing-app.vercel.app
+https://my-hearing-app.vercel.app/**
 ```
 
 ### Site URL
-Set the **Site URL** to your production URL:
+Set the **Site URL** to the production domain:
 ```
-https://your-app.vercel.app
+https://soundsteps.app
 ```
-(or your custom domain)
 
 This is the default redirect target for auth emails.
 
@@ -328,7 +327,7 @@ The Supabase JS client automatically detects the tokens in the URL hash and esta
 5. User signs in with Google
 6. Google redirects back to: https://<project>.supabase.co/auth/v1/callback?code=...
 7. Supabase exchanges code for tokens
-8. Supabase redirects to app: https://your-app.com/#access_token=...&refresh_token=...
+8. Supabase redirects to app: https://soundsteps.app/#access_token=...&refresh_token=...
 9. Supabase JS client detects hash, establishes session
 10. UserContext.onAuthStateChange fires with 'SIGNED_IN'
 11. App fetches profile, migrates guest data, etc.
@@ -341,7 +340,7 @@ The Supabase JS client automatically detects the tokens in the URL hash and esta
 3. Supabase sends email with link: https://<project>.supabase.co/auth/v1/verify?token=...&redirect_to=...
 4. User clicks link in email
 5. Supabase verifies token, creates session
-6. Redirects to app: https://your-app.com/#access_token=...&refresh_token=...
+6. Redirects to app: https://soundsteps.app/#access_token=...&refresh_token=...
 7. Supabase JS client detects hash, establishes session
 8. UserContext.onAuthStateChange fires with 'SIGNED_IN'
 ```
@@ -353,7 +352,7 @@ The Supabase JS client automatically detects the tokens in the URL hash and esta
 3. Supabase sends email with link: https://<project>.supabase.co/auth/v1/verify?type=recovery&token=...&redirect_to=.../reset-password
 4. User clicks link in email
 5. Supabase verifies token, creates recovery session
-6. Redirects to: https://your-app.com/reset-password#access_token=...&type=recovery
+6. Redirects to: https://soundsteps.app/reset-password#access_token=...&type=recovery
 7. ResetPassword.tsx detects the session via onAuthStateChange('PASSWORD_RECOVERY')
 8. User enters new password
 9. Code: supabase.auth.updateUser({ password })
