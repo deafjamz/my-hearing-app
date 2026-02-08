@@ -27,6 +27,13 @@ export function ActivityList() {
     return !localStorage.getItem('soundsteps_welcomed');
   });
 
+  // Auto-dismiss upsell after 3 seconds
+  useEffect(() => {
+    if (!upsellTier) return;
+    const timer = setTimeout(() => setUpsellTier(null), 3000);
+    return () => clearTimeout(timer);
+  }, [upsellTier]);
+
   // Welcome / auth gate — first-timers and unauthenticated users
   if (!authLoading && showWelcome) {
     return (
@@ -49,13 +56,6 @@ export function ActivityList() {
       </>
     );
   }
-
-  // Auto-dismiss upsell after 3 seconds
-  useEffect(() => {
-    if (!upsellTier) return;
-    const timer = setTimeout(() => setUpsellTier(null), 3000);
-    return () => clearTimeout(timer);
-  }, [upsellTier]);
 
   const onrampActivities: Activity[] = [
     {

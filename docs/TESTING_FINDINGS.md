@@ -22,7 +22,7 @@
 
 | ID | Severity | Title | Status | Fix Batch | Notes |
 |----|----------|-------|--------|-----------|-------|
-| F-001 | P1 | No first-time user onboarding | OPEN | — | Needs design work |
+| F-001 | P1 | No first-time user onboarding | **FIXED** | Batch 7 | WelcomeScreen + auth gate on Practice Hub landing |
 | F-002 | P2 | Audio carrier phrase bleed (Detection) | SUPERSEDED | — | Escalated to F-009 |
 | F-003 | P1 | Theme inconsistency (dark vs light) | **FIXED** | Batch 2 | Added `class="dark"` globally, converted PracticeHub |
 | F-004 | P1 | Stats hidden behind user icon | **FIXED** | Batch 2 | Added `mr-14` to Detection stats |
@@ -30,7 +30,7 @@
 | F-006 | P2 | Play button no feedback on re-click | **FIXED** | Batch 2 | Button grays out + 50% opacity when disabled |
 | F-007 | P1 | Activities feel infinite — no end | **FIXED** | Batch 2+4 | Detection: 10 rounds, RapidFire: 15 rounds, CategoryPlayer: 10 rounds — all have SessionSummary |
 | F-008 | P1 | No pre-activity briefing | **FIXED** | Batch 5 | ActivityBriefing component added to all 4 activities — title, instructions, session info, Begin button |
-| F-009 | **P0** | Carrier phrase contamination (daniel voice) | **FIXING** | Batch 6 | Cross-voice audit: daniel 92.5% contaminated, all other voices 0%. Regenerating 179 words via clean pipeline. See `docs/F009_INCIDENT_REPORT.md` |
+| F-009 | **P0** | Carrier phrase contamination (daniel voice) | **FIXED** | Batch 6 | Cross-voice audit: daniel 92.5% contaminated, all other voices 0%. Regenerated 179 daniel + 19 new words × 9 voices. 350 files uploaded to Supabase. See `docs/F009_INCIDENT_REPORT.md` |
 | F-010 | **P0** | Guest mode silently discards progress | **FIXED** | Batch 3 | RequireAuth gate blocks activities for guests — sign-in prompt with AuthModal |
 | F-011 | P1 | App should require sign-in | **FIXED** | Batch 3 | 12 activity routes now wrapped in RequireAuth; browsing routes remain open |
 | F-012 | P2 | Share with Audiologist — compliance risk | OPEN | — | Needs regulatory review |
@@ -40,8 +40,9 @@
 | F-016 | P1 | No per-answer feedback in Word Pairs | **FIXED** | Batch 4 | CategoryPlayer shows correct/incorrect with 1.5s feedback delay; RapidFire already had it |
 | F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
 
-**Summary:** 17 findings | 14 fixed | 1 fixing | 1 open | 1 superseded
-**P0s:** 3 total — 2 fixed (F-010, F-015), 1 fixing (F-009 — daniel voice regen in progress)
+**Summary:** 17 findings | 16 fixed | 0 fixing | 0 open | 1 superseded
+**P0s:** 3 total — 3 fixed (F-009, F-010, F-015)
+**Note:** F-012 (Share with Audiologist compliance) deferred — needs product decision
 
 ### Fix Batches
 
