@@ -3,7 +3,7 @@
 ## Audio Standards
 
 - **Format:** MP3 128kbps (CDN-hosted)
-- **Normalization:** -18 LUFS target
+- **Normalization:** -20 LUFS target
 - **Peak:** < -1dB (no clipping)
 - **Sample Rate:** 44.1kHz
 

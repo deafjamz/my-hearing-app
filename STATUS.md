@@ -1,11 +1,11 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-07
-> **Last Session:** Manual Testing & Triage Fixes (Session 14)
-> **Build Status:** ✅ PASSING (4.14s, 268KB main bundle)
+> **Last Session:** F-009 Fix, Design Sweep, Smart Coach, Word Scrub (Session 15)
+> **Build Status:** ✅ PASSING (4.19s, 272KB main bundle)
 > **Deployment:** ✅ LIVE at https://my-hearing-app.vercel.app
-> **Tests:** ✅ 58 PASSING
-> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (6 fixed, 2 partial, 9 open)
+> **Tests:** ✅ 31 PASSING (Vitest)
+> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (15 fixed, 1 fixing, 1 open)
 
 ---
 
@@ -118,9 +118,10 @@ To add a new voice:
 | Component | Status |
 |-----------|--------|
 | 9-Voice System | ✅ See voice table below |
-| Carrier Phrase Method | ✅ Production ready |
+| TTS Method | ✅ Ellipsis padding (`"... word ..."`) — carrier phrase banned (see F-009) |
 | LUFS Normalization | ✅ -20 dB target |
 | Babble Noise | ✅ 6-talker, compressed |
+| Word List | ✅ 100 real-word pairs (non-words scrubbed, 11 replaced) |
 
 ### Voice Status (9-Voice Professional Roster)
 | Voice | Region | HNR | Word Coverage | Status |
@@ -130,7 +131,7 @@ To add a new voice:
 | Bill | US | 11.4 dB | 100% (regen complete) | ✅ Ready |
 | Michael | US | 12.4 dB | 100% (regen complete) | ✅ Ready |
 | Alice | UK | 11.2 dB | 100% (regen complete) | ✅ Ready |
-| Daniel | UK | 12.1 dB | 99.9% (1845/1847) | ✅ Ready |
+| Daniel | UK | 12.1 dB | 99.9% (1845/1847) | ⚠️ F-009: 179 files regenerated locally, awaiting upload |
 | Matilda | AU | 11.4 dB | 100% (regen complete) | ✅ Ready |
 | Charlie | AU | 10.6 dB | 100% (regen complete) | ✅ Ready |
 | Aravind | IN | 10.2 dB | 100% (1847/1847) | ✅ Ready |
@@ -139,12 +140,15 @@ To add a new voice:
 
 **Note:** All voices verified in Supabase storage `audio/words_v2/{voice}/` on 2026-01-19
 
+**F-009 Status:** Daniel had 92.5% carrier phrase contamination ("is [word]" prefix). 179 files regenerated locally with ellipsis padding method. 19 new word files (non-word replacements) generated for all 9 voices. All files in `regen_output/` — blocked on valid Supabase service role key (JWT format) for upload.
+
 ---
 
 ## Blockers
 
 1. ~~**Voice Audio Gaps**~~ - ✅ RESOLVED: All 9 voices now have full word coverage
 2. **Authentication** - Login flow has spinner issue (low priority, guest mode works)
+3. **Supabase Service Role Key** - Need valid JWT-format key from Supabase Dashboard > Settings > API. The `sb_secret_` format key doesn't work for Storage API uploads. Blocks: F-009 audio upload, word pair CSV sync, non-word cleanup migration.
 
 ---
 
@@ -347,6 +351,43 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-07 (Session 15: F-009 Fix, Word Scrub, Design Sweep, Smart Coach)
+
+**Summary:** Fixed F-009 carrier phrase contamination, scrubbed non-words from word list, updated master rules, added reduced-motion support, cleaned dead code.
+
+**F-009 Carrier Phrase Fix:**
+- Cross-voice duration audit detected daniel at 92.5% contamination (other 8 voices clean)
+- Regenerated 179 daniel files using ellipsis padding (`"... word ..."`) method
+- Updated `docs/rules/00_MASTER_RULES.md` with new TTS generation rules and F-009 warning
+- Created `docs/F009_INCIDENT_REPORT.md` with full root cause analysis and prevention measures
+- **Blocked on Supabase service role key for upload** — all files in `regen_output/daniel/`
+
+**Word List Scrub (Non-Words Removed):**
+- Audited all 200 words across 10 clinical sets
+- Replaced 11 non-word/marginal pairs with real English words preserving phonological contrasts:
+  - Set 2: bap→bat, sud→bud | Set 5: calk→caulk, keem→keen
+  - Set 8: fas→miss, han→fun, sof→lot, sen→kin, hep→yell (all 5 truncations replaced)
+  - Set 9: pappy→snappy | Set 10: ester-day→Saturday
+- Generated audio for 19 new words × 9 voices = 171 files (all in `regen_output/`)
+- Created `sql_migrations/cleanup_nonwords.sql` for database cleanup
+
+**Smart Coach Engine:**
+- Canonical spec: `docs/rules/10_CLINICAL_CONSTANTS.md` (80%/50%/5dB)
+- Removed dead `useSmartCoach()` from `useStimuli.ts`
+- 31 unit tests in `src/lib/__tests__/api.test.ts`
+
+**Dead Code Cleanup:**
+- Deleted `src/pages/ClinicalReport.tsx` (not in routes, not imported)
+- Deleted `src/hooks/useAudioPlayer.ts` (never imported, Capacitor-specific)
+- Removed dead `useSmartCoach()` from `useStimuli.ts`
+
+**P1 Fixes (in progress):**
+- `prefers-reduced-motion` support added to animated components
+- `any` type elimination across hooks and components
+- Shared `LoadingSpinner` component created
+
+**Build:** ✅ PASSING | **Tests:** ✅ 31 PASSING
 
 ### 2026-02-07 (Session 14: Manual Testing & Triage Fixes)
 

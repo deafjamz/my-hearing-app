@@ -99,7 +99,15 @@ export function useProgressByActivity(days: number = 30) {
           lastPlayed: string;
         }>();
 
-        data.forEach((entry: any) => {
+        interface ActivityEntry {
+          content_type: string;
+          result: string;
+          response_time_ms: number | null;
+          content_tags: { erberLevel?: string } | null;
+          created_at: string;
+        }
+
+        (data as ActivityEntry[]).forEach((entry) => {
           const contentType = entry.content_type as ContentType;
           const isCorrect = entry.result === 'correct';
           const responseTime = entry.response_time_ms || 0;

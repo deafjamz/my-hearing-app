@@ -96,7 +96,16 @@ export function useProgressData() {
         let totalTrials = 0;
         const sessions = new Set<string>();
 
-        progressData.forEach((entry: any) => {
+        interface ProgressEntry {
+          created_at: string;
+          condition_snr?: number;
+          content_tags?: { snr?: number };
+          is_correct?: boolean;
+          result?: string;
+          session_id?: string;
+        }
+
+        (progressData as ProgressEntry[]).forEach((entry) => {
           const date = format(new Date(entry.created_at), 'yyyy-MM-dd');
 
           // SCHEMA-AGNOSTIC: Support both v5 (user_trials) and current (user_progress)

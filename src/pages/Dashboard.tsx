@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Play, Volume2, HeadphonesIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useProgressData } from '@/hooks/useProgressData';
 import { useState, useEffect } from 'react';
+import { WelcomeScreen } from '@/components/WelcomeScreen';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
  * Dashboard - Premium Bento Grid Layout
@@ -10,7 +12,16 @@ import { useState, useEffect } from 'react';
  */
 export function Dashboard() {
   const { stats, loading, isGuest } = useProgressData();
+  const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(() => {
+    return !localStorage.getItem('soundsteps_welcomed');
+  });
+
+  const dismissWelcome = () => {
+    localStorage.setItem('soundsteps_welcomed', 'true');
+    setShowWelcome(false);
+  };
 
   // Calculate daily steps
   useEffect(() => {
@@ -37,12 +48,12 @@ export function Dashboard() {
     }
   }, [isGuest, stats.progressData]);
 
+  if (showWelcome) {
+    return <WelcomeScreen onSkip={dismissWelcome} />;
+  }
+
   if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading...</div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   const goal = 100;
@@ -52,21 +63,25 @@ export function Dashboard() {
   // SNR Progress (circular)
   const snrProgress = Math.min(Math.abs(stats.currentSNR) / 20 * 100, 100);
 
-  // Stagger animation
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  // Stagger animation (disabled when user prefers reduced motion)
+  const container = prefersReducedMotion
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.1,
+          },
+        },
+      };
 
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
+  const item = prefersReducedMotion
+    ? { hidden: { opacity: 1, y: 0 }, show: { opacity: 1, y: 0 } }
+    : {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 },
+      };
 
   return (
     <div className="min-h-screen bg-slate-950 p-6">
@@ -110,10 +125,10 @@ export function Dashboard() {
                       ? 'bg-gradient-to-r from-teal-500 to-teal-400'
                       : 'bg-gradient-to-r from-teal-600 to-teal-500'
                   }`}
-                  initial={{ width: 0 }}
+                  initial={prefersReducedMotion ? false : { width: 0 }}
                   animate={{
                     width: `${progress}%`,
-                    boxShadow: isGoalReached
+                    boxShadow: !prefersReducedMotion && isGoalReached
                       ? [
                           '0 0 10px rgba(0, 167, 157, 0.6)',
                           '0 0 20px rgba(0, 167, 157, 0.8)',
@@ -121,7 +136,7 @@ export function Dashboard() {
                         ]
                       : '0 0 0px rgba(0, 167, 157, 0)',
                   }}
-                  transition={{
+                  transition={prefersReducedMotion ? { duration: 0 } : {
                     width: { duration: 1.2, ease: 'easeOut' },
                     boxShadow: isGoalReached
                       ? { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
@@ -131,7 +146,7 @@ export function Dashboard() {
               </div>
 
               <div className="flex items-baseline gap-2">
-                <p className="text-5xl font-black text-white">
+                <p className="text-5xl font-bold text-white">
                   {dailySteps}
                 </p>
                 <span className="text-xl font-normal text-slate-500">
@@ -169,9 +184,9 @@ export function Dashboard() {
                   strokeWidth="8"
                   fill="transparent"
                   strokeDasharray={314}
-                  initial={{ strokeDashoffset: 314 }}
+                  initial={prefersReducedMotion ? false : { strokeDashoffset: 314 }}
                   animate={{ strokeDashoffset: 314 - (314 * snrProgress) / 100 }}
-                  transition={{ duration: 1.5, ease: 'easeOut' }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 1.5, ease: 'easeOut' }}
                   className="text-teal-500"
                   strokeLinecap="round"
                 />
@@ -203,16 +218,11 @@ export function Dashboard() {
           {/* Bottom Left - Quick Start (Wide) */}
           <motion.div
             variants={item}
-            className="md:col-span-3 md:row-span-1 bg-gradient-to-br from-violet-900/30 to-purple-900/30 border border-violet-800/50 rounded-3xl p-8 relative overflow-hidden group"
+            className="md:col-span-3 md:row-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-8 relative overflow-hidden group"
           >
-            {/* Aura Background Effect */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-20">
-              <div className="w-64 h-64 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 blur-3xl" />
-            </div>
-
             <div className="relative z-10 flex items-center justify-between">
               <div>
-                <h3 className="text-xs font-bold text-violet-400 uppercase tracking-wide mb-3">
+                <h3 className="text-xs font-bold text-teal-400 uppercase tracking-wide mb-3">
                   Quick Start
                 </h3>
                 <p className="text-3xl font-bold text-white mb-2">
@@ -225,7 +235,7 @@ export function Dashboard() {
 
               <Link
                 to="/practice"
-                className="w-24 h-24 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform group"
+                className="w-24 h-24 rounded-full bg-teal-500 hover:bg-teal-400 flex items-center justify-center shadow-2xl hover:scale-105 transition-all group"
               >
                 <Play className="h-10 w-10 text-white ml-1" />
               </Link>
@@ -238,12 +248,12 @@ export function Dashboard() {
             className="md:col-span-1 md:row-span-1 bg-slate-900 border border-slate-800 rounded-3xl p-6"
           >
             <div className="flex flex-col h-full justify-between">
-              <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
-                <HeadphonesIcon className="text-purple-400" size={24} />
+              <div className="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center mb-4">
+                <HeadphonesIcon className="text-teal-400" size={24} />
               </div>
 
               <div>
-                <p className="text-4xl font-black text-white mb-2">
+                <p className="text-4xl font-bold text-white mb-2">
                   {isGuest ? '—' : stats.totalTrials}
                 </p>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wide">
@@ -251,7 +261,7 @@ export function Dashboard() {
                 </p>
                 <Link
                   to="/progress"
-                  className="text-xs text-purple-400 hover:text-purple-300 font-medium mt-2 inline-block transition-colors"
+                  className="text-xs text-teal-400 hover:text-teal-300 font-medium mt-2 inline-block transition-colors"
                 >
                   View Full Report →
                 </Link>

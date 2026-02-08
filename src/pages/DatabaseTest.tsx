@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 
 export function DatabaseTest() {
   const [status, setStatus] = useState<'testing' | 'success' | 'error'>('testing');
-  const [wordPairs, setWordPairs] = useState<any[]>([]);
+  const [wordPairs, setWordPairs] = useState<Record<string, string | number | null>[]>([]);
   const [error, setError] = useState<string>('');
 
   useEffect(() => {

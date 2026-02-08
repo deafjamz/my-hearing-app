@@ -1,15 +1,44 @@
 /**
- * Smart Coach API — Local Implementation
+ * Smart Coach Engine — Adaptive Difficulty System
  *
- * Implements adaptive SNR adjustment and clinical babble retrieval.
- * All logic runs client-side against Supabase.
+ * Implements a 2-down/1-up adaptive staircase for SNR adjustment.
+ * This is SoundSteps' core differentiator — it adapts exercise difficulty
+ * to each user's performance in real-time.
  *
- * Clinical SNR Reference:
- * - CI users need +5 to +15 dB for 80% comprehension in noise
- * - Adaptive training reduces SNR as performance improves
+ * Spec: docs/rules/10_CLINICAL_CONSTANTS.md
+ *
+ * Clinical context:
+ * - CI users typically need +5 to +15 dB SNR for 80% comprehension
+ * - The staircase converges on the user's 70.7% correct threshold
+ * - SNR adjustments happen every 10 trials (1 block)
  */
 
 import { supabase } from '@/lib/supabase';
+
+// ── Clinical Constants (from docs/rules/10_CLINICAL_CONSTANTS.md) ──────────
+
+/** SNR step size in dB. Each adjustment moves by this amount. */
+export const SNR_STEP = 5;
+
+/** Minimum SNR (hardest condition). Speech barely above noise. */
+export const SNR_MIN = -10;
+
+/** Maximum SNR (easiest condition). Speech well above noise. */
+export const SNR_MAX = 20;
+
+/** Default starting SNR for new users. Comfortable listening. */
+export const SNR_DEFAULT = 10;
+
+/** Number of trials per evaluation block. Coach evaluates after every block. */
+export const BLOCK_SIZE = 10;
+
+/** Accuracy threshold to increase difficulty (decrease SNR). */
+export const THRESHOLD_UP = 80;
+
+/** Accuracy threshold to decrease difficulty (increase SNR). */
+export const THRESHOLD_DOWN = 50;
+
+// ── Types ──────────────────────────────────────────────────────────────────
 
 export interface SmartCoachResponse {
   recommendation: string;
@@ -18,44 +47,43 @@ export interface SmartCoachResponse {
   next_snr: number;
 }
 
+// ── Core Algorithm ─────────────────────────────────────────────────────────
+
 /**
- * Evaluate a batch of trials and recommend SNR adjustment.
+ * Evaluate a block of trials and recommend SNR adjustment.
  *
- * Rules (per clinical guidelines):
- * - >=80% accuracy → decrease SNR by 2 dB (make harder)
- * - <=50% accuracy → increase SNR by 2 dB (make easier)
- * - 51-79% → keep current SNR
+ * Algorithm (2-down / 1-up staircase):
+ *   - ≥80% accuracy (8/10) → Decrease SNR by 5 dB (make harder)
+ *   - ≤50% accuracy (5/10) → Increase SNR by 5 dB (make easier)
+ *   - 51-79%               → Maintain current SNR
  *
- * SNR is clamped to [-10, +20] dB range.
+ * SNR is clamped to [SNR_MIN, SNR_MAX] range.
+ * This function is pure — no side effects, no async.
  */
-export async function evaluateSession(
+export function evaluateSession(
   currentSNR: number,
   results: boolean[]
-): Promise<SmartCoachResponse> {
+): SmartCoachResponse {
   const correct = results.filter(Boolean).length;
   const accuracy = (correct / results.length) * 100;
 
-  const SNR_STEP = 2;
-  const SNR_MIN = -10;
-  const SNR_MAX = 20;
-
-  if (accuracy >= 80) {
+  if (accuracy >= THRESHOLD_UP) {
     const next_snr = Math.max(SNR_MIN, currentSNR - SNR_STEP);
     return {
       recommendation:
         accuracy === 100
           ? 'Perfect score! Increasing the challenge.'
-          : `${accuracy}% accuracy — great work! Making it a bit harder.`,
+          : `${Math.round(accuracy)}% accuracy — great work! Making it harder.`,
       action: 'decrease',
       accuracy,
       next_snr,
     };
   }
 
-  if (accuracy <= 50) {
+  if (accuracy <= THRESHOLD_DOWN) {
     const next_snr = Math.min(SNR_MAX, currentSNR + SNR_STEP);
     return {
-      recommendation: `${accuracy}% accuracy. Dialing back the difficulty so you can build confidence.`,
+      recommendation: `${Math.round(accuracy)}% accuracy. Adjusting to build confidence.`,
       action: 'increase',
       accuracy,
       next_snr,
@@ -63,16 +91,18 @@ export async function evaluateSession(
   }
 
   return {
-    recommendation: `${accuracy}% accuracy — solid progress. Staying at this level.`,
+    recommendation: `${Math.round(accuracy)}% accuracy — solid progress. Staying at this level.`,
     action: 'keep',
     accuracy,
     next_snr: currentSNR,
   };
 }
 
+// ── Data Access ────────────────────────────────────────────────────────────
+
 /**
- * Get the clinical babble noise URL from Supabase.
- * Returns null if no babble asset is found.
+ * Get the babble noise URL from Supabase storage.
+ * Returns null if no babble asset is found (exercises continue without noise).
  */
 export async function getClinicalBabble(): Promise<string | null> {
   const { data, error } = await supabase
@@ -82,7 +112,9 @@ export async function getClinicalBabble(): Promise<string | null> {
     .single();
 
   if (error || !data) {
-    console.warn('[api] No clinical babble found:', error?.message);
+    if (import.meta.env.DEV) {
+      console.warn('[SmartCoach] No babble noise found:', error?.message);
+    }
     return null;
   }
 
@@ -90,7 +122,8 @@ export async function getClinicalBabble(): Promise<string | null> {
 }
 
 /**
- * Get the user's saved SNR level. Defaults to +10 dB.
+ * Get the user's saved SNR level from their profile.
+ * Returns SNR_DEFAULT (+10 dB) if no saved value exists.
  */
 export async function getUserSNR(userId: string): Promise<number> {
   const { data, error } = await supabase
@@ -99,8 +132,8 @@ export async function getUserSNR(userId: string): Promise<number> {
     .eq('id', userId)
     .single();
 
-  if (error || !data?.current_snr) {
-    return 10; // Default +10 dB (easy starting point)
+  if (error || data?.current_snr == null) {
+    return SNR_DEFAULT;
   }
 
   return data.current_snr;
@@ -108,14 +141,17 @@ export async function getUserSNR(userId: string): Promise<number> {
 
 /**
  * Save the user's current SNR level to their profile.
+ * Silently fails if the update errors (non-blocking).
  */
 export async function saveUserSNR(userId: string, snr: number): Promise<void> {
+  const clamped = Math.max(SNR_MIN, Math.min(SNR_MAX, snr));
+
   const { error } = await supabase
     .from('profiles')
-    .update({ current_snr: snr })
+    .update({ current_snr: clamped })
     .eq('id', userId);
 
-  if (error) {
-    console.error('[api] Failed to save SNR:', error.message);
+  if (error && import.meta.env.DEV) {
+    console.error('[SmartCoach] Failed to save SNR:', error.message);
   }
 }

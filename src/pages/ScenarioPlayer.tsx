@@ -4,7 +4,8 @@ import { Play, Pause, FastForward, Rewind, Volume2, VolumeX, Music } from 'lucid
 import { useActivityData } from '@/hooks/useActivityData';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { cn } from '@/lib/utils';
-import { ScenarioItem } from '@/types/activity';
+import { Scenario, ScenarioItem } from '@/types/activity';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 interface ScenarioItemDisplay extends ScenarioItem {
   isPlaying: boolean;
@@ -27,7 +28,7 @@ export function ScenarioPlayer() {
       audioPlayerRef.current = new Audio();
       audioPlayerRef.current.onended = () => {
         // Advance logic
-        if (scenario && (scenario as any).items && currentLineIndex < (scenario as any).items.length - 1) {
+        if (scenario && 'items' in scenario && currentLineIndex < (scenario as Scenario).items.length - 1) {
           setCurrentLineIndex(prev => prev + 1);
         } else {
           setIsPlaying(false);
@@ -66,13 +67,13 @@ export function ScenarioPlayer() {
 
     // Load Ambience
     if (scenario.ambience_path && ambiencePlayerRef.current && ambiencePlayerRef.current.src !== scenario.ambience_path) {
-      console.log("Loading Ambience:", scenario.ambience_path);
+      if (import.meta.env.DEV) console.log("Loading Ambience:", scenario.ambience_path);
       ambiencePlayerRef.current.src = scenario.ambience_path;
       ambiencePlayerRef.current.load();
     }
 
     // Load Dialogue Line
-    const items = (scenario as any).items as ScenarioItemDisplay[];
+    const items = (scenario as Scenario).items as ScenarioItemDisplay[];
     if (items && items[currentLineIndex]) {
       const line = items[currentLineIndex];
       if (audioPlayerRef.current && line.audio_path && audioPlayerRef.current.src !== line.audio_path) {
@@ -115,10 +116,10 @@ export function ScenarioPlayer() {
       }
   };
 
-  if (loading) return <div className="p-8 text-center">Loading...</div>;
+  if (loading) return <LoadingSpinner message="Loading scenario..." />;
   if (error || !scenario) return <div className="p-8 text-center text-red-500">Error loading scenario.</div>;
 
-  const dialogueItems = (scenario as any).items as ScenarioItemDisplay[];
+  const dialogueItems = (scenario as Scenario).items as ScenarioItemDisplay[];
   const currentLine = dialogueItems[currentLineIndex];
 
   return (

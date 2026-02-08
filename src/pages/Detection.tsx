@@ -11,6 +11,7 @@ import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 const SESSION_LENGTH = 10;
 
@@ -198,11 +199,7 @@ export function Detection() {
   }
 
   if (loading || rounds.length === 0) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading detection exercises...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading detection exercises..." />;
   }
 
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -246,11 +243,11 @@ export function Detection() {
             className={`w-32 h-32 rounded-full shadow-xl flex items-center justify-center text-white z-10 transition-all ${
               hasAnswered
                 ? isCorrectAnswer
-                  ? 'bg-gradient-to-tr from-teal-500 to-teal-600 shadow-teal-500/30'
-                  : 'bg-gradient-to-tr from-amber-500 to-amber-600 shadow-amber-500/30'
+                  ? 'bg-teal-500'
+                  : 'bg-amber-500'
                 : audioPlayed
-                  ? 'bg-gradient-to-tr from-slate-600 to-slate-700 shadow-none opacity-50 cursor-not-allowed'
-                  : 'bg-gradient-to-tr from-purple-500 to-purple-600 shadow-purple-500/30 hover:scale-105'
+                  ? 'bg-slate-600 shadow-none opacity-50 cursor-not-allowed'
+                  : 'bg-teal-500 hover:bg-teal-400 shadow-xl hover:scale-105'
             }`}
           >
             {hasAnswered ? (

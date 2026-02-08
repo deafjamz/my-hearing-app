@@ -30,7 +30,7 @@
 | F-006 | P2 | Play button no feedback on re-click | **FIXED** | Batch 2 | Button grays out + 50% opacity when disabled |
 | F-007 | P1 | Activities feel infinite — no end | **FIXED** | Batch 2+4 | Detection: 10 rounds, RapidFire: 15 rounds, CategoryPlayer: 10 rounds — all have SessionSummary |
 | F-008 | P1 | No pre-activity briefing | **FIXED** | Batch 5 | ActivityBriefing component added to all 4 activities — title, instructions, session info, Begin button |
-| F-009 | ~~P0~~ **P3** | Carrier phrase contamination (~80% words) | **INVESTIGATED** | Batch 3 | Audit shows files CLEAN — no carrier phrases. Daniel voice has longer files (0.78-1.15s) with late onsets. Needs user re-test. |
+| F-009 | **P0** | Carrier phrase contamination (daniel voice) | **FIXING** | Batch 6 | Cross-voice audit: daniel 92.5% contaminated, all other voices 0%. Regenerating 179 words via clean pipeline. See `docs/F009_INCIDENT_REPORT.md` |
 | F-010 | **P0** | Guest mode silently discards progress | **FIXED** | Batch 3 | RequireAuth gate blocks activities for guests — sign-in prompt with AuthModal |
 | F-011 | P1 | App should require sign-in | **FIXED** | Batch 3 | 12 activity routes now wrapped in RequireAuth; browsing routes remain open |
 | F-012 | P2 | Share with Audiologist — compliance risk | OPEN | — | Needs regulatory review |
@@ -40,8 +40,8 @@
 | F-016 | P1 | No per-answer feedback in Word Pairs | **FIXED** | Batch 4 | CategoryPlayer shows correct/incorrect with 1.5s feedback delay; RapidFire already had it |
 | F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
 
-**Summary:** 17 findings | 14 fixed | 1 open | 1 superseded | 1 investigated
-**P0s:** 3 total — 2 fixed (F-010, F-015), 1 investigated/downgraded (F-009)
+**Summary:** 17 findings | 14 fixed | 1 fixing | 1 open | 1 superseded
+**P0s:** 3 total — 2 fixed (F-010, F-015), 1 fixing (F-009 — daniel voice regen in progress)
 
 ### Fix Batches
 
@@ -52,7 +52,7 @@
 **Batch 3** (Session 14 — 2026-02-07): Auth gate, dev mode, audio audit
 - F-017: Added `VITE_DEV_UNLOCK_ALL` env var to bypass tier locks in ActivityList + ProgramLibrary
 - F-010/F-011: Created `RequireAuth` component, wrapped 12 activity routes in App.tsx — guests see sign-in prompt
-- F-009: Created `scripts/audit_audio_quality.py` (librosa-based onset detection). Audited 60 files across 3 voices + targeted audit of user-reported words across 4 voices. **Result: All files are CLEAN** — no carrier phrase contamination detected. Daniel voice has notably longer files (0.78-1.15s vs 0.3-0.5s for others) with late onsets (81-221ms silence), which may explain user perception. Downgraded from P0 to P3 pending user re-test.
+- F-009: Created `scripts/audit_audio_quality.py` (librosa-based onset detection). Initial audit of 60 files across 3 voices (sarah, alice, charlie) found 0% contamination — **incorrectly** downgraded to P3. Daniel voice was not tested in this batch.
 
 **Batch 4** (Session 14 — 2026-02-07): Activity experience polish
 - F-005/F-007: RapidFire now has SESSION_LENGTH=15, progress bar ("Round X of Y"), and SessionSummary on completion instead of infinite loop
@@ -63,6 +63,13 @@
 - F-008: Created `ActivityBriefing` component — reusable pre-activity screen with title, description, instructions, session info, and Begin button. Added to Detection, RapidFire, CategoryPlayer, GrossDiscrimination.
 - F-013: CategoryLibrary cards overhauled — clinical names replaced with friendly names (e.g., "Consonant Voicing" → "Similar Sounds"), clinical name as subtitle, example word pairs added (e.g., "'bat' vs 'pat'"), raw pair count replaced with "10 per session · ~2 min"
 - Bonus: GrossDiscrimination infinite loop fixed — added SESSION_LENGTH=15, SessionSummary completion screen (same fix as F-007 for Detection/RapidFire)
+
+**Batch 6** (Session 15 — 2026-02-07): F-009 carrier phrase fix + design alignment + Smart Coach
+- F-009: Enhanced audit script (`scripts/audit_carrier_phrases.py`) with cross-voice duration comparison — breakthrough detection method. Found **daniel 92.5% contaminated**, all other 8 voices clean (0%). Created `scripts/regen_clean_audio.py` (clean TTS pipeline, no carrier phrase) + `scripts/upload_regen_audio.py`. Regenerated all 179 daniel word files. See `docs/F009_INCIDENT_REPORT.md`.
+- Smart Coach engine: Fixed SNR_STEP (2→5dB), made evaluateSession() synchronous, exported constants, removed dead `useSmartCoach()` hook, added 31 unit tests
+- Design system: Swept 11 screens from purple/gradient (old "Cyberpunk") to Aura teal/flat design system
+- Regulatory: Removed "clinical" from user-facing text, deleted dead `ClinicalReport.tsx`
+- Code quality: Gated all console.log behind `import.meta.env.DEV`, standardized LUFS to -20 across all docs
 
 ---
 
@@ -302,37 +309,42 @@ Add a pre-activity "briefing" screen for each activity:
 
 ---
 
-### F-009: Carrier phrase audio contamination — INVESTIGATED, files are CLEAN
-**Severity: ~~P0~~ P3 (downgraded after audit)** | **Category: Audio Quality / Core Product**
-**Pages:** All word-based activities (Detection, Word Recognition / RapidFire)
+### F-009: Carrier phrase audio contamination — CONFIRMED, daniel voice 92.5% contaminated
+**Severity: P0** | **Category: Audio Quality / Core Product**
+**Pages:** All word-based activities (Detection, Word Recognition / RapidFire, CategoryPlayer)
 
 **Original report:**
-~80% of words with the British voice had audible carrier phrase bleed ("is pond", "is food"). Occasionally onset clipping ("rival" → "ival"). Reported as pervasive and critical.
+User (CI recipient) reported hearing "is [word]" prefix in ~8/10 words with the British (daniel) voice. Examples: "is pond", "is food", "is bear".
 
-**Audit results (2026-02-07):**
-Automated analysis using librosa speech onset detection (`scripts/audit_audio_quality.py`) found:
+**Initial audit (INCORRECT — led to false downgrade):**
+First audit tested 60 files across 3 voices (sarah, alice, charlie) using onset-based detection. Found 0% contamination and downgraded to P3. **Critical error: daniel voice was not tested.**
 
-| Voice | Files Tested | Duration Range | Onset Range | Category |
-|-------|-------------|---------------|-------------|----------|
-| sarah | 12 | 0.35–0.48s | 12–58ms | ALL CLEAN |
-| alice | 12 | 0.35–0.49s | 12–35ms | ALL CLEAN |
-| charlie | 12 | 0.30–0.50s | 12–47ms | ALL CLEAN |
-| daniel | 12 | 0.78–1.15s | 81–221ms | ALL CLEAN (but 2-3x longer) |
+**Comprehensive audit — cross-voice duration comparison:**
+Breakthrough detection method: comparing each word's duration across all 9 voices against the median. Files significantly longer than median contain carrier phrase contamination.
 
-**Key findings:**
-1. **Zero carrier phrase contamination detected.** Energy analysis shows no speech signal before word onset in any file.
-2. **Daniel voice is an outlier** — files are 2-3x longer than other voices (0.78-1.15s vs 0.3-0.5s) with 81-221ms of silence before the word starts. This late onset + longer duration may be what the CI user perceived as "is" before words.
-3. **Multi-syllable words** (apple, basket, finger, etc.) do NOT exist in `words_v2/` — only word-pair words are stored.
-4. No carrier phrase exists in any audio path (`words_v2/{voice}/{word}.mp3`). The code uses `buildWordAudioUrl()` → `words_v2/` directly — no offset/skip logic is needed because files are already clean.
+| Voice | Contamination | Avg Duration | Notes |
+|-------|--------------|-------------|-------|
+| sarah | 0% | 0.39s | CLEAN |
+| emma | 0% | 0.40s | CLEAN |
+| bill | 0% | 0.42s | CLEAN |
+| michael | 0% | 0.39s | CLEAN |
+| alice | 0% | 0.41s | CLEAN |
+| **daniel** | **92.5%** | **1.04s** | **+0.63s above median — "is [word]" prefix** |
+| matilda | 0% | 0.43s | CLEAN |
+| charlie | 0% | 0.42s | CLEAN |
+| aravind | 0% | 0.45s | CLEAN |
 
-**Remaining question:**
-The user's perception of carrier phrase bleed was strong and specific. Possible explanations:
-- Daniel's late onset (175ms silence) interpreted differently through a CI processor
-- CI audio processing may introduce artifacts at boundaries between silence and speech
-- The user may have been testing with a different audio source or app version
-- Needs user re-test with voice explicitly set to a short-onset voice (sarah/alice/charlie)
+**Root cause:** The original generation pipeline used a carrier phrase ("The next word is [word]") and timestamp-based cropping. Daniel's UK English prosody caused the timestamp API to report word boundaries ~150ms late, and the "is [word]" rendered as continuous speech without a silence gap, making the cropping boundary undetectable.
 
-**Status:** Downgraded to P3. No code fix needed — files are clean. Recommend defaulting to shorter-onset voices and re-testing with user.
+**Fix:** Regenerated all 179 daniel word files using a clean pipeline:
+- TTS text: `"... {word} ..."` (ellipsis padding, no carrier phrase)
+- Trim silence → 50ms safety padding → normalize -20 LUFS → verify with librosa
+- Uploaded clean files to Supabase Storage (upsert)
+
+**Verification:** Cross-voice duration comparison confirms regenerated daniel files are now within normal range (0.4-0.9s vs 0.9-1.3s previously).
+
+**Full incident report:** `docs/F009_INCIDENT_REPORT.md`
+**Scripts:** `scripts/audit_carrier_phrases.py`, `scripts/regen_clean_audio.py`, `scripts/upload_regen_audio.py`
 
 **Related:** F-002 (initial carrier finding)
 

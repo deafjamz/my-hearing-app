@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { ChevronLeft, Target, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
  * Category Library - Browse word pairs by contrast category
@@ -19,6 +20,7 @@ interface Category {
 export function CategoryLibrary() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     fetchCategories();
@@ -92,11 +94,7 @@ export function CategoryLibrary() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading categories...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading categories..." />;
   }
 
   return (
@@ -128,26 +126,23 @@ export function CategoryLibrary() {
           {categories.map((category, idx) => (
             <motion.div
               key={category.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
+              transition={{ delay: prefersReducedMotion ? 0 : idx * 0.05, duration: prefersReducedMotion ? 0 : undefined }}
             >
               <Link
                 to={`/practice/category/${encodeURIComponent(category.name)}`}
                 className="block group"
               >
                 <div className="relative overflow-hidden p-6 bg-slate-900 border-2 border-slate-800 rounded-3xl hover:border-slate-700 transition-all">
-                  {/* Gradient accent */}
-                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${category.color} opacity-20 blur-3xl`} />
-
                   <div className="relative">
                     {/* Icon */}
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 shadow-lg`}>
-                      <Zap className="h-6 w-6 text-white" strokeWidth={2.5} />
+                    <div className="w-12 h-12 rounded-xl bg-teal-500/20 flex items-center justify-center mb-4">
+                      <Zap className="h-6 w-6 text-teal-400" strokeWidth={2.5} />
                     </div>
 
                     {/* Title — friendly name with clinical subtitle */}
-                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-violet-400 transition-colors">
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-teal-400 transition-colors">
                       {categoryInfo[category.name]?.friendly || category.name}
                     </h3>
                     {categoryInfo[category.name] && (
@@ -161,7 +156,7 @@ export function CategoryLibrary() {
 
                     {/* Example word pair */}
                     {categoryInfo[category.name]?.example && (
-                      <p className="text-sm text-violet-400/80 mb-4 italic">
+                      <p className="text-sm text-slate-400/80 mb-4 italic">
                         {categoryInfo[category.name].example}
                       </p>
                     )}

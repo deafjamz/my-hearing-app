@@ -62,7 +62,7 @@ export function useProgress() {
       if (error) {
         console.error("Failed to log progress to Supabase:", error);
       } else {
-        console.log("✅ Progress logged successfully:", payload);
+        if (import.meta.env.DEV) console.log("Progress logged successfully:", payload);
       }
     } catch (e) {
       console.error("Supabase authentication or logging error:", e);

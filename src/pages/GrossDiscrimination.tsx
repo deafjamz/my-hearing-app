@@ -11,6 +11,7 @@ import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
+import { LoadingSpinner } from '../components/LoadingSpinner';
 
 /**
  * Gross Discrimination Activity - Between Detection and Minimal Pairs
@@ -294,11 +295,7 @@ export function GrossDiscrimination() {
   }
 
   if (loading || rounds.length === 0) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading exercises...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading exercises..." />;
   }
 
   const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -347,9 +344,9 @@ export function GrossDiscrimination() {
             className={`w-28 h-28 rounded-full shadow-xl flex items-center justify-center text-white z-10 transition-all ${
               hasAnswered
                 ? isCorrectAnswer
-                  ? 'bg-gradient-to-tr from-teal-500 to-teal-600 shadow-teal-500/30'
-                  : 'bg-gradient-to-tr from-amber-500 to-amber-600 shadow-amber-500/30'
-                : 'bg-gradient-to-tr from-purple-500 to-purple-600 shadow-purple-500/30 hover:scale-105'
+                  ? 'bg-teal-500'
+                  : 'bg-amber-500'
+                : 'bg-teal-500 hover:bg-teal-400 hover:scale-105'
             }`}
           >
             {hasAnswered ? (
@@ -391,7 +388,7 @@ export function GrossDiscrimination() {
               }
             } else {
               cardStyle +=
-                ' hover:border-purple-400 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20';
+                ' hover:border-teal-400 dark:hover:border-teal-600 hover:bg-teal-50 dark:hover:bg-teal-900/20';
             }
 
             return (
@@ -421,7 +418,7 @@ export function GrossDiscrimination() {
           </div>
           <div className="h-1 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-purple-500"
+              className="h-full bg-teal-500"
               initial={{ width: 0 }}
               animate={{ width: `${((currentIndex + 1) / rounds.length) * 100}%` }}
               transition={{ duration: 0.3 }}

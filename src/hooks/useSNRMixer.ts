@@ -75,7 +75,7 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
     targetGainRef.current.gain.value = targetGain;
     noiseGainRef.current.gain.value = noiseGain;
 
-    console.log(`[useSNRMixer] Gains updated: target=${targetGain.toFixed(2)}, noise=${noiseGain.toFixed(4)} (${enabled ? 'AUDIBLE' : 'SILENT SENTINEL'})`);
+    if (import.meta.env.DEV) console.log(`[useSNRMixer] Gains updated: target=${targetGain.toFixed(2)}, noise=${noiseGain.toFixed(4)} (${enabled ? 'AUDIBLE' : 'SILENT SENTINEL'})`);
   }, []);
 
   /**
@@ -84,17 +84,18 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
   useEffect(() => {
     const initAudioContext = () => {
       if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        audioContextRef.current = new AudioContextClass();
 
         // Track AudioContext state changes (for mobile debugging)
         setAudioContextState(audioContextRef.current.state);
-        console.log('[useSNRMixer] AudioContext initialized. State:', audioContextRef.current.state);
+        if (import.meta.env.DEV) console.log('[useSNRMixer] AudioContext initialized. State:', audioContextRef.current.state);
 
         // Listen for state changes
         audioContextRef.current.addEventListener('statechange', () => {
           if (audioContextRef.current) {
             setAudioContextState(audioContextRef.current.state);
-            console.log('[useSNRMixer] AudioContext state changed:', audioContextRef.current.state);
+            if (import.meta.env.DEV) console.log('[useSNRMixer] AudioContext state changed:', audioContextRef.current.state);
           }
         });
 
@@ -210,7 +211,7 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
       noiseSourceRef.current.start(0);
       setIsNoiseRunning(true);
 
-      console.log(`[useSNRMixer] ✅ Noise started in ${noiseEnabled ? 'AUDIBLE' : 'SILENT SENTINEL'} mode`);
+      if (import.meta.env.DEV) console.log(`[useSNRMixer] Noise started in ${noiseEnabled ? 'AUDIBLE' : 'SILENT SENTINEL'} mode`);
     } catch (err) {
       console.error('[useSNRMixer] Failed to start noise:', err);
       setError('Failed to start background noise');
@@ -315,7 +316,7 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
   const setNoiseEnabled = useCallback((enabled: boolean) => {
     setNoiseEnabledState(enabled);
     updateGains(snr, enabled);
-    console.log(`[useSNRMixer] Noise ${enabled ? 'ENABLED' : 'DISABLED'} (Silent Sentinel: ${!enabled})`);
+    if (import.meta.env.DEV) console.log(`[useSNRMixer] Noise ${enabled ? 'ENABLED' : 'DISABLED'} (Silent Sentinel: ${!enabled})`);
   }, [snr, updateGains]);
 
   /**
@@ -335,7 +336,7 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
     if (audioContextRef.current.state === 'suspended') {
       try {
         await audioContextRef.current.resume();
-        console.log('[useSNRMixer] ✅ AudioContext resumed. State:', audioContextRef.current.state);
+        if (import.meta.env.DEV) console.log('[useSNRMixer] AudioContext resumed. State:', audioContextRef.current.state);
         return true;
       } catch (err) {
         console.error('[useSNRMixer] ❌ Failed to resume AudioContext:', err);
@@ -343,7 +344,7 @@ export function useSNRMixer(props?: UseSNRMixerProps) {
         return false;
       }
     } else {
-      console.log('[useSNRMixer] AudioContext already running. State:', audioContextRef.current.state);
+      if (import.meta.env.DEV) console.log('[useSNRMixer] AudioContext already running. State:', audioContextRef.current.state);
       return true;
     }
   }, []);

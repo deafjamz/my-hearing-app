@@ -65,14 +65,14 @@ export function ProgressChart({ data }: ProgressChartProps) {
               borderRadius: '8px',
               color: '#f2f2f7'
             }}
-            formatter={(value: any, name: string) => {
+            formatter={(value: number, name: string) => {
               if (name === 'displaySNR') {
                 return [`${-value} dB`, 'SNR'];
               }
               if (name === 'accuracy') {
                 return [`${value}%`, 'Accuracy'];
               }
-              return [value, name];
+              return [`${value}`, name];
             }}
             labelFormatter={(label) => `Date: ${label}`}
           />

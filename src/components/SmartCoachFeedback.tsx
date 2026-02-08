@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { TrendingUp, TrendingDown, Minus, Sparkles, Volume2, ArrowDownCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Volume2, ArrowDownCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface SmartCoachFeedbackProps {
@@ -33,46 +33,46 @@ export function SmartCoachFeedback({
     switch (action) {
       case 'Decrease': // Increasing difficulty (success)
         return {
-          bg: 'bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30',
+          bg: 'bg-teal-50 dark:bg-slate-900',
           border: 'border-teal-200 dark:border-teal-800',
           icon: 'text-teal-600 dark:text-teal-400',
-          glow: 'shadow-teal-200/50 dark:shadow-teal-900/50',
+          glow: 'shadow-xl',
           badge: 'bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300',
           title: 'text-teal-900 dark:text-teal-100',
         };
       case 'Increase': // Decreasing difficulty (supportive)
         return {
-          bg: 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30',
+          bg: 'bg-amber-50 dark:bg-slate-900',
           border: 'border-amber-200 dark:border-amber-800',
           icon: 'text-amber-600 dark:text-amber-400',
-          glow: 'shadow-amber-200/50 dark:shadow-amber-900/50',
+          glow: 'shadow-xl',
           badge: 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
           title: 'text-amber-900 dark:text-amber-100',
         };
       case 'Enable Noise': // Mastery achieved, invite to level up
         return {
-          bg: 'bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30',
-          border: 'border-purple-200 dark:border-purple-800',
-          icon: 'text-purple-600 dark:text-purple-400',
-          glow: 'shadow-purple-200/50 dark:shadow-purple-900/50',
-          badge: 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
-          title: 'text-purple-900 dark:text-purple-100',
+          bg: 'bg-teal-50 dark:bg-slate-900',
+          border: 'border-teal-200 dark:border-teal-800',
+          icon: 'text-teal-600 dark:text-teal-400',
+          glow: 'shadow-xl',
+          badge: 'bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300',
+          title: 'text-teal-900 dark:text-teal-100',
         };
       case 'Step Down': // Suggest easier activity (supportive, not discouraging)
         return {
-          bg: 'bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30',
+          bg: 'bg-emerald-50 dark:bg-slate-900',
           border: 'border-emerald-200 dark:border-emerald-800',
           icon: 'text-emerald-600 dark:text-emerald-400',
-          glow: 'shadow-emerald-200/50 dark:shadow-emerald-900/50',
+          glow: 'shadow-xl',
           badge: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300',
           title: 'text-emerald-900 dark:text-emerald-100',
         };
       default: // Keep (neutral)
         return {
-          bg: 'bg-gradient-to-br from-slate-50 to-zinc-50 dark:from-slate-950/30 dark:to-zinc-950/30',
+          bg: 'bg-slate-50 dark:bg-slate-900',
           border: 'border-slate-200 dark:border-slate-800',
           icon: 'text-slate-600 dark:text-slate-400',
-          glow: 'shadow-slate-200/50 dark:shadow-slate-900/50',
+          glow: 'shadow-xl',
           badge: 'bg-slate-100 text-slate-700 dark:bg-slate-900/50 dark:text-slate-300',
           title: 'text-slate-900 dark:text-slate-100',
         };
@@ -137,9 +137,7 @@ export function SmartCoachFeedback({
         {/* Title */}
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2">
-            <Sparkles size={20} className={colors.icon} aria-hidden="true" />
             <h2 id="coach-title" className={`text-2xl font-bold ${colors.title}`}>{getTitle()}</h2>
-            <Sparkles size={20} className={colors.icon} aria-hidden="true" />
           </div>
           <p className="text-slate-600 dark:text-slate-400 text-lg">{message}</p>
         </div>
@@ -201,7 +199,7 @@ export function SmartCoachFeedback({
                 : action === 'Increase'
                 ? 'bg-amber-600 hover:bg-amber-700'
                 : action === 'Enable Noise'
-                ? 'bg-purple-600 hover:bg-purple-700'
+                ? 'bg-teal-500 hover:bg-teal-400'
                 : 'bg-slate-600 hover:bg-slate-700'
             }`}
           >

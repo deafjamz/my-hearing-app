@@ -12,8 +12,20 @@ import { SessionSummary } from '../components/SessionSummary';
 import { AuraVisualizer } from '../components/AuraVisualizer';
 import { HapticButton } from '../components/ui/HapticButton';
 import { hapticSuccess, hapticFailure } from '../lib/haptics';
-import { evaluateSession, getClinicalBabble, getUserSNR, saveUserSNR, SmartCoachResponse } from '../lib/api';
+import { evaluateSession, getClinicalBabble, getUserSNR, saveUserSNR, SNR_DEFAULT, BLOCK_SIZE } from '../lib/api';
 import { ActivityBriefing } from '../components/ActivityBriefing';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+
+/** UI-level coach action type (capitalized), matching SmartCoachFeedbackProps */
+type CoachUIAction = 'Increase' | 'Decrease' | 'Keep' | 'Enable Noise' | 'Step Down';
+
+/** UI-level coach response with capitalized action strings */
+interface CoachUIResponse {
+  recommendation: string;
+  action: CoachUIAction;
+  accuracy: number;
+  next_snr: number;
+}
 
 // Game State Interface
 interface GameRound {
@@ -46,17 +58,17 @@ export function RapidFire() {
 
   // Smart Coach state
   const [trialHistory, setTrialHistory] = useState<boolean[]>([]);
-  const [currentSNR, setCurrentSNR] = useState<number>(10); // Will be loaded from user profile
+  const [currentSNR, setCurrentSNR] = useState<number>(SNR_DEFAULT);
   const [babbleUrl, setBabbleUrl] = useState<string>('');
   const [showCoachFeedback, setShowCoachFeedback] = useState(false);
-  const [coachResponse, setCoachResponse] = useState<SmartCoachResponse | null>(null);
+  const [coachResponse, setCoachResponse] = useState<CoachUIResponse | null>(null);
 
   // Noise toggle (Silent Sentinel per 00_MASTER_RULES.md Section 6)
   const [noiseEnabled, setNoiseEnabled] = useState(false); // Default OFF (Consumer Model)
 
-  // Debug logging (can be removed in production)
+  // Debug logging (dev only)
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       console.log('[RapidFire] Loading:', loading, '| Pairs:', pairs.length, '| Voice:', voice || 'sarah');
     }
   }, [loading, pairs.length, voice]);
@@ -164,8 +176,7 @@ export function RapidFire() {
   const handleNoiseToggle = () => {
     const newState = !noiseEnabled;
     setNoiseEnabled(newState);
-    setMixerNoiseEnabled(newState); // Update mixer immediately
-    console.log(`[RapidFire] Noise ${newState ? 'ENABLED' : 'DISABLED'}`);
+    setMixerNoiseEnabled(newState);
   };
 
   const hasGuessed = selectedGuess !== null;
@@ -231,13 +242,13 @@ export function RapidFire() {
         }
     });
 
-    // Smart Coach: Evaluate every 10 trials (only if noise is enabled)
-    if (newHistory.length % 10 === 0 && newHistory.length > 0) {
+    // Smart Coach: Evaluate every BLOCK_SIZE trials (per 10_CLINICAL_CONSTANTS.md)
+    if (newHistory.length % BLOCK_SIZE === 0 && newHistory.length > 0) {
       stopNoise(); // Stop continuous noise before showing modal
 
-      // Get last 10 results
-      const last10 = newHistory.slice(-10);
-      const accuracyPercent = (last10.filter(Boolean).length / 10) * 100;
+      // Get last block of results
+      const lastBlock = newHistory.slice(-BLOCK_SIZE);
+      const accuracyPercent = (lastBlock.filter(Boolean).length / BLOCK_SIZE) * 100;
 
       // Step Down Detection: User struggling at easiest setting
       // If at max SNR (+20 dB, easiest noise) OR quiet mode, and accuracy ≤50%
@@ -248,7 +259,7 @@ export function RapidFire() {
         // Suggest stepping down to Gross Discrimination
         setCoachResponse({
           recommendation: "Word pairs are quite challenging. Let's build your foundation with simpler exercises first - you'll come back stronger!",
-          action: "Step Down" as any, // UI-specific action
+          action: "Step Down",
           accuracy: accuracyPercent,
           next_snr: currentSNR, // Keep same SNR
         });
@@ -258,17 +269,19 @@ export function RapidFire() {
 
       // Per 00_MASTER_RULES.md Section 6: Smart Coach only adjusts SNR if noise is enabled
       if (noiseEnabled) {
-        // Call Smart Coach for SNR adjustment
-        const response = await evaluateSession(currentSNR, last10);
+        // Smart Coach SNR adjustment (pure function, no async)
+        const response = evaluateSession(currentSNR, lastBlock);
 
         // Map API action to UI action format
-        const uiAction = response.action === 'decrease' ? 'Decrease'
+        const uiAction: CoachUIAction = response.action === 'decrease' ? 'Decrease'
           : response.action === 'increase' ? 'Increase'
           : 'Keep';
 
         setCoachResponse({
-          ...response,
-          action: uiAction as any,
+          recommendation: response.recommendation,
+          action: uiAction,
+          accuracy: response.accuracy,
+          next_snr: response.next_snr,
         });
         setShowCoachFeedback(true);
 
@@ -286,7 +299,7 @@ export function RapidFire() {
           recommendation: accuracyPercent >= 90
             ? "Perfect score in quiet mode! Ready to try this with background noise?"
             : `${accuracyPercent}% accuracy. Keep practicing!`,
-          action: (accuracyPercent >= 90 ? "Enable Noise" : "Keep") as any,
+          action: accuracyPercent >= 90 ? "Enable Noise" as const : "Keep" as const,
           accuracy: accuracyPercent,
           next_snr: currentSNR, // No change
         });
@@ -322,7 +335,7 @@ export function RapidFire() {
   }
 
   if (loading) {
-    return <div className="p-10 text-center text-slate-500">Loading word pairs...</div>;
+    return <LoadingSpinner message="Loading word pairs..." />;
   }
 
   if (sessionRounds.length === 0 || !currentRound) {
@@ -367,8 +380,8 @@ export function RapidFire() {
             disabled={isTargetPlaying} // Disable play button when audio is playing
             className={`w-28 h-28 rounded-full shadow-xl flex items-center justify-center text-white z-10 ${
               hasGuessed
-                ? 'bg-gradient-to-tr from-green-500 to-green-600 hover:scale-105 shadow-green-500/30'
-                : 'bg-gradient-to-tr from-purple-500 to-purple-600 hover:scale-105 shadow-purple-500/30'
+                ? 'bg-teal-500 hover:bg-teal-400 hover:scale-105'
+                : 'bg-teal-500 hover:bg-teal-400 hover:scale-105'
             }`}
           >
             {hasGuessed ? <ArrowRight size={48} /> : <Play size={48} fill="currentColor" className="ml-1" />}
@@ -393,7 +406,7 @@ export function RapidFire() {
             const isTheCorrectAnswer = option === currentRound.targetWord;
             const showAnswerText = !hardMode || audioPlayedForRound;
 
-            let cardStyle = "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-purple-300 dark:hover:border-purple-700";
+            let cardStyle = "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white hover:border-teal-400 dark:hover:border-teal-600";
 
             if (hasGuessed) {
               if (isTheCorrectAnswer) {
@@ -434,7 +447,7 @@ export function RapidFire() {
           </div>
           <div className="h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-purple-500 rounded-full"
+              className="h-full bg-teal-500 rounded-full"
               animate={{ width: `${((currentIndex + 1) / sessionRounds.length) * 100}%` }}
               transition={{ duration: 0.3 }}
             />
@@ -446,7 +459,7 @@ export function RapidFire() {
       {showCoachFeedback && coachResponse && (
         <SmartCoachFeedback
           message={coachResponse.recommendation}
-          action={coachResponse.action as any}
+          action={coachResponse.action}
           accuracy={coachResponse.accuracy}
           currentSNR={currentSNR}
           nextSNR={coachResponse.next_snr}
@@ -458,7 +471,6 @@ export function RapidFire() {
             // Enable noise when user opts in after achieving mastery
             setNoiseEnabled(true);
             setMixerNoiseEnabled(true);
-            console.log('[RapidFire] Noise ENABLED via Smart Coach opt-in');
           }}
           stepDownPath="/practice/gross-discrimination"
         />

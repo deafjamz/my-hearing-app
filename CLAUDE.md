@@ -25,12 +25,29 @@ cd ~/Projects/my-hearing-app
 
 ---
 
+## CRITICAL: Single Source of Truth
+
+**`~/Projects/my-hearing-app` is the ONLY canonical location for everything — code AND documentation.**
+
+A legacy copy exists at `~/Desktop/my-hearing-app/` but it is **read-only reference only**. All docs from that copy were ported to the active project in Feb 2026. Specifically:
+
+- `core docs/` (with space) on Desktop → `core_docs/` (with underscore) in Projects
+- Desktop `docs/rules/` → Projects `docs/rules/`
+- Desktop `.claude/rules|commands|skills/` → Projects `.claude/rules|commands|skills/`
+- Desktop `src/styles/tokens.ts` → Projects `src/styles/tokens.ts`
+
+**If you create or update any documentation, it goes in `~/Projects/my-hearing-app/` — never Desktop.**
+
+---
+
 ## Session Continuity
 
 **Starting a new session?**
 1. `cd ~/Projects/my-hearing-app` (CRITICAL!)
 2. Read `STATUS.md` - current state, blockers, next actions
 3. `git pull` to get latest changes
+
+**Working on UI?** Read `docs/STYLE_GUIDE.md` first — "Aura" design system, teal primary CTA, no cyberpunk
 
 **Working with audio?** Read `docs/AUDIO_INVENTORY.md` - single source of truth for audio assets
 
@@ -59,18 +76,25 @@ This is a web-based hearing rehabilitation application designed specifically for
 
 ### Directory Layout
 ```
-~/Projects/my-hearing-app/          <- CANONICAL DEVELOPMENT LOCATION
+~/Projects/my-hearing-app/          <- CANONICAL LOCATION (code + docs)
 ├── src/
 │   ├── components/                 <- React components
 │   ├── hooks/                      <- Custom React hooks
 │   ├── lib/                        <- Utilities and helpers
 │   ├── pages/                      <- Page components
 │   ├── store/                      <- State management
+│   ├── styles/                     <- Design tokens (tokens.ts)
 │   └── types/                      <- TypeScript types
+├── core_docs/                      <- Brand strategy, design system, master plan
+├── docs/                           <- Technical documentation
+│   └── rules/                      <- Architecture & clinical rules
 ├── public/                         <- Static assets
 ├── scripts/                        <- Audio generation scripts
 ├── sql_migrations/                 <- Database migrations
-├── docs/                           <- Documentation
+├── .claude/
+│   ├── rules/                      <- Agent rules (6 files)
+│   ├── commands/                   <- Agent commands
+│   └── skills/                     <- Agent skills
 ├── CLAUDE.md                       <- This file
 ├── STATUS.md                       <- Session status
 ├── DEVELOPMENT_SETUP.md            <- Critical setup guide
@@ -109,7 +133,12 @@ This is a web-based hearing rehabilitation application designed specifically for
 - Custom hooks for data fetching (useStimuli, useAudioPlayer, etc.)
 - Context for global state (UserContext, VoiceContext)
 
-### CSS Guidelines
+### CSS & Design Guidelines
+- **Read `docs/STYLE_GUIDE.md` before any UI work** — "Aura" design system
+- **"The Apple of Hearing"** — Clean, Swiss, Medical-Grade. NOT cyberpunk.
+- Primary CTA color: **Teal** (`bg-teal-500`), not purple/violet
+- Solid button fills only — no gradients, no colored shadows
+- `font-bold` max — never `font-black`
 - Tailwind utility classes primarily
 - Custom CSS only for complex animations
 - Mobile-first responsive design
@@ -156,11 +185,20 @@ npx vercel --prod
 | Purpose | File |
 |---------|------|
 | **CRITICAL SETUP** | `DEVELOPMENT_SETUP.md` |
+| **Design system** | `docs/STYLE_GUIDE.md` — "Aura" system (read before any UI work) |
+| **Brand strategy** | `core_docs/3_BRAND_STRATEGY.md` — "The Apple of Hearing" |
+| **Design tokens** | `core_docs/4_DESIGN_SYSTEM.md` — Full Aura token spec |
+| **Master plan** | `core_docs/5_MASTER_PLAN.md` — Phased roadmap |
+| Architecture rules | `docs/rules/00_MASTER_RULES.md` |
+| Clinical constants | `docs/rules/10_CLINICAL_CONSTANTS.md` — SNR math, Smart Coach |
+| UI review checklist | `docs/UI_REVIEW_CHECKLIST.md` — Quality gates |
 | Session status | `STATUS.md` |
 | Audio inventory | `docs/AUDIO_INVENTORY.md` |
-| Vercel config | `vercel.json` |
-| Architecture rules | `docs/rules/00_MASTER_RULES.md` |
+| Audio master inventory | `docs/AUDIO_MASTER_INVENTORY.md` — 31K+ files |
 | Voice config | `docs/VOICE_LIBRARY.md` |
+| Regulatory language | `docs/REGULATORY_LANGUAGE_GUIDE.md` — FDA-safe copy |
+| Browser compat | `docs/BROWSER_COMPATIBILITY.md` — iOS Safari, MFi/ASHA |
+| Vercel config | `vercel.json` |
 
 ## Notion Project Log Integration
 

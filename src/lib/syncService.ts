@@ -12,7 +12,7 @@ export async function migrateGuestData(userId: string): Promise<{
   success: boolean;
   mergedData?: Record<string, unknown>;
 }> {
-  console.log('[syncService] migrateGuestData stub called for', userId);
+  if (import.meta.env.DEV) console.log('[syncService] migrateGuestData stub called for', userId);
   return { success: false };
 }
 
@@ -25,7 +25,7 @@ export async function pullProgress(userId: string): Promise<{
     stats: { streak: number };
   };
 }> {
-  console.log('[syncService] pullProgress stub called for', userId);
+  if (import.meta.env.DEV) console.log('[syncService] pullProgress stub called for', userId);
   return { success: false };
 }
 
@@ -33,7 +33,7 @@ export async function pullProgress(userId: string): Promise<{
 export async function syncOfflineData(userId: string): Promise<{
   synced: number;
 }> {
-  console.log('[syncService] syncOfflineData stub called for', userId);
+  if (import.meta.env.DEV) console.log('[syncService] syncOfflineData stub called for', userId);
   return { synced: 0 };
 }
 
@@ -44,5 +44,5 @@ export function hasOfflineData(): boolean {
 
 /** Enable/disable audio caching for premium users */
 export function setAudioCachingEnabled(enabled: boolean): void {
-  console.log('[syncService] Audio caching', enabled ? 'enabled' : 'disabled');
+  if (import.meta.env.DEV) console.log('[syncService] Audio caching', enabled ? 'enabled' : 'disabled');
 }

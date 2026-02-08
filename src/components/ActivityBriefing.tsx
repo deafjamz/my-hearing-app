@@ -23,7 +23,7 @@ export function ActivityBriefing({ title, description, instructions, sessionInfo
 
         <button
           onClick={onStart}
-          className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg rounded-xl shadow-lg shadow-purple-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-3"
+          className="w-full py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-xl shadow-xl transition-all active:scale-[0.98] flex items-center justify-center gap-3"
         >
           <Play size={22} fill="currentColor" />
           Begin

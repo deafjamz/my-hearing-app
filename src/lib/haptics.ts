@@ -28,7 +28,7 @@ export async function hapticSuccess() {
     }
   } else {
     // Web fallback - non-blocking
-    console.log('[Haptics] ✅ Success (Light Impact)');
+    if (import.meta.env.DEV) console.log('[Haptics] ✅ Success (Light Impact)');
   }
 }
 
@@ -46,7 +46,7 @@ export async function hapticFailure() {
     }
   } else {
     // Web fallback - non-blocking
-    console.log('[Haptics] ❌ Failure (Error Notification)');
+    if (import.meta.env.DEV) console.log('[Haptics] ❌ Failure (Error Notification)');
   }
 }
 
@@ -64,7 +64,7 @@ export async function hapticSelection() {
     }
   } else {
     // Web fallback - non-blocking
-    console.log('[Haptics] 🔘 Selection (Medium Impact)');
+    if (import.meta.env.DEV) console.log('[Haptics] 🔘 Selection (Medium Impact)');
   }
 }
 
@@ -82,6 +82,6 @@ export async function hapticWarning() {
     }
   } else {
     // Web fallback - non-blocking
-    console.log('[Haptics] ⚠️ Warning (Warning Notification)');
+    if (import.meta.env.DEV) console.log('[Haptics] ⚠️ Warning (Warning Notification)');
   }
 }

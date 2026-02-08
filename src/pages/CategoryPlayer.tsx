@@ -6,11 +6,24 @@ import { ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useUser } from '@/store/UserContext';
 import { ActivityBriefing } from '@/components/ActivityBriefing';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
  * Loads 10 random pairs from a specific contrast category
  */
+
+interface AudioAsset {
+  id: string;
+  voice_id: string;
+  storage_path: string;
+}
+
+interface StimulusRow {
+  id: string;
+  clinical_metadata: Record<string, string> | null;
+  audio_assets: AudioAsset[] | null;
+}
 
 interface WordPair {
   id: string;
@@ -81,11 +94,11 @@ export function CategoryPlayer() {
       if (error) throw error;
 
       // Filter by category and shuffle
-      const categoryPairs = stimuli
-        .filter((s: any) => s.clinical_metadata?.contrast_category === decodedCategory)
-        .map((s: any) => {
+      const categoryPairs = (stimuli as StimulusRow[])
+        .filter((s) => s.clinical_metadata?.contrast_category === decodedCategory)
+        .map((s) => {
           // Try selected voice first, fall back to any available voice
-          const audio = s.audio_assets?.find((a: any) => a.voice_id === selectedVoice)
+          const audio = s.audio_assets?.find((a) => a.voice_id === selectedVoice)
             || s.audio_assets?.[0];
           return {
             id: s.id,
@@ -176,11 +189,7 @@ export function CategoryPlayer() {
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading pairs...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading pairs..." />;
   }
 
   if (pairs.length === 0) {
@@ -189,7 +198,7 @@ export function CategoryPlayer() {
         <div className="text-center">
           <div className="text-slate-400 mb-4">No audio available for this category yet.</div>
           <p className="text-slate-500 text-sm mb-4">Audio for this category hasn't been generated. Try a different category.</p>
-          <Link to="/categories" className="text-violet-400 hover:text-violet-300">
+          <Link to="/categories" className="text-slate-400 hover:text-slate-300">
             ← Back to Categories
           </Link>
         </div>
@@ -240,7 +249,7 @@ export function CategoryPlayer() {
           </div>
           <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-violet-500 to-purple-600 rounded-full transition-all duration-300"
+              className="h-full bg-teal-500 rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -260,7 +269,7 @@ export function CategoryPlayer() {
             <button
               onClick={toggleAutoplay}
               className={`relative w-14 h-8 rounded-full transition-all ${
-                autoplayEnabled ? 'bg-violet-600' : 'bg-slate-700'
+                autoplayEnabled ? 'bg-teal-500' : 'bg-slate-700'
               }`}
             >
               <div
@@ -279,7 +288,7 @@ export function CategoryPlayer() {
                 setHasPlayed(true);
               }
             }}
-            className="w-full p-8 bg-gradient-to-br from-violet-900/40 to-purple-900/40 border-2 border-violet-700 rounded-3xl hover:from-violet-900/60 hover:to-purple-900/60 transition-all"
+            className="w-full p-8 bg-slate-900 border-2 border-slate-700 rounded-3xl hover:bg-slate-800 hover:border-teal-500/30 transition-all"
           >
             <div className="text-center">
               <div className="text-6xl mb-4">🔊</div>
@@ -308,7 +317,7 @@ export function CategoryPlayer() {
           {/* Answer Buttons */}
           <div className="grid grid-cols-2 gap-4">
             {[currentPair.word1, currentPair.word2].map((word) => {
-              let btnStyle = 'border-slate-700 hover:border-violet-500';
+              let btnStyle = 'border-slate-700 hover:border-teal-500';
               if (feedback) {
                 if (word.toLowerCase() === feedback.correctWord) {
                   btnStyle = 'border-teal-500 bg-teal-900/20';

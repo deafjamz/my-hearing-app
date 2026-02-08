@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { CheckCircle, TrendingUp, Target } from 'lucide-react';
 
 /**
@@ -36,20 +36,21 @@ export function SessionSummary({
   };
 
   const performance = getPerformanceMessage();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         className="max-w-lg w-full"
       >
         {/* Success Icon */}
         <motion.div
-          initial={{ scale: 0 }}
+          initial={prefersReducedMotion ? false : { scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.2, type: 'spring', stiffness: 200 }}
           className="flex justify-center mb-6"
         >
           <div className="w-24 h-24 rounded-full bg-teal-500/20 border-4 border-teal-500 flex items-center justify-center">
@@ -59,9 +60,9 @@ export function SessionSummary({
 
         {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.3, duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-8"
         >
           <h1 className="text-3xl font-bold text-white mb-2">Session Complete!</h1>
@@ -72,10 +73,10 @@ export function SessionSummary({
         <div className="grid grid-cols-1 gap-4 mb-8">
           {/* Accuracy */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="p-6 bg-gradient-to-br from-teal-900/30 to-green-900/30 border border-teal-700/50 rounded-2xl"
+            transition={{ delay: prefersReducedMotion ? 0 : 0.4, duration: prefersReducedMotion ? 0 : undefined }}
+            className="p-6 bg-slate-900 border border-slate-800 rounded-2xl"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -100,14 +101,14 @@ export function SessionSummary({
 
           {/* Performance Message */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0 : undefined }}
             className="p-6 bg-slate-900 border border-slate-800 rounded-2xl"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-violet-500/20 flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-violet-400" />
+              <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-teal-400" />
               </div>
               <div>
                 <p className="text-sm font-medium text-slate-400">Assessment</p>
@@ -121,9 +122,9 @@ export function SessionSummary({
 
         {/* Motivational Message */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.6, duration: prefersReducedMotion ? 0 : undefined }}
           className="p-6 bg-slate-900/50 border border-slate-800 rounded-2xl mb-8"
         >
           <p className="text-slate-400 text-center leading-relaxed">
@@ -141,22 +142,22 @@ export function SessionSummary({
 
         {/* Continue Button */}
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
+          whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+          whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
           onClick={onContinue}
-          className="w-full p-6 bg-gradient-to-r from-violet-600 to-purple-700 rounded-2xl hover:from-violet-500 hover:to-purple-600 transition-all shadow-lg"
+          className="w-full p-6 bg-teal-500 hover:bg-teal-400 rounded-2xl transition-all shadow-xl"
         >
           <p className="text-white font-bold text-lg">Continue Training</p>
         </motion.button>
 
         {/* Secondary Actions */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.8, duration: prefersReducedMotion ? 0 : undefined }}
           className="mt-4 text-center"
         >
           <button

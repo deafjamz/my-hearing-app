@@ -16,7 +16,7 @@ export interface Stimulus {
   target_phoneme?: string;
   contrast_phoneme?: string;
   phoneme_position?: 'initial' | 'medial' | 'final';
-  tags?: Record<string, any>;
+  tags?: Record<string, string | number | boolean | null>;
   tier: 'free' | 'standard' | 'premium';
   created_at: string;
 }
@@ -226,39 +226,3 @@ export function useTrialLogger() {
   return { logTrial, logging };
 }
 
-/**
- * Hook to get Smart Coach recommended SNR
- */
-export function useSmartCoach() {
-  const [recommendedSNR, setRecommendedSNR] = useState<number>(10); // Default: +10dB (easy)
-  const [loading, setLoading] = useState(false);
-
-  const getRecommendedSNR = async (currentSNR: number) => {
-    setLoading(true);
-
-    try {
-      const { data: userData } = await supabase.auth.getUser();
-      if (!userData.user) {
-        return currentSNR;
-      }
-
-      // Call the calculate_next_snr function
-      const { data, error } = await supabase.rpc('calculate_next_snr', {
-        p_user_id: userData.user.id,
-        p_current_snr: currentSNR,
-      });
-
-      if (error) throw error;
-
-      setRecommendedSNR(data);
-      return data;
-    } catch (err) {
-      console.error('Smart Coach error:', err);
-      return currentSNR;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return { recommendedSNR, getRecommendedSNR, loading };
-}

@@ -33,6 +33,7 @@ export interface ScenarioItem {
   speaker: string;
   text: string;
   difficulty: string;
+  audio_path?: string;
 }
 
 export interface Scenario {
@@ -41,6 +42,7 @@ export interface Scenario {
   difficulty: string;
   description: string;
   items: ScenarioItem[];
+  ambience_path?: string;
   tier?: 'free' | 'standard' | 'premium';
 }
 

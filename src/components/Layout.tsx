@@ -30,8 +30,8 @@ export function Layout({ className }: LayoutProps) {
 
       {/* Global Atmospheric Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/20 dark:bg-purple-500/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[100px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[120px]" />
       </div>
       
       {/* Top Bar (Mobile Header) */}
@@ -48,7 +48,7 @@ export function Layout({ className }: LayoutProps) {
             className="pointer-events-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all"
          >
              {user ? (
-                 <div className="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">
+                 <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center text-xs font-bold">
                      {user.email?.[0].toUpperCase()}
                  </div>
              ) : (
@@ -88,7 +88,7 @@ export function Layout({ className }: LayoutProps) {
                 className={cn(
                   "flex flex-col items-center gap-1 transition-all duration-300 py-1 px-2 rounded-lg",
                   isActive
-                    ? "text-purple-400 bg-purple-500/20"
+                    ? "text-teal-400 bg-teal-500/20"
                     : "text-slate-400 hover:text-white"
                 )}
               >

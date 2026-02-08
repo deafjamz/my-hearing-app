@@ -111,19 +111,19 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
         // Handle SIGNED_IN event - migrate guest data
         if (event === 'SIGNED_IN') {
-          console.log('User signed in, checking for guest data migration...');
+          if (import.meta.env.DEV) console.log('User signed in, checking for guest data migration...');
           const result = await migrateGuestData(userId);
           if (result.success && result.mergedData) {
-            console.log('Guest data migrated:', result.mergedData);
+            if (import.meta.env.DEV) console.log('Guest data migrated:', result.mergedData);
           }
         }
 
         // Handle TOKEN_REFRESHED - sync any offline data
         if (event === 'TOKEN_REFRESHED' && hasOfflineData()) {
-          console.log('Token refreshed, syncing offline data...');
+          if (import.meta.env.DEV) console.log('Token refreshed, syncing offline data...');
           const syncResult = await syncOfflineData(userId);
           if (syncResult.synced > 0) {
-            console.log(`Synced ${syncResult.synced} offline entries`);
+            if (import.meta.env.DEV) console.log(`Synced ${syncResult.synced} offline entries`);
           }
         }
 

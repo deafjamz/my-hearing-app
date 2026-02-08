@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Lock, ChevronLeft } from 'lucide-react';
 import * as Icons from 'lucide-react';
-import { motion } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 /**
  * Program Library - Netflix-Style Program Cards
@@ -30,6 +32,7 @@ export function ProgramLibrary() {
   const { user, profile } = useUser();
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
   // Map subscription tier to program tier scheme
   const tierMap: Record<string, string> = { 'Free': 'free', 'Standard': 'tier1', 'Premium': 'tier2' };
@@ -90,27 +93,20 @@ export function ProgramLibrary() {
     return true;
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
+  const container = prefersReducedMotion
+    ? { hidden: { opacity: 1 }, show: { opacity: 1 } }
+    : {
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.1
+          }
+        }
+      };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-slate-400">Loading programs...</div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading programs..." />;
   }
 
   // Group programs by tier
@@ -131,7 +127,7 @@ export function ProgramLibrary() {
           </Link>
           <div>
             <h1 className="text-3xl font-bold text-white">Programs</h1>
-            <p className="text-slate-400 text-sm">Curated clinical training pathways</p>
+            <p className="text-slate-400 text-sm">Structured listening practice pathways</p>
           </div>
         </div>
 
@@ -205,14 +201,16 @@ export function ProgramLibrary() {
 }
 
 function ProgramCard({ program, locked }: { program: Program; locked: boolean }) {
-  const Icon = (Icons as any)[program.icon_name] || Icons.Sparkles;
+  const prefersReducedMotion = useReducedMotion();
+  const IconLookup = Icons as Record<string, LucideIcon>;
+  const Icon = IconLookup[program.icon_name] || Icons.Sparkles;
   const progress = program.completed_sessions && program.total_sessions
     ? (program.completed_sessions / program.total_sessions) * 100
     : 0;
 
   return (
     <motion.div
-      whileHover={{ scale: locked ? 1 : 1.02 }}
+      whileHover={prefersReducedMotion ? undefined : { scale: locked ? 1 : 1.02 }}
       className={`relative group ${locked ? 'opacity-60' : ''}`}
     >
       <Link

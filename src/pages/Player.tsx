@@ -89,10 +89,10 @@ export function Player() {
             <p className="font-semibold mb-1">Transcript:</p>
             {hardMode && !audioHasPlayed ? (
               <p className="text-slate-400 italic">Listen to the audio first...</p>
-            ) : activityData.transcript && (activityData as any).alignmentData ? (
+            ) : activityData.transcript && 'alignmentData' in activityData && activityData.alignmentData ? (
               <KaraokeTranscript
                 transcript={activityData.transcript}
-                alignmentData={(activityData as any).alignmentData}
+                alignmentData={activityData.alignmentData}
                 currentTime={currentTime}
                 voiceId={currentVoice}
               />
