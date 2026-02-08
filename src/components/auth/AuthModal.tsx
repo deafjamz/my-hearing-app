@@ -16,7 +16,7 @@ interface AuthModalProps {
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProps) {
-  const [view, setView] = useState<AuthView>('sign-in');
+  const [view, setView] = useState<AuthView>('sign-up');
   const [emailType, setEmailType] = useState<EmailType>('confirmation');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -73,7 +73,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
           if (error.message === 'Invalid login credentials') {
-            throw new Error('Incorrect email or password. Please try again.');
+            throw new Error('No account found with those credentials. Need to create one?');
           }
           if (error.message.includes('Email not confirmed')) {
             throw new Error('Please check your email and confirm your account first.');
