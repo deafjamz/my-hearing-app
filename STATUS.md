@@ -1,11 +1,11 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-07
-> **Last Session:** Auth hardening, dark mode fix, OAuth/Magic Link/Forgot Password (Session 17)
-> **Build Status:** ✅ PASSING (3.3s, 278KB main bundle)
-> **Deployment:** ✅ LIVE at https://soundsteps.app (+ https://my-hearing-app.vercel.app)
+> **Last Updated:** 2026-02-08
+> **Last Session:** Route restructure, Sentences modernization, hooks fix (Session 18)
+> **Build Status:** ✅ PASSING (3.4s, 248KB main bundle)
+> **Deployment:** ✅ LIVE at https://soundsteps.app — auto-deploys on push to main
 > **Tests:** ✅ 31 PASSING (Vitest)
-> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (17 fixed)
+> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (16 fixed, 1 deferred)
 
 ---
 
@@ -239,26 +239,32 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Configure Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → paste into Supabase Dashboard → Authentication → Providers → Google. Callback URL: `https://padfntxzoxhozfjsqnzc.supabase.co/auth/v1/callback`. Full instructions in `docs/AUTH_SETUP.md`.
-- [ ] **Configure Apple OAuth** — Apple Developer account → Sign in with Apple service ID → paste into Supabase Dashboard → Authentication → Providers → Apple. Full instructions in `docs/AUTH_SETUP.md`.
-- [x] ~~Configure custom SMTP~~ ✅ Done (Resend via noreply@soundsteps.app)
-- [x] ~~Customize email templates~~ ✅ Branded templates written for all 4 email types. Paste into Supabase Dashboard → Authentication → Email Templates.
-- [x] ~~Configure custom SMTP~~ ✅ Resend configured (noreply@soundsteps.app), DNS verified (SPF/DKIM/MX)
-- [ ] **Paste email templates into Supabase** — 4 templates ready: Confirm Signup, Magic Link, Reset Password, Change Email. See session notes or `docs/AUTH_SETUP.md`.
+- [ ] **Configure Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → Supabase. See `docs/AUTH_SETUP.md`.
+- [ ] **Configure Apple OAuth** — Apple Developer → Sign in with Apple. See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
 - [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
 - [ ] **Remove VITE_DEV_UNLOCK_ALL from Vercel** production env (was added for testing)
+- [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
+- [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
+
+### Done (previously TODO)
+- [x] Email templates pasted into Supabase ✅ (Session 18)
+- [x] Supabase security linter SQL fixes run ✅ (Session 18)
+- [x] Premium granted to test account ✅ (Session 18)
+- [x] Custom SMTP configured ✅ (Resend via noreply@soundsteps.app)
+- [x] Branded email templates written ✅
 
 ### Future Opportunities
 
 #### P0 — Core UX
-- [ ] **Bluetooth/CI audio relay: Silent Sentinel persistent audio** — Cochlear Phone Clip and similar Bluetooth relay devices (Resound HAs, Cochlear CIs) have 3-4 second audio route delay. Short isolated clips (Detection, word pairs) get cut off before transmitting. Fix: maintain a persistent near-silent audio stream (~0.0001 gain) on the Web Audio API to keep the Bluetooth route alive. When a word plays, it transmits instantly with no delay. Already spec'd in `audio.md` rules as "Silent Sentinel" pattern — needs implementation across all activity pages. This is critical for the core CI user demographic.
-- [ ] **Guided new-user onboarding flow** — After completing first activity (e.g., Detection), user has no idea what to do next. SessionSummary shows results but no guidance. New users need an "on rails" experience: (1) Assessment sequence to determine starting level, (2) Clear "Next: Try this" CTA after each activity, (3) Progressive unlocking so users don't get lost or overwhelmed. Think Duolingo's first-run: guided path, not an open menu. Should determine difficulty level early and route accordingly.
-- [ ] **Redesign Home as propulsive landing, not data dashboard** — Current Dashboard shows empty metrics (0/100, +10 dB, "Intermediate") to new users. Cold, clinical, uninviting. Home should be warm and action-oriented: greeting, one big CTA to start practicing, maybe a streak/encouragement card. Move SNR, Current Level, Daily Ascent metrics to Progress page or a second-level "Stats" view. First screen = propulsive ("Start today's practice"), deeper screens = data.
+- [x] ~~Bluetooth/CI audio relay: Silent Sentinel~~ ✅ Implemented — `useSilentSentinel` hook active in Detection, RapidFire, CategoryPlayer, GrossDiscrimination, SentenceTraining
+- [x] ~~Guided new-user onboarding~~ ✅ Implemented — WelcomeScreen + ActivityBriefing on all activities + nextActivity in SessionSummary
+- [x] ~~Redesign Home as propulsive landing~~ ✅ Practice Hub is now `/`, Dashboard moved to `/dashboard`
+- [ ] **"Today's Practice" daily training** — Structured daily routine with scheduled activities adjusted to ability. Like Duolingo's daily lesson — user opens app, sees next activity, taps Start. No decision fatigue. Programs infrastructure exists but needs UX rethink.
 
 #### P1 — Auth & Account
-- [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings. Email template (#4) already written.
-- [ ] **Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → Supabase. See `docs/AUTH_SETUP.md`.
-- [ ] **Apple OAuth** — Apple Developer → Sign in with Apple. See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
+- [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings.
+- [ ] **Google OAuth** — See `docs/AUTH_SETUP.md`.
+- [ ] **Apple OAuth** — See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
 
 ### Completed
 - [x] ~~Verify programs schema exists in Supabase~~ ✅ Confirmed (224 session_items)
@@ -370,6 +376,37 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-08 (Session 18: Route Restructure, Sentences Fix, UX Cleanup)
+
+**Summary:** Made Practice Hub the default landing, modernized Sentences page, fixed React hooks bug, cleaned up stale deploy notes. Supabase security fixes, email templates, and Premium access configured by user.
+
+**Route Restructuring:**
+- `/` → Practice Hub (ActivityList) — was Dashboard
+- `/dashboard` → Dashboard — opt-in stats view, no longer default
+- Nav simplified from 4 tabs to 3: Practice, Progress, Settings
+- Welcome/auth gate moved from Dashboard to ActivityList
+
+**Sentences Modernization (SentenceTraining.tsx):**
+- Added ActivityBriefing, progress bar ("Round X of Y"), useSilentSentinel
+- Added useProgress logging with sentence metadata
+- Dark theme support throughout
+- Fixed voice type (was hardcoded `'sarah' | 'marcus'`, now uses VoiceContext)
+- Added nextActivity → Everyday Scenarios in SessionSummary
+
+**Other Fixes:**
+- Removed Programs card from Practice Hub (still at `/programs` for dev)
+- Upsell banner: changed from fixed overlay to inline with 3s auto-dismiss
+- Fixed React hooks violation: useEffect was after conditional early return in ActivityList
+- Updated findings tracker: F-001 FIXED, F-009 FIXED (16/17 resolved)
+- Confirmed git-triggered Vercel deploys working, removed stale CLI workaround notes
+
+**Supabase (user-side):**
+- Email templates pasted into Dashboard
+- Security linter SQL fixes run (SECURITY DEFINER views, RLS policies, function search_path)
+- Premium granted to test account (wakingupdeaf@gmail.com)
+
+**Build:** ✅ PASSING (3.4s) | **Tests:** ✅ 31 PASSING
 
 ### 2026-02-07 (Session 17: Auth Hardening, Dark Mode, OAuth/Magic Link/Forgot Password)
 
