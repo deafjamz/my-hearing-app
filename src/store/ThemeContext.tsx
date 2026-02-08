@@ -17,7 +17,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (saved === 'light' || saved === 'dark') return saved;
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
     }
-    return 'light';
+    return 'dark';
   });
 
   // Apply theme class to HTML element

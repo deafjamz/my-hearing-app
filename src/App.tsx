@@ -34,6 +34,7 @@ const CategoryPlayer = lazy(() => import('@/pages/CategoryPlayer').then(m => ({ 
 const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
 const TermsOfService = lazy(() => import('@/pages/TermsOfService').then(m => ({ default: m.TermsOfService })));
 const ProgressReport = lazy(() => import('@/pages/ProgressReport').then(m => ({ default: m.ProgressReport })));
+const ResetPassword = lazy(() => import('@/pages/ResetPassword').then(m => ({ default: m.ResetPassword })));
 
 // Dev-only page imports - lazy loaded too
 const AudioQA = lazy(() => import('@/pages/AudioQA').then(m => ({ default: m.AudioQA })));
@@ -135,6 +136,10 @@ const productionRoutes = [
   {
     path: '/progress',
     element: <S><ProgressReport /></S>,
+  },
+  {
+    path: '/reset-password',
+    element: <S><ResetPassword /></S>,
   },
 ];
 
