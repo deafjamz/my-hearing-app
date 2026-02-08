@@ -33,16 +33,17 @@
 | F-009 | **P0** | Carrier phrase contamination (daniel voice) | **FIXED** | Batch 6 | Cross-voice audit: daniel 92.5% contaminated, all other voices 0%. Regenerated 179 daniel + 19 new words × 9 voices. 350 files uploaded to Supabase. See `docs/F009_INCIDENT_REPORT.md` |
 | F-010 | **P0** | Guest mode silently discards progress | **FIXED** | Batch 3 | RequireAuth gate blocks activities for guests — sign-in prompt with AuthModal |
 | F-011 | P1 | App should require sign-in | **FIXED** | Batch 3 | 12 activity routes now wrapped in RequireAuth; browsing routes remain open |
-| F-012 | P2 | Share with Audiologist — compliance risk | OPEN | — | Needs regulatory review |
+| F-012 | P2 | Share with Audiologist — compliance risk | DEFERRED | — | Needs product decision |
 | F-013 | P1 | Word Pairs cards unapproachable | **FIXED** | Batch 5 | Friendly names, example pairs, session info badges; clinical names as subtitles |
 | F-014 | P1 | Voice changes unexpectedly between activities | **FIXED** | Batch 2+4 | All activities use voice from UserContext; SessionPlayer fixed in Batch 4 |
 | F-015 | **P0** | Word Pairs ends after 1 word | **FIXED** | Batch 2 | Voice fallback + muted praise for short sessions |
 | F-016 | P1 | No per-answer feedback in Word Pairs | **FIXED** | Batch 4 | CategoryPlayer shows correct/incorrect with 1.5s feedback delay; RapidFire already had it |
 | F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
 
-**Summary:** 17 findings | 16 fixed | 0 fixing | 0 open | 1 superseded
+**Summary:** 17 findings | 16 fixed | 0 fixing | 1 deferred | 1 superseded
 **P0s:** 3 total — 3 fixed (F-009, F-010, F-015)
 **Note:** F-012 (Share with Audiologist compliance) deferred — needs product decision
+**Route changes (Session 18):** `/` is now Practice Hub (ActivityList), `/dashboard` is Dashboard. Findings below reference routes as they were at time of discovery.
 
 ### Fix Batches
 
@@ -64,6 +65,12 @@
 - F-008: Created `ActivityBriefing` component — reusable pre-activity screen with title, description, instructions, session info, and Begin button. Added to Detection, RapidFire, CategoryPlayer, GrossDiscrimination.
 - F-013: CategoryLibrary cards overhauled — clinical names replaced with friendly names (e.g., "Consonant Voicing" → "Similar Sounds"), clinical name as subtitle, example word pairs added (e.g., "'bat' vs 'pat'"), raw pair count replaced with "10 per session · ~2 min"
 - Bonus: GrossDiscrimination infinite loop fixed — added SESSION_LENGTH=15, SessionSummary completion screen (same fix as F-007 for Detection/RapidFire)
+
+**Batch 7** (Session 18 — 2026-02-08): Route restructure, Sentences modernization
+- F-001: WelcomeScreen + auth gate moved from Dashboard to Practice Hub (ActivityList at `/`). Dashboard moved to `/dashboard` as opt-in stats view.
+- SentenceTraining.tsx: ActivityBriefing, progress bar, useProgress logging, useSilentSentinel, dark theme, voice type fix, nextActivity
+- Nav simplified from 4 tabs to 3: Practice, Progress, Settings
+- React hooks violation fixed in ActivityList (useEffect after early return)
 
 **Batch 6** (Session 15 — 2026-02-07): F-009 carrier phrase fix + design alignment + Smart Coach
 - F-009: Enhanced audit script (`scripts/audit_carrier_phrases.py`) with cross-voice duration comparison — breakthrough detection method. Found **daniel 92.5% contaminated**, all other 8 voices clean (0%). Created `scripts/regen_clean_audio.py` (clean TTS pipeline, no carrier phrase) + `scripts/upload_regen_audio.py`. Regenerated all 179 daniel word files. See `docs/F009_INCIDENT_REPORT.md`.

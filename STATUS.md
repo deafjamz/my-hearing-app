@@ -239,17 +239,19 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Configure Google OAuth** — Google Cloud Console → OAuth 2.0 Client ID → Supabase. See `docs/AUTH_SETUP.md`.
-- [ ] **Configure Apple OAuth** — Apple Developer → Sign in with Apple. See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
+- [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
 - [ ] **Remove VITE_DEV_UNLOCK_ALL from Vercel** production env (was added for testing)
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 - [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
 
 ### Done (previously TODO)
+- [x] Google OAuth configured and working ✅ (Session 18 — Google Cloud Console + Supabase)
+- [x] DNS moved from Namecheap to Cloudflare ✅ (Session 18)
+- [x] Email forwarding configured ✅ (Session 18 — support@soundsteps.app → soundstepsapp@gmail.com via Cloudflare Email Routing)
 - [x] Email templates pasted into Supabase ✅ (Session 18)
 - [x] Supabase security linter SQL fixes run ✅ (Session 18)
-- [x] Premium granted to test account ✅ (Session 18)
+- [x] Premium granted to test account ✅ (Session 18 — wakingupdeaf@gmail.com)
 - [x] Custom SMTP configured ✅ (Resend via noreply@soundsteps.app)
 - [x] Branded email templates written ✅
 
@@ -263,8 +265,8 @@ python3 scripts/generate_sentences_v2.py
 
 #### P1 — Auth & Account
 - [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings.
-- [ ] **Google OAuth** — See `docs/AUTH_SETUP.md`.
-- [ ] **Apple OAuth** — See `docs/AUTH_SETUP.md`. Required for App Store if any social login offered.
+- [x] ~~**Google OAuth**~~ ✅ Working (Session 18 — Google Cloud Console + Supabase configured)
+- [ ] **Apple OAuth** — Pending D-U-N-S number / Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 
 ### Completed
 - [x] ~~Verify programs schema exists in Supabase~~ ✅ Confirmed (224 session_items)
@@ -401,10 +403,14 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 - Updated findings tracker: F-001 FIXED, F-009 FIXED (16/17 resolved)
 - Confirmed git-triggered Vercel deploys working, removed stale CLI workaround notes
 
-**Supabase (user-side):**
-- Email templates pasted into Dashboard
-- Security linter SQL fixes run (SECURITY DEFINER views, RLS policies, function search_path)
+**Infrastructure (user-side):**
+- Email templates pasted into Supabase Dashboard
+- Supabase security linter SQL fixes run (SECURITY DEFINER views, RLS policies, function search_path)
 - Premium granted to test account (wakingupdeaf@gmail.com)
+- Google OAuth configured and working (Google Cloud Console + Supabase)
+- Apple OAuth: pending D-U-N-S number / Apple Developer enrollment as Organization (Wyoming LLC)
+- DNS moved from Namecheap to Cloudflare
+- Email forwarding: support@soundsteps.app → soundstepsapp@gmail.com (via Cloudflare Email Routing)
 
 **Build:** ✅ PASSING (3.4s) | **Tests:** ✅ 31 PASSING
 
@@ -419,8 +425,8 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 - index.html: theme-color meta `#7c3aed` (purple) → `#020617` (slate-950)
 
 **Auth System (5 methods):**
-- Google OAuth — `signInWithOAuth({ provider: 'google' })` — UI ready, needs Google Cloud + Supabase config
-- Apple OAuth — `signInWithOAuth({ provider: 'apple' })` — UI ready, needs Apple Developer + Supabase config
+- Google OAuth — `signInWithOAuth({ provider: 'google' })` — ✅ Working (configured in Session 18)
+- Apple OAuth — `signInWithOAuth({ provider: 'apple' })` — UI ready, pending D-U-N-S / Apple Developer enrollment
 - Magic Link — `signInWithOtp({ email })` — fully working, no extra config
 - Forgot Password — `resetPasswordForEmail()` + `/reset-password` page — fully working
 - Email + Password — improved error handling, email confirmation screen
@@ -435,6 +441,7 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 - Connected `soundsteps.app` to Vercel (DNS A record → 76.76.21.21)
 - SSL auto-provisioned via Let's Encrypt
 - Supabase redirect URLs configured for soundsteps.app
+- DNS moved to Cloudflare in Session 18
 
 **Documentation:**
 - Created `docs/AUTH_SETUP.md` — complete setup guide for all 5 auth methods, Google/Apple config steps, redirect URL config, troubleshooting, production checklist

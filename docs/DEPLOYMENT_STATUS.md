@@ -206,7 +206,7 @@ WHERE p.title = 'First Words';
 
 ### Step 5: Test UI Flow ⏸️
 **Manual Testing:**
-1. Navigate to `/practice` → Click "Programs"
+1. Navigate to `/` (Practice Hub) → Click "Programs"
 2. Should see 5 programs (2 free, 3 tier1)
 3. Click "First Words" → Should see 8 sessions
 4. Click "Session 1" → Should load SessionPlayer
@@ -219,9 +219,7 @@ WHERE p.title = 'First Words';
 ## 🎯 Complete User Flow
 
 ```
-Dashboard
-    ↓
-Practice Hub (/practice)
+Practice Hub (/)
     ↓
 Programs (/programs)
     ↓ [Click "First Words"]

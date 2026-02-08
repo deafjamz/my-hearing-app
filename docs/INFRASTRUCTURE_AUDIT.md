@@ -1,6 +1,6 @@
 # Infrastructure Audit Report
 
-> **Audit Date:** 2026-01-24
+> **Audit Date:** 2026-01-24 (last updated 2026-02-08)
 > **Auditor:** CTO/Security Engineer Review
 > **Status:** CRITICAL ISSUES RESOLVED, MONITORING RECOMMENDED
 
@@ -43,9 +43,10 @@ rm src/data/minimalPairs.ts        # Dead code, never imported
 - Bundle size: 1.34 MB (gzipped: 378 KB)
 
 ### Remaining Concern
-Bundle size warning at 1.3MB. Future optimization:
-- Code splitting with React.lazy()
-- Tree-shaking dev dependencies
+Bundle size was 1.3MB. Code splitting implemented in Session 12:
+- React.lazy() for all page components
+- Vendor chunk splitting (797KB → 272KB main + chunks)
+- Current main bundle: ~248KB
 
 ---
 
@@ -175,14 +176,16 @@ Free tier exhausted in ~2 days at scale
 ### Production Routes (Always Available)
 | Route | Component | Purpose |
 |-------|-----------|---------|
-| `/` | Dashboard | Home screen |
-| `/practice` | ActivityList | Activity hub |
+| `/` | ActivityList | Practice Hub (default landing) |
+| `/practice` | ActivityList | Practice Hub (alias) |
+| `/dashboard` | Dashboard | Stats & progress (opt-in) |
 | `/practice/detection` | Detection | Erber Level 1 |
 | `/practice/gross-discrimination` | GrossDiscrimination | Erber Level 2 |
 | `/categories` | CategoryLibrary | Word pair categories |
 | `/sentences` | SentenceTraining | Sentence exercises |
 | `/scenarios` | ScenarioPlayer | Multi-speaker dialogue |
 | `/programs` | ProgramLibrary | Curated programs |
+| `/progress` | ProgressReport | Charts and print-to-PDF |
 | `/settings` | Settings | User preferences |
 
 ### Dev-Only Routes (Hidden in Production)
@@ -224,14 +227,18 @@ Free tier exhausted in ~2 days at scale
 
 ### Deploy to Vercel
 ```bash
-# Install Vercel CLI
-npm i -g vercel
+# Auto-deploy: push to main branch (recommended)
+git push origin main
 
-# Deploy
-vercel --prod
-
-# Or link to Git for auto-deploy
+# Manual deploy (if needed):
+npx vercel --prod
 ```
+
+### DNS & Domain
+- **Domain:** soundsteps.app
+- **DNS provider:** Cloudflare (migrated from Namecheap, 2026-02-08)
+- **Email routing:** support@soundsteps.app → soundstepsapp@gmail.com (Cloudflare Email Routing)
+- **SSL:** Auto-provisioned via Let's Encrypt (Vercel)
 
 ### Post-Deploy
 - [ ] Verify PWA install on mobile
@@ -302,7 +309,7 @@ npm install @sentry/react
 ### Month 1
 - [ ] Evaluate upgrade to Supabase Pro
 - [ ] Consider CloudFlare R2 migration
-- [ ] Implement code splitting
+- [x] Implement code splitting ✅ (Session 12 — React.lazy + vendor chunks)
 
 ---
 

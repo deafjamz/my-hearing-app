@@ -94,8 +94,11 @@
 ### Active (Current)
 | Doc | Last Updated | Status |
 |-----|--------------|--------|
-| STATUS.md | 2026-01-25 | ✅ Current |
+| STATUS.md | 2026-02-08 | ✅ Current |
 | CLAUDE.md | 2026-01-25 | ✅ Current |
+| AUTH_SETUP.md | 2026-02-08 | ✅ Current |
+| TESTING_FINDINGS.md | 2026-02-08 | ✅ Current |
+| INFRASTRUCTURE_AUDIT.md | 2026-02-08 | ✅ Current |
 | AUDIO_INVENTORY.md | 2026-01-25 | ✅ Current |
 | VOICE_LIBRARY.md | 2026-01-19 | ✅ Current |
 | REGULATORY_LANGUAGE_GUIDE.md | 2026-01-24 | ✅ Current |
@@ -126,7 +129,7 @@
 - Vercel: https://vercel.com/dashboard
 
 ### Live App
-- Production: https://my-hearing-app.vercel.app
+- Production: https://soundsteps.app (also https://my-hearing-app.vercel.app)
 - Supabase Project: (see .env for project ID)
 
 ---

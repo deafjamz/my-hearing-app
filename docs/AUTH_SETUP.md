@@ -90,9 +90,11 @@ By default, Supabase requires email confirmation. To change this:
 
 ## 2. Google OAuth
 
-### Status: UI ready, needs provider configuration
+### Status: Working (configured 2026-02-08)
 
 Users click "Continue with Google" → redirected to Google → redirected back to app with session.
+
+Google Cloud Console OAuth 2.0 Client ID and Supabase provider are both configured. OAuth consent screen is published.
 
 ### Setup Steps
 
@@ -134,16 +136,18 @@ Users click "Continue with Google" → redirected to Google → redirected back 
 - Click "Continue with Google"
 - Should redirect to Google sign-in → back to app → signed in
 
-### What happens without configuration
-If Google is not configured in Supabase, clicking the button will show an error message in the modal: "google sign-in failed" or similar Supabase error. This is graceful — the button is always visible but only works when the provider is configured.
+### Current Configuration
+Google OAuth is fully configured and working as of 2026-02-08. Both the Google Cloud Console OAuth 2.0 Client ID and Supabase Google provider are active.
 
 ---
 
 ## 3. Apple OAuth
 
-### Status: UI ready, needs provider configuration
+### Status: UI ready, pending Apple Developer enrollment
 
 Users click "Continue with Apple" → redirected to Apple → redirected back to app with session.
+
+**Blocker:** Apple Developer enrollment as Organization requires a D-U-N-S number for the Wyoming LLC. Enrollment is in progress. Once approved, follow the setup steps below.
 
 ### Setup Steps
 
@@ -403,14 +407,27 @@ https://<YOUR_PROJECT_REF>.supabase.co/auth/v1/callback
 
 ---
 
+## Email Infrastructure
+
+### Custom SMTP
+Custom SMTP is configured via Resend (noreply@soundsteps.app) in Supabase Dashboard → Settings → Auth → SMTP Settings.
+
+### Email Forwarding
+support@soundsteps.app forwards to soundstepsapp@gmail.com via Cloudflare Email Routing (configured 2026-02-08).
+
+### DNS
+Domain DNS is managed via Cloudflare (migrated from Namecheap in Session 18).
+
+---
+
 ## Production Checklist
 
-- [ ] **Email confirmation** enabled in Supabase (Authentication → Providers → Email)
-- [ ] **Site URL** set to production domain (Authentication → URL Configuration)
-- [ ] **Redirect URLs** include production domain + localhost (Authentication → URL Configuration)
-- [ ] **Google OAuth** configured (Google Cloud Console + Supabase Providers)
-- [ ] **Apple OAuth** configured (Apple Developer + Supabase Providers)
-- [ ] **Custom SMTP** configured for reliable email delivery (Settings → Auth → SMTP)
-- [ ] **Email templates** customized with SoundSteps branding (Authentication → Email Templates)
+- [x] **Email confirmation** enabled in Supabase (Authentication → Providers → Email)
+- [x] **Site URL** set to production domain (Authentication → URL Configuration)
+- [x] **Redirect URLs** include production domain + localhost (Authentication → URL Configuration)
+- [x] **Google OAuth** configured (Google Cloud Console + Supabase Providers) — working as of 2026-02-08
+- [ ] **Apple OAuth** configured (Apple Developer + Supabase Providers) — pending D-U-N-S / enrollment
+- [x] **Custom SMTP** configured for reliable email delivery (Resend via noreply@soundsteps.app)
+- [x] **Email templates** customized with SoundSteps branding (Authentication → Email Templates)
 - [ ] **Rate limits** reviewed (Authentication → Rate Limits)
 - [ ] **Test all flows** on mobile Safari, Chrome, and desktop browsers
