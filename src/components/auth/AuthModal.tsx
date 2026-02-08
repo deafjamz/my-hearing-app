@@ -73,7 +73,11 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
           if (error.message === 'Invalid login credentials') {
-            throw new Error('No account found with those credentials. Need to create one?');
+            // Auto-switch to sign-up with email preserved
+            setView('sign-up');
+            setLoading(false);
+            setError('No account found — create one below.');
+            return;
           }
           if (error.message.includes('Email not confirmed')) {
             throw new Error('Please check your email and confirm your account first.');
