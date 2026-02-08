@@ -116,7 +116,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-sm text-slate-500 hover:text-teal-400 transition-colors font-medium"
           >
-            {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+            {isSignUp ? <>Already have an account? <span className="font-bold">Sign In</span></> : <>Don't have an account? <span className="font-bold">Sign Up</span></>}
           </button>
         </div>
       </div>

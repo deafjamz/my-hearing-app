@@ -35,7 +35,7 @@ export function Dashboard() {
     return (
       <>
         <WelcomeScreen onSignIn={() => setShowAuthModal(true)} />
-        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+        <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} dismissible={false} />
       </>
     );
   }
