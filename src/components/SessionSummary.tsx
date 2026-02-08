@@ -1,9 +1,15 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { CheckCircle, TrendingUp, Target } from 'lucide-react';
+import { CheckCircle, TrendingUp, Target, ArrowRight } from 'lucide-react';
 
 /**
  * Session Summary - Completion screen for program sessions
  */
+
+interface NextActivity {
+  label: string;       // e.g., "Word Basics"
+  description: string; // e.g., "Tell apart very different words"
+  path: string;        // e.g., "/practice/gross-discrimination"
+}
 
 interface SessionSummaryProps {
   sessionTitle: string;
@@ -11,6 +17,7 @@ interface SessionSummaryProps {
   totalItems: number;
   correctCount: number;
   onContinue: () => void;
+  nextActivity?: NextActivity;
 }
 
 export function SessionSummary({
@@ -19,6 +26,7 @@ export function SessionSummary({
   totalItems,
   correctCount,
   onContinue,
+  nextActivity,
 }: SessionSummaryProps) {
   // Determine performance level — scale praise to session length
   const isShortSession = totalItems < 5;
@@ -140,33 +148,46 @@ export function SessionSummary({
           </p>
         </motion.div>
 
-        {/* Continue Button */}
+        {/* What's Next — guided suggestion */}
+        {nextActivity && (
+          <motion.a
+            href={nextActivity.path}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
+            whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+            whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+            className="block w-full p-6 bg-teal-500 hover:bg-teal-400 rounded-2xl transition-all shadow-xl mb-3 cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-teal-100 text-sm font-medium mb-1">Up Next</p>
+                <p className="text-white font-bold text-lg">{nextActivity.label}</p>
+                <p className="text-teal-100 text-sm mt-1">{nextActivity.description}</p>
+              </div>
+              <ArrowRight className="text-white flex-shrink-0 ml-4" size={24} />
+            </div>
+          </motion.a>
+        )}
+
+        {/* Continue / Back Button */}
         <motion.button
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
+          transition={{ delay: prefersReducedMotion ? 0 : nextActivity ? 0.8 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
           whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
           whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
           onClick={onContinue}
-          className="w-full p-6 bg-teal-500 hover:bg-teal-400 rounded-2xl transition-all shadow-xl"
+          className={`w-full p-6 rounded-2xl transition-all ${
+            nextActivity
+              ? 'bg-slate-900 border border-slate-800 hover:bg-slate-800'
+              : 'bg-teal-500 hover:bg-teal-400 shadow-xl'
+          }`}
         >
-          <p className="text-white font-bold text-lg">Continue Training</p>
+          <p className={`font-bold text-lg ${nextActivity ? 'text-slate-300' : 'text-white'}`}>
+            {nextActivity ? 'Back to Practice Hub' : 'Continue Training'}
+          </p>
         </motion.button>
-
-        {/* Secondary Actions */}
-        <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 0.8, duration: prefersReducedMotion ? 0 : undefined }}
-          className="mt-4 text-center"
-        >
-          <button
-            onClick={onContinue}
-            className="text-slate-400 hover:text-slate-300 text-sm font-medium"
-          >
-            Return to Program
-          </button>
-        </motion.div>
       </motion.div>
     </div>
   );

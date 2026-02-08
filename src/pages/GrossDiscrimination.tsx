@@ -12,6 +12,7 @@ import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { useSilentSentinel } from '../hooks/useSilentSentinel';
 
 /**
  * Gross Discrimination Activity - Between Detection and Minimal Pairs
@@ -161,6 +162,7 @@ const SESSION_LENGTH = 10;
 export function GrossDiscrimination() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
+  const { ensureResumed } = useSilentSentinel();
   const navigate = useNavigate();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
 
@@ -205,6 +207,7 @@ export function GrossDiscrimination() {
   const handlePlay = useCallback(async () => {
     if (!currentRound || isPlaying) return;
 
+    await ensureResumed();
     setIsPlaying(true);
     setStartTime(Date.now());
 
@@ -276,7 +279,7 @@ export function GrossDiscrimination() {
         description="Start with words that sound very different."
         instructions="Listen to a word, then pick which one you heard. These words sound quite different from each other — a great warm-up exercise!"
         sessionInfo={`${SESSION_LENGTH} rounds · About 3 minutes`}
-        onStart={() => setHasStarted(true)}
+        onStart={() => { ensureResumed(); setHasStarted(true); }}
       />
     );
   }
@@ -290,6 +293,11 @@ export function GrossDiscrimination() {
         totalItems={total}
         correctCount={correct}
         onContinue={() => navigate('/practice')}
+        nextActivity={{
+          label: 'Word Categories',
+          description: 'Practice with specific sound contrasts',
+          path: '/categories',
+        }}
       />
     );
   }

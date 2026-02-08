@@ -12,6 +12,7 @@ import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { useSilentSentinel } from '../hooks/useSilentSentinel';
 
 const SESSION_LENGTH = 10;
 
@@ -39,6 +40,9 @@ export function Detection() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
+
+  // Silent Sentinel — keeps BT audio route alive for CI accessories
+  const { ensureResumed } = useSilentSentinel();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
@@ -97,6 +101,7 @@ export function Detection() {
   const handlePlay = useCallback(async () => {
     if (!currentRound || isPlaying) return;
 
+    await ensureResumed(); // Warm up BT route on first tap
     setIsPlaying(true);
     setStartTime(Date.now());
 
@@ -180,7 +185,7 @@ export function Detection() {
         description="Can you tell when a word is played?"
         instructions="You'll hear either a word or silence. After listening, tap Yes if you heard a word, or No if it was silent."
         sessionInfo="10 rounds · About 2 minutes"
-        onStart={() => setHasStarted(true)}
+        onStart={() => { ensureResumed(); setHasStarted(true); }}
       />
     );
   }
@@ -194,6 +199,11 @@ export function Detection() {
         totalItems={total}
         correctCount={correct}
         onContinue={() => navigate('/practice')}
+        nextActivity={{
+          label: 'Word Basics',
+          description: 'Tell apart very different words',
+          path: '/practice/gross-discrimination',
+        }}
       />
     );
   }

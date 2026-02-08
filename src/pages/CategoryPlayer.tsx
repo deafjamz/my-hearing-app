@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '@/store/UserContext';
 import { ActivityBriefing } from '@/components/ActivityBriefing';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -36,6 +37,7 @@ export function CategoryPlayer() {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { voice } = useUser();
+  const { ensureResumed } = useSilentSentinel();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
@@ -124,6 +126,8 @@ export function CategoryPlayer() {
 
   const playAudio = async (storagePath: string) => {
     try {
+      await ensureResumed();
+
       if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
@@ -215,6 +219,11 @@ export function CategoryPlayer() {
         totalItems={pairs.length}
         correctCount={responses.filter(r => r.correct).length}
         onContinue={() => navigate('/categories')}
+        nextActivity={{
+          label: 'RapidFire Challenge',
+          description: 'Test your skills with all word pairs',
+          path: '/practice/rapid-fire',
+        }}
       />
     );
   }
