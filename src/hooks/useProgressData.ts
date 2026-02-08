@@ -67,7 +67,14 @@ export function useProgressData() {
           .order('created_at', { ascending: true });
 
         if (error) {
-          console.error('Failed to fetch progress data:', error);
+          if (import.meta.env.DEV) console.warn('Failed to fetch progress data:', error);
+          setStats({
+            currentSNR: 10,
+            totalMinutes: 0,
+            totalTrials: 0,
+            avgAccuracy: 0,
+            progressData: []
+          });
           setLoading(false);
           return;
         }
@@ -160,7 +167,7 @@ export function useProgressData() {
     };
 
     fetchData();
-  }, [user]);
+  }, [user?.id]);
 
   return { stats, loading, isGuest: !user };
 }
