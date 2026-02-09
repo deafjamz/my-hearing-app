@@ -268,6 +268,7 @@ python3 scripts/generate_sentences_v2.py
 - [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings.
 - [x] ~~**Google OAuth**~~ ✅ Working + published (Session 18)
 - [ ] **Apple OAuth** — Pending D-U-N-S number / Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
+- [ ] **Supabase Custom Domain** — Upgrade to Pro ($25/mo), set up `auth.soundsteps.app` CNAME so OAuth redirects show your domain instead of `padfntxzoxhozfjsqnzc.supabase.co`. Currently users see the raw Supabase URL during Google sign-in on mobile Safari — looks untrustworthy. Fix before opening to real users.
 
 ### Completed
 - [x] ~~Verify programs schema exists in Supabase~~ ✅ Confirmed (224 session_items)
