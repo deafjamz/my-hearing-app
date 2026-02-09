@@ -241,12 +241,13 @@ python3 scripts/generate_sentences_v2.py
 ### TODO — Next Session
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
-- [ ] **Remove VITE_DEV_UNLOCK_ALL from Vercel** production env (was added for testing)
+- [x] ~~Remove VITE_DEV_UNLOCK_ALL from Vercel~~ ✅ (Session 18)
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 - [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
 
 ### Done (previously TODO)
-- [x] Google OAuth configured and working ✅ (Session 18 — Google Cloud Console + Supabase)
+- [x] Google OAuth configured, working, and published ✅ (Session 18 — consent screen published for all users)
+- [x] VITE_DEV_UNLOCK_ALL removed from Vercel production ✅ (Session 18)
 - [x] DNS moved from Namecheap to Cloudflare ✅ (Session 18)
 - [x] Email forwarding configured ✅ (Session 18 — support@soundsteps.app → soundstepsapp@gmail.com via Cloudflare Email Routing)
 - [x] Email templates pasted into Supabase ✅ (Session 18)
@@ -265,7 +266,7 @@ python3 scripts/generate_sentences_v2.py
 
 #### P1 — Auth & Account
 - [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings.
-- [x] ~~**Google OAuth**~~ ✅ Working (Session 18 — Google Cloud Console + Supabase configured)
+- [x] ~~**Google OAuth**~~ ✅ Working + published (Session 18)
 - [ ] **Apple OAuth** — Pending D-U-N-S number / Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 
 ### Completed
