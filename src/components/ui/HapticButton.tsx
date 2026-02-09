@@ -11,7 +11,7 @@ import { hapticSelection } from '@/lib/haptics';
  * - Supports custom Tailwind classes via tailwind-merge
  *
  * Usage:
- * <HapticButton className="bg-purple-600">Click Me</HapticButton>
+ * <HapticButton className="bg-teal-500">Click Me</HapticButton>
  */
 
 interface HapticButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

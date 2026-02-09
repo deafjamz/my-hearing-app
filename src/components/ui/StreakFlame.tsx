@@ -45,7 +45,7 @@ export function StreakFlame() {
         className={`transition-colors duration-300 ${color} ${animation}`} 
         fill={currentStreak >= 1 ? "currentColor" : "none"}
       />
-      <span className={`font-black text-sm tabular-nums ${color}`}>
+      <span className={`font-bold text-sm tabular-nums ${color}`}>
         {currentStreak}
       </span>
     </div>

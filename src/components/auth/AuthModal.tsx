@@ -166,7 +166,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
           <div className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-teal-400" />
           </div>
-          <h2 className="text-2xl font-black text-white mb-2 text-center">{title}</h2>
+          <h2 className="text-2xl font-bold text-white mb-2 text-center">{title}</h2>
           <p className="text-slate-400 text-sm mb-2 text-center">
             We sent an email to <span className="text-white font-medium">{email}</span>.
           </p>
@@ -191,7 +191,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
           <BackButton onClick={() => goTo('sign-in')} />
 
           <div className="text-center mb-8 pt-2">
-            <h2 className="text-2xl font-black text-white mb-2">Email Sign-In Link</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Email Sign-In Link</h2>
             <p className="text-slate-400 text-sm">No password needed — we'll email you a link.</p>
           </div>
 
@@ -214,7 +214,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
           <BackButton onClick={() => goTo('sign-in')} />
 
           <div className="text-center mb-8 pt-2">
-            <h2 className="text-2xl font-black text-white mb-2">Reset Password</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Reset Password</h2>
             <p className="text-slate-400 text-sm">Enter your email and we'll send a reset link.</p>
           </div>
 
@@ -246,7 +246,7 @@ export function AuthModal({ isOpen, onClose, dismissible = true }: AuthModalProp
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-black text-white mb-2">
+          <h2 className="text-2xl font-bold text-white mb-2">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
           </h2>
           <p className="text-slate-400 text-sm">

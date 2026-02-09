@@ -15,7 +15,7 @@ export function Settings() {
         <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400">
           <SettingsIcon size={20} />
         </div>
-        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Settings</h1>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Settings</h1>
       </div>
 
       {/* Appearance */}

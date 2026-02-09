@@ -83,7 +83,7 @@ export function StepTracker({ current, goal = 100 }: StepTrackerProps) {
         <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">
           Daily Ascent
         </h3>
-        <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+        <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
           {current}
           <span className="text-sm font-normal text-slate-500 dark:text-slate-400 ml-1">
             / {goal}

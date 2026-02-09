@@ -40,7 +40,7 @@ export function HeaRing({ current, goal, size = 200, className }: HeaRingProps) 
           <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#FFD93D" />
             <stop offset="50%" stopColor="#FF6B6B" />
-            <stop offset="100%" stopColor="#6C5CE7" />
+            <stop offset="100%" stopColor="#0d9488" />
           </linearGradient>
         </defs>
 

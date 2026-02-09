@@ -77,7 +77,7 @@ export function ResetPassword() {
           <div className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-teal-400" />
           </div>
-          <h2 className="text-2xl font-black text-white mb-2">Password Updated</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Password Updated</h2>
           <p className="text-slate-400 text-sm mb-6">
             Your password has been changed successfully. You're now signed in.
           </p>
@@ -111,7 +111,7 @@ export function ResetPassword() {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-6">
         <div className="bg-slate-900 w-full max-w-md rounded-[2rem] border border-slate-800 p-8 text-center">
-          <h2 className="text-2xl font-black text-white mb-2">Invalid Reset Link</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Invalid Reset Link</h2>
           <p className="text-slate-400 text-sm mb-6">
             This link may have expired or already been used. Please request a new password reset.
           </p>
@@ -132,7 +132,7 @@ export function ResetPassword() {
     <div className="min-h-[80vh] flex items-center justify-center p-6">
       <div className="bg-slate-900 w-full max-w-md rounded-[2rem] border border-slate-800 p-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-black text-white mb-2">Set New Password</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Set New Password</h2>
           <p className="text-slate-400 text-sm">Choose a new password for your account.</p>
         </div>
 

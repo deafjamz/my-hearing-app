@@ -98,7 +98,7 @@ export function CategoryLibrary() {
       'Consonant Voicing': 'from-blue-500 to-indigo-600',
       'Manner': 'from-green-500 to-emerald-600',
       'Place': 'from-orange-500 to-amber-600',
-      'Sibilants': 'from-purple-500 to-violet-600',
+      'Sibilants': 'from-cyan-500 to-sky-600',
       'Plosives': 'from-red-500 to-rose-600',
       'Fricatives': 'from-teal-500 to-cyan-600',
       'Nasals': 'from-yellow-500 to-orange-600',

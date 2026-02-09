@@ -11,8 +11,8 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')
-      .then((registration) => {
-        console.log('[SW] Registered:', registration.scope);
+      .then(() => {
+        // SW registered successfully
       })
       .catch((error) => {
         console.error('[SW] Registration failed:', error);
