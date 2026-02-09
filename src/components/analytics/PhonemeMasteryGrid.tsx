@@ -103,6 +103,7 @@ export function PhonemeMasteryGrid({ data }: { data: PhonemeMasteryData }) {
                 return (
                   <button
                     key={`${rowPhoneme}-${colPhoneme}`}
+                    aria-label={`${rowPhoneme} versus ${colPhoneme}: ${pair.accuracy}% accuracy, ${pair.trials} trials`}
                     className={`w-full aspect-square rounded ${cellColor(pair.accuracy, true)} hover:ring-2 hover:ring-teal-400 transition-all cursor-pointer flex items-center justify-center`}
                     onMouseEnter={() => setTooltip(`${rowPhoneme} / ${colPhoneme}: ${pair.accuracy}% (${pair.trials} trials)`)}
                     onMouseLeave={() => setTooltip(null)}

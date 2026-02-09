@@ -186,6 +186,7 @@ export function GrossDiscrimination() {
 
   // Replay tracking
   const [replayCount, setReplayCount] = useState(0);
+  const [audioError, setAudioError] = useState(false);
 
   // Stats
   const [correct, setCorrect] = useState(0);
@@ -222,9 +223,10 @@ export function GrossDiscrimination() {
     setStartTime(Date.now());
 
     try {
+      setAudioError(false);
       await playUrl(currentRound.targetAudio);
     } catch {
-      // Audio failed — still let user answer
+      setAudioError(true);
     }
     setIsPlaying(false);
     setAudioPlayed(true);
@@ -350,6 +352,10 @@ export function GrossDiscrimination() {
               : 'Listen and pick the word you heard'}
           </p>
         </motion.div>
+
+        {audioError && (
+          <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>
+        )}
 
         {/* Play Button with Aura */}
         <div className="flex justify-center mb-6 relative">

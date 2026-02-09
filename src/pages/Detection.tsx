@@ -57,6 +57,7 @@ export function Detection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
+  const [audioError, setAudioError] = useState(false);
 
   // Replay tracking
   const [replayCount, setReplayCount] = useState(0);
@@ -114,9 +115,10 @@ export function Detection() {
     if (currentRound.hasSound && currentRound.audioUrl) {
       // Play through sentinel's AudioContext (same destination as BT keepalive)
       try {
+        setAudioError(false);
         await playUrl(currentRound.audioUrl);
       } catch {
-        // Audio failed — still let user answer
+        setAudioError(true);
       }
       setIsPlaying(false);
       setAudioPlayed(true);
@@ -245,6 +247,10 @@ export function Detection() {
             Listen carefully, then answer Yes or No
           </p>
         </motion.div>
+
+        {audioError && (
+          <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>
+        )}
 
         {/* Play Button with Aura */}
         <div className="flex justify-center mb-6 relative">

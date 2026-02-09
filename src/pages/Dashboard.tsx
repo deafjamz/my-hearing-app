@@ -38,6 +38,29 @@ export function Dashboard() {
     return <LoadingSpinner />;
   }
 
+  if (stats.totalTrials === 0) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+        <div className="max-w-md text-center">
+          <div className="w-20 h-20 rounded-full bg-teal-500/10 flex items-center justify-center mx-auto mb-6">
+            <HeadphonesIcon size={36} className="text-teal-400" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-3">Ready to Begin?</h1>
+          <p className="text-slate-400 mb-8">
+            Complete your first practice session to see your stats and progress here.
+          </p>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-teal-500 text-white rounded-xl font-bold hover:bg-teal-400 transition-colors"
+          >
+            <Play size={20} />
+            Start Practicing
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const goal = 100;
   const progress = Math.min((dailySteps / goal) * 100, 100);
   const isGoalReached = dailySteps >= goal;
@@ -209,6 +232,7 @@ export function Dashboard() {
 
               <Link
                 to="/"
+                aria-label="Begin practice session"
                 className="w-24 h-24 rounded-full bg-teal-500 hover:bg-teal-400 flex items-center justify-center shadow-2xl hover:scale-105 transition-all group"
               >
                 <Play className="h-10 w-10 text-white ml-1" />

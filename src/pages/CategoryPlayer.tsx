@@ -65,6 +65,7 @@ export function CategoryPlayer() {
   });
   const [hasPlayed, setHasPlayed] = useState(false);
   const [feedback, setFeedback] = useState<{ isCorrect: boolean; correctWord: string; selectedWord: string } | null>(null);
+  const [audioError, setAudioError] = useState(false);
 
   useEffect(() => {
     if (category) {
@@ -131,13 +132,14 @@ export function CategoryPlayer() {
 
   const playAudio = async (storagePath: string) => {
     try {
+      setAudioError(false);
       await ensureResumed();
       stopPlayback(); // Stop any currently playing audio
 
       const { data } = supabase.storage.from('audio').getPublicUrl(storagePath);
       await playUrl(data.publicUrl);
-    } catch (err) {
-      console.error('Error playing audio:', err);
+    } catch {
+      setAudioError(true);
     }
   };
 
@@ -316,6 +318,10 @@ export function CategoryPlayer() {
               />
             </button>
           </div>
+
+          {audioError && (
+            <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>
+          )}
 
           {/* Play Button — teal circle, matches Detection/RapidFire */}
           <div className="flex justify-center">

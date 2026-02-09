@@ -36,6 +36,7 @@ export function SentenceTraining() {
   // Track responses for completion screen
   const [responses, setResponses] = useState<Array<{ correct: boolean }>>([]);
   const [isComplete, setIsComplete] = useState(false);
+  const [audioError, setAudioError] = useState(false);
 
   const currentSentence = sentences[currentIndex];
 
@@ -78,9 +79,10 @@ export function SentenceTraining() {
     if (storagePath) {
       const url = getAudioUrl(storagePath);
       try {
+        setAudioError(false);
         await playUrl(url);
       } catch {
-        // Audio failed — still show question
+        setAudioError(true);
       }
     }
 
@@ -236,6 +238,10 @@ export function SentenceTraining() {
               </>
             )}
           </div>
+
+          {audioError && (
+            <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>
+          )}
 
           {/* Play Button */}
           {!isPlaying && !showQuestion && (

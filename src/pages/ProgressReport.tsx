@@ -43,6 +43,36 @@ export function ProgressReport() {
     );
   }
 
+  if (stats.totalTrials === 0) {
+    return (
+      <div className="max-w-2xl mx-auto w-full px-6 pt-6 pb-32">
+        <div className="flex items-center gap-3 mb-8">
+          <Link
+            to="/"
+            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          >
+            <ArrowLeft size={20} className="text-slate-500" />
+          </Link>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Progress Report
+          </h1>
+        </div>
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-12 text-center">
+          <p className="text-slate-500 dark:text-slate-400 text-lg mb-2">No practice data yet</p>
+          <p className="text-slate-400 dark:text-slate-500 text-sm mb-6">
+            Complete some exercises to see your detailed progress, trends, and sound pattern analysis here.
+          </p>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500 text-white rounded-xl font-bold hover:bg-teal-400 transition-colors"
+          >
+            Start First Session
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const chartData = stats.progressData.map(d => ({
     ...d,
     label: format(new Date(d.date), 'MMM d'),
@@ -55,6 +85,7 @@ export function ProgressReport() {
         <div className="flex items-center gap-3">
           <Link
             to="/"
+            aria-label="Back to Practice Hub"
             className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors print:hidden"
           >
             <ArrowLeft size={20} className="text-slate-500" />
