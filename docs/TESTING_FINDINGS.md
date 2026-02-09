@@ -39,9 +39,20 @@
 | F-015 | **P0** | Word Pairs ends after 1 word | **FIXED** | Batch 2 | Voice fallback + muted praise for short sessions |
 | F-016 | P1 | No per-answer feedback in Word Pairs | **FIXED** | Batch 4 | CategoryPlayer shows correct/incorrect with 1.5s feedback delay; RapidFire already had it |
 | F-017 | P2 | No dev/test mode for locked content | **FIXED** | Batch 3 | `VITE_DEV_UNLOCK_ALL=true` in .env.local bypasses tier locks |
+| F-018 | **P0** | BT hearing aids get no audio (words route to speaker) | **FIXED** | Batch 8 | `new Audio()` creates separate audio session from Web Audio API sentinel. Converted 4 activities to `playUrl()` through sentinel's AudioContext. |
+| F-019 | P1 | Activities load slowly on mobile | **FIXED** | Batch 8 | `useWordPairs` fetched all rows with `select('*')`. Added column selection, `.limit(50)`, server-side category filter. |
+| F-020 | **P0** | Progress not saving for logged-in users | **FIXED** | Batch 8 | `content_id` was UUID type but Detection/GrossDiscrimination pass string IDs. `ALTER TABLE user_progress ALTER COLUMN content_id TYPE text`. |
+| F-021 | P1 | Sentences: no audio in Safari | **FIXED** | Batch 10 | Root cause: stale `useVoice()` sent wrong voice ID → empty `audio_assets` → no audio URL. Also fixed biased answer shuffle. |
+| F-022 | P2 | Scenarios: 20+ second load time | **FIXED** | Batch 9 | `select('*')` with no limit. Changed to explicit columns + `.limit(50)`. |
+| F-023 | P1 | Stories: inconsistent styling + broken audio | **FIXED** | Batch 9+10 | Batch 9: styling fixes. Batch 10: (1) `useKaraokePlayer` refactored from `new Audio()` to Web Audio API with built-in sentinel for BT hearing aids, (2) StoryPlayer wraps DB paths with `getStorageUrl()`, (3) uses route params instead of hardcoded storyId, (4) fixed backPath. |
+| F-024 | P1 | Word Pairs: correct answer always on left card | **FIXED** | Batch 9 | Biased `.sort(() => Math.random() - 0.5)` replaced with fair `Math.random() > 0.5` coin flip in RapidFire, GrossDiscrimination, and CategoryPlayer. CategoryPlayer had no shuffle at all — added `useMemo` shuffled options. |
+| F-025 | P1 | Voice selection not applied — Charlie sounds like American woman | **FIXED** | Batch 9 | Player.tsx used stale `currentVoice` from VoiceContext (reads `preferredVoice` key, never syncs). Changed to `voice` from UserContext (reads correct `voice` key). All activities now use UserContext consistently. |
+| F-026 | P2 | Activities require unnecessary scrolling | **FIXED** | Batch 9 | Reduced `py-8` → `py-4`, `mb-12` → `mb-6`, `mb-10` → `mb-6`, `mb-8` → `mb-4` across Detection, RapidFire, GrossDiscrimination. Saves ~80px vertical space per activity. |
+| F-027 | P2 | ScenarioPlayer: BT hearing aid audio bypass | **FIXED** | Batch 10 | Full rewrite to Web Audio API with built-in sentinel. Two concurrent BufferSourceNode streams (dialogue + looping ambience with GainNode volume). Buffer cache, auto-advance, skip controls. |
 
-**Summary:** 17 findings | 16 fixed | 0 fixing | 1 deferred | 1 superseded
-**P0s:** 3 total — 3 fixed (F-009, F-010, F-015)
+**Summary:** 27 findings | 25 fixed | 0 fixing | 0 open | 1 deferred | 1 superseded
+**P0s:** 5 total — 5 fixed (F-009, F-010, F-015, F-018, F-020)
+**All findings resolved** — only F-012 deferred (Share with Audiologist compliance, needs product decision)
 **Note:** F-012 (Share with Audiologist compliance) deferred — needs product decision
 **Route changes (Session 18):** `/` is now Practice Hub (ActivityList), `/dashboard` is Dashboard. Findings below reference routes as they were at time of discovery.
 
@@ -71,6 +82,24 @@
 - SentenceTraining.tsx: ActivityBriefing, progress bar, useProgress logging, useSilentSentinel, dark theme, voice type fix, nextActivity
 - Nav simplified from 4 tabs to 3: Practice, Progress, Settings
 - React hooks violation fixed in ActivityList (useEffect after early return)
+
+**Batch 8** (Session 19 — 2026-02-08): BT audio routing, loading optimization, progress tracking
+- F-018: Added `playUrl()` and `stopPlayback()` to `useSilentSentinel` hook — fetches, decodes, and plays audio through the sentinel's AudioContext (same pattern as `useSNRMixer.playTarget()`). Converted Detection, GrossDiscrimination, CategoryPlayer, SentenceTraining from `new Audio()` to `playUrl()`. Removed `<audio>` element from SentenceTraining, `currentAudio` state from CategoryPlayer.
+- F-019: Changed `useWordPairs` from `select('*')` to explicit columns + `.limit(50)`. Added server-side `.eq('clinical_metadata->>contrast_category', category)` to CategoryPlayer query, removed client-side `.filter()`. Created `sql_migrations/add_performance_indexes.sql` (4 indexes, user runs after deploy).
+- F-020: Root cause — `user_progress.content_id` was `UUID NOT NULL` but Detection passes `"detection-0"` and GrossDiscrimination passes `"gross-0"`. Every insert silently failed. DB fix: `ALTER TABLE user_progress ALTER COLUMN content_id TYPE text`. Code fix: expanded `contentType` union in `useProgress.ts` to include `'environmental' | 'story_question'`.
+
+**Batch 9** (Session 21 — 2026-02-08): Shuffle bias, voice selection, viewport scroll, scenario perf, story styling
+- F-024: Replaced biased `.sort(() => Math.random() - 0.5)` with fair coin flip (`Math.random() > 0.5 ? [a,b] : [b,a]`) in RapidFire (line 150), GrossDiscrimination (lines 99, 134). Also replaced biased Fisher-Yates in grossPairs array sort (line 140). CategoryPlayer had zero shuffle — added `useMemo` randomized options per round.
+- F-025: Player.tsx used `useVoice()` (VoiceContext) which reads stale `localStorage.preferredVoice`. Changed to `useUser()` (UserContext) which reads active `localStorage.voice`. Removed VoiceContext import. All activities now consistently use UserContext for voice.
+- F-026: Reduced padding in 3 activity layouts: Detection (`py-8`→`py-4`, `mb-12`→`mb-6`, instruction `mb-8`→`mb-4`, feedback `mb-8`→`mb-4`), RapidFire (`py-8`→`py-4`, play button `mb-8`→`mb-4`, answer cards `mb-8`→`mb-4`), GrossDiscrimination (`py-8`→`py-4`, instruction `mb-8`→`mb-4`, play button `mb-10`→`mb-6`).
+- F-022: ScenarioList changed from `select('*')` to `select('id, title, description, difficulty, tier')` with `.limit(50)`.
+- F-023 (partial): StoryPlayer difficulty buttons: `bg-white dark:bg-slate-800 rounded-xl shadow-sm` → `bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-teal-500`. ResultsScreen: `font-black` → `font-bold`, added `text-slate-900 dark:text-white`.
+
+**Batch 10** (Session 22 — 2026-02-08): Stories BT audio, Sentences voice fix, karaoke Web Audio API
+- F-023 (complete): `useKaraokePlayer.ts` full refactor — replaced `new Audio()` + HTMLAudioElement with Web Audio API (fetch → decodeAudioData → BufferSourceNode). Added built-in silent sentinel oscillator for BT hearing aid routing. Uses requestAnimationFrame for karaoke word-time sync instead of `timeupdate` event. Supports pause/resume via stop+offset+recreate pattern (BufferSourceNodes can't be paused). StoryPlayer.tsx: wrapped `audio_female_path`/`alignment_female_path` with `getStorageUrl()`, added `useParams` for route param `:id` instead of hardcoded storyId, fixed backPath `/stories` → `/practice/stories`.
+- F-021: Root cause — `SentenceTraining.tsx` used stale `useVoice()` (VoiceContext reads `localStorage.preferredVoice`, never syncs). Voice mismatch caused `useSentenceData` audio_assets query to return empty results → `audio_assets[0]?.storage_path` was undefined → no audio URL → no playback. Fixed: switched to `useUser()` (UserContext, canonical voice source). Also fixed biased `.sort(() => Math.random() - 0.5)` answer shuffle with proper Fisher-Yates.
+- F-027: ScenarioPlayer.tsx full rewrite — replaced `new Audio()` for both dialogue and ambience with Web Audio API. Built-in AudioContext + silent sentinel oscillator (-80dB). Dialogue plays as BufferSourceNode with recursive auto-advance via refs (avoids stale closures). Ambience plays as looping BufferSourceNode through GainNode for volume control. Added AudioBuffer cache to avoid redundant decodes. Skip forward/backward controls. Fixed backPath `/practice` → `/practice/scenarios`. **Zero `new Audio()` calls remain in any active activity.**
+- Updated `useSentenceData.ts` SentenceStimulus type: added `distractor_1/2/3` fields, made `acoustic_foil`/`semantic_foil` optional (type now matches actual DB JSONB schema used by SentenceTraining).
 
 **Batch 6** (Session 15 — 2026-02-07): F-009 carrier phrase fix + design alignment + Smart Coach
 - F-009: Enhanced audit script (`scripts/audit_carrier_phrases.py`) with cross-voice duration comparison — breakthrough detection method. Found **daniel 92.5% contaminated**, all other 8 voices clean (0%). Created `scripts/regen_clean_audio.py` (clean TTS pipeline, no carrier phrase) + `scripts/upload_regen_audio.py`. Regenerated all 179 daniel word files. See `docs/F009_INCIDENT_REPORT.md`.
@@ -571,6 +600,85 @@ This means large portions of the app CANNOT be tested without either:
 1. **Quick fix:** Create a test account in Supabase with `subscription_tier = 'Premium'` and share credentials
 2. **Better:** Add a dev mode toggle (environment variable `VITE_DEV_UNLOCK_ALL=true`) that bypasses `isLocked()` checks
 3. **Best:** Add a `/dev` settings panel (only in dev/staging) with tier override, voice selection, session length controls
+
+---
+
+### F-018: Bluetooth hearing aids receive no audio — words route to phone speaker
+**Severity: P0** | **Category: Audio / Accessibility / Core Audience**
+**Pages:** Detection, GrossDiscrimination, CategoryPlayer, SentenceTraining
+
+**Problem:**
+A tester using iPhone Safari with Bluetooth hearing aids (Phone Clip / MFi) reported hearing words through the phone speaker instead of through their hearing aids. The Silent Sentinel (BT keepalive oscillator) was running and keeping the Bluetooth connection alive, but actual word audio bypassed it.
+
+**Root cause:**
+iOS Safari treats plain HTML `<audio>` elements / `new Audio()` as a separate audio session from the Web Audio API. The sentinel uses an AudioContext with a near-silent oscillator connected to `ctx.destination`. But when activities played words via `new Audio(url).play()`, iOS routed that audio through the default audio session (phone speaker) rather than through the Web Audio API session (which was connected to BT).
+
+RapidFire was unaffected because it already uses `useSNRMixer`, which plays all audio through a single AudioContext via `fetch → arrayBuffer → decodeAudioData → BufferSourceNode → destination`.
+
+**Fix:**
+Added `playUrl(url)` method to `useSilentSentinel` that uses the same `fetch → decodeAudioData → BufferSourceNode` pattern as `useSNRMixer.playTarget()`. All audio now routes through the sentinel's AudioContext, which is the same destination as the BT keepalive oscillator.
+
+Also added `stopPlayback()` for rapid tapping and cleanup on unmount.
+
+Converted 4 activities:
+- Detection.tsx — `new Audio()` → `await playUrl()`
+- GrossDiscrimination.tsx — `new Audio()` → `await playUrl()`
+- CategoryPlayer.tsx — `new Audio()` → `await playUrl()`, removed `currentAudio` HTMLAudioElement state
+- SentenceTraining.tsx — Removed `audioRef`, `handleAudioEnded`, `<audio>` JSX element; `handlePlay` now uses `await playUrl()`
+
+**Verification:** Requires manual test on iOS Safari with BT hearing aids. RapidFire (untouched) should continue working as before.
+
+---
+
+### F-019: Activities load slowly on mobile
+**Severity: P1** | **Category: Performance / UX**
+**Pages:** All word-based activities, CategoryPlayer
+
+**Problem:**
+Activities take noticeably long to show content on mobile. Two contributing factors:
+
+1. `useWordPairs()` fetches ALL rows from `word_pairs` with `select('*')` and no limit. This pulls every row including unused legacy audio path columns (`audio_1_path_sarah`, etc.).
+2. CategoryPlayer fetches ALL stimuli from `stimuli_catalog` where `content_type = 'word_pair'`, then filters by category in JavaScript. For a large catalog, this means downloading hundreds of rows to use ~10.
+
+**Fix:**
+1. Changed `useWordPairs` query to explicit column selection (`id, word_1, word_2, clinical_category, tier, target_phoneme, contrast_phoneme, position, vowel_context`) with `.limit(50)`. Activities only need 10 pairs; 50 gives shuffle variety.
+2. Added server-side filter `.eq('clinical_metadata->>contrast_category', decodedCategory)` to CategoryPlayer's Supabase query. Removed client-side `.filter()`.
+3. Created `sql_migrations/add_performance_indexes.sql` with 4 indexes (stimuli_catalog content_type, contrast_category JSONB, audio_assets stimuli_id, word_pairs tier).
+
+**Verification:** Manual test — activities should load noticeably faster on mobile. DB indexes need to be run in Supabase SQL Editor.
+
+---
+
+### F-020: Progress not saving for logged-in users
+**Severity: P0** | **Category: Data / Core Functionality**
+**Pages:** Detection, GrossDiscrimination (all activities affected by silent error pattern)
+
+**Problem:**
+Two testers (both logged in with Premium accounts) reported zero progress tracking — Dashboard and Progress page showed nothing despite completing multiple activities.
+
+**Root cause:**
+The `user_progress` table schema defines `content_id` as `UUID NOT NULL`:
+```sql
+content_id uuid not null
+```
+
+But Detection generates IDs like `"detection-0"`, `"detection-1"` and GrossDiscrimination generates `"gross-0"`, `"gross-1"`. These are not valid UUIDs. Every `supabase.from('user_progress').insert(...)` call silently failed with a type mismatch error.
+
+The error WAS logged to `console.error` in `useProgress.ts` (line 63), but:
+- No error state was set on the hook
+- No UI feedback was shown to the user
+- The `finally` block set `isLogging = false`, making it look like the operation completed normally
+
+Other activities (RapidFire, SentenceTraining, CategoryPlayer) pass actual UUIDs from the database and were unaffected by the type mismatch — but their errors would also be silently swallowed.
+
+**Fix:**
+- DB: `ALTER TABLE user_progress ALTER COLUMN content_id TYPE text` (run in Supabase SQL Editor)
+- Code: Expanded `contentType` union in `useProgress.ts` to include `'environmental' | 'story_question'`
+
+**Design weakness (not yet fixed):**
+All failure paths in `useProgress.ts` are silent. The hook returns `{ logProgress, isLogging }` but no `error` state. Components have no way to know if a save failed. This should be addressed in a future session.
+
+**Related:** F-010 (guest progress silently discarded — different root cause but same silent-failure pattern)
 
 ---
 

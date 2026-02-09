@@ -15,6 +15,7 @@ import { hapticSuccess, hapticFailure } from '../lib/haptics';
 import { evaluateSession, getClinicalBabble, getUserSNR, saveUserSNR, SNR_DEFAULT, BLOCK_SIZE } from '../lib/api';
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { getVoiceGender } from '../lib/voiceGender';
 
 /** UI-level coach action type (capitalized), matching SmartCoachFeedbackProps */
 type CoachUIAction = 'Increase' | 'Decrease' | 'Keep' | 'Enable Noise' | 'Step Down';
@@ -62,6 +63,9 @@ export function RapidFire() {
   const [babbleUrl, setBabbleUrl] = useState<string>('');
   const [showCoachFeedback, setShowCoachFeedback] = useState(false);
   const [coachResponse, setCoachResponse] = useState<CoachUIResponse | null>(null);
+
+  // Replay tracking
+  const [replayCount, setReplayCount] = useState(0);
 
   // Noise toggle (Silent Sentinel per 00_MASTER_RULES.md Section 6)
   const [noiseEnabled, setNoiseEnabled] = useState(false); // Default OFF (Consumer Model)
@@ -143,7 +147,7 @@ export function RapidFire() {
           pair,
           targetWord,
           targetAudio,
-          options: [pair.word_1, pair.word_2].sort(() => Math.random() - 0.5)
+          options: Math.random() > 0.5 ? [pair.word_1, pair.word_2] : [pair.word_2, pair.word_1]
         };
       });
 
@@ -189,6 +193,7 @@ export function RapidFire() {
       if (currentRound?.targetAudio) {
         // Mobile: Resume AudioContext on first user interaction
         await resumeAudio();
+        if (audioPlayedForRound) setReplayCount(prev => prev + 1);
         playTarget(currentRound.targetAudio); // Play word on top of continuous noise
         setAudioPlayedForRound(true); // Mark audio as played for this round
       } else {
@@ -196,6 +201,7 @@ export function RapidFire() {
       }
     } else {
       setSelectedGuess(null);
+      setReplayCount(0);
       if (currentIndex < sessionRounds.length - 1) {
           setCurrentIndex(prev => prev + 1);
           setStartTime(Date.now());
@@ -234,11 +240,19 @@ export function RapidFire() {
         correctResponse: currentRound.targetWord,
         responseTimeMs: responseTime,
         metadata: {
+            activityType: 'rapid_fire',
             targetPhoneme: currentRound.pair.target_phoneme,
             contrastPhoneme: currentRound.pair.contrast_phoneme,
+            position: currentRound.pair.position,
+            vowelContext: currentRound.pair.vowel_context,
             clinicalCategory: currentRound.pair.clinical_category,
             voiceId: voice,
-            snr: currentSNR // Track SNR used for this trial
+            voiceGender: getVoiceGender(voice || 'sarah'),
+            snr: currentSNR,
+            noiseEnabled,
+            trialNumber: currentIndex,
+            replayCount,
+            tier: currentRound.pair.tier,
         }
     });
 
@@ -368,9 +382,9 @@ export function RapidFire() {
         </HapticButton>
       </motion.header>
 
-      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
+      <main className="max-w-lg mx-auto w-full px-6 py-4 flex-1 flex flex-col">
         {/* Unified Action Button with Aura */}
-        <div className="flex justify-center mb-8 relative">
+        <div className="flex justify-center mb-4 relative">
           {/* The Pulsing Aura (behind button) */}
           <AuraVisualizer isPlaying={isTargetPlaying} currentSnr={currentSNR} />
 
@@ -400,7 +414,7 @@ export function RapidFire() {
         {audioError && <p className="text-center text-red-500 mb-4 text-sm">{audioError}</p>}
 
         {/* Answer Cards */}
-        <div className="space-y-3 mb-8">
+        <div className="space-y-3 mb-4">
           {currentRound.options.map((option) => {
             const isSelected = selectedGuess === option;
             const isTheCorrectAnswer = option === currentRound.targetWord;

@@ -1,29 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSentenceData, getAudioUrl } from '@/hooks/useSentenceData';
-import { useVoice } from '@/store/VoiceContext';
+import { useUser } from '@/store/UserContext';
 import { useProgress } from '@/hooks/useProgress';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
 import { SessionSummary } from '@/components/SessionSummary';
 import { ActivityBriefing } from '@/components/ActivityBriefing';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
+import { getVoiceGender } from '@/lib/voiceGender';
 
 const SESSION_LENGTH = 10;
 
 export function SentenceTraining() {
   const navigate = useNavigate();
-  const { currentVoice } = useVoice();
+  const { voice } = useUser();
+  const currentVoice = voice || 'sarah';
   const { sentences, loading, error } = useSentenceData({ limit: SESSION_LENGTH, voiceId: currentVoice });
   const { logProgress } = useProgress();
-  const { ensureResumed } = useSilentSentinel();
+  const { ensureResumed, playUrl } = useSilentSentinel();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [replayCount, setReplayCount] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -34,7 +37,6 @@ export function SentenceTraining() {
   const [responses, setResponses] = useState<Array<{ correct: boolean }>>([]);
   const [isComplete, setIsComplete] = useState(false);
 
-  const audioRef = useRef<HTMLAudioElement>(null);
   const currentSentence = sentences[currentIndex];
 
   // Shuffle answers into 4 options
@@ -49,25 +51,39 @@ export function SentenceTraining() {
         .filter(Boolean)
         .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
 
-      // Shuffle all answers
-      setAnswers(allAnswers.sort(() => Math.random() - 0.5));
+      // Fisher-Yates shuffle
+      const shuffled = [...allAnswers];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      setAnswers(shuffled);
     }
   }, [currentSentence, currentIndex, sentences]);
 
-  // Handle audio playback
+  // Handle audio playback — routes through Web Audio API for BT hearing aids
   const handlePlay = async () => {
-    if (!audioRef.current || !currentSentence) return;
+    if (!currentSentence) return;
 
     await ensureResumed();
-    audioRef.current.play();
+    if (showQuestion) setReplayCount(prev => prev + 1);
     setIsPlaying(true);
     setShowQuestion(false);
     setSelectedAnswer(null);
     setFeedback(null);
     setStartTime(Date.now());
-  };
 
-  const handleAudioEnded = () => {
+    // Build URL inline and play through sentinel's AudioContext
+    const storagePath = currentSentence.audio_assets[0]?.storage_path;
+    if (storagePath) {
+      const url = getAudioUrl(storagePath);
+      try {
+        await playUrl(url);
+      } catch {
+        // Audio failed — still show question
+      }
+    }
+
     setIsPlaying(false);
     setShowQuestion(true);
   };
@@ -93,9 +109,19 @@ export function SentenceTraining() {
       correctResponse: currentSentence.clinical_metadata.correct_answer,
       responseTimeMs: Date.now() - startTime,
       metadata: {
+        activityType: 'sentence_training',
         voiceId: currentVoice,
-        question: currentSentence.clinical_metadata.question_text,
+        voiceGender: getVoiceGender(currentVoice),
+        questionText: currentSentence.clinical_metadata.question_text,
+        sentenceText: currentSentence.content_text,
+        distractors: [
+          currentSentence.clinical_metadata.distractor_1,
+          currentSentence.clinical_metadata.distractor_2,
+          currentSentence.clinical_metadata.distractor_3,
+        ].filter(Boolean) as string[],
         difficulty: currentSentence.clinical_metadata.difficulty,
+        trialNumber: currentIndex,
+        replayCount,
         scenario: currentSentence.clinical_metadata.scenario,
       },
     });
@@ -104,6 +130,7 @@ export function SentenceTraining() {
     setTimeout(() => {
       if (currentIndex < sentences.length - 1) {
         setCurrentIndex((prev) => prev + 1);
+        setReplayCount(0);
         setSelectedAnswer(null);
         setFeedback(null);
         setShowQuestion(false);
@@ -161,10 +188,6 @@ export function SentenceTraining() {
       />
     );
   }
-
-  const audioUrl = currentSentence?.audio_assets[0]?.storage_path
-    ? getAudioUrl(currentSentence.audio_assets[0].storage_path)
-    : '';
 
   const totalRounds = sentences.length;
 
@@ -262,16 +285,6 @@ export function SentenceTraining() {
               })}
             </div>
           </div>
-        )}
-
-        {/* Hidden audio element */}
-        {audioUrl && (
-          <audio
-            ref={audioRef}
-            src={audioUrl}
-            onEnded={handleAudioEnded}
-            preload="auto"
-          />
         )}
 
         {/* Progress indicator */}

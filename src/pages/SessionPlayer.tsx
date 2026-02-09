@@ -4,8 +4,11 @@ import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
 import { SessionSummary } from '@/components/SessionSummary';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
-import { ChevronLeft, CheckCircle, XCircle } from 'lucide-react';
+import { ChevronLeft, CheckCircle, XCircle, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSilentSentinel } from '@/hooks/useSilentSentinel';
+import { useProgress } from '@/hooks/useProgress';
+import { getVoiceGender } from '@/lib/voiceGender';
 
 /**
  * Session Player - Polymorphic player for program sessions
@@ -56,6 +59,8 @@ export function SessionPlayer() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const { user, voice } = useUser();
   const navigate = useNavigate();
+  const { ensureResumed, playUrl, stopPlayback } = useSilentSentinel();
+  const { logProgress } = useProgress();
 
   const [session, setSession] = useState<Session | null>(null);
   const [items, setItems] = useState<SessionItem[]>([]);
@@ -73,8 +78,8 @@ export function SessionPlayer() {
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
-  // Audio state
-  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
+  // Audio & replay state
+  const [replayCount, setReplayCount] = useState(0);
   const [selectedVoice, setSelectedVoice] = useState<string>(voice || 'sarah');
 
   useEffect(() => {
@@ -129,18 +134,11 @@ export function SessionPlayer() {
 
   const playAudio = async (storagePath: string) => {
     try {
-      // Stop current audio if playing
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
+      await ensureResumed();
+      stopPlayback(); // Stop any currently playing audio
 
-      // Get public URL from Supabase storage
       const { data } = supabase.storage.from('audio').getPublicUrl(storagePath);
-
-      const audio = new Audio(data.publicUrl);
-      setCurrentAudio(audio);
-      await audio.play();
+      await playUrl(data.publicUrl);
     } catch (err) {
       console.error('Error playing audio:', err);
     }
@@ -148,6 +146,7 @@ export function SessionPlayer() {
 
   const handleResponse = (answer: string, isCorrect: boolean) => {
     const responseTime = Date.now() - trialStartTime;
+    const stimulus = items[currentIndex].stimuli;
 
     // Show feedback
     setSelectedAnswer(answer);
@@ -156,8 +155,37 @@ export function SessionPlayer() {
     // Record response
     setResponses([...responses, { correct: isCorrect, responseTime }]);
 
+    // Log per-trial progress
+    const isWordPair = stimulus.content_type === 'word_pair';
+    logProgress({
+      contentType: isWordPair ? 'word' : 'sentence',
+      contentId: stimulus.id,
+      result: isCorrect ? 'correct' : 'incorrect',
+      userResponse: answer,
+      correctResponse: isWordPair
+        ? (stimulus.clinical_metadata.word_1 || '')
+        : (stimulus.clinical_metadata.correct_answer || ''),
+      responseTimeMs: responseTime,
+      metadata: {
+        activityType: 'session_player',
+        voiceId: selectedVoice,
+        voiceGender: getVoiceGender(selectedVoice),
+        trialNumber: currentIndex,
+        replayCount,
+        clinicalCategory: stimulus.clinical_metadata.contrast_category,
+        ...(isWordPair ? {
+          distractorWord: stimulus.clinical_metadata.word_2,
+        } : {
+          questionText: stimulus.clinical_metadata.question_text,
+          sentenceText: stimulus.content_text,
+          difficulty: String(stimulus.clinical_metadata.difficulty || ''),
+        }),
+      },
+    });
+
     // Auto-advance after 1.5s
     setTimeout(() => {
+      setReplayCount(0);
       if (currentIndex < items.length - 1) {
         setCurrentIndex(currentIndex + 1);
         setTrialStartTime(Date.now());
@@ -265,7 +293,12 @@ export function SessionPlayer() {
             word2={stimulus.clinical_metadata.word_2 || ''}
             audioPath={audioAsset?.storage_path}
             onResponse={handleResponse}
-            onPlayAudio={() => audioAsset && playAudio(audioAsset.storage_path)}
+            onPlayAudio={() => {
+              if (audioAsset) {
+                setReplayCount(prev => prev + 1);
+                playAudio(audioAsset.storage_path);
+              }
+            }}
             selectedAnswer={selectedAnswer}
           />
         ) : (
@@ -279,7 +312,12 @@ export function SessionPlayer() {
             ]}
             audioPath={audioAsset?.storage_path}
             onResponse={handleResponse}
-            onPlayAudio={() => audioAsset && playAudio(audioAsset.storage_path)}
+            onPlayAudio={() => {
+              if (audioAsset) {
+                setReplayCount(prev => prev + 1);
+                playAudio(audioAsset.storage_path);
+              }
+            }}
             selectedAnswer={selectedAnswer}
           />
         )}
@@ -369,12 +407,9 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
           onPlayAudio();
           setHasPlayed(true);
         }}
-        className="w-full p-8 bg-gradient-to-br from-teal-900/40 to-teal-800/40 border-2 border-teal-700 rounded-3xl hover:from-teal-900/60 hover:to-teal-800/60 transition-all"
+        className="w-28 h-28 mx-auto rounded-full bg-teal-500 hover:bg-teal-400 hover:scale-105 shadow-xl flex items-center justify-center text-white transition-all"
       >
-        <div className="text-center">
-          <div className="text-6xl mb-4">🔊</div>
-          <p className="text-white font-bold text-lg">Listen</p>
-        </div>
+        <Play size={48} fill="currentColor" className="ml-1" />
       </button>
 
       {/* Answer Buttons */}
@@ -442,12 +477,9 @@ function SentencePlayer({ questionText, correctAnswer, distractors, audioPath, o
           onPlayAudio();
           setHasPlayed(true);
         }}
-        className="w-full p-8 bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl hover:from-teal-500 hover:to-teal-500 transition-all shadow-lg"
+        className="w-28 h-28 mx-auto rounded-full bg-teal-500 hover:bg-teal-400 hover:scale-105 shadow-xl flex items-center justify-center text-white transition-all"
       >
-        <div className="text-center">
-          <div className="text-6xl mb-2">🔊</div>
-          <p className="text-white font-bold text-lg">{hasPlayed ? 'Listen Again' : 'Listen'}</p>
-        </div>
+        <Play size={48} fill="currentColor" className="ml-1" />
       </button>
 
       {/* Question */}

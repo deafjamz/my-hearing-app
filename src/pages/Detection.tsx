@@ -13,6 +13,7 @@ import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { useSilentSentinel } from '../hooks/useSilentSentinel';
+import { getVoiceGender } from '../lib/voiceGender';
 
 const SESSION_LENGTH = 10;
 
@@ -42,7 +43,8 @@ export function Detection() {
   const { pairs, loading } = useWordPairs(voice || 'sarah');
 
   // Silent Sentinel — keeps BT audio route alive for CI accessories
-  const { ensureResumed } = useSilentSentinel();
+  // playUrl routes audio through same AudioContext so BT hearing aids receive it
+  const { ensureResumed, playUrl } = useSilentSentinel();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
@@ -55,6 +57,9 @@ export function Detection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
+
+  // Replay tracking
+  const [replayCount, setReplayCount] = useState(0);
 
   // Stats
   const [correct, setCorrect] = useState(0);
@@ -97,30 +102,24 @@ export function Detection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Play audio (word or silence)
+  // Play audio (word or silence) — routes through Web Audio API for BT hearing aids
   const handlePlay = useCallback(async () => {
     if (!currentRound || isPlaying) return;
 
     await ensureResumed(); // Warm up BT route on first tap
+    if (audioPlayed) setReplayCount(prev => prev + 1);
     setIsPlaying(true);
     setStartTime(Date.now());
 
     if (currentRound.hasSound && currentRound.audioUrl) {
-      // Play the word
-      const audio = new Audio(currentRound.audioUrl);
-      audio.onended = () => {
-        setIsPlaying(false);
-        setAudioPlayed(true);
-      };
-      audio.onerror = () => {
-        console.error('Audio playback error');
-        setIsPlaying(false);
-        setAudioPlayed(true);
-      };
-      await audio.play().catch(() => {
-        setIsPlaying(false);
-        setAudioPlayed(true);
-      });
+      // Play through sentinel's AudioContext (same destination as BT keepalive)
+      try {
+        await playUrl(currentRound.audioUrl);
+      } catch {
+        // Audio failed — still let user answer
+      }
+      setIsPlaying(false);
+      setAudioPlayed(true);
     } else {
       // Silence - just wait 1-2 seconds
       const silenceDuration = 1000 + Math.random() * 1000;
@@ -129,7 +128,7 @@ export function Detection() {
         setAudioPlayed(true);
       }, silenceDuration);
     }
-  }, [currentRound, isPlaying]);
+  }, [currentRound, isPlaying, ensureResumed, playUrl]);
 
   // Handle user answer
   const handleAnswer = (userSaidYes: boolean) => {
@@ -157,11 +156,14 @@ export function Detection() {
       correctResponse: currentRound.hasSound ? 'yes' : 'no',
       responseTimeMs: responseTime,
       metadata: {
+        activityType: 'detection',
         voiceId: voice || 'sarah',
-        // Custom detection metadata
-        category: 'detection',
-        safetyCritical: false,
-        acousticSimilarity: 'word_vs_silence',
+        voiceGender: getVoiceGender(voice || 'sarah'),
+        word: currentRound.word || undefined,
+        hasSound: currentRound.hasSound,
+        trialNumber: currentIndex,
+        replayCount,
+        clinicalCategory: 'detection',
       },
     });
   };
@@ -172,6 +174,7 @@ export function Detection() {
       setCurrentIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setAudioPlayed(false);
+      setReplayCount(0);
       setStartTime(Date.now());
     } else {
       setIsComplete(true);
@@ -229,11 +232,11 @@ export function Detection() {
         </div>
       </motion.header>
 
-      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
+      <main className="max-w-lg mx-auto w-full px-6 py-4 flex-1 flex flex-col">
         {/* Instructions */}
         <motion.div
           animate={{ opacity: isPlaying ? 0.2 : 1 }}
-          className="text-center mb-8"
+          className="text-center mb-4"
         >
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             Did you hear a word?
@@ -244,7 +247,7 @@ export function Detection() {
         </motion.div>
 
         {/* Play Button with Aura */}
-        <div className="flex justify-center mb-12 relative">
+        <div className="flex justify-center mb-6 relative">
           <AuraVisualizer isPlaying={isPlaying} currentSnr={20} />
 
           <HapticButton
@@ -281,7 +284,7 @@ export function Detection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="text-center mb-8"
+              className="text-center mb-4"
             >
               <p className={`text-lg font-bold ${
                 isCorrectAnswer

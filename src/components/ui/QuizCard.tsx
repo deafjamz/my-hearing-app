@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface QuizCardProps {
   question: Question;
-  onAnswer: (isCorrect: boolean) => void;
+  onAnswer: (isCorrect: boolean, choiceText: string, correctText: string) => void;
   disabled?: boolean;
 }
 
@@ -16,10 +16,11 @@ export function QuizCard({ question, onAnswer, disabled = false }: QuizCardProps
 
   const handleSelect = (choice: Choice) => {
     if (isSubmitted || disabled) return;
-    
+
     setSelectedChoiceId(choice.id);
     setIsSubmitted(true);
-    onAnswer(choice.isCorrect);
+    const correctChoice = question.choices.find(c => c.isCorrect);
+    onAnswer(choice.isCorrect, choice.text, correctChoice?.text || '');
   };
 
   return (

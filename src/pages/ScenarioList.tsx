@@ -13,8 +13,9 @@ export function ScenarioList() {
     const fetchScenarios = async () => {
       const { data, error } = await supabase
         .from('scenarios')
-        .select('*')
-        .order('title');
+        .select('id, title, description, difficulty, tier')
+        .order('title')
+        .limit(50);
 
       if (error) {
         console.error("Error fetching scenarios:", error);

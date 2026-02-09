@@ -14,8 +14,11 @@ export interface SentenceStimulus {
     target_phoneme: string;
     question_text: string;
     correct_answer: string;
-    acoustic_foil: string;
-    semantic_foil: string;
+    acoustic_foil?: string;
+    semantic_foil?: string;
+    distractor_1?: string;
+    distractor_2?: string;
+    distractor_3?: string;
     scenario: string;
     difficulty: number;
   };

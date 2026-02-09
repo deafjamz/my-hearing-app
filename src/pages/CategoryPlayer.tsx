@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { SessionSummary } from '@/components/SessionSummary';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useUser } from '@/store/UserContext';
 import { ActivityBriefing } from '@/components/ActivityBriefing';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
+import { useProgress } from '@/hooks/useProgress';
+import { getVoiceGender } from '@/lib/voiceGender';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -37,15 +39,18 @@ export function CategoryPlayer() {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { voice } = useUser();
-  const { ensureResumed } = useSilentSentinel();
+  const { ensureResumed, playUrl, stopPlayback } = useSilentSentinel();
+  const { logProgress } = useProgress();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
 
+  // Replay tracking
+  const [replayCount, setReplayCount] = useState(0);
+
   const [pairs, setPairs] = useState<WordPair[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
   const selectedVoice = voice || 'sarah';
 
   // Performance tracking
@@ -79,7 +84,7 @@ export function CategoryPlayer() {
     try {
       const decodedCategory = decodeURIComponent(category || '');
 
-      // Fetch word pairs from this category
+      // Fetch word pairs from this category (server-side filter)
       const { data: stimuli, error } = await supabase
         .from('stimuli_catalog')
         .select(`
@@ -91,13 +96,13 @@ export function CategoryPlayer() {
             storage_path
           )
         `)
-        .eq('content_type', 'word_pair');
+        .eq('content_type', 'word_pair')
+        .eq('clinical_metadata->>contrast_category', decodedCategory);
 
       if (error) throw error;
 
-      // Filter by category and shuffle
+      // Map to WordPair format
       const categoryPairs = (stimuli as StimulusRow[])
-        .filter((s) => s.clinical_metadata?.contrast_category === decodedCategory)
         .map((s) => {
           // Try selected voice first, fall back to any available voice
           const audio = s.audio_assets?.find((a) => a.voice_id === selectedVoice)
@@ -127,16 +132,10 @@ export function CategoryPlayer() {
   const playAudio = async (storagePath: string) => {
     try {
       await ensureResumed();
-
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
+      stopPlayback(); // Stop any currently playing audio
 
       const { data } = supabase.storage.from('audio').getPublicUrl(storagePath);
-      const audio = new Audio(data.publicUrl);
-      setCurrentAudio(audio);
-      await audio.play();
+      await playUrl(data.publicUrl);
     } catch (err) {
       console.error('Error playing audio:', err);
     }
@@ -165,11 +164,36 @@ export function CategoryPlayer() {
     setResponses(prev => [...prev, { correct: isCorrect, responseTime }]);
     setFeedback({ isCorrect, correctWord, selectedWord: selectedWord.toLowerCase() });
 
+    // Determine the distractor word (the word NOT played)
+    const distractorWord = selectedWord.toLowerCase() === currentPair.word1.toLowerCase()
+      ? currentPair.word2
+      : currentPair.word1;
+
+    // Log per-trial progress
+    logProgress({
+      contentType: 'word',
+      contentId: currentPair.id,
+      result: isCorrect ? 'correct' : 'incorrect',
+      userResponse: selectedWord,
+      correctResponse: correctWord,
+      responseTimeMs: responseTime,
+      metadata: {
+        activityType: 'category_practice',
+        voiceId: selectedVoice,
+        voiceGender: getVoiceGender(selectedVoice),
+        clinicalCategory: decodeURIComponent(category || ''),
+        distractorWord,
+        trialNumber: currentIndex,
+        replayCount,
+      },
+    });
+
     const isLast = currentIndex >= pairs.length - 1;
 
     // Auto-advance after showing feedback
     setTimeout(() => {
       setFeedback(null);
+      setReplayCount(0);
       if (!isLast) {
         setCurrentIndex(prev => prev + 1);
         setTrialStartTime(Date.now());
@@ -229,6 +253,10 @@ export function CategoryPlayer() {
   }
 
   const currentPair = pairs[currentIndex];
+  const shuffledOptions = useMemo(
+    () => Math.random() > 0.5 ? [currentPair.word1, currentPair.word2] : [currentPair.word2, currentPair.word1],
+    [currentIndex]
+  );
   const progressPercent = ((currentIndex + 1) / pairs.length) * 100;
 
   return (
@@ -269,7 +297,7 @@ export function CategoryPlayer() {
           {/* Autoplay Toggle */}
           <div className="flex items-center justify-between p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
             <div className="flex items-center gap-3">
-              <div className="text-2xl">🔄</div>
+              <Play size={20} className="text-teal-400" />
               <div>
                 <p className="text-white font-medium text-sm">Autoplay Audio</p>
                 <p className="text-slate-500 text-xs">Play automatically on each item</p>
@@ -289,21 +317,21 @@ export function CategoryPlayer() {
             </button>
           </div>
 
-          {/* Audio Button */}
-          <button
-            onClick={() => {
-              if (currentPair.audioPath) {
-                playAudio(currentPair.audioPath);
-                setHasPlayed(true);
-              }
-            }}
-            className="w-full p-8 bg-slate-900 border-2 border-slate-700 rounded-3xl hover:bg-slate-800 hover:border-teal-500/30 transition-all"
-          >
-            <div className="text-center">
-              <div className="text-6xl mb-4">🔊</div>
-              <p className="text-white font-bold text-lg">Listen</p>
-            </div>
-          </button>
+          {/* Play Button — teal circle, matches Detection/RapidFire */}
+          <div className="flex justify-center">
+            <button
+              onClick={() => {
+                if (currentPair.audioPath) {
+                  if (hasPlayed) setReplayCount(prev => prev + 1);
+                  playAudio(currentPair.audioPath);
+                  setHasPlayed(true);
+                }
+              }}
+              className="w-28 h-28 rounded-full bg-teal-500 hover:bg-teal-400 hover:scale-105 shadow-xl flex items-center justify-center text-white transition-all"
+            >
+              <Play size={48} fill="currentColor" className="ml-1" />
+            </button>
+          </div>
 
           {/* Per-answer feedback */}
           {feedback && (
@@ -325,7 +353,7 @@ export function CategoryPlayer() {
 
           {/* Answer Buttons */}
           <div className="grid grid-cols-2 gap-4">
-            {[currentPair.word1, currentPair.word2].map((word) => {
+            {shuffledOptions.map((word) => {
               let btnStyle = 'border-slate-700 hover:border-teal-500';
               if (feedback) {
                 if (word.toLowerCase() === feedback.correctWord) {

@@ -213,7 +213,8 @@ export function useWordPairs(voice?: string) {
       try {
         const { data, error } = await supabase
           .from('word_pairs')
-          .select('*');
+          .select('id, word_1, word_2, clinical_category, tier, target_phoneme, contrast_phoneme, position, vowel_context')
+          .limit(50);
 
         if (error) {
           console.error("Error fetching word pairs:", error);

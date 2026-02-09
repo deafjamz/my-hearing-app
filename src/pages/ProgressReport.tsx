@@ -2,11 +2,20 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Printer, Lock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { useProgressData } from '@/hooks/useProgressData';
+import { useAnalytics } from '@/hooks/useAnalytics';
 import { useUser } from '@/store/UserContext';
 import { format } from 'date-fns';
+import {
+  ActivityBreakdownCard,
+  VoiceComparisonCard,
+  PositionAnalysisCard,
+  NoiseEffectivenessCard,
+  ReplayInsightCard,
+} from '@/components/analytics';
 
 export function ProgressReport() {
   const { stats, loading, isGuest } = useProgressData();
+  const { data: analytics, loading: analyticsLoading } = useAnalytics();
   const { hasAccess } = useUser();
 
   const canPrint = hasAccess('Premium');
@@ -161,6 +170,22 @@ export function ProgressReport() {
                 <Bar dataKey="trials" fill="#14b8a6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
+          </div>
+        </section>
+      )}
+
+      {/* Insights */}
+      {!analyticsLoading && analytics && (
+        <section className="mb-8 print:mb-6">
+          <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 px-1 print:text-black">
+            Insights
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ActivityBreakdownCard data={analytics.byActivity} />
+            <VoiceComparisonCard data={analytics.byVoice} />
+            <PositionAnalysisCard data={analytics.byPosition} />
+            <NoiseEffectivenessCard data={analytics.noiseComparison} />
+            <ReplayInsightCard data={analytics.replayStats} totalTrials={stats.totalTrials} />
           </div>
         </section>
       )}

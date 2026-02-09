@@ -1,11 +1,11 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-08
-> **Last Session:** Route restructure, Sentences modernization, hooks fix (Session 18)
-> **Build Status:** ✅ PASSING (3.4s, 248KB main bundle)
-> **Deployment:** ✅ LIVE at https://soundsteps.app — auto-deploys on push to main
+> **Last Session:** Session 22 (continued) — F-027 ScenarioPlayer BT fix, useProgress error surfacing
+> **Build Status:** ✅ PASSING (3.2s, 248KB main bundle)
+> **Deployment:** ✅ LIVE at https://soundsteps.app — deployed via `npx vercel --prod`
 > **Tests:** ✅ 31 PASSING (Vitest)
-> **Testing:** 17 findings tracked in `docs/TESTING_FINDINGS.md` (16 fixed, 1 deferred)
+> **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 
 ---
 
@@ -239,20 +239,25 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
+- [ ] **Run performance indexes SQL** — `sql_migrations/add_performance_indexes.sql` in Supabase SQL Editor (4 indexes for faster queries)
+- [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test Detection, Word Basics, Categories, Sentences. Audio should come through hearing aids, not phone speaker.
+- [ ] **Verify progress tracking** — Have testers complete activities, then check Dashboard/Progress page shows results
+- [ ] **Surface progress errors to UI** — `useProgress.ts` silently swallows all errors. Add error state so users know if save failed.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
-- [ ] **Test all auth flows end-to-end** on mobile Safari, Chrome, and desktop
-- [x] ~~Remove VITE_DEV_UNLOCK_ALL from Vercel~~ ✅ (Session 18)
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 - [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
 
 ### Done (previously TODO)
+- [x] BT hearing aid audio routing fixed ✅ (Session 19 — F-018)
+- [x] Slow loading optimized ✅ (Session 19 — F-019)
+- [x] Progress tracking fixed ✅ (Session 19 — F-020, content_id UUID→TEXT)
+- [x] Premium granted to 3 test accounts ✅ (Session 19 — wakingupdeaf, lyle7257, mark@rdaadvantage)
 - [x] Google OAuth configured, working, and published ✅ (Session 18 — consent screen published for all users)
 - [x] VITE_DEV_UNLOCK_ALL removed from Vercel production ✅ (Session 18)
 - [x] DNS moved from Namecheap to Cloudflare ✅ (Session 18)
 - [x] Email forwarding configured ✅ (Session 18 — support@soundsteps.app → soundstepsapp@gmail.com via Cloudflare Email Routing)
 - [x] Email templates pasted into Supabase ✅ (Session 18)
 - [x] Supabase security linter SQL fixes run ✅ (Session 18)
-- [x] Premium granted to test account ✅ (Session 18 — wakingupdeaf@gmail.com)
 - [x] Custom SMTP configured ✅ (Resend via noreply@soundsteps.app)
 - [x] Branded email templates written ✅
 
@@ -369,6 +374,7 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 - [x] ~~Build progress visualization page~~ ✅ DONE 2026-02-06
 - [x] ~~Practice focus areas analysis~~ ✅ DONE (included in ProgressReport)
 - [x] ~~PDF export (shareable with audiologists)~~ ✅ DONE (window.print())
+- [x] ~~Analytics insight cards (Sprint 2)~~ ✅ DONE 2026-02-08 (5 cards: Activity Breakdown, Voice Comparison, Position Analysis, Noise Effectiveness, Replay Patterns)
 
 ### Phase 9: Tier Locking
 - [x] ~~Lock Standard/Premium content for non-subscribers~~ ✅ DONE 2026-02-06
@@ -380,6 +386,225 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-08 (Session 21: Data Engine Sprint 2 — Analytics Hooks + Progress Report Enhancement)
+
+**Summary:** Surfaced Sprint 1's enriched per-trial data in the ProgressReport page. Created a single analytics hook that queries `user_progress` once and computes 6 breakdowns from `content_tags` JSONB. Built 5 self-hiding insight cards and wired them into ProgressReport below existing charts. No DB migrations needed.
+
+**New hook:** `src/hooks/useAnalytics.ts` (~180 lines)
+- Single Supabase query → 6 computed breakdowns: byActivity, byVoice, byPosition, noiseComparison, replayStats, responseTimeTrend
+- `ACTIVITY_LABELS` map: `detection` → 'Sound Detection', `rapid_fire` → 'Word Pairs', etc.
+- Follows same pattern as `useProgressData.ts` (single query, JS aggregation)
+
+**New components:** `src/components/analytics/` (5 cards + barrel export)
+- `ActivityBreakdownCard.tsx` — Horizontal bars with accuracy per activity, color-coded (teal ≥80%, amber 50-80%, red <50%)
+- `VoiceComparisonCard.tsx` — Male vs Female voice accuracy side-by-side
+- `PositionAnalysisCard.tsx` — Initial/Medial/Final phoneme position accuracy (3-column)
+- `NoiseEffectivenessCard.tsx` — Quiet vs Noise accuracy comparison
+- `ReplayInsightCard.tsx` — Avg replays/trial with zero-replay vs multi-replay accuracy
+- `index.ts` — Barrel export
+
+**Modified:** `src/pages/ProgressReport.tsx`
+- Added "Insights" section below existing charts, above print footer
+- 2-column responsive grid (`grid-cols-1 md:grid-cols-2`)
+- Cards self-hide when <5 trials exist for that dimension
+- Entire section hidden when no analytics data or still loading
+
+**Design verification:**
+- All cards match existing Aura design system (teal primary, `font-bold` max, no gradients)
+- Dark mode: `bg-white dark:bg-slate-900`, `border-slate-200 dark:border-slate-800`
+- Print styles: `print:border-slate-300`, `print:text-black`
+- Mobile responsive: single column on mobile, 2 columns on desktop
+- Empty states: "Not enough data" text for individual sub-sections; null return hides entire card
+
+**Quality checks:**
+- Zero console.log statements (all new code)
+- Zero `any` types
+- Zero regulatory term violations
+- Zero hardcoded secrets
+- Zero new TS errors (all pre-existing)
+- All files <50 lines (cards) or <200 lines (hook)
+- Immutable patterns throughout
+
+**Bug Fix Batch 9 (same session):**
+- **F-024 FIXED:** Answer position shuffle bias — replaced biased `.sort(() => Math.random() - 0.5)` with fair coin flip in RapidFire, GrossDiscrimination. CategoryPlayer had zero shuffle — added `useMemo` randomized options.
+- **F-025 FIXED:** Voice selection not applied — Player.tsx used stale `useVoice()` (VoiceContext). Changed to `useUser()` (UserContext). Root cause: two competing localStorage keys (`preferredVoice` vs `voice`), VoiceContext never re-reads after mount.
+- **F-026 FIXED:** Excessive scrolling — reduced `py-8`→`py-4`, `mb-12`→`mb-6`, `mb-10`→`mb-6` in Detection, RapidFire, GrossDiscrimination. Saves ~80px vertical space.
+- **F-022 FIXED:** Scenario list slow — `select('*')` → explicit columns + `.limit(50)` in ScenarioList.
+- **F-023 PARTIAL:** StoryPlayer styling — `font-black`→`font-bold`, difficulty buttons → Aura dark cards, dark mode text. Audio URL construction still open.
+
+**Files modified (Batch 9):**
+- `src/pages/RapidFire.tsx` — Fair shuffle, reduced padding
+- `src/pages/GrossDiscrimination.tsx` — Fair shuffle, Fisher-Yates for array, reduced padding
+- `src/pages/CategoryPlayer.tsx` — Added `useMemo` shuffled options, `useMemo` import
+- `src/pages/Detection.tsx` — Reduced padding/margins
+- `src/pages/Player.tsx` — Removed VoiceContext, use UserContext for voice
+- `src/pages/ScenarioList.tsx` — Explicit column selection + limit
+- `src/pages/StoryPlayer.tsx` — Aura styling, font-bold, dark mode text
+
+**Remaining open:** F-021 (Sentences audio Safari — CORS/bucket issue), F-023 (Stories audio URL path — needs investigation)
+
+**Build:** ✅ PASSING (3.1s) | **Tests:** ✅ 31 PASSING
+
+---
+
+### 2026-02-08 (Session 22 continued: F-027 Fix + useProgress Error Surfacing)
+
+**Summary:** Fixed final BT audio violation (F-027 — ScenarioPlayer). All 27 findings now resolved (25 fixed, 1 deferred, 1 superseded). Added error state to `useProgress` hook so consumers can surface save failures to users.
+
+**F-027 Fix — ScenarioPlayer BT audio:**
+- Full rewrite of `ScenarioPlayer.tsx` — replaced `new Audio()` for dialogue and ambience with Web Audio API
+- Built-in AudioContext with silent sentinel oscillator (-80dB, keeps BT route alive)
+- Dialogue: sequential `BufferSourceNode` playback with recursive auto-advance via refs (avoids stale closures)
+- Ambience: looping `BufferSourceNode` through `GainNode` for volume control
+- `AudioBuffer` cache avoids redundant decode operations
+- Skip forward/backward controls, fixed backPath to `/practice/scenarios`
+- **Zero `new Audio()` calls remain in any active activity**
+
+**useProgress error surfacing:**
+- Added `error` and `clearError` to `useProgress()` return value
+- Three error states: not signed in, DB insert failure, connection error
+- Console logs gated behind `import.meta.env.DEV`
+- Consumers can optionally destructure `{ error }` to show save failures
+
+**Files modified:**
+- `src/pages/ScenarioPlayer.tsx` — Full rewrite: `new Audio()` → Web Audio API with sentinel
+- `src/hooks/useProgress.ts` — Added `error`/`clearError` state
+- `docs/TESTING_FINDINGS.md` — F-027 FIXED, summary updated (25/27 fixed, 0 open)
+
+**Build:** ✅ PASSING (3.2s) | **Tests:** ✅ 31 PASSING
+
+---
+
+### 2026-02-08 (Session 22: BT Audio Fix Batch 10 — Stories Karaoke + Sentences Voice)
+
+**Summary:** Fixed the last 2 open audio findings (F-021, F-023). Refactored `useKaraokePlayer` from `new Audio()` to Web Audio API for BT hearing aid compatibility. Fixed SentenceTraining's stale voice context that caused empty audio assets. Logged new finding F-027 for ScenarioPlayer.
+
+**F-023 Fix — Stories audio (complete):**
+- `useKaraokePlayer.ts` **full refactor** — replaced `new Audio()` + HTMLAudioElement with Web Audio API:
+  - Creates own AudioContext with built-in silent sentinel oscillator (-80dB, keeps BT route alive)
+  - Fetches audio via `fetch → arrayBuffer → decodeAudioData → AudioBuffer`
+  - Plays through `BufferSourceNode → destination` (same BT-compatible pattern as `useSilentSentinel.playUrl()`)
+  - Uses `requestAnimationFrame` loop for karaoke word-time sync (replaces `timeupdate` event)
+  - Supports pause/resume via stop+offset+recreate pattern (BufferSourceNodes can't be paused natively)
+  - Dual loading states: tracks alignment and audio fetch independently
+  - Uses `onEndedRef` to avoid stale callback closures
+  - iOS Safari AudioContext resume handled in `play()` function
+- `StoryPlayer.tsx`:
+  - Wrapped `story.audio_female_path` and `story.alignment_female_path` with `getStorageUrl()` (was passing raw DB paths)
+  - Added `useParams` to read `:id` route param (was hardcoded to `'story_001_whispering_woods'`)
+  - Fixed `backPath` from `/stories` → `/practice/stories` (matching actual route)
+
+**F-021 Fix — Sentences audio:**
+- **Root cause:** `SentenceTraining.tsx` used `useVoice()` (VoiceContext) which reads stale `localStorage.preferredVoice`. Voice ID mismatch caused `useSentenceData`'s audio_assets query (`.eq('voice_id', options.voiceId)`) to return zero results → `audio_assets[0]?.storage_path` was `undefined` → no audio URL → no playback.
+- **Fix:** Changed `useVoice()` → `useUser()` (UserContext), which reads canonical `localStorage.voice`. Same fix pattern as F-025 in Player.tsx.
+- Also fixed biased answer shuffle: `.sort(() => Math.random() - 0.5)` → proper Fisher-Yates.
+- Updated `useSentenceData.ts` `SentenceStimulus` type: added `distractor_1/2/3` fields, made `acoustic_foil`/`semantic_foil` optional.
+
+**F-027 (new finding):** ScenarioPlayer.tsx uses `new Audio()` for dialogue and ambience playback — same BT audio routing issue as F-018. Logged for future fix.
+
+**Files modified:**
+- `src/hooks/useKaraokePlayer.ts` — Full rewrite: `new Audio()` → Web Audio API with sentinel
+- `src/pages/StoryPlayer.tsx` — `getStorageUrl()` wrapping, `useParams`, backPath fix
+- `src/pages/SentenceTraining.tsx` — `useVoice()` → `useUser()`, Fisher-Yates shuffle
+- `src/hooks/useSentenceData.ts` — Updated `SentenceStimulus` type for distractor fields
+- `docs/TESTING_FINDINGS.md` — F-021 FIXED, F-023 FIXED, F-027 added, Batch 10 added
+- `STATUS.md` — Session 22 entry
+
+**Build:** ✅ PASSING (3.7s) | **Tests:** ✅ 31 PASSING
+
+---
+
+### 2026-02-08 (Session 20: Data Engine Sprint 1 — Rich Per-Trial Logging)
+
+**Summary:** Made all 7 activities log consistent, rich per-trial data to `user_progress.content_tags` JSONB. Fixed BT audio in SessionPlayer. Fixed Player.tsx TODO bug. Extended QuizCard callback to pass actual answer text. Created voiceGender utility.
+
+**New file:** `src/lib/voiceGender.ts` — voice-to-gender lookup (9 voices → male/female)
+
+**Key changes:**
+- `useProgress.ts` — 15 new optional metadata fields (activityType, trialNumber, replayCount, voiceGender, etc.)
+- `Detection.tsx` — +replayCount, +voiceGender, +word, +hasSound, +trialNumber, +activityType
+- `GrossDiscrimination.tsx` — +replayCount, +voiceGender, +distractorWord, +trialNumber, +activityType
+- `RapidFire.tsx` — +replayCount, +position, +vowelContext, +noiseEnabled, +trialNumber, +voiceGender, +tier
+- `SentenceTraining.tsx` — +replayCount, +sentenceText, +distractors, +trialNumber, +voiceGender
+- `QuizCard.tsx` — Extended `onAnswer(isCorrect, choiceText, correctText)` callback
+- `Player.tsx` — Fixed `correctResponse: 'TODO'` bug, +activityType, +storyId, +voiceGender
+- `StoryPlayer.tsx` — +activityType, +voiceGender, +trialNumber
+- `CategoryPlayer.tsx` — Added logging from scratch (was logging NOTHING)
+- `SessionPlayer.tsx` — Replaced `new Audio()` with `useSilentSentinel` (BT fix), added per-trial logging
+
+**New findings logged:** F-021 (Sentences no audio Safari), F-022 (Scenarios slow load), F-023 (Stories styling/audio), F-024 (Word Pairs shuffle bug), F-025 (Voice selection not applied), F-026 (Unnecessary scrolling in activities)
+
+**Build:** ✅ PASSING (3.5s) | **Tests:** ✅ 31 PASSING
+
+---
+
+### 2026-02-08 (Session 19: BT Hearing Aid Audio Fix, Loading Optimization, Progress Tracking Fix)
+
+**Summary:** Fixed audio routing for Bluetooth hearing aids (4 activities), optimized slow loading queries, and found/fixed the root cause of progress not saving for logged-in users. Premium tier granted to 3 test accounts. Deployed to production.
+
+**Fix 1 — Bluetooth Hearing Aid Audio Routing (F-018):**
+
+**Root cause:** Detection, GrossDiscrimination, CategoryPlayer, and SentenceTraining played audio via plain HTML `<audio>` / `new Audio()`. The Silent Sentinel (BT keepalive) uses a separate Web Audio API AudioContext. iOS Safari treats these as different audio sessions — the sentinel keeps BT alive but words route to the phone speaker instead of hearing aids. RapidFire was unaffected because it already uses `useSNRMixer` which routes everything through one Web Audio API context.
+
+**Fix:** Added `playUrl(url)` and `stopPlayback()` methods to `useSilentSentinel` hook. These fetch, decode (`decodeAudioData`), and play audio through the sentinel's own AudioContext/destination — same pattern as `useSNRMixer.playTarget()`. All 4 affected activities converted from `new Audio()` to `playUrl()`.
+
+Files modified:
+- `src/hooks/useSilentSentinel.ts` — Added `playUrl()`, `stopPlayback()`, `sourceRef` for tracking current playback
+- `src/pages/Detection.tsx` — Replaced `new Audio()` + `onended`/`onerror` with `await playUrl()`
+- `src/pages/GrossDiscrimination.tsx` — Same pattern as Detection
+- `src/pages/CategoryPlayer.tsx` — Replaced `new Audio()` with `playUrl()`, removed `currentAudio` state
+- `src/pages/SentenceTraining.tsx` — Removed `audioRef`, `handleAudioEnded`, `<audio>` JSX element; `handlePlay` computes URL inline and uses `await playUrl()`
+
+**Fix 2 — Slow Loading (F-019):**
+
+**Root cause:** `useWordPairs()` fetched ALL rows from `word_pairs` with `select('*')` and no limit — pulling every row including unused legacy audio path columns. CategoryPlayer fetched ALL stimuli then filtered by category in JavaScript.
+
+Files modified:
+- `src/hooks/useActivityData.ts` — Changed to explicit column selection + `.limit(50)` (activities only need 10, 50 gives shuffle variety)
+- `src/pages/CategoryPlayer.tsx` — Added `.eq('clinical_metadata->>contrast_category', decodedCategory)` server-side filter, removed client-side `.filter()`
+
+New file:
+- `sql_migrations/add_performance_indexes.sql` — 4 indexes for `stimuli_catalog`, `audio_assets`, `word_pairs` (user runs in Supabase SQL Editor)
+
+**Fix 3 — Progress Not Saving for Logged-In Users (F-020):**
+
+**Root cause:** The `user_progress` table had `content_id UUID NOT NULL`, but Detection passes `"detection-0"` and GrossDiscrimination passes `"gross-0"` — these are not valid UUIDs. Every insert silently failed (error logged to console but not surfaced to UI). All other activities (RapidFire, CategoryPlayer, SentenceTraining) pass actual UUIDs from the database and were unaffected.
+
+**DB fix (run in Supabase SQL Editor):**
+```sql
+ALTER TABLE user_progress ALTER COLUMN content_id TYPE text;
+```
+
+**Code fix:**
+- `src/hooks/useProgress.ts` — Expanded `contentType` union to include `'environmental' | 'story_question'` (Detection was already passing `'environmental'`, TypeScript just didn't know)
+
+**Investigation finding:** All progress failure paths in `useProgress.ts` are silent — errors logged to console but never surfaced to UI. No error state returned to components. This is a design weakness but not blocking; the UUID type mismatch was the actual cause of data loss.
+
+**Premium Tier — Test Accounts:**
+
+Granted Premium to 3 accounts via Supabase SQL Editor:
+- `wakingupdeaf@gmail.com` (existing)
+- `lyle7257@gmail.com` (new)
+- `mark@rdaadvantage.com` (new — requires account creation first; SQL uses `SELECT FROM auth.users` guard)
+
+SQL pattern (safe — inserts 0 rows if email doesn't exist):
+```sql
+INSERT INTO profiles (id, subscription_tier)
+SELECT id, 'Premium'
+FROM auth.users WHERE email = '...'
+ON CONFLICT (id) DO UPDATE SET subscription_tier = 'Premium';
+```
+
+**Deployment:**
+- `npm run build` — ✅ clean (3.5s)
+- `npm test` — ✅ 31/31 pass
+- `npx vercel --prod` — ✅ deployed to https://soundsteps.app
+- Testers just need a page refresh (Vite cache-busted chunk names, no localStorage schema changes)
+
+**Build:** ✅ PASSING (3.5s) | **Tests:** ✅ 31 PASSING
+
+---
 
 ### 2026-02-08 (Session 18: Route Restructure, Sentences Fix, UX Cleanup)
 

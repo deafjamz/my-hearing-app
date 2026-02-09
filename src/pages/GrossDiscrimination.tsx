@@ -13,6 +13,7 @@ import { useUser } from '../store/UserContext';
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { useSilentSentinel } from '../hooks/useSilentSentinel';
+import { getVoiceGender } from '../lib/voiceGender';
 
 /**
  * Gross Discrimination Activity - Between Detection and Minimal Pairs
@@ -95,7 +96,7 @@ function createGrossPairs(pairs: WordPair[]): GrossRound[] {
       targetWord: target.word,
       targetAudio: target.audio,
       distractorWord: distractor.word,
-      options: [target.word, distractor.word].sort(() => Math.random() - 0.5),
+      options: Math.random() > 0.5 ? [target.word, distractor.word] : [distractor.word, target.word],
     });
 
     used.add(short.word);
@@ -130,13 +131,18 @@ function createGrossPairs(pairs: WordPair[]): GrossRound[] {
           targetWord: word1.word,
           targetAudio: word1.audio,
           distractorWord: word2.word,
-          options: [word1.word, word2.word].sort(() => Math.random() - 0.5),
+          options: Math.random() > 0.5 ? [word1.word, word2.word] : [word2.word, word1.word],
         });
       }
     }
   }
 
-  return grossPairs.sort(() => Math.random() - 0.5);
+  // Fisher-Yates shuffle
+  for (let i = grossPairs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [grossPairs[i], grossPairs[j]] = [grossPairs[j], grossPairs[i]];
+  }
+  return grossPairs;
 }
 
 /**
@@ -162,7 +168,7 @@ const SESSION_LENGTH = 10;
 export function GrossDiscrimination() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession } = useUser();
-  const { ensureResumed } = useSilentSentinel();
+  const { ensureResumed, playUrl } = useSilentSentinel();
   const navigate = useNavigate();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
 
@@ -177,6 +183,9 @@ export function GrossDiscrimination() {
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
+
+  // Replay tracking
+  const [replayCount, setReplayCount] = useState(0);
 
   // Stats
   const [correct, setCorrect] = useState(0);
@@ -203,29 +212,23 @@ export function GrossDiscrimination() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Play audio
+  // Play audio — routes through Web Audio API for BT hearing aids
   const handlePlay = useCallback(async () => {
     if (!currentRound || isPlaying) return;
 
     await ensureResumed();
+    if (audioPlayed) setReplayCount(prev => prev + 1);
     setIsPlaying(true);
     setStartTime(Date.now());
 
-    const audio = new Audio(currentRound.targetAudio);
-    audio.onended = () => {
-      setIsPlaying(false);
-      setAudioPlayed(true);
-    };
-    audio.onerror = () => {
-      console.error('Audio playback error');
-      setIsPlaying(false);
-      setAudioPlayed(true);
-    };
-    await audio.play().catch(() => {
-      setIsPlaying(false);
-      setAudioPlayed(true);
-    });
-  }, [currentRound, isPlaying]);
+    try {
+      await playUrl(currentRound.targetAudio);
+    } catch {
+      // Audio failed — still let user answer
+    }
+    setIsPlaying(false);
+    setAudioPlayed(true);
+  }, [currentRound, isPlaying, ensureResumed, playUrl]);
 
   // Handle answer
   const handleAnswer = (answer: string) => {
@@ -253,9 +256,14 @@ export function GrossDiscrimination() {
       correctResponse: currentRound.targetWord,
       responseTimeMs: responseTime,
       metadata: {
+        activityType: 'gross_discrimination',
         voiceId: voice || 'sarah',
+        voiceGender: getVoiceGender(voice || 'sarah'),
+        distractorWord: currentRound.distractorWord,
+        trialNumber: currentIndex,
+        replayCount,
         clinicalCategory: 'gross_discrimination',
-        difficulty: '1', // Easier than minimal pairs
+        difficulty: '1',
       },
     });
   };
@@ -266,6 +274,7 @@ export function GrossDiscrimination() {
       setCurrentIndex(prev => prev + 1);
       setSelectedAnswer(null);
       setAudioPlayed(false);
+      setReplayCount(0);
       setStartTime(Date.now());
     } else {
       setIsComplete(true);
@@ -322,11 +331,11 @@ export function GrossDiscrimination() {
         </div>
       </motion.header>
 
-      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
+      <main className="max-w-lg mx-auto w-full px-6 py-4 flex-1 flex flex-col">
         {/* Instructions */}
         <motion.div
           animate={{ opacity: isPlaying ? 0.2 : 1 }}
-          className="text-center mb-8"
+          className="text-center mb-4"
         >
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
             {hasAnswered
@@ -343,7 +352,7 @@ export function GrossDiscrimination() {
         </motion.div>
 
         {/* Play Button with Aura */}
-        <div className="flex justify-center mb-10 relative">
+        <div className="flex justify-center mb-6 relative">
           <AuraVisualizer isPlaying={isPlaying} currentSnr={20} />
 
           <HapticButton

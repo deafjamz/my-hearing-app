@@ -4,18 +4,17 @@ import { AudioPlayer } from '@/components/ui/AudioPlayer';
 import { SNRMixer } from '@/components/ui/SNRMixer';
 import { QuizCard } from '@/components/ui/QuizCard';
 import { useActivityData } from '@/hooks/useActivityData';
-import { useVoice } from '@/store/VoiceContext';
 import { useUser } from '@/store/UserContext';
 import { getAudioPath } from '@/lib/audioUtils';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
 import { KaraokeTranscript } from '@/components/ui/KaraokeTranscript';
 import { useProgress } from '@/hooks/useProgress';
+import { getVoiceGender } from '@/lib/voiceGender';
 
 export function Player() {
   const { id } = useParams<{ id: string }>();
-  const { currentVoice } = useVoice();
-  const { hardMode } = useUser();
+  const { voice, hardMode } = useUser();
   const { data: activityData, loading, error } = useActivityData(id);
   const { logProgress } = useProgress();
 
@@ -48,23 +47,26 @@ export function Player() {
   }
 
   // Dynamic path resolution
-  const dynamicAudioSrc = getAudioPath(activityData, currentVoice);
+  const dynamicAudioSrc = getAudioPath(activityData, voice || 'sarah');
   const isScenario = !!activityData.noiseSrc;
 
-  const handleAnswer = (isCorrect: boolean, questionId: string, userAnswer: string) => {
+  const handleAnswer = (isCorrect: boolean, questionId: string, userAnswer: string, correctAnswer: string) => {
     setFeedback(isCorrect ? 'correct' : 'incorrect');
-    
-    // Log to Smart Coach
+
     logProgress({
-        contentType: 'story', // or scenario, ideally passed in metadata
+        contentType: isScenario ? 'scenario' : 'story',
         contentId: activityData.id,
         result: isCorrect ? 'correct' : 'incorrect',
         userResponse: userAnswer,
-        correctResponse: 'TODO: Fetch correct answer text', 
-        responseTimeMs: Date.now() - startTime, // Rough estimate of time spent
+        correctResponse: correctAnswer,
+        responseTimeMs: Date.now() - startTime,
         metadata: {
-            voiceId: currentVoice,
-            noiseLevel: isScenario ? 'mixed' : 'quiet'
+            activityType: isScenario ? 'scenario' : 'story',
+            voiceId: voice || 'sarah',
+            voiceGender: getVoiceGender(voice || 'sarah'),
+            storyId: activityData.id,
+            questionText: questionId,
+            noiseLevel: isScenario ? 'mixed' : 'quiet',
         }
     });
   };
@@ -94,7 +96,7 @@ export function Player() {
                 transcript={activityData.transcript}
                 alignmentData={activityData.alignmentData}
                 currentTime={currentTime}
-                voiceId={currentVoice}
+                voiceId={voice || 'sarah'}
               />
             ) : (
               <p>{activityData.transcript}</p>
@@ -111,10 +113,10 @@ export function Player() {
               </div>
               
               {activityData.questions.map(q => (
-                <QuizCard 
-                  key={q.id} 
-                  question={q} 
-                  onAnswer={(isCorrect) => handleAnswer(isCorrect, q.id, "selected_choice_id")} 
+                <QuizCard
+                  key={q.id}
+                  question={q}
+                  onAnswer={(isCorrect, choiceText, correctText) => handleAnswer(isCorrect, q.id, choiceText, correctText)}
                 />
               ))}
             </>

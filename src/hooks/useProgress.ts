@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase';
 import { useUser } from '../store/UserContext';
 
 export interface ProgressPayload {
-  contentType: 'word' | 'story' | 'sentence' | 'scenario';
+  contentType: 'word' | 'story' | 'sentence' | 'scenario' | 'environmental' | 'story_question';
   contentId: string;
   result: 'correct' | 'incorrect' | 'skipped';
   userResponse?: string;
@@ -16,6 +16,23 @@ export interface ProgressPayload {
     snr?: number;
     clinicalCategory?: string;
     difficulty?: string;
+    // Sprint 1: Rich data fields
+    activityType?: string;
+    trialNumber?: number;
+    replayCount?: number;
+    voiceGender?: 'male' | 'female';
+    tier?: string;
+    word?: string;
+    hasSound?: boolean;
+    distractorWord?: string;
+    position?: string;
+    vowelContext?: string;
+    noiseEnabled?: boolean;
+    sentenceText?: string;
+    distractors?: string[];
+    questionText?: string;
+    storyId?: string;
+    [key: string]: unknown;
   };
   responseTimeMs?: number;
   sessionId?: string;
@@ -24,9 +41,11 @@ export interface ProgressPayload {
 export function useProgress() {
   const { incrementStreak, resetStreak } = useUser();
   const [isLogging, setIsLogging] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const logProgress = async (payload: ProgressPayload) => {
     setIsLogging(true);
+    setError(null);
     const timestamp = new Date().toISOString();
 
     // 1. Optimistic UI Updates for streak
@@ -35,17 +54,16 @@ export function useProgress() {
     } else if (payload.result === 'incorrect') {
       resetStreak();
     }
-    // Note: addToHistory is no longer called here. It's handled by the session timer.
 
     // 2. Supabase Insert
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        console.warn("User not authenticated. Progress not logged to DB.");
-        return; 
+        setError('Not signed in — progress not saved');
+        return;
       }
 
-      const { error } = await supabase.from('user_progress').insert({
+      const { error: dbError } = await supabase.from('user_progress').insert({
         user_id: user.id,
         session_id: payload.sessionId,
         content_type: payload.contentType,
@@ -59,17 +77,21 @@ export function useProgress() {
         created_at: timestamp
       });
 
-      if (error) {
-        console.error("Failed to log progress to Supabase:", error);
+      if (dbError) {
+        setError('Progress not saved — try again later');
+        if (import.meta.env.DEV) console.error("Failed to log progress:", dbError);
       } else {
         if (import.meta.env.DEV) console.log("Progress logged successfully:", payload);
       }
     } catch (e) {
-      console.error("Supabase authentication or logging error:", e);
+      setError('Progress not saved — connection error');
+      if (import.meta.env.DEV) console.error("Supabase logging error:", e);
     } finally {
       setIsLogging(false);
     }
   };
 
-  return { logProgress, isLogging };
+  const clearError = () => setError(null);
+
+  return { logProgress, isLogging, error, clearError };
 }

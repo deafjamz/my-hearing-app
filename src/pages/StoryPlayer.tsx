@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import { useKaraokePlayer } from '@/hooks/useKaraokePlayer';
 import { useProgress } from '@/hooks/useProgress';
+import { getVoiceGender } from '@/lib/voiceGender';
+import { getStorageUrl } from '@/lib/audio';
 import { supabase } from '@/lib/supabase';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 
@@ -30,15 +33,15 @@ const DifficultySelector = ({ onStart }: { onStart: (difficulty: TextVisibility)
   <div className="p-8 max-w-lg mx-auto">
     <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white mb-6">Choose Your Challenge</h2>
     <div className="grid grid-cols-1 gap-4">
-      <button onClick={() => onStart('Full')} className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm text-left">
+      <button onClick={() => onStart('Full')} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-left hover:border-teal-500 transition-colors">
         <h3 className="font-bold text-lg text-slate-900 dark:text-white">Full Support</h3>
         <p className="text-slate-500 dark:text-slate-400">See all text, karaoke-style.</p>
       </button>
-      <button onClick={() => onStart('Partial')} className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm text-left">
+      <button onClick={() => onStart('Partial')} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-left hover:border-teal-500 transition-colors">
         <h3 className="font-bold text-lg text-slate-900 dark:text-white">Partial Support</h3>
         <p className="text-slate-500 dark:text-slate-400">Some words are hidden.</p>
       </button>
-      <button onClick={() => onStart('None')} className="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm text-left">
+      <button onClick={() => onStart('None')} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-left hover:border-teal-500 transition-colors">
         <h3 className="font-bold text-lg text-slate-900 dark:text-white">No Support</h3>
         <p className="text-slate-500 dark:text-slate-400">Pure listening challenge.</p>
       </button>
@@ -52,7 +55,7 @@ const KaraokeDisplay = ({ story, onEnded, textVisibility }: { story: Story; onEn
     activeWordIndex, 
     isPlaying, 
     togglePlay 
-  } = useKaraokePlayer(story.audio_female_path, story.alignment_female_path, { onEnded });
+  } = useKaraokePlayer(getStorageUrl(story.audio_female_path), getStorageUrl(story.alignment_female_path), { onEnded });
 
   const renderTranscript = () => {
     if (textVisibility === 'None') {
@@ -160,15 +163,16 @@ const QuizChallenge = ({ questions, onSubmit }: { questions: StoryQuestion[], on
 
 const ResultsScreen = ({ score, total }: { score: number, total: number }) => (
     <div className="p-8 text-center">
-        <h2 className="text-3xl font-bold mb-4">Results</h2>
-        <p className="text-5xl font-black">{score} / {total}</p>
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Results</h2>
+        <p className="text-5xl font-bold text-slate-900 dark:text-white">{score} / {total}</p>
     </div>
 );
 
 
 // --- Main Player Component --- 
 export function StoryPlayer() {
-  const storyId = 'story_001_whispering_woods'; // Hardcoded for now
+  const { id } = useParams<{ id: string }>();
+  const storyId = id || 'story_001_whispering_woods';
   
   const [gameState, setGameState] = useState<GameState>('difficulty_selection');
   const [story, setStory] = useState<Story | null>(null);
@@ -212,7 +216,7 @@ export function StoryPlayer() {
   
   const handleQuizSubmit = (finalAnswers: Record<string, string>) => {
     let finalScore = 0;
-    for (const q of questions) {
+    questions.forEach((q, idx) => {
       const userAnswer = finalAnswers[q.id];
       const isCorrect = userAnswer === q.correct_answer;
       if (isCorrect) {
@@ -226,13 +230,16 @@ export function StoryPlayer() {
         userResponse: userAnswer,
         correctResponse: q.correct_answer,
         metadata: {
+          activityType: 'story',
           storyId: story!.id,
+          voiceGender: getVoiceGender('sarah'), // Stories currently use female voice
+          trialNumber: idx,
           questionType: q.question_type,
           phonemicTarget: q.phonemic_target,
           difficulty: difficulty,
         }
       });
-    }
+    });
 
     setScore(finalScore);
     setGameState('results');
@@ -264,7 +271,7 @@ export function StoryPlayer() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <header className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 border-b border-slate-200/50 dark:border-slate-800/50">
-        <ActivityHeader title={story?.title || "Story"} backPath="/stories" />
+        <ActivityHeader title={story?.title || "Story"} backPath="/practice/stories" />
       </header>
       <main className="flex-1 flex flex-col">
         {loading ? renderLoadingOrError() : renderGameState()}

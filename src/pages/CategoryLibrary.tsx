@@ -64,15 +64,28 @@ export function CategoryLibrary() {
   };
 
   // Friendly names + examples for approachable cards (F-013)
+  // Keys match actual DB values from word_pairs.clinical_category (e.g., "Set 1: Voicing Contrast")
   const categoryInfo: Record<string, { friendly: string; description: string; example: string }> = {
-    'Vowels': { friendly: 'Vowel Sounds', description: 'Hear the difference between similar vowel sounds', example: "e.g., 'bit' vs 'bet'" },
-    'Consonant Voicing': { friendly: 'Similar Sounds', description: 'Tell apart sounds that are almost identical', example: "e.g., 'bat' vs 'pat'" },
-    'Manner': { friendly: 'Sound Patterns', description: 'Focus on how different sounds are made', example: "e.g., 'mat' vs 'bat'" },
-    'Place': { friendly: 'Sound Positions', description: 'Spot where sounds are made in the mouth', example: "e.g., 'tea' vs 'key'" },
-    'Sibilants': { friendly: 'Hissing Sounds', description: 'Master the sharp S, Z, and SH sounds', example: "e.g., 'sip' vs 'zip'" },
-    'Plosives': { friendly: 'Pop & Burst Sounds', description: 'Practice quick, punchy sounds', example: "e.g., 'pin' vs 'bin'" },
-    'Fricatives': { friendly: 'Friction Sounds', description: 'Work on the breathy F, V, and TH sounds', example: "e.g., 'fan' vs 'van'" },
-    'Nasals': { friendly: 'Nasal Sounds', description: 'Distinguish the humming M, N, and NG sounds', example: "e.g., 'map' vs 'nap'" },
+    // Actual DB values (from words_master.csv Set column)
+    'Set 1: Voicing Contrast': { friendly: 'Same or Different?', description: 'Tell apart sounds that are almost identical', example: "'bat' vs 'pat'" },
+    'Set 2: Nasal Contrast': { friendly: 'Humming Sounds', description: 'Hear the difference between M, N, and NG', example: "'map' vs 'nap'" },
+    'Set 3: Vowel Height': { friendly: 'Vowel Sounds', description: 'Spot the difference between similar vowels', example: "'bit' vs 'bet'" },
+    'Set 4: Ling Sounds Emphasis': { friendly: 'Core Sounds', description: 'The 6 key sounds used in hearing checks', example: "'ah' vs 'ee'" },
+    'Set 5: Place of Articulation': { friendly: 'Where in the Mouth?', description: 'Sounds made in different places', example: "'tea' vs 'key'" },
+    'Set 6: Manner of Articulation': { friendly: 'How Sounds Are Made', description: 'Stops, slides, and hums — different types of sounds', example: "'mat' vs 'bat'" },
+    'Set 7: Word Initial Clusters': { friendly: 'Tricky Beginnings', description: 'Words that start with blended sounds', example: "'play' vs 'pray'" },
+    'Set 8: Word Final Clusters': { friendly: 'Tricky Endings', description: 'Words that end with blended sounds', example: "'mist' vs 'miss'" },
+    'Set 9: Multi-Syllabic Simple': { friendly: 'Longer Words', description: 'Two-syllable words with clear contrasts', example: "'candy' vs 'sandy'" },
+    'Set 10: Multi-Syllabic Complex': { friendly: 'Challenge Words', description: 'Longer words with subtle differences', example: "'complete' vs 'compete'" },
+    // Legacy keys (in case some DB rows use short names)
+    'Vowels': { friendly: 'Vowel Sounds', description: 'Hear the difference between similar vowels', example: "'bit' vs 'bet'" },
+    'Consonant Voicing': { friendly: 'Same or Different?', description: 'Tell apart sounds that are almost identical', example: "'bat' vs 'pat'" },
+    'Manner': { friendly: 'How Sounds Are Made', description: 'Focus on how different sounds are made', example: "'mat' vs 'bat'" },
+    'Place': { friendly: 'Where in the Mouth?', description: 'Sounds made in different places', example: "'tea' vs 'key'" },
+    'Sibilants': { friendly: 'Sharp Sounds', description: 'Master the S, Z, and SH sounds', example: "'sip' vs 'zip'" },
+    'Plosives': { friendly: 'Pop Sounds', description: 'Practice quick, punchy sounds', example: "'pin' vs 'bin'" },
+    'Fricatives': { friendly: 'Breathy Sounds', description: 'Work on the F, V, and TH sounds', example: "'fan' vs 'van'" },
+    'Nasals': { friendly: 'Humming Sounds', description: 'Distinguish the M, N, and NG sounds', example: "'map' vs 'nap'" },
   };
 
   const getCategoryDescription = (category: string): string => {
@@ -141,13 +154,10 @@ export function CategoryLibrary() {
                       <Zap className="h-6 w-6 text-teal-400" strokeWidth={2.5} />
                     </div>
 
-                    {/* Title — friendly name with clinical subtitle */}
+                    {/* Title — friendly name only */}
                     <h3 className="text-xl font-bold text-white mb-1 group-hover:text-teal-400 transition-colors">
                       {categoryInfo[category.name]?.friendly || category.name}
                     </h3>
-                    {categoryInfo[category.name] && (
-                      <p className="text-xs text-slate-500 mb-2">{category.name}</p>
-                    )}
 
                     {/* Description */}
                     <p className="text-slate-400 text-sm mb-2 leading-relaxed">
