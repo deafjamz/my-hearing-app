@@ -1,11 +1,12 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-08
-> **Last Session:** Session 22 (continued) — F-027 ScenarioPlayer BT fix, useProgress error surfacing
-> **Build Status:** ✅ PASSING (3.2s, 248KB main bundle)
-> **Deployment:** ✅ LIVE at https://soundsteps.app — deployed via `npx vercel --prod`
+> **Last Session:** Session 23 — Data Engine Sprint 3 Phases A-C COMPLETE (phoneme mastery, Erber journey, recommendations, CSV export)
+> **Build Status:** ✅ PASSING (4.75s, 248KB main bundle)
+> **Deployment:** Needs deploy — `git push` to main or `npx vercel --prod`
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
+> **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
 
 ---
 
@@ -35,6 +36,45 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Sprint 3: World-Class Data Engine (Phases A-C COMPLETE)
+
+**Full plan:** `.claude/plans/splendid-riding-wombat.md`
+
+**Phase A — Phoneme Intelligence + Recommendations: ✅ COMPLETE**
+- [x] `usePhonemeAnalytics` hook — lifetime RapidFire phoneme-pair mastery, confusion matrix, position breakdown
+- [x] `PhonemeMasteryGrid` card — CSS Grid heatmap (no new deps), upper-triangle, color-coded by accuracy
+- [x] `ConfusionPatternCard` card — top 3 confused sound pairs with confusion direction
+- [x] `useRecommendations` hook — pure computation, 6 priority rules, returns top 3 recommendations
+- [x] `RecommendationCard` card — wired into Dashboard bento grid
+
+**Phase B — Longitudinal Intelligence + Erber Journey: ✅ COMPLETE**
+- [x] `useLongitudinalAnalytics` hook — lifetime trends, weekly/monthly bucketing, streaks, fatigue, Erber 4-level progression
+- [x] `ErberJourneyCard` — horizontal 4-node progression (Detection → Discrimination → Identification → Comprehension)
+- [x] `WeeklyTrendCard` — recharts LineChart with weekly/monthly toggle
+- [x] `SNRProgressionCard` — AreaChart with reversed Y-axis (lower SNR = harder = better)
+- [x] `FatigueAnalysisCard` — early/mid/late trial accuracy bars with fatigue warning
+- [x] `ConsistencyStreakCard` — 7-day heatmap + streak count, wired into Dashboard
+
+**Phase C — Data Export: ✅ COMPLETE**
+- [x] `exportCsv.ts` utility — browser-side CSV (training data + phoneme summary), Blob + hidden anchor
+- [x] `ExportButton` card — Premium-gated dropdown menu, wired into ProgressReport header
+
+**Wiring: ✅ COMPLETE**
+- [x] `ProgressReport.tsx` — 3 new sections: Sound Pattern Mastery, Training Journey, Session Intelligence
+- [x] `Dashboard.tsx` — RecommendationCard (3-col) + ConsistencyStreakCard (1-col) in bento grid
+- [x] `analytics/index.ts` — 14 barrel exports (5 Sprint 2 + 8 Sprint 3 cards + ExportButton)
+
+**Phase D — Weekly Email Report (Premium): PLANNED (not started)**
+- [ ] Supabase Edge Function + Resend API (educational weekly summary, not diagnostic)
+- [ ] Settings toggle for opt-in, pg_cron Monday 8am UTC schedule
+- [ ] SQL migration: `email_weekly_digest BOOLEAN DEFAULT false` on profiles table
+- [ ] React Email template with rotating "Listening Tips", regulatory-safe framing
+- [ ] Infrastructure: Resend API key as Supabase secret, Edge Function deploy, pg_cron schedule
+
+**Sprint 3 Stats:** 13 new files, 3 modified files, 0 new npm dependencies, build clean (4.75s)
 
 ---
 
@@ -239,15 +279,19 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Run performance indexes SQL** — `sql_migrations/add_performance_indexes.sql` in Supabase SQL Editor (4 indexes for faster queries)
-- [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test Detection, Word Basics, Categories, Sentences. Audio should come through hearing aids, not phone speaker.
-- [ ] **Verify progress tracking** — Have testers complete activities, then check Dashboard/Progress page shows results
-- [ ] **Surface progress errors to UI** — `useProgress.ts` silently swallows all errors. Add error state so users know if save failed.
+- [ ] **Deploy Sprint 3** — `git push` to main (Vercel auto-deploys). All Phases A-C code is committed and build-verified.
+- [ ] **Live test new analytics** — Log into app, complete some RapidFire trials, then check ProgressReport for phoneme heatmap, Erber journey, trends. Check Dashboard for recommendations and streak.
+- [ ] **Test CSV export** — On ProgressReport, click Export (Premium-gated). Verify training data and phoneme summary CSVs download correctly.
+- [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test all activities. All audio should route through hearing aids.
+- [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule. See plan file for full architecture.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 - [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
 
 ### Done (previously TODO)
+- [x] Run performance indexes SQL ✅ (Session 23 — user ran manually)
+- [x] Surface progress errors to UI ✅ (Session 22 — `useProgress` returns `{ error, clearError }`)
+- [x] Verify progress tracking ✅ (Session 20 — all 7 activities log rich per-trial data)
 - [x] BT hearing aid audio routing fixed ✅ (Session 19 — F-018)
 - [x] Slow loading optimized ✅ (Session 19 — F-019)
 - [x] Progress tracking fixed ✅ (Session 19 — F-020, content_id UUID→TEXT)
@@ -375,6 +419,10 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 - [x] ~~Practice focus areas analysis~~ ✅ DONE (included in ProgressReport)
 - [x] ~~PDF export (shareable with audiologists)~~ ✅ DONE (window.print())
 - [x] ~~Analytics insight cards (Sprint 2)~~ ✅ DONE 2026-02-08 (5 cards: Activity Breakdown, Voice Comparison, Position Analysis, Noise Effectiveness, Replay Patterns)
+- [x] ~~Phoneme mastery heatmap + confusion analysis (Sprint 3)~~ ✅ DONE 2026-02-08
+- [x] ~~Erber journey + longitudinal trends (Sprint 3)~~ ✅ DONE 2026-02-08
+- [x] ~~Smart recommendations on Dashboard (Sprint 3)~~ ✅ DONE 2026-02-08
+- [x] ~~CSV export Premium-gated (Sprint 3)~~ ✅ DONE 2026-02-08
 
 ### Phase 9: Tier Locking
 - [x] ~~Lock Standard/Premium content for non-subscribers~~ ✅ DONE 2026-02-06
@@ -386,6 +434,46 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-08 (Session 23: Data Engine Sprint 3 Phases A-C — Phoneme Mastery, Longitudinal Intelligence, CSV Export)
+
+**Summary:** Built the world-class data engine differentiator. No consumer aural rehab app tracks phoneme-pair mastery or generates data-driven practice recommendations. Created 3 new hooks, 8 new cards, 1 export utility, wired everything into ProgressReport (3 new sections) and Dashboard (2 new bento cards). Zero new npm dependencies.
+
+**Phase A — Phoneme Intelligence + Recommendations (5 files):**
+- `src/hooks/usePhonemeAnalytics.ts` (~230 lines) — Single Supabase query filtering `content_tags->>activityType = 'rapid_fire'` (lifetime, no time window). Aggregates phoneme-pair accuracy, confusion direction, position breakdown. Normalizes pair keys alphabetically. Returns `masteredPairs` (>=80%, 20+ trials), `strugglingPairs` (<60%, 10+ trials), `uniquePhonemes` for grid axes.
+- `src/components/analytics/PhonemeMasteryGrid.tsx` (~120 lines) — CSS Grid heatmap. Upper-right triangle only. Cell colors: teal-500 (>=80%), teal-300 (>=70%), amber-400 (>=50%), red-400 (<50%). Tooltip on hover/tap. Self-hides if <3 pairs have 5+ trials. No charting library.
+- `src/components/analytics/ConfusionPatternCard.tsx` (~75 lines) — Top 3 confused pairs (<80% accuracy). Shows confusion direction with arrow icon. Self-hides if all pairs above 80%.
+- `src/hooks/useRecommendations.ts` (~180 lines) — Pure computation (NO Supabase query). Takes data from 3 hooks. 6 priority rules: weakest phoneme pair, Erber advancement, voice diversity, noise readiness, position weakness, consistency nudge. Returns top 3.
+- `src/components/analytics/RecommendationCard.tsx` (~90 lines) — Dashboard bento card. Type-based icons (Volume2, Zap, Ear, Target, Flame). First item gets teal accent.
+
+**Phase B — Longitudinal Intelligence (6 files):**
+- `src/hooks/useLongitudinalAnalytics.ts` (~230 lines) — Single Supabase query, ALL rows (lifetime). Computes: weeklyTrend (date-fns startOfWeek), monthlyTrend, snrProgression (daily avg from RapidFire), consistency (streaks, last7Days booleans), fatigue (early/mid/late trial accuracy), erberJourney (4 Erber levels mapped from activityType).
+- `src/components/analytics/ErberJourneyCard.tsx` (~95 lines) — Horizontal 4-node: Detection → Discrimination → Identification → Comprehension. Mastered=teal+checkmark, in-progress=amber+circle, no-data=slate+lock. Connecting lines color-code progress.
+- `src/components/analytics/WeeklyTrendCard.tsx` (~105 lines) — Recharts LineChart with weekly/monthly toggle. Teal line, dark tooltip.
+- `src/components/analytics/SNRProgressionCard.tsx` (~80 lines) — Recharts AreaChart, reversed Y-axis (lower=harder=better). Gradient fill.
+- `src/components/analytics/FatigueAnalysisCard.tsx` (~65 lines) — Three horizontal bars (early 1-3, mid 4-6, late 7-10). Amber warning if fatigue detected (late >10% lower than early).
+- `src/components/analytics/ConsistencyStreakCard.tsx` (~75 lines) — Dashboard bento card. 7-day heatmap cells, streak count with flame icon, last-30-days active count.
+
+**Phase C — Data Export (2 files):**
+- `src/lib/exportCsv.ts` (~80 lines) — Browser-side CSV: `exportProgressCsv()` (full training data) + `exportPhonemeSummaryCsv()` (phoneme pairs). Blob + hidden anchor download.
+- `src/components/analytics/ExportButton.tsx` (~80 lines) — Premium-gated dropdown. Two options: training data, sound patterns. Fetches all user_progress rows on demand.
+
+**Wiring (3 modified files):**
+- `src/pages/ProgressReport.tsx` — Added `usePhonemeAnalytics` + `useLongitudinalAnalytics` hooks. Added ExportButton next to Print button. 3 new sections: Sound Pattern Mastery (heatmap + confusion), Training Journey (Erber + trends + SNR), Session Intelligence (fatigue).
+- `src/pages/Dashboard.tsx` — Added `usePhonemeAnalytics`, `useAnalytics`, `useLongitudinalAnalytics`, `useRecommendations`. New bento row: RecommendationCard (3-col) + ConsistencyStreakCard (1-col).
+- `src/components/analytics/index.ts` — Barrel exports for all 14 analytics components.
+
+**Architecture decisions:**
+- All cards self-hide with MIN_TRIALS threshold (graceful empty state for new users)
+- ProgressReport new sections each wrapped in `!loading && data &&` guards
+- Dashboard cards wrapped in `data && data.length > 0` guards
+- Erber level mapping: detection→Detection, rapid_fire/gross_discrimination→Discrimination, category_practice/session_player→Identification, sentence_training/story/scenario→Comprehension
+- Streak computation: backward walk from today for current streak, forward scan for longest
+- Fatigue threshold: flagged when late-trial accuracy drops >10% from early-trial accuracy with 10+ late trials
+
+**Build:** ✅ PASSING (4.75s) | **Tests:** ✅ 31 PASSING | **New files:** 13 | **Modified files:** 3
+
+---
 
 ### 2026-02-08 (Session 21: Data Engine Sprint 2 — Analytics Hooks + Progress Report Enhancement)
 

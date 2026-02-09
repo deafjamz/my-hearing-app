@@ -3,6 +3,8 @@ import { ArrowLeft, Printer, Lock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { useProgressData } from '@/hooks/useProgressData';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { usePhonemeAnalytics } from '@/hooks/usePhonemeAnalytics';
+import { useLongitudinalAnalytics } from '@/hooks/useLongitudinalAnalytics';
 import { useUser } from '@/store/UserContext';
 import { format } from 'date-fns';
 import {
@@ -11,11 +13,20 @@ import {
   PositionAnalysisCard,
   NoiseEffectivenessCard,
   ReplayInsightCard,
+  PhonemeMasteryGrid,
+  ConfusionPatternCard,
+  ErberJourneyCard,
+  WeeklyTrendCard,
+  SNRProgressionCard,
+  FatigueAnalysisCard,
+  ExportButton,
 } from '@/components/analytics';
 
 export function ProgressReport() {
   const { stats, loading, isGuest } = useProgressData();
   const { data: analytics, loading: analyticsLoading } = useAnalytics();
+  const { data: phonemeData, loading: phonemeLoading } = usePhonemeAnalytics();
+  const { data: longitudinalData, loading: longitudinalLoading } = useLongitudinalAnalytics();
   const { hasAccess } = useUser();
 
   const canPrint = hasAccess('Premium');
@@ -53,19 +64,22 @@ export function ProgressReport() {
           </h1>
         </div>
 
-        <button
-          onClick={canPrint ? handlePrint : undefined}
-          disabled={!canPrint}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors print:hidden ${
-            canPrint
-              ? 'bg-teal-500 text-white hover:bg-teal-400'
-              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-          }`}
-          title={canPrint ? 'Print / Save as PDF' : 'Premium feature'}
-        >
-          {canPrint ? <Printer size={16} /> : <Lock size={16} />}
-          Share with Audiologist
-        </button>
+        <div className="flex items-center gap-2">
+          <ExportButton phonemePairs={phonemeData?.pairs} />
+          <button
+            onClick={canPrint ? handlePrint : undefined}
+            disabled={!canPrint}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors print:hidden ${
+              canPrint
+                ? 'bg-teal-500 text-white hover:bg-teal-400'
+                : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+            }`}
+            title={canPrint ? 'Print / Save as PDF' : 'Premium feature'}
+          >
+            {canPrint ? <Printer size={16} /> : <Lock size={16} />}
+            Share with Audiologist
+          </button>
+        </div>
       </div>
 
       {isGuest && (
@@ -186,6 +200,49 @@ export function ProgressReport() {
             <PositionAnalysisCard data={analytics.byPosition} />
             <NoiseEffectivenessCard data={analytics.noiseComparison} />
             <ReplayInsightCard data={analytics.replayStats} totalTrials={stats.totalTrials} />
+          </div>
+        </section>
+      )}
+
+      {/* Sound Pattern Mastery */}
+      {!phonemeLoading && phonemeData && (
+        <section className="mb-8 print:mb-6">
+          <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 px-1 print:text-black">
+            Sound Pattern Mastery
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="md:col-span-2">
+              <PhonemeMasteryGrid data={phonemeData} />
+            </div>
+            <ConfusionPatternCard pairs={phonemeData.strugglingPairs} />
+          </div>
+        </section>
+      )}
+
+      {/* Training Journey */}
+      {!longitudinalLoading && longitudinalData && (
+        <section className="mb-8 print:mb-6">
+          <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 px-1 print:text-black">
+            Training Journey
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="md:col-span-2">
+              <ErberJourneyCard journey={longitudinalData.erberJourney} />
+            </div>
+            <WeeklyTrendCard weeklyTrend={longitudinalData.weeklyTrend} monthlyTrend={longitudinalData.monthlyTrend} />
+            <SNRProgressionCard data={longitudinalData.snrProgression} />
+          </div>
+        </section>
+      )}
+
+      {/* Session Intelligence */}
+      {!longitudinalLoading && longitudinalData && (
+        <section className="mb-8 print:mb-6">
+          <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 px-1 print:text-black">
+            Session Intelligence
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FatigueAnalysisCard fatigue={longitudinalData.fatigue} />
           </div>
         </section>
       )}

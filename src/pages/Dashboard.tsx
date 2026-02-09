@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import { Play, HeadphonesIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useProgressData } from '@/hooks/useProgressData';
+import { usePhonemeAnalytics } from '@/hooks/usePhonemeAnalytics';
+import { useAnalytics } from '@/hooks/useAnalytics';
+import { useLongitudinalAnalytics } from '@/hooks/useLongitudinalAnalytics';
+import { useRecommendations } from '@/hooks/useRecommendations';
+import { RecommendationCard, ConsistencyStreakCard } from '@/components/analytics';
 import { useState, useEffect } from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 
@@ -11,6 +16,10 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
  */
 export function Dashboard() {
   const { stats, loading } = useProgressData();
+  const { data: phonemeData } = usePhonemeAnalytics();
+  const { data: analyticsData } = useAnalytics();
+  const { data: longitudinalData } = useLongitudinalAnalytics();
+  const { recommendations } = useRecommendations(phonemeData, analyticsData, longitudinalData);
   const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
 
@@ -233,6 +242,20 @@ export function Dashboard() {
               </div>
             </div>
           </motion.div>
+
+          {/* Recommendations */}
+          {recommendations.length > 0 && (
+            <motion.div variants={item} className="md:col-span-3">
+              <RecommendationCard recommendations={recommendations} />
+            </motion.div>
+          )}
+
+          {/* Practice Consistency */}
+          {longitudinalData?.consistency && (
+            <motion.div variants={item} className="md:col-span-1">
+              <ConsistencyStreakCard consistency={longitudinalData.consistency} />
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </div>
