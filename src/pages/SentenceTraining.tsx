@@ -11,12 +11,14 @@ import { ActivityBriefing } from '@/components/ActivityBriefing';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { getVoiceGender } from '@/lib/voiceGender';
+import { useTodaysPlan } from '@/hooks/useTodaysPlan';
 
 const SESSION_LENGTH = 10;
 
 export function SentenceTraining() {
   const navigate = useNavigate();
   const { voice } = useUser();
+  const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
   const currentVoice = voice || 'sarah';
   const { sentences, loading, error } = useSentenceData({ limit: SESSION_LENGTH, voiceId: currentVoice });
   const { logProgress } = useProgress();
@@ -181,8 +183,11 @@ export function SentenceTraining() {
         accuracy={accuracy}
         totalItems={responses.length}
         correctCount={correctCount}
-        onContinue={() => navigate('/')}
-        nextActivity={{
+        onContinue={() => {
+          if (isInPlan) advancePlan();
+          else navigate('/');
+        }}
+        nextActivity={planNext ?? {
           label: 'Everyday Scenarios',
           description: 'Practice with real-world dialogue',
           path: '/scenarios',

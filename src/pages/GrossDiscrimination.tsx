@@ -14,6 +14,7 @@ import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { useSilentSentinel } from '../hooks/useSilentSentinel';
 import { getVoiceGender } from '../lib/voiceGender';
+import { useTodaysPlan } from '../hooks/useTodaysPlan';
 
 /**
  * Gross Discrimination Activity - Between Detection and Minimal Pairs
@@ -170,6 +171,7 @@ export function GrossDiscrimination() {
   const { voice, startPracticeSession, endPracticeSession } = useUser();
   const { ensureResumed, playUrl } = useSilentSentinel();
   const navigate = useNavigate();
+  const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
   const { pairs, loading } = useWordPairs(voice || 'sarah');
 
   // Briefing state
@@ -303,8 +305,11 @@ export function GrossDiscrimination() {
         accuracy={finalAccuracy}
         totalItems={total}
         correctCount={correct}
-        onContinue={() => navigate('/practice')}
-        nextActivity={{
+        onContinue={() => {
+          if (isInPlan) advancePlan();
+          else navigate('/practice');
+        }}
+        nextActivity={planNext ?? {
           label: 'Word Categories',
           description: 'Practice with specific sound contrasts',
           path: '/categories',

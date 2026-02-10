@@ -6,6 +6,8 @@ import { hapticSelection } from '@/lib/haptics';
 import { useUser } from '@/store/UserContext';
 import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { TodaysPracticeCard } from '@/components/TodaysPracticeCard';
+import { useTodaysPractice } from '@/hooks/useTodaysPractice';
 
 interface Activity {
   id: string;
@@ -21,6 +23,7 @@ interface Activity {
 export function ActivityList() {
   const { user, hasAccess, loading: authLoading } = useUser();
   const navigate = useNavigate();
+  const { plan: todaysPlan, loading: planLoading } = useTodaysPractice();
   const [upsellTier, setUpsellTier] = useState<string | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showWelcome, setShowWelcome] = useState(() => {
@@ -205,6 +208,9 @@ export function ActivityList() {
         </div>
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Practice Hub</h1>
       </div>
+
+      {/* Today's Practice — hero card */}
+      <TodaysPracticeCard plan={todaysPlan} loading={planLoading} />
 
       {/* Getting Started Section */}
       <div className="mb-8">

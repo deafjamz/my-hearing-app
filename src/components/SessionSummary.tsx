@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { CheckCircle, TrendingUp, Target, ArrowRight } from 'lucide-react';
+import { useTodaysPlan } from '@/hooks/useTodaysPlan';
 
 /**
  * Session Summary - Completion screen for program sessions
@@ -45,6 +46,8 @@ export function SessionSummary({
 
   const performance = getPerformanceMessage();
   const prefersReducedMotion = useReducedMotion();
+  const { isInPlan, isLastStep } = useTodaysPlan();
+  const isPlanComplete = isInPlan && isLastStep;
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
@@ -73,7 +76,9 @@ export function SessionSummary({
           transition={{ delay: prefersReducedMotion ? 0 : 0.3, duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-8"
         >
-          <h1 className="text-3xl font-bold text-white mb-2">Session Complete!</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">
+            {isPlanComplete ? 'Practice Complete!' : 'Session Complete!'}
+          </h1>
           <p className="text-slate-400 text-lg">{sessionTitle}</p>
         </motion.div>
 
@@ -119,7 +124,7 @@ export function SessionSummary({
                 <TrendingUp className="h-6 w-6 text-teal-400" />
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-400">Assessment</p>
+                <p className="text-sm font-medium text-slate-400">Result</p>
                 <p className={`text-xl font-bold ${performance.color}`}>
                   {performance.message}
                 </p>
@@ -148,8 +153,8 @@ export function SessionSummary({
           </p>
         </motion.div>
 
-        {/* What's Next — guided suggestion */}
-        {nextActivity && (
+        {/* What's Next — guided suggestion (hidden when plan is complete) */}
+        {nextActivity && !isPlanComplete && (
           <motion.a
             href={nextActivity.path}
             initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
@@ -174,18 +179,22 @@ export function SessionSummary({
         <motion.button
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: prefersReducedMotion ? 0 : nextActivity ? 0.8 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
+          transition={{ delay: prefersReducedMotion ? 0 : nextActivity && !isPlanComplete ? 0.8 : 0.7, duration: prefersReducedMotion ? 0 : undefined }}
           whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
           whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
           onClick={onContinue}
           className={`w-full p-6 rounded-2xl transition-all ${
-            nextActivity
+            nextActivity && !isPlanComplete
               ? 'bg-slate-900 border border-slate-800 hover:bg-slate-800'
               : 'bg-teal-500 hover:bg-teal-400 shadow-xl'
           }`}
         >
-          <p className={`font-bold text-lg ${nextActivity ? 'text-slate-300' : 'text-white'}`}>
-            {nextActivity ? 'Back to Practice Hub' : 'Continue Training'}
+          <p className={`font-bold text-lg ${nextActivity && !isPlanComplete ? 'text-slate-300' : 'text-white'}`}>
+            {isPlanComplete
+              ? 'Back to Practice Hub'
+              : nextActivity
+                ? 'Back to Practice Hub'
+                : 'Continue Training'}
           </p>
         </motion.button>
       </motion.div>

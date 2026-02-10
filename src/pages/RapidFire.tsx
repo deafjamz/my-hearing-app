@@ -16,6 +16,7 @@ import { evaluateSession, getClinicalBabble, getUserSNR, saveUserSNR, SNR_DEFAUL
 import { ActivityBriefing } from '../components/ActivityBriefing';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { getVoiceGender } from '../lib/voiceGender';
+import { useTodaysPlan } from '../hooks/useTodaysPlan';
 
 /** UI-level coach action type (capitalized), matching SmartCoachFeedbackProps */
 type CoachUIAction = 'Increase' | 'Decrease' | 'Keep' | 'Enable Noise' | 'Step Down';
@@ -42,6 +43,7 @@ export function RapidFire() {
   const { logProgress } = useProgress();
   const { voice, startPracticeSession, endPracticeSession, user, hardMode, hasAccess } = useUser();
   const navigate = useNavigate();
+  const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
 
   // Force 'sarah' if no voice is found (e.g. user is logged out)
   const { pairs, loading } = useWordPairs(voice || 'sarah');
@@ -343,7 +345,15 @@ export function RapidFire() {
         accuracy={finalAccuracy}
         totalItems={trialHistory.length}
         correctCount={correctCount}
-        onContinue={() => navigate('/practice')}
+        onContinue={() => {
+          if (isInPlan) advancePlan();
+          else navigate('/practice');
+        }}
+        nextActivity={planNext ?? {
+          label: 'Word Categories',
+          description: 'Practice with specific sound contrasts',
+          path: '/categories',
+        }}
       />
     );
   }

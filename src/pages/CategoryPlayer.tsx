@@ -10,6 +10,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
+import { useTodaysPlan } from '@/hooks/useTodaysPlan';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -41,6 +42,7 @@ export function CategoryPlayer() {
   const { voice } = useUser();
   const { ensureResumed, playUrl, stopPlayback } = useSilentSentinel();
   const { logProgress } = useProgress();
+  const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
@@ -244,8 +246,11 @@ export function CategoryPlayer() {
         accuracy={accuracy}
         totalItems={pairs.length}
         correctCount={responses.filter(r => r.correct).length}
-        onContinue={() => navigate('/categories')}
-        nextActivity={{
+        onContinue={() => {
+          if (isInPlan) advancePlan();
+          else navigate('/categories');
+        }}
+        nextActivity={planNext ?? {
           label: 'RapidFire Challenge',
           description: 'Test your skills with all word pairs',
           path: '/practice/rapid-fire',
