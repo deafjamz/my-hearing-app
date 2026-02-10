@@ -1,12 +1,13 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-08
-> **Last Session:** Session 23 — Data Engine Sprint 3 Phases A-C COMPLETE (phoneme mastery, Erber journey, recommendations, CSV export)
-> **Build Status:** ✅ PASSING (4.75s, 248KB main bundle)
-> **Deployment:** Needs deploy — `git push` to main or `npx vercel --prod`
+> **Last Updated:** 2026-02-09
+> **Last Session:** Session 24 — Today's Practice daily training flow (navigation sequencer, hero card, dynamic nextActivity)
+> **Build Status:** ✅ PASSING (3.58s, 248KB main bundle)
+> **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
+> **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 
 ---
 
@@ -279,14 +280,13 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Deploy Sprint 3** — `git push` to main (Vercel auto-deploys). All Phases A-C code is committed and build-verified.
-- [ ] **Live test new analytics** — Log into app, complete some RapidFire trials, then check ProgressReport for phoneme heatmap, Erber journey, trends. Check Dashboard for recommendations and streak.
+- [ ] **Live test Today's Practice** — Open app, verify hero card on Practice Hub, run 2-step plan, confirm "Up Next" chaining and "Practice Complete" state. Test new-user, returning-user, and goal-met states.
+- [ ] **Live test analytics** — Complete some RapidFire trials, check ProgressReport for phoneme heatmap, Erber journey, trends. Check Dashboard for recommendations and streak.
 - [ ] **Test CSV export** — On ProgressReport, click Export (Premium-gated). Verify training data and phoneme summary CSVs download correctly.
 - [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test all activities. All audio should route through hearing aids.
 - [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule. See plan file for full architecture.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
-- [ ] **"Today's Practice" concept** — Design daily training flow that removes decision fatigue (Duolingo-style). Discussed in Session 18 but not yet started.
 
 ### Done (previously TODO)
 - [x] Run performance indexes SQL ✅ (Session 23 — user ran manually)
@@ -311,7 +311,7 @@ python3 scripts/generate_sentences_v2.py
 - [x] ~~Bluetooth/CI audio relay: Silent Sentinel~~ ✅ Implemented — `useSilentSentinel` hook active in Detection, RapidFire, CategoryPlayer, GrossDiscrimination, SentenceTraining
 - [x] ~~Guided new-user onboarding~~ ✅ Implemented — WelcomeScreen + ActivityBriefing on all activities + nextActivity in SessionSummary
 - [x] ~~Redesign Home as propulsive landing~~ ✅ Practice Hub is now `/`, Dashboard moved to `/dashboard`
-- [ ] **"Today's Practice" daily training** — Structured daily routine with scheduled activities adjusted to ability. Like Duolingo's daily lesson — user opens app, sees next activity, taps Start. No decision fatigue. Programs infrastructure exists but needs UX rethink.
+- [x] ~~"Today's Practice" daily training~~ ✅ Implemented (Session 24) — Hero card on Practice Hub, 2-step Erber-based plan via navigation sequencer, dynamic nextActivity on 5 activities, plan-complete celebration, tier-gated.
 
 #### P1 — Auth & Account
 - [ ] **Change email address** — Add email change field to Settings page. Calls `supabase.auth.updateUser({ email })`. Enable "Secure email change" (double opt-in) in Supabase Dashboard → Auth → Settings.
@@ -434,6 +434,32 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-09 (Session 24: Today's Practice — Daily Training Flow)
+
+**Summary:** Built a Duolingo-style daily training flow that eliminates decision fatigue. Hero card on Practice Hub tells users exactly what to practice, then chains 2 activities via dynamic "Up Next" cards. Navigation sequencer reuses all existing activity pages via sessionStorage — zero changes to trial UIs.
+
+**New files (3):**
+- `src/hooks/useTodaysPlan.ts` (~83 lines) — sessionStorage read/write helper. Stores 2-step plan with today's date for auto-expiry. `startTodaysPlan()` writes plan + navigates. `useTodaysPlan()` hook reads plan and provides `nextActivity`, `advancePlan()`, `isLastStep`.
+- `src/hooks/useTodaysPractice.ts` (~186 lines) — Plan generation algorithm. Composes 5 existing analytics hooks (useLongitudinalAnalytics, usePhonemeAnalytics, useAnalytics, useRecommendations, useProgressData). Determines working Erber level, builds 2-step plan (core + stretch), tier-gates activities, falls back gracefully.
+- `src/components/TodaysPracticeCard.tsx` (~119 lines) — Hero card with 3 states: "Ready to practice" (step labels, streak, yesterday accuracy, teal CTA), "Goal met" (checkmark, secondary button), "New user" (Let's Get Started prompt).
+
+**Modified files (7):**
+- `src/pages/ActivityList.tsx` — Hero card above "Getting Started" section
+- `src/pages/Detection.tsx` — Dynamic nextActivity from plan
+- `src/pages/GrossDiscrimination.tsx` — Dynamic nextActivity from plan
+- `src/pages/RapidFire.tsx` — Dynamic nextActivity (previously had none)
+- `src/pages/CategoryPlayer.tsx` — Dynamic nextActivity from plan
+- `src/pages/SentenceTraining.tsx` — Dynamic nextActivity from plan
+- `src/components/SessionSummary.tsx` — "Assessment" → "Result" (regulatory fix), plan-complete detection shows "Practice Complete!" title
+
+**Architecture:** Navigation sequencer pattern — sessionStorage stores plan, activity pages read it via `useTodaysPlan()`, `advancePlan()` advances step and navigates. Plan auto-expires at midnight. Direct navigation (not via hero card) falls back to existing hardcoded nextActivity suggestions.
+
+**Not included (future phases):** Placement assessment, inline orchestrator, streak freeze, daily goal picker, spaced repetition for specific pairs.
+
+**Build:** ✅ PASSING (3.58s) | **Tests:** ✅ 31 PASSING | **New files:** 3 | **Modified files:** 7
+
+---
 
 ### 2026-02-08 (Session 23: Data Engine Sprint 3 Phases A-C — Phoneme Mastery, Longitudinal Intelligence, CSV Export)
 
