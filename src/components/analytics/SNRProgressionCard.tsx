@@ -56,7 +56,7 @@ export function SNRProgressionCard({ data }: { data: SNRPoint[] }) {
               color: '#f1f5f9',
               fontSize: '0.875rem',
             }}
-            formatter={(value: number) => [`${value > 0 ? '+' : ''}${value} dB (${snrLabel(value)})`, 'SNR']}
+            formatter={(value: number) => [`${snrLabel(value)} (${value > 0 ? '+' : ''}${value} dB)`, 'Difficulty Level']}
           />
           <defs>
             <linearGradient id="snrGradient" x1="0" y1="0" x2="0" y2="1">

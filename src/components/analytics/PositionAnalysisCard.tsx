@@ -3,9 +3,9 @@ import type { PositionBreakdown } from '@/hooks/useAnalytics';
 const MIN_TRIALS = 5;
 const POSITION_ORDER = ['initial', 'medial', 'final'];
 const POSITION_LABELS: Record<string, string> = {
-  initial: 'Initial',
-  medial: 'Medial',
-  final: 'Final',
+  initial: 'Start',
+  medial: 'Middle',
+  final: 'End',
 };
 
 export function PositionAnalysisCard({ data }: { data: PositionBreakdown[] }) {
@@ -18,9 +18,12 @@ export function PositionAnalysisCard({ data }: { data: PositionBreakdown[] }) {
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 print:border-slate-300">
-      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 print:text-black">
-        Phoneme Position
+      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 print:text-black">
+        Where in the Word
       </h3>
+      <p className="text-xs text-slate-400 dark:text-slate-500 mb-4 print:text-slate-600">
+        Are sounds at the start, middle, or end easier for you?
+      </p>
       <div className="grid grid-cols-3 gap-3">
         {sorted.map(item => (
           <div key={item.position} className="text-center">
@@ -30,7 +33,7 @@ export function PositionAnalysisCard({ data }: { data: PositionBreakdown[] }) {
             <p className="text-2xl font-bold text-slate-900 dark:text-white print:text-black">
               {item.accuracy}%
             </p>
-            <p className="text-xs text-slate-400 mt-0.5">{item.trials} trials</p>
+            <p className="text-xs text-slate-400 mt-0.5">{item.trials} exercises</p>
           </div>
         ))}
       </div>

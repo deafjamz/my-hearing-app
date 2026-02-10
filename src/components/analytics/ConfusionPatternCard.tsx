@@ -22,7 +22,7 @@ export function ConfusionPatternCard({ pairs }: { pairs: PhonemePairStats[] }) {
         Focus Areas
       </h3>
       <p className="text-xs text-slate-400 dark:text-slate-500 mb-4 print:text-slate-600">
-        Sounds that need more practice
+        These sounds are easy to mix up — practice makes them clearer
       </p>
 
       <div className="space-y-4">
@@ -37,21 +37,21 @@ export function ConfusionPatternCard({ pairs }: { pairs: PhonemePairStats[] }) {
               {/* Confusion direction */}
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-sm font-bold text-slate-900 dark:text-white print:text-black">
-                  /{pair.target}/
+                  "{pair.target}"
                 </span>
                 <ArrowRight size={14} className="text-slate-400" />
                 <span className="text-sm font-bold text-slate-900 dark:text-white print:text-black">
-                  /{pair.contrast}/
+                  "{pair.contrast}"
                 </span>
                 <span className="text-xs text-slate-400 dark:text-slate-500 ml-auto">
-                  {pair.accuracy}% accurate
+                  {pair.accuracy}% correct
                 </span>
               </div>
 
               {/* Detail line */}
               {dominantDirection.count > 0 && (
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  /{dominantDirection.from}/ heard as /{dominantDirection.to}/ — {dominantDirection.count} of {totalErrors} errors
+                  "{dominantDirection.from}" heard as "{dominantDirection.to}" — {dominantDirection.count} of {totalErrors} mix-ups
                 </p>
               )}
 

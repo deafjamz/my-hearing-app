@@ -19,9 +19,9 @@ export function FatigueAnalysisCard({ fatigue }: { fatigue: FatigueProfile }) {
   if (total === 0) return null;
 
   const buckets = [
-    { label: 'Early (1–3)', accuracy: fatigue.earlyAccuracy },
-    { label: 'Mid (4–6)', accuracy: fatigue.midAccuracy },
-    { label: 'Late (7–10)', accuracy: fatigue.lateAccuracy },
+    { label: 'First few (1–3)', accuracy: fatigue.earlyAccuracy },
+    { label: 'Middle (4–6)', accuracy: fatigue.midAccuracy },
+    { label: 'Last few (7–10)', accuracy: fatigue.lateAccuracy },
   ];
 
   return (
@@ -56,7 +56,7 @@ export function FatigueAnalysisCard({ fatigue }: { fatigue: FatigueProfile }) {
 
       {fatigue.showsFatigue && (
         <p className="mt-4 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 print:bg-amber-50">
-          Your accuracy tends to drop later in sessions. Shorter, more frequent practice may help.
+          Totally normal! Most people do best at the start. Try shorter sessions and you might see even better results.
         </p>
       )}
     </div>

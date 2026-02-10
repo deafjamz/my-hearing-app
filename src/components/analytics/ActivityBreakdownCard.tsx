@@ -16,9 +16,12 @@ export function ActivityBreakdownCard({ data }: { data: ActivityBreakdown[] }) {
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 print:border-slate-300">
-      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 print:text-black">
-        Accuracy by Activity
+      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 print:text-black">
+        How You're Doing by Activity
       </h3>
+      <p className="text-xs text-slate-400 dark:text-slate-500 mb-4 print:text-slate-600">
+        Your score in each type of exercise
+      </p>
       <div className="space-y-3">
         {filtered.map(item => (
           <div key={item.activityType}>
@@ -28,7 +31,7 @@ export function ActivityBreakdownCard({ data }: { data: ActivityBreakdown[] }) {
               </span>
               <span className="text-sm font-bold text-slate-900 dark:text-white print:text-black">
                 {item.accuracy}%
-                <span className="text-xs font-normal text-slate-400 ml-1">({item.trials})</span>
+                <span className="text-xs font-normal text-slate-400 ml-1">({item.trials} exercises)</span>
               </span>
             </div>
             <div className="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">

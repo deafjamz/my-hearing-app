@@ -51,8 +51,8 @@ export function useRecommendations(
         id: 'phoneme-weakest',
         priority: 1,
         type: 'phoneme',
-        title: `Practice /${weakest.target}/ vs /${weakest.contrast}/`,
-        description: `Your accuracy is ${weakest.accuracy}% — focused practice with these sounds will help.`,
+        title: `Practice "${weakest.target}" vs "${weakest.contrast}"`,
+        description: `You're getting this right ${weakest.accuracy}% of the time — a little extra practice will help!`,
         actionPath: '/practice/rapid-fire',
         actionLabel: 'Start Word Pairs',
         metric: weakest.accuracy,
@@ -63,8 +63,8 @@ export function useRecommendations(
     if (longitudinalData?.erberJourney) {
       const journey = longitudinalData.erberJourney;
       const levels = [
-        { key: 'detection', label: 'Sound Detection', next: 'Word Pairs (discrimination)', nextPath: '/practice/rapid-fire', data: journey.detection },
-        { key: 'discrimination', label: 'Word Pairs', next: 'Sentences (comprehension)', nextPath: '/practice/sentences', data: journey.discrimination },
+        { key: 'detection', label: 'Sound Detection', next: 'Word Pairs', nextPath: '/practice/rapid-fire', data: journey.detection },
+        { key: 'discrimination', label: 'Word Pairs', next: 'Sentences', nextPath: '/practice/sentences', data: journey.discrimination },
         { key: 'identification', label: 'Identification', next: 'Sentences', nextPath: '/practice/sentences', data: journey.identification },
       ] as const;
 
@@ -157,7 +157,7 @@ export function useRecommendations(
           priority: 3,
           type: 'position',
           title: `Focus on ${posLabel} sounds`,
-          description: `Your accuracy for ${weakPosition.position}-position sounds is ${weakPosition.accuracy}%.`,
+          description: `You're at ${weakPosition.accuracy}% for sounds at the ${posLabel} of words — some focused practice here will help!`,
           actionPath: '/practice/rapid-fire',
           actionLabel: 'Practice',
           metric: weakPosition.accuracy,

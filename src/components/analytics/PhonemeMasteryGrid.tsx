@@ -39,7 +39,7 @@ export function PhonemeMasteryGrid({ data }: { data: PhonemeMasteryData }) {
         Sound Pattern Mastery
       </h3>
       <p className="text-xs text-slate-400 dark:text-slate-500 mb-4 print:text-slate-600">
-        How well you distinguish similar sounds
+        Each square shows how often you get a sound pair right
       </p>
 
       {/* Tooltip */}
@@ -103,11 +103,11 @@ export function PhonemeMasteryGrid({ data }: { data: PhonemeMasteryData }) {
                 return (
                   <button
                     key={`${rowPhoneme}-${colPhoneme}`}
-                    aria-label={`${rowPhoneme} versus ${colPhoneme}: ${pair.accuracy}% accuracy, ${pair.trials} trials`}
+                    aria-label={`${rowPhoneme} versus ${colPhoneme}: ${pair.accuracy}% correct, ${pair.trials} exercises`}
                     className={`w-full aspect-square rounded ${cellColor(pair.accuracy, true)} hover:ring-2 hover:ring-teal-400 transition-all cursor-pointer flex items-center justify-center`}
-                    onMouseEnter={() => setTooltip(`${rowPhoneme} / ${colPhoneme}: ${pair.accuracy}% (${pair.trials} trials)`)}
+                    onMouseEnter={() => setTooltip(`${rowPhoneme} vs ${colPhoneme}: ${pair.accuracy}% correct (${pair.trials} exercises)`)}
                     onMouseLeave={() => setTooltip(null)}
-                    onClick={() => setTooltip(`${rowPhoneme} / ${colPhoneme}: ${pair.accuracy}% (${pair.trials} trials)`)}
+                    onClick={() => setTooltip(`${rowPhoneme} vs ${colPhoneme}: ${pair.accuracy}% correct (${pair.trials} exercises)`)}
                   >
                     <span className="text-[9px] font-bold text-white/80">
                       {pair.accuracy}

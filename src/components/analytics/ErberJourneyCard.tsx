@@ -5,7 +5,7 @@ const MIN_TOTAL_TRIALS = 5;
 
 const LEVELS = [
   { key: 'detection' as const, label: 'Detection', desc: 'Hear sounds' },
-  { key: 'discrimination' as const, label: 'Discrimination', desc: 'Tell sounds apart' },
+  { key: 'discrimination' as const, label: 'Comparison', desc: 'Tell sounds apart' },
   { key: 'identification' as const, label: 'Identification', desc: 'Recognize words' },
   { key: 'comprehension' as const, label: 'Comprehension', desc: 'Understand meaning' },
 ];
@@ -78,12 +78,12 @@ export function ErberJourneyCard({ journey }: { journey: ErberJourney }) {
                     {stats.accuracy}%
                   </p>
                   <p className="text-[10px] text-slate-400 dark:text-slate-500">
-                    {stats.trials} trials
+                    {stats.trials} exercises
                   </p>
                 </div>
               ) : (
                 <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
-                  Not started
+                  Try it!
                 </p>
               )}
             </div>

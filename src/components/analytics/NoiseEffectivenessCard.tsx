@@ -7,9 +7,12 @@ export function NoiseEffectivenessCard({ data }: { data: NoiseComparison }) {
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 print:border-slate-300">
-      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 print:text-black">
+      <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 print:text-black">
         Quiet vs. Noise
       </h3>
+      <p className="text-xs text-slate-400 dark:text-slate-500 mb-4 print:text-slate-600">
+        How background noise affects your listening
+      </p>
       <div className="grid grid-cols-2 gap-4">
         <ConditionStat label="Quiet" trials={data.quiet.trials} accuracy={data.quiet.accuracy} />
         <ConditionStat label="With Noise" trials={data.noise.trials} accuracy={data.noise.accuracy} />
@@ -23,7 +26,7 @@ function ConditionStat({ label, trials, accuracy }: { label: string; trials: num
     return (
       <div className="text-center">
         <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-1">{label}</p>
-        <p className="text-sm text-slate-400">Not enough data</p>
+        <p className="text-sm text-slate-400">Keep practicing to see results here</p>
       </div>
     );
   }
@@ -36,7 +39,7 @@ function ConditionStat({ label, trials, accuracy }: { label: string; trials: num
       <p className="text-2xl font-bold text-slate-900 dark:text-white print:text-black">
         {accuracy}%
       </p>
-      <p className="text-xs text-slate-400 mt-0.5">{trials} trials</p>
+      <p className="text-xs text-slate-400 mt-0.5">{trials} exercises</p>
     </div>
   );
 }
