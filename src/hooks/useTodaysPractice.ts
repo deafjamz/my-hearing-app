@@ -107,6 +107,17 @@ export function useTodaysPractice(): { plan: TodaysPlan | null; loading: boolean
 // --- Helpers ---
 
 function getWorkingLevel(erber: ErberJourney | undefined): string {
+  // Before checking Erber journey, check placement assessment result
+  const placementRaw = localStorage.getItem('soundsteps_placement');
+  if (placementRaw && !erber) {
+    try {
+      const placement = JSON.parse(placementRaw);
+      if (placement.level && ERBER_LEVELS.includes(placement.level)) {
+        return placement.level;
+      }
+    } catch { /* fall through to default */ }
+  }
+
   if (!erber) return 'detection';
 
   // Find highest level NOT yet mastered

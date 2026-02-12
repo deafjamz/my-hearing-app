@@ -46,7 +46,7 @@ export function ActivityList() {
           onSignIn={() => setShowAuthModal(true)}
           onStart={() => {
             localStorage.setItem('soundsteps_welcomed', 'true');
-            navigate('/practice/detection');
+            navigate('/placement');
           }}
           onSkip={() => {
             localStorage.setItem('soundsteps_welcomed', 'true');

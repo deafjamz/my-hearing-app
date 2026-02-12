@@ -54,8 +54,9 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
 
   // State 3 — New user (no Erber data — steps default to detection)
   const isNewUser = todayTrials === 0 && yesterdayAccuracy === null && streakDays === 0;
+  const hasPlacement = !!localStorage.getItem('soundsteps_placement');
 
-  if (isNewUser) {
+  if (isNewUser && !hasPlacement) {
     return (
       <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
@@ -69,11 +70,35 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
         </p>
 
         <button
+          onClick={() => navigate('/placement')}
+          className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+        >
+          <Play size={20} fill="currentColor" />
+          Start Listening Check
+        </button>
+      </motion.div>
+    );
+  }
+
+  if (isNewUser && hasPlacement) {
+    return (
+      <motion.div
+        initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+        className="bg-slate-900 border border-slate-800 rounded-3xl p-6 mb-8"
+      >
+        <h2 className="text-xl font-bold text-white mb-2">Ready to Train</h2>
+        <p className="text-slate-400 text-sm mb-5">
+          Your personalized plan is ready. Let's go!
+        </p>
+
+        <button
           onClick={handleStart}
           className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
         >
           <Play size={20} fill="currentColor" />
-          Start
+          Start Practice
         </button>
       </motion.div>
     );

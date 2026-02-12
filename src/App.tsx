@@ -62,6 +62,7 @@ const PrivacyPolicy = namedLazy(() => import('@/pages/PrivacyPolicy'), 'PrivacyP
 const TermsOfService = namedLazy(() => import('@/pages/TermsOfService'), 'TermsOfService');
 const ProgressReport = namedLazy(() => import('@/pages/ProgressReport'), 'ProgressReport');
 const ResetPassword = namedLazy(() => import('@/pages/ResetPassword'), 'ResetPassword');
+const PlacementAssessment = namedLazy(() => import('@/pages/PlacementAssessment'), 'PlacementAssessment');
 
 // Dev-only page imports
 const AudioQA = namedLazy(() => import('@/pages/AudioQA'), 'AudioQA');
@@ -99,6 +100,10 @@ const productionRoutes = [
   {
     path: '/practice/rapid-fire',
     element: <S><RequireAuth><RapidFire /></RequireAuth></S>,
+  },
+  {
+    path: '/placement',
+    element: <S><RequireAuth><PlacementAssessment /></RequireAuth></S>,
   },
   {
     path: '/practice/detection',

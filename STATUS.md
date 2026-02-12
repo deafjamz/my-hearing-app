@@ -1,13 +1,15 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-09
-> **Last Session:** Session 24 — Today's Practice daily training flow (navigation sequencer, hero card, dynamic nextActivity)
-> **Build Status:** ✅ PASSING (3.58s, 248KB main bundle)
+> **Last Updated:** 2026-02-11
+> **Last Session:** Session 25 — Placement Assessment + Marketing Strategy + 5 Marketing Skills + MCP Setup
+> **Build Status:** ✅ PASSING
 > **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
+> **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
+> **Marketing:** ✅ Strategy doc + 5 skills + MCP setup guide
 
 ---
 
@@ -280,11 +282,13 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Live test Today's Practice** — Open app, verify hero card on Practice Hub, run 2-step plan, confirm "Up Next" chaining and "Practice Complete" state. Test new-user, returning-user, and goal-met states.
-- [ ] **Live test analytics** — Complete some RapidFire trials, check ProgressReport for phoneme heatmap, Erber journey, trends. Check Dashboard for recommendations and streak.
-- [ ] **Test CSV export** — On ProgressReport, click Export (Premium-gated). Verify training data and phoneme summary CSVs download correctly.
-- [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test all activities. All audio should route through hearing aids.
-- [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule. See plan file for full architecture.
+- [ ] **Live test Placement Assessment** — Clear localStorage, sign out → sign in → WelcomeScreen → "Start Your First Exercise" → `/placement` → complete 10 trials → see results → "Start Training" → Practice Hub. Verify TodaysPracticeCard shows correct state.
+- [ ] **Live test Today's Practice** — Verify hero card, run 2-step plan, confirm "Up Next" chaining and "Practice Complete" state.
+- [ ] **Marketing Phase 2 — Install MCPs** — Add Perplexity + Playwright + Firecrawl MCPs to `.claude/settings.local.json`. See `docs/MCP_SETUP.md`.
+- [ ] **Marketing Phase 2 — Competitive research** — Use Perplexity MCP to research LACE, Angel Sound, AB Clix. Use Playwright to screenshot competitors. Save to `/tmp/competitive_research.md`.
+- [ ] **Marketing Phase 2 — Landing pages** — Build 3 audience-specific landing pages (CI Users, Audiologists, Family Members) using positioning + copy skills.
+- [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test placement + all activities.
+- [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 
@@ -434,6 +438,35 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-11 (Session 25: Placement Assessment + Marketing Strategy + Skills + MCP)
+
+**Summary:** Built the Placement Assessment ("Listening Check") — a 10-trial interactive assessment across all 4 Erber levels that serves as the primary lead magnet and new-user onboarding. Also wrote comprehensive marketing strategy document based on Isenberg AI Marketing Masterclass analysis, created 5 marketing skills for Claude Code, and documented MCP setup for research workflow.
+
+**New files (8):**
+- `src/pages/PlacementAssessment.tsx` (~460 lines) — 10-trial Listening Check with 4 phases (intro, trial, interstitial, results). 2 Detection, 3 Discrimination, 3 Identification, 2 Comprehension. Uses `useSilentSentinel.playUrl()` for BT-safe audio. Logs every trial via `useProgress`. Saves results to `localStorage.soundsteps_placement`. Determines starting level (80%/60%/60% thresholds).
+- `docs/MARKETING_PLAN.md` (~437 lines) — Full strategy document: Isenberg video analysis with 12-tool matrix, funnel architecture, 3 audience landing pages, SEO keywords, content marketing (blog + Remotion video + Glyph images), pricing tiers, regulatory guardrails, competitive landscape, email strategy, 4-phase implementation plan.
+- `docs/MCP_SETUP.md` (~200 lines) — Setup guide for Perplexity MCP (research), Playwright MCP (screenshots/automation), Firecrawl MCP (web scraping). Combined config JSON, workflow walkthrough, troubleshooting.
+- `.claude/skills/hearing-health-copy.md` (~130 lines) — Regulatory-safe copywriting skill with prohibited/allowed term matrix, headline frameworks, CTA rules.
+- `.claude/skills/audiologist-outreach.md` (~120 lines) — B2B messaging for audiologists: pain points, proof points, objection handling, email templates.
+- `.claude/skills/ci-community-voice.md` (~110 lines) — Authentic first-person CI user perspective (Bruce's story), content templates for communities.
+- `.claude/skills/soundsteps-positioning.md` (~140 lines) — 10 differentiators, 4 ICPs, 5 positioning frameworks, headline generation process.
+- `.claude/skills/soundsteps-orchestrator.md` (~110 lines) — "What's next?" decision skill with funnel checklist and priority routing.
+
+**Modified files (4):**
+- `src/App.tsx` — Added `/placement` route (lazy-loaded, RequireAuth)
+- `src/pages/ActivityList.tsx` — WelcomeScreen "Start Your First Exercise" → `/placement`
+- `src/components/TodaysPracticeCard.tsx` — New user without placement → "Start Listening Check"; with placement → "Start Practice"
+- `src/hooks/useTodaysPractice.ts` — `getWorkingLevel()` reads placement level from localStorage when no Erber data exists
+
+**Architecture:**
+- Placement is a bootstrap — `localStorage.soundsteps_placement` read by `getWorkingLevel()` only when no Erber journey data exists yet. Once real progress accumulates, Erber journey overrides.
+- All placement audio plays through Web Audio API (`playUrl()`) — BT hearing aid compatible.
+- Marketing skills follow `.claude/skills/` pattern — domain expertise codified as markdown instructions for Claude Code workflows.
+
+**Build:** ✅ PASSING | **Tests:** ✅ 31 PASSING | **New files:** 8 | **Modified files:** 4
+
+---
 
 ### 2026-02-09 (Session 24: Today's Practice — Daily Training Flow)
 
