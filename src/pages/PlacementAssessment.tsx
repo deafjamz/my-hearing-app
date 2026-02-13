@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Play, Check, Volume2, ChevronRight, Ear, ArrowRight } from 'lucide-react';
+import { Play, Check, Volume2, ChevronRight, Ear, ArrowRight, ArrowLeftRight, Target, MessageSquare } from 'lucide-react';
 import { useWordPairs, type WordPair } from '@/hooks/useActivityData';
 import { useSentenceData, getAudioUrl, type SentenceWithAudio } from '@/hooks/useSentenceData';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
@@ -35,28 +35,31 @@ const TRIAL_SEQUENCE: TrialDef[] = [
   { level: 'comprehension', index: 1 },
 ];
 
-const LEVEL_INFO: Record<ErberLevel, { title: string; icon: string; description: string; nextHint: string }> = {
+const LEVEL_ICONS: Record<ErberLevel, React.ComponentType<{ className?: string; size?: number }>> = {
+  detection: Ear,
+  discrimination: ArrowLeftRight,
+  identification: Target,
+  comprehension: MessageSquare,
+};
+
+const LEVEL_INFO: Record<ErberLevel, { title: string; description: string; nextHint: string }> = {
   detection: {
     title: 'Detection',
-    icon: '👂',
     description: 'Can you tell when a sound is present?',
     nextHint: 'You noticed sounds. Now let\'s try telling words apart.',
   },
   discrimination: {
     title: 'Discrimination',
-    icon: '🔀',
     description: 'Can you tell two different words apart?',
     nextHint: 'Now let\'s try with similar-sounding words.',
   },
   identification: {
     title: 'Identification',
-    icon: '🎯',
     description: 'Can you recognize similar-sounding words?',
     nextHint: 'Finally, let\'s try understanding sentences.',
   },
   comprehension: {
     title: 'Comprehension',
-    icon: '💬',
     description: 'Can you understand the meaning of sentences?',
     nextHint: '',
   },
@@ -101,7 +104,15 @@ export function PlacementAssessment() {
 
   // Data hooks
   const { pairs, loading: pairsLoading } = useWordPairs(voice);
-  const { sentences, loading: sentencesLoading } = useSentenceData({ limit: 4, voiceId: voice });
+  const { sentences, loading: sentencesLoading, error: sentencesError } = useSentenceData({ limit: 4, voiceId: voice });
+
+  // Debug: log loading states in dev
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log('[Placement] voice:', voice, 'pairsLoading:', pairsLoading, 'pairs:', pairs.length,
+        'sentencesLoading:', sentencesLoading, 'sentences:', sentences.length, 'error:', sentencesError);
+    }
+  }, [voice, pairsLoading, pairs.length, sentencesLoading, sentences.length, sentencesError]);
 
   // State machine
   const [phase, setPhase] = useState<Phase>('intro');
@@ -381,8 +392,13 @@ export function PlacementAssessment() {
   // Loading state
   if (dataLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <div className="w-8 h-8 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin" />
+        {sentencesError && (
+          <p className="text-red-400 text-sm text-center px-6">
+            Error loading sentences: {sentencesError}
+          </p>
+        )}
       </div>
     );
   }
@@ -431,15 +447,20 @@ export function PlacementAssessment() {
 
             {/* Level preview */}
             <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-8 text-left space-y-3">
-              {ERBER_LEVELS.map((level) => (
-                <div key={level} className="flex items-center gap-3">
-                  <span className="text-lg">{LEVEL_INFO[level].icon}</span>
-                  <div>
-                    <p className="text-white text-sm font-bold">{LEVEL_INFO[level].title}</p>
-                    <p className="text-slate-500 text-xs">{LEVEL_INFO[level].description}</p>
+              {ERBER_LEVELS.map((level) => {
+                const Icon = LEVEL_ICONS[level];
+                return (
+                  <div key={level} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-4 h-4 text-teal-400" />
+                    </div>
+                    <div>
+                      <p className="text-white text-sm font-bold">{LEVEL_INFO[level].title}</p>
+                      <p className="text-slate-500 text-xs">{LEVEL_INFO[level].description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <button
@@ -491,7 +512,7 @@ export function PlacementAssessment() {
               {currentTrial.level === 'detection' && 'Listen carefully. Did you hear a word?'}
               {currentTrial.level === 'discrimination' && 'Listen to the word. Which one did you hear?'}
               {currentTrial.level === 'identification' && 'Listen carefully. Which word was it?'}
-              {currentTrial.level === 'comprehension' && 'Listen to the sentence, then answer the question.'}
+              {currentTrial.level === 'comprehension' && (hasPlayed ? 'Answer the question below.' : 'Listen to the sentence, then answer the question.')}
             </p>
 
             {/* Play button */}
@@ -513,9 +534,11 @@ export function PlacementAssessment() {
 
             {/* Comprehension question text */}
             {currentTrial.level === 'comprehension' && hasPlayed && sentences[currentTrial.index] && (
-              <p className="text-white text-base font-bold text-center mb-6 px-4">
-                {sentences[currentTrial.index].clinical_metadata.question_text}
-              </p>
+              <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6">
+                <p className="text-white text-base font-bold text-center">
+                  {sentences[currentTrial.index].clinical_metadata?.question_text || 'What did you hear?'}
+                </p>
+              </div>
             )}
 
             {/* Choice buttons */}
@@ -698,7 +721,7 @@ export function PlacementAssessment() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-lg">{LEVEL_INFO[level].icon}</span>
+                        {(() => { const Icon = LEVEL_ICONS[level]; return <Icon className="w-4 h-4 text-slate-400" size={16} />; })()}
                         <span className="text-white font-bold text-sm">{LEVEL_INFO[level].title}</span>
                         {isRecommended && (
                           <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-teal-500 text-white">
