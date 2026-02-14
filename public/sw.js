@@ -1,13 +1,16 @@
 // SoundSteps Service Worker v1.0.0
 // Minimal caching strategy for PWA support
 
-const CACHE_NAME = 'soundsteps-v1';
+const CACHE_NAME = 'soundsteps-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/favicon-32.png',
+  '/apple-touch-icon.png',
   '/icon-192.png',
   '/icon-512.png',
+  '/logo.png',
 ];
 
 // Install: Cache static assets

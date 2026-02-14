@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundSteps Logo Review Gallery</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0E14;
+      color: #E2E8F0;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: #fff; }
+    .subtitle { color: #64748B; margin-bottom: 2rem; font-size: 0.875rem; }
+    .controls {
+      display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .controls button {
+      padding: 0.5rem 1rem; border-radius: 9999px; border: 1px solid #334155;
+      background: transparent; color: #94A3B8; cursor: pointer; font-size: 0.8rem;
+      transition: all 0.15s;
+    }
+    .controls button:hover, .controls button.active {
+      background: #008F86; color: white; border-color: #008F86;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .card:hover { border-color: #008F86; transform: translateY(-2px); }
+    .card img {
+      width: 100%; aspect-ratio: 1; object-fit: cover;
+      display: block; background: #0F172A;
+    }
+    .card-info {
+      padding: 0.75rem 1rem;
+    }
+    .card-id {
+      font-weight: 700; color: #008F86; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .card-name { font-weight: 500; font-size: 0.875rem; margin-top: 0.125rem; }
+    .card-source { color: #64748B; font-size: 0.7rem; margin-top: 0.25rem; }
+    .score-bar {
+      display: flex; gap: 0.25rem; padding: 0.5rem 1rem; border-top: 1px solid #334155;
+    }
+    .score-btn {
+      flex: 1; padding: 0.375rem; border: 1px solid #334155; border-radius: 0.5rem;
+      background: transparent; color: #64748B; cursor: pointer; font-size: 0.75rem;
+      transition: all 0.15s; text-align: center;
+    }
+    .score-btn:hover { border-color: #008F86; color: #008F86; }
+    .score-btn.selected { background: #008F86; color: white; border-color: #008F86; }
+    .score-btn.reject { border-color: #EF4444; color: #EF4444; }
+    .score-btn.reject.selected { background: #EF4444; color: white; }
+    .card.rejected { opacity: 0.3; }
+    .card.favorited { border-color: #008F86; box-shadow: 0 0 20px rgba(0,143,134,0.2); }
+    .stats {
+      position: fixed; bottom: 1rem; right: 1rem; background: #1E293B;
+      border: 1px solid #334155; padding: 1rem; border-radius: 0.75rem;
+      font-size: 0.8rem; z-index: 10;
+    }
+    .stats span { color: #008F86; font-weight: 700; }
+    .export-btn {
+      margin-top: 0.5rem; padding: 0.375rem 0.75rem; background: #008F86;
+      color: white; border: none; border-radius: 0.5rem; cursor: pointer;
+      font-size: 0.75rem; width: 100%;
+    }
+    .empty {
+      grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;
+      color: #64748B;
+    }
+    .empty h2 { color: #94A3B8; margin-bottom: 1rem; }
+    .empty code {
+      display: block; background: #1E293B; padding: 1rem; border-radius: 0.5rem;
+      margin: 0.5rem auto; max-width: 600px; text-align: left; font-size: 0.8rem;
+      color: #008F86;
+    }
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+      z-index: 100; cursor: zoom-out; align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>SoundSteps — Logo Review Gallery</h1>
+  <p class="subtitle">Click image to enlarge. Score 1-5 or reject. Favorites get green glow. Export scores when done.</p>
+
+  <div class="controls" id="filters">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="batch1">Batch 1: Core Form</button>
+    <button data-filter="batch2">Batch 2: Depth</button>
+    <button data-filter="batch3">Batch 3: Typography</button>
+    <button data-filter="batch4">Batch 4: Stylistic</button>
+    <button data-filter="batch5">Batch 5: Context</button>
+    <button data-filter="favorites">Favorites (4-5)</button>
+    <button data-filter="rejected">Rejected</button>
+  </div>
+
+  <div class="grid" id="gallery"></div>
+
+  <div class="stats" id="stats">
+    Total: <span id="total">0</span> |
+    Scored: <span id="scored">0</span> |
+    Favs: <span id="favs">0</span>
+    <button class="export-btn" onclick="exportScores()">Export Scores JSON</button>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightbox-img" />
+  </div>
+
+  <script>
+    // Scores persist in localStorage
+    const STORAGE_KEY = 'soundsteps_logo_scores';
+    let scores = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    let allCards = [];
+    let currentFilter = 'all';
+
+    function saveScores() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+      updateStats();
+    }
+
+    function updateStats() {
+      const total = allCards.length;
+      const scored = Object.keys(scores).filter(k => scores[k] !== undefined).length;
+      const favs = Object.values(scores).filter(s => s >= 4).length;
+      document.getElementById('total').textContent = total;
+      document.getElementById('scored').textContent = scored;
+      document.getElementById('favs').textContent = favs;
+    }
+
+    function exportScores() {
+      const data = {
+        exported: new Date().toISOString(),
+        scores: scores,
+        favorites: Object.entries(scores).filter(([,s]) => s >= 4).map(([k]) => k),
+        rejected: Object.entries(scores).filter(([,s]) => s === 0).map(([k]) => k),
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'logo_scores.json'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function createCard(img) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.batch = img.batch;
+      card.dataset.id = img.id;
+
+      const score = scores[img.filename];
+      if (score === 0) card.classList.add('rejected');
+      if (score >= 4) card.classList.add('favorited');
+
+      card.innerHTML = `
+        <img src="${img.path}" alt="${img.name}" loading="lazy"
+             onclick="document.getElementById('lightbox-img').src=this.src; document.getElementById('lightbox').classList.add('open');" />
+        <div class="card-info">
+          <div class="card-id">${img.id} — ${img.batch}</div>
+          <div class="card-name">${img.name}</div>
+          <div class="card-source">${img.source}</div>
+        </div>
+        <div class="score-bar">
+          ${[1,2,3,4,5].map(n =>
+            `<button class="score-btn ${score === n ? 'selected' : ''}" onclick="setScore('${img.filename}', ${n}, this)">${n}</button>`
+          ).join('')}
+          <button class="score-btn reject ${score === 0 ? 'selected' : ''}" onclick="setScore('${img.filename}', 0, this)">✕</button>
+        </div>
+      `;
+      return card;
+    }
+
+    function setScore(filename, value, btn) {
+      scores[filename] = value;
+      saveScores();
+
+      // Update card visual state
+      const card = btn.closest('.card');
+      card.classList.toggle('rejected', value === 0);
+      card.classList.toggle('favorited', value >= 4);
+
+      // Update button states
+      card.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      applyFilter();
+    }
+
+    function applyFilter() {
+      document.querySelectorAll('.card').forEach(card => {
+        const batch = card.dataset.batch;
+        const id = card.dataset.id;
+        const filename = Object.keys(scores).find(k => k.includes(id)) || id;
+        const score = scores[filename];
+
+        let show = true;
+        if (currentFilter === 'favorites') show = score >= 4;
+        else if (currentFilter === 'rejected') show = score === 0;
+        else if (currentFilter !== 'all') show = batch === currentFilter;
+
+        card.style.display = show ? '' : 'none';
+      });
+    }
+
+    // Filter buttons
+    document.getElementById('filters').addEventListener('click', e => {
+      if (e.target.tagName !== 'BUTTON') return;
+      document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentFilter = e.target.dataset.filter;
+      applyFilter();
+    });
+
+    // On load: scan for images by building card data from known prompts
+    async function init() {
+      try {
+        const resp = await fetch('../prompts/all_prompts.json');
+        const data = await resp.json();
+        const gallery = document.getElementById('gallery');
+
+        for (const [batchName, prompts] of Object.entries(data.batches)) {
+          const batchNum = batchName.split('_')[0];
+          for (const p of prompts) {
+            const slug = p.name.toLowerCase().replace(/[ /&]/g, '_');
+            // Try both DALL-E and Ideogram variants
+            for (const source of ['dalle', 'ideogram']) {
+              for (let v = 1; v <= 4; v++) {
+                const suffix = source === 'dalle' ? '' : '_ideogram';
+                const filename = `${p.id}_${slug}${suffix}_v${v}.png`;
+                const path = `../outputs/${batchNum}/${filename}`;
+
+                // Check if image exists via fetch HEAD
+                try {
+                  const check = await fetch(path, { method: 'HEAD' });
+                  if (check.ok) {
+                    const img = {
+                      id: p.id,
+                      name: p.name,
+                      batch: batchNum,
+                      source: source === 'dalle' ? 'DALL-E 3' : 'Ideogram',
+                      filename: filename,
+                      path: path,
+                    };
+                    allCards.push(img);
+                    gallery.appendChild(createCard(img));
+                  }
+                } catch {}
+              }
+            }
+          }
+        }
+
+        if (allCards.length === 0) {
+          gallery.innerHTML = `
+            <div class="empty">
+              <h2>No images generated yet</h2>
+              <p>Run one of the generation scripts first:</p>
+              <code>
+# DALL-E 3 (needs OpenAI API key)<br>
+export OPENAI_API_KEY=sk-...<br>
+python3 generate_dalle.py --batch batch1 --variants 2<br>
+<br>
+# Ideogram (needs Ideogram API key)<br>
+export IDEOGRAM_API_KEY=...<br>
+python3 generate_ideogram.py --batch batch1 --variants 2<br>
+<br>
+# Then open this gallery:<br>
+python3 -m http.server 8080 --directory branding/logo-gen<br>
+# → http://localhost:8080/gallery/
+              </code>
+            </div>
+          `;
+        }
+
+        updateStats();
+      } catch (err) {
+        console.error('Failed to load prompts:', err);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

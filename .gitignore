@@ -42,6 +42,9 @@ regen_output/
 # Testing screenshots
 screenshots/
 
+# Logo generation outputs (large PNGs)
+branding/logo-gen/outputs/
+
 # Build
 dist/
 .vercel

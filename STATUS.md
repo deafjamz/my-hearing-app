@@ -1,7 +1,7 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-11
-> **Last Session:** Session 25 — Placement Assessment + Marketing Strategy + 5 Marketing Skills + MCP Setup
+> **Last Updated:** 2026-02-14
+> **Last Session:** Session 26 — Logo v1 + Placement Bug Fixes + Design Audit + Logo Generation Pipeline
 > **Build Status:** ✅ PASSING
 > **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
@@ -10,6 +10,7 @@
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
 > **Marketing:** ✅ Strategy doc + 5 skills + MCP setup guide
+> **Branding:** Logo v1 generated (Stepped S teal lettermark). Generation pipeline ready. Integration plan written (not yet implemented).
 
 ---
 
@@ -282,12 +283,27 @@ python3 scripts/generate_sentences_v2.py
 ## Next Actions (Priority Order)
 
 ### TODO — Next Session
-- [ ] **Live test Placement Assessment** — Clear localStorage, sign out → sign in → WelcomeScreen → "Start Your First Exercise" → `/placement` → complete 10 trials → see results → "Start Training" → Practice Hub. Verify TodaysPracticeCard shows correct state.
+
+#### Immediate — Logo Integration (plan approved, ready to implement)
+- [ ] **Integrate Logo v1** — Plan at `.claude/plans/splendid-riding-wombat.md`. 7 steps: generate icon sizes via `sips`, replace favicon + PWA icons, fix manifest theme_color (#7c3aed→#020617), add logo to Layout nav header (left side), WelcomeScreen (above heading), PlacementAssessment intro (replace ear icon). Files: `index.html`, `manifest.json`, `sw.js`, `Layout.tsx`, `WelcomeScreen.tsx`, `PlacementAssessment.tsx`, 5 new icon files in `public/`.
+- [ ] **Continue logo iteration** — Current logo is v1 placeholder from Weavly (Ideogram V3 inpaint). ~30 generated, ~5 promising. 50-prompt pipeline ready at `branding/logo-gen/` for batch generation via DALL-E 3 or Ideogram API.
+
+#### Design Overhaul (identified in Session 26 audit)
+- [ ] **Replace Inter font** — Currently using Inter (universal AI-app fingerprint). Pick a distinctive typeface.
+- [ ] **Kill 14 gradient instances** — ActivityHeader.tsx, CategoryLibrary.tsx, ProgramLibrary.tsx, ProgramDetail.tsx, SentenceTraining.tsx, ActivityList.tsx. Aura spec says no gradients (except Aura visualizer).
+- [ ] **Extract Button/Card primitives** — No `src/components/primitives/` exists. Every component inlines Tailwind button/card classes.
+- [ ] **Remove legacy Vitality palette** — `tailwind.config.js` still has deprecated brand colors.
+
+#### Testing & Verification
+- [ ] **Live test Placement Assessment** — Verify comprehension question fix (visible card container + fallback text) and loading spinner fix (debug logging added).
 - [ ] **Live test Today's Practice** — Verify hero card, run 2-step plan, confirm "Up Next" chaining and "Practice Complete" state.
-- [ ] **Marketing Phase 2 — Install MCPs** — Add Perplexity + Playwright + Firecrawl MCPs to `.claude/settings.local.json`. See `docs/MCP_SETUP.md`.
-- [ ] **Marketing Phase 2 — Competitive research** — Use Perplexity MCP to research LACE, Angel Sound, AB Clix. Use Playwright to screenshot competitors. Save to `/tmp/competitive_research.md`.
-- [ ] **Marketing Phase 2 — Landing pages** — Build 3 audience-specific landing pages (CI Users, Audiologists, Family Members) using positioning + copy skills.
 - [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test placement + all activities.
+
+#### Marketing & Growth
+- [ ] **Marketing Phase 2 — Competitive research** — Use Playwright MCP to screenshot LACE, Angel Sound, AB Clix. Save to `/tmp/competitive_research.md`.
+- [ ] **Marketing Phase 2 — Landing pages** — Build 3 audience-specific landing pages (CI Users, Audiologists, Family Members) using positioning + copy skills.
+
+#### Infrastructure
 - [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
@@ -438,6 +454,49 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-14 (Session 26: Logo v1 + Placement Bug Fixes + Design Audit + Logo Generation Pipeline)
+
+**Summary:** Fixed 3 Placement Assessment bugs found during live testing (loading spinner, cheap emoji icons, missing comprehension question). Conducted thorough design audit identifying "vibecoded hallmarks" — the app uses Inter font, standard Tailwind colors, Lucide icons, and no custom visual identity (same as every AI-generated app). Created a 50-prompt logo generation pipeline for the "Stepped S" concept, generated ~30 logos in Weavly, selected v1 placeholder. Wrote integration plan for favicon, PWA icons, nav header, welcome screen, and placement intro. Installed Playwright + Firecrawl MCPs.
+
+**Placement Bug Fixes (committed + deployed):**
+- `src/pages/PlacementAssessment.tsx` — Replaced emoji icons (ear, arrows, target, chat) with Lucide React components (Ear, ArrowLeftRight, Target, MessageSquare) in teal-tinted containers. Added visible card container for comprehension question with `'What did you hear?'` fallback. Added dev-only debug logging for loading state diagnosis. Added `sentencesError` display in loading spinner.
+
+**Logo Generation Pipeline (new, not committed):**
+- `branding/logo-gen/prompts/all_prompts.json` — 50 structured prompts across 5 batches (Core Form, Depth/Shading, Typography, Stylistic Range, Context/Application)
+- `branding/logo-gen/prompts/ALL_PROMPTS.md` — Human-readable copy-paste version for Weavly
+- `branding/logo-gen/generate_dalle.py` — DALL-E 3 batch generation (lazy openai import for dry-run)
+- `branding/logo-gen/generate_ideogram.py` — Ideogram V2A batch generation (DESIGN style)
+- `branding/logo-gen/gallery/index.html` — Dark-themed review gallery with 1-5 scoring, reject, filter, lightbox, localStorage, JSON export
+- `branding/logo-gen/run.sh` — Runner script (dalle, ideogram, gallery, dry-run, count)
+- `branding/logo-v1.png` — Selected v1 logo (Stepped S, teal on dark, Ideogram V3 inpaint)
+- `.gitignore` — Added `branding/logo-gen/outputs/` to prevent generated images from being committed
+
+**MCP Setup (committed):**
+- `docs/MCP_SETUP.md` — Fixed package names: Playwright is `@playwright/mcp@latest` (not `@anthropic/playwright-mcp`), Firecrawl is `firecrawl-mcp` (not `@anthropic/firecrawl-mcp`). Perplexity skipped.
+
+**Design Audit Findings:**
+- 85% Aura-compliant, grade B+
+- 14 gradient instances (should be 0 outside Aura visualizer)
+- Inter font (universal AI-app fingerprint)
+- No extracted primitives (Button, Card, Badge)
+- Legacy Vitality palette in tailwind.config.js
+- No logo/visual identity anywhere in UI
+- Manifest theme_color still purple `#7c3aed` (should be `#020617`)
+- PWA icons are placeholder blue X (Capacitor default)
+
+**Logo Integration Plan (written, not implemented):**
+- Plan at `.claude/plans/splendid-riding-wombat.md`
+- 7 steps: generate icon sizes → update index.html → fix manifest.json → bump SW cache → add to Layout nav → add to WelcomeScreen → add to PlacementAssessment intro
+- 11 files total (5 new icon PNGs, 6 modified source files)
+
+**Commits:**
+1. `01c90bb` — feat: Placement Assessment + marketing strategy + 5 marketing skills
+2. `11b167b` — fix: Placement Assessment — Lucide icons, question visibility, debug logging
+
+**Build:** ✅ PASSING | **Tests:** ✅ 31 PASSING
+
+---
 
 ### 2026-02-11 (Session 25: Placement Assessment + Marketing Strategy + Skills + MCP)
 

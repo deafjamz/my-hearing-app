@@ -31,7 +31,13 @@ export function Layout({ className }: LayoutProps) {
       
       {/* Top Bar (Mobile Header) — only for authenticated users */}
       {showChrome && (
-        <div className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex justify-end items-center pointer-events-none">
+        <div className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex justify-between items-center pointer-events-none">
+           <Link
+              to="/"
+              className="pointer-events-auto"
+           >
+               <img src="/logo.png" alt="SoundSteps" className="w-8 h-8 rounded-lg" />
+           </Link>
            <Link
               to="/settings"
               onClick={() => hapticSelection()}

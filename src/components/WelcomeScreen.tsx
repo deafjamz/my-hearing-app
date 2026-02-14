@@ -51,6 +51,16 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
         transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         className="max-w-md w-full relative z-10"
       >
+        {/* Logo */}
+        <motion.img
+          src="/logo.png"
+          alt=""
+          initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.05, duration: prefersReducedMotion ? 0 : 0.5 }}
+          className="w-20 h-20 rounded-2xl mx-auto mb-6"
+        />
+
         {/* Heading */}
         <motion.h1
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}

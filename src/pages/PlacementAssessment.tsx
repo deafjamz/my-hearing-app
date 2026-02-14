@@ -432,9 +432,7 @@ export function PlacementAssessment() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
             className="flex flex-col items-center text-center pt-12"
           >
-            <div className="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center mb-6">
-              <Ear className="w-10 h-10 text-teal-400" />
-            </div>
+            <img src="/logo.png" alt="SoundSteps" className="w-20 h-20 rounded-2xl mb-6" />
 
             <h1 className="text-3xl font-bold text-white tracking-tight mb-3">
               Let's Find Your Starting Point

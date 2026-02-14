@@ -81,12 +81,18 @@ Browser automation from Claude Code. Opens websites, takes screenshots, clicks t
 
 ### Setup
 
+```bash
+claude mcp add playwright npx @playwright/mcp@latest
+```
+
+Or manually in your MCP config:
+
 ```json
 {
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@anthropic/playwright-mcp"]
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }
@@ -133,14 +139,20 @@ Web scraping and data extraction. Extracts copy, structure, and data from compet
 
 1. Get a Firecrawl API key from [firecrawl.dev](https://www.firecrawl.dev/)
 
-2. Add to MCP config:
+2. Add via CLI:
+
+```bash
+claude mcp add firecrawl -e FIRECRAWL_API_KEY=your-api-key -- npx -y firecrawl-mcp
+```
+
+Or manually in MCP config:
 
 ```json
 {
   "mcpServers": {
     "firecrawl": {
       "command": "npx",
-      "args": ["-y", "@anthropic/firecrawl-mcp"],
+      "args": ["-y", "firecrawl-mcp"],
       "env": {
         "FIRECRAWL_API_KEY": "fc-xxxxxxxxxxxx"
       }
