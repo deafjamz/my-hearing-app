@@ -30,7 +30,7 @@ export function StreakFlame() {
     color = "text-teal-400";
     fill = "teal";
     animation = "animate-spin-slow"; // Or a complex keyframe
-    shadow = "drop-shadow-[0_0_12px_rgba(0,167,157,0.8)]"; // Teal Plasma
+    shadow = "drop-shadow-[0_0_12px_rgba(0,143,134,0.8)]"; // Teal Plasma
   }
   if (currentStreak >= 50) {
     color = "text-yellow-400"; // GOLD

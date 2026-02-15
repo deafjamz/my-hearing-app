@@ -13,7 +13,7 @@ interface ProgressChartProps {
  * - Lower SNR (-5 dB) = Harder/Better = Higher on chart
  * - Higher SNR (+20 dB) = Easier = Lower on chart
  *
- * Design: Aura Teal (#00A79D) per 20_DESIGN_TOKENS.md
+ * Design: Aura Teal (#008F86) per 20_DESIGN_TOKENS.md
  */
 export function ProgressChart({ data }: ProgressChartProps) {
   if (data.length === 0) {
@@ -80,10 +80,10 @@ export function ProgressChart({ data }: ProgressChartProps) {
           <Line
             type="monotone"
             dataKey="displaySNR"
-            stroke="#00A79D" // Aura Teal
+            stroke="#008F86" // Aura Teal
             strokeWidth={3}
-            dot={{ fill: '#00A79D', r: 4 }}
-            activeDot={{ r: 6, fill: '#00A79D' }}
+            dot={{ fill: '#008F86', r: 4 }}
+            activeDot={{ r: 6, fill: '#008F86' }}
           />
         </LineChart>
       </ResponsiveContainer>

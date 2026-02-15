@@ -3,6 +3,7 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Question, Choice } from '@/types/activity';
 import { motion, AnimatePresence } from 'framer-motion';
+import { hapticSuccess, hapticFailure } from '@/lib/haptics';
 
 interface QuizCardProps {
   question: Question;
@@ -20,6 +21,7 @@ export function QuizCard({ question, onAnswer, disabled = false }: QuizCardProps
     setSelectedChoiceId(choice.id);
     setIsSubmitted(true);
     const correctChoice = question.choices.find(c => c.isCorrect);
+    if (choice.isCorrect) hapticSuccess(); else hapticFailure();
     onAnswer(choice.isCorrect, choice.text, correctChoice?.text || '');
   };
 

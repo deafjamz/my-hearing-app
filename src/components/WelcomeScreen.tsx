@@ -1,5 +1,6 @@
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Headphones, TrendingUp, Clock } from 'lucide-react';
+import { hapticSelection } from '@/lib/haptics';
 
 interface WelcomeScreenProps {
   /** Auth gate mode — opens sign-in/sign-up modal */
@@ -113,8 +114,8 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
               <motion.button
                 whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
                 whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
-                onClick={onStart}
-                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
+                onClick={() => { hapticSelection(); onStart?.(); }}
+                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,143,134,0.3)] transition-colors cursor-pointer"
               >
                 Start Your First Exercise
               </motion.button>
@@ -138,8 +139,8 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
               <motion.button
                 whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
                 whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
-                onClick={onSignIn}
-                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,167,157,0.3)] transition-colors cursor-pointer"
+                onClick={() => { hapticSelection(); onSignIn?.(); }}
+                className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,143,134,0.3)] transition-colors cursor-pointer"
               >
                 Get Started
               </motion.button>

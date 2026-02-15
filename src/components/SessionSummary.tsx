@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { CheckCircle, TrendingUp, Target, ArrowRight } from 'lucide-react';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
+import { hapticSuccess } from '@/lib/haptics';
 
 /**
  * Session Summary - Completion screen for program sessions
@@ -49,6 +51,13 @@ export function SessionSummary({
   const { isInPlan, isLastStep } = useTodaysPlan();
   const isPlanComplete = isInPlan && isLastStep;
 
+  // Haptic celebration on mount
+  useEffect(() => {
+    hapticSuccess();
+    const timer = setTimeout(() => hapticSuccess(), 150);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
       <motion.div
@@ -57,17 +66,34 @@ export function SessionSummary({
         transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
         className="max-w-lg w-full"
       >
-        {/* Success Icon */}
-        <motion.div
-          initial={prefersReducedMotion ? false : { scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.2, type: 'spring', stiffness: 200 }}
-          className="flex justify-center mb-6"
-        >
-          <div className="w-24 h-24 rounded-full bg-teal-500/20 border-4 border-teal-500 flex items-center justify-center">
-            <CheckCircle className="h-12 w-12 text-teal-400" strokeWidth={2.5} />
-          </div>
-        </motion.div>
+        {/* Success Icon with Ring Burst */}
+        <div className="flex justify-center mb-6 relative">
+          {/* Expanding ring burst */}
+          {!prefersReducedMotion && [0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute w-24 h-24 rounded-full border-2 border-teal-500"
+              initial={{ scale: 1, opacity: 0.6 }}
+              animate={{ scale: 2.5 + i * 0.5, opacity: 0 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.3 + i * 0.15,
+                ease: 'easeOut',
+              }}
+              style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+            />
+          ))}
+
+          <motion.div
+            initial={prefersReducedMotion ? false : { scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.2, type: 'spring', stiffness: 200 }}
+          >
+            <div className="w-24 h-24 rounded-full bg-teal-500/20 border-4 border-teal-500 flex items-center justify-center">
+              <CheckCircle className="h-12 w-12 text-teal-400" strokeWidth={2.5} />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Title */}
         <motion.div

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
  * AuraVisualizer - The "Aura" Component
  *
  * Per 20_DESIGN_TOKENS.md:
- * - Brand Teal (#00A79D) - Bioluminescent
+ * - Brand Teal (#008F86) - Bioluminescent
  * - Continuous breathing animation when audio is playing
  * - SNR-aware: Shows noise grain when SNR < 0 (harder difficulty)
  *
@@ -27,7 +27,7 @@ export function AuraVisualizer({ isPlaying, currentSnr }: AuraVisualizerProps) {
         <motion.div
           className="absolute w-32 h-32 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(0, 167, 157, 0.4) 0%, rgba(0, 167, 157, 0) 70%)',
+            background: 'radial-gradient(circle, rgba(0, 143, 134, 0.4) 0%, rgba(0, 143, 134, 0) 70%)',
           }}
           animate={{
             scale: [1, 1.2, 1],

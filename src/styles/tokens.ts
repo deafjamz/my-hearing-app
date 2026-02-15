@@ -22,9 +22,9 @@ export const tokens = {
   colors: {
     // The Canvas (OLED Safe)
     background: {
-      default: '#0A0A0A',    // Pure dark - OLED true black adjacent
-      surface: '#1C1C1E',    // Elevated surface
-      elevated: '#2C2C2E',   // Cards, modals
+      default: '#0A0E14',    // Deep blue-black (The Clearing identity)
+      surface: '#141A23',    // Elevated surface
+      elevated: '#1E2530',   // Cards, modals
     },
 
     // High Contrast Text
@@ -36,7 +36,7 @@ export const tokens = {
 
     // The Signal (Bioluminescent Brand)
     brand: {
-      teal: '#00A79D',       // Primary CTA, success states
+      teal: '#008F86',       // Primary CTA, success states
       amber: '#FFB300',      // Secondary CTA, highlights, rewards
       tealLight: '#00CFC3',  // Hover states
       amberLight: '#FFD54F', // Hover states
@@ -47,7 +47,7 @@ export const tokens = {
       success: '#4CAF50',    // Correct answers, achievements
       error: '#FF453A',      // Incorrect, warnings
       warning: '#FFB300',    // Alerts (shares amber)
-      info: '#00A79D',       // Information (shares teal)
+      info: '#008F86',       // Information (shares teal)
     },
 
     // Neumorphic Base (for light mode, if enabled)
@@ -67,11 +67,11 @@ export const tokens = {
   shadows: {
     // Dark mode - subtle glow
     dark: {
-      sm: '0 2px 8px rgba(0, 167, 157, 0.1)',
-      md: '0 4px 16px rgba(0, 167, 157, 0.15)',
-      lg: '0 8px 32px rgba(0, 167, 157, 0.2)',
+      sm: '0 2px 8px rgba(0, 143, 134, 0.1)',
+      md: '0 4px 16px rgba(0, 143, 134, 0.15)',
+      lg: '0 8px 32px rgba(0, 143, 134, 0.2)',
       glow: {
-        teal: '0 0 20px rgba(0, 167, 157, 0.3)',
+        teal: '0 0 20px rgba(0, 143, 134, 0.3)',
         amber: '0 0 20px rgba(255, 179, 0, 0.3)',
       },
     },
@@ -164,7 +164,7 @@ export const tokens = {
    */
   typography: {
     fontFamily: {
-      sans: ['Inter Variable', 'system-ui', 'sans-serif'],
+      sans: ['Satoshi', 'General Sans', 'system-ui', '-apple-system', 'sans-serif'],
       mono: ['JetBrains Mono', 'monospace'],
     },
     fontSize: {

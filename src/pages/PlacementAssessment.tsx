@@ -9,6 +9,7 @@ import { useProgress } from '@/hooks/useProgress';
 import { useUser } from '@/store/UserContext';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { buildWordAudioUrl } from '@/lib/audio';
+import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
 // --- Constants ---
 
@@ -255,6 +256,9 @@ export function PlacementAssessment() {
       };
     });
 
+    // Haptic feedback
+    if (isCorrect) hapticSuccess(); else hapticFailure();
+
     // Show feedback
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 
@@ -464,6 +468,7 @@ export function PlacementAssessment() {
             <button
               onClick={async () => {
                 await ensureResumed();
+                hapticSelection();
                 setPhase('trial');
               }}
               className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
@@ -674,7 +679,7 @@ export function PlacementAssessment() {
             </p>
 
             <button
-              onClick={() => setPhase('trial')}
+              onClick={() => { hapticSelection(); setPhase('trial'); }}
               className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors"
             >
               Continue
@@ -773,7 +778,7 @@ export function PlacementAssessment() {
             </div>
 
             <button
-              onClick={() => navigate('/practice')}
+              onClick={() => { hapticSelection(); navigate('/practice'); }}
               className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
             >
               Start Training

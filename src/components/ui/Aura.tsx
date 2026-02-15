@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
  *
  * From core docs/4_design_system.md:
  * - Radial gradient that pulses with audio amplitude
- * - Teal (#00A79D) = Speech/Signal
+ * - Teal (#008F86) = Speech/Signal
  * - Amber (#FFB300) = Noise
  *
  * Uses Web Audio API to analyze real-time audio amplitude
@@ -145,9 +145,9 @@ export function Aura({
     // Color based on mode
     if (mode === 'speech') {
       // Teal gradient (Speech/Signal)
-      gradient.addColorStop(0, `rgba(0, 167, 157, ${0.8 + amplitude * 0.2})`); // #00A79D
-      gradient.addColorStop(0.5, `rgba(0, 167, 157, ${0.4 + amplitude * 0.3})`);
-      gradient.addColorStop(1, 'rgba(0, 167, 157, 0)');
+      gradient.addColorStop(0, `rgba(0, 143, 134, ${0.8 + amplitude * 0.2})`); // #008F86
+      gradient.addColorStop(0.5, `rgba(0, 143, 134, ${0.4 + amplitude * 0.3})`);
+      gradient.addColorStop(1, 'rgba(0, 143, 134, 0)');
     } else if (mode === 'noise') {
       // Amber gradient (Noise)
       gradient.addColorStop(0, `rgba(255, 179, 0, ${0.8 + amplitude * 0.2})`); // #FFB300
@@ -167,9 +167,9 @@ export function Aura({
         centerY,
         pulseRadius
       );
-      tealGradient.addColorStop(0, `rgba(0, 167, 157, ${tealOpacity})`);
-      tealGradient.addColorStop(0.5, `rgba(0, 167, 157, ${tealOpacity * 0.5})`);
-      tealGradient.addColorStop(1, 'rgba(0, 167, 157, 0)');
+      tealGradient.addColorStop(0, `rgba(0, 143, 134, ${tealOpacity})`);
+      tealGradient.addColorStop(0.5, `rgba(0, 143, 134, ${tealOpacity * 0.5})`);
+      tealGradient.addColorStop(1, 'rgba(0, 143, 134, 0)');
 
       ctx.fillStyle = tealGradient;
       ctx.fillRect(0, 0, size, size);
@@ -214,7 +214,7 @@ export function Aura({
         <motion.div
           className="absolute inset-0 rounded-full border-2"
           style={{
-            borderColor: mode === 'speech' ? '#00A79D' : mode === 'noise' ? '#FFB300' : '#00A79D',
+            borderColor: mode === 'speech' ? '#008F86' : mode === 'noise' ? '#FFB300' : '#008F86',
             opacity: 0.3 + amplitude * 0.4,
           }}
           animate={{
@@ -295,9 +295,9 @@ export function StaticAura({
   className?: string;
 }) {
   const colors = {
-    speech: '#00A79D',
+    speech: '#008F86',
     noise: '#FFB300',
-    mixed: '#00A79D',
+    mixed: '#008F86',
   };
 
   return (

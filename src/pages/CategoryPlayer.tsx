@@ -11,6 +11,7 @@ import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
+import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
 /**
  * Category Player - Quick Practice mode for word pairs by category
@@ -146,6 +147,7 @@ export function CategoryPlayer() {
   };
 
   const toggleAutoplay = () => {
+    hapticSelection();
     const newValue = !autoplayEnabled;
     setAutoplayEnabled(newValue);
     localStorage.setItem('wordPairAutoplay', newValue.toString());
@@ -165,6 +167,7 @@ export function CategoryPlayer() {
     }
 
     const isCorrect = selectedWord.toLowerCase() === correctWord;
+    if (isCorrect) hapticSuccess(); else hapticFailure();
     setResponses(prev => [...prev, { correct: isCorrect, responseTime }]);
     setFeedback({ isCorrect, correctWord, selectedWord: selectedWord.toLowerCase() });
 
@@ -333,6 +336,7 @@ export function CategoryPlayer() {
             <button
               onClick={() => {
                 if (currentPair.audioPath) {
+                  hapticSelection();
                   if (hasPlayed) setReplayCount(prev => prev + 1);
                   playAudio(currentPair.audioPath);
                   setHasPlayed(true);

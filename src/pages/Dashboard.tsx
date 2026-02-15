@@ -127,11 +127,11 @@ export function Dashboard() {
                     width: `${progress}%`,
                     boxShadow: !prefersReducedMotion && isGoalReached
                       ? [
-                          '0 0 10px rgba(0, 167, 157, 0.6)',
-                          '0 0 20px rgba(0, 167, 157, 0.8)',
-                          '0 0 10px rgba(0, 167, 157, 0.6)',
+                          '0 0 10px rgba(0, 143, 134, 0.6)',
+                          '0 0 20px rgba(0, 143, 134, 0.8)',
+                          '0 0 10px rgba(0, 143, 134, 0.6)',
                         ]
-                      : '0 0 0px rgba(0, 167, 157, 0)',
+                      : '0 0 0px rgba(0, 143, 134, 0)',
                   }}
                   transition={prefersReducedMotion ? { duration: 0 } : {
                     width: { duration: 1.2, ease: 'easeOut' },

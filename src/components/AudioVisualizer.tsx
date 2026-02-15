@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
  *
  * Per 20_DESIGN_TOKENS.md:
  * - Idle: Invisible
- * - Active: Pulsing Teal (#00A79D)
+ * - Active: Pulsing Teal (#008F86)
  * - High Noise (SNR < 0): Subtle static/grain overlay
  *
  * @param isPlaying - Whether audio is currently playing
@@ -43,7 +43,7 @@ export function AudioVisualizer({ isPlaying, snr = 10 }: AudioVisualizerProps) {
           ${isVisible ? 'opacity-100' : 'opacity-0'}
         `}
         style={{
-          background: 'radial-gradient(circle, rgba(0, 167, 157, 0.4) 0%, rgba(0, 167, 157, 0) 70%)',
+          background: 'radial-gradient(circle, rgba(0, 143, 134, 0.4) 0%, rgba(0, 143, 134, 0) 70%)',
           animation: isPlaying ? 'breathing 2s ease-in-out infinite' : 'none',
         }}
       />

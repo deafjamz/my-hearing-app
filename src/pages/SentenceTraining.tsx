@@ -12,6 +12,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
+import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
 const SESSION_LENGTH = 10;
 
@@ -69,6 +70,7 @@ export function SentenceTraining() {
     if (!currentSentence) return;
 
     await ensureResumed();
+    hapticSelection();
     if (showQuestion) setReplayCount(prev => prev + 1);
     setIsPlaying(true);
     setShowQuestion(false);
@@ -97,6 +99,7 @@ export function SentenceTraining() {
     if (!currentSentence || !startTime) return;
 
     const isCorrect = answer === currentSentence.clinical_metadata.correct_answer;
+    if (isCorrect) hapticSuccess(); else hapticFailure();
     setSelectedAnswer(answer);
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 

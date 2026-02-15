@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
+import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
 /**
  * Session Player - Polymorphic player for program sessions
@@ -147,6 +148,9 @@ export function SessionPlayer() {
   const handleResponse = (answer: string, isCorrect: boolean) => {
     const responseTime = Date.now() - trialStartTime;
     const stimulus = items[currentIndex].stimuli;
+
+    // Haptic feedback
+    if (isCorrect) hapticSuccess(); else hapticFailure();
 
     // Show feedback
     setSelectedAnswer(answer);
@@ -356,6 +360,7 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
   }, [audioPath, autoplayEnabled]);
 
   const toggleAutoplay = () => {
+    hapticSelection();
     const newValue = !autoplayEnabled;
     setAutoplayEnabled(newValue);
     localStorage.setItem('wordPairAutoplay', newValue.toString());

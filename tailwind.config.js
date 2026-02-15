@@ -8,12 +8,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        // === Aura Design System (OLED-Safe) — PRIMARY ===
-        // The Canvas
+        // === "The Clearing" Identity — Deeper Teal + Blue-Black ===
+        // Override Tailwind teal with identity palette (#008F86 primary)
+        teal: {
+          50: '#f0fdfb',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5ce8d4',
+          400: '#00CFC3',
+          500: '#008F86',
+          600: '#007A73',
+          700: '#005F59',
+          800: '#004D48',
+          900: '#003D3B',
+          950: '#002624',
+        },
+        // Override slate-950/900 for identity backgrounds
+        slate: {
+          950: '#0A0E14',  // Base (deep blue-black, not pure OLED black)
+          900: '#141A23',  // Surface (cards, containers)
+        },
+        // === Aura Design System tokens ===
         background: {
-          DEFAULT: '#0A0A0A',
-          surface: '#1C1C1E',
-          elevated: '#2C2C2E',
+          DEFAULT: '#0A0E14',
+          surface: '#141A23',
+          elevated: '#1E2530',
         },
         // High Contrast Text
         text: {
@@ -26,13 +45,13 @@ export default {
           success: '#4CAF50',
           error: '#FF453A',
           warning: '#FFB300',
-          info: '#00A79D',
+          info: '#008F86',
         },
 
         // === Legacy tokens — used by Player, SNRMixer, AudioPlayer, QuizCard ===
         // TODO: Remove after screen-by-screen design alignment sweep
         brand: {
-          teal: '#00A79D',
+          teal: '#008F86',
           'teal-light': '#00CFC3',
           amber: '#FFB300',
           'amber-light': '#FFD54F',
@@ -57,7 +76,7 @@ export default {
         error: { 500: '#ef4444' },
       },
       fontFamily: {
-        sans: ['Inter Variable', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Satoshi', 'General Sans', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       borderRadius: {
@@ -71,15 +90,15 @@ export default {
         '102': '1.02',
       },
       boxShadow: {
-        // Aura glow effects
-        'glow-teal': '0 0 20px rgba(0, 167, 157, 0.3)',
+        // Aura glow effects (identity teal #008F86)
+        'glow-teal': '0 0 20px rgba(0, 143, 134, 0.3)',
         'glow-amber': '0 0 20px rgba(255, 179, 0, 0.3)',
         'glow-success': '0 0 20px rgba(76, 175, 80, 0.3)',
         'glow-error': '0 0 20px rgba(255, 69, 58, 0.3)',
         // Elevation shadows
-        'elevation-1': '0 2px 8px rgba(0, 167, 157, 0.1)',
-        'elevation-2': '0 4px 16px rgba(0, 167, 157, 0.15)',
-        'elevation-3': '0 8px 32px rgba(0, 167, 157, 0.2)',
+        'elevation-1': '0 2px 8px rgba(0, 143, 134, 0.1)',
+        'elevation-2': '0 4px 16px rgba(0, 143, 134, 0.15)',
+        'elevation-3': '0 8px 32px rgba(0, 143, 134, 0.2)',
       },
       transitionDuration: {
         '0': '0ms',
@@ -101,8 +120,8 @@ export default {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
         'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(0, 167, 157, 0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(0, 167, 157, 0.5)' },
+          '0%, 100%': { boxShadow: '0 0 20px rgba(0, 143, 134, 0.3)' },
+          '50%': { boxShadow: '0 0 30px rgba(0, 143, 134, 0.5)' },
         },
         'streak-flame': {
           '0%, 100%': { transform: 'scale(1)' },

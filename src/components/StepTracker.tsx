@@ -62,11 +62,11 @@ export function StepTracker({ current, goal = 100 }: StepTrackerProps) {
               // Resonance: Glow/pulse when goal reached
               boxShadow: isGoalReached
                 ? [
-                    '0 0 10px rgba(0, 167, 157, 0.6)',
-                    '0 0 20px rgba(0, 167, 157, 0.8)',
-                    '0 0 10px rgba(0, 167, 157, 0.6)',
+                    '0 0 10px rgba(0, 143, 134, 0.6)',
+                    '0 0 20px rgba(0, 143, 134, 0.8)',
+                    '0 0 10px rgba(0, 143, 134, 0.6)',
                   ]
-                : '0 0 0px rgba(0, 167, 157, 0)',
+                : '0 0 0px rgba(0, 143, 134, 0)',
             }}
             transition={{
               height: { duration: 1.2, ease: 'easeOut' },
