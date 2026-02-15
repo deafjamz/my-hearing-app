@@ -24,10 +24,14 @@
 1. Read STATUS.md (this file)
 2. Canonical directory: ~/Projects/my-hearing-app
    (~/Desktop/my-hearing-app is a symlink to the same place)
-3. For voice/audio questions, see docs/VOICE_LIBRARY.md
-4. For infrastructure, see docs/INFRASTRUCTURE_AUDIT.md
-5. For audio generation, run scripts from ~/Projects/my-hearing-app/scripts/
-6. Deploy: git push to main (auto-deploys via Vercel)
+3. IGNORE these directories — they are NOT the active repo:
+   - ~/Desktop/my-hearing-app-ARCHIVED-2026-02-15
+   - ~/Desktop/my-hearing-app-BACKUP-2026-02-15
+   - ~/Desktop/my-hearing-app-fresh
+4. For voice/audio questions, see docs/VOICE_LIBRARY.md
+5. For infrastructure, see docs/INFRASTRUCTURE_AUDIT.md
+6. For audio generation, run scripts from ~/Projects/my-hearing-app/scripts/
+7. Deploy: git push to main (auto-deploys via Vercel)
 ```
 
 ---
