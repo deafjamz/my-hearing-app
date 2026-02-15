@@ -6,6 +6,7 @@ import { getVoiceGender } from '@/lib/voiceGender';
 import { getStorageUrl } from '@/lib/audio';
 import { supabase } from '@/lib/supabase';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
+import { Button } from '@/components/primitives';
 
 // Define types for our data
 interface Story {
@@ -150,13 +151,14 @@ const QuizChallenge = ({ questions, onSubmit }: { questions: StoryQuestion[], on
           </button>
         ))}
       </div>
-      <button 
-        onClick={handleNextQuestion} 
+      <Button
+        size="md"
+        onClick={handleNextQuestion}
         disabled={!selectedAnswer}
-        className="mt-8 w-full px-6 py-3 bg-teal-500 text-white rounded-lg disabled:bg-slate-400"
+        className="mt-8 w-full rounded-lg disabled:bg-slate-400 disabled:text-white"
       >
         {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish'}
-      </button>
+      </Button>
     </div>
   );
 };

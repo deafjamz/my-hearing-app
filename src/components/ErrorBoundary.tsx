@@ -1,4 +1,5 @@
 import { Component, ReactNode } from 'react';
+import { Button } from '@/components/primitives';
 
 interface Props {
   children: ReactNode;
@@ -42,18 +43,21 @@ export class ErrorBoundary extends Component<Props, State> {
               </pre>
             )}
             <div className="flex gap-3 justify-center pt-2">
-              <button
+              <Button
+                size="sm"
                 onClick={this.handleRetry}
-                className="px-5 py-2.5 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-400 transition-colors"
+                className="rounded-lg"
               >
                 Try Again
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={() => window.location.assign('/')}
-                className="px-5 py-2.5 bg-slate-800 text-slate-300 rounded-lg font-medium hover:bg-slate-700 transition-colors"
+                className="rounded-lg"
               >
                 Go Home
-              </button>
+              </Button>
             </div>
           </div>
         </div>

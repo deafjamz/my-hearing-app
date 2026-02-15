@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Lock, ArrowLeft } from 'lucide-react';
 import { useUser } from '@/store/UserContext';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { Button } from '@/components/primitives';
 
 /**
  * Route guard that requires authentication before rendering children.
@@ -33,12 +34,13 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
           Create a free account so your progress is saved across sessions. It only takes a moment.
         </p>
 
-        <button
+        <Button
+          size="lg"
           onClick={() => setShowAuth(true)}
-          className="w-full py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all active:scale-[0.98] mb-4"
+          className="shadow-lg shadow-teal-500/30 active:scale-[0.98] rounded-xl mb-4"
         >
           Sign In or Create Account
-        </button>
+        </Button>
 
         <Link
           to="/practice"

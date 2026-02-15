@@ -8,6 +8,7 @@ import { ChevronLeft, CheckCircle, XCircle, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
+import { Card } from '@/components/primitives';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
@@ -384,7 +385,7 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
   return (
     <div className="space-y-6">
       {/* Autoplay Toggle */}
-      <div className="flex items-center justify-between p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
+      <Card variant="subtle" padding="p-4" className="flex items-center justify-between rounded-xl">
         <div className="flex items-center gap-3">
           <div className="text-2xl">🔄</div>
           <div>
@@ -404,7 +405,7 @@ function WordPairPlayer({ word1, word2, audioPath, onResponse, onPlayAudio, sele
             }`}
           />
         </button>
-      </div>
+      </Card>
 
       {/* Audio Replay Button */}
       <button

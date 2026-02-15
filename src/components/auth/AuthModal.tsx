@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { X, Loader2, Mail, Lock, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/primitives';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -405,13 +406,14 @@ function ErrorMessage({ error }: { error: string | null }) {
 
 function SubmitButton({ loading, label }: { loading: boolean; label: string }) {
   return (
-    <button
+    <Button
       type="submit"
+      size="lg"
       disabled={loading}
-      className="w-full py-4 bg-teal-500 hover:bg-teal-400 disabled:opacity-50 disabled:hover:bg-teal-500 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+      className="shadow-lg shadow-teal-500/30 active:scale-[0.98] rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:bg-teal-500"
     >
       {loading ? <Loader2 className="animate-spin" size={20} /> : label}
-    </button>
+    </Button>
   );
 }
 

@@ -27,28 +27,28 @@ export function QuizCard({ question, onAnswer, disabled = false }: QuizCardProps
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">{question.text}</h3>
+      <h3 className="text-lg font-semibold text-slate-200">{question.text}</h3>
       
       <div className="grid gap-3">
         {question.choices.map((choice) => {
           const isSelected = selectedChoiceId === choice.id;
-          let variantStyles = "border-gray-200 hover:border-primary-300 hover:bg-primary-50";
-          
+          let variantStyles = "border-slate-700 hover:border-teal-500 hover:bg-teal-500/10";
+
           if (disabled && !isSubmitted) {
-            variantStyles = "opacity-50 cursor-not-allowed border-gray-100 bg-gray-50";
+            variantStyles = "opacity-50 cursor-not-allowed border-slate-700 bg-slate-800";
           } else if (isSubmitted) {
             if (isSelected && choice.isCorrect) {
-              variantStyles = "border-green-500 bg-green-50 text-green-800";
+              variantStyles = "border-green-500 bg-green-500/10 text-green-400";
             } else if (isSelected && !choice.isCorrect) {
-              variantStyles = "border-red-500 bg-red-50 text-red-800";
+              variantStyles = "border-red-500 bg-red-500/10 text-red-400";
             } else if (!isSelected && choice.isCorrect) {
               // Show the correct answer even if they missed it
-              variantStyles = "border-green-200 bg-green-50/50 text-green-700 border-dashed";
+              variantStyles = "border-green-700 bg-green-500/5 text-green-500 border-dashed";
             } else {
-              variantStyles = "opacity-50 border-gray-100";
+              variantStyles = "opacity-50 border-slate-700";
             }
           } else if (isSelected) {
-            variantStyles = "border-primary-500 bg-primary-50 ring-1 ring-primary-500";
+            variantStyles = "border-teal-500 bg-teal-500/10 ring-1 ring-teal-500";
           }
 
           return (
@@ -98,7 +98,7 @@ export function QuizCard({ question, onAnswer, disabled = false }: QuizCardProps
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <div className="bg-blue-50 text-blue-800 text-sm p-4 rounded-lg mt-4">
+            <div className="bg-teal-500/10 text-teal-300 text-sm p-4 rounded-lg mt-4">
               <p className="font-semibold mb-1">Did you know?</p>
               {question.feedback}
             </div>

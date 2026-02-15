@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format } from 'date-fns';
 import { ProgressDataPoint } from '@/hooks/useProgressData';
+import { Card } from '@/components/primitives';
 
 interface ProgressChartProps {
   data: ProgressDataPoint[];
@@ -18,9 +19,9 @@ interface ProgressChartProps {
 export function ProgressChart({ data }: ProgressChartProps) {
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 bg-slate-900/50 rounded-xl border border-slate-800">
+      <Card variant="subtle" padding="p-0" className="flex items-center justify-center h-64 rounded-xl">
         <p className="text-slate-400 text-sm">No progress data yet. Complete some trials to see your progress!</p>
-      </div>
+      </Card>
     );
   }
 
@@ -32,7 +33,7 @@ export function ProgressChart({ data }: ProgressChartProps) {
   }));
 
   return (
-    <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-6">
+    <Card variant="subtle" className="rounded-xl">
       <h3 className="text-white font-semibold mb-4">SNR Progress (Last 30 Days)</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={chartData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
@@ -91,6 +92,6 @@ export function ProgressChart({ data }: ProgressChartProps) {
       <div className="mt-4 text-xs text-slate-400 text-center">
         ↑ Higher = More Difficult (Lower SNR) | ↓ Lower = Easier (Higher SNR)
       </div>
-    </div>
+    </Card>
   );
 }

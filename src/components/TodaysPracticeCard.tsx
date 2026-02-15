@@ -3,6 +3,7 @@ import { Play, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { startTodaysPlan } from '@/hooks/useTodaysPlan';
 import type { TodaysPlan } from '@/hooks/useTodaysPractice';
+import { Button } from '@/components/primitives';
 
 interface TodaysPracticeCardProps {
   plan: TodaysPlan | null;
@@ -42,12 +43,14 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
           {streakDays > 0 && <span className="ml-1">· {streakDays}-day streak</span>}
         </p>
 
-        <button
+        <Button
+          variant="secondary"
+          size="md"
           onClick={handleStart}
-          className="w-full py-3 rounded-2xl bg-slate-800 border border-slate-700 text-slate-300 font-bold text-sm hover:bg-slate-700 transition-colors"
+          className="w-full rounded-2xl border-slate-700"
         >
           Practice More
-        </button>
+        </Button>
       </motion.div>
     );
   }
@@ -69,13 +72,14 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
           A quick listening check to personalize your training.
         </p>
 
-        <button
+        <Button
+          size="lg"
           onClick={() => navigate('/placement')}
-          className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+          className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
         >
           <Play size={20} fill="currentColor" />
           Start Listening Check
-        </button>
+        </Button>
       </motion.div>
     );
   }
@@ -93,13 +97,14 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
           Your personalized plan is ready. Let's go!
         </p>
 
-        <button
+        <Button
+          size="lg"
           onClick={handleStart}
-          className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+          className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
         >
           <Play size={20} fill="currentColor" />
           Start Practice
-        </button>
+        </Button>
       </motion.div>
     );
   }
@@ -130,13 +135,14 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
         )}
       </div>
 
-      <button
+      <Button
+        size="lg"
         onClick={handleStart}
-        className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+        className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
       >
         <Play size={20} fill="currentColor" />
         Start Practice
-      </button>
+      </Button>
     </motion.div>
   );
 }

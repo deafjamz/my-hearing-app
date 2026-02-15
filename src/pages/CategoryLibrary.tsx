@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase';
 import { ChevronLeft, Target, Zap } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { Card } from '@/components/primitives';
 
 /**
  * Category Library - Browse word pairs by contrast category
@@ -137,7 +138,7 @@ export function CategoryLibrary() {
                 to={`/practice/category/${encodeURIComponent(category.name)}`}
                 className="block group"
               >
-                <div className="relative overflow-hidden p-6 bg-slate-900 border-2 border-slate-800 rounded-3xl hover:border-slate-700 transition-all">
+                <Card className="relative overflow-hidden border-2 hover:border-slate-700 rounded-3xl transition-all">
                   <div className="relative">
                     {/* Icon */}
                     <div className="w-12 h-12 rounded-xl bg-teal-500/20 flex items-center justify-center mb-4">
@@ -170,7 +171,7 @@ export function CategoryLibrary() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </Card>
               </Link>
             </motion.div>
           ))}

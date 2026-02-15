@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { Lock, Loader2, CheckCircle } from 'lucide-react';
+import { Button, Card } from '@/components/primitives';
 
 /**
  * ResetPassword — handles the redirect from Supabase's password reset email.
@@ -73,7 +74,7 @@ export function ResetPassword() {
   if (success) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-6">
-        <div className="bg-slate-900 w-full max-w-md rounded-[2rem] border border-slate-800 p-8 text-center">
+        <Card className="w-full max-w-md rounded-[2rem] p-8 text-center">
           <div className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-teal-400" />
           </div>
@@ -81,13 +82,14 @@ export function ResetPassword() {
           <p className="text-slate-400 text-sm mb-6">
             Your password has been changed successfully. You're now signed in.
           </p>
-          <button
+          <Button
+            size="lg"
             onClick={() => navigate('/')}
-            className="w-full py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all"
+            className="shadow-lg shadow-teal-500/30 rounded-xl"
           >
             Go to Dashboard
-          </button>
-        </div>
+          </Button>
+        </Card>
       </div>
     );
   }
@@ -110,18 +112,20 @@ export function ResetPassword() {
   if (!hasSession) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-6">
-        <div className="bg-slate-900 w-full max-w-md rounded-[2rem] border border-slate-800 p-8 text-center">
+        <Card className="w-full max-w-md rounded-[2rem] p-8 text-center">
           <h2 className="text-2xl font-bold text-white mb-2">Invalid Reset Link</h2>
           <p className="text-slate-400 text-sm mb-6">
             This link may have expired or already been used. Please request a new password reset.
           </p>
-          <button
+          <Button
+            variant="secondary"
+            size="lg"
             onClick={() => navigate('/')}
-            className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all"
+            className="rounded-xl"
           >
             Go to Home
-          </button>
-        </div>
+          </Button>
+        </Card>
       </div>
     );
   }
@@ -130,7 +134,7 @@ export function ResetPassword() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center p-6">
-      <div className="bg-slate-900 w-full max-w-md rounded-[2rem] border border-slate-800 p-8">
+      <Card className="w-full max-w-md rounded-[2rem] p-8">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-white mb-2">Set New Password</h2>
           <p className="text-slate-400 text-sm">Choose a new password for your account.</p>
@@ -181,15 +185,16 @@ export function ResetPassword() {
             </div>
           )}
 
-          <button
+          <Button
             type="submit"
+            size="lg"
             disabled={loading}
-            className="w-full py-4 bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+            className="shadow-lg shadow-teal-500/30 active:scale-[0.98] rounded-xl flex items-center justify-center gap-2"
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : 'Update Password'}
-          </button>
+          </Button>
         </form>
-      </div>
+      </Card>
     </div>
   );
 }

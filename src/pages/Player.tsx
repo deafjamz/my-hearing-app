@@ -108,8 +108,8 @@ export function Player() {
           {activityData.questions.length > 0 && (
             <>
               <div className="flex items-center gap-2">
-                <div className="h-8 w-1 bg-brand-primary-500 rounded-full" />
-                <h2 className="text-xl font-bold text-brand-dark-800">Comprehension Check</h2>
+                <div className="h-8 w-1 bg-teal-500 rounded-full" />
+                <h2 className="text-xl font-bold text-slate-200">Comprehension Check</h2>
               </div>
               
               {activityData.questions.map(q => (

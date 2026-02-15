@@ -1,7 +1,7 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-14
-> **Last Session:** Session 27 — Logo Integration + Gradient Purge + Legacy Cleanup
+> **Last Session:** Session 28 — Design System Primitives + Identity Polish
 > **Build Status:** ✅ PASSING
 > **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
@@ -11,6 +11,7 @@
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
 > **Marketing:** ✅ Strategy doc + 5 skills + MCP setup guide
 > **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment. Gradients purged (0 remaining).
+> **Design System:** Phase 1 ✅ (Satoshi font, deeper teal, haptics, ring burst) | Phase 2 ✅ (Button/Card primitives, full adoption across 14 files, QuizCard dark-mode fix, brand token purge, SNRMixer dark-mode alignment)
 
 ---
 
@@ -40,6 +41,99 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 28: Design System Primitives + Full Adoption (COMPLETE)
+
+### What Was Done
+
+**Part A — Button/Card Primitives Created**
+- Created `src/components/primitives/Button.tsx` — 3 variants (primary/secondary/ghost) × 3 sizes (sm/md/lg), auto `hapticSelection()` on click, `forwardRef`, uses `cn()` from `@/lib/utils` for class merging via clsx + tailwind-merge
+- Created `src/components/primitives/Card.tsx` — 3 variants (default/highlighted/subtle), configurable `padding` prop (default `p-6`), uses `cn()`
+- Created `src/components/primitives/index.ts` — barrel export
+
+**Part B — Initial Primitive Migration + Brand Token Purge**
+- `ActivityBriefing.tsx` — Card (subtle) + Button (lg)
+- `ErrorBoundary.tsx` — 2 Buttons (primary + secondary)
+- `WelcomeScreen.tsx` — Button (ghost for "Skip for now")
+- `Player.tsx` — 2 brand-* → teal-500/slate-200
+- `AudioPlayer.tsx` — 5 brand-* → teal-500/teal-400/red-400/slate-400
+- `SNRMixer.tsx` — 6 brand-* + full dark-mode realignment (bg-white→bg-slate-900, bg-gray-50→bg-slate-800/50)
+- `QuizCard.tsx` — 3 primary-* → teal-500/10, teal-300
+- `AudioQA.tsx` — 1 primary-600 → teal-500
+- `tailwind.config.js` — Removed entire legacy `brand` block (red #FF6B6B, yellow #FFD93D, purple #6C5CE7) + `primary`/`secondary`/`success`/`error` palette blocks. CSS bundle -1.1KB.
+
+**Part C — QuizCard Dark-Mode Fix (9 class replacements)**
+- `text-gray-900` → `text-slate-200`
+- `border-gray-200 hover:border-teal-300 hover:bg-teal-50` → `border-slate-700 hover:border-teal-500 hover:bg-teal-500/10`
+- `border-gray-100 bg-gray-50` → `border-slate-700 bg-slate-800`
+- `border-green-500 bg-green-50 text-green-800` → `border-green-500 bg-green-500/10 text-green-400`
+- `border-red-500 bg-red-50 text-red-800` → `border-red-500 bg-red-500/10 text-red-400`
+- `border-green-200 bg-green-50/50 text-green-700` → `border-green-700 bg-green-500/5 text-green-500`
+- `border-gray-100` → `border-slate-700`
+- `bg-blue-50 text-blue-800` → `bg-teal-500/10 text-teal-300`
+- `bg-teal-50` → `bg-teal-500/10`
+
+**Part D — Full Primitive Adoption (14 Buttons + 13 Cards across 11 additional files)**
+
+Button migrations:
+- `RequireAuth.tsx` — 1 primary Button ("Sign In or Create Account")
+- `TodaysPracticeCard.tsx` — 4 Buttons (1 secondary + 3 primary)
+- `AuthModal.tsx` — 1 Button (SubmitButton internal component)
+- `ResetPassword.tsx` — 3 Buttons (2 primary + 1 secondary)
+- `PlacementAssessment.tsx` — 4 Buttons
+- `StoryPlayer.tsx` — 1 Button ("Next"/"Finish" quiz submit)
+
+Card migrations:
+- `ProgressChart.tsx` — 2 subtle Cards (empty state + chart container)
+- `CategoryPlayer.tsx` — 1 subtle Card (autoplay toggle)
+- `SessionPlayer.tsx` — 1 subtle Card (autoplay toggle)
+- `PlacementAssessment.tsx` — 3 default Cards (Erber levels, question, recommendation)
+- `ResetPassword.tsx` — 3 default Cards
+- `CategoryLibrary.tsx` — 1 default Card (category item)
+
+### Exclusion Rules (why some elements were NOT migrated)
+- `motion.div` / `motion.button` / `motion.a` — can't replace without losing Framer Motion animations
+- `<Link>` elements styled as buttons — Button renders `<button>`, not `<a>`
+- Play circle buttons, answer grid buttons, toggle switches — specialized interactions
+- Analytics cards — have `print:` styles and `bg-white dark:bg-slate-900` dual-mode for PDF export
+- `AudioQA.tsx` — dev-only page, low priority for dark-mode alignment
+
+### Files Modified (14 total)
+| File | Button | Card | Brand Purge | Dark-Mode Fix |
+|------|--------|------|-------------|---------------|
+| `src/components/primitives/Button.tsx` | NEW | | | |
+| `src/components/primitives/Card.tsx` | | NEW | | |
+| `src/components/primitives/index.ts` | NEW | | | |
+| `src/components/ActivityBriefing.tsx` | 1 | 1 | | |
+| `src/components/ErrorBoundary.tsx` | 2 | | | |
+| `src/components/WelcomeScreen.tsx` | 1 | | | |
+| `src/components/RequireAuth.tsx` | 1 | | | |
+| `src/components/TodaysPracticeCard.tsx` | 4 | | | |
+| `src/components/auth/AuthModal.tsx` | 1 | | | |
+| `src/components/ProgressChart.tsx` | | 2 | | |
+| `src/components/ui/QuizCard.tsx` | | | 3 | 9 replacements |
+| `src/components/ui/AudioPlayer.tsx` | | | 5 | |
+| `src/components/ui/SNRMixer.tsx` | | | 6 | full realignment |
+| `src/pages/Player.tsx` | | | 2 | |
+| `src/pages/AudioQA.tsx` | | | 1 | |
+| `src/pages/ResetPassword.tsx` | 3 | 3 | | |
+| `src/pages/PlacementAssessment.tsx` | 4 | 3 | | |
+| `src/pages/StoryPlayer.tsx` | 1 | | | |
+| `src/pages/CategoryPlayer.tsx` | | 1 | | |
+| `src/pages/SessionPlayer.tsx` | | 1 | | |
+| `src/pages/CategoryLibrary.tsx` | | 1 | | |
+| `tailwind.config.js` | | | legacy blocks removed | |
+
+**Total: 3 new files, 18 modified files. 18 Buttons + 14 Cards + 17 brand-token fixes + 9 QuizCard dark-mode fixes.**
+
+### Verification
+- `npm run build` — passes clean (5.16s, CSS 56.28KB)
+- 0 `brand-*` classes remaining in `.tsx` files
+- 0 `primary-N` / `secondary-N` tokens remaining
+- 0 `bg-gray-50` / `bg-blue-50` / `text-gray-900` / `border-gray-200` remaining in QuizCard
+- `tokens.ts` still has `brand: { teal, amber }` — this is Aura palette, NOT legacy. Kept intentionally.
 
 ---
 
@@ -285,9 +379,6 @@ python3 scripts/generate_sentences_v2.py
 ### TODO — Next Session
 
 #### Design Polish (remaining from Session 26 audit)
-- [ ] **Replace Inter font** — Currently using Inter (universal AI-app fingerprint). Pick a distinctive typeface.
-- [ ] **Extract Button/Card primitives** — No `src/components/primitives/` exists. Every component inlines Tailwind button/card classes.
-- [ ] **Migrate remaining legacy brand-* tokens** — Player.tsx, SNRMixer.tsx, AudioPlayer.tsx still use `brand-primary`, `brand-secondary`, etc. from Vitality palette. Needs screen-by-screen pass.
 - [ ] **Continue logo iteration** — Current logo is v1 placeholder from Weavly (Ideogram V3 inpaint). 50-prompt pipeline ready at `branding/logo-gen/` for batch generation via DALL-E 3 or Ideogram API.
 
 #### Testing & Verification
@@ -306,6 +397,12 @@ python3 scripts/generate_sentences_v2.py
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 
 ### Done (previously TODO)
+- [x] Replace Inter font ✅ (Session 27 — Satoshi configured, zero Inter references remain)
+- [x] Extract Button/Card primitives ✅ (Session 28 — `src/components/primitives/` with Button + Card)
+- [x] Full primitive adoption ✅ (Session 28 — 14 Buttons + 13 Cards across 14 files)
+- [x] Migrate brand-* tokens ✅ (Session 28 — Player.tsx, SNRMixer.tsx, AudioPlayer.tsx, QuizCard.tsx, AudioQA.tsx all purged. Legacy palette removed from tailwind.config.js)
+- [x] QuizCard dark-mode fix ✅ (Session 28 — 9 class replacements, all light patterns→dark equivalents)
+- [x] SNRMixer dark-mode alignment ✅ (Session 28 — bg-white/bg-gray-50 → bg-slate-900/bg-slate-800/50)
 - [x] Integrate Logo v1 ✅ (Session 27 — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment)
 - [x] Kill 14 gradient instances ✅ (Session 27 — all 14 replaced with solid fills, 0 gradients remaining)
 - [x] Remove neumorphic shadows ✅ (Session 27 — 5 shadow tokens removed from tailwind.config.js)

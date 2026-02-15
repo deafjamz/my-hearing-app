@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { Headphones, TrendingUp, Clock } from 'lucide-react';
 import { hapticSelection } from '@/lib/haptics';
+import { Button } from '@/components/primitives';
 
 interface WelcomeScreenProps {
   /** Auth gate mode — opens sign-in/sign-up modal */
@@ -122,12 +123,14 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
               <p className="text-slate-500 text-sm text-center mt-3">
                 About 2 minutes
               </p>
-              <button
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={onSkip}
-                className="block mx-auto mt-4 text-slate-500 hover:text-slate-400 text-sm transition-colors cursor-pointer"
+                className="block mx-auto mt-4 text-slate-500"
               >
                 Skip for now
-              </button>
+              </Button>
             </motion.div>
           ) : (
             <motion.div

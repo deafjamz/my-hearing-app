@@ -8,6 +8,7 @@ import { useUser } from '@/store/UserContext';
 import { ActivityBriefing } from '@/components/ActivityBriefing';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
+import { Card } from '@/components/primitives';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
@@ -305,7 +306,7 @@ export function CategoryPlayer() {
         {/* Word Pair Player */}
         <div className="space-y-6">
           {/* Autoplay Toggle */}
-          <div className="flex items-center justify-between p-4 bg-slate-900/50 border border-slate-800 rounded-xl">
+          <Card variant="subtle" padding="p-4" className="flex items-center justify-between rounded-xl">
             <div className="flex items-center gap-3">
               <Play size={20} className="text-teal-400" />
               <div>
@@ -325,7 +326,7 @@ export function CategoryPlayer() {
                 }`}
               />
             </button>
-          </div>
+          </Card>
 
           {audioError && (
             <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>

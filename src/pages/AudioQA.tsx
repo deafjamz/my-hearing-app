@@ -20,7 +20,7 @@ export function AudioQA() {
   return (
     <div className="p-6 max-w-2xl mx-auto space-y-6 pb-24">
       <header>
-        <Link to="/" className="flex items-center text-gray-500 hover:text-primary-600 mb-4">
+        <Link to="/" className="flex items-center text-gray-500 hover:text-teal-500 mb-4">
           <ArrowLeft size={20} className="mr-1" /> Back
         </Link>
         <h1 className="text-2xl font-bold text-gray-900">Audio Quality QA</h1>

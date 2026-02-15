@@ -10,6 +10,7 @@ import { useUser } from '@/store/UserContext';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { buildWordAudioUrl } from '@/lib/audio';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
+import { Button, Card } from '@/components/primitives';
 
 // --- Constants ---
 
@@ -414,12 +415,13 @@ export function PlacementAssessment() {
         <p className="text-slate-400 text-sm">
           Not enough practice content available right now. Please try again later.
         </p>
-        <button
+        <Button
+          size="md"
           onClick={() => navigate('/practice')}
-          className="mt-6 px-6 py-3 bg-teal-500 text-white font-bold rounded-2xl"
+          className="mt-6"
         >
           Go to Practice Hub
-        </button>
+        </Button>
       </div>
     );
   }
@@ -448,7 +450,7 @@ export function PlacementAssessment() {
             </p>
 
             {/* Level preview */}
-            <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-8 text-left space-y-3">
+            <Card padding="p-5" className="w-full mb-8 text-left space-y-3">
               {ERBER_LEVELS.map((level) => {
                 const Icon = LEVEL_ICONS[level];
                 return (
@@ -463,19 +465,20 @@ export function PlacementAssessment() {
                   </div>
                 );
               })}
-            </div>
+            </Card>
 
-            <button
+            <Button
+              size="lg"
               onClick={async () => {
                 await ensureResumed();
                 hapticSelection();
                 setPhase('trial');
               }}
-              className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+              className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
             >
               <Play size={20} fill="currentColor" />
               Start Listening Check
-            </button>
+            </Button>
 
             <p className="text-slate-500 text-sm mt-3">About 3 minutes</p>
           </motion.div>
@@ -537,11 +540,11 @@ export function PlacementAssessment() {
 
             {/* Comprehension question text */}
             {currentTrial.level === 'comprehension' && hasPlayed && sentences[currentTrial.index] && (
-              <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6">
+              <Card padding="p-4" className="w-full mb-6">
                 <p className="text-white text-base font-bold text-center">
                   {sentences[currentTrial.index].clinical_metadata?.question_text || 'What did you hear?'}
                 </p>
-              </div>
+              </Card>
             )}
 
             {/* Choice buttons */}
@@ -678,13 +681,14 @@ export function PlacementAssessment() {
               })()}
             </p>
 
-            <button
+            <Button
+              size="lg"
               onClick={() => { hapticSelection(); setPhase('trial'); }}
-              className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors"
+              className="rounded-2xl flex items-center justify-center gap-2"
             >
               Continue
               <ChevronRight size={20} />
-            </button>
+            </Button>
           </motion.div>
         )}
 
@@ -762,7 +766,7 @@ export function PlacementAssessment() {
             </div>
 
             {/* Recommendation */}
-            <div className="w-full bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-8">
+            <Card padding="p-5" className="w-full mb-8">
               <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">
                 Recommended Starting Level
               </p>
@@ -775,15 +779,16 @@ export function PlacementAssessment() {
                 {recommendedLevel === 'identification' && 'You can tell words apart well — let\'s work on recognizing similar sounds.'}
                 {recommendedLevel === 'comprehension' && 'Strong listening skills! Let\'s focus on understanding full sentences and conversations.'}
               </p>
-            </div>
+            </Card>
 
-            <button
+            <Button
+              size="lg"
               onClick={() => { hapticSelection(); navigate('/practice'); }}
-              className="w-full py-4 rounded-2xl bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg flex items-center justify-center gap-2 transition-colors shadow-lg"
+              className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
             >
               Start Training
               <ArrowRight size={20} />
-            </button>
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

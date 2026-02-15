@@ -36,13 +36,13 @@ export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpda
               initial={{ scale: 1, opacity: 0.5 }}
               animate={{ scale: 1.5, opacity: 0 }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
-              className="absolute inset-0 bg-brand-primary/20 rounded-full z-0"
+              className="absolute inset-0 bg-teal-500/20 rounded-full z-0"
             />
             <motion.div
               initial={{ scale: 1, opacity: 0.5 }}
               animate={{ scale: 1.25, opacity: 0 }}
               transition={{ repeat: Infinity, duration: 1.5, delay: 0.5, ease: "easeOut" }}
-              className="absolute inset-0 bg-brand-primary/30 rounded-full z-0"
+              className="absolute inset-0 bg-teal-500/30 rounded-full z-0"
             />
           </>
         )}
@@ -54,7 +54,7 @@ export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpda
             "relative z-10 flex items-center justify-center w-20 h-20 rounded-full transition-all duration-300",
             error 
               ? "bg-red-100 text-red-500 cursor-not-allowed"
-              : "bg-brand-primary hover:bg-brand-primary/90 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95"
+              : "bg-teal-500 hover:bg-teal-400 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95"
           )}
           aria-label={isPlaying ? "Pause" : "Play"}
         >
@@ -70,8 +70,8 @@ export function AudioPlayer({ src, title, className, onEnded, onPlay, onTimeUpda
         </button>
       </div>
 
-      {error && <p className="text-sm text-brand-primary mt-4 font-medium">{error}</p>}
-      {title && !error && <h3 className="text-sm font-medium text-brand-dark/60 mt-4 uppercase tracking-wider">{title}</h3>}
+      {error && <p className="text-sm text-red-400 mt-4 font-medium">{error}</p>}
+      {title && !error && <h3 className="text-sm font-medium text-slate-400 mt-4 uppercase tracking-wider">{title}</h3>}
     </div>
   );
 }

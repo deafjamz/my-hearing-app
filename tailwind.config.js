@@ -47,33 +47,6 @@ export default {
           warning: '#FFB300',
           info: '#008F86',
         },
-
-        // === Legacy tokens — used by Player, SNRMixer, AudioPlayer, QuizCard ===
-        // TODO: Remove after screen-by-screen design alignment sweep
-        brand: {
-          teal: '#008F86',
-          'teal-light': '#00CFC3',
-          amber: '#FFB300',
-          'amber-light': '#FFD54F',
-          primary: '#FF6B6B',
-          secondary: '#FFD93D',
-          tertiary: '#6C5CE7',
-          dark: '#0F172A',
-          light: '#F8FAFC',
-          background: '#E0E5EC',
-        },
-        // Legacy utility colors (QuizCard, AudioQA, Player)
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          300: '#7dd3fc',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-        },
-        secondary: { 500: '#64748b' },
-        success: { 500: '#22c55e' },
-        error: { 500: '#ef4444' },
       },
       fontFamily: {
         sans: ['Satoshi', 'General Sans', 'system-ui', '-apple-system', 'sans-serif'],
