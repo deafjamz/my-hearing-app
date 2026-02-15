@@ -1,7 +1,7 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-14
-> **Last Session:** Session 26 — Logo v1 + Placement Bug Fixes + Design Audit + Logo Generation Pipeline
+> **Last Session:** Session 27 — Logo Integration + Gradient Purge + Legacy Cleanup
 > **Build Status:** ✅ PASSING
 > **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
@@ -10,7 +10,7 @@
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
 > **Marketing:** ✅ Strategy doc + 5 skills + MCP setup guide
-> **Branding:** Logo v1 generated (Stepped S teal lettermark). Generation pipeline ready. Integration plan written (not yet implemented).
+> **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment. Gradients purged (0 remaining).
 
 ---
 
@@ -284,15 +284,11 @@ python3 scripts/generate_sentences_v2.py
 
 ### TODO — Next Session
 
-#### Immediate — Logo Integration (plan approved, ready to implement)
-- [ ] **Integrate Logo v1** — Plan at `.claude/plans/splendid-riding-wombat.md`. 7 steps: generate icon sizes via `sips`, replace favicon + PWA icons, fix manifest theme_color (#7c3aed→#020617), add logo to Layout nav header (left side), WelcomeScreen (above heading), PlacementAssessment intro (replace ear icon). Files: `index.html`, `manifest.json`, `sw.js`, `Layout.tsx`, `WelcomeScreen.tsx`, `PlacementAssessment.tsx`, 5 new icon files in `public/`.
-- [ ] **Continue logo iteration** — Current logo is v1 placeholder from Weavly (Ideogram V3 inpaint). ~30 generated, ~5 promising. 50-prompt pipeline ready at `branding/logo-gen/` for batch generation via DALL-E 3 or Ideogram API.
-
-#### Design Overhaul (identified in Session 26 audit)
+#### Design Polish (remaining from Session 26 audit)
 - [ ] **Replace Inter font** — Currently using Inter (universal AI-app fingerprint). Pick a distinctive typeface.
-- [ ] **Kill 14 gradient instances** — ActivityHeader.tsx, CategoryLibrary.tsx, ProgramLibrary.tsx, ProgramDetail.tsx, SentenceTraining.tsx, ActivityList.tsx. Aura spec says no gradients (except Aura visualizer).
 - [ ] **Extract Button/Card primitives** — No `src/components/primitives/` exists. Every component inlines Tailwind button/card classes.
-- [ ] **Remove legacy Vitality palette** — `tailwind.config.js` still has deprecated brand colors.
+- [ ] **Migrate remaining legacy brand-* tokens** — Player.tsx, SNRMixer.tsx, AudioPlayer.tsx still use `brand-primary`, `brand-secondary`, etc. from Vitality palette. Needs screen-by-screen pass.
+- [ ] **Continue logo iteration** — Current logo is v1 placeholder from Weavly (Ideogram V3 inpaint). 50-prompt pipeline ready at `branding/logo-gen/` for batch generation via DALL-E 3 or Ideogram API.
 
 #### Testing & Verification
 - [ ] **Live test Placement Assessment** — Verify comprehension question fix (visible card container + fallback text) and loading spinner fix (debug logging added).
@@ -306,9 +302,15 @@ python3 scripts/generate_sentences_v2.py
 #### Infrastructure
 - [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule.
 - [ ] **Configure Apple OAuth** — Pending D-U-N-S number and Apple Developer enrollment as Organization (Wyoming LLC). See `docs/AUTH_SETUP.md`.
+- [ ] **Supabase Custom Domain** — Upgrade to Pro ($25/mo), `auth.soundsteps.app` CNAME so OAuth doesn't show raw Supabase URL.
 - [ ] **F-012 product decision** — "Share with Audiologist" behind paywall: make free, remove, or rename? See `docs/TESTING_FINDINGS.md`
 
 ### Done (previously TODO)
+- [x] Integrate Logo v1 ✅ (Session 27 — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment)
+- [x] Kill 14 gradient instances ✅ (Session 27 — all 14 replaced with solid fills, 0 gradients remaining)
+- [x] Remove neumorphic shadows ✅ (Session 27 — 5 shadow tokens removed from tailwind.config.js)
+- [x] Fix manifest theme_color ✅ (Session 27 — #7c3aed → #020617)
+- [x] Fix manifest icon sizes ✅ (Session 27 — 72x72→192x192, 1024x1024→512x512)
 - [x] Run performance indexes SQL ✅ (Session 23 — user ran manually)
 - [x] Surface progress errors to UI ✅ (Session 22 — `useProgress` returns `{ error, clearError }`)
 - [x] Verify progress tracking ✅ (Session 20 — all 7 activities log rich per-trial data)
@@ -454,6 +456,35 @@ python3 scripts/generate_sentences_all_voices.py --voices emma,bill,michael
 ---
 
 ## Recent Completions
+
+### 2026-02-14 (Session 27: Logo Integration + Gradient Purge + Legacy Cleanup)
+
+**Summary:** Implemented the full logo integration plan from Session 26. Generated 5 icon sizes from `branding/logo-v1.png` (32, 180, 192, 512, 1024px). Replaced placeholder blue X favicon and PWA icons with Stepped S teal lettermark. Fixed manifest `theme_color` from purple `#7c3aed` to dark slate `#020617` and corrected icon size declarations. Added logo to Layout nav header, WelcomeScreen, and PlacementAssessment intro. Bumped service worker cache to v2. Then purged all 14 gradient instances across 8 components, removed 5 neumorphic shadow tokens from `tailwind.config.js`, and simplified ActivityHeader from 62 lines to 22. CSS bundle shrank 7KB (64KB → 57KB). Updated STATUS.md and audited all docs for open action items.
+
+**Commits:**
+1. `feat: Logo integration — favicon, PWA icons, nav header, welcome & placement screens` (25 files, +2651 -18)
+2. `refactor: Purge gradients + remove neumorphic shadows from Aura design system` (10 files, +32 -84)
+
+**Files Changed:**
+- `public/` — favicon-32.png, apple-touch-icon.png, icon-192.png, icon-512.png, logo.png (new/replaced)
+- `index.html` — added favicon-32 link, updated apple-touch-icon
+- `public/manifest.json` — fixed theme_color + icon sizes
+- `public/sw.js` — bumped to v2, added new assets
+- `src/components/Layout.tsx` — logo in nav header (left side)
+- `src/components/WelcomeScreen.tsx` — logo above heading
+- `src/pages/PlacementAssessment.tsx` — logo replaces Ear icon
+- `src/components/ui/ActivityHeader.tsx` — simplified, removed Vitality palette logic
+- `src/components/StepTracker.tsx` — solid fill
+- `src/pages/CategoryLibrary.tsx` — removed gradient color map
+- `src/pages/ProgramLibrary.tsx` — solid badges + progress bars
+- `src/pages/ProgramDetail.tsx` — solid CTA + progress bar
+- `src/pages/SentenceTraining.tsx` — solid audio visualizer
+- `src/pages/ActivityList.tsx` — solid onramp card bg
+- `src/pages/Dashboard.tsx` — solid progress bar
+- `tailwind.config.js` — removed neumorphic shadows, cleaned comments
+- `.gitignore` — added *.swp
+
+---
 
 ### 2026-02-14 (Session 26: Logo v1 + Placement Bug Fixes + Design Audit + Logo Generation Pipeline)
 
