@@ -1,0 +1,4 @@
+id,story_id,question_text,question_type,answer_options,correct_answer,difficulty_level,phonemic_target
+q_story_001_01,story_001_whispering_woods,"What was alive with secrets?","detail","[""The old house"", ""The old forest"", ""The riverbank""]","The old forest",1,""
+q_story_001_02,story_001_whispering_woods,"What did the breeze carry?","detail","[""The scent of rain"", ""Whispers"", ""The sound of bells""]","Whispers",1,""
+q_story_001_03,story_001_whispering_woods,"What was required to understand the whispers?","inference","[""A special map"", ""Patience"", ""A loud microphone""]","Patience",2,""

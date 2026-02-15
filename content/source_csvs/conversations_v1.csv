@@ -1,0 +1,81 @@
+id,category,prompt_text,response_text,target_keyword,target_phoneme,acoustic_foil,semantic_foil,plausible_foil,difficulty,tier
+conv_appt_001,appointments,"What time is the appointment?","It's at three thirty.",three thirty,/θ/,four fifteen,on Tuesday,not sure yet,2,free
+conv_appt_002,appointments,"When should I arrive?","Please come fifteen minutes early.",fifteen minutes,/f/,fifty minutes early,after lunch,whenever you can,2,free
+conv_appt_003,appointments,"Which doctor am I seeing?","You're seeing Doctor Miller.",Doctor Miller,/m/,Doctor Wheeler,the specialist,the one on call,2,free
+conv_appt_004,appointments,"What floor is the office on?","It's on the third floor.",third floor,/θ/,first floor,the main building,take the elevator,2,free
+conv_appt_005,appointments,"Do I need to bring anything?","Bring your insurance card.",insurance card,/ʃ/,insurance form,all your paperwork,just yourself,2,free
+conv_appt_006,appointments,"How long will it take?","About forty-five minutes.",forty-five,/f/,twenty-five minutes,the whole morning,depends on results,3,free
+conv_appt_007,appointments,"Can I reschedule?","Yes, call us tomorrow morning.",tomorrow morning,/m/,tomorrow evening,as soon as possible,whenever works,2,free
+conv_appt_008,appointments,"Is parking available?","Yes, use the garage on Main Street.",Main Street,/s/,First Street,behind the building,there's a lot nearby,3,free
+conv_appt_009,appointments,"What's the copay?","Twenty-five dollars.",Twenty-five,/t/,Thirty-five dollars,depends on insurance,we'll bill you later,2,free
+conv_appt_010,appointments,"Is the doctor running late?","About fifteen minutes behind.",fifteen minutes,/f/,fifty minutes behind,quite a while,just a little,2,free
+conv_dir_001,directions,"Where is the pharmacy?","It's on the corner of Fifth and Oak.",Fifth and Oak,/f/,Sixth and Oak,down the street,I'm not sure,2,free
+conv_dir_002,directions,"How do I get to the elevator?","Go straight and turn left at the end.",turn left,/l/,turn right,keep going straight,it's near the entrance,2,free
+conv_dir_003,directions,"Which bus goes downtown?","Take the number twelve.",number twelve,/t/,number twenty,the blue line,any of them work,2,free
+conv_dir_004,directions,"Is the hospital nearby?","It's about three blocks north.",three blocks,/θ/,two blocks north,pretty close by,take a taxi,2,free
+conv_dir_005,directions,"Where can I park?","There's a lot behind the building.",behind the building,/b/,beside the building,on the street,anywhere you find,2,free
+conv_dir_006,directions,"Which exit should I take?","Take exit forty-two.",exit forty-two,/f/,exit thirty-two,the next one,keep driving,2,free
+conv_dir_007,directions,"Is it far from here?","About ten minutes by car.",ten minutes,/t/,twenty minutes,walking distance,depends on traffic,2,free
+conv_dir_008,directions,"Where's the nearest ATM?","Inside the grocery store on Pine.",Pine,/p/,Vine,around the corner,I'll show you,3,free
+conv_dir_009,directions,"How do I find your office?","Take the stairs to the second floor.",second floor,/s/,seventh floor,down the hall,follow the signs,2,free
+conv_dir_010,directions,"What's the address?","Four fifteen Main Street.",Four fifteen,/f/,Five fifteen,on the corner,I'll text it to you,2,free
+conv_phone_001,phone_calls,"Who called while I was out?","Your sister called twice.",sister,/s/,mister,a family member,someone important,2,free
+conv_phone_002,phone_calls,"Did they leave a message?","Yes, call back before five.",before five,/f/,before nine,as soon as possible,when you get a chance,2,free
+conv_phone_003,phone_calls,"What was the callback number?","Five five five, three four two one.",three four two one,/θ/,three five two one,the main office,I wrote it down,3,free
+conv_phone_004,phone_calls,"Was it urgent?","They said it's quite important.",quite important,/k/,not important,fairly urgent,just checking in,2,free
+conv_phone_005,phone_calls,"When did they call?","Around two thirty this afternoon.",two thirty,/θ/,two thirteen,earlier today,a while ago,2,free
+conv_phone_006,phone_calls,"Did the doctor's office call?","Yes, your results are ready.",results are ready,/r/,prescription is ready,appointment confirmed,they'll call again,2,free
+conv_phone_007,phone_calls,"Any messages from work?","The meeting moved to Thursday.",Thursday,/θ/,Tuesday,next week,they didn't say when,2,free
+conv_phone_008,phone_calls,"Who was on the voicemail?","Someone from the insurance company.",insurance company,/ʃ/,finance company,the bank,didn't recognize them,3,free
+conv_phone_009,phone_calls,"What time should I call back?","Before six o'clock.",six o'clock,/s/,seven o'clock,business hours,whenever you can,2,free
+conv_phone_010,phone_calls,"Did they say what it was about?","Regarding your claim from last month.",last month,/l/,this month,the recent paperwork,not specifically,3,free
+conv_shop_001,shopping,"How much does this cost?","That's thirty-nine ninety-nine.",thirty-nine,/θ/,twenty-nine ninety-nine,about forty dollars,let me check,2,free
+conv_shop_002,shopping,"Do you have this in blue?","Yes, in the back on the left.",back on the left,/l/,back on the right,over there,I can check,2,free
+conv_shop_003,shopping,"Is this on sale?","Twenty percent off today only.",Twenty percent,/t/,Thirty percent,for members only,it's full price,2,free
+conv_shop_004,shopping,"When does the store close?","At nine thirty tonight.",nine thirty,/θ/,nine fifteen,in about an hour,soon,2,free
+conv_shop_005,shopping,"Can I return this?","Yes, within thirty days with receipt.",thirty days,/θ/,sixty days,two weeks,depends on the item,2,free
+conv_shop_006,shopping,"Do you take credit cards?","We accept all major cards.",all major cards,/k/,cash only please,most credit cards,depends on the amount,2,free
+conv_shop_007,shopping,"Where are the batteries?","Aisle seven, near the front.",Aisle seven,/s/,Aisle eleven,in electronics,I can show you,2,free
+conv_shop_008,shopping,"Is there a fitting room?","Yes, around the corner on your right.",on your right,/r/,on your left,straight ahead,just past checkout,2,free
+conv_shop_009,shopping,"Do you have a smaller size?","Let me check in the stockroom.",in the stockroom,/s/,in the showroom,I'll look,we might be out,3,free
+conv_shop_010,shopping,"What's your return policy?","Full refund within fourteen days.",fourteen days,/f/,forty days,two weeks,store credit only,2,free
+conv_social_001,social,"How was your weekend?","It was really relaxing.",really relaxing,/r/,pretty exhausting,quite busy,same as always,1,free
+conv_social_002,social,"Have you eaten lunch yet?","Yes, about an hour ago.",an hour ago,/r/,half an hour ago,not yet,just finished,1,free
+conv_social_003,social,"Are you coming to the party?","Yes, I'll be there around seven.",around seven,/s/,around eleven,in the evening,hopefully,1,free
+conv_social_004,social,"Did you hear the news?","Yes, isn't it surprising?",surprising,/s/,concerning,wonderful news,I haven't yet,2,free
+conv_social_005,social,"What are you doing this weekend?","Visiting my parents upstate.",parents upstate,/p/,grandparents upstate,staying home,not sure yet,2,free
+conv_social_006,social,"How's your family doing?","Everyone's doing well, thanks.",doing well,/w/,doing fine,same as usual,been better,1,free
+conv_social_007,social,"Would you like some coffee?","Yes please, with cream.",with cream,/k/,with sugar,black is fine,just water,1,free
+conv_social_008,social,"What do you think of the weather?","It's supposed to rain later.",rain later,/r/,snow later,clear up soon,hard to tell,2,free
+conv_social_009,social,"Are you feeling better?","Much better, thank you for asking.",much better,/b/,a little better,same as yesterday,still recovering,1,free
+conv_social_010,social,"Can you help me with something?","Of course, what do you need?",what do you need,/n/,what can I do,sure thing,I'm kind of busy,1,free
+conv_social_011,social,"Where did you go on vacation?","We went to the beach in Florida.",beach in Florida,/f/,mountains in Colorado,stayed local,haven't gone yet,2,free
+conv_social_012,social,"What time is dinner?","We're eating at six thirty.",six thirty,/s/,seven thirty,around sunset,whenever you're ready,2,free
+conv_social_013,social,"Did you watch the game last night?","Yes, the final score was three to one.",three to one,/θ/,two to one,a close game,I missed it,2,free
+conv_social_014,social,"How long have you lived here?","About fifteen years now.",fifteen years,/f/,fifty years,most of my life,not very long,2,free
+conv_social_015,social,"What do you do for work?","I'm a software engineer.",software engineer,/s/,systems engineer,I work in tech,this and that,2,free
+conv_social_016,social,"Is this seat taken?","No, please sit down.",please sit down,/s/,it's reserved,go ahead,someone's coming,1,free
+conv_social_017,social,"Nice to meet you!","The pleasure is mine.",pleasure is mine,/ʒ/,nice meeting you,same here,likewise,1,free
+conv_social_018,social,"What time did you get here?","Around eight this morning.",eight this morning,/θ/,late this morning,just now,a while ago,2,free
+conv_social_019,social,"Are you from around here?","No, I moved from Boston.",moved from Boston,/b/,grew up in Austin,just visiting,been here forever,2,free
+conv_social_020,social,"What are your plans tonight?","Meeting friends for dinner at eight.",dinner at eight,/t/,dinner at nine,staying in,no specific plans,2,free
+conv_med_001,medical,"What did the doctor say?","Take two pills twice daily.",two pills twice daily,/t/,three pills twice daily,rest for a week,call back tomorrow,3,free
+conv_med_002,medical,"When should I take the medicine?","With food in the morning.",with food,/f/,before food,at bedtime,whenever you remember,2,free
+conv_med_003,medical,"How are you feeling today?","Much better than yesterday.",better than yesterday,/b/,worse than yesterday,about the same,hard to say,2,free
+conv_med_004,medical,"Did you get your test results?","Yes, everything looks normal.",looks normal,/n/,looks abnormal,still waiting,need more tests,2,free
+conv_med_005,medical,"What symptoms are you having?","Mostly headaches and fatigue.",headaches and fatigue,/f/,fever and chills,just tired,nothing specific,2,free
+conv_med_006,medical,"Should I take any precautions?","Avoid heavy lifting for two weeks.",two weeks,/w/,three weeks,a few days,until you feel better,3,free
+conv_med_007,medical,"Is the procedure painful?","You might feel slight pressure.",slight pressure,/p/,sharp pain,nothing at all,mild discomfort,3,free
+conv_med_008,medical,"When is my next appointment?","In three weeks on a Wednesday.",three weeks on Wednesday,/θ/,two weeks on Thursday,next month,we'll call you,3,free
+conv_med_009,medical,"Can I drive after the procedure?","No, have someone else drive you.",someone else drive,/s/,you can drive yourself,wait an hour,depends how you feel,3,free
+conv_med_010,medical,"How many refills do I have?","You have three refills left.",three refills,/θ/,two refills left,none remaining,call to check,2,free
+conv_med_011,medical,"What's my blood pressure?","One twenty over eighty.",one twenty over eighty,/t/,one thirty over ninety,perfectly normal,a little high,3,free
+conv_med_012,medical,"Are there any side effects?","Possible drowsiness and dry mouth.",drowsiness,/z/,dizziness,nothing major,mild nausea,3,free
+conv_med_013,medical,"When will the stitches come out?","In about seven to ten days.",seven to ten days,/s/,four to five days,at your follow-up,when they dissolve,3,free
+conv_med_014,medical,"Should I continue my other medications?","Yes, except the blood thinner.",except the blood thinner,/θ/,except the pain medicine,all of them,check the list,3,free
+conv_med_015,medical,"How long until I see improvement?","Usually within one to two weeks.",one to two weeks,/w/,three to four weeks,a few days,varies by person,3,free
+conv_med_016,medical,"Can I eat before the test?","No food or drink after midnight.",after midnight,/m/,after breakfast,light meal is fine,only water,2,free
+conv_med_017,medical,"Where should I apply the cream?","On the affected area twice daily.",affected area,/f/,infected area,the whole body,as needed,3,free
+conv_med_018,medical,"Is this medicine safe during pregnancy?","Consult your OB before taking it.",consult your OB,/k/,definitely safe,avoid completely,only in third trimester,3,free
+conv_med_019,medical,"What if I miss a dose?","Take it as soon as you remember.",as soon as you remember,/s/,skip it entirely,double the next dose,wait until tomorrow,2,free
+conv_med_020,medical,"Do I need to fast for blood work?","Yes, no eating for twelve hours.",twelve hours,/t/,eight hours,not necessary,just light snacks,2,free

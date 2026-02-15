@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\\\.(ts|tsx)$\"",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs');let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const i=JSON.parse(d);const p=i.tool_input?.file_path;if(p&&fs.existsSync(p)){const c=fs.readFileSync(p,'utf8');const lines=c.split('\\n');const matches=[];lines.forEach((l,idx)=>{if(/console\\.log/.test(l))matches.push((idx+1)+': '+l.trim())});if(matches.length){console.error('[Hook] WARNING: console.log found in '+p);matches.slice(0,3).forEach(m=>console.error(m));console.error('[Hook] Remove before committing')}}console.log(d)})\""
+          }
+        ],
+        "description": "Warn about console.log statements after edits"
+      },
+      {
+        "matcher": "tool == \"Edit\" && tool_input.file_path matches \"src/.*\\\\.tsx$\"",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs');let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const i=JSON.parse(d);const p=i.tool_input?.file_path;if(p&&fs.existsSync(p)){const c=fs.readFileSync(p,'utf8');if(/clinical/i.test(c)){console.error('[Hook] WARNING: Found \\\"clinical\\\" in '+p);console.error('[Hook] FDA compliance: Use \\\"structured\\\" or \\\"training\\\" instead');console.error('[Hook] See .claude/rules/regulatory.md')}}console.log(d)})\""
+          }
+        ],
+        "description": "Check for 'clinical' terminology in React components (FDA compliance)"
+      },
+      {
+        "matcher": "tool == \"Edit\" && tool_input.file_path matches \"src/hooks/.*\\\\.ts$\"",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const fs=require('fs');let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{const i=JSON.parse(d);const p=i.tool_input?.file_path;if(p&&fs.existsSync(p)&&/audio/i.test(p)){const c=fs.readFileSync(p,'utf8');if(!/audio\\.src\\s*=\\s*['\\\"]?['\\\"]?/.test(c)&&/new Audio/.test(c)){console.error('[Hook] REMINDER: Audio hooks should clean up');console.error('[Hook] Add audio.src = \\\"\\\" in useEffect cleanup');console.error('[Hook] See .claude/rules/audio.md')}}console.log(d)})\""
+          }
+        ],
+        "description": "Remind about audio cleanup in hooks"
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const{execSync}=require('child_process');const fs=require('fs');let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{execSync('git rev-parse --git-dir',{stdio:'pipe'})}catch{console.log(d);process.exit(0)}try{const files=execSync('git diff --name-only HEAD',{encoding:'utf8',stdio:['pipe','pipe','pipe']}).split('\\n').filter(f=>/\\.(ts|tsx)$/.test(f)&&fs.existsSync(f));let hasIssues=false;for(const f of files){const c=fs.readFileSync(f,'utf8');if(c.includes('console.log')){console.error('[Hook] console.log in: '+f);hasIssues=true}if(/clinical/i.test(c)&&f.includes('src/')){console.error('[Hook] \\\"clinical\\\" term in: '+f);hasIssues=true}}if(hasIssues)console.error('[Hook] Fix issues before committing')}catch(e){}console.log(d)})\""
+          }
+        ],
+        "description": "Check modified files for console.log and clinical terminology"
+      }
+    ]
+  }
+}

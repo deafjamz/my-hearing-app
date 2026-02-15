@@ -1,0 +1,51 @@
+id,name,description,category,intensity,correct_answer,foil_1,foil_2,foil_3,acoustic_similarity,difficulty,tier,safety_critical
+env_home_001,doorbell,Standard two-tone doorbell chime,home,moderate,Doorbell,Phone ringing,Alarm clock,Wind chimes,tonal_pattern,1,free,false
+env_home_002,microwave_beep,Microwave finished beeping three times,home,quiet,Microwave beep,Oven timer,Phone notification,Alarm clock,repetitive_beep,2,free,false
+env_home_003,phone_ring,Landline telephone ringing,home,moderate,Phone ringing,Doorbell,Alarm clock,Timer beep,tonal_pattern,1,free,false
+env_home_004,alarm_clock,Digital alarm clock beeping,home,moderate,Alarm clock,Timer beep,Phone notification,Doorbell,repetitive_beep,2,free,false
+env_home_005,door_knock,Someone knocking on a door three times,home,moderate,Door knock,Hammering,Footsteps,Tapping,impact_pattern,1,free,false
+env_home_006,water_running,Faucet with water running,home,continuous,Running water,Rain,Shower,Dishwasher,water_flow,2,free,false
+env_home_007,toilet_flush,Toilet flushing sound,home,moderate,Toilet flush,Shower starting,Water draining,Bathtub filling,water_flow,2,free,false
+env_home_008,vacuum_cleaner,Vacuum cleaner running,home,loud,Vacuum cleaner,Hair dryer,Fan running,Lawn mower,motor_drone,2,free,false
+env_home_009,washer_spin,Washing machine spin cycle,home,moderate,Washing machine,Dryer tumbling,Dishwasher,Air conditioner,motor_cycle,3,free,false
+env_home_010,dryer_buzzer,Dryer end of cycle buzzer,home,moderate,Dryer buzzer,Oven timer,Microwave beep,Alarm clock,buzzer_tone,2,free,false
+env_home_011,coffee_maker,Coffee maker brewing and dripping,home,quiet,Coffee maker,Water boiling,Tea kettle,Sink dripping,liquid_bubbling,3,free,false
+env_home_012,toaster_pop,Toaster popping up,home,quick,Toaster pop,Cabinet closing,Lock clicking,Light switch,mechanical_click,2,free,false
+env_home_013,kettle_whistle,Tea kettle whistling,home,moderate,Kettle whistle,Steam releasing,Bird chirping,Wind blowing,high_pitch_whistle,2,free,false
+env_home_014,oven_timer,Oven timer beeping repeatedly,home,moderate,Oven timer,Microwave beep,Alarm clock,Phone timer,repetitive_beep,2,free,false
+env_home_015,garage_door,Electric garage door opening,home,moderate,Garage door,Elevator moving,Window blinds,Roll-up door,motor_mechanical,3,free,false
+env_outdoor_001,car_horn,Car horn honking once,outdoor,loud,Car horn,Truck horn,Train horn,Ship horn,horn_blast,1,free,true
+env_outdoor_002,dog_bark,Dog barking twice,outdoor,moderate,Dog barking,Seal barking,Person coughing,Fox cry,animal_vocal,1,free,false
+env_outdoor_003,car_starting,Car engine starting up,outdoor,moderate,Car starting,Motorcycle starting,Lawn mower starting,Generator running,engine_start,2,free,false
+env_outdoor_004,bird_chirping,Birds chirping in the morning,outdoor,quiet,Bird chirping,Cricket sound,Squeaky swing,Whistle,high_pitch_pattern,2,free,false
+env_outdoor_005,thunder,Distant thunder rumbling,outdoor,loud,Thunder,Explosion,Heavy truck,Bass music,low_frequency_rumble,2,free,false
+env_outdoor_006,rain,Rain falling on a roof,outdoor,continuous,Rain sounds,Shower running,Static noise,Bacon frying,white_noise_pattern,2,free,false
+env_outdoor_007,ambulance_siren,Ambulance siren approaching,outdoor,loud,Ambulance siren,Police siren,Fire truck siren,Car alarm,emergency_siren,1,free,true
+env_outdoor_008,police_siren,Police car siren wailing,outdoor,loud,Police siren,Ambulance siren,Fire truck siren,Car alarm,emergency_siren,1,free,true
+env_outdoor_009,fire_truck,Fire truck siren with air horn,outdoor,very_loud,Fire truck siren,Police siren,Ambulance siren,Train horn,emergency_siren,1,free,true
+env_outdoor_010,lawn_mower,Gas lawn mower running,outdoor,loud,Lawn mower,Leaf blower,Chainsaw,Motorcycle,engine_continuous,2,free,false
+env_comm_001,text_message,iPhone text message notification,communication,quiet,Text message,Email notification,App notification,Reminder chime,short_chime,2,free,false
+env_comm_002,email_chime,Email received notification sound,communication,quiet,Email notification,Text message,Calendar alert,App update,notification_chime,2,free,false
+env_comm_003,video_call,Video call incoming ring,communication,moderate,Video call ring,Phone ringing,Doorbell,Alarm,ringtone_pattern,2,free,false
+env_comm_004,keyboard_typing,Mechanical keyboard typing,communication,quiet,Keyboard typing,Rain on window,Tapping fingers,Clicking pen,rapid_clicking,3,free,false
+env_comm_005,phone_vibrate,Phone vibrating on table,communication,quiet,Phone vibrating,Electric toothbrush,Massage device,Small motor,vibration_buzz,3,free,false
+env_comm_006,notification_sound,Generic notification ping,communication,quiet,Notification ping,Microwave beep,Water drop,Clock tick,single_tone,2,free,false
+env_comm_007,camera_shutter,Camera phone shutter sound,communication,quick,Camera shutter,Stapler,Lighter click,Lock turning,mechanical_click,3,free,false
+env_comm_008,low_battery,Low battery warning beep,communication,quiet,Low battery warning,Error sound,Timer beep,Notification,warning_beep,2,free,false
+env_comm_009,charging_chime,Phone plugged in charging sound,communication,quiet,Charging sound,Completion chime,Start-up sound,Notification,status_chime,3,free,false
+env_comm_010,voice_assistant,Voice assistant activation tone,communication,quiet,Voice assistant,Notification,Alert sound,Startup chime,activation_tone,3,free,false
+env_appliance_001,dishwasher,Dishwasher running mid-cycle,appliance,moderate,Dishwasher,Washing machine,Rain,Shower,water_mechanical,3,free,false
+env_appliance_002,refrigerator,Refrigerator compressor humming,appliance,quiet,Refrigerator hum,Air conditioner,Computer fan,Dehumidifier,motor_hum,3,free,false
+env_appliance_003,air_conditioner,Central air conditioner running,appliance,continuous,Air conditioner,Fan running,Refrigerator,Furnace blowing,air_flow,3,free,false
+env_appliance_004,blender,Kitchen blender at high speed,appliance,loud,Blender,Food processor,Vacuum cleaner,Hair dryer,high_motor,2,free,false
+env_appliance_005,hair_dryer,Hair dryer on medium heat,appliance,moderate,Hair dryer,Vacuum cleaner,Leaf blower,Hand dryer,air_motor,2,free,false
+env_appliance_006,electric_shaver,Electric razor buzzing,appliance,quiet,Electric shaver,Clippers,Small fan,Phone vibrating,vibration_buzz,3,free,false
+env_appliance_007,printer,Inkjet printer printing a page,appliance,moderate,Printer printing,Scanner scanning,Fax machine,Paper shredder,mechanical_movement,3,free,false
+env_appliance_008,ice_maker,Ice maker dropping ice,appliance,moderate,Ice maker,Glass breaking,Dice rolling,Keys dropping,hard_objects_falling,3,free,false
+env_appliance_009,garbage_disposal,Garbage disposal grinding,appliance,loud,Garbage disposal,Blender,Drain gurgling,Motor struggling,grinding_motor,2,free,false
+env_appliance_010,furnace_ignite,Gas furnace igniting and running,appliance,moderate,Furnace igniting,Water heater,Stove burner,Fireplace,gas_ignition,3,free,false
+env_safety_001,smoke_detector,Smoke detector alarm beeping,safety,very_loud,Smoke detector,Carbon monoxide alarm,Fire alarm,Security alarm,high_pitch_alarm,1,free,true
+env_safety_002,carbon_monoxide,Carbon monoxide detector alarm,safety,very_loud,Carbon monoxide alarm,Smoke detector,Fire alarm,Security alarm,high_pitch_alarm,1,free,true
+env_safety_003,car_alarm,Car alarm sounding,safety,very_loud,Car alarm,House alarm,Police siren,Emergency alert,multi_tone_alarm,1,free,true
+env_safety_004,backup_beep,Vehicle backup warning beep,safety,moderate,Backup beep,Crosswalk signal,Timer beep,Equipment alert,repetitive_beep,1,free,true
+env_safety_005,emergency_broadcast,Emergency broadcast alert tone,safety,loud,Emergency broadcast,Amber alert,Weather alert,Test signal,alert_tone,1,free,true

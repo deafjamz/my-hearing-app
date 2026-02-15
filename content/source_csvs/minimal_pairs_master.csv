@@ -1,0 +1,2082 @@
+word_1,word_2,contrast_category,phoneme_1_ipa,phoneme_2_ipa,contrast_position
+Pat,Bat,Consonant Voicing,/p/,/b/,Initial
+Pear,Bear,Consonant Voicing,/p/,/b/,Initial
+Pack,Back,Consonant Voicing,/p/,/b/,Initial
+Pet,Bet,Consonant Voicing,/p/,/b/,Initial
+Pill,Bill,Consonant Voicing,/p/,/b/,Initial
+Pin,Bin,Consonant Voicing,/p/,/b/,Initial
+Pie,Buy,Consonant Voicing,/p/,/b/,Initial
+Pond,Bond,Consonant Voicing,/p/,/b/,Initial
+Pike,Bike,Consonant Voicing,/p/,/b/,Initial
+Pail,Bail,Consonant Voicing,/p/,/b/,Initial
+Peach,Beach,Consonant Voicing,/p/,/b/,Initial
+Pest,Best,Consonant Voicing,/p/,/b/,Initial
+Pug,Bug,Consonant Voicing,/p/,/b/,Initial
+Pad,Bad,Consonant Voicing,/p/,/b/,Initial
+Park,Bark,Consonant Voicing,/p/,/b/,Initial
+Peg,Beg,Consonant Voicing,/p/,/b/,Initial
+Pit,Bit,Consonant Voicing,/p/,/b/,Initial
+Pole,Bowl,Consonant Voicing,/p/,/b/,Initial
+Pout,Bout,Consonant Voicing,/p/,/b/,Initial
+Puff,Buff,Consonant Voicing,/p/,/b/,Initial
+Pull,Bull,Consonant Voicing,/p/,/b/,Initial
+Pump,Bump,Consonant Voicing,/p/,/b/,Initial
+Punch,Bunch,Consonant Voicing,/p/,/b/,Initial
+Push,Bush,Consonant Voicing,/p/,/b/,Initial
+Putt,Butt,Consonant Voicing,/p/,/b/,Initial
+Cap,Cab,Consonant Voicing,/p/,/b/,Final
+Rope,Robe,Consonant Voicing,/p/,/b/,Final
+Rip,Rib,Consonant Voicing,/p/,/b/,Final
+Lap,Lab,Consonant Voicing,/p/,/b/,Final
+Mop,Mob,Consonant Voicing,/p/,/b/,Final
+Tap,Tab,Consonant Voicing,/p/,/b/,Final
+Cop,Cob,Consonant Voicing,/p/,/b/,Final
+Cup,Cub,Consonant Voicing,/p/,/b/,Final
+Nap,Nab,Consonant Voicing,/p/,/b/,Final
+Slap,Slab,Consonant Voicing,/p/,/b/,Final
+Time,Dime,Consonant Voicing,/t/,/d/,Initial
+Ten,Den,Consonant Voicing,/t/,/d/,Initial
+Tip,Dip,Consonant Voicing,/t/,/d/,Initial
+Toe,Doe,Consonant Voicing,/t/,/d/,Initial
+Town,Down,Consonant Voicing,/t/,/d/,Initial
+Tale,Dale,Consonant Voicing,/t/,/d/,Initial
+Tug,Dug,Consonant Voicing,/t/,/d/,Initial
+Tear,Dear,Consonant Voicing,/t/,/d/,Initial
+Teal,Deal,Consonant Voicing,/t/,/d/,Initial
+Tame,Dame,Consonant Voicing,/t/,/d/,Initial
+Tan,Dan,Consonant Voicing,/t/,/d/,Initial
+Tart,Dart,Consonant Voicing,/t/,/d/,Initial
+Team,Deem,Consonant Voicing,/t/,/d/,Initial
+Tell,Dell,Consonant Voicing,/t/,/d/,Initial
+Tent,Dent,Consonant Voicing,/t/,/d/,Initial
+Tide,Died,Consonant Voicing,/t/,/d/,Initial
+Tie,Die,Consonant Voicing,/t/,/d/,Initial
+Till,Dill,Consonant Voicing,/t/,/d/,Initial
+Tine,Dine,Consonant Voicing,/t/,/d/,Initial
+Toll,Dole,Consonant Voicing,/t/,/d/,Initial
+Tore,Door,Consonant Voicing,/t/,/d/,Initial
+Tote,Dote,Consonant Voicing,/t/,/d/,Initial
+Touch,Dutch,Consonant Voicing,/t/,/d/,Initial
+Train,Drain,Consonant Voicing,/t/,/d/,Initial
+Tramp,Damp,Consonant Voicing,/t/,/d/,Initial
+Tread,Dread,Consonant Voicing,/t/,/d/,Initial
+Tress,Dress,Consonant Voicing,/t/,/d/,Initial
+Trip,Drip,Consonant Voicing,/t/,/d/,Initial
+True,Drew,Consonant Voicing,/t/,/d/,Initial
+Trunk,Drunk,Consonant Voicing,/t/,/d/,Initial
+Try,Dry,Consonant Voicing,/t/,/d/,Initial
+Tuck,Duck,Consonant Voicing,/t/,/d/,Initial
+Tune,Dune,Consonant Voicing,/t/,/d/,Initial
+Tusk,Dusk,Consonant Voicing,/t/,/d/,Initial
+Bet,Bed,Consonant Voicing,/t/,/d/,Final
+Bit,Bid,Consonant Voicing,/t/,/d/,Final
+Hurt,Heard,Consonant Voicing,/t/,/d/,Final
+Neat,Need,Consonant Voicing,/t/,/d/,Final
+Sent,Send,Consonant Voicing,/t/,/d/,Final
+Write,Ride,Consonant Voicing,/t/,/d/,Final
+Coat,Code,Consonant Voicing,/t/,/d/,Final
+Cart,Card,Consonant Voicing,/t/,/d/,Final
+Seat,Seed,Consonant Voicing,/t/,/d/,Final
+Bite,Bide,Consonant Voicing,/t/,/d/,Final
+Feet,Feed,Consonant Voicing,/t/,/d/,Final
+Bent,Bend,Consonant Voicing,/t/,/d/,Final
+Lent,Lend,Consonant Voicing,/t/,/d/,Final
+Rate,Raid,Consonant Voicing,/t/,/d/,Final
+Mate,Made,Consonant Voicing,/t/,/d/,Final
+Sight,Side,Consonant Voicing,/t/,/d/,Final
+Bat,Bad,Consonant Voicing,/t/,/d/,Final
+Bait,Bade,Consonant Voicing,/t/,/d/,Final
+Bright,Bride,Consonant Voicing,/t/,/d/,Final
+Cat,Cad,Consonant Voicing,/t/,/d/,Final
+Date,Dade,Consonant Voicing,/t/,/d/,Final
+Fat,Fad,Consonant Voicing,/t/,/d/,Final
+Goat,Goad,Consonant Voicing,/t/,/d/,Final
+Grit,Grid,Consonant Voicing,/t/,/d/,Final
+Heat,Heed,Consonant Voicing,/t/,/d/,Final
+Hit,Hid,Consonant Voicing,/t/,/d/,Final
+Kit,Kid,Consonant Voicing,/t/,/d/,Final
+Late,Lade,Consonant Voicing,/t/,/d/,Final
+Let,Led,Consonant Voicing,/t/,/d/,Final
+Lit,Lid,Consonant Voicing,/t/,/d/,Final
+Mat,Mad,Consonant Voicing,/t/,/d/,Final
+Meet,Mead,Consonant Voicing,/t/,/d/,Final
+Mutt,Mud,Consonant Voicing,/t/,/d/,Final
+Net,Ned,Consonant Voicing,/t/,/d/,Final
+Not,Nod,Consonant Voicing,/t/,/d/,Final
+Oat,Owed,Consonant Voicing,/t/,/d/,Final
+Pat,Pad,Consonant Voicing,/t/,/d/,Final
+Plot,Plod,Consonant Voicing,/t/,/d/,Final
+Pot,Pod,Consonant Voicing,/t/,/d/,Final
+Rent,Rend,Consonant Voicing,/t/,/d/,Final
+Root,Rood,Consonant Voicing,/t/,/d/,Final
+Rot,Rod,Consonant Voicing,/t/,/d/,Final
+Set,Said,Consonant Voicing,/t/,/d/,Final
+Shot,Shod,Consonant Voicing,/t/,/d/,Final
+Sit,Sid,Consonant Voicing,/t/,/d/,Final
+Slate,Slade,Consonant Voicing,/t/,/d/,Final
+Slit,Slid,Consonant Voicing,/t/,/d/,Final
+Suit,Sued,Consonant Voicing,/t/,/d/,Final
+Tent,Tend,Consonant Voicing,/t/,/d/,Final
+Tote,Toad,Consonant Voicing,/t/,/d/,Final
+Vent,Vend,Consonant Voicing,/t/,/d/,Final
+Wait,Wade,Consonant Voicing,/t/,/d/,Final
+Want,Wand,Consonant Voicing,/t/,/d/,Final
+Wet,Wed,Consonant Voicing,/t/,/d/,Final
+White,Wide,Consonant Voicing,/t/,/d/,Final
+Wrote,Road,Consonant Voicing,/t/,/d/,Final
+Writer,Rider,Consonant Voicing,/t/,/d/,Medial
+Matter,Madder,Consonant Voicing,/t/,/d/,Medial
+Bitter,Bidder,Consonant Voicing,/t/,/d/,Medial
+Later,Ladder,Consonant Voicing,/t/,/d/,Medial
+Water,Wader,Consonant Voicing,/t/,/d/,Medial
+Coating,Coding,Consonant Voicing,/t/,/d/,Medial
+Seating,Seeding,Consonant Voicing,/t/,/d/,Medial
+Waiting,Wading,Consonant Voicing,/t/,/d/,Medial
+Heating,Heeding,Consonant Voicing,/t/,/d/,Medial
+Potting,Podding,Consonant Voicing,/t/,/d/,Medial
+Coat,Goat,Consonant Voicing,/k/,/g/,Initial
+Came,Game,Consonant Voicing,/k/,/g/,Initial
+Cap,Gap,Consonant Voicing,/k/,/g/,Initial
+Cold,Gold,Consonant Voicing,/k/,/g/,Initial
+Cut,Gut,Consonant Voicing,/k/,/g/,Initial
+Class,Glass,Consonant Voicing,/k/,/g/,Initial
+Cane,Gain,Consonant Voicing,/k/,/g/,Initial
+Cave,Gave,Consonant Voicing,/k/,/g/,Initial
+Curl,Girl,Consonant Voicing,/k/,/g/,Initial
+Card,Guard,Consonant Voicing,/k/,/g/,Initial
+Crow,Grow,Consonant Voicing,/k/,/g/,Initial
+Crate,Grate,Consonant Voicing,/k/,/g/,Initial
+Crime,Grime,Consonant Voicing,/k/,/g/,Initial
+Coal,Goal,Consonant Voicing,/k/,/g/,Initial
+Core,Gore,Consonant Voicing,/k/,/g/,Initial
+Crave,Grave,Consonant Voicing,/k/,/g/,Initial
+Cull,Gull,Consonant Voicing,/k/,/g/,Initial
+Back,Bag,Consonant Voicing,/k/,/g/,Final
+Pick,Pig,Consonant Voicing,/k/,/g/,Final
+Dock,Dog,Consonant Voicing,/k/,/g/,Final
+Sack,Sag,Consonant Voicing,/k/,/g/,Final
+Tack,Tag,Consonant Voicing,/k/,/g/,Final
+Buck,Bug,Consonant Voicing,/k/,/g/,Final
+Lack,Lag,Consonant Voicing,/k/,/g/,Final
+Rack,Rag,Consonant Voicing,/k/,/g/,Final
+Leak,League,Consonant Voicing,/k/,/g/,Final
+Peck,Peg,Consonant Voicing,/k/,/g/,Final
+Brick,Brig,Consonant Voicing,/k/,/g/,Final
+Duck,Dug,Consonant Voicing,/k/,/g/,Final
+Flack,Flag,Consonant Voicing,/k/,/g/,Final
+Flock,Flog,Consonant Voicing,/k/,/g/,Final
+Hack,Hag,Consonant Voicing,/k/,/g/,Final
+Hock,Hog,Consonant Voicing,/k/,/g/,Final
+Jock,Jog,Consonant Voicing,/k/,/g/,Final
+Lock,Log,Consonant Voicing,/k/,/g/,Final
+Luck,Lug,Consonant Voicing,/k/,/g/,Final
+Muck,Mug,Consonant Voicing,/k/,/g/,Final
+Pluck,Plug,Consonant Voicing,/k/,/g/,Final
+Puck,Pug,Consonant Voicing,/k/,/g/,Final
+Rick,Rig,Consonant Voicing,/k/,/g/,Final
+Ruck,Rug,Consonant Voicing,/k/,/g/,Final
+Shack,Shag,Consonant Voicing,/k/,/g/,Final
+Slack,Slag,Consonant Voicing,/k/,/g/,Final
+Snack,Snag,Consonant Voicing,/k/,/g/,Final
+Stack,Stag,Consonant Voicing,/k/,/g/,Final
+Tuck,Tug,Consonant Voicing,/k/,/g/,Final
+Wick,Wig,Consonant Voicing,/k/,/g/,Final
+Locker,Logger,Consonant Voicing,/k/,/g/,Medial
+Racket,Ragged,Consonant Voicing,/k/,/g/,Medial
+Sacking,Sagging,Consonant Voicing,/k/,/g/,Medial
+Bicker,Bigger,Consonant Voicing,/k/,/g/,Medial
+Fan,Van,Consonant Voicing,/f/,/v/,Initial
+Fine,Vine,Consonant Voicing,/f/,/v/,Initial
+Fast,Vast,Consonant Voicing,/f/,/v/,Initial
+Few,View,Consonant Voicing,/f/,/v/,Initial
+Fat,Vat,Consonant Voicing,/f/,/v/,Initial
+Feel,Veal,Consonant Voicing,/f/,/v/,Initial
+Ferry,Very,Consonant Voicing,/f/,/v/,Initial
+Fender,Vendor,Consonant Voicing,/f/,/v/,Initial
+File,Vile,Consonant Voicing,/f/,/v/,Initial
+Focal,Vocal,Consonant Voicing,/f/,/v/,Initial
+Foil,Voile,Consonant Voicing,/f/,/v/,Initial
+Safe,Save,Consonant Voicing,/f/,/v/,Final
+Leaf,Leave,Consonant Voicing,/f/,/v/,Final
+Proof,Prove,Consonant Voicing,/f/,/v/,Final
+Grief,Grieve,Consonant Voicing,/f/,/v/,Final
+Half,Have,Consonant Voicing,/f/,/v/,Final
+Life,Live,Consonant Voicing,/f/,/v/,Final
+Strife,Strive,Consonant Voicing,/f/,/v/,Final
+Belief,Believe,Consonant Voicing,/f/,/v/,Final
+Thief,Thieve,Consonant Voicing,/f/,/v/,Final
+Shelf,Shelve,Consonant Voicing,/f/,/v/,Final
+Calf,Calve,Consonant Voicing,/f/,/v/,Final
+Wife,Wive,Consonant Voicing,/f/,/v/,Final
+Sip,Zip,Consonant Voicing,/s/,/z/,Initial
+Sink,Zinc,Consonant Voicing,/s/,/z/,Initial
+Sue,Zoo,Consonant Voicing,/s/,/z/,Initial
+Seal,Zeal,Consonant Voicing,/s/,/z/,Initial
+Sap,Zap,Consonant Voicing,/s/,/z/,Initial
+Sing,Zing,Consonant Voicing,/s/,/z/,Initial
+Sack,Zack,Consonant Voicing,/s/,/z/,Initial
+Sane,Zane,Consonant Voicing,/s/,/z/,Initial
+Bus,Buzz,Consonant Voicing,/s/,/z/,Final
+Rice,Rise,Consonant Voicing,/s/,/z/,Final
+Price,Prize,Consonant Voicing,/s/,/z/,Final
+Face,Phase,Consonant Voicing,/s/,/z/,Final
+Loose,Lose,Consonant Voicing,/s/,/z/,Final
+Hiss,His,Consonant Voicing,/s/,/z/,Final
+Peace,Peas,Consonant Voicing,/s/,/z/,Final
+Ice,Eyes,Consonant Voicing,/s/,/z/,Final
+Race,Raise,Consonant Voicing,/s/,/z/,Final
+Mace,Maze,Consonant Voicing,/s/,/z/,Final
+Lace,Lays,Consonant Voicing,/s/,/z/,Final
+Fuss,Fuzz,Consonant Voicing,/s/,/z/,Final
+Base,Baize,Consonant Voicing,/s/,/z/,Final
+Brace,Braze,Consonant Voicing,/s/,/z/,Final
+Cease,Seize,Consonant Voicing,/s/,/z/,Final
+Dice,Dies,Consonant Voicing,/s/,/z/,Final
+Dose,Doze,Consonant Voicing,/s/,/z/,Final
+Fleece,Fleas,Consonant Voicing,/s/,/z/,Final
+Grace,Graze,Consonant Voicing,/s/,/z/,Final
+Lice,Lies,Consonant Voicing,/s/,/z/,Final
+Niece,Knees,Consonant Voicing,/s/,/z/,Final
+Noose,News,Consonant Voicing,/s/,/z/,Final
+Nose,Knows,Consonant Voicing,/s/,/z/,Final
+Pace,Pays,Consonant Voicing,/s/,/z/,Final
+Pence,Pens,Consonant Voicing,/s/,/z/,Final
+Place,Plays,Consonant Voicing,/s/,/z/,Final
+Fussy,Fuzzy,Consonant Voicing,/s/,/z/,Medial
+Lacy,Lazy,Consonant Voicing,/s/,/z/,Medial
+Muscle,Muzzle,Consonant Voicing,/s/,/z/,Medial
+Chin,Gin,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Cheap,Jeep,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Choke,Joke,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Cheer,Jeer,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chest,Jest,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chain,Jane,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chug,Jug,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Char,Jar,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chew,Jew,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chill,Jill,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Chunk,Junk,Consonant Voicing,/tʃ/,/dʒ/,Initial
+Rich,Ridge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Batch,Badge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Search,Surge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Etch,Edge,Consonant Voicing,/tʃ/,/dʒ/,Final
+H,Age,Consonant Voicing,/tʃ/,/dʒ/,Final
+Catch,Cadge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Latch,Lodge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Match,Madge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Patch,Padge,Consonant Voicing,/tʃ/,/dʒ/,Final
+Thigh,Thy,Consonant Voicing,/θ/,/ð/,Initial
+Teeth,Teethe,Consonant Voicing,/θ/,/ð/,Final
+Breath,Breathe,Consonant Voicing,/θ/,/ð/,Final
+Sooth,Soothe,Consonant Voicing,/θ/,/ð/,Final
+Bath,Bathe,Consonant Voicing,/θ/,/ð/,Final
+Wreath,Wreathe,Consonant Voicing,/θ/,/ð/,Final
+Ether,Either,Consonant Voicing,/θ/,/ð/,Medial
+Key,Tea,Consonant Place of Articulation,/k/,/t/,Initial
+Car,Tar,Consonant Place of Articulation,/k/,/t/,Initial
+Call,Tall,Consonant Place of Articulation,/k/,/t/,Initial
+Cake,Take,Consonant Place of Articulation,/k/,/t/,Initial
+Cool,Tool,Consonant Place of Articulation,/k/,/t/,Initial
+Corn,Torn,Consonant Place of Articulation,/k/,/t/,Initial
+Cub,Tub,Consonant Place of Articulation,/k/,/t/,Initial
+Coat,Tote,Consonant Place of Articulation,/k/,/t/,Initial
+Cuff,Tough,Consonant Place of Articulation,/k/,/t/,Initial
+Kind,Tined,Consonant Place of Articulation,/k/,/t/,Initial
+Kite,Tight,Consonant Place of Articulation,/k/,/t/,Initial
+Tape,Cape,Consonant Place of Articulation,/t/,/k/,Initial
+Tin,Kin,Consonant Place of Articulation,/t/,/k/,Initial
+Team,Keen,Consonant Place of Articulation,/t/,/k/,Initial
+Talk,Chalk,Consonant Place of Articulation,/t/,/k/,Initial
+Task,Cask,Consonant Place of Articulation,/t/,/k/,Initial
+Tick,Kick,Consonant Place of Articulation,/t/,/k/,Initial
+Tied,Cried,Consonant Place of Articulation,/t/,/k/,Initial
+Time,Chime,Consonant Place of Articulation,/t/,/k/,Initial
+Toad,Code,Consonant Place of Articulation,/t/,/k/,Initial
+Told,Cold,Consonant Place of Articulation,/t/,/k/,Initial
+Toll,Coal,Consonant Place of Articulation,/t/,/k/,Initial
+Tone,Cone,Consonant Place of Articulation,/t/,/k/,Initial
+Took,Cook,Consonant Place of Articulation,/t/,/k/,Initial
+Top,Cop,Consonant Place of Articulation,/t/,/k/,Initial
+Tore,Core,Consonant Place of Articulation,/t/,/k/,Initial
+Tough,Cuff,Consonant Place of Articulation,/t/,/k/,Initial
+Tow,Cow,Consonant Place of Articulation,/t/,/k/,Initial
+Tower,Cower,Consonant Place of Articulation,/t/,/k/,Initial
+Track,Crack,Consonant Place of Articulation,/t/,/k/,Initial
+Train,Crane,Consonant Place of Articulation,/t/,/k/,Initial
+Trash,Crash,Consonant Place of Articulation,/t/,/k/,Initial
+Treat,Crete,Consonant Place of Articulation,/t/,/k/,Initial
+True,Crew,Consonant Place of Articulation,/t/,/k/,Initial
+Trust,Crust,Consonant Place of Articulation,/t/,/k/,Initial
+Try,Cry,Consonant Place of Articulation,/t/,/k/,Initial
+Turn,Kern,Consonant Place of Articulation,/t/,/k/,Initial
+Two,Coo,Consonant Place of Articulation,/t/,/k/,Initial
+Go,Dough,Consonant Place of Articulation,/g/,/d/,Initial
+Gate,Date,Consonant Place of Articulation,/g/,/d/,Initial
+Guy,Die,Consonant Place of Articulation,/g/,/d/,Initial
+Gone,Dawn,Consonant Place of Articulation,/g/,/d/,Initial
+Gown,Down,Consonant Place of Articulation,/g/,/d/,Initial
+Gill,Dill,Consonant Place of Articulation,/g/,/d/,Initial
+Guess,Dress,Consonant Place of Articulation,/g/,/d/,Initial
+Gain,Dane,Consonant Place of Articulation,/g/,/d/,Initial
+Game,Dame,Consonant Place of Articulation,/g/,/d/,Initial
+Gash,Dash,Consonant Place of Articulation,/g/,/d/,Initial
+Gaze,Daze,Consonant Place of Articulation,/g/,/d/,Initial
+Gear,Deer,Consonant Place of Articulation,/g/,/d/,Initial
+Goal,Dole,Consonant Place of Articulation,/g/,/d/,Initial
+Gore,Door,Consonant Place of Articulation,/g/,/d/,Initial
+Got,Dot,Consonant Place of Articulation,/g/,/d/,Initial
+Grab,Drab,Consonant Place of Articulation,/g/,/d/,Initial
+Grain,Drain,Consonant Place of Articulation,/g/,/d/,Initial
+Gray,Dray,Consonant Place of Articulation,/g/,/d/,Initial
+Grew,Drew,Consonant Place of Articulation,/g/,/d/,Initial
+Grill,Drill,Consonant Place of Articulation,/g/,/d/,Initial
+Grip,Drip,Consonant Place of Articulation,/g/,/d/,Initial
+Ground,Drowned,Consonant Place of Articulation,/g/,/d/,Initial
+Grow,Dough,Consonant Place of Articulation,/g/,/d/,Initial
+Gull,Dull,Consonant Place of Articulation,/g/,/d/,Initial
+Gun,Dun,Consonant Place of Articulation,/g/,/d/,Initial
+Gust,Dust,Consonant Place of Articulation,/g/,/d/,Initial
+Big,Dig,Consonant Place of Articulation,/b/,/d/,Initial
+Bad,Dad,Consonant Place of Articulation,/b/,/d/,Initial
+Boat,Dote,Consonant Place of Articulation,/b/,/d/,Initial
+Bear,Dare,Consonant Place of Articulation,/b/,/d/,Initial
+Bait,Date,Consonant Place of Articulation,/b/,/d/,Initial
+Ball,Doll,Consonant Place of Articulation,/b/,/d/,Initial
+Beep,Deep,Consonant Place of Articulation,/b/,/d/,Initial
+Buck,Duck,Consonant Place of Articulation,/b/,/d/,Initial
+Ban,Dan,Consonant Place of Articulation,/b/,/d/,Initial
+Bark,Dark,Consonant Place of Articulation,/b/,/d/,Initial
+Bead,Deed,Consonant Place of Articulation,/b/,/d/,Initial
+Bed,Dead,Consonant Place of Articulation,/b/,/d/,Initial
+Bee,Dee,Consonant Place of Articulation,/b/,/d/,Initial
+Bell,Dell,Consonant Place of Articulation,/b/,/d/,Initial
+Bent,Dent,Consonant Place of Articulation,/b/,/d/,Initial
+Bid,Did,Consonant Place of Articulation,/b/,/d/,Initial
+Bill,Dill,Consonant Place of Articulation,/b/,/d/,Initial
+Bind,Dined,Consonant Place of Articulation,/b/,/d/,Initial
+Blaze,Daze,Consonant Place of Articulation,/b/,/d/,Initial
+Bleed,Deed,Consonant Place of Articulation,/b/,/d/,Initial
+Block,Dock,Consonant Place of Articulation,/b/,/d/,Initial
+Bloom,Doom,Consonant Place of Articulation,/b/,/d/,Initial
+Blow,Dough,Consonant Place of Articulation,/b/,/d/,Initial
+Blue,Due,Consonant Place of Articulation,/b/,/d/,Initial
+Bog,Dog,Consonant Place of Articulation,/b/,/d/,Initial
+Bone,Done,Consonant Place of Articulation,/b/,/d/,Initial
+Bore,Door,Consonant Place of Articulation,/b/,/d/,Initial
+Bought,Draught,Consonant Place of Articulation,/b/,/d/,Initial
+Bound,Downed,Consonant Place of Articulation,/b/,/d/,Initial
+Bow,Dough,Consonant Place of Articulation,/b/,/d/,Initial
+Bowl,Dole,Consonant Place of Articulation,/b/,/d/,Initial
+Brag,Drag,Consonant Place of Articulation,/b/,/d/,Initial
+Brain,Drain,Consonant Place of Articulation,/b/,/d/,Initial
+Brake,Drake,Consonant Place of Articulation,/b/,/d/,Initial
+Bread,Dread,Consonant Place of Articulation,/b/,/d/,Initial
+Brew,Drew,Consonant Place of Articulation,/b/,/d/,Initial
+Brown,Drown,Consonant Place of Articulation,/b/,/d/,Initial
+Bull,Dull,Consonant Place of Articulation,/b/,/d/,Initial
+Bump,Dump,Consonant Place of Articulation,/b/,/d/,Initial
+Bun,Dun,Consonant Place of Articulation,/b/,/d/,Initial
+Bust,Dust,Consonant Place of Articulation,/b/,/d/,Initial
+Buy,Die,Consonant Place of Articulation,/b/,/d/,Initial
+See,She,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sip,Ship,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sign,Shine,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Seat,Sheet,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Save,Shave,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sock,Shock,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sell,Shell,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sore,Shore,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Self,Shelf,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sack,Shack,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Said,Shed,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sake,Shake,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Same,Shame,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Saw,Shaw,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Say,Shay,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Seep,Sheep,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sew,Show,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sigh,Shy,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sill,Shill,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sin,Shin,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sod,Shod,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Son,Shun,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Soot,Shoot,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sop,Shop,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sort,Short,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sue,Shoe,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Suit,Shoot,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Sun,Shun,Consonant Place of Articulation,/s/,/ʃ/,Initial
+Mess,Mesh,Consonant Place of Articulation,/s/,/ʃ/,Final
+Gas,Gash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Lease,Leash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Puss,Push,Consonant Place of Articulation,/s/,/ʃ/,Final
+Bass,Bash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Buss,Bush,Consonant Place of Articulation,/s/,/ʃ/,Final
+Case,Cash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Crass,Crash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Diss,Dish,Consonant Place of Articulation,/s/,/ʃ/,Final
+Gus,Gush,Consonant Place of Articulation,/s/,/ʃ/,Final
+Lass,Lash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Mass,Mash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Moss,Mosh,Consonant Place of Articulation,/s/,/ʃ/,Final
+Race,Rash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Russ,Rush,Consonant Place of Articulation,/s/,/ʃ/,Final
+Sass,Sash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Toss,Tosh,Consonant Place of Articulation,/s/,/ʃ/,Final
+Trace,Trash,Consonant Place of Articulation,/s/,/ʃ/,Final
+Sin,Thin,Consonant Place of Articulation,/s/,/θ/,Initial
+Sink,Think,Consonant Place of Articulation,/s/,/θ/,Initial
+Some,Thumb,Consonant Place of Articulation,/s/,/θ/,Initial
+Saw,Thaw,Consonant Place of Articulation,/s/,/θ/,Initial
+Sick,Thick,Consonant Place of Articulation,/s/,/θ/,Initial
+Sought,Thought,Consonant Place of Articulation,/s/,/θ/,Initial
+Sank,Thank,Consonant Place of Articulation,/s/,/θ/,Initial
+Seem,Theme,Consonant Place of Articulation,/s/,/θ/,Initial
+Sigh,Thigh,Consonant Place of Articulation,/s/,/θ/,Initial
+Song,Thong,Consonant Place of Articulation,/s/,/θ/,Initial
+Face,Faith,Consonant Place of Articulation,/s/,/θ/,Final
+Pass,Path,Consonant Place of Articulation,/s/,/θ/,Final
+Miss,Myth,Consonant Place of Articulation,/s/,/θ/,Final
+Mass,Math,Consonant Place of Articulation,/s/,/θ/,Final
+Base,Bath,Consonant Place of Articulation,/s/,/θ/,Final
+Boss,Both,Consonant Place of Articulation,/s/,/θ/,Final
+Close,Cloth,Consonant Place of Articulation,/s/,/θ/,Final
+Force,Fourth,Consonant Place of Articulation,/s/,/θ/,Final
+Gross,Growth,Consonant Place of Articulation,/s/,/θ/,Final
+Kiss,Kith,Consonant Place of Articulation,/s/,/θ/,Final
+Lace,Lath,Consonant Place of Articulation,/s/,/θ/,Final
+Mice,Myth,Consonant Place of Articulation,/s/,/θ/,Final
+Moss,Moth,Consonant Place of Articulation,/s/,/θ/,Final
+Mouse,Mouth,Consonant Place of Articulation,/s/,/θ/,Final
+Race,Rath,Consonant Place of Articulation,/s/,/θ/,Final
+Truce,Truth,Consonant Place of Articulation,/s/,/θ/,Final
+Use,Youth,Consonant Place of Articulation,/s/,/θ/,Final
+Fin,Thin,Consonant Place of Articulation,/f/,/θ/,Initial
+Free,Three,Consonant Place of Articulation,/f/,/θ/,Initial
+Fought,Thought,Consonant Place of Articulation,/f/,/θ/,Initial
+Fret,Threat,Consonant Place of Articulation,/f/,/θ/,Initial
+Firm,Therm,Consonant Place of Articulation,/f/,/θ/,Initial
+First,Thirst,Consonant Place of Articulation,/f/,/θ/,Initial
+Fresh,Thresh,Consonant Place of Articulation,/f/,/θ/,Initial
+Frill,Thrill,Consonant Place of Articulation,/f/,/θ/,Initial
+Deaf,Death,Consonant Place of Articulation,/f/,/θ/,Final
+Roof,Ruth,Consonant Place of Articulation,/f/,/θ/,Final
+They,Day,Consonant Place of Articulation,/ð/,/d/,Initial
+Then,Den,Consonant Place of Articulation,/ð/,/d/,Initial
+There,Dare,Consonant Place of Articulation,/ð/,/d/,Initial
+Those,Doze,Consonant Place of Articulation,/ð/,/d/,Initial
+Than,Dan,Consonant Place of Articulation,/ð/,/d/,Initial
+Thee,Dee,Consonant Place of Articulation,/ð/,/d/,Initial
+Though,Dough,Consonant Place of Articulation,/ð/,/d/,Initial
+Thy,Die,Consonant Place of Articulation,/ð/,/d/,Initial
+Breathe,Breed,Consonant Place of Articulation,/ð/,/d/,Final
+Loathe,Load,Consonant Place of Articulation,/ð/,/d/,Final
+Soothe,Sued,Consonant Place of Articulation,/ð/,/d/,Final
+Writhe,Ride,Consonant Place of Articulation,/ð/,/d/,Final
+Wait,Rate,Consonant Place of Articulation,/w/,/r/,Initial
+Wed,Red,Consonant Place of Articulation,/w/,/r/,Initial
+Wing,Ring,Consonant Place of Articulation,/w/,/r/,Initial
+Wag,Rag,Consonant Place of Articulation,/w/,/r/,Initial
+Whip,Rip,Consonant Place of Articulation,/w/,/r/,Initial
+Wise,Rise,Consonant Place of Articulation,/w/,/r/,Initial
+Wore,Roar,Consonant Place of Articulation,/w/,/r/,Initial
+West,Rest,Consonant Place of Articulation,/w/,/r/,Initial
+Wail,Rail,Consonant Place of Articulation,/w/,/r/,Initial
+Wake,Rake,Consonant Place of Articulation,/w/,/r/,Initial
+Weep,Reap,Consonant Place of Articulation,/w/,/r/,Initial
+Wick,Rick,Consonant Place of Articulation,/w/,/r/,Initial
+Wide,Ride,Consonant Place of Articulation,/w/,/r/,Initial
+Wipe,Ripe,Consonant Place of Articulation,/w/,/r/,Initial
+Woke,Yolk,Consonant Place of Articulation,/w/,/j/,Initial
+Wet,Yet,Consonant Place of Articulation,/w/,/j/,Initial
+Wail,Yale,Consonant Place of Articulation,/w/,/j/,Initial
+Wall,Yawl,Consonant Place of Articulation,/w/,/j/,Initial
+Ward,Yard,Consonant Place of Articulation,/w/,/j/,Initial
+Warn,Yarn,Consonant Place of Articulation,/w/,/j/,Initial
+Way,Yay,Consonant Place of Articulation,/w/,/j/,Initial
+We,Ye,Consonant Place of Articulation,/w/,/j/,Initial
+Well,Yell,Consonant Place of Articulation,/w/,/j/,Initial
+Whelp,Yelp,Consonant Place of Articulation,/w/,/j/,Initial
+When,Yen,Consonant Place of Articulation,/w/,/j/,Initial
+Wield,Yield,Consonant Place of Articulation,/w/,/j/,Initial
+Win,Yin,Consonant Place of Articulation,/w/,/j/,Initial
+Whip,Yip,Consonant Place of Articulation,/w/,/j/,Initial
+Cat,Pat,Consonant Place of Articulation,/k/,/p/,Initial
+Can,Pan,Consonant Place of Articulation,/k/,/p/,Initial
+Keep,Peep,Consonant Place of Articulation,/k/,/p/,Initial
+Core,Pour,Consonant Place of Articulation,/k/,/p/,Initial
+Cuff,Puff,Consonant Place of Articulation,/k/,/p/,Initial
+Call,Paul,Consonant Place of Articulation,/k/,/p/,Initial
+Cane,Pain,Consonant Place of Articulation,/k/,/p/,Initial
+Care,Pair,Consonant Place of Articulation,/k/,/p/,Initial
+Cart,Part,Consonant Place of Articulation,/k/,/p/,Initial
+Case,Pace,Consonant Place of Articulation,/k/,/p/,Initial
+Catch,Patch,Consonant Place of Articulation,/k/,/p/,Initial
+Cave,Pave,Consonant Place of Articulation,/k/,/p/,Initial
+Caw,Paw,Consonant Place of Articulation,/k/,/p/,Initial
+Cease,Peace,Consonant Place of Articulation,/k/,/p/,Initial
+Chain,Pain,Consonant Place of Articulation,/k/,/p/,Initial
+Chair,Pair,Consonant Place of Articulation,/k/,/p/,Initial
+Cheap,Peep,Consonant Place of Articulation,/k/,/p/,Initial
+Check,Peck,Consonant Place of Articulation,/k/,/p/,Initial
+Cheek,Peak,Consonant Place of Articulation,/k/,/p/,Initial
+Cheer,Peer,Consonant Place of Articulation,/k/,/p/,Initial
+Cheese,Pease,Consonant Place of Articulation,/k/,/p/,Initial
+Chest,Pest,Consonant Place of Articulation,/k/,/p/,Initial
+Chick,Pick,Consonant Place of Articulation,/k/,/p/,Initial
+Chill,Pill,Consonant Place of Articulation,/k/,/p/,Initial
+Chin,Pin,Consonant Place of Articulation,/k/,/p/,Initial
+Chip,Pip,Consonant Place of Articulation,/k/,/p/,Initial
+Choke,Poke,Consonant Place of Articulation,/k/,/p/,Initial
+Chop,Pop,Consonant Place of Articulation,/k/,/p/,Initial
+Chore,Pour,Consonant Place of Articulation,/k/,/p/,Initial
+Clam,Pam,Consonant Place of Articulation,/k/,/p/,Initial
+Clan,Plan,Consonant Place of Articulation,/k/,/p/,Initial
+Click,Pick,Consonant Place of Articulation,/k/,/p/,Initial
+Clip,Pip,Consonant Place of Articulation,/k/,/p/,Initial
+Clod,Plod,Consonant Place of Articulation,/k/,/p/,Initial
+Clot,Plot,Consonant Place of Articulation,/k/,/p/,Initial
+Cloud,Proud,Consonant Place of Articulation,/k/,/p/,Initial
+Coal,Pole,Consonant Place of Articulation,/k/,/p/,Initial
+Coast,Post,Consonant Place of Articulation,/k/,/p/,Initial
+Coke,Poke,Consonant Place of Articulation,/k/,/p/,Initial
+Cool,Pool,Consonant Place of Articulation,/k/,/p/,Initial
+Cop,Pop,Consonant Place of Articulation,/k/,/p/,Initial
+Cope,Pope,Consonant Place of Articulation,/k/,/p/,Initial
+Cork,Pork,Consonant Place of Articulation,/k/,/p/,Initial
+Cost,Post,Consonant Place of Articulation,/k/,/p/,Initial
+Cot,Pot,Consonant Place of Articulation,/k/,/p/,Initial
+Couch,Pouch,Consonant Place of Articulation,/k/,/p/,Initial
+Cow,Pow,Consonant Place of Articulation,/k/,/p/,Initial
+Crank,Prank,Consonant Place of Articulation,/k/,/p/,Initial
+Crime,Prime,Consonant Place of Articulation,/k/,/p/,Initial
+Crop,Prop,Consonant Place of Articulation,/k/,/p/,Initial
+Crowd,Proud,Consonant Place of Articulation,/k/,/p/,Initial
+Cry,Pry,Consonant Place of Articulation,/k/,/p/,Initial
+Cub,Pub,Consonant Place of Articulation,/k/,/p/,Initial
+Cuddle,Puddle,Consonant Place of Articulation,/k/,/p/,Initial
+Cue,Pew,Consonant Place of Articulation,/k/,/p/,Initial
+Cull,Pull,Consonant Place of Articulation,/k/,/p/,Initial
+Cup,Pup,Consonant Place of Articulation,/k/,/p/,Initial
+Cure,Pure,Consonant Place of Articulation,/k/,/p/,Initial
+Curl,Purl,Consonant Place of Articulation,/k/,/p/,Initial
+Curse,Purse,Consonant Place of Articulation,/k/,/p/,Initial
+Cut,Put,Consonant Place of Articulation,/k/,/p/,Initial
+Four,Door,Consonant Place of Articulation,/f/,/d/,Initial
+Fight,Tight,Consonant Place of Articulation,/f/,/t/,Initial
+Fun,Sun,Consonant Place of Articulation,/f/,/s/,Initial
+Far,Star,Consonant Place of Articulation,/f/,/s/,Initial
+Fast,Past,Consonant Place of Articulation,/f/,/p/,Initial
+Fat,Bat,Consonant Place of Articulation,/f/,/b/,Initial
+Feed,Seed,Consonant Place of Articulation,/f/,/s/,Initial
+Fell,Tell,Consonant Place of Articulation,/f/,/t/,Initial
+Fill,Bill,Consonant Place of Articulation,/f/,/b/,Initial
+Fine,Dine,Consonant Place of Articulation,/f/,/d/,Initial
+Fish,Wish,Consonant Place of Articulation,/f/,/w/,Initial
+Foam,Roam,Consonant Place of Articulation,/f/,/r/,Initial
+Folk,Yolk,Consonant Place of Articulation,/f/,/j/,Initial
+Foot,Put,Consonant Place of Articulation,/f/,/p/,Initial
+Full,Pull,Consonant Place of Articulation,/f/,/p/,Initial
+Fur,Purr,Consonant Place of Articulation,/f/,/p/,Initial
+Fame,Tame,Consonant Place of Articulation,/f/,/t/,Initial
+Fake,Take,Consonant Place of Articulation,/f/,/t/,Initial
+Fan,Tan,Consonant Place of Articulation,/f/,/t/,Initial
+Fang,Tang,Consonant Place of Articulation,/f/,/t/,Initial
+Farm,Harm,Consonant Place of Articulation,/f/,/h/,Initial
+Fart,Tart,Consonant Place of Articulation,/f/,/t/,Initial
+Fate,Date,Consonant Place of Articulation,/f/,/d/,Initial
+Fault,Vault,Consonant Place of Articulation,/f/,/v/,Initial
+Fawn,Dawn,Consonant Place of Articulation,/f/,/d/,Initial
+Fear,Tear,Consonant Place of Articulation,/f/,/t/,Initial
+Feast,Least,Consonant Place of Articulation,/f/,/l/,Initial
+Feat,Neat,Consonant Place of Articulation,/f/,/n/,Initial
+Fed,Said,Consonant Place of Articulation,/f/,/s/,Initial
+Fee,Tea,Consonant Place of Articulation,/f/,/t/,Initial
+Feed,Need,Consonant Place of Articulation,/f/,/n/,Initial
+Feel,Reel,Consonant Place of Articulation,/f/,/r/,Initial
+Felt,Belt,Consonant Place of Articulation,/f/,/b/,Initial
+Fen,Then,Consonant Place of Articulation,/f/,/ð/,Initial
+Fence,Tense,Consonant Place of Articulation,/f/,/t/,Initial
+Fend,Send,Consonant Place of Articulation,/f/,/s/,Initial
+Ferry,Berry,Consonant Place of Articulation,/f/,/b/,Initial
+Fetch,Sketch,Consonant Place of Articulation,/f/,/s/,Initial
+Fete,Date,Consonant Place of Articulation,/f/,/d/,Initial
+Few,Chew,Consonant Place of Articulation,/f/,/tʃ/,Initial
+Fib,Rib,Consonant Place of Articulation,/f/,/r/,Initial
+Fiddle,Middle,Consonant Place of Articulation,/f/,/m/,Initial
+Field,Wield,Consonant Place of Articulation,/f/,/w/,Initial
+Fig,Big,Consonant Place of Articulation,/f/,/b/,Initial
+Fight,Might,Consonant Place of Articulation,/f/,/m/,Initial
+File,Tile,Consonant Place of Articulation,/f/,/t/,Initial
+Fill,Will,Consonant Place of Articulation,/f/,/w/,Initial
+Fin,Tin,Consonant Place of Articulation,/f/,/t/,Initial
+Finch,Winch,Consonant Place of Articulation,/f/,/w/,Initial
+Find,Bind,Consonant Place of Articulation,/f/,/b/,Initial
+Fine,Line,Consonant Place of Articulation,/f/,/l/,Initial
+Fir,Sir,Consonant Place of Articulation,/f/,/s/,Initial
+Fire,Hire,Consonant Place of Articulation,/f/,/h/,Initial
+Firm,Term,Consonant Place of Articulation,/f/,/t/,Initial
+Fish,Dish,Consonant Place of Articulation,/f/,/d/,Initial
+Fist,Mist,Consonant Place of Articulation,/f/,/m/,Initial
+Fit,Sit,Consonant Place of Articulation,/f/,/s/,Initial
+Fix,Mix,Consonant Place of Articulation,/f/,/m/,Initial
+Fizz,Whizz,Consonant Place of Articulation,/f/,/w/,Initial
+Flag,Lag,Consonant Place of Articulation,/f/,/l/,Initial
+Flake,Rake,Consonant Place of Articulation,/f/,/r/,Initial
+Flame,Lame,Consonant Place of Articulation,/f/,/l/,Initial
+Flap,Tap,Consonant Place of Articulation,/f/,/t/,Initial
+Flash,Lash,Consonant Place of Articulation,/f/,/l/,Initial
+Flask,Mask,Consonant Place of Articulation,/f/,/m/,Initial
+Flat,That,Consonant Place of Articulation,/f/,/ð/,Initial
+Flaw,Law,Consonant Place of Articulation,/f/,/l/,Initial
+Flea,Tea,Consonant Place of Articulation,/f/,/t/,Initial
+Fled,Said,Consonant Place of Articulation,/f/,/s/,Initial
+Fleece,Niece,Consonant Place of Articulation,/f/,/n/,Initial
+Flesh,Mesh,Consonant Place of Articulation,/f/,/m/,Initial
+Flew,Blue,Consonant Place of Articulation,/f/,/b/,Initial
+Flick,Lick,Consonant Place of Articulation,/f/,/l/,Initial
+Flight,Bite,Consonant Place of Articulation,/f/,/b/,Initial
+Fling,Sing,Consonant Place of Articulation,/f/,/s/,Initial
+Flip,Tip,Consonant Place of Articulation,/f/,/t/,Initial
+Flirt,Dirt,Consonant Place of Articulation,/f/,/d/,Initial
+Float,Boat,Consonant Place of Articulation,/f/,/b/,Initial
+Flock,Dock,Consonant Place of Articulation,/f/,/d/,Initial
+Flog,Dog,Consonant Place of Articulation,/f/,/d/,Initial
+Flood,Mud,Consonant Place of Articulation,/f/,/m/,Initial
+Floor,Door,Consonant Place of Articulation,/f/,/d/,Initial
+Flop,Top,Consonant Place of Articulation,/f/,/t/,Initial
+Flow,Low,Consonant Place of Articulation,/f/,/l/,Initial
+Fluff,Stuff,Consonant Place of Articulation,/f/,/s/,Initial
+Flush,Rush,Consonant Place of Articulation,/f/,/r/,Initial
+Flute,Loot,Consonant Place of Articulation,/f/,/l/,Initial
+Fly,Lie,Consonant Place of Articulation,/f/,/l/,Initial
+Foal,Goal,Consonant Place of Articulation,/f/,/g/,Initial
+Foam,Home,Consonant Place of Articulation,/f/,/h/,Initial
+Fog,Dog,Consonant Place of Articulation,/f/,/d/,Initial
+Foil,Boil,Consonant Place of Articulation,/f/,/b/,Initial
+Fold,Gold,Consonant Place of Articulation,/f/,/g/,Initial
+Folk,Soak,Consonant Place of Articulation,/f/,/s/,Initial
+Fond,Bond,Consonant Place of Articulation,/f/,/b/,Initial
+Food,Mood,Consonant Place of Articulation,/f/,/m/,Initial
+Fool,Pool,Consonant Place of Articulation,/f/,/p/,Initial
+Foot,Soot,Consonant Place of Articulation,/f/,/s/,Initial
+For,War,Consonant Place of Articulation,/f/,/w/,Initial
+Ford,Board,Consonant Place of Articulation,/f/,/b/,Initial
+Fore,Sore,Consonant Place of Articulation,/f/,/s/,Initial
+Fork,Pork,Consonant Place of Articulation,/f/,/p/,Initial
+Form,Warm,Consonant Place of Articulation,/f/,/w/,Initial
+Fort,Sort,Consonant Place of Articulation,/f/,/s/,Initial
+Foul,Howl,Consonant Place of Articulation,/f/,/h/,Initial
+Found,Sound,Consonant Place of Articulation,/f/,/s/,Initial
+Four,Tour,Consonant Place of Articulation,/f/,/t/,Initial
+Fowl,Vowel,Consonant Place of Articulation,/f/,/v/,Initial
+Fox,Box,Consonant Place of Articulation,/f/,/b/,Initial
+Fray,Ray,Consonant Place of Articulation,/f/,/r/,Initial
+Free,Tree,Consonant Place of Articulation,/f/,/t/,Initial
+Fret,Bet,Consonant Place of Articulation,/f/,/b/,Initial
+Fridge,Bridge,Consonant Place of Articulation,/f/,/b/,Initial
+Friend,Bend,Consonant Place of Articulation,/f/,/b/,Initial
+Fright,Right,Consonant Place of Articulation,/f/,/r/,Initial
+Frill,Grill,Consonant Place of Articulation,/f/,/g/,Initial
+Fringe,Cringe,Consonant Place of Articulation,/f/,/k/,Initial
+Frock,Crock,Consonant Place of Articulation,/f/,/k/,Initial
+Frog,Dog,Consonant Place of Articulation,/f/,/d/,Initial
+From,Rum,Consonant Place of Articulation,/f/,/r/,Initial
+Front,Runt,Consonant Place of Articulation,/f/,/r/,Initial
+Frown,Crown,Consonant Place of Articulation,/f/,/k/,Initial
+Fruit,Boot,Consonant Place of Articulation,/f/,/b/,Initial
+Fry,Try,Consonant Place of Articulation,/f/,/t/,Initial
+Fudge,Judge,Consonant Place of Articulation,/f/,/dʒ/,Initial
+Full,Dull,Consonant Place of Articulation,/f/,/d/,Initial
+Fume,Tomb,Consonant Place of Articulation,/f/,/t/,Initial
+Fun,Run,Consonant Place of Articulation,/f/,/r/,Initial
+Fund,Bund,Consonant Place of Articulation,/f/,/b/,Initial
+Fur,Sir,Consonant Place of Articulation,/f/,/s/,Initial
+Fuse,Use,Consonant Place of Articulation,/f/,/j/,Initial
+Fuss,Bus,Consonant Place of Articulation,/f/,/b/,Initial
+Chew,Shoe,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chop,Shop,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chair,Share,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chip,Ship,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Choose,Shoes,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chic,Sheik,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Cheat,Sheet,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Cheer,Sheer,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chief,Sheaf,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chill,Shill,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chin,Shin,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chine,Shine,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chock,Shock,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chore,Shore,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chose,Shows,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chow,Show,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Chuck,Shuck,Consonant Manner of Articulation,/tʃ/,/ʃ/,Initial
+Catch,Cash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Watch,Wash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Match,Mash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Wish,Witch,Consonant Manner of Articulation,/ʃ/,/tʃ/,Final
+Ditch,Dish,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Hatch,Hash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Botch,Bosh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Branch,Brash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Crutch,Crush,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Ditch,Dish,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Fletch,Flesh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Hatch,Hash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Hutch,Hush,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Latch,Lash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Leach,Leash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Leech,Leash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Lunch,Lush,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+March,Marsh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Match,Mash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Much,Mush,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Mulch,Mulsh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Perch,Persh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Poach,Posh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Punch,Push,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Ranch,Rash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Switch,Swish,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Watch,Wash,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Welch,Welsh,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Which,Wish,Consonant Manner of Articulation,/tʃ/,/ʃ/,Final
+Tip,Sip,Consonant Manner of Articulation,/t/,/s/,Initial
+Tear,Sear,Consonant Manner of Articulation,/t/,/s/,Initial
+Talk,Sock,Consonant Manner of Articulation,/t/,/s/,Initial
+Tale,Sail,Consonant Manner of Articulation,/t/,/s/,Initial
+Team,Seem,Consonant Manner of Articulation,/t/,/s/,Initial
+Tan,San,Consonant Manner of Articulation,/t/,/s/,Initial
+Taught,Sought,Consonant Manner of Articulation,/t/,/s/,Initial
+Tick,Sick,Consonant Manner of Articulation,/t/,/s/,Initial
+Tie,Sigh,Consonant Manner of Articulation,/t/,/s/,Initial
+Tight,Sight,Consonant Manner of Articulation,/t/,/s/,Initial
+Till,Sill,Consonant Manner of Articulation,/t/,/s/,Initial
+Tin,Sin,Consonant Manner of Articulation,/t/,/s/,Initial
+Tine,Sign,Consonant Manner of Articulation,/t/,/s/,Initial
+Tinge,Singe,Consonant Manner of Articulation,/t/,/s/,Initial
+Tire,Sire,Consonant Manner of Articulation,/t/,/s/,Initial
+Toe,Sew,Consonant Manner of Articulation,/t/,/s/,Initial
+Told,Sold,Consonant Manner of Articulation,/t/,/s/,Initial
+Tore,Sore,Consonant Manner of Articulation,/t/,/s/,Initial
+Town,Sown,Consonant Manner of Articulation,/t/,/s/,Initial
+Toy,Soy,Consonant Manner of Articulation,/t/,/s/,Initial
+Track,Sack,Consonant Manner of Articulation,/t/,/s/,Initial
+Trail,Sail,Consonant Manner of Articulation,/t/,/s/,Initial
+Trap,Sap,Consonant Manner of Articulation,/t/,/s/,Initial
+Tray,Say,Consonant Manner of Articulation,/t/,/s/,Initial
+Tread,Said,Consonant Manner of Articulation,/t/,/s/,Initial
+Treat,Seat,Consonant Manner of Articulation,/t/,/s/,Initial
+Tree,See,Consonant Manner of Articulation,/t/,/s/,Initial
+Trend,Send,Consonant Manner of Articulation,/t/,/s/,Initial
+Trip,Sip,Consonant Manner of Articulation,/t/,/s/,Initial
+True,Sue,Consonant Manner of Articulation,/t/,/s/,Initial
+Trunk,Sunk,Consonant Manner of Articulation,/t/,/s/,Initial
+Try,Sigh,Consonant Manner of Articulation,/t/,/s/,Initial
+Tub,Sub,Consonant Manner of Articulation,/t/,/s/,Initial
+Tuck,Suck,Consonant Manner of Articulation,/t/,/s/,Initial
+Tune,Soon,Consonant Manner of Articulation,/t/,/s/,Initial
+Turf,Surf,Consonant Manner of Articulation,/t/,/s/,Initial
+Two,Sue,Consonant Manner of Articulation,/t/,/s/,Initial
+Pants,Pass,Consonant Manner of Articulation,/t/,/s/,Final
+Dip,Zip,Consonant Manner of Articulation,/d/,/z/,Initial
+Road,Rose,Consonant Manner of Articulation,/d/,/z/,Final
+Bead,Bees,Consonant Manner of Articulation,/d/,/z/,Final
+Pat,Fat,Consonant Manner of Articulation,/p/,/f/,Initial
+Pail,Fail,Consonant Manner of Articulation,/p/,/f/,Initial
+Pour,Four,Consonant Manner of Articulation,/p/,/f/,Initial
+Pile,File,Consonant Manner of Articulation,/p/,/f/,Initial
+Pill,Fill,Consonant Manner of Articulation,/p/,/f/,Initial
+Pond,Fond,Consonant Manner of Articulation,/p/,/f/,Initial
+Pace,Face,Consonant Manner of Articulation,/p/,/f/,Initial
+Pan,Fan,Consonant Manner of Articulation,/p/,/f/,Initial
+Part,Fart,Consonant Manner of Articulation,/p/,/f/,Initial
+Peel,Feel,Consonant Manner of Articulation,/p/,/f/,Initial
+Pine,Fine,Consonant Manner of Articulation,/p/,/f/,Initial
+Pork,Fork,Consonant Manner of Articulation,/p/,/f/,Initial
+Leap,Leaf,Consonant Manner of Articulation,/p/,/f/,Final
+Chop,Cough,Consonant Manner of Articulation,/p/,/f/,Final
+Bake,Make,Consonant Manner of Articulation,/b/,/m/,Initial
+Beach,Meet,Consonant Manner of Articulation,/b/,/m/,Initial
+Boat,Moat,Consonant Manner of Articulation,/b/,/m/,Initial
+Bite,Might,Consonant Manner of Articulation,/b/,/m/,Initial
+Ball,Mall,Consonant Manner of Articulation,/b/,/m/,Initial
+Ban,Man,Consonant Manner of Articulation,/b/,/m/,Initial
+Bat,Mat,Consonant Manner of Articulation,/b/,/m/,Initial
+Bean,Mean,Consonant Manner of Articulation,/b/,/m/,Initial
+Bend,Mend,Consonant Manner of Articulation,/b/,/m/,Initial
+Best,Nest,Consonant Manner of Articulation,/b/,/n/,Initial
+Boon,Noon,Consonant Manner of Articulation,/b/,/n/,Initial
+Bought,Naught,Consonant Manner of Articulation,/b/,/n/,Initial
+Bow,Know,Consonant Manner of Articulation,/b/,/n/,Initial
+Map,Nap,Consonant Manner of Articulation,/m/,/n/,Initial
+Might,Night,Consonant Manner of Articulation,/m/,/n/,Initial
+Meat,Neat,Consonant Manner of Articulation,/m/,/n/,Initial
+Mail,Nail,Consonant Manner of Articulation,/m/,/n/,Initial
+More,Nor,Consonant Manner of Articulation,/m/,/n/,Initial
+Mice,Nice,Consonant Manner of Articulation,/m/,/n/,Initial
+Mound,Noun,Consonant Manner of Articulation,/m/,/n/,Initial
+Sum,Sun,Consonant Manner of Articulation,/m/,/n/,Final
+Same,Sane,Consonant Manner of Articulation,/m/,/n/,Final
+Team,Teen,Consonant Manner of Articulation,/m/,/n/,Final
+Lick,Wick,Consonant Manner of Articulation,/l/,/w/,Initial
+Light,White,Consonant Manner of Articulation,/l/,/w/,Initial
+Loot,Root,Consonant Manner of Articulation,/l/,/r/,Initial
+Lest,West,Consonant Manner of Articulation,/l/,/w/,Initial
+Lied,Wide,Consonant Manner of Articulation,/l/,/w/,Initial
+Read,Weed,Consonant Manner of Articulation,/r/,/w/,Initial
+Rake,Wake,Consonant Manner of Articulation,/r/,/w/,Initial
+Rest,West,Consonant Manner of Articulation,/r/,/w/,Initial
+Right,White,Consonant Manner of Articulation,/r/,/w/,Initial
+Yell,Well,Consonant Manner of Articulation,/j/,/w/,Initial
+Yawn,Warn,Consonant Manner of Articulation,/j/,/w/,Initial
+Yes,Guess,Consonant Manner of Articulation,/j/,/g/,Initial
+Yet,Get,Consonant Manner of Articulation,/j/,/g/,Initial
+Lake,Rake,Consonant Manner of Articulation,/l/,/r/,Initial
+Light,Right,Consonant Manner of Articulation,/l/,/r/,Initial
+Lead,Read,Consonant Manner of Articulation,/l/,/r/,Initial
+Lane,Rain,Consonant Manner of Articulation,/l/,/r/,Initial
+Load,Road,Consonant Manner of Articulation,/l/,/r/,Initial
+Lice,Rice,Consonant Manner of Articulation,/l/,/r/,Initial
+Lock,Rock,Consonant Manner of Articulation,/l/,/r/,Initial
+Glass,Grass,Consonant Manner of Articulation,/l/,/r/,Medial
+Flee,Free,Consonant Manner of Articulation,/l/,/r/,Medial
+Play,Pray,Consonant Manner of Articulation,/l/,/r/,Medial
+Belly,Berry,Consonant Manner of Articulation,/l/,/r/,Medial
+Alive,Arrive,Consonant Manner of Articulation,/l/,/r/,Medial
+Collect,Correct,Consonant Manner of Articulation,/l/,/r/,Medial
+Stop,Shop,Consonant Manner of Articulation,/t/,/ʃ/,Initial
+Tear,Share,Consonant Manner of Articulation,/t/,/ʃ/,Initial
+Top,Chop,Consonant Manner of Articulation,/t/,/tʃ/,Initial
+Tip,Chip,Consonant Manner of Articulation,/t/,/tʃ/,Initial
+Tick,Chick,Consonant Manner of Articulation,/t/,/tʃ/,Initial
+Tool,Cool,Consonant Manner of Articulation,/t/,/k/,Initial
+Heat,Hit,Vowel Height,/iː/,/ɪ/,Medial
+Beat,Bit,Vowel Height,/iː/,/ɪ/,Medial
+Seat,Sit,Vowel Height,/iː/,/ɪ/,Medial
+Feet,Fit,Vowel Height,/iː/,/ɪ/,Medial
+Keen,Kin,Vowel Height,/iː/,/ɪ/,Medial
+Leak,Lick,Vowel Height,/iː/,/ɪ/,Medial
+Deep,Dip,Vowel Height,/iː/,/ɪ/,Medial
+Sheep,Ship,Vowel Height,/iː/,/ɪ/,Medial
+Green,Grin,Vowel Height,/iː/,/ɪ/,Medial
+Steal,Still,Vowel Height,/iː/,/ɪ/,Medial
+Cheek,Chick,Vowel Height,/iː/,/ɪ/,Medial
+Deal,Dill,Vowel Height,/iː/,/ɪ/,Medial
+Each,Itch,Vowel Height,/iː/,/ɪ/,Medial
+Feel,Fill,Vowel Height,/iː/,/ɪ/,Medial
+Read,Rid,Vowel Height,/iː/,/ɪ/,Medial
+Seek,Sick,Vowel Height,/iː/,/ɪ/,Medial
+Wean,Win,Vowel Height,/iː/,/ɪ/,Medial
+Bean,Bin,Vowel Height,/iː/,/ɪ/,Medial
+Deed,Did,Vowel Height,/iː/,/ɪ/,Medial
+Eat,It,Vowel Height,/iː/,/ɪ/,Medial
+Heap,Hip,Vowel Height,/iː/,/ɪ/,Medial
+Heel,Hill,Vowel Height,/iː/,/ɪ/,Medial
+Knee,Knit,Vowel Height,/iː/,/ɪ/,Medial
+Lead,Lid,Vowel Height,/iː/,/ɪ/,Medial
+Leap,Lip,Vowel Height,/iː/,/ɪ/,Medial
+Least,List,Vowel Height,/iː/,/ɪ/,Medial
+Meal,Mill,Vowel Height,/iː/,/ɪ/,Medial
+Peak,Pick,Vowel Height,/iː/,/ɪ/,Medial
+Seen,Sin,Vowel Height,/iː/,/ɪ/,Medial
+Sleep,Slip,Vowel Height,/iː/,/ɪ/,Medial
+Team,Tim,Vowel Height,/iː/,/ɪ/,Medial
+Bait,Bet,Vowel Height,/eɪ/,/ɛ/,Medial
+Late,Let,Vowel Height,/eɪ/,/ɛ/,Medial
+Mate,Met,Vowel Height,/eɪ/,/ɛ/,Medial
+Pain,Pen,Vowel Height,/eɪ/,/ɛ/,Medial
+Raid,Red,Vowel Height,/eɪ/,/ɛ/,Medial
+Sale,Sell,Vowel Height,/eɪ/,/ɛ/,Medial
+Taste,Test,Vowel Height,/eɪ/,/ɛ/,Medial
+Wait,Wet,Vowel Height,/eɪ/,/ɛ/,Medial
+Gate,Get,Vowel Height,/eɪ/,/ɛ/,Medial
+Fail,Fell,Vowel Height,/eɪ/,/ɛ/,Medial
+Fade,Fed,Vowel Height,/eɪ/,/ɛ/,Medial
+Laid,Led,Vowel Height,/eɪ/,/ɛ/,Medial
+Main,Men,Vowel Height,/eɪ/,/ɛ/,Medial
+Wade,Wed,Vowel Height,/eɪ/,/ɛ/,Medial
+Date,Debt,Vowel Height,/eɪ/,/ɛ/,Medial
+Grate,Great,Vowel Height,/eɪ/,/ɛ/,Medial
+Tail,Tell,Vowel Height,/eɪ/,/ɛ/,Medial
+Trade,Tread,Vowel Height,/eɪ/,/ɛ/,Medial
+Fell,Fill,Vowel Height,/ɛ/,/ɪ/,Medial
+Set,Sit,Vowel Height,/ɛ/,/ɪ/,Medial
+Ten,Tin,Vowel Height,/ɛ/,/ɪ/,Medial
+Bet,Bit,Vowel Height,/ɛ/,/ɪ/,Medial
+Did,Dead,Vowel Height,/ɪ/,/ɛ/,Medial
+Desk,Disk,Vowel Height,/ɛ/,/ɪ/,Medial
+Knit,Net,Vowel Height,/ɪ/,/ɛ/,Medial
+List,Lest,Vowel Height,/ɪ/,/ɛ/,Medial
+Pick,Peck,Vowel Height,/ɪ/,/ɛ/,Medial
+Pin,Pen,Vowel Height,/ɪ/,/ɛ/,Medial
+Bell,Bill,Vowel Height,/ɛ/,/ɪ/,Medial
+Beg,Big,Vowel Height,/ɛ/,/ɪ/,Medial
+Check,Chick,Vowel Height,/ɛ/,/ɪ/,Medial
+Den,Din,Vowel Height,/ɛ/,/ɪ/,Medial
+Fetch,Fitch,Vowel Height,/ɛ/,/ɪ/,Medial
+Gem,Jim,Vowel Height,/ɛ/,/ɪ/,Medial
+Hem,Him,Vowel Height,/ɛ/,/ɪ/,Medial
+Left,Lift,Vowel Height,/ɛ/,/ɪ/,Medial
+Mess,Miss,Vowel Height,/ɛ/,/ɪ/,Medial
+Neck,Nick,Vowel Height,/ɛ/,/ɪ/,Medial
+Peg,Pig,Vowel Height,/ɛ/,/ɪ/,Medial
+Wreck,Rick,Vowel Height,/ɛ/,/ɪ/,Medial
+Bet,Bat,Vowel Height,/ɛ/,/æ/,Medial
+Bed,Bad,Vowel Height,/ɛ/,/æ/,Medial
+Head,Had,Vowel Height,/ɛ/,/æ/,Medial
+Men,Man,Vowel Height,/ɛ/,/æ/,Medial
+Said,Sad,Vowel Height,/ɛ/,/æ/,Medial
+Send,Sand,Vowel Height,/ɛ/,/æ/,Medial
+Blend,Bland,Vowel Height,/ɛ/,/æ/,Medial
+Beg,Bag,Vowel Height,/ɛ/,/æ/,Medial
+End,And,Vowel Height,/ɛ/,/æ/,Medial
+Gem,Jam,Vowel Height,/ɛ/,/æ/,Medial
+Left,Laughed,Vowel Height,/ɛ/,/æ/,Medial
+Bend,Band,Vowel Height,/ɛ/,/æ/,Medial
+Dead,Dad,Vowel Height,/ɛ/,/æ/,Medial
+Flesh,Flash,Vowel Height,/ɛ/,/æ/,Medial
+Guess,Gas,Vowel Height,/ɛ/,/æ/,Medial
+Lend,Land,Vowel Height,/ɛ/,/æ/,Medial
+Mesh,Mash,Vowel Height,/ɛ/,/æ/,Medial
+Peck,Pack,Vowel Height,/ɛ/,/æ/,Medial
+Pet,Pat,Vowel Height,/ɛ/,/æ/,Medial
+Pool,Pull,Vowel Height,/uː/,/ʊ/,Medial
+Food,Foot,Vowel Height,/uː/,/ʊ/,Medial
+Luke,Look,Vowel Height,/uː/,/ʊ/,Medial
+Suit,Soot,Vowel Height,/uː/,/ʊ/,Medial
+Fool,Full,Vowel Height,/uː/,/ʊ/,Medial
+Cooed,Could,Vowel Height,/uː/,/ʊ/,Medial
+Wooed,Would,Vowel Height,/uː/,/ʊ/,Medial
+Stewed,Stood,Vowel Height,/uː/,/ʊ/,Medial
+Could,Cud,Vowel Height,/ʊ/,/ʌ/,Medial
+Look,Luck,Vowel Height,/ʊ/,/ʌ/,Medial
+Put,Putt,Vowel Height,/ʊ/,/ʌ/,Medial
+Book,Buck,Vowel Height,/ʊ/,/ʌ/,Medial
+Shook,Shuck,Vowel Height,/ʊ/,/ʌ/,Medial
+Took,Tuck,Vowel Height,/ʊ/,/ʌ/,Medial
+Stood,Stud,Vowel Height,/ʊ/,/ʌ/,Medial
+Boat,Bought,Vowel Height,/oʊ/,/ɔː/,Medial
+Coat,Caught,Vowel Height,/oʊ/,/ɔː/,Medial
+Ball,Bowl,Vowel Height,/ɔː/,/oʊ/,Medial
+Lawn,Loan,Vowel Height,/ɔː/,/oʊ/,Medial
+Coal,Call,Vowel Height,/oʊ/,/ɔː/,Medial
+Woke,Walk,Vowel Height,/oʊ/,/ɔː/,Medial
+Stole,Stall,Vowel Height,/oʊ/,/ɔː/,Medial
+Close,Claws,Vowel Height,/oʊ/,/ɔː/,Medial
+Flow,Flaw,Vowel Height,/oʊ/,/ɔː/,Medial
+Hole,Hall,Vowel Height,/oʊ/,/ɔː/,Medial
+Low,Law,Vowel Height,/oʊ/,/ɔː/,Medial
+Note,Naught,Vowel Height,/oʊ/,/ɔː/,Medial
+Own,Awn,Vowel Height,/oʊ/,/ɔː/,Medial
+Pole,Paul,Vowel Height,/oʊ/,/ɔː/,Medial
+Sow,Saw,Vowel Height,/oʊ/,/ɔː/,Medial
+Tote,Taught,Vowel Height,/oʊ/,/ɔː/,Medial
+Hat,Hot,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Cat,Cot,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Sack,Sock,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Map,Mop,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Lack,Lock,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Tap,Top,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Cap,Cop,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Block,Black,Vowel Place/Fronting,/ɑ/,/æ/,Medial
+Add,Odd,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Band,Bond,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Gnat,Not,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Rack,Rock,Vowel Place/Fronting,/æ/,/ɑ/,Medial
+Ban,Bun,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Cap,Cup,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Fan,Fun,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Ran,Run,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Track,Truck,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Bag,Bug,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Ankle,Uncle,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Bat,Butt,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Drank,Drunk,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Mash,Mush,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Damp,Dump,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Fang,Fung,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Ham,Hum,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Hang,Hung,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Mad,Mud,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Rag,Rug,Vowel Place/Fronting,/æ/,/ʌ/,Medial
+Who,He,Vowel Place/Fronting,/uː/,/iː/,Medial
+Boot,Beat,Vowel Place/Fronting,/uː/,/iː/,Medial
+Mood,Mead,Vowel Place/Fronting,/uː/,/iː/,Medial
+Shoe,She,Vowel Place/Fronting,/uː/,/iː/,Medial
+Boom,Beam,Vowel Place/Fronting,/uː/,/iː/,Medial
+Choose,Cheese,Vowel Place/Fronting,/uː/,/iː/,Medial
+Cool,Keel,Vowel Place/Fronting,/uː/,/iː/,Medial
+Fool,Feel,Vowel Place/Fronting,/uː/,/iː/,Medial
+Goose,Geese,Vowel Place/Fronting,/uː/,/iː/,Medial
+Hoot,Heat,Vowel Place/Fronting,/uː/,/iː/,Medial
+Loom,Leam,Vowel Place/Fronting,/uː/,/iː/,Medial
+Lose,Lease,Vowel Place/Fronting,/uː/,/iː/,Medial
+Moon,Mean,Vowel Place/Fronting,/uː/,/iː/,Medial
+Pool,Peel,Vowel Place/Fronting,/uː/,/iː/,Medial
+Rude,Reed,Vowel Place/Fronting,/uː/,/iː/,Medial
+Shoot,Sheet,Vowel Place/Fronting,/uː/,/iː/,Medial
+Tooth,Teeth,Vowel Place/Fronting,/uː/,/iː/,Medial
+Team,Tame,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Lean,Lane,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Seek,Sake,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Mean,Main,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Beat,Bait,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Deal,Dale,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Eat,Ate,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Feat,Fate,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Heat,Hate,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Keen,Cane,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Leak,Lake,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Meat,Mate,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Peace,Pace,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Read,Raid,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Seal,Sale,Vowel Place/Fronting,/iː/,/eɪ/,Medial
+Bait,Bite,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Late,Light,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Rate,Right,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Race,Rice,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+File,Fail,Vowel Place/Fronting,/aɪ/,/eɪ/,Medial
+Hate,Height,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Bake,Bike,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Face,Vice,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Lace,Lice,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Lame,Lime,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Lane,Line,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Mail,Mile,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Pain,Pine,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Wait,White,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Load,Loud,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Tone,Town,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Coach,Couch,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Found,Phone,Vowel Place/Fronting,/aʊ/,/oʊ/,Medial
+Boat,Bout,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Dough,Dow,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Know,Now,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Nose,House,Vowel Place/Fronting,/oʊ/,/aʊ/,Medial
+Hot,Hut,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Lock,Luck,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Rob,Rub,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Shot,Shut,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Cop,Cup,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Not,Nut,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Pop,Pup,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Cot,Cut,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Bock,Buck,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Clock,Cluck,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Dock,Duck,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Doll,Dull,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Bite,Bought,Vowel Place/Fronting,/aɪ/,/ɔː/,Medial
+Sign,Soy,Vowel Place/Fronting,/aɪ/,/ɔɪ/,Medial
+File,Foil,Vowel Place/Fronting,/aɪ/,/ɔɪ/,Medial
+Buy,Boy,Vowel Place/Fronting,/aɪ/,/ɔɪ/,Medial
+Tie,Toy,Vowel Place/Fronting,/aɪ/,/ɔɪ/,Medial
+Bed,Beg,Final Consonant Discrimination,/d/,/g/,Final
+Did,Dig,Final Consonant Discrimination,/d/,/g/,Final
+Bad,Bag,Final Consonant Discrimination,/d/,/g/,Final
+Road,Robe,Final Consonant Discrimination,/d/,/b/,Final
+Seed,Seem,Final Consonant Discrimination,/d/,/m/,Final
+Mad,Man,Final Consonant Discrimination,/d/,/n/,Final
+Wide,Wife,Final Consonant Discrimination,/d/,/f/,Final
+Head,Hen,Final Consonant Discrimination,/d/,/n/,Final
+Laid,Lane,Final Consonant Discrimination,/d/,/n/,Final
+Need,Knee,Final Consonant Discrimination,/d/,/n/,Final
+Bud,Bun,Final Consonant Discrimination,/d/,/n/,Final
+Feed,Feet,Final Consonant Discrimination,/d/,/t/,Final
+Had,Hat,Final Consonant Discrimination,/d/,/t/,Final
+Cap,Cat,Final Consonant Discrimination,/p/,/t/,Final
+Sleep,Sleet,Final Consonant Discrimination,/p/,/t/,Final
+Hop,Hot,Final Consonant Discrimination,/p/,/t/,Final
+Wipe,White,Final Consonant Discrimination,/p/,/t/,Final
+Map,Mat,Final Consonant Discrimination,/p/,/t/,Final
+Keep,Feet,Final Consonant Discrimination,/p/,/t/,Final
+Cop,Cot,Final Consonant Discrimination,/p/,/t/,Final
+Mope,Mote,Final Consonant Discrimination,/p/,/t/,Final
+Back,Bat,Final Consonant Discrimination,/k/,/t/,Final
+Book,Boot,Final Consonant Discrimination,/k/,/t/,Final
+Sick,Sit,Final Consonant Discrimination,/k/,/t/,Final
+Make,Mate,Final Consonant Discrimination,/k/,/t/,Final
+Dock,Dot,Final Consonant Discrimination,/k/,/t/,Final
+Neck,Net,Final Consonant Discrimination,/k/,/t/,Final
+Peak,Pete,Final Consonant Discrimination,/k/,/t/,Final
+Rake,Rate,Final Consonant Discrimination,/k/,/t/,Final
+Cake,Cape,Final Consonant Discrimination,/k/,/p/,Final
+Like,Life,Final Consonant Discrimination,/k/,/f/,Final
+Look,Loop,Final Consonant Discrimination,/k/,/p/,Final
+Take,Tape,Final Consonant Discrimination,/k/,/p/,Final
+Back,Bap,Final Consonant Discrimination,/k/,/p/,Final
+Rack,Wrap,Final Consonant Discrimination,/k/,/p/,Final
+Mass,Math,Final Consonant Discrimination,/s/,/θ/,Final
+Pass,Path,Final Consonant Discrimination,/s/,/θ/,Final
+Face,Faith,Final Consonant Discrimination,/s/,/θ/,Final
+Bus,But,Final Consonant Discrimination,/s/,/t/,Final
+Nice,Night,Final Consonant Discrimination,/s/,/t/,Final
+Yes,Yet,Final Consonant Discrimination,/s/,/t/,Final
+Lease,Lead,Final Consonant Discrimination,/s/,/d/,Final
+Sin,Sing,Final Consonant Discrimination,/n/,/ŋ/,Final
+Win,Wing,Final Consonant Discrimination,/n/,/ŋ/,Final
+Ran,Rang,Final Consonant Discrimination,/n/,/ŋ/,Final
+Thin,Thing,Final Consonant Discrimination,/n/,/ŋ/,Final
+Kin,King,Final Consonant Discrimination,/n/,/ŋ/,Final
+Ban,Bang,Final Consonant Discrimination,/n/,/ŋ/,Final
+Sun,Sung,Final Consonant Discrimination,/n/,/ŋ/,Final
+Lawn,Long,Final Consonant Discrimination,/n/,/ŋ/,Final
+Mash,Match,Final Consonant Discrimination,/ʃ/,/tʃ/,Final
+Wash,Watch,Final Consonant Discrimination,/ʃ/,/tʃ/,Final
+Dish,Ditch,Final Consonant Discrimination,/ʃ/,/tʃ/,Final
+Rash,Rat,Final Consonant Discrimination,/ʃ/,/t/,Final
+Leash,Leak,Final Consonant Discrimination,/ʃ/,/k/,Final
+Rush,Rut,Final Consonant Discrimination,/ʃ/,/t/,Final
+Push,Put,Final Consonant Discrimination,/ʃ/,/t/,Final
+Life,Light,Final Consonant Discrimination,/f/,/t/,Final
+Cough,Caught,Final Consonant Discrimination,/f/,/t/,Final
+Leaf,Leak,Final Consonant Discrimination,/f/,/k/,Final
+Safe,Sake,Final Consonant Discrimination,/f/,/k/,Final
+Puff,Puck,Final Consonant Discrimination,/f/,/k/,Final
+Laugh,Lap,Final Consonant Discrimination,/f/,/p/,Final
+Rough,Rut,Final Consonant Discrimination,/f/,/t/,Final
+Breathe,Breeze,Final Consonant Discrimination,/ð/,/z/,Final
+Teethe,Tease,Final Consonant Discrimination,/ð/,/z/,Final
+Bathe,Bays,Final Consonant Discrimination,/ð/,/z/,Final
+Cheese,Cheat,Final Consonant Discrimination,/z/,/t/,Final
+Nose,Note,Final Consonant Discrimination,/z/,/t/,Final
+Rise,Write,Final Consonant Discrimination,/z/,/t/,Final
+Knees,Neat,Final Consonant Discrimination,/z/,/t/,Final
+Size,Sight,Final Consonant Discrimination,/z/,/t/,Final
+Gaze,Gate,Final Consonant Discrimination,/z/,/t/,Final
+Wage,Wait,Final Consonant Discrimination,/dʒ/,/t/,Final
+Page,Paid,Final Consonant Discrimination,/dʒ/,/d/,Final
+Age,Ate,Final Consonant Discrimination,/dʒ/,/t/,Final
+Meal,Mean,Final Consonant Discrimination,/l/,/n/,Final
+Feel,Feed,Final Consonant Discrimination,/l/,/d/,Final
+Call,Caught,Final Consonant Discrimination,/l/,/t/,Final
+File,Fight,Final Consonant Discrimination,/l/,/t/,Final
+Pill,Pip,Final Consonant Discrimination,/l/,/p/,Final
+Sell,Set,Final Consonant Discrimination,/l/,/t/,Final
+Tile,Time,Final Consonant Discrimination,/l/,/m/,Final
+Mail,Main,Final Consonant Discrimination,/l/,/n/,Final
+Peel,Peak,Final Consonant Discrimination,/l/,/k/,Final
+Ram,Ran,Final Consonant Discrimination,/m/,/n/,Final
+Seam,Seen,Final Consonant Discrimination,/m/,/n/,Final
+Dime,Dine,Final Consonant Discrimination,/m/,/n/,Final
+Game,Gain,Final Consonant Discrimination,/m/,/n/,Final
+Home,Hone,Final Consonant Discrimination,/m/,/n/,Final
+Comb,Cone,Final Consonant Discrimination,/m/,/n/,Final
+Time,Tide,Final Consonant Discrimination,/m/,/d/,Final
+Room,Root,Final Consonant Discrimination,/m/,/t/,Final
+Same,Safe,Final Consonant Discrimination,/m/,/f/,Final
+Pan,Pad,Consonant Voicing,/n/,/d/,Final
+Cane,Cade,Consonant Voicing,/n/,/d/,Final
+Bean,Bead,Consonant Voicing,/n/,/d/,Final
+Tone,Toad,Consonant Voicing,/n/,/d/,Final
+Pine,Pied,Consonant Voicing,/n/,/d/,Final
+Mend,Med,Consonant Voicing,/n/,/d/,Final
+Pry,Try,Consonant Place of Articulation,/p/,/t/,Initial
+Pit,Kit,Consonant Place of Articulation,/p/,/k/,Initial
+Pug,Tug,Consonant Place of Articulation,/p/,/t/,Initial
+Pout,Tout,Consonant Place of Articulation,/p/,/t/,Initial
+Buy,Guy,Consonant Place of Articulation,/b/,/g/,Initial
+Beak,Geek,Consonant Place of Articulation,/b/,/g/,Initial
+Bail,Gail,Consonant Place of Articulation,/b/,/g/,Initial
+Boon,Goon,Consonant Place of Articulation,/b/,/g/,Initial
+Tub,Sub,Consonant Manner of Articulation,/t/,/s/,Initial
+Tack,Sack,Consonant Manner of Articulation,/t/,/s/,Initial
+Tine,Sign,Consonant Manner of Articulation,/t/,/s/,Initial
+Tore,Sore,Consonant Manner of Articulation,/t/,/s/,Initial
+Doom,Zoom,Consonant Manner of Articulation,/d/,/z/,Initial
+Dap,Zap,Consonant Manner of Articulation,/d/,/z/,Initial
+Beep,Keep,Consonant Place of Articulation,/b/,/k/,Initial
+Bite,Kite,Consonant Place of Articulation,/b/,/k/,Initial
+Bow,Know,Consonant Place of Articulation,/b/,/n/,Initial
+Beat,Neat,Consonant Place of Articulation,/b/,/n/,Initial
+Base,Vase,Consonant Place of Articulation,/b/,/v/,Initial
+Best,Vest,Consonant Place of Articulation,/b/,/v/,Initial
+Bet,Vet,Consonant Place of Articulation,/b/,/v/,Initial
+Boat,Vote,Consonant Place of Articulation,/b/,/v/,Initial
+Ban,Van,Consonant Place of Articulation,/b/,/v/,Initial
+Bent,Vent,Consonant Place of Articulation,/b/,/v/,Initial
+Curb,Curve,Consonant Voicing,/b/,/v/,Final
+Rub,Rove,Consonant Voicing,/b/,/v/,Final
+Cab,Cave,Consonant Voicing,/b/,/v/,Final
+Deer,Jeer,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Dig,Jig,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Door,Jar,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Dump,Jump,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Dog,Jog,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Dug,Jug,Consonant Place of Articulation,/d/,/dʒ/,Initial
+Fad,Sad,Consonant Manner of Articulation,/f/,/s/,Initial
+Fay,Say,Consonant Manner of Articulation,/f/,/s/,Initial
+Fit,Sit,Consonant Manner of Articulation,/f/,/s/,Initial
+Fought,Sought,Consonant Manner of Articulation,/f/,/s/,Initial
+Fir,Sir,Consonant Manner of Articulation,/f/,/s/,Initial
+Get,Wet,Consonant Manner of Articulation,/g/,/w/,Initial
+Gas,Was,Consonant Manner of Articulation,/g/,/w/,Initial
+Got,What,Consonant Manner of Articulation,/g/,/w/,Initial
+Gag,Wag,Consonant Manner of Articulation,/g/,/w/,Initial
+Gown,Town,Consonant Place of Articulation,/g/,/t/,Initial
+Gate,Wait,Consonant Manner of Articulation,/g/,/w/,Initial
+Gull,Dull,Consonant Place of Articulation,/g/,/d/,Initial
+Hack,Pack,Consonant Place of Articulation,/h/,/p/,Initial
+Hag,Bag,Consonant Place of Articulation,/h/,/b/,Initial
+Ham,Pam,Consonant Place of Articulation,/h/,/p/,Initial
+Hash,Dash,Consonant Place of Articulation,/h/,/d/,Initial
+Hat,Fat,Consonant Place of Articulation,/h/,/f/,Initial
+Hawk,Talk,Consonant Place of Articulation,/h/,/t/,Initial
+Heat,Meat,Consonant Place of Articulation,/h/,/m/,Initial
+Hid,Lid,Consonant Place of Articulation,/h/,/l/,Initial
+High,Thigh,Consonant Place of Articulation,/h/,/θ/,Initial
+Hill,Fill,Consonant Place of Articulation,/h/,/f/,Initial
+Hip,Sip,Consonant Place of Articulation,/h/,/s/,Initial
+Hit,Sit,Consonant Place of Articulation,/h/,/s/,Initial
+Hog,Fog,Consonant Place of Articulation,/h/,/f/,Initial
+Hot,Not,Consonant Place of Articulation,/h/,/n/,Initial
+House,Mouse,Consonant Place of Articulation,/h/,/m/,Initial
+Hug,Thug,Consonant Place of Articulation,/h/,/θ/,Initial
+Hush,Mush,Consonant Place of Articulation,/h/,/m/,Initial
+Jam,Yam,Consonant Place of Articulation,/dʒ/,/j/,Initial
+Jar,Bar,Consonant Place of Articulation,/dʒ/,/b/,Initial
+Jaw,Thaw,Consonant Place of Articulation,/dʒ/,/θ/,Initial
+Jet,Wet,Consonant Place of Articulation,/dʒ/,/w/,Initial
+Jig,Wig,Consonant Place of Articulation,/dʒ/,/w/,Initial
+Jot,Got,Consonant Place of Articulation,/dʒ/,/g/,Initial
+Joust,Oust,Consonant Place of Articulation,/dʒ/,/aʊ/,Initial
+Judge,Fudge,Consonant Place of Articulation,/dʒ/,/f/,Initial
+Kill,Pill,Consonant Place of Articulation,/k/,/p/,Initial
+Kip,Tip,Consonant Place of Articulation,/k/,/t/,Initial
+Kit,Sit,Consonant Manner of Articulation,/k/,/s/,Initial
+Lad,Mad,Consonant Manner of Articulation,/l/,/m/,Initial
+Lag,Nag,Consonant Manner of Articulation,/l/,/n/,Initial
+Lamb,Ram,Consonant Manner of Articulation,/l/,/r/,Initial
+Lap,Tap,Consonant Manner of Articulation,/l/,/t/,Initial
+Lash,Dash,Consonant Manner of Articulation,/l/,/d/,Initial
+Latch,Catch,Consonant Manner of Articulation,/l/,/k/,Initial
+Leach,Reach,Consonant Manner of Articulation,/l/,/r/,Initial
+Leak,Weak,Consonant Manner of Articulation,/l/,/w/,Initial
+Lean,Mean,Consonant Manner of Articulation,/l/,/m/,Initial
+Leap,Heap,Consonant Manner of Articulation,/l/,/h/,Initial
+Leg,Peg,Consonant Manner of Articulation,/l/,/p/,Initial
+Liar,Fire,Consonant Manner of Articulation,/l/,/f/,Initial
+Lick,Nick,Consonant Manner of Articulation,/l/,/n/,Initial
+Lid,Kid,Consonant Manner of Articulation,/l/,/k/,Initial
+Life,Wife,Consonant Manner of Articulation,/l/,/w/,Initial
+Light,Might,Consonant Manner of Articulation,/l/,/m/,Initial
+Like,Hike,Consonant Manner of Articulation,/l/,/h/,Initial
+Line,Nine,Consonant Manner of Articulation,/l/,/n/,Initial
+Lip,Zip,Consonant Manner of Articulation,/l/,/z/,Initial
+List,Mist,Consonant Manner of Articulation,/l/,/m/,Initial
+Live,Give,Consonant Manner of Articulation,/l/,/g/,Initial
+Loaf,Oaf,Consonant Manner of Articulation,/l/,/oʊ/,Initial
+Lock,Rock,Consonant Manner of Articulation,/l/,/r/,Initial
+Log,Dog,Consonant Manner of Articulation,/l/,/d/,Initial
+Look,Cook,Consonant Manner of Articulation,/l/,/k/,Initial
+Loop,Soup,Consonant Manner of Articulation,/l/,/s/,Initial
+Loot,Boot,Consonant Manner of Articulation,/l/,/b/,Initial
+Lose,Choose,Consonant Manner of Articulation,/l/,/tʃ/,Initial
+Lot,Got,Consonant Manner of Articulation,/l/,/g/,Initial
+Loud,Proud,Consonant Manner of Articulation,/l/,/p/,Initial
+Low,Mow,Consonant Manner of Articulation,/l/,/m/,Initial
+Lump,Dump,Consonant Manner of Articulation,/l/,/d/,Initial
+Lush,Rush,Consonant Manner of Articulation,/l/,/r/,Initial
+Mad,Bad,Consonant Manner of Articulation,/m/,/b/,Initial
+Man,Tan,Consonant Manner of Articulation,/m/,/t/,Initial
+Map,Cap,Consonant Manner of Articulation,/m/,/k/,Initial
+Mash,Dash,Consonant Manner of Articulation,/m/,/d/,Initial
+Mat,Bat,Consonant Manner of Articulation,/m/,/b/,Initial
+Match,Catch,Consonant Manner of Articulation,/m/,/k/,Initial
+Meal,Deal,Consonant Manner of Articulation,/m/,/d/,Initial
+Mean,Bean,Consonant Manner of Articulation,/m/,/b/,Initial
+Meet,Feet,Consonant Manner of Articulation,/m/,/f/,Initial
+Mice,Nice,Consonant Manner of Articulation,/m/,/n/,Initial
+Miff,If,Consonant Manner of Articulation,/m/,/ɪ/,Initial
+Might,Fight,Consonant Manner of Articulation,/m/,/f/,Initial
+Mike,Bike,Consonant Manner of Articulation,/m/,/b/,Initial
+Mild,Wild,Consonant Manner of Articulation,/m/,/w/,Initial
+Mile,Pile,Consonant Manner of Articulation,/m/,/p/,Initial
+Milk,Silk,Consonant Manner of Articulation,/m/,/s/,Initial
+Mill,Will,Consonant Manner of Articulation,/m/,/w/,Initial
+Mime,Time,Consonant Manner of Articulation,/m/,/t/,Initial
+Mind,Bind,Consonant Manner of Articulation,/m/,/b/,Initial
+Mine,Fine,Consonant Manner of Articulation,/m/,/f/,Initial
+Mink,Sink,Consonant Manner of Articulation,/m/,/s/,Initial
+Mint,Hint,Consonant Manner of Articulation,/m/,/h/,Initial
+Mire,Fire,Consonant Manner of Articulation,/m/,/f/,Initial
+Miss,Kiss,Consonant Manner of Articulation,/m/,/k/,Initial
+Mist,Fist,Consonant Manner of Articulation,/m/,/f/,Initial
+Mix,Fix,Consonant Manner of Articulation,/m/,/f/,Initial
+Moan,Known,Consonant Manner of Articulation,/m/,/n/,Initial
+Mock,Dock,Consonant Manner of Articulation,/m/,/d/,Initial
+Mode,Load,Consonant Manner of Articulation,/m/,/l/,Initial
+Mold,Gold,Consonant Manner of Articulation,/m/,/g/,Initial
+Moo,Too,Consonant Manner of Articulation,/m/,/t/,Initial
+Mood,Food,Consonant Manner of Articulation,/m/,/f/,Initial
+Mop,Top,Consonant Manner of Articulation,/m/,/t/,Initial
+Most,Post,Consonant Manner of Articulation,/m/,/p/,Initial
+Mouse,Louse,Consonant Manner of Articulation,/m/,/l/,Initial
+Mouth,South,Consonant Manner of Articulation,/m/,/s/,Initial
+Much,Such,Consonant Manner of Articulation,/m/,/s/,Initial
+Muck,Duck,Consonant Manner of Articulation,/m/,/d/,Initial
+Mud,Bud,Consonant Manner of Articulation,/m/,/b/,Initial
+Mug,Thug,Consonant Manner of Articulation,/m/,/θ/,Initial
+Mull,Gull,Consonant Manner of Articulation,/m/,/g/,Initial
+Munch,Bunch,Consonant Manner of Articulation,/m/,/b/,Initial
+Mush,Rush,Consonant Manner of Articulation,/m/,/r/,Initial
+Mute,Boot,Consonant Manner of Articulation,/m/,/b/,Initial
+Nag,Tag,Consonant Manner of Articulation,/n/,/t/,Initial
+Nail,Sail,Consonant Manner of Articulation,/n/,/s/,Initial
+Name,Game,Consonant Manner of Articulation,/n/,/g/,Initial
+Nap,Tap,Consonant Manner of Articulation,/n/,/t/,Initial
+Naught,Bought,Consonant Manner of Articulation,/n/,/b/,Initial
+Near,Dear,Consonant Manner of Articulation,/n/,/d/,Initial
+Neat,Seat,Consonant Manner of Articulation,/n/,/s/,Initial
+Neck,Deck,Consonant Manner of Articulation,/n/,/d/,Initial
+Need,Weed,Consonant Manner of Articulation,/n/,/w/,Initial
+Net,Wet,Consonant Manner of Articulation,/n/,/w/,Initial
+New,Few,Consonant Manner of Articulation,/n/,/f/,Initial
+Nib,Rib,Consonant Manner of Articulation,/n/,/r/,Initial
+Nice,Vice,Consonant Manner of Articulation,/n/,/v/,Initial
+Nick,Pick,Consonant Manner of Articulation,/n/,/p/,Initial
+Nigh,Thigh,Consonant Manner of Articulation,/n/,/θ/,Initial
+Night,Sight,Consonant Manner of Articulation,/n/,/s/,Initial
+Nip,Sip,Consonant Manner of Articulation,/n/,/s/,Initial
+Nod,Rod,Consonant Manner of Articulation,/n/,/r/,Initial
+Noise,Boys,Consonant Manner of Articulation,/n/,/b/,Initial
+Nook,Look,Consonant Manner of Articulation,/n/,/l/,Initial
+Noon,Moon,Consonant Manner of Articulation,/n/,/m/,Initial
+Nose,Hose,Consonant Manner of Articulation,/n/,/h/,Initial
+Not,Got,Consonant Manner of Articulation,/n/,/g/,Initial
+Note,Vote,Consonant Manner of Articulation,/n/,/v/,Initial
+Now,Wow,Consonant Manner of Articulation,/n/,/w/,Initial
+Nudge,Judge,Consonant Manner of Articulation,/n/,/dʒ/,Initial
+Null,Gull,Consonant Manner of Articulation,/n/,/g/,Initial
+Numb,Thumb,Consonant Manner of Articulation,/n/,/θ/,Initial
+Nut,But,Consonant Manner of Articulation,/n/,/b/,Initial
+Pack,Tack,Consonant Place of Articulation,/p/,/t/,Initial
+Page,Gage,Consonant Voicing,/p/,/g/,Initial
+Pail,Mail,Consonant Manner of Articulation,/p/,/m/,Initial
+Pain,Cane,Consonant Place of Articulation,/p/,/k/,Initial
+Pair,Care,Consonant Place of Articulation,/p/,/k/,Initial
+Pale,Gale,Consonant Voicing,/p/,/g/,Initial
+Pan,Man,Consonant Manner of Articulation,/p/,/m/,Initial
+Pass,Mass,Consonant Manner of Articulation,/p/,/m/,Initial
+Path,Math,Consonant Manner of Articulation,/p/,/m/,Initial
+Pave,Gave,Consonant Voicing,/p/,/g/,Initial
+Pawn,Dawn,Consonant Place of Articulation,/p/,/d/,Initial
+Peak,Beak,Consonant Voicing,/p/,/b/,Initial
+Peal,Deal,Consonant Place of Articulation,/p/,/d/,Initial
+Peck,Deck,Consonant Place of Articulation,/p/,/d/,Initial
+Peel,Feel,Consonant Manner of Articulation,/p/,/f/,Initial
+Pen,Then,Consonant Place of Articulation,/p/,/ð/,Initial
+Perch,Birch,Consonant Voicing,/p/,/b/,Initial
+Pick,Kick,Consonant Place of Articulation,/p/,/k/,Initial
+Pig,Big,Consonant Voicing,/p/,/b/,Initial
+Pike,Like,Consonant Manner of Articulation,/p/,/l/,Initial
+Pile,Tile,Consonant Place of Articulation,/p/,/t/,Initial
+Pill,Till,Consonant Place of Articulation,/p/,/t/,Initial
+Pinch,Finch,Consonant Manner of Articulation,/p/,/f/,Initial
+Pine,Dine,Consonant Place of Articulation,/p/,/d/,Initial
+Pip,Tip,Consonant Place of Articulation,/p/,/t/,Initial
+Pit,Sit,Consonant Manner of Articulation,/p/,/s/,Initial
+Pith,With,Consonant Manner of Articulation,/p/,/w/,Initial
+Pity,City,Consonant Manner of Articulation,/p/,/s/,Initial
+Pod,God,Consonant Voicing,/p/,/g/,Initial
+Poke,Joke,Consonant Manner of Articulation,/p/,/dʒ/,Initial
+Pole,Goal,Consonant Voicing,/p/,/g/,Initial
+Pond,Wand,Consonant Manner of Articulation,/p/,/w/,Initial
+Pony,Bony,Consonant Voicing,/p/,/b/,Initial
+Pool,Cool,Consonant Place of Articulation,/p/,/k/,Initial
+Poor,Boor,Consonant Voicing,/p/,/b/,Initial
+Pop,Top,Consonant Place of Articulation,/p/,/t/,Initial
+Pork,Fork,Consonant Manner of Articulation,/p/,/f/,Initial
+Port,Fort,Consonant Manner of Articulation,/p/,/f/,Initial
+Posh,Josh,Consonant Manner of Articulation,/p/,/dʒ/,Initial
+Pot,Got,Consonant Voicing,/p/,/g/,Initial
+Pouch,Vouch,Consonant Manner of Articulation,/p/,/v/,Initial
+Pout,Doubt,Consonant Place of Articulation,/p/,/d/,Initial
+Pram,Ram,Consonant Manner of Articulation,/p/,/r/,Initial
+Prank,Bank,Consonant Voicing,/p/,/b/,Initial
+Pray,Tray,Consonant Place of Articulation,/p/,/t/,Initial
+Press,Dress,Consonant Place of Articulation,/p/,/d/,Initial
+Pride,Bride,Consonant Voicing,/p/,/b/,Initial
+Prime,Grime,Consonant Voicing,/p/,/g/,Initial
+Prize,Rise,Consonant Manner of Articulation,/p/,/r/,Initial
+Prod,Rod,Consonant Manner of Articulation,/p/,/r/,Initial
+Puff,Buff,Consonant Voicing,/p/,/b/,Initial
+Pug,Dug,Consonant Place of Articulation,/p/,/d/,Initial
+Pull,Bull,Consonant Voicing,/p/,/b/,Initial
+Pump,Bump,Consonant Voicing,/p/,/b/,Initial
+Punch,Bunch,Consonant Voicing,/p/,/b/,Initial
+Pure,Cure,Consonant Place of Articulation,/p/,/k/,Initial
+Purse,Curse,Consonant Place of Articulation,/p/,/k/,Initial
+Push,Bush,Consonant Voicing,/p/,/b/,Initial
+Put,Foot,Consonant Manner of Articulation,/p/,/f/,Initial
+Rag,Bag,Consonant Manner of Articulation,/r/,/b/,Initial
+Rage,Gage,Consonant Manner of Articulation,/r/,/g/,Initial
+Raid,Paid,Consonant Manner of Articulation,/r/,/p/,Initial
+Rail,Fail,Consonant Manner of Articulation,/r/,/f/,Initial
+Rain,Gain,Consonant Manner of Articulation,/r/,/g/,Initial
+Rake,Fake,Consonant Manner of Articulation,/r/,/f/,Initial
+Ram,Jam,Consonant Manner of Articulation,/r/,/dʒ/,Initial
+Ran,Fan,Consonant Manner of Articulation,/r/,/f/,Initial
+Rang,Gang,Consonant Manner of Articulation,/r/,/g/,Initial
+Rank,Bank,Consonant Manner of Articulation,/r/,/b/,Initial
+Rant,Cant,Consonant Manner of Articulation,/r/,/k/,Initial
+Rap,Cap,Consonant Manner of Articulation,/r/,/k/,Initial
+Rash,Cash,Consonant Manner of Articulation,/r/,/k/,Initial
+Rat,Gnat,Consonant Manner of Articulation,/r/,/n/,Initial
+Rate,Gate,Consonant Manner of Articulation,/r/,/g/,Initial
+Reach,Beach,Consonant Manner of Articulation,/r/,/b/,Initial
+Read,Need,Consonant Manner of Articulation,/r/,/n/,Initial
+Reap,Heap,Consonant Manner of Articulation,/r/,/h/,Initial
+Rear,Near,Consonant Manner of Articulation,/r/,/n/,Initial
+Red,Bed,Consonant Manner of Articulation,/r/,/b/,Initial
+Reef,Beef,Consonant Manner of Articulation,/r/,/b/,Initial
+Reel,Feel,Consonant Manner of Articulation,/r/,/f/,Initial
+Rent,Tent,Consonant Manner of Articulation,/r/,/t/,Initial
+Rest,Best,Consonant Manner of Articulation,/r/,/b/,Initial
+Rib,Fib,Consonant Manner of Articulation,/r/,/f/,Initial
+Rice,Dice,Consonant Manner of Articulation,/r/,/d/,Initial
+Rich,Witch,Consonant Manner of Articulation,/r/,/w/,Initial
+Rick,Kick,Consonant Manner of Articulation,/r/,/k/,Initial
+Rid,Kid,Consonant Manner of Articulation,/r/,/k/,Initial
+Ride,Tide,Consonant Manner of Articulation,/r/,/t/,Initial
+Ridge,Fridge,Consonant Manner of Articulation,/r/,/f/,Initial
+Rift,Lift,Consonant Manner of Articulation,/r/,/l/,Initial
+Right,White,Consonant Manner of Articulation,/r/,/w/,Initial
+Rill,Fill,Consonant Manner of Articulation,/r/,/f/,Initial
+Rim,Him,Consonant Manner of Articulation,/r/,/h/,Initial
+Ring,King,Consonant Manner of Articulation,/r/,/k/,Initial
+Rink,Sink,Consonant Manner of Articulation,/r/,/s/,Initial
+Rip,Nip,Consonant Manner of Articulation,/r/,/n/,Initial
+Ripe,Wipe,Consonant Manner of Articulation,/r/,/w/,Initial
+Rise,Wise,Consonant Manner of Articulation,/r/,/w/,Initial
+Risk,Disk,Consonant Manner of Articulation,/r/,/d/,Initial
+Roach,Coach,Consonant Manner of Articulation,/r/,/k/,Initial
+Road,Toad,Consonant Manner of Articulation,/r/,/t/,Initial
+Roam,Foam,Consonant Manner of Articulation,/r/,/f/,Initial
+Roar,Door,Consonant Manner of Articulation,/r/,/d/,Initial
+Roast,Boast,Consonant Manner of Articulation,/r/,/b/,Initial
+Rob,Bob,Consonant Manner of Articulation,/r/,/b/,Initial
+Robe,Probe,Consonant Manner of Articulation,/r/,/p/,Initial
+Rock,Sock,Consonant Manner of Articulation,/r/,/s/,Initial
+Rod,Cod,Consonant Manner of Articulation,/r/,/k/,Initial
+Rode,Mode,Consonant Manner of Articulation,/r/,/m/,Initial
+Rogue,Vogue,Consonant Manner of Articulation,/r/,/v/,Initial
+Roll,Toll,Consonant Manner of Articulation,/r/,/t/,Initial
+Rome,Home,Consonant Manner of Articulation,/r/,/h/,Initial
+Roof,Goof,Consonant Manner of Articulation,/r/,/g/,Initial
+Rook,Cook,Consonant Manner of Articulation,/r/,/k/,Initial
+Room,Zoom,Consonant Manner of Articulation,/r/,/z/,Initial
+Roost,Boost,Consonant Manner of Articulation,/r/,/b/,Initial
+Root,Boot,Consonant Manner of Articulation,/r/,/b/,Initial
+Rope,Pope,Consonant Manner of Articulation,/r/,/p/,Initial
+Rot,Got,Consonant Manner of Articulation,/r/,/g/,Initial
+Rough,Tough,Consonant Manner of Articulation,/r/,/t/,Initial
+Round,Found,Consonant Manner of Articulation,/r/,/f/,Initial
+Rouse,Mouse,Consonant Manner of Articulation,/r/,/m/,Initial
+Route,Bout,Consonant Manner of Articulation,/r/,/b/,Initial
+Row,Know,Consonant Manner of Articulation,/r/,/n/,Initial
+Rub,Sub,Consonant Manner of Articulation,/r/,/s/,Initial
+Ruck,Duck,Consonant Manner of Articulation,/r/,/d/,Initial
+Rude,Dude,Consonant Manner of Articulation,/r/,/d/,Initial
+Rug,Mug,Consonant Manner of Articulation,/r/,/m/,Initial
+Rule,Cool,Consonant Manner of Articulation,/r/,/k/,Initial
+Rump,Lump,Consonant Manner of Articulation,/r/,/l/,Initial
+Run,Bun,Consonant Manner of Articulation,/r/,/b/,Initial
+Rung,Lung,Consonant Manner of Articulation,/r/,/l/,Initial
+Rush,Gush,Consonant Manner of Articulation,/r/,/g/,Initial
+Rust,Must,Consonant Manner of Articulation,/r/,/m/,Initial
+Rut,Nut,Consonant Manner of Articulation,/r/,/n/,Initial
+Sack,Back,Consonant Manner of Articulation,/s/,/b/,Initial
+Sad,Bad,Consonant Manner of Articulation,/s/,/b/,Initial
+Sag,Bag,Consonant Manner of Articulation,/s/,/b/,Initial
+Sage,Gage,Consonant Manner of Articulation,/s/,/g/,Initial
+Said,Bed,Consonant Manner of Articulation,/s/,/b/,Initial
+Sail,Bail,Consonant Manner of Articulation,/s/,/b/,Initial
+Sake,Bake,Consonant Manner of Articulation,/s/,/b/,Initial
+Sale,Gale,Consonant Manner of Articulation,/s/,/g/,Initial
+Same,Game,Consonant Manner of Articulation,/s/,/g/,Initial
+Sand,Band,Consonant Manner of Articulation,/s/,/b/,Initial
+Sane,Vane,Consonant Manner of Articulation,/s/,/v/,Initial
+Sang,Bang,Consonant Manner of Articulation,/s/,/b/,Initial
+Sank,Bank,Consonant Manner of Articulation,/s/,/b/,Initial
+Sat,Bat,Consonant Manner of Articulation,/s/,/b/,Initial
+Save,Gave,Consonant Manner of Articulation,/s/,/g/,Initial
+Saw,Jaw,Consonant Manner of Articulation,/s/,/dʒ/,Initial
+Say,Day,Consonant Manner of Articulation,/s/,/d/,Initial
+Seal,Deal,Consonant Manner of Articulation,/s/,/d/,Initial
+Seam,Beam,Consonant Manner of Articulation,/s/,/b/,Initial
+Search,Birch,Consonant Manner of Articulation,/s/,/b/,Initial
+Seat,Beat,Consonant Manner of Articulation,/s/,/b/,Initial
+Seed,Weed,Consonant Manner of Articulation,/s/,/w/,Initial
+Seek,Geek,Consonant Manner of Articulation,/s/,/g/,Initial
+Seem,Theme,Consonant Manner of Articulation,/s/,/θ/,Initial
+Seen,Bean,Consonant Manner of Articulation,/s/,/b/,Initial
+Seize,Ease,Consonant Manner of Articulation,/s/,/iː/,Initial
+Sell,Bell,Consonant Manner of Articulation,/s/,/b/,Initial
+Send,Bend,Consonant Manner of Articulation,/s/,/b/,Initial
+Set,Bet,Consonant Manner of Articulation,/s/,/b/,Initial
+Sew,Dough,Consonant Manner of Articulation,/s/,/d/,Initial
+Shack,Back,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shad,Bad,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shade,Fade,Consonant Manner of Articulation,/ʃ/,/f/,Initial
+Shake,Bake,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shame,Game,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Share,Care,Consonant Manner of Articulation,/ʃ/,/k/,Initial
+Shave,Gave,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shawl,Ball,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shed,Bed,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Sheen,Bean,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Sheep,Deep,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Sheet,Beat,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shelf,Self,Consonant Place of Articulation,/ʃ/,/s/,Initial
+Shell,Bell,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shift,Lift,Consonant Manner of Articulation,/ʃ/,/l/,Initial
+Shill,Fill,Consonant Manner of Articulation,/ʃ/,/f/,Initial
+Shin,Fin,Consonant Manner of Articulation,/ʃ/,/f/,Initial
+Shine,Fine,Consonant Manner of Articulation,/ʃ/,/f/,Initial
+Shirt,Dirt,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Shiver,Giver,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shock,Dock,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Shoe,Goo,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shook,Cook,Consonant Manner of Articulation,/ʃ/,/k/,Initial
+Shoot,Boot,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shop,Top,Consonant Manner of Articulation,/ʃ/,/t/,Initial
+Shore,Door,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Short,Fort,Consonant Manner of Articulation,/ʃ/,/f/,Initial
+Shot,Got,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shoulder,Boulder,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shout,Doubt,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Show,Go,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shown,Known,Consonant Manner of Articulation,/ʃ/,/n/,Initial
+Shred,Bed,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shrill,Grill,Consonant Manner of Articulation,/ʃ/,/g/,Initial
+Shrink,Drink,Consonant Manner of Articulation,/ʃ/,/d/,Initial
+Shuck,Buck,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shut,But,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Shy,Buy,Consonant Manner of Articulation,/ʃ/,/b/,Initial
+Sick,Pick,Consonant Manner of Articulation,/s/,/p/,Initial
+Sigh,Thigh,Consonant Place of Articulation,/s/,/θ/,Initial
+Sight,Fight,Consonant Manner of Articulation,/s/,/f/,Initial
+Sign,Fine,Consonant Manner of Articulation,/s/,/f/,Initial
+Sill,Fill,Consonant Manner of Articulation,/s/,/f/,Initial
+Sin,Bin,Consonant Manner of Articulation,/s/,/b/,Initial
+Sing,King,Consonant Manner of Articulation,/s/,/k/,Initial
+Sink,Wink,Consonant Manner of Articulation,/s/,/w/,Initial
+Sip,Dip,Consonant Manner of Articulation,/s/,/d/,Initial
+Sir,Fir,Consonant Manner of Articulation,/s/,/f/,Initial
+Sit,Bit,Consonant Manner of Articulation,/s/,/b/,Initial
+Site,Bite,Consonant Manner of Articulation,/s/,/b/,Initial
+Six,Fix,Consonant Manner of Articulation,/s/,/f/,Initial
+Size,Wise,Consonant Manner of Articulation,/s/,/w/,Initial
+Soak,Joke,Consonant Manner of Articulation,/s/,/dʒ/,Initial
+Soap,Rope,Consonant Manner of Articulation,/s/,/r/,Initial
+Soar,Door,Consonant Manner of Articulation,/s/,/d/,Initial
+Sock,Dock,Consonant Manner of Articulation,/s/,/d/,Initial
+Sod,God,Consonant Manner of Articulation,/s/,/g/,Initial
+Sold,Gold,Consonant Manner of Articulation,/s/,/g/,Initial
+Sole,Goal,Consonant Manner of Articulation,/s/,/g/,Initial
+Some,Come,Consonant Manner of Articulation,/s/,/k/,Initial
+Son,Done,Consonant Manner of Articulation,/s/,/d/,Initial
+Song,Long,Consonant Manner of Articulation,/s/,/l/,Initial
+Soon,Moon,Consonant Manner of Articulation,/s/,/m/,Initial
+Sore,More,Consonant Manner of Articulation,/s/,/m/,Initial
+Sort,Fort,Consonant Manner of Articulation,/s/,/f/,Initial
+Sought,Bought,Consonant Manner of Articulation,/s/,/b/,Initial
+Sour,Hour,Consonant Manner of Articulation,/s/,/h/,Initial
+South,Mouth,Consonant Manner of Articulation,/s/,/m/,Initial
+Sow,Mow,Consonant Manner of Articulation,/s/,/m/,Initial
+Such,Much,Consonant Manner of Articulation,/s/,/m/,Initial
+Suck,Buck,Consonant Manner of Articulation,/s/,/b/,Initial
+Sud,Bud,Consonant Manner of Articulation,/s/,/b/,Initial
+Sue,Moo,Consonant Manner of Articulation,/s/,/m/,Initial
+Suit,Boot,Consonant Manner of Articulation,/s/,/b/,Initial
+Sum,Come,Consonant Manner of Articulation,/s/,/k/,Initial
+Sun,Fun,Consonant Manner of Articulation,/s/,/f/,Initial
+Sung,Lung,Consonant Manner of Articulation,/s/,/l/,Initial
+Sunk,Junk,Consonant Manner of Articulation,/s/,/dʒ/,Initial
+Sup,Cup,Consonant Manner of Articulation,/s/,/k/,Initial
+Sure,Pure,Consonant Manner of Articulation,/s/,/p/,Initial
+Surf,Turf,Consonant Manner of Articulation,/s/,/t/,Initial
+Surge,Urge,Consonant Manner of Articulation,/s/,/ɜː/,Initial
+Tack,Back,Consonant Voicing,/t/,/b/,Initial
+Tag,Bag,Consonant Voicing,/t/,/b/,Initial
+Tail,Jail,Consonant Manner of Articulation,/t/,/dʒ/,Initial
+Take,Rake,Consonant Manner of Articulation,/t/,/r/,Initial
+Tale,Gale,Consonant Voicing,/t/,/g/,Initial
+Talk,Walk,Consonant Manner of Articulation,/t/,/w/,Initial
+Tame,Game,Consonant Voicing,/t/,/g/,Initial
+Tan,Pan,Consonant Place of Articulation,/t/,/p/,Initial
+Tank,Bank,Consonant Voicing,/t/,/b/,Initial
+Tap,Cap,Consonant Place of Articulation,/t/,/k/,Initial
+Tape,Gape,Consonant Voicing,/t/,/g/,Initial
+Tar,Bar,Consonant Voicing,/t/,/b/,Initial
+Tart,Cart,Consonant Place of Articulation,/t/,/k/,Initial
+Task,Mask,Consonant Manner of Articulation,/t/,/m/,Initial
+Taught,Naught,Consonant Manner of Articulation,/t/,/n/,Initial
+Team,Beam,Consonant Voicing,/t/,/b/,Initial
+Tear,Care,Consonant Place of Articulation,/t/,/k/,Initial
+Tease,Ease,Consonant Manner of Articulation,/t/,/iː/,Initial
+Tell,Bell,Consonant Voicing,/t/,/b/,Initial
+Ten,Pen,Consonant Place of Articulation,/t/,/p/,Initial
+Tend,Bend,Consonant Voicing,/t/,/b/,Initial
+Tent,Vent,Consonant Manner of Articulation,/t/,/v/,Initial
+Test,Best,Consonant Voicing,/t/,/b/,Initial
+Thatch,Catch,Consonant Manner of Articulation,/θ/,/k/,Initial
+Thaw,Saw,Consonant Place of Articulation,/θ/,/s/,Initial
+Them,Gem,Consonant Manner of Articulation,/ð/,/dʒ/,Initial
+Then,Zen,Consonant Manner of Articulation,/ð/,/z/,Initial
+There,Care,Consonant Manner of Articulation,/ð/,/k/,Initial
+These,Ease,Consonant Manner of Articulation,/ð/,/iː/,Initial
+Thick,Pick,Consonant Manner of Articulation,/θ/,/p/,Initial
+Thief,Chief,Consonant Manner of Articulation,/θ/,/tʃ/,Initial
+Thigh,High,Consonant Place of Articulation,/θ/,/h/,Initial
+Thin,Win,Consonant Manner of Articulation,/θ/,/w/,Initial
+Thing,King,Consonant Manner of Articulation,/θ/,/k/,Initial
+Think,Sink,Consonant Place of Articulation,/θ/,/s/,Initial
+Thirst,First,Consonant Manner of Articulation,/θ/,/f/,Initial
+This,Miss,Consonant Manner of Articulation,/ð/,/m/,Initial
+Thorn,Corn,Consonant Manner of Articulation,/θ/,/k/,Initial
+Those,Hose,Consonant Manner of Articulation,/ð/,/h/,Initial
+Though,Dough,Consonant Place of Articulation,/ð/,/d/,Initial
+Thought,Fought,Consonant Place of Articulation,/θ/,/f/,Initial
+Thread,Bread,Consonant Manner of Articulation,/θ/,/b/,Initial
+Three,Free,Consonant Place of Articulation,/θ/,/f/,Initial
+Threw,Crew,Consonant Manner of Articulation,/θ/,/k/,Initial
+Thrill,Grill,Consonant Manner of Articulation,/θ/,/g/,Initial
+Thrive,Drive,Consonant Manner of Articulation,/θ/,/d/,Initial
+Throat,Moat,Consonant Manner of Articulation,/θ/,/m/,Initial
+Throne,Groan,Consonant Manner of Articulation,/θ/,/g/,Initial
+Through,Grew,Consonant Manner of Articulation,/θ/,/g/,Initial
+Throw,Grow,Consonant Manner of Articulation,/θ/,/g/,Initial
+Thud,Bud,Consonant Manner of Articulation,/θ/,/b/,Initial
+Thug,Lug,Consonant Manner of Articulation,/θ/,/l/,Initial
+Thumb,Dumb,Consonant Manner of Articulation,/θ/,/d/,Initial
+Thump,Lump,Consonant Manner of Articulation,/θ/,/l/,Initial
+Tick,Pick,Consonant Place of Articulation,/t/,/p/,Initial
+Tide,Guide,Consonant Voicing,/t/,/g/,Initial
+Tie,Guy,Consonant Voicing,/t/,/g/,Initial
+Tight,Fight,Consonant Place of Articulation,/t/,/f/,Initial
+Tile,Mile,Consonant Manner of Articulation,/t/,/m/,Initial
+Till,Fill,Consonant Place of Articulation,/t/,/f/,Initial
+Time,Mime,Consonant Manner of Articulation,/t/,/m/,Initial
+Tin,Fin,Consonant Place of Articulation,/t/,/f/,Initial
+Tinge,Hinge,Consonant Manner of Articulation,/t/,/h/,Initial
+Tip,Kip,Consonant Place of Articulation,/t/,/k/,Initial
+Tire,Fire,Consonant Place of Articulation,/t/,/f/,Initial
+Toad,Load,Consonant Manner of Articulation,/t/,/l/,Initial
+Toast,Boast,Consonant Voicing,/t/,/b/,Initial
+Toe,Mow,Consonant Manner of Articulation,/t/,/m/,Initial
+Told,Gold,Consonant Voicing,/t/,/g/,Initial
+Toll,Bowl,Consonant Voicing,/t/,/b/,Initial
+Tone,Bone,Consonant Voicing,/t/,/b/,Initial
+Took,Look,Consonant Manner of Articulation,/t/,/l/,Initial
+Tool,Pool,Consonant Place of Articulation,/t/,/p/,Initial
+Top,Mop,Consonant Manner of Articulation,/t/,/m/,Initial
+Tore,Bore,Consonant Voicing,/t/,/b/,Initial
+Torn,Corn,Consonant Place of Articulation,/t/,/k/,Initial
+Tough,Rough,Consonant Manner of Articulation,/t/,/r/,Initial
+Tout,Bout,Consonant Voicing,/t/,/b/,Initial
+Tow,Bow,Consonant Voicing,/t/,/b/,Initial
+Tower,Power,Consonant Place of Articulation,/t/,/p/,Initial
+Town,Gown,Consonant Voicing,/t/,/g/,Initial
+Toy,Boy,Consonant Voicing,/t/,/b/,Initial
+Track,Rack,Consonant Manner of Articulation,/t/,/r/,Initial
+Trade,Braid,Consonant Voicing,/t/,/b/,Initial
+Trail,Fail,Consonant Place of Articulation,/t/,/f/,Initial
+Train,Grain,Consonant Voicing,/t/,/g/,Initial
+Trap,Wrap,Consonant Manner of Articulation,/t/,/r/,Initial
+Trash,Rash,Consonant Manner of Articulation,/t/,/r/,Initial
+Tray,Gray,Consonant Voicing,/t/,/g/,Initial
+Treat,Greet,Consonant Voicing,/t/,/g/,Initial
+Tree,Free,Consonant Place of Articulation,/t/,/f/,Initial
+Trick,Brick,Consonant Voicing,/t/,/b/,Initial
+Tried,Cried,Consonant Place of Articulation,/t/,/k/,Initial
+Trim,Grim,Consonant Voicing,/t/,/g/,Initial
+Trip,Drip,Consonant Voicing,/t/,/d/,Initial
+Trot,Rot,Consonant Manner of Articulation,/t/,/r/,Initial
+Trough,Rough,Consonant Manner of Articulation,/t/,/r/,Initial
+True,Grew,Consonant Voicing,/t/,/g/,Initial
+Trunk,Drunk,Consonant Voicing,/t/,/d/,Initial
+Trust,Rust,Consonant Manner of Articulation,/t/,/r/,Initial
+Try,Cry,Consonant Place of Articulation,/t/,/k/,Initial
+Tub,Cub,Consonant Place of Articulation,/t/,/k/,Initial
+Tuck,Buck,Consonant Voicing,/t/,/b/,Initial
+Tug,Lug,Consonant Manner of Articulation,/t/,/l/,Initial
+Tuna,Luna,Consonant Manner of Articulation,/t/,/l/,Initial
+Tune,Boon,Consonant Voicing,/t/,/b/,Initial
+Turf,Surf,Consonant Manner of Articulation,/t/,/s/,Initial
+Turn,Burn,Consonant Voicing,/t/,/b/,Initial
+Van,Man,Consonant Manner of Articulation,/v/,/m/,Initial
+Vane,Cane,Consonant Manner of Articulation,/v/,/k/,Initial
+Vase,Base,Consonant Place of Articulation,/v/,/b/,Initial
+Vast,Fast,Consonant Voicing,/v/,/f/,Initial
+Veal,Deal,Consonant Manner of Articulation,/v/,/d/,Initial
+Veil,Bail,Consonant Manner of Articulation,/v/,/b/,Initial
+Vent,Bent,Consonant Manner of Articulation,/v/,/b/,Initial
+Vest,Best,Consonant Place of Articulation,/v/,/b/,Initial
+Vet,Bet,Consonant Place of Articulation,/v/,/b/,Initial
+View,Few,Consonant Voicing,/v/,/f/,Initial
+Vile,File,Consonant Voicing,/v/,/f/,Initial
+Vine,Fine,Consonant Voicing,/v/,/f/,Initial
+Vote,Boat,Consonant Place of Articulation,/v/,/b/,Initial
+Vow,Bow,Consonant Place of Articulation,/v/,/b/,Initial
+Wad,Rod,Consonant Manner of Articulation,/w/,/r/,Initial
+Wade,Raid,Consonant Manner of Articulation,/w/,/r/,Initial
+Waft,Raft,Consonant Manner of Articulation,/w/,/r/,Initial
+Wage,Rage,Consonant Manner of Articulation,/w/,/r/,Initial
+Wail,Rail,Consonant Manner of Articulation,/w/,/r/,Initial
+Wait,Bait,Consonant Manner of Articulation,/w/,/b/,Initial
+Waive,Rave,Consonant Manner of Articulation,/w/,/r/,Initial
+Wake,Rake,Consonant Manner of Articulation,/w/,/r/,Initial
+Walk,Talk,Consonant Manner of Articulation,/w/,/t/,Initial
+Wall,Ball,Consonant Manner of Articulation,/w/,/b/,Initial
+Wand,Pond,Consonant Manner of Articulation,/w/,/p/,Initial
+War,Bar,Consonant Manner of Articulation,/w/,/b/,Initial
+Ward,Hard,Consonant Manner of Articulation,/w/,/h/,Initial
+Warm,Arm,Consonant Manner of Articulation,/w/,/ɑː/,Initial
+Warn,Yarn,Consonant Place of Articulation,/w/,/j/,Initial
+Watch,Botch,Consonant Manner of Articulation,/w/,/b/,Initial
+Wax,Tax,Consonant Manner of Articulation,/w/,/t/,Initial
+Way,Day,Consonant Manner of Articulation,/w/,/d/,Initial
+Weak,Beak,Consonant Manner of Articulation,/w/,/b/,Initial
+Weal,Real,Consonant Manner of Articulation,/w/,/r/,Initial
+Wear,Bear,Consonant Manner of Articulation,/w/,/b/,Initial
+Web,Deb,Consonant Manner of Articulation,/w/,/d/,Initial
+Wed,Bed,Consonant Manner of Articulation,/w/,/b/,Initial
+Weed,Seed,Consonant Manner of Articulation,/w/,/s/,Initial
+Week,Geek,Consonant Manner of Articulation,/w/,/g/,Initial
+Weep,Keep,Consonant Manner of Articulation,/w/,/k/,Initial
+Weigh,Day,Consonant Manner of Articulation,/w/,/d/,Initial
+Weight,Rate,Consonant Place of Articulation,/w/,/r/,Initial
+Well,Bell,Consonant Manner of Articulation,/w/,/b/,Initial
+Wend,Bend,Consonant Manner of Articulation,/w/,/b/,Initial
+Went,Rent,Consonant Manner of Articulation,/w/,/r/,Initial
+West,Best,Consonant Manner of Articulation,/w/,/b/,Initial
+Wet,Bet,Consonant Manner of Articulation,/w/,/b/,Initial
+Whack,Rack,Consonant Manner of Articulation,/w/,/r/,Initial
+Wham,Ram,Consonant Manner of Articulation,/w/,/r/,Initial
+What,Got,Consonant Manner of Articulation,/w/,/g/,Initial
+Wheel,Feel,Consonant Manner of Articulation,/w/,/f/,Initial
+When,Pen,Consonant Manner of Articulation,/w/,/p/,Initial
+Where,Care,Consonant Manner of Articulation,/w/,/k/,Initial
+Which,Rich,Consonant Manner of Articulation,/w/,/r/,Initial
+Whiff,Riff,Consonant Manner of Articulation,/w/,/r/,Initial
+While,Pile,Consonant Manner of Articulation,/w/,/p/,Initial
+Whim,Rim,Consonant Manner of Articulation,/w/,/r/,Initial
+Whine,Fine,Consonant Manner of Articulation,/w/,/f/,Initial
+Whip,Hip,Consonant Manner of Articulation,/w/,/h/,Initial
+Whir,Sir,Consonant Manner of Articulation,/w/,/s/,Initial
+White,Bite,Consonant Manner of Articulation,/w/,/b/,Initial
+Who,Goo,Consonant Manner of Articulation,/w/,/g/,Initial
+Whole,Goal,Consonant Manner of Articulation,/w/,/g/,Initial
+Whom,Room,Consonant Manner of Articulation,/w/,/r/,Initial
+Wick,Sick,Consonant Manner of Articulation,/w/,/s/,Initial
+Wide,Ride,Consonant Manner of Articulation,/w/,/r/,Initial
+Wield,Field,Consonant Manner of Articulation,/w/,/f/,Initial
+Wife,Life,Consonant Manner of Articulation,/w/,/l/,Initial
+Wig,Pig,Consonant Manner of Articulation,/w/,/p/,Initial
+Wild,Mild,Consonant Manner of Articulation,/w/,/m/,Initial
+Will,Fill,Consonant Manner of Articulation,/w/,/f/,Initial
+Wilt,Guilt,Consonant Manner of Articulation,/w/,/g/,Initial
+Wimp,Limp,Consonant Manner of Articulation,/w/,/l/,Initial
+Win,Fin,Consonant Manner of Articulation,/w/,/f/,Initial
+Wince,Rinse,Consonant Manner of Articulation,/w/,/r/,Initial
+Winch,Finch,Consonant Manner of Articulation,/w/,/f/,Initial
+Wind,Mind,Consonant Manner of Articulation,/w/,/m/,Initial
+Wine,Dine,Consonant Manner of Articulation,/w/,/d/,Initial
+Wing,Sing,Consonant Manner of Articulation,/w/,/s/,Initial
+Wink,Rink,Consonant Manner of Articulation,/w/,/r/,Initial
+Wipe,Ripe,Consonant Manner of Articulation,/w/,/r/,Initial
+Wire,Fire,Consonant Manner of Articulation,/w/,/f/,Initial
+Wise,Guys,Consonant Manner of Articulation,/w/,/g/,Initial
+Wish,Fish,Consonant Manner of Articulation,/w/,/f/,Initial
+Wisp,Lisp,Consonant Manner of Articulation,/w/,/l/,Initial
+Wit,Bit,Consonant Manner of Articulation,/w/,/b/,Initial
+Witch,Pitch,Consonant Manner of Articulation,/w/,/p/,Initial
+With,Pith,Consonant Manner of Articulation,/w/,/p/,Initial
+Woe,Row,Consonant Manner of Articulation,/w/,/r/,Initial
+Woke,Joke,Consonant Manner of Articulation,/w/,/dʒ/,Initial
+Won,Done,Consonant Manner of Articulation,/w/,/d/,Initial
+Wood,Good,Consonant Manner of Articulation,/w/,/g/,Initial
+Woof,Goof,Consonant Manner of Articulation,/w/,/g/,Initial
+Wool,Cool,Consonant Manner of Articulation,/w/,/k/,Initial
+Word,Bird,Consonant Manner of Articulation,/w/,/b/,Initial
+Wore,Bore,Consonant Manner of Articulation,/w/,/b/,Initial
+Work,Lurk,Consonant Manner of Articulation,/w/,/l/,Initial
+Worm,Firm,Consonant Manner of Articulation,/w/,/f/,Initial
+Worn,Corn,Consonant Manner of Articulation,/w/,/k/,Initial
+Worst,First,Consonant Manner of Articulation,/w/,/f/,Initial
+Worth,Birth,Consonant Manner of Articulation,/w/,/b/,Initial
+Would,Could,Consonant Manner of Articulation,/w/,/k/,Initial
+Wound,Found,Consonant Manner of Articulation,/w/,/f/,Initial
+Wrap,Rap,Consonant Manner of Articulation,/w/,/r/,Initial
+Wreck,Neck,Consonant Manner of Articulation,/w/,/n/,Initial
+Wren,Pen,Consonant Manner of Articulation,/w/,/p/,Initial
+Wring,Ring,Consonant Manner of Articulation,/w/,/r/,Initial
+Wrist,Mist,Consonant Manner of Articulation,/w/,/m/,Initial
+Write,Bite,Consonant Manner of Articulation,/w/,/b/,Initial
+Wrong,Long,Consonant Manner of Articulation,/w/,/l/,Initial
+Wrote,Vote,Consonant Manner of Articulation,/w/,/v/,Initial
+Yam,Jam,Consonant Place of Articulation,/j/,/dʒ/,Initial
+Yap,Tap,Consonant Manner of Articulation,/j/,/t/,Initial
+Yard,Hard,Consonant Manner of Articulation,/j/,/h/,Initial
+Yarn,Barn,Consonant Manner of Articulation,/j/,/b/,Initial
+Yawn,Dawn,Consonant Manner of Articulation,/j/,/d/,Initial
+Yeah,Day,Consonant Manner of Articulation,/j/,/d/,Initial
+Year,Ear,Consonant Manner of Articulation,/j/,/ɪ/,Initial
+Yeast,East,Consonant Manner of Articulation,/j/,/iː/,Initial
+Yell,Sell,Consonant Manner of Articulation,/j/,/s/,Initial
+Yellow,Jello,Consonant Place of Articulation,/j/,/dʒ/,Initial
+Yep,Step,Consonant Manner of Articulation,/j/,/s/,Initial
+Yes,Mess,Consonant Manner of Articulation,/j/,/m/,Initial
+Yet,Get,Consonant Manner of Articulation,/j/,/g/,Initial
+Yoke,Joke,Consonant Place of Articulation,/j/,/dʒ/,Initial
+Yore,More,Consonant Manner of Articulation,/j/,/m/,Initial
+You,Moo,Consonant Manner of Articulation,/j/,/m/,Initial
+Your,Tour,Consonant Manner of Articulation,/j/,/t/,Initial
+Youth,Tooth,Consonant Manner of Articulation,/j/,/t/,Initial
+Yule,Rule,Consonant Manner of Articulation,/j/,/r/,Initial
+Zap,Gap,Consonant Manner of Articulation,/z/,/g/,Initial
+Zeal,Meal,Consonant Manner of Articulation,/z/,/m/,Initial
+Zen,Pen,Consonant Manner of Articulation,/z/,/p/,Initial
+Zest,Best,Consonant Manner of Articulation,/z/,/b/,Initial
+Zip,Lip,Consonant Manner of Articulation,/z/,/l/,Initial
+Zone,Bone,Consonant Manner of Articulation,/z/,/b/,Initial
+Zoo,Goo,Consonant Manner of Articulation,/z/,/g/,Initial
+Zoom,Room,Consonant Manner of Articulation,/z/,/r/,Initial
+Ruffle,Rubble,Consonant Voicing,/f/,/b/,Medial
+Rifle,Rival,Consonant Voicing,/f/,/v/,Medial
+Refer,Rever,Consonant Voicing,/f/,/v/,Medial
+Popping,Bobbing,Consonant Voicing,/p/,/b/,Medial
+Napping,Nabbing,Consonant Voicing,/p/,/b/,Medial
+Latter,Ladder,Consonant Voicing,/t/,/d/,Medial
+Biting,Biding,Consonant Voicing,/t/,/d/,Medial
+Writing,Riding,Consonant Voicing,/t/,/d/,Medial
+Fussy,Fuzzy,Consonant Voicing,/s/,/z/,Medial
+Lacy,Lazy,Consonant Voicing,/s/,/z/,Medial
+Buses,Buzzes,Consonant Voicing,/s/,/z/,Medial
+Ether,Either,Consonant Voicing,/θ/,/ð/,Medial
+Riches,Ridges,Consonant Voicing,/tʃ/,/dʒ/,Medial
+Matcher,Major,Consonant Voicing,/tʃ/,/dʒ/,Medial
+Fetching,Fledging,Consonant Voicing,/tʃ/,/dʒ/,Medial
+Pleasure,Pressure,Consonant Manner of Articulation,/ʒ/,/ʃ/,Medial
+Follow,Borrow,Consonant Manner of Articulation,/f/,/b/,Medial
+Tummy,Gummy,Consonant Voicing,/t/,/g/,Medial
+Silly,Chilly,Consonant Manner of Articulation,/s/,/tʃ/,Medial
+Barrow,Narrow,Consonant Manner of Articulation,/b/,/n/,Medial
+Merry,Berry,Consonant Manner of Articulation,/m/,/b/,Medial
+Risen,Ridden,Consonant Manner of Articulation,/z/,/d/,Medial
+Picket,Ticket,Consonant Place of Articulation,/p/,/t/,Medial
+Foggy,Doggy,Consonant Place of Articulation,/f/,/d/,Medial
+Cuddle,Muddle,Consonant Manner of Articulation,/k/,/m/,Medial
+Getter,Better,Consonant Voicing,/g/,/b/,Medial
+Niggle,Nibble,Consonant Voicing,/g/,/b/,Medial
+Wager,Waiter,Consonant Manner of Articulation,/dʒ/,/t/,Medial
+Raging,Raving,Consonant Manner of Articulation,/dʒ/,/v/,Medial
+Pigeon,Pillion,Consonant Manner of Articulation,/dʒ/,/l/,Medial
+Bulge,Bulk,Final Consonant Discrimination,/dʒ/,/k/,Final
+Badge,Bad,Final Consonant Discrimination,/dʒ/,/d/,Final
+Rage,Raid,Final Consonant Discrimination,/dʒ/,/d/,Final
+Ridge,Rid,Final Consonant Discrimination,/dʒ/,/d/,Final
+Dodge,Dog,Final Consonant Discrimination,/dʒ/,/g/,Final
+Knave,Name,Final Consonant Discrimination,/v/,/m/,Final
+Give,Glim,Final Consonant Discrimination,/v/,/m/,Final
+Have,Ham,Final Consonant Discrimination,/v/,/m/,Final
+Love,Lump,Final Consonant Discrimination,/v/,/p/,Final
+Live,Lid,Final Consonant Discrimination,/v/,/d/,Final
+Save,Sate,Final Consonant Discrimination,/v/,/t/,Final
+Leave,Lean,Final Consonant Discrimination,/v/,/n/,Final
+Strive,Strike,Final Consonant Discrimination,/v/,/k/,Final
+Brave,Break,Final Consonant Discrimination,/v/,/k/,Final
+Loathe,Loaf,Final Consonant Discrimination,/ð/,/f/,Final
+Bathe,Bait,Final Consonant Discrimination,/ð/,/t/,Final
+Soothe,Soon,Final Consonant Discrimination,/ð/,/n/,Final
+Clothe,Close,Final Consonant Discrimination,/ð/,/z/,Final
+Math,Man,Final Consonant Discrimination,/θ/,/n/,Final
+Path,Pad,Final Consonant Discrimination,/θ/,/d/,Final
+Faith,Fade,Final Consonant Discrimination,/θ/,/d/,Final
+Ruth,Root,Final Consonant Discrimination,/θ/,/t/,Final
+Mouth,Mouse,Final Consonant Discrimination,/θ/,/s/,Final
+Death,Debt,Final Consonant Discrimination,/θ/,/t/,Final
+Bath,Back,Final Consonant Discrimination,/θ/,/k/,Final
+Worth,Word,Final Consonant Discrimination,/θ/,/d/,Final
+Oath,Oat,Final Consonant Discrimination,/θ/,/t/,Final
+Ring,Rim,Final Consonant Discrimination,/ŋ/,/m/,Final
+Sing,Sin,Final Consonant Discrimination,/ŋ/,/n/,Final
+Bang,Ban,Final Consonant Discrimination,/ŋ/,/n/,Final
+Hang,Ham,Final Consonant Discrimination,/ŋ/,/m/,Final
+Long,Lawn,Final Consonant Discrimination,/ŋ/,/n/,Final
+Song,Sod,Final Consonant Discrimination,/ŋ/,/d/,Final
+Thing,Thick,Final Consonant Discrimination,/ŋ/,/k/,Final
+Rang,Rate,Final Consonant Discrimination,/ŋ/,/t/,Final
+Lung,Love,Final Consonant Discrimination,/ŋ/,/v/,Final
+King,Kid,Final Consonant Discrimination,/ŋ/,/d/,Final
+Lash,Lad,Final Consonant Discrimination,/ʃ/,/d/,Final
+Wish,Wiz,Final Consonant Discrimination,/ʃ/,/z/,Final
+Mesh,Mess,Consonant Place of Articulation,/ʃ/,/s/,Final
+Rush,Rough,Final Consonant Discrimination,/ʃ/,/f/,Final
+Cash,Cat,Final Consonant Discrimination,/ʃ/,/t/,Final
+Gash,Gap,Final Consonant Discrimination,/ʃ/,/p/,Final
+Fish,Fit,Final Consonant Discrimination,/ʃ/,/t/,Final
+Raze,Rage,Final Consonant Discrimination,/z/,/dʒ/,Final
+Fuse,Food,Final Consonant Discrimination,/z/,/d/,Final
+Haze,Hate,Final Consonant Discrimination,/z/,/t/,Final
+Lose,Loot,Final Consonant Discrimination,/z/,/t/,Final
+Buzz,Bud,Final Consonant Discrimination,/z/,/d/,Final
+Whizz,Whit,Final Consonant Discrimination,/z/,/t/,Final
+Was,Wash,Final Consonant Discrimination,/z/,/ʃ/,Final
+Seize,Seed,Final Consonant Discrimination,/z/,/d/,Final
+His,Hit,Final Consonant Discrimination,/z/,/t/,Final
+Daze,Date,Final Consonant Discrimination,/z/,/t/,Final
+Kite,Kind,Final Consonant Discrimination,/t/,/d/,Final
+Bait,Bake,Final Consonant Discrimination,/t/,/k/,Final
+Set,Sec,Final Consonant Discrimination,/t/,/k/,Final
+Hit,Hick,Final Consonant Discrimination,/t/,/k/,Final
+Cat,Cab,Final Consonant Discrimination,/t/,/b/,Final
+Butt,Bus,Final Consonant Discrimination,/t/,/s/,Final
+White,Wise,Final Consonant Discrimination,/t/,/z/,Final
+Caught,Cough,Final Consonant Discrimination,/t/,/f/,Final
+Bite,Bike,Final Consonant Discrimination,/t/,/k/,Final
+Sight,Sigh,Final Consonant Discrimination,/t/,/h/,Final
+Meet,Meal,Final Consonant Discrimination,/t/,/l/,Final
+Wait,Wage,Final Consonant Discrimination,/t/,/dʒ/,Final
+Late,Lace,Final Consonant Discrimination,/t/,/s/,Final
+Bet,Bedge,Final Consonant Discrimination,/t/,/dʒ/,Final
+Sit,Sill,Final Consonant Discrimination,/t/,/l/,Final
+Rate,Raise,Final Consonant Discrimination,/t/,/z/,Final
+Loot,Loom,Final Consonant Discrimination,/t/,/m/,Final
+Boot,Boom,Final Consonant Discrimination,/t/,/m/,Final
+Neat,Kneel,Final Consonant Discrimination,/t/,/l/,Final
+Fought,Fall,Final Consonant Discrimination,/t/,/l/,Final
+Sought,Saul,Final Consonant Discrimination,/t/,/l/,Final
+Debt,Deaf,Final Consonant Discrimination,/t/,/f/,Final
+Pit,Pill,Final Consonant Discrimination,/t/,/l/,Final
+Fist,Fast,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Lick,Lack,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Sit,Sat,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Fix,Fax,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Hit,Hat,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Slick,Slack,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Bit,Bat,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Quit,Quat,Vowel Place/Fronting,/ɪ/,/æ/,Medial
+Bin,Ben,Vowel Height,/ɪ/,/ɛ/,Medial
+Win,When,Vowel Height,/ɪ/,/ɛ/,Medial
+Sought,Sat,Vowel Place/Fronting,/ɔː/,/æ/,Medial
+Caught,Cat,Vowel Place/Fronting,/ɔː/,/æ/,Medial
+Pawn,Pan,Vowel Place/Fronting,/ɔː/,/æ/,Medial
+Dawn,Dan,Vowel Place/Fronting,/ɔː/,/æ/,Medial
+Raw,Rah,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Bored,Bard,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Cord,Card,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Fork,Park,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Short,Shot,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Sport,Spot,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Worn,Warn,Vowel Place/Fronting,/ɔː/,/ɑ/,Medial
+Yard,Lord,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Hard,Hoard,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Guard,Gourd,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Part,Port,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Star,Store,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Tar,Tore,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Far,Four,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Bar,Bore,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Car,Core,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Mar,More,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Par,Pore,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Spar,Spore,Vowel Place/Fronting,/ɑ/,/ɔː/,Medial
+Lop,Loop,Vowel Height,/ɑ/,/uː/,Medial
+Mop,Mope,Vowel Height,/ɑ/,/oʊ/,Medial
+Hop,Hope,Vowel Height,/ɑ/,/oʊ/,Medial
+Rod,Road,Vowel Height,/ɑ/,/oʊ/,Medial
+Got,Goat,Vowel Height,/ɑ/,/oʊ/,Medial
+Cod,Code,Vowel Height,/ɑ/,/oʊ/,Medial
+Rob,Robe,Vowel Height,/ɑ/,/oʊ/,Medial
+Snob,Snub,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Blob,Blub,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Clod,Cloud,Vowel Place/Fronting,/ɑ/,/aʊ/,Medial
+Sod,Sad,Vowel Place/Fronting,/ɑ/,/æ/,Medial
+Jot,Jut,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Jog,Jug,Vowel Place/Fronting,/ɑ/,/ʌ/,Medial
+Dune,Dean,Vowel Place/Fronting,/uː/,/iː/,Medial
+Bait,Boat,Vowel Place/Fronting,/eɪ/,/oʊ/,Medial
+Hale,Hole,Vowel Place/Fronting,/eɪ/,/oʊ/,Medial
+Lace,Lose,Vowel Place/Fronting,/eɪ/,/uː/,Medial
+Late,Loot,Vowel Place/Fronting,/eɪ/,/uː/,Medial
+Main,Moon,Vowel Place/Fronting,/eɪ/,/uː/,Medial
+Sale,Soul,Vowel Place/Fronting,/eɪ/,/oʊ/,Medial
+Tape,Tope,Vowel Place/Fronting,/eɪ/,/oʊ/,Medial
+Wake,Woke,Vowel Place/Fronting,/eɪ/,/oʊ/,Medial
+Stray,Straw,Vowel Place/Fronting,/eɪ/,/ɔː/,Medial
+Play,Ploy,Vowel Place/Fronting,/eɪ/,/ɔɪ/,Medial
+Bay,Boy,Vowel Place/Fronting,/eɪ/,/ɔɪ/,Medial
+Way,Why,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Weigh,Why,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Say,Sigh,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Pay,Pie,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Day,Die,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+May,My,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Lay,Lie,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Fay,Fie,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Gay,Guy,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Hay,Hi,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Nay,Nigh,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Ray,Rye,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Shay,Shy,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Slay,Sly,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Stay,Sty,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Tray,Try,Vowel Place/Fronting,/eɪ/,/aɪ/,Medial
+Lest,Nest,Final Consonant Discrimination,/l/,/n/,Final
+Bake,Bait,Final Consonant Discrimination,/k/,/t/,Final
+Sake,Sate,Final Consonant Discrimination,/k/,/t/,Final
+Leak,Leap,Final Consonant Discrimination,/k/,/p/,Final
+Luck,Lunch,Final Consonant Discrimination,/k/,/tʃ/,Final
+Poke,Poach,Final Consonant Discrimination,/k/,/tʃ/,Final
+Rick,Rich,Final Consonant Discrimination,/k/,/tʃ/,Final
+Muck,Much,Final Consonant Discrimination,/k/,/tʃ/,Final
+Pack,Patch,Final Consonant Discrimination,/k/,/tʃ/,Final
+Hike,Hive,Final Consonant Discrimination,/k/,/v/,Final
+Mice,Mice,Consonant Voicing,/s/,/z/,Final
+Dice,Dies,Consonant Voicing,/s/,/z/,Final
+Fleece,Fleas,Consonant Voicing,/s/,/z/,Final
+Trice,Tries,Consonant Voicing,/s/,/z/,Final
+Dunce,Duns,Consonant Voicing,/s/,/z/,Final
+Tense,Tens,Consonant Voicing,/s/,/z/,Final
+Hence,Hens,Consonant Voicing,/s/,/z/,Final
+Pence,Pens,Consonant Voicing,/s/,/z/,Final
+Wince,Wins,Consonant Voicing,/s/,/z/,Final
+Fence,Fens,Consonant Voicing,/s/,/z/,Final
+Sense,Sends,Consonant Voicing,/s/,/z/,Final
+Lice,Lies,Consonant Voicing,/s/,/z/,Final
+Brace,Braze,Consonant Voicing,/s/,/z/,Final
+Cease,Seize,Consonant Voicing,/s/,/z/,Final
+Chose,Shows,Consonant Voicing,/z/,/s/,Final
+Cot,Cod,Consonant Voicing,/t/,/d/,Final
+Mat,Mad,Consonant Voicing,/t/,/d/,Final
+Root,Rude,Consonant Voicing,/t/,/d/,Final
+Sheet,She'd,Consonant Voicing,/t/,/d/,Final
+Sit,Sid,Consonant Voicing,/t/,/d/,Final
+Meet,Mead,Consonant Voicing,/t/,/d/,Final
+Net,Ned,Consonant Voicing,/t/,/d/,Final
+Not,Nod,Consonant Voicing,/t/,/d/,Final
+Oat,Owed,Consonant Voicing,/t/,/d/,Final
+Pot,Pod,Consonant Voicing,/t/,/d/,Final
+Route,Rowed,Consonant Voicing,/t/,/d/,Final
+Sight,Sighed,Consonant Voicing,/t/,/d/,Final
+Soot,Sued,Consonant Voicing,/t/,/d/,Final
+Suit,Sued,Consonant Voicing,/t/,/d/,Final
+Tight,Tied,Consonant Voicing,/t/,/d/,Final
+White,Wide,Consonant Voicing,/t/,/d/,Final
+Beat,Bead,Consonant Voicing,/t/,/d/,Final
+Debt,Dead,Consonant Voicing,/t/,/d/,Final
+Fat,Fad,Consonant Voicing,/t/,/d/,Final
+Goat,Goad,Consonant Voicing,/t/,/d/,Final
+Great,Grade,Consonant Voicing,/t/,/d/,Final
+Grit,Grid,Consonant Voicing,/t/,/d/,Final
+Heat,Heed,Consonant Voicing,/t/,/d/,Final
+Height,Hide,Consonant Voicing,/t/,/d/,Final
+Hit,Hid,Consonant Voicing,/t/,/d/,Final
+Hoot,Hood,Consonant Voicing,/t/,/d/,Final
+Kit,Kid,Consonant Voicing,/t/,/d/,Final
+Light,Lied,Consonant Voicing,/t/,/d/,Final
+Lit,Lid,Consonant Voicing,/t/,/d/,Final
+Moat,Mode,Consonant Voicing,/t/,/d/,Final
+Mutt,Mud,Consonant Voicing,/t/,/d/,Final

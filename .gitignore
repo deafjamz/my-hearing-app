@@ -49,7 +49,21 @@ screenshots/
 # Logo generation outputs (large PNGs)
 branding/logo-gen/outputs/
 
+# Generation artifacts (audio pipeline logs and progress)
+*_generation.log
+*_progress.json
+*_failed_words.txt
+
+# Temp/test audio files
+temp_*.mp3
+test_*.mp3
+analyze_*.mp3
+
+# Network captures
+*.har
+
 # Build
 dist/
 .vercel
 .env*.local
+.vite/

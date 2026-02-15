@@ -1,0 +1,655 @@
+sentence_text,target_keyword,target_phoneme,question_text,correct_answer,acoustic_foil,semantic_foil,scenario,difficulty
+"The phone is ringing.","Ringing",/ŋ/,"What is the phone doing?","Ringing","Singing","Talking","Daily Life",1
+"She drank the hot tea.","Tea",/t/,"What did she drink?","Tea","Key","Coffee","Dining",2
+"He lost his car keys.","Keys",/k/,"What did he lose?","Keys","Peas","Wallet","Daily Life",1
+"The dog barked at the mail carrier.","Barked",/b/,"What did the dog do?","Barked","Parked","Jumped","Daily Life",1
+"Please close the door.","Door",/d/,"What should I close?","Door","More","Window","Daily Life",1
+"The baby is sleeping now.","Sleeping",/s/,"What is the baby doing?","Sleeping","Creeping","Crying","Daily Life",2
+"I need a pen to write this.","Pen",/p/,"What do I need to write?","Pen","Ten","Pencil","Daily Life",1
+"The coffee is too hot.","Hot",/h/,"How is the coffee?","Hot","Not","Cold","Dining",1
+"We watched a movie last night.","Movie",/m/,"What did we watch?","Movie","Moving","Show","Social",2
+"She wore a blue dress.","Blue",/b/,"What color was the dress?","Blue","Glue","Red","Social",2
+"He bought a new coat.","Coat",/k/,"What did he buy?","Coat","Boat","Jacket","Daily Life",2
+"The soup tastes very good.","Soup",/s/,"What tastes very good?","Soup","Stoop","Food","Dining",1
+"I am going to the store.","Store",/st/,"Where am I going?","Store","More","Bank","Daily Life",1
+"The children played in the park.","Park",/p/,"Where did the children play?","Park","Dark","Yard","Outdoors",1
+"It might rain this afternoon.","Rain",/r/,"What might happen this afternoon?","Rain","Pain","Snow","Outdoors",2
+"He fixed the broken chair.","Chair",/tʃ/,"What did he fix?","Chair","Share","Table","Daily Life",2
+"She likes to read books.","Books",/b/,"What does she like to read?","Books","Looks","Magazines","Daily Life",1
+"The wind is blowing hard.","Wind",/w/,"What is blowing hard?","Wind","Mind","Air","Outdoors",2
+"We had fish for dinner.","Fish",/f/,"What did we have for dinner?","Fish","Wish","Meat","Dining",2
+"The meeting starts at nine.","Nine",/n/,"When does the meeting start?","Nine","Fine","Ten","Daily Life",3
+"He drives a big truck.","Truck",/tr/,"What does he drive?","Truck","Duck","Car","Daily Life",2
+"I paid the bill online.","Bill",/b/,"What did I pay online?","Bill","Pill","Taxes","Daily Life",2
+"She put the milk in the fridge.","Milk",/m/,"What did she put in the fridge?","Milk","Silk","Juice","Daily Life",1
+"The clock is on the wall.","Clock",/k/,"What is on the wall?","Clock","Block","Picture","Daily Life",1
+"We need to buy some eggs.","Eggs",/ɛ/,"What do we need to buy?","Eggs","Legs","Bread","Daily Life",1
+"The sun is very bright today.","Bright",/br/,"How is the sun today?","Bright","Light","Hot","Outdoors",1
+"He is wearing a hat.","Hat",/h/,"What is he wearing?","Hat","Cat","Cap","Daily Life",1
+"They live in a white house.","White",/w/,"What color is the house?","White","Right","Big","Daily Life",2
+"I forgot my glasses.","Glasses",/g/,"What did I forget?","Glasses","Classes","Wallet","Daily Life",2
+"She is baking a cake.","Cake",/k/,"What is she baking?","Cake","Rake","Pie","Dining",2
+"The water is cold.","Cold",/k/,"How is the water?","Cold","Gold","Warm","Daily Life",1
+"He washed his hands.","Hands",/h/,"What did he wash?","Hands","Bands","Face","Daily Life",1
+"The bird is singing in the tree.","Bird",/b/,"What is singing in the tree?","Bird","Word","Cat","Outdoors",2
+"We are going on a trip.","Trip",/tr/,"What are we going on?","Trip","Ship","Vacation","Social",3
+"The shoes are too tight.","Tight",/t/,"How are the shoes?","Tight","Light","Small","Daily Life",2
+"He ordered a cheeseburger.","Cheeseburger",/tʃ/,"What did he order?","Cheeseburger","Cheeseboard","Sandwich","Dining",3
+"The cat is hiding under the bed.","Bed",/b/,"Where is the cat hiding?","Bed","Red","Sofa","Daily Life",1
+"I have a doctor's appointment.","Doctor",/d/,"What kind of appointment do I have?","Doctor","Proctor","Meeting","Daily Life",3
+"She cut her finger with a knife.","Knife",/n/,"What did she use to cut her finger?","Knife","Wife","Blade","Daily Life",3
+"The train is late.","Late",/l/,"How is the train?","Late","Gate","Delayed","Daily Life",2
+"We need more time.","Time",/t/,"What do we need more of?","Time","Dime","Help","Social",2
+"He is a very tall man.","Tall",/t/,"How would you describe the man?","Tall","Call","Big","Social",2
+"The music is too loud.","Loud",/l/,"How is the music?","Loud","Proud","Noisy","Social",1
+"I need to charge my phone.","Phone",/f/,"What do I need to charge?","Phone","Bone","Battery","Daily Life",1
+"She found a quarter on the ground.","Quarter",/kw/,"What did she find?","Quarter","Sorter","Coin","Daily Life",3
+"The apple is red and shiny.","Apple",/æ/,"What is red and shiny?","Apple","Paddle","Fruit","Dining",1
+"He went for a long walk.","Walk",/w/,"What did he go for?","Walk","Talk","Run","Outdoors",2
+"The car stopped at the red light.","Red",/r/,"What color was the light?","Red","Bed","Stop","Daily Life",1
+"She is drinking water from a glass.","Glass",/g/,"What is she drinking water from?","Glass","Class","Cup","Dining",2
+"I have a pain in my back.","Pain",/p/,"What do I have in my back?","Pain","Rain","Ache","Daily Life",3
+"The stars are visible tonight.","Stars",/st/,"What is visible tonight?","Stars","Cars","Sky","Outdoors",2
+"He is looking for a new job.","Job",/dʒ/,"What is he looking for?","Job","Rob","Work","Daily Life",3
+"We had a great time at the party.","Party",/p/,"Where did we have a great time?","Party","Hearty","Event","Social",2
+"The teacher is writing on the board.","Teacher",/t/,"Who is writing on the board?","Teacher","Preacher","Man","Daily Life",2
+"I bought some fresh bread.","Bread",/br/,"What did I buy?","Bread","Thread","Food","Dining",2
+"The snow is melting fast.","Snow",/sn/,"What is melting fast?","Snow","Glow","Ice","Outdoors",2
+"He put salt and pepper on his food.","Pepper",/p/,"What did he put on his food besides salt?","Pepper","Paper","Spice","Dining",3
+"She is afraid of spiders.","Spiders",/sp/,"What is she afraid of?","Spiders","Wider","Bugs","Daily Life",3
+"The airplane is flying high.","Airplane",/pl/,"What is flying high?","Airplane","Explain","Jet","Outdoors",2
+"He is eating a banana.","Banana",/b/,"What is he eating?","Banana","Bandana","Fruit","Dining",2
+"The door bell is broken.","Bell",/b/,"What part of the door is broken?","Bell","Tell","Handle","Daily Life",3
+"I am waiting for the bus.","Bus",/b/,"What am I waiting for?","Bus","Us","Ride","Daily Life",1
+"She has long brown hair.","Hair",/h/,"What is long and brown?","Hair","Chair","Coat","Social",2
+"The leaves fall in autumn.","Leaves",/l/,"What falls in autumn?","Leaves","Sleeves","Trees","Outdoors",2
+"He is riding his bike.","Bike",/b/,"What is he riding?","Bike","Hike","Cycle","Outdoors",1
+"I need to wash the dishes.","Dishes",/d/,"What do I need to wash?","Dishes","Wishes","Pots","Daily Life",1
+"The ocean waves are big.","Ocean",/oʊ/,"Where are the waves big?","Ocean","Motion","Sea","Outdoors",3
+"She is typing on the keyboard.","Keyboard",/k/,"What is she typing on?","Keyboard","Leopard","Computer","Daily Life",2
+"We saw a deer in the woods.","Deer",/d/,"What did we see in the woods?","Deer","Beer","Animal","Outdoors",3
+"He is drinking orange juice.","Juice",/dʒ/,"What is he drinking?","Juice","Goose","Soda","Dining",2
+"The baby has a new toy.","Toy",/t/,"What does the baby have?","Toy","Boy","Rattle","Daily Life",1
+"I need to buy a stamp.","Stamp",/st/,"What do I need to buy?","Stamp","Lamp","Mail","Daily Life",3
+"The movie made her cry.","Cry",/kr/,"What did the movie make her do?","Cry","Fry","Sad","Social",3
+"He put the book on the shelf.","Shelf",/ʃ/,"Where did he put the book?","Shelf","Self","Table","Daily Life",2
+"The garden needs water.","Garden",/g/,"What needs water?","Garden","Harden","Plants","Outdoors",2
+"She is looking for her purse.","Purse",/p/,"What is she looking for?","Purse","Nurse","Bag","Daily Life",3
+"The road is very slippery.","Road",/r/,"What is very slippery?","Road","Load","Street","Outdoors",3
+"He is eating soup with a spoon.","Spoon",/sp/,"What is he eating soup with?","Spoon","Moon","Fork","Dining",1
+"The pencil is sharp.","Sharp",/ʃ/,"How is the pencil?","Sharp","Carp","Pointy","Daily Life",3
+"We need to clean the floor.","Floor",/fl/,"What do we need to clean?","Floor","Door","Room","Daily Life",1
+"The mountains are covered in snow.","Mountains",/m/,"What is covered in snow?","Mountains","Fountains","Hills","Outdoors",3
+"She is wearing red lipstick.","Red",/r/,"What color is the lipstick?","Red","Bed","Pink","Social",3
+"He ordered a slice of pizza.","Pizza",/p/,"What did he order a slice of?","Pizza","Pita","Pie","Dining",2
+"The library is very quiet.","Quiet",/kw/,"How is the library?","Quiet","Diet","Silent","Daily Life",2
+"I am allergic to peanuts.","Peanuts",/p/,"What am I allergic to?","Peanuts","Donuts","Nuts","Dining",4
+"The bridge is closed for repairs.","Bridge",/br/,"What is closed for repairs?","Bridge","Fridge","Road","Outdoors",3
+"She sent a text message.","Text",/t/,"What did she send?","Text","Next","Email","Daily Life",2
+"He is planting a tree.","Tree",/tr/,"What is he planting?","Tree","Free","Bush","Outdoors",2
+"The child is afraid of the dark.","Dark",/d/,"What is the child afraid of?","Dark","Bark","Night","Daily Life",2
+"We are having a barbecue.","Barbecue",/b/,"What are we having?","Barbecue","Barber","Party","Social",3
+"She bought a ticket for the concert.","Ticket",/t/,"What did she buy?","Ticket","Thicket","Pass","Social",3
+"The mirror is broken.","Mirror",/m/,"What is broken?","Mirror","Nearer","Glass","Daily Life",4
+"He likes to play golf.","Golf",/g/,"What does he like to play?","Golf","Wolf","Tennis","Outdoors",4
+"The salad needs more dressing.","Salad",/s/,"What needs more dressing?","Salad","Ballad","Food","Dining",3
+"The boat sailed across the lake.","Boat",/b/,"What sailed across the lake?","Boat","Goat","Ship","Outdoors",2
+"I have a headache.","Headache",/h/,"What do I have?","Headache","Backache","Pain","Daily Life",4
+"She is listening to the radio.","Radio",/r/,"What is she listening to?","Radio","Patio","Music","Daily Life",2
+"The bath is ready now.","Bath",/b/,"What is ready now?","Bath","Path","Water","Daily Life",2
+"We need to book a flight soon.","Flight",/f/,"What do we need to book soon?","Flight","Light","Trip","Daily Life",3
+"Please turn off the light.","Light",/l/,"What should I turn off?","Light","Right","Lamp","Daily Life",1
+"I am looking for my shoes.","Shoes",/ʃ/,"What am I looking for?","Shoes","Choose","Boots","Daily Life",1
+"The cat caught a mouse.","Mouse",/m/,"What did the cat catch?","Mouse","House","Rat","Daily Life",2
+"He is drinking a glass of milk.","Glass",/g/,"What is he drinking from?","Glass","Class","Cup","Dining",1
+"The car needs gas.","Gas",/g/,"What does the car need?","Gas","Pass","Fuel","Daily Life",1
+"She is writing a letter.","Letter",/l/,"What is she writing?","Letter","Better","Note","Daily Life",2
+"We ate dinner at a restaurant.","Restaurant",/r/,"Where did we eat dinner?","Restaurant","Restraint","Cafe","Dining",2
+"The sky is clear today.","Clear",/kl/,"How is the sky today?","Clear","Near","Blue","Outdoors",1
+"He is brushing his teeth.","Teeth",/t/,"What is he brushing?","Teeth","Wreath","Mouth","Daily Life",1
+"The flowers are beautiful.","Flowers",/fl/,"What is beautiful?","Flowers","Towers","Garden","Outdoors",2
+"I need to buy some soap.","Soap",/s/,"What do I need to buy?","Soap","Rope","Shampoo","Daily Life",2
+"She is wearing a warm scarf.","Scarf",/sk/,"What is she wearing?","Scarf","Barf","Wrap","Daily Life",3
+"The meeting was very long.","Long",/l/,"How was the meeting?","Long","Wrong","Boring","Social",2
+"He is cooking eggs in a pan.","Pan",/p/,"What is he cooking eggs in?","Pan","Man","Pot","Dining",1
+"The child is playing with a ball.","Ball",/b/,"What is the child playing with?","Ball","Wall","Toy","Daily Life",1
+"I have to go to the bank.","Bank",/b/,"Where do I have to go?","Bank","Tank","Store","Daily Life",2
+"She put sugar in her coffee.","Sugar",/ʃ/,"What did she put in her coffee?","Sugar","Bigger","Cream","Dining",1
+"The rain stopped an hour ago.","Stopped",/st/,"What did the rain do?","Stopped","Hopped","Ended","Outdoors",2
+"He is sitting on the bench.","Bench",/b/,"What is he sitting on?","Bench","Wrench","Seat","Outdoors",2
+"I lost my favorite pen.","Pen",/p/,"What did I lose?","Pen","Hen","Pencil","Daily Life",1
+"The bread is in the oven.","Oven",/ʌ/,"Where is the bread?","Oven","Coven","Toaster","Dining",2
+"We need to buy a new rug.","Rug",/r/,"What do we need to buy?","Rug","Mug","Carpet","Daily Life",3
+"He is wearing boots because it's cold.","Boots",/b/,"What is he wearing?","Boots","Roots","Shoes","Outdoors",2
+"The soup is too salty.","Salty",/s/,"How is the soup?","Salty","Faulty","Spicy","Dining",3
+"I am learning a new language.","Language",/l/,"What am I learning?","Language","Baggage","Skill","Social",4
+"The dog is chasing the cat.","Chasing",/tʃ/,"What is the dog doing?","Chasing","Pacing","Running","Daily Life",2
+"She is planting flowers in the garden.","Planting",/pl/,"What is she doing in the garden?","Planting","Chanting","Gardening","Outdoors",2
+"He is reading the newspaper.","Newspaper",/n/,"What is he reading?","Newspaper","Used paper","Article","Daily Life",1
+"The wind is blowing the leaves.","Leaves",/l/,"What is the wind blowing?","Leaves","Sleeves","Trees","Outdoors",2
+"I need to call my mother.","Mother",/m/,"Who do I need to call?","Mother","Brother","Friend","Daily Life",1
+"The cheese is very strong.","Cheese",/tʃ/,"What is very strong?","Cheese","Sneeze","Smell","Dining",3
+"He is working on his computer.","Computer",/k/,"What is he working on?","Computer","Commuter","Laptop","Daily Life",1
+"The baby is drinking from a bottle.","Bottle",/b/,"What is the baby drinking from?","Bottle","Wattle","Cup","Daily Life",1
+"She is going to the gym.","Gym",/dʒ/,"Where is she going?","Gym","Him","Workout","Daily Life",2
+"The car is parked in the garage.","Garage",/g/,"Where is the car parked?","Garage","Barrage","Driveway","Daily Life",2
+"I need to buy a gift for my friend.","Gift",/g/,"What do I need to buy?","Gift","Lift","Present","Social",2
+"The water is boiling on the stove.","Boiling",/b/,"What is the water doing?","Boiling","Toiling","Heating","Dining",2
+"He is wearing a suit and tie.","Suit",/s/,"What is he wearing?","Suit","Boot","Clothes","Social",2
+"The bird built a nest.","Nest",/n/,"What did the bird build?","Nest","Best","Home","Outdoors",2
+"She is looking for her glasses.","Glasses",/g/,"What is she looking for?","Glasses","Masses","Eyes","Daily Life",2
+"The cake tastes delicious.","Cake",/k/,"What tastes delicious?","Cake","Rake","Food","Dining",1
+"I am going to the beach this weekend.","Beach",/b/,"Where am I going this weekend?","Beach","Peach","Ocean","Outdoors",2
+"He is painting the fence white.","Fence",/f/,"What is he painting?","Fence","Dense","Wall","Outdoors",3
+"The phone battery is low.","Battery",/b/,"What is low?","Battery","Flattery","Charge","Daily Life",3
+"She is wearing a necklace.","Necklace",/n/,"What is she wearing?","Necklace","Reckless","Jewelry","Social",3
+"The traffic is very bad today.","Traffic",/tr/,"What is very bad today?","Traffic","Graphic","Roads","Daily Life",2
+"I need to take my medicine.","Medicine",/m/,"What do I need to take?","Medicine","Edison","Pills","Daily Life",3
+"He is watching a soccer game.","Soccer",/s/,"What game is he watching?","Soccer","Shocker","Sports","Social",3
+"The child is drawing a picture.","Drawing",/dr/,"What is the child doing?","Drawing","Gnawing","Art","Daily Life",2
+"She is cleaning the windows.","Windows",/w/,"What is she cleaning?","Windows","Minnows","Glass","Daily Life",2
+"The airplane landed safely.","Landed",/l/,"What did the airplane do?","Landed","Branded","Arrived","Outdoors",2
+"I need to buy some stamps.","Stamps",/st/,"What do I need to buy?","Stamps","Lamps","Mail","Daily Life",3
+"The fire is burning in the fireplace.","Fireplace",/f/,"Where is the fire burning?","Fireplace","Dire space","Hearth","Daily Life",2
+"He is taking a shower.","Shower",/ʃ/,"What is he taking?","Shower","Power","Bath","Daily Life",2
+"The keys are on the table.","Table",/t/,"Where are the keys?","Table","Cable","Desk","Daily Life",1
+"She is looking at the moon.","Moon",/m/,"What is she looking at?","Moon","Spoon","Sky","Outdoors",2
+"The doctor gave me a prescription.","Prescription",/pr/,"What did the doctor give me?","Prescription","Description","Medicine","Daily Life",4
+"I am reading a book about history.","History",/h/,"What is the book about?","History","Mystery","Facts","Daily Life",4
+"The cat is sleeping on the chair.","Chair",/tʃ/,"Where is the cat sleeping?","Chair","Hair","Seat","Daily Life",1
+"He is eating an apple.","Apple",/æ/,"What is he eating?","Apple","Grapple","Fruit","Dining",1
+"The children are swimming in the pool.","Pool",/p/,"Where are the children swimming?","Pool","Cool","Water","Outdoors",2
+"She is wearing a red coat.","Red",/r/,"What color is her coat?","Red","Bed","Warm","Daily Life",2
+"I need to wash my hair.","Hair",/h/,"What do I need to wash?","Hair","Chair","Head","Daily Life",1
+"The train arrived on time.","Time",/t/,"When did the train arrive?","Time","Lime","Schedule","Daily Life",2
+"He is drinking a cup of tea.","Cup",/k/,"What is he drinking from?","Cup","Pup","Mug","Dining",1
+"The music is very relaxing.","Relaxing",/r/,"How is the music?","Relaxing","Taxing","Calm","Social",3
+"She is looking for a parking spot.","Spot",/sp/,"What is she looking for?","Spot","Pot","Space","Daily Life",3
+"The dog is barking at the squirrel.","Squirrel",/skw/,"What is the dog barking at?","Squirrel","Twirl","Animal","Outdoors",4
+"I need to buy some milk.","Milk",/m/,"What do I need to buy?","Milk","Silk","Groceries","Daily Life",1
+"The sun is shining brightly.","Shining",/ʃ/,"What is the sun doing?","Shining","Dining","Bright","Outdoors",1
+"He is wearing a watch on his wrist.","Watch",/w/,"What is he wearing on his wrist?","Watch","Swatch","Timepiece","Daily Life",3
+"The coffee shop is closed.","Closed",/kl/,"What is the status of the coffee shop?","Closed","Posed","Shut","Dining",2
+"She is taking a picture with her camera.","Camera",/k/,"What is she using to take a picture?","Camera","Hammer","Device","Social",2
+"The wind is blowing the leaves off the trees.","Blowing",/bl/,"What is the wind doing?","Blowing","Glowing","Moving","Outdoors",2
+"I have a meeting at two o'clock.","Two",/t/,"When is the meeting?","Two","Shoe","Time","Daily Life",2
+"He is cutting the grass in the yard.","Grass",/gr/,"What is he cutting?","Grass","Class","Lawn","Outdoors",2
+"The baby is crying because he is hungry.","Crying",/kr/,"What is the baby doing?","Crying","Trying","Sad","Daily Life",2
+"She is wearing a beautiful dress.","Dress",/dr/,"What is she wearing?","Dress","Stress","Clothes","Social",2
+"The water is leaking from the pipe.","Leaking",/l/,"What is the water doing?","Leaking","Peeking","Dripping","Daily Life",3
+"I need to buy some bread and butter.","Bread",/br/,"What do I need to buy besides butter?","Bread","Thread","Food","Dining",2
+"The bird is flying in the sky.","Flying",/fl/,"What is the bird doing?","Flying","Crying","Soaring","Outdoors",2
+"He is cooking dinner in the kitchen.","Kitchen",/k/,"Where is he cooking dinner?","Kitchen","Chicken","Room","Dining",1
+"The car is very dirty and needs a wash.","Dirty",/d/,"How is the car?","Dirty","Thirty","Unclean","Daily Life",3
+"She is playing the piano.","Piano",/p/,"What is she playing?","Piano","Banjo","Instrument","Social",3
+"The snow is falling softly.","Falling",/f/,"What is the snow doing?","Falling","Calling","Coming down","Outdoors",2
+"I need to check my email.","Email",/i/,"What do I need to check?","Email","Detail","Messages","Daily Life",2
+"He is drinking a cold beer.","Beer",/b/,"What is he drinking?","Beer","Deer","Drink","Dining",3
+"The flowers are blooming in the spring.","Blooming",/bl/,"What are the flowers doing?","Blooming","Rooming","Growing","Outdoors",2
+"She is walking her dog in the park.","Dog",/d/,"What is she walking?","Dog","Fog","Pet","Outdoors",1
+"The movie starts at seven thirty.","Thirty",/θ/,"What time does the movie start?","Thirty","Dirty","Seven","Social",3
+"I need to buy a new pair of shoes.","Pair",/p/,"What do I need to buy?","Pair","Chair","Set","Daily Life",2
+"He is eating a sandwich for lunch.","Sandwich",/s/,"What is he eating for lunch?","Sandwich","Bandage","Food","Dining",2
+"The sky is cloudy and gray.","Cloudy",/kl/,"How is the sky?","Cloudy","Rowdy","Overcast","Outdoors",3
+"She is listening to music with headphones.","Headphones",/h/,"What is she using to listen to music?","Headphones","Telephones","Earbuds","Daily Life",3
+"The cat is chasing a mouse.","Mouse",/m/,"What is the cat chasing?","Mouse","House","Rodent","Daily Life",2
+"I need to go to the post office.","Post office",/p/,"Where do I need to go?","Post office","Lost office","Mail","Daily Life",3
+"He is riding a horse on the beach.","Horse",/h/,"What is he riding?","Horse","Course","Animal","Outdoors",4
+"The soup is very hot.","Hot",/h/,"How is the soup?","Hot","Pot","Warm","Dining",1
+"She is looking for her keys.","Keys",/k/,"What is she looking for?","Keys","Peas","Car","Daily Life",1
+"The wind is blowing very strong.","Strong",/str/,"How is the wind blowing?","Strong","Wrong","Hard","Outdoors",2
+"I have a dentist appointment tomorrow.","Dentist",/d/,"What kind of appointment do I have?","Dentist","Chemist","Doctor","Daily Life",4
+"He is fishing in the lake.","Fishing",/f/,"What is he doing in the lake?","Fishing","Wishing","Swimming","Outdoors",3
+"The children are playing outside.","Outside",/aʊ/,"Where are the children playing?","Outside","Inside","Yard","Outdoors",1
+"She is baking cookies in the oven.","Cookies",/k/,"What is she baking?","Cookies","Bookies","Treats","Dining",2
+"The phone is ringing loudly.","Loudly",/l/,"How is the phone ringing?","Loudly","Proudly","Noisily","Daily Life",1
+"I need to buy some groceries.","Groceries",/gr/,"What do I need to buy?","Groceries","Wineries","Food","Daily Life",3
+"He is wearing a blue shirt.","Blue",/b/,"What color is his shirt?","Blue","Glue","Dark","Daily Life",2
+"The water is dripping from the faucet.","Dripping",/dr/,"What is the water doing?","Dripping","Tripping","Leaking","Daily Life",3
+"She is reading a magazine.","Magazine",/m/,"What is she reading?","Magazine","Figurine","Book","Daily Life",3
+"The dog is sleeping on the rug.","Rug",/r/,"Where is the dog sleeping?","Rug","Mug","Floor","Daily Life",2
+"I need to pay the rent.","Rent",/r/,"What do I need to pay?","Rent","Tent","Bills","Daily Life",3
+"He is driving a red car.","Red",/r/,"What color is the car?","Red","Bed","Fast","Daily Life",2
+"The flowers need water.","Water",/w/,"What do the flowers need?","Water","Daughter","Sunlight","Outdoors",2
+"She is wearing a hat and gloves.","Gloves",/gl/,"What is she wearing besides a hat?","Gloves","Loves","Mittens","Daily Life",2
+"The movie was very scary.","Scary",/sk/,"How was the movie?","Scary","Dairy","Frightening","Social",3
+"I need to brush my teeth.","Brush",/br/,"What do I need to do to my teeth?","Brush","Crush","Clean","Daily Life",1
+"He is eating a bowl of cereal.","Cereal",/s/,"What is he eating?","Cereal","Serial","Breakfast","Dining",2
+"The bird is sitting on the fence.","Fence",/f/,"Where is the bird sitting?","Fence","Dense","Wall","Outdoors",2
+"She is looking at the stars.","Stars",/st/,"What is she looking at?","Stars","Cars","Sky","Outdoors",2
+"The soup needs more salt.","Salt",/s/,"What does the soup need?","Salt","Fault","Pepper","Dining",2
+"I am waiting for a package.","Package",/p/,"What am I waiting for?","Package","Cabbage","Mail","Daily Life",3
+"He is playing guitar in a band.","Guitar",/g/,"What is he playing?","Guitar","Sitar","Instrument","Social",4
+"The wind is blowing the clouds away.","Clouds",/kl/,"What is the wind blowing away?","Clouds","Crowds","Sky","Outdoors",3
+"She is drinking a glass of wine.","Wine",/w/,"What is she drinking?","Wine","Line","Drink","Dining",3
+"The car is parked on the street.","Street",/str/,"Where is the car parked?","Street","Treat","Road","Daily Life",2
+"I need to buy a new toothbrush.","Toothbrush",/t/,"What do I need to buy?","Toothbrush","Hairbrush","Dental","Daily Life",3
+"He is watching the news on TV.","News",/n/,"What is he watching on TV?","News","Shoes","Show","Daily Life",2
+"The children are laughing at the joke.","Joke",/dʒ/,"What are the children laughing at?","Joke","Poke","Comedy","Social",2
+"She is cooking pasta for dinner.","Pasta",/p/,"What is she cooking?","Pasta","Master","Food","Dining",2
+"The dog is digging a hole in the yard.","Hole",/h/,"What is the dog digging?","Hole","Pole","Pit","Outdoors",2
+"I need to vacuum the carpet.","Carpet",/k/,"What do I need to vacuum?","Carpet","Market","Floor","Daily Life",3
+"He is wearing a black jacket.","Black",/bl/,"What color is his jacket?","Black","Slack","Dark","Daily Life",2
+"The water is flowing down the river.","River",/r/,"Where is the water flowing?","River","Shiver","Stream","Outdoors",3
+"She is putting the dishes in the dishwasher.","Dishwasher",/d/,"Where is she putting the dishes?","Dishwasher","Dispatcher","Sink","Daily Life",3
+"The airplane is taking off.","Taking off",/t/,"What is the airplane doing?","Taking off","Baking off","Leaving","Outdoors",2
+"I need to buy some fruit and vegetables.","Fruit",/fr/,"What do I need to buy besides vegetables?","Fruit","Boot","Food","Dining",2
+"He is listening to a podcast.","Podcast",/p/,"What is he listening to?","Podcast","Broadcast","Show","Daily Life",4
+"The snow is covering the ground.","Ground",/gr/,"What is the snow covering?","Ground","Found","Earth","Outdoors",2
+"She is writing in her notebook.","Notebook",/n/,"What is she writing in?","Notebook","Cookbook","Journal","Daily Life",3
+"The coffee is very strong.","Strong",/str/,"How is the coffee?","Strong","Wrong","Dark","Dining",3
+"He is cleaning the bathroom mirror.","Mirror",/m/,"What is he cleaning?","Mirror","Nearer","Glass","Daily Life",4
+"The children are playing hide and seek.","Hide and seek",/h/,"What are the children playing?","Hide and seek","Ride and peek","Game","Social",3
+"She is wearing earrings in her ears.","Earrings",/ɪər/,"What is she wearing in her ears?","Earrings","Clearings","Jewelry","Social",3
+"The wind is blowing the chimney smoke.","Smoke",/sm/,"What is the wind blowing?","Smoke","Poke","Chimney","Outdoors",4
+"I need to make a phone call.","Call",/k/,"What do I need to make?","Call","Ball","Talk","Daily Life",1
+"He is eating a piece of toast.","Toast",/t/,"What is he eating?","Toast","Most","Bread","Dining",2
+"The bird is eating seeds from the feeder.","Seeds",/s/,"What is the bird eating?","Seeds","Weeds","Food","Outdoors",3
+"She is looking for a recipe online.","Recipe",/r/,"What is she looking for?","Recipe","Therapy","Instructions","Dining",4
+"The dog is swimming in the lake.","Swimming",/sw/,"What is the dog doing?","Swimming","Trimming","Playing","Outdoors",3
+"I need to buy a ticket for the train.","Ticket",/t/,"What do I need to buy?","Ticket","Thicket","Pass","Daily Life",3
+"He is wearing a belt with his pants.","Belt",/b/,"What is he wearing with his pants?","Belt","Melt","Strap","Daily Life",3
+"The water is very deep in the ocean.","Deep",/d/,"How is the water in the ocean?","Deep","Sheep","Bottomless","Outdoors",4
+"She is putting the clothes in the washing machine.","Washing Machine",/w/,"Where is she putting the clothes?","Washing Machine","Fashion Machine","Laundry","Daily Life",3
+"The airplane is flying above the clouds.","Clouds",/kl/,"Where is the airplane flying?","Clouds","Crowds","Sky","Outdoors",3
+"I need to buy some toothpaste.","Toothpaste",/t/,"What do I need to buy?","Toothpaste","Mouth-paste","Cleaner","Daily Life",4
+"He is watching a comedy movie.","Comedy",/k/,"What kind of movie is he watching?","Comedy","Tragedy","Funny","Social",4
+"The snow is melting on the roof.","Roof",/r/,"Where is the snow melting?","Roof","Goof","House","Outdoors",3
+"She is writing a report for work.","Report",/r/,"What is she writing?","Report","Support","Document","Daily Life",4
+"The coffee is very bitter.","Bitter",/b/,"How is the coffee?","Bitter","Litter","Strong","Dining",4
+"He is cleaning the kitchen floor.","Floor",/fl/,"What is he cleaning?","Floor","Door","Tiles","Daily Life",2
+"The children are building a sandcastle.","Sandcastle",/s/,"What are the children building?","Sandcastle","Land-hassle","Fort","Outdoors",4
+"She is wearing a ring on her finger.","Ring",/r/,"What is she wearing on her finger?","Ring","Wing","Jewelry","Social",2
+"The wind is blowing the curtains.","Curtains",/k/,"What is the wind blowing?","Curtains","Fountains","Windows","Daily Life",3
+"I need to go to the grocery store.","Grocery store",/g/,"Where do I need to go?","Grocery store","Rosary door","Market","Daily Life",1
+"He is eating a bowl of soup.","Bowl",/b/,"What is he eating from?","Bowl","Toll","Dish","Dining",1
+"The bird is singing a beautiful song.","Song",/s/,"What is the bird singing?","Song","Wrong","Tune","Outdoors",2
+"She is looking for a new apartment.","Apartment",/p/,"What is she looking for?","Apartment","Department","Home","Daily Life",4
+"The dog is chasing a ball.","Ball",/b/,"What is the dog chasing?","Ball","Wall","Toy","Outdoors",1
+"I need to buy a new coat.","Coat",/k/,"What do I need to buy?","Coat","Boat","Jacket","Daily Life",2
+"He is wearing a tie with his shirt.","Tie",/t/,"What is he wearing with his shirt?","Tie","Pie","Neckwear","Social",2
+"The water is flowing under the bridge.","Bridge",/br/,"Where is the water flowing?","Bridge","Fridge","Road","Outdoors",3
+"She is putting the books on the shelf.","Shelf",/ʃ/,"Where is she putting the books?","Shelf","Self","Bookcase","Daily Life",2
+"The airplane is landing on the runway.","Runway",/r/,"Where is the airplane landing?","Runway","One-way","Airport","Outdoors",4
+"I need to buy some soap and shampoo.","Shampoo",/ʃ/,"What do I need to buy besides soap?","Shampoo","Bamboo","Cleaner","Daily Life",2
+"He is watching a basketball game.","Basketball",/b/,"What game is he watching?","Basketball","Racket-ball","Sports","Social",3
+"The snow is very deep.","Deep",/d/,"How is the snow?","Deep","Sheep","Thick","Outdoors",3
+"She is writing a letter to her friend.","Friend",/fr/,"Who is she writing a letter to?","Friend","Trend","Person","Daily Life",2
+"The coffee is very hot.","Hot",/h/,"How is the coffee?","Hot","Pot","Warm","Dining",1
+"He is cleaning the car windows.","Windows",/w/,"What is he cleaning?","Windows","Minnows","Glass","Daily Life",2
+"The children are playing in the sandbox.","Sandbox",/s/,"Where are the children playing?","Sandbox","Band-box","Yard","Outdoors",3
+"She is wearing a scarf around her neck.","Neck",/n/,"Where is she wearing a scarf?","Neck","Deck","Shoulders","Daily Life",3
+"The wind is blowing the door shut.","Shut",/ʃ/,"What is the wind doing to the door?","Shut","Cut","Closing","Daily Life",3
+"I need to go to the bank today.","Bank",/b/,"Where do I need to go today?","Bank","Tank","Money","Daily Life",2
+"He is eating a slice of cake.","Slice",/sl/,"What is he eating?","Slice","Ice","Piece","Dining",2
+"The bird is sitting in the tree.","Tree",/tr/,"Where is the bird sitting?","Tree","Free","Branch","Outdoors",2
+"She is looking for a new job.","Job",/dʒ/,"What is she looking for?","Job","Gob","Work","Daily Life",3
+"The dog is barking at the mail carrier.","Mail carrier",/m/,"Who is the dog barking at?","Mail carrier","Sail barrier","Person","Daily Life",3
+"I need to buy a new watch.","Watch",/w/,"What do I need to buy?","Watch","Swatch","Timepiece","Daily Life",3
+"He is wearing a helmet while riding his bike.","Helmet",/h/,"What is he wearing while riding his bike?","Helmet","Velvet","Safety","Outdoors",4
+"The water is boiling in the pot.","Pot",/p/,"Where is the water boiling?","Pot","Hot","Stove","Dining",2
+"She is putting the groceries in the refrigerator.","Refrigerator",/r/,"Where is she putting the groceries?","Refrigerator","Decorator","Fridge","Daily Life",4
+"The airplane is flying through the sky.","Sky",/sk/,"Where is the airplane flying?","Sky","Pie","Air","Outdoors",2
+"I need to buy some eggs and bacon.","Bacon",/b/,"What do I need to buy besides eggs?","Bacon","Taken","Food","Dining",2
+"He is watching a football game on TV.","Football",/f/,"What game is he watching?","Football","Softball","Sports","Social",3
+"The snow is falling heavily.","Heavily",/h/,"How is the snow falling?","Heavily","Cheerily","A lot","Outdoors",4
+"She is writing a story on her laptop.","Story",/st/,"What is she writing?","Story","Glory","Book","Daily Life",3
+"The coffee is very sweet.","Sweet",/sw/,"How is the coffee?","Sweet","Wheat","Sugary","Dining",3
+"He is cleaning the garage floor.","Floor",/fl/,"What is he cleaning in the garage?","Floor","Door","Ground","Daily Life",3
+"The children are playing with blocks.","Blocks",/bl/,"What are the children playing with?","Blocks","Clocks","Toys","Daily Life",2
+"She is wearing a bracelet on her wrist.","Bracelet",/br/,"What is she wearing on her wrist?","Bracelet","Graceless","Jewelry","Social",4
+"The wind is blowing the flag.","Flag",/fl/,"What is the wind blowing?","Flag","Bag","Pole","Outdoors",3
+"I need to go to the pharmacy.","Pharmacy",/f/,"Where do I need to go?","Pharmacy","Harmony","Drugs","Daily Life",4
+"He is eating a hamburger and fries.","Hamburger",/h/,"What is he eating?","Hamburger","Stammerer","Food","Dining",3
+"The bird is flying over the house.","House",/h/,"Where is the bird flying?","House","Mouse","Roof","Outdoors",2
+"She is looking for her phone charger.","Charger",/tʃ/,"What is she looking for?","Charger","Barger","Cord","Daily Life",3
+"The dog is chewing on a bone.","Bone",/b/,"What is the dog chewing on?","Bone","Phone","Treat","Daily Life",2
+"I need to buy a new umbrella.","Umbrella",/ʌ/,"What do I need to buy?","Umbrella","Propella","Rain","Daily Life",3
+"He is wearing a suit to the wedding.","Wedding",/w/,"Where is he wearing a suit?","Wedding","Bedding","Event","Social",2
+"The water is flowing out of the tub.","Tub",/t/,"Where is the water flowing out of?","Tub","Sub","Bath","Daily Life",2
+"She is putting the letter in the mailbox.","Mailbox",/m/,"Where is she putting the letter?","Mailbox","Sail-rocks","Post","Daily Life",3
+"The airplane is flying to another city.","City",/s/,"Where is the airplane flying?","City","Pity","Place","Outdoors",3
+"I need to buy some coffee beans.","Beans",/b/,"What do I need to buy?","Beans","Means","Coffee","Dining",3
+"He is watching a documentary about animals.","Documentary",/d/,"What is he watching?","Documentary","Elementary","Show","Social",5
+"The snow is very white and clean.","White",/w/,"How is the snow?","White","Light","Pure","Outdoors",2
+"She is writing a list of things to do.","List",/l/,"What is she writing?","List","Fist","Notes","Daily Life",2
+"The coffee is very dark and rich.","Dark",/d/,"How is the coffee?","Dark","Bark","Strong","Dining",3
+"He is cleaning the bathroom sink.","Sink",/s/,"What is he cleaning?","Sink","Think","Basin","Daily Life",3
+"The children are playing in the playground.","Playground",/pl/,"Where are the children playing?","Playground","Greyhound","Park","Outdoors",3
+"She is wearing a diamond necklace.","Diamond",/d/,"What kind of necklace is she wearing?","Diamond","Simon","Expensive","Social",4
+"The wind is blowing the trees back and forth.","Trees",/tr/,"What is the wind blowing?","Trees","Seize","Branches","Outdoors",2
+"I need to go to the hardware store.","Hardware",/h/,"What kind of store do I need to go to?","Hardware","Card-wear","Tools","Daily Life",4
+"He is eating a salad for lunch.","Salad",/s/,"What is he eating for lunch?","Salad","Ballad","Healthy","Dining",2
+"The bird is chirping loudly.","Chirping",/tʃ/,"What is the bird doing?","Chirping","Burping","Singing","Outdoors",3
+"She is looking for a place to sit.","Sit",/s/,"What is she looking for a place to do?","Sit","Fit","Rest","Social",2
+"The dog is wagging his tail.","Wagging",/w/,"What is the dog doing with his tail?","Wagging","Lagging","Moving","Daily Life",2
+"I need to buy a new computer mouse.","Mouse",/m/,"What do I need to buy?","Mouse","House","Clicker","Daily Life",3
+"He is wearing a jacket because it's windy.","Windy",/w/,"Why is he wearing a jacket?","Windy","Candy","Cold","Outdoors",3
+"The water is cold in the swimming pool.","Pool",/p/,"Where is the water cold?","Pool","Cool","Water","Outdoors",2
+"She is putting the baby in the crib.","Crib",/kr/,"Where is she putting the baby?","Crib","Rib","Bed","Daily Life",3
+"The airplane is flying over the ocean.","Ocean",/oʊ/,"Where is the airplane flying?","Ocean","Motion","Water","Outdoors",3
+"I need to buy some chicken for dinner.","Chicken",/tʃ/,"What do I need to buy for dinner?","Chicken","Kitchen","Meat","Dining",2
+"He is watching a horror movie.","Horror",/h/,"What kind of movie is he watching?","Horror","Sorter","Scary","Social",4
+"The snow is starting to stick to the ground.","Stick",/st/,"What is the snow starting to do?","Stick","Pick","Stay","Outdoors",4
+"She is writing a poem about nature.","Poem",/p/,"What is she writing?","Poem","Roam","Verse","Daily Life",4
+"The coffee is very weak.","Weak",/w/,"How is the coffee?","Weak","Beak","Watery","Dining",4
+"He is cleaning the kitchen counters.","Counters",/k/,"What is he cleaning?","Counters","Bouncers","Tops","Daily Life",3
+"The children are playing tag in the yard.","Tag",/t/,"What are the children playing?","Tag","Bag","Game","Outdoors",2
+"She is wearing a gold watch.","Gold",/g/,"What kind of watch is she wearing?","Gold","Cold","Expensive","Social",3
+"The wind is blowing the rain sideways.","Sideways",/s/,"How is the wind blowing the rain?","Sideways","My ways","Direction","Outdoors",4
+"I need to go to the doctor for a checkup.","Checkup",/tʃ/,"Why do I need to go to the doctor?","Checkup","Ketchup","Appointment","Daily Life",4
+"He is eating a steak and potatoes.","Steak",/st/,"What is he eating?","Steak","Stake","Meat","Dining",3
+"The bird is flying south for the winter.","South",/s/,"Where is the bird flying?","South","Mouth","Direction","Outdoors",4
+"She is looking for a dress to wear to the party.","Dress",/dr/,"What is she looking for?","Dress","Stress","Outfit","Social",3
+"The dog is sleeping by the fireplace.","Fireplace",/f/,"Where is the dog sleeping?","Fireplace","Tire-space","Hearth","Daily Life",3
+"I need to buy a new phone case.","Case",/k/,"What do I need to buy?","Case","Base","Cover","Daily Life",3
+"He is wearing a hat to protect him from the sun.","Sun",/s/,"What is the hat protecting him from?","Sun","Fun","Heat","Outdoors",2
+"The water is clean and clear in the lake.","Clear",/kl/,"How is the water in the lake?","Clear","Near","Pure","Outdoors",3
+"She is putting the flowers in a vase.","Vase",/v/,"Where is she putting the flowers?","Vase","Base","Container","Daily Life",3
+"The airplane is flying at a high altitude.","Altitude",/æ/,"What is the airplane flying at?","Altitude","Attitude","Height","Outdoors",5
+"I need to buy some paper towels.","Paper towels",/p/,"What do I need to buy?","Paper towels","Taper vowels","Cleaner","Daily Life",4
+"He is watching a science fiction movie.","Science fiction",/s/,"What kind of movie is he watching?","Science fiction","Silence friction","Fantasy","Social",5
+"The snow is covering the trees.","Trees",/tr/,"What is the snow covering?","Trees","Seize","Branches","Outdoors",2
+"She is writing a thank you note.","Note",/n/,"What is she writing?","Note","Vote","Card","Social",3
+"The coffee is very aromatic.","Aromatic",/r/,"How is the coffee?","Aromatic","Erratic","Smelly","Dining",5
+"He is cleaning the bedroom closet.","Closet",/kl/,"What is he cleaning?","Closet","Deposit","Storage","Daily Life",3
+"The children are playing on the swings.","Swings",/sw/,"What are the children playing on?","Swings","Things","Park","Outdoors",3
+"She is wearing a silver bracelet.","Silver",/s/,"What kind of bracelet is she wearing?","Silver","Deliver","Metal","Social",4
+"The wind is blowing the sailboat across the water.","Sailboat",/s/,"What is the wind blowing?","Sailboat","Mail-coat","Vessel","Outdoors",4
+"I need to go to the library to return a book.","Library",/l/,"Where do I need to go?","Library","Blueberry","Books","Daily Life",3
+"He is eating a bowl of ice cream.","Ice cream",/aɪ/,"What is he eating?","Ice cream","Scream","Dessert","Dining",2
+"The bird is hopping on the grass.","Hopping",/h/,"What is the bird doing?","Hopping","Shopping","Jumping","Outdoors",3
+"She is looking for a pen in her purse.","Pen",/p/,"What is she looking for in her purse?","Pen","Ten","Writer","Daily Life",2
+"The dog is chasing a squirrel up the tree.","Squirrel",/skw/,"What is the dog chasing?","Squirrel","Twirl","Animal","Outdoors",4
+"I need to buy a new battery for my watch.","Battery",/b/,"What do I need to buy?","Battery","Flattery","Power","Daily Life",4
+"He is wearing a raincoat because it's raining.","Raincoat",/r/,"What is he wearing?","Raincoat","Train-boat","Jacket","Outdoors",3
+"The water is warm in the bathtub.","Warm",/w/,"How is the water in the bathtub?","Warm","Farm","Hot","Daily Life",2
+"She is putting the milk in the cereal.","Cereal",/s/,"What is she putting the milk in?","Cereal","Serial","Bowl","Dining",1
+"The airplane is flying over the mountains.","Mountains",/m/,"Where is the airplane flying?","Mountains","Fountains","Hills","Outdoors",3
+"I need to buy some eggs for breakfast.","Breakfast",/br/,"Why do I need to buy eggs?","Breakfast","Wreck-fast","Morning","Dining",3
+"He is watching a cooking show on TV.","Cooking",/k/,"What kind of show is he watching?","Cooking","Booking","Food","Social",3
+"The snow is melting in the sun.","Melting",/m/,"What is the snow doing?","Melting","Smelting","Disappearing","Outdoors",3
+"She is writing a grocery list.","List",/l/,"What is she writing?","List","Fist","Shopping","Daily Life",3
+"The coffee is very acidic.","Acidic",/s/,"How is the coffee?","Acidic","A-critic","Sour","Dining",5
+"He is cleaning the living room rug.","Rug",/r/,"What is he cleaning?","Rug","Mug","Carpet","Daily Life",2
+"The children are playing soccer in the park.","Soccer",/s/,"What are the children playing?","Soccer","Shocker","Game","Outdoors",3
+"She is wearing a pearl necklace.","Pearl",/p/,"What kind of necklace is she wearing?","Pearl","Girl","Jewelry","Social",4
+"The wind is blowing the smoke from the fire.","Smoke",/sm/,"What is the wind blowing?","Smoke","Poke","Fire","Outdoors",3
+"I need to go to the gas station.","Gas station",/g/,"Where do I need to go?","Gas station","Pass nation","Fuel","Daily Life",3
+"He is eating a piece of pie.","Pie",/p/,"What is he eating?","Pie","Tie","Dessert","Dining",2
+"The bird is looking for worms in the dirt.","Worms",/w/,"What is the bird looking for?","Worms","Firms","Food","Outdoors",4
+"She is looking for a place to park her car.","Park",/p/,"What is she looking for a place to do?","Park","Bark","Stop","Daily Life",3
+"The dog is hiding under the table.","Table",/t/,"Where is the dog hiding?","Table","Cable","Furniture","Daily Life",2
+"I need to buy a new light bulb.","Light bulb",/l/,"What do I need to buy?","Light bulb","White tub","Lamp","Daily Life",4
+"He is wearing a sweater because it's cold.","Sweater",/sw/,"What is he wearing?","Sweater","Wetter","Jumper","Daily Life",2
+"The water is clean and fresh.","Fresh",/fr/,"How is the water?","Fresh","Mesh","Pure","Daily Life",3
+"She is putting the baby in the stroller.","Stroller",/str/,"Where is she putting the baby?","Stroller","Bowler","Cart","Daily Life",4
+"The airplane is flying to a different country.","Country",/k/,"Where is the airplane flying?","Country","Bounty","Nation","Outdoors",4
+"I need to buy some laundry detergent.","Detergent",/d/,"What do I need to buy?","Detergent","Emergent","Soap","Daily Life",5
+"He is watching a drama series on Netflix.","Drama",/dr/,"What kind of series is he watching?","Drama","Trauma","Serious","Social",4
+"The snow is falling on the rooftops.","Rooftops",/r/,"Where is the snow falling?","Rooftops","Shoe-stops","Houses","Outdoors",3
+"She is writing an email to her boss.","Email",/iː/,"What is she writing?","Email","Detail","Message","Daily Life",3
+"The coffee is very smooth.","Smooth",/sm/,"How is the coffee?","Smooth","Groove","Creamy","Dining",4
+"He is cleaning the attic stairs.","Attic",/æ/,"Where is he cleaning the stairs?","Attic","Static","Upstairs","Daily Life",4
+"The children are playing with dolls.","Dolls",/d/,"What are the children playing with?","Dolls","Walls","Toys","Daily Life",2
+"She is wearing a silk blouse.","Silk",/s/,"What kind of blouse is she wearing?","Silk","Milk","Fabric","Social",4
+"The wind is blowing the leaves around the yard.","Yard",/j/,"Where is the wind blowing the leaves?","Yard","Hard","Grass","Outdoors",2
+"I need to go to the dentist to fix a cavity.","Cavity",/k/,"Why do I need to go to the dentist?","Cavity","Gravity","Tooth","Daily Life",5
+"He is eating a bowl of oatmeal.","Oatmeal",/oʊ/,"What is he eating?","Oatmeal","Goat-meal","Breakfast","Dining",3
+"The bird is sitting on the power line.","Power line",/p/,"Where is the bird sitting?","Power line","Sour lime","Wire","Outdoors",4
+"She is looking for a book at the bookstore.","Bookstore",/b/,"Where is she looking for a book?","Bookstore","Cook-more","Shop","Daily Life",3
+"The dog is running in the field.","Field",/f/,"Where is the dog running?","Field","Shield","Grass","Outdoors",3
+"I need to buy a new pillow for my bed.","Pillow",/p/,"What do I need to buy?","Pillow","Willow","Bedding","Daily Life",3
+"He is wearing a mask to protect himself.","Mask",/m/,"What is he wearing for protection?","Mask","Task","Cover","Daily Life",3
+"The water is flowing into the drain.","Drain",/dr/,"Where is the water flowing?","Drain","Train","Pipe","Daily Life",3
+"She is putting the leftovers in a container.","Container",/k/,"Where is she putting the leftovers?","Container","Retainer","Box","Dining",4
+"The airplane is waiting for clearance to take off.","Clearance",/kl/,"What is the airplane waiting for?","Clearance","Appearance","Permission","Outdoors",5
+"I need to buy some stamps for these letters.","Stamps",/st/,"What do I need to buy?","Stamps","Lamps","Postage","Daily Life",3
+"He is watching a baseball game at the stadium.","Baseball",/b/,"What game is he watching?","Baseball","Taste-all","Sports","Social",3
+"The snow is blowing across the road.","Road",/r/,"Where is the snow blowing?","Road","Load","Street","Outdoors",3
+"She is writing a check to pay the bill.","Check",/tʃ/,"What is she writing?","Check","Neck","Payment","Daily Life",3
+"The coffee is very flavorful.","Flavorful",/fl/,"How is the coffee?","Flavorful","Playful","Tasty","Dining",4
+"He is cleaning the dust off the furniture.","Dust",/d/,"What is he cleaning off the furniture?","Dust","Rust","Dirt","Daily Life",3
+"The children are playing in the sprinkler.","Sprinkler",/spr/,"What are the children playing in?","Sprinkler","Wrinkler","Water","Outdoors",4
+"She is wearing a leather jacket.","Leather",/l/,"What kind of jacket is she wearing?","Leather","Feather","Material","Social",3
+"The wind is howling through the trees.","Howling",/h/,"What is the wind doing?","Howling","Bowling","Blowing","Outdoors",4
+"I need to go to the ATM to get some cash.","Cash",/k/,"Why do I need to go to the ATM?","Cash","Catch","Money","Daily Life",3
+"He is eating a piece of chocolate cake.","Chocolate",/tʃ/,"What kind of cake is he eating?","Chocolate","Socket","Dessert","Dining",3
+"The bird is eating a worm.","Worm",/w/,"What is the bird eating?","Worm","Firm","Food","Outdoors",4
+"She is looking for her keys in the dark.","Dark",/d/,"Where is she looking for her keys?","Dark","Bark","Night","Daily Life",3
+"The dog is playing fetch with a stick.","Fetch",/f/,"What is the dog playing?","Fetch","Sketch","Game","Outdoors",3
+"I need to buy a new vacuum cleaner.","Vacuum cleaner",/v/,"What do I need to buy?","Vacuum cleaner","Volume meter","Appliance","Daily Life",5
+"He is wearing sunglasses because it's bright.","Sunglasses",/s/,"What is he wearing?","Sunglasses","Sun-classes","Eyewear","Outdoors",3
+"The water is frozen in the birdbath.","Frozen",/fr/,"How is the water in the birdbath?","Frozen","Chosen","Ice","Outdoors",4
+"She is putting the clothes in the dryer.","Dryer",/dr/,"Where is she putting the clothes?","Dryer","Fryer","Laundry","Daily Life",3
+"The airplane is experiencing turbulence.","Turbulence",/t/,"What is the airplane experiencing?","Turbulence","Opulence","Bumps","Outdoors",5
+"I need to buy some milk and cheese.","Cheese",/tʃ/,"What do I need to buy besides milk?","Cheese","Sneeze","Dairy","Dining",2
+"He is watching a thriller movie.","Thriller",/θr/,"What kind of movie is he watching?","Thriller","Spiller","Suspense","Social",4
+"The snow is very powdery.","Powdery",/p/,"How is the snow?","Powdery","Flowery","Light","Outdoors",4
+"She is writing a message on a whiteboard.","Whiteboard",/w/,"What is she writing on?","Whiteboard","Skateboard","Board","Daily Life",4
+"The coffee is lukewarm.","Lukewarm",/l/,"How is the coffee?","Lukewarm","Bookworm","Tepid","Dining",4
+"He is cleaning the mud off his boots.","Mud",/m/,"What is he cleaning off his boots?","Mud","Bud","Dirt","Daily Life",2
+"The children are playing in the autumn leaves.","Leaves",/l/,"What are the children playing in?","Leaves","Sleeves","Fall","Outdoors",2
+"She is wearing a colorful dress.","Colorful",/k/,"How is her dress?","Colorful","Sorrowful","Bright","Social",3
+"The wind is blowing the smoke away.","Smoke",/sm/,"What is the wind blowing away?","Smoke","Poke","Fire","Outdoors",3
+"He cut the green grass.","Grass",/g/,"What did he cut?","Grass","Glass","Lawn","Outdoors",1
+"Please pass the salt.","Salt",/s/,"What should I pass?","Salt","Fault","Pepper","Dining",1
+"We ate lunch at noon.","Lunch",/l/,"What did we eat at noon?","Lunch","Bunch","Food","Dining",2
+"The fire is very warm.","Warm",/w/,"How is the fire?","Warm","Arm","Hot","Daily Life",1
+"He has a beard and mustache.","Beard",/b/,"What does he have on his face?","Beard","Weird","Hair","Social",3
+"The map is in the glove box.","Map",/m/,"What is in the glove box?","Map","Cap","Book","Daily Life",3
+"She is a very good cook.","Cook",/k/,"What is she very good at being?","Cook","Book","Chef","Dining",3
+"The shirt is too small.","Small",/sm/,"How is the shirt?","Small","Tall","Tight","Daily Life",2
+"The sink is full of water.","Sink",/s/,"What is full of water?","Sink","Think","Tub","Daily Life",2
+"The chicken is in the oven.","Chicken",/tʃ/,"What is in the oven?","Chicken","Kitchen","Food","Dining",2
+"She is afraid of the storm.","Storm",/st/,"What is she afraid of?","Storm","Worm","Weather","Outdoors",2
+"I have a meeting tomorrow.","Meeting",/m/,"What do I have tomorrow?","Meeting","Eating","Appointment","Daily Life",2
+"The pillow is very soft.","Pillow",/p/,"What is very soft?","Pillow","Willow","Bed","Daily Life",2
+"We need to turn right here.","Right",/r/,"Which way do we need to turn?","Right","Light","Left","Daily Life",1
+"The ice cream is melting.","Ice cream",/aɪ/,"What is melting?","Ice cream","Nice dream","Dessert","Dining",2
+"The keys are on the hook.","Hook",/h/,"Where are the keys?","Hook","Book","Table","Daily Life",3
+"The elevator is going up.","Up",/ʌ/,"Which way is the elevator going?","Up","Cup","Down","Daily Life",1
+"The beach is very sandy.","Sandy",/s/,"How is the beach?","Sandy","Candy","Shore","Outdoors",2
+"She is walking in the rain.","Walking",/w/,"What is she doing in the rain?","Walking","Talking","Standing","Outdoors",2
+"We are going to the zoo.","Zoo",/z/,"Where are we going?","Zoo","Shoe","Park","Outdoors",2
+"She is looking for her cat.","Cat",/k/,"What is she looking for?","Cat","Bat","Pet","Daily Life",1
+"The socks are dirty.","Socks",/s/,"What is dirty?","Socks","Rocks","Clothes","Daily Life",2
+"He is fixing the roof.","Roof",/r/,"What is he fixing?","Roof","Goof","House","Daily Life",3
+"The butter is on the table.","Butter",/b/,"What is on the table?","Butter","Gutter","Food","Dining",2
+"The moon is full tonight.","Full",/f/,"How is the moon tonight?","Full","Dull","Bright","Outdoors",2
+"I need a towel to dry off.","Towel",/t/,"What do I need to dry off?","Towel","Owl","Cloth","Daily Life",2
+"The coffee shop is busy.","Busy",/b/,"How is the coffee shop?","Busy","Dizzy","Crowded","Dining",3
+"The window is open.","Open",/oʊ/,"How is the window?","Open","Broken","Closed","Daily Life",1
+"He is looking at the stars.","Stars",/st/,"What is he looking at?","Stars","Cars","Sky","Outdoors",2
+"The dog is wagging its tail.","Tail",/t/,"What is the dog wagging?","Tail","Pail","Body","Daily Life",1
+"The car needs an oil change.","Oil",/ɔɪ/,"What does the car need?","Oil","Boil","Service","Daily Life",3
+"He is allergic to cats.","Cats",/k/,"What is he allergic to?","Cats","Hats","Pets","Daily Life",3
+"The kitchen is clean.","Clean",/kl/,"How is the kitchen?","Clean","Mean","Tidy","Daily Life",2
+"She is holding a baby.","Baby",/b/,"What is she holding?","Baby","Maybe","Child","Social",2
+"The book is on the desk.","Desk",/d/,"Where is the book?","Desk","Disk","Table","Daily Life",1
+"I need to buy a new lamp.","Lamp",/l/,"What do I need to buy?","Lamp","Ramp","Light","Daily Life",3
+"He is watching the game on TV.","Game",/g/,"What is he watching on TV?","Game","Name","Show","Social",2
+"The rice is cooking.","Rice",/r/,"What is cooking?","Rice","Mice","Food","Dining",2
+"She is driving too fast.","Fast",/f/,"How is she driving?","Fast","Last","Quickly","Daily Life",2
+"I need a haircut.","Haircut",/h/,"What do I need?","Haircut","Bear-cut","Trim","Daily Life",3
+"The stairs are steep.","Steep",/st/,"How are the stairs?","Steep","Sleep","High","Daily Life",3
+"The movie was scary.","Scary",/sk/,"How was the movie?","Scary","Hairy","Bad","Social",3
+"The sun is setting.","Setting",/s/,"What is the sun doing?","Setting","Betting","Going down","Outdoors",2
+"I need to do the laundry.","Laundry",/l/,"What do I need to do?","Laundry","Foundry","Chores","Daily Life",2
+"She is wearing a green shirt.","Green",/g/,"What color is the shirt?","Green","Screen","Blue","Social",2
+"The car is parked outside.","Parked",/p/,"Where is the car?","Parked","Barked","Outside","Daily Life",1
+"The baby is crawling.","Crawling",/kr/,"What is the baby doing?","Crawling","Brawling","Moving","Daily Life",3
+"She is watering the plants.","Plants",/pl/,"What is she watering?","Plants","Pants","Garden","Outdoors",1
+"The coffee is cold.","Cold",/k/,"How is the coffee?","Cold","Old","Hot","Dining",1
+"The traffic is bad today.","Bad",/b/,"How is the traffic today?","Bad","Sad","Heavy","Daily Life",2
+"The water is boiling.","Boiling",/b/,"What is the water doing?","Boiling","Toiling","Hot","Dining",2
+"I am feeling very happy.","Happy",/h/,"How am I feeling?","Happy","Sappy","Joyful","Social",2
+"The book is on the table.","Table",/t/,"Where is the book?","Table","Cable","Desk","Daily Life",1
+"He is playing soccer in the park.","Soccer",/s/,"What is he playing?","Soccer","Shocker","Football","Outdoors",3
+"The cat is chasing the mouse.","Chasing",/tʃ/,"What is the cat doing?","Chasing","Pacing","Hunting","Daily Life",3
+"She is wearing a red dress.","Dress",/dr/,"What is she wearing?","Dress","Press","Gown","Social",2
+"The music is very relaxing.","Relaxing",/r/,"How is the music?","Relaxing","Taxing","Calm","Social",3
+"I need to take my medicine.","Medicine",/m/,"What do I need to take?","Medicine","Pedicine","Pills","Daily Life",3
+"The bird is eating a worm.","Worm",/w/,"What is the bird eating?","Worm","Warm","Bug","Outdoors",3
+"He is driving too fast.","Fast",/f/,"How is he driving?","Fast","Last","Quickly","Daily Life",2
+"She is looking out the window.","Window",/w/,"What is she looking out of?","Window","Shadow","Glass","Daily Life",2
+"The car is making a strange noise.","Noise",/n/,"What is the car making?","Noise","Toys","Sound","Daily Life",4
+"I am going to the doctor.","Doctor",/d/,"Who am I going to see?","Doctor","Proctor","Physician","Daily Life",3
+"The baby is drinking milk.","Milk",/m/,"What is the baby drinking?","Milk","Silk","Formula","Daily Life",1
+"He is wearing a hat and gloves.","Gloves",/g/,"What is he wearing besides a hat?","Gloves","Loves","Mittens","Daily Life",2
+"The flowers are blooming in the spring.","Blooming",/b/,"What are the flowers doing?","Blooming","Rooming","Growing","Outdoors",3
+"She is cutting the cake.","Cutting",/k/,"What is she doing to the cake?","Cutting","Putting","Slicing","Dining",2
+"The dog is sleeping on the rug.","Rug",/r/,"Where is the dog sleeping?","Rug","Mug","Carpet","Daily Life",2
+"I need to wash my hair.","Hair",/h/,"What do I need to wash?","Hair","Chair","Head","Daily Life",1
+"The movie starts at seven.","Seven",/s/,"When does the movie start?","Seven","Eleven","Eight","Social",3
+"He is eating cereal for breakfast.","Cereal",/s/,"What is he eating?","Cereal","Serial","Oatmeal","Dining",3
+"The cat is playing with a ball.","Ball",/b/,"What is the cat playing with?","Ball","Wall","Toy","Daily Life",1
+"She is wearing a scarf.","Scarf",/sk/,"What is she wearing?","Scarf","Barf","Wrap","Daily Life",3
+"The water is leaking from the pipe.","Leaking",/l/,"What is the water doing?","Leaking","Peeking","Dripping","Daily Life",3
+"I am reading a book about history.","History",/h/,"What is the book about?","History","Mystery","Facts","Daily Life",4
+"The dog is wagging its tail.","Tail",/t/,"What is the dog wagging?","Tail","Pail","Body","Daily Life",2
+"He is cleaning the windows.","Cleaning",/k/,"What is he doing to the windows?","Cleaning","Leaning","Washing","Daily Life",2
+"The soup needs more salt.","Salt",/s/,"What does the soup need?","Salt","Fault","Seasoning","Dining",2
+"She is looking for a parking spot.","Spot",/sp/,"What is she looking for?","Spot","Pot","Space","Daily Life",2
+"The baby is wearing a diaper.","Diaper",/d/,"What is the baby wearing?","Diaper","Viper","Nappy","Daily Life",3
+"I need to charge my laptop.","Laptop",/l/,"What do I need to charge?","Laptop","Tiptop","Computer","Daily Life",2
+"The bird is sitting on the fence.","Fence",/f/,"Where is the bird sitting?","Fence","Sense","Wall","Outdoors",2
+"He is drinking a beer.","Beer",/b/,"What is he drinking?","Beer","Deer","Ale","Dining",3
+"The car is turning right.","Right",/r/,"Which way is the car turning?","Right","Light","Direction","Daily Life",2
+"She is making a salad.","Salad",/s/,"What is she making?","Salad","Ballad","Meal","Dining",2
+"The phone battery is low.","Battery",/b/,"What is low?","Battery","Flattery","Power","Daily Life",3
+"I am going to the post office.","Post",/p/,"Where am I going?","Post","Host","Mail","Daily Life",2
+"The dog is chasing the cat.","Cat",/k/,"What is the dog chasing?","Cat","Bat","Feline","Daily Life",2
+"He is wearing a jacket.","Jacket",/dʒ/,"What is he wearing?","Jacket","Racket","Coat","Daily Life",2
+"The water is very clear.","Clear",/k/,"How is the water?","Clear","Fear","Clean","Outdoors",2
+"She is eating an orange.","Orange",/ɔr/,"What is she eating?","Orange","Hinge","Fruit","Dining",3
+"The movie was very funny.","Funny",/f/,"How was the movie?","Funny","Sunny","Humorous","Social",2
+"I need to brush my teeth.","Brush",/br/,"What do I need to do to my teeth?","Brush","Crush","Clean","Daily Life",1
+"The cat is sitting on the mat.","Mat",/m/,"Where is the cat sitting?","Mat","Bat","Rug","Daily Life",1
+"He is reading a magazine.","Magazine",/m/,"What is he reading?","Magazine","Gasoline","Booklet","Daily Life",3
+"The soup is very tasty.","Tasty",/t/,"How is the soup?","Tasty","Hasty","Good","Dining",2
+"She is wearing a ring.","Ring",/r/,"What is she wearing on her finger?","Ring","Wing","Jewelry","Social",2
+"The car is very old.","Old",/oʊ/,"How is the car?","Old","Cold","Aged","Daily Life",2
+"I am going to the bank.","Bank",/b/,"Where am I going?","Bank","Tank","Money","Daily Life",2
+"The dog is very friendly.","Friendly",/fr/,"How is the dog?","Friendly","Trendily","Nice","Daily Life",3
+"He is eating a cookie.","Cookie",/k/,"What is he eating?","Cookie","Bookie","Biscuit","Dining",2
+"The water is very warm.","Warm",/w/,"How is the water?","Warm","Form","Hot","Daily Life",2
+"She is looking at the stars.","Stars",/st/,"What is she looking at?","Stars","Bars","Sky","Outdoors",2
+"The movie was very scary.","Scary",/sk/,"How was the movie?","Scary","Dairy","Frightening","Social",3
+"I need to wash the car.","Wash",/w/,"What do I need to do to the car?","Wash","Watch","Clean","Daily Life",2
+"The cat is very playful.","Playful",/pl/,"How is the cat?","Playful","Prayful","Active","Daily Life",3
+"He is drinking a soda.","Soda",/s/,"What is he drinking?","Soda","Yoda","Pop","Dining",3
+"The book is very thick.","Thick",/θ/,"How is the book?","Thick","Sick","Big","Daily Life",3
+"She is wearing a dress.","Dress",/dr/,"What is she wearing?","Dress","Stress","Clothes","Social",2
+"The music is very soft.","Soft",/s/,"How is the music?","Soft","Loft","Quiet","Social",2
+"I need to feed the dog.","Feed",/f/,"What do I need to do for the dog?","Feed","Seed","Nourish","Daily Life",1
+"The bird is very colorful.","Colorful",/k/,"How is the bird?","Colorful","Doleful","Bright","Outdoors",3
+"He is driving a motorcycle.","Motorcycle",/m/,"What is he driving?","Motorcycle","Water-cycle","Bike","Daily Life",4
+"The soup is very bland.","Bland",/bl/,"How is the soup?","Bland","Grand","Plain","Dining",4
+"She is looking at the map.","Map",/m/,"What is she looking at?","Map","Cap","Directions","Daily Life",2
+"The car is very fast.","Fast",/f/,"How is the car?","Fast","Vast","Quick","Daily Life",2
+"I am going to the library.","Library",/l/,"Where am I going?","Library","Bribery","Books","Daily Life",3
+"The dog is very loyal.","Loyal",/l/,"How is the dog?","Loyal","Royal","Faithful","Daily Life",4
+"He is eating a salad.","Salad",/s/,"What is he eating?","Salad","Ballad","Greens","Dining",2
+"The water is very refreshing.","Refreshing",/r/,"How is the water?","Refreshing","Stressing","Cool","Dining",3
+"She is looking at the sunset.","Sunset",/s/,"What is she looking at?","Sunset","Onset","Sky","Outdoors",3
+"The movie was very exciting.","Exciting",/ɛk/,"How was the movie?","Exciting","Sighting","Thrilling","Social",3
+"I need to clean the house.","Clean",/k/,"What do I need to do to the house?","Clean","Lean","Tidy","Daily Life",2
+"The cat is very curious.","Curious",/k/,"How is the cat?","Curious","Furious","Inquisitive","Daily Life",4
+"He is drinking a cocktail.","Cocktail",/k/,"What is he drinking?","Cocktail","Ox-tail","Drink","Dining",4
+"The book is very informative.","Informative",/f/,"How is the book?","Informative","Formative","Educational","Daily Life",4
+"She is wearing a bracelet.","Bracelet",/br/,"What is she wearing?","Bracelet","Race-let","Jewelry","Social",4
+"The music is very upbeat.","Upbeat",/ʌ/,"How is the music?","Upbeat","Defeat","Happy","Social",4
+"I need to call the plumber.","Plumber",/pl/,"Who do I need to call?","Plumber","Drummer","Repairman","Daily Life",3
+"The bird is singing a song.","Song",/s/,"What is the bird singing?","Song","Wrong","Tune","Outdoors",2
+"He is riding the subway.","Subway",/s/,"What is he riding?","Subway","Some-way","Train","Daily Life",3
+"The soup is very creamy.","Creamy",/kr/,"How is the soup?","Creamy","Dreamy","Smooth","Dining",3
+"She is looking at the painting.","Painting",/p/,"What is she looking at?","Painting","Fainting","Art","Social",3
+"The car is very expensive.","Expensive",/ɛk/,"How is the car?","Expensive","Pensive","Costly","Daily Life",4
+"I am going to the airport.","Airport",/ɛər/,"Where am I going?","Airport","Seaport","Travel","Daily Life",3
+"The dog is very obedient.","Obedient",/b/,"How is the dog?","Obedient","Radiant","Well-behaved","Daily Life",4
+"He is eating a bowl of rice.","Rice",/r/,"What is he eating?","Rice","Mice","Grains","Dining",2
+"The water is very turbulent.","Turbulent",/t/,"How is the water?","Turbulent","Opulent","Rough","Outdoors",5
+"She is looking at the clouds.","Clouds",/kl/,"What is she looking at?","Clouds","Crowds","Sky","Outdoors",2
+"The movie was very emotional.","Emotional",/m/,"How was the movie?","Emotional","Promotional","Moving","Social",4
+"I need to organize my desk.","Organize",/ɔr/,"What do I need to do to my desk?","Organize","Agonize","Tidy","Daily Life",4
+"The cat is very independent.","Independent",/p/,"How is the cat?","Independent","Dependent","Aloof","Daily Life",4
+"He is drinking a cup of hot chocolate.","Chocolate",/tʃ/,"What is he drinking?","Chocolate","Late","Cocoa","Dining",2
+"The book is very suspenseful.","Suspenseful",/s/,"How is the book?","Suspenseful","Pencil-full","Thrilling","Daily Life",5
+"She is wearing a pair of jeans.","Jeans",/dʒ/,"What is she wearing?","Jeans","Beans","Pants","Daily Life",2
+"The music is very melancholic.","Melancholic",/m/,"How is the music?","Melancholic","Alcoholic","Sad","Social",5
+"I need to fix the broken window.","Broken",/b/,"What is the state of the window?","Broken","Token","Shattered","Daily Life",2
+"The bird is flying south for the winter.","South",/s/,"Where is the bird flying?","South","Mouth","Direction","Outdoors",3
+"He is driving a convertible.","Convertible",/v/,"What is he driving?","Convertible","Notable","Car","Daily Life",5
+"The soup is very flavorful.","Flavorful",/fl/,"How is the soup?","Flavorful","Playful","Tasty","Dining",4
+"She is looking at the mountains.","Mountains",/m/,"What is she looking at?","Mountains","Fountains","Hills","Outdoors",3
+"The car is very reliable.","Reliable",/r/,"How is the car?","Reliable","Pliable","Dependable","Daily Life",4
+"I am going to the dentist.","Dentist",/d/,"Who am I going to see?","Dentist","Chemist","Doctor","Daily Life",3
+"The dog is very energetic.","Energetic",/dʒ/,"How is the dog?","Energetic","Magnetic","Active","Daily Life",4
+"He is eating a piece of pie.","Pie",/p/,"What is he eating?","Pie","Tie","Dessert","Dining",2
+"The water is very shallow.","Shallow",/ʃ/,"How is the water?","Shallow","Hollow","Deep","Outdoors",3
+"She is looking at the flowers.","Flowers",/fl/,"What is she looking at?","Flowers","Towers","Plants","Outdoors",2
+"The movie was very predictable.","Predictable",/d/,"How was the movie?","Predictable","Suitable","Boring","Social",4
+"I need to water the plants.","Water",/w/,"What do I need to do to the plants?","Water","Slaughter","Hydrate","Daily Life",2
+"The cat is very affectionate.","Affectionate",/f/,"How is the cat?","Affectionate","Sectional","Loving","Daily Life",4
+"He is drinking a glass of milk.","Milk",/m/,"What is he drinking?","Milk","Silk","Dairy","Dining",1
+"The book is very confusing.","Confusing",/f/,"How is the book?","Confusing","Amusing","Complicated","Daily Life",4
+"She is wearing a sweater.","Sweater",/sw/,"What is she wearing?","Sweater","Wetter","Jumper","Daily Life",2
+"The music is very repetitive.","Repetitive",/p/,"How is the music?","Repetitive","Sedative","Boring","Social",4
+"I need to call the electrician.","Electrician",/l/,"Who do I need to call?","Electrician","Magician","Repairman","Daily Life",4
+"The bird is looking for food.","Food",/f/,"What is the bird looking for?","Food","Good","Nourishment","Outdoors",2
+"He is riding a bicycle.","Bicycle",/b/,"What is he riding?","Bicycle","Icicle","Bike","Outdoors",3
+"The soup is very watery.","Watery",/w/,"How is the soup?","Watery","Pottery","Thin","Dining",4
+"She is looking at the ocean.","Ocean",/oʊ/,"What is she looking at?","Ocean","Motion","Sea","Outdoors",3
+"The car is very fuel-efficient.","Efficient",/f/,"How is the car?","Efficient","Deficient","Economical","Daily Life",5
+"I am going to the supermarket.","Supermarket",/s/,"Where am I going?","Supermarket","Target","Store","Daily Life",3
+"The dog is very protective.","Protective",/p/,"How is the dog?","Protective","Detective","Loyal","Daily Life",4
+"He is eating a bowl of soup.","Bowl",/b/,"What is he eating from?","Bowl","Mole","Dish","Dining",2
+"The water is very murky.","Murky",/m/,"How is the water?","Murky","Jerky","Cloudy","Outdoors",4
+"She is looking at the stars.","Stars",/st/,"What is she looking at?","Stars","Cars","Sky","Outdoors",2
+"The movie was very inspiring.","Inspiring",/sp/,"How was the movie?","Inspiring","Expiring","Moving","Social",4
+"I need to clean the bathroom.","Bathroom",/b/,"What do I need to clean?","Bathroom","Mailroom","Restroom","Daily Life",2
+"The cat is very agile.","Agile",/æ/,"How is the cat?","Agile","Fragile","Quick","Daily Life",4
+"He is drinking a cup of green tea.","Green",/g/,"What kind of tea is he drinking?","Green","Mean","Herbal","Dining",3
+"The book is very educational.","Educational",/dʒ/,"How is the book?","Educational","Sensational","Informative","Daily Life",4
+"She is wearing a hat.","Hat",/h/,"What is she wearing on her head?","Hat","Mat","Cap","Daily Life",1
+"The music is very loud.","Loud",/l/,"How is the music?","Loud","Cloud","Noisy","Social",1
+"I need to fix the leaky faucet.","Faucet",/f/,"What do I need to fix?","Faucet","Closet","Tap","Daily Life",3
+"The bird is sitting in the cage.","Cage",/k/,"Where is the bird sitting?","Cage","Page","Enclosure","Daily Life",3
+"He is driving a truck.","Truck",/tr/,"What is he driving?","Truck","Buck","Vehicle","Daily Life",2
+"The soup is very spicy.","Spicy",/sp/,"How is the soup?","Spicy","Icy","Hot","Dining",3
+"She is looking at the moon.","Moon",/m/,"What is she looking at?","Moon","Noon","Sky","Outdoors",2
+"The car is very clean.","Clean",/k/,"How is the car?","Clean","Lean","Washed","Daily Life",2
+"I am going to the beach.","Beach",/b/,"Where am I going?","Beach","Peach","Ocean","Outdoors",1
+"The dog is very hungry.","Hungry",/h/,"How is the dog?","Hungry","Angry","Starving","Daily Life",2
+"He is eating a banana.","Banana",/b/,"What is he eating?","Banana","Bandana","Fruit","Dining",2
+"The water is very hot.","Hot",/h/,"How is the water?","Hot","Pot","Boiling","Daily Life",1
+"She is looking at the snow.","Snow",/sn/,"What is she looking at?","Snow","Glow","Weather","Outdoors",2
+"The movie was very sad.","Sad",/s/,"How was the movie?","Sad","Bad","Emotional","Social",2
+"I need to vacuum the carpet.","Vacuum",/v/,"What do I need to do to the carpet?","Vacuum","Volume","Clean","Daily Life",3
+"The cat is very fast.","Fast",/f/,"How is the cat?","Fast","Vast","Quick","Daily Life",2
+"He is drinking a cup of coffee.","Coffee",/k/,"What is he drinking?","Coffee","Toffee","Drink","Dining",1
+"The book is very boring.","Boring",/b/,"How is the book?","Boring","Scoring","Dull","Daily Life",3
+"She is wearing a skirt.","Skirt",/sk/,"What is she wearing?","Skirt","Shirt","Bottoms","Daily Life",3
+"The music is very energetic.","Energetic",/dʒ/,"How is the music?","Energetic","Magnetic","Upbeat","Social",4
+"I need to fix the dripping sink.","Dripping",/dr/,"What is the sink doing?","Dripping","Ripping","Leaking","Daily Life",3
+"The bird is flying high in the sky.","High",/h/,"How is the bird flying?","High","Thigh","Up","Outdoors",2
+"He is driving a sports car.","Sports",/sp/,"What kind of car is he driving?","Sports","Courts","Fast","Daily Life",4
+"The soup is very delicious.","Delicious",/d/,"How is the soup?","Delicious","Suspicious","Tasty","Dining",3
+"She is looking at the rainbow.","Rainbow",/r/,"What is she looking at?","Rainbow","Pain-bow","Sky","Outdoors",3
+"The car is very new.","New",/n/,"How is the car?","New","Few","Recent","Daily Life",2
+"I am going to the park.","Park",/p/,"Where am I going?","Park","Bark","Outside","Outdoors",1
+"The dog is very well-trained.","Trained",/tr/,"How is the dog?","Trained","Strained","Obedient","Daily Life",3
+"He is eating a hamburger.","Hamburger",/h/,"What is he eating?","Hamburger","Stammerer","Burger","Dining",3
+"The water is very calm.","Calm",/k/,"How is the water?","Calm","Bomb","Still","Outdoors",3
+"She is looking at the clouds.","Clouds",/kl/,"What is she looking at?","Clouds","Crowds","Sky","Outdoors",2
+"The movie was very entertaining.","Entertaining",/t/,"How was the movie?","Entertaining","Pertaining","Fun","Social",4
+"I need to dust the furniture.","Dust",/d/,"What do I need to do to the furniture?","Dust","Bust","Clean","Daily Life",3
+"The cat is very lazy.","Lazy",/l/,"How is the cat?","Lazy","Hazy","Sleepy","Daily Life",3
+"He is drinking a glass of juice.","Juice",/dʒ/,"What is he drinking?","Juice","Goose","Drink","Dining",2
+"The book is very thought-provoking.","Provoking",/v/,"How is the book?","Provoking","Joking","Interesting","Daily Life",5
+"She is wearing a pair of socks.","Socks",/s/,"What is she wearing on her feet?","Socks","Locks","Hosiery","Daily Life",2
+"The music is very soothing.","Soothing",/s/,"How is the music?","Soothing","Teething","Calming","Social",3
+"I need to fix the squeaky door.","Squeaky",/skw/,"How is the door?","Squeaky","Freaky","Noisy","Daily Life",4
+"The bird is building a nest in the tree.","Nest",/n/,"What is the bird building?","Nest","Best","Home","Outdoors",2
+"He is driving a van.","Van",/v/,"What is he driving?","Van","Fan","Vehicle","Daily Life",3

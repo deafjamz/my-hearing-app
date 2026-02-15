@@ -1,0 +1,41 @@
+scenario_id,title,description,difficulty,tier,category,noise_type
+scn_grocery_checkout,Grocery Checkout,Paying for groceries at the supermarket,2,free,shopping,grocery_store_ambient
+scn_pharmacy_pickup,Pharmacy Pickup,Picking up a prescription at the pharmacy,3,free,medical,medical_office_ambient
+scn_restaurant_order,Restaurant Ordering,Ordering food at a casual restaurant,2,free,dining,restaurant_moderate
+scn_bank_transaction,Bank Transaction,Making a deposit at the bank teller,3,standard,errands,speech_shaped_steady
+scn_bus_directions,Bus Directions,Asking the driver for route information,3,standard,transit,transit_ambient
+scn_appointment_checkin,Appointment Check-in,Checking in at a medical office,3,free,medical,medical_office_ambient
+scn_hair_salon,Hair Salon Visit,Describing the haircut you want,2,standard,services,babble_8talker_cafeteria
+scn_dry_cleaner,Dry Cleaner Pickup,Picking up clothes from the dry cleaner,2,standard,errands,speech_shaped_steady
+scn_post_office,Post Office Visit,Mailing a package at the post office,3,standard,errands,speech_shaped_steady
+scn_gym_signup,Gym Membership,Signing up for a gym membership,3,standard,services,babble_8talker_cafeteria
+scn_car_service,Car Service,Dropping off car for maintenance,3,premium,services,speech_shaped_steady
+scn_hotel_checkin,Hotel Check-in,Checking into a hotel room,2,standard,travel,speech_shaped_steady
+scn_library_help,Library Assistance,Asking for help finding a book,2,free,services,speech_shaped_modulated
+scn_bakery_order,Bakery Order,Ordering pastries at a bakery,2,standard,shopping,restaurant_moderate
+scn_tech_support,Tech Support Call,Getting help with a device issue,4,premium,phone,speech_shaped_steady
+scn_insurance_call,Insurance Inquiry,Calling about insurance coverage,4,premium,phone,speech_shaped_steady
+scn_flight_checkin,Airport Check-in,Checking in at the airport counter,3,standard,travel,babble_8talker_cafeteria
+scn_car_rental,Car Rental Pickup,Picking up a rental car,3,premium,travel,speech_shaped_steady
+scn_movie_tickets,Movie Tickets,Buying tickets at the theater,2,standard,entertainment,babble_8talker_cafeteria
+scn_deli_counter,Deli Counter,Ordering at a deli counter,2,free,shopping,grocery_store_ambient
+scn_pet_store,Pet Store Help,Getting advice at a pet store,2,standard,shopping,speech_shaped_steady
+scn_fitness_class,Fitness Class,Signing up for a fitness class,3,standard,services,babble_8talker_cafeteria
+scn_auto_parts,Auto Parts Store,Finding the right car part,3,premium,shopping,speech_shaped_steady
+scn_tax_prep,Tax Preparation,Meeting with a tax preparer,4,premium,professional,speech_shaped_modulated
+scn_real_estate,Real Estate Showing,Viewing an apartment with an agent,3,premium,professional,speech_shaped_modulated
+scn_job_interview,Job Interview,Being interviewed for a position,4,premium,professional,speech_shaped_modulated
+scn_parent_teacher,Parent-Teacher Meeting,Meeting with your child's teacher,3,premium,professional,speech_shaped_modulated
+scn_roadside_assist,Roadside Assistance,Calling for car help,3,premium,phone,speech_shaped_steady
+scn_dentist_checkin,Dentist Check-in,Arriving for a dental appointment,2,standard,medical,medical_office_ambient
+scn_eye_doctor,Eye Doctor Visit,Getting an eye exam,3,standard,medical,medical_office_ambient
+scn_drive_through,Drive-Through Order,Ordering food at a drive-through window,3,standard,dining,transit_ambient
+scn_vet_visit,Veterinarian Visit,Taking a pet to the vet,3,standard,medical,medical_office_ambient
+scn_clothing_return,Clothing Store Return,Returning an item at a clothing store,2,standard,shopping,babble_8talker_cafeteria
+scn_coffee_order,Coffee Shop Order,Ordering a drink at a busy coffee shop,2,free,dining,babble_8talker_cafeteria
+scn_farmers_market,Farmer's Market,Buying produce at an outdoor market,2,free,shopping,babble_8talker_cafeteria
+scn_phone_banking,Phone Banking Call,Checking an account balance by phone,4,premium,phone,speech_shaped_steady
+scn_neighbor_chat,Neighbor Conversation,Chatting with a neighbor outside,2,free,social,speech_shaped_modulated
+scn_gas_station,Gas Station,Paying inside at a gas station,2,standard,errands,speech_shaped_steady
+scn_schedule_appt,Scheduling an Appointment,Calling to schedule a doctor appointment,3,standard,phone,speech_shaped_steady
+scn_package_delivery,Package Delivery,Receiving a delivery at home,2,free,errands,speech_shaped_modulated

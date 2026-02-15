@@ -1,0 +1,30 @@
+{
+  "$comment": "MCP servers for SoundSteps. Copy needed servers to ~/.claude.json",
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--project-ref=padfntxzoxhozfjsqnzc"],
+      "description": "Supabase database operations - queries, schema, RLS"
+    },
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com",
+      "description": "Vercel deployments and preview URLs"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Persistent memory across sessions"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp-server"],
+      "description": "Live documentation lookup (React, TypeScript, Supabase docs)"
+    }
+  },
+  "_notes": {
+    "usage": "Copy servers you need to ~/.claude.json under mcpServers",
+    "context_warning": "Keep under 10 MCPs enabled to preserve context window",
+    "supabase": "Project ref is already set for SoundSteps production"
+  }
+}

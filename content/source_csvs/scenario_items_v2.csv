@@ -1,0 +1,314 @@
+id,scenario_id,speaker,text,order
+scn_grocery_checkout_01,scn_grocery_checkout,Cashier,Did you find everything you were looking for today?,1
+scn_grocery_checkout_02,scn_grocery_checkout,Customer,Yes I did thank you. Do you have any paper bags?,2
+scn_grocery_checkout_03,scn_grocery_checkout,Cashier,We do. Would you like paper or plastic?,3
+scn_grocery_checkout_04,scn_grocery_checkout,Customer,Paper please. And I have my own reusable bags too.,4
+scn_grocery_checkout_05,scn_grocery_checkout,Cashier,Great. Your total comes to forty-seven dollars and thirty-two cents.,5
+scn_grocery_checkout_06,scn_grocery_checkout,Customer,Here you go. Can I get cash back?,6
+scn_grocery_checkout_07,scn_grocery_checkout,Cashier,Sure. How much would you like?,7
+scn_grocery_checkout_08,scn_grocery_checkout,Customer,Twenty dollars please.,8
+scn_pharmacy_pickup_01,scn_pharmacy_pickup,Pharmacist,Hi there. How can I help you today?,1
+scn_pharmacy_pickup_02,scn_pharmacy_pickup,Customer,I'm here to pick up a prescription for Johnson.,2
+scn_pharmacy_pickup_03,scn_pharmacy_pickup,Pharmacist,First name and date of birth please?,3
+scn_pharmacy_pickup_04,scn_pharmacy_pickup,Customer,Sarah Johnson. March fifteenth nineteen seventy-two.,4
+scn_pharmacy_pickup_05,scn_pharmacy_pickup,Pharmacist,Let me check. Yes we have it ready. Have you taken this medication before?,5
+scn_pharmacy_pickup_06,scn_pharmacy_pickup,Customer,No this is the first time.,6
+scn_pharmacy_pickup_07,scn_pharmacy_pickup,Pharmacist,Would you like to speak with the pharmacist about any questions?,7
+scn_pharmacy_pickup_08,scn_pharmacy_pickup,Customer,Yes please. I'd like to know about possible side effects.,8
+scn_restaurant_order_01,scn_restaurant_order,Server,Good evening. Welcome to Mario's. Can I start you off with something to drink?,1
+scn_restaurant_order_02,scn_restaurant_order,Customer,I'll have a glass of water and an iced tea please.,2
+scn_restaurant_order_03,scn_restaurant_order,Server,Sweetened or unsweetened for the tea?,3
+scn_restaurant_order_04,scn_restaurant_order,Customer,Unsweetened please. Do you have any specials tonight?,4
+scn_restaurant_order_05,scn_restaurant_order,Server,Yes. Tonight we have grilled salmon with roasted vegetables.,5
+scn_restaurant_order_06,scn_restaurant_order,Customer,That sounds good. I'll have the salmon special.,6
+scn_restaurant_order_07,scn_restaurant_order,Server,Excellent choice. Would you like a salad or soup to start?,7
+scn_restaurant_order_08,scn_restaurant_order,Customer,The house salad with ranch dressing on the side please.,8
+scn_bank_transaction_01,scn_bank_transaction,Teller,Hello. How can I help you today?,1
+scn_bank_transaction_02,scn_bank_transaction,Customer,I'd like to make a deposit into my checking account.,2
+scn_bank_transaction_03,scn_bank_transaction,Teller,May I have your account number or your ID please?,3
+scn_bank_transaction_04,scn_bank_transaction,Customer,Here's my driver's license.,4
+scn_bank_transaction_05,scn_bank_transaction,Teller,Thank you Mr. Williams. How much would you like to deposit?,5
+scn_bank_transaction_06,scn_bank_transaction,Customer,Five hundred dollars. Three hundred in cash and a check for two hundred.,6
+scn_bank_transaction_07,scn_bank_transaction,Teller,The cash will be available immediately. The check will clear in two business days.,7
+scn_bank_transaction_08,scn_bank_transaction,Customer,That's fine. Can I also get my current balance?,8
+scn_bus_directions_01,scn_bus_directions,Passenger,Excuse me does this bus go to the downtown transit center?,1
+scn_bus_directions_02,scn_bus_directions,Driver,Yes it does. We'll be there in about twenty minutes.,2
+scn_bus_directions_03,scn_bus_directions,Passenger,Will you announce the stop or should I watch for it?,3
+scn_bus_directions_04,scn_bus_directions,Driver,I announce all major stops. Downtown is stop number fourteen.,4
+scn_bus_directions_05,scn_bus_directions,Passenger,Thank you. Is there a transfer point there for the eastside routes?,5
+scn_bus_directions_06,scn_bus_directions,Driver,Yes. Routes fifteen and twenty-three both connect there.,6
+scn_appointment_checkin_01,scn_appointment_checkin,Receptionist,Good morning. Do you have an appointment today?,1
+scn_appointment_checkin_02,scn_appointment_checkin,Patient,Yes I have a ten o'clock with Doctor Patel.,2
+scn_appointment_checkin_03,scn_appointment_checkin,Receptionist,Your name please?,3
+scn_appointment_checkin_04,scn_appointment_checkin,Patient,Michael Thompson.,4
+scn_appointment_checkin_05,scn_appointment_checkin,Receptionist,I found you. Has your insurance information changed since your last visit?,5
+scn_appointment_checkin_06,scn_appointment_checkin,Patient,No it's still the same.,6
+scn_appointment_checkin_07,scn_appointment_checkin,Receptionist,Please have a seat. The doctor will be with you shortly.,7
+scn_appointment_checkin_08,scn_appointment_checkin,Patient,Thank you. Is there a copay I need to pay today?,8
+scn_hair_salon_01,scn_hair_salon,Stylist,Hi there. What are we doing for you today?,1
+scn_hair_salon_02,scn_hair_salon,Customer,I'd like a trim and maybe some layers added.,2
+scn_hair_salon_03,scn_hair_salon,Stylist,How much length do you want to take off?,3
+scn_hair_salon_04,scn_hair_salon,Customer,About an inch. I want to keep most of the length.,4
+scn_hair_salon_05,scn_hair_salon,Stylist,Sounds good. Do you want me to style it after or just blow dry?,5
+scn_hair_salon_06,scn_hair_salon,Customer,Just a simple blow dry is fine.,6
+scn_dry_cleaner_01,scn_dry_cleaner,Employee,Hi. Picking up or dropping off today?,1
+scn_dry_cleaner_02,scn_dry_cleaner,Customer,Picking up. The last name is Garcia.,2
+scn_dry_cleaner_03,scn_dry_cleaner,Employee,Do you have your ticket?,3
+scn_dry_cleaner_04,scn_dry_cleaner,Customer,I think I lost it. I dropped off a suit and two shirts last week.,4
+scn_dry_cleaner_05,scn_dry_cleaner,Employee,No problem. Can I see your ID?,5
+scn_dry_cleaner_06,scn_dry_cleaner,Customer,Sure. Here you go.,6
+scn_dry_cleaner_07,scn_dry_cleaner,Employee,I found it. That will be twenty-three fifty.,7
+scn_post_office_01,scn_post_office,Clerk,Next please. How can I help you?,1
+scn_post_office_02,scn_post_office,Customer,I need to mail this package to California.,2
+scn_post_office_03,scn_post_office,Clerk,Would you like regular mail or priority?,3
+scn_post_office_04,scn_post_office,Customer,How long does each take?,4
+scn_post_office_05,scn_post_office,Clerk,Regular is five to seven days. Priority is two to three days.,5
+scn_post_office_06,scn_post_office,Customer,Priority please. I need it there by Friday.,6
+scn_post_office_07,scn_post_office,Clerk,Is there anything fragile or liquid inside?,7
+scn_post_office_08,scn_post_office,Customer,No just books and some documents.,8
+scn_gym_signup_01,scn_gym_signup,Staff,Welcome to FitLife. Are you interested in a membership?,1
+scn_gym_signup_02,scn_gym_signup,Customer,Yes. I'd like to learn about your options.,2
+scn_gym_signup_03,scn_gym_signup,Staff,We have monthly and annual plans. Annual saves you twenty percent.,3
+scn_gym_signup_04,scn_gym_signup,Customer,What's included in the basic membership?,4
+scn_gym_signup_05,scn_gym_signup,Staff,Full access to all equipment and group classes. Personal training is extra.,5
+scn_gym_signup_06,scn_gym_signup,Customer,Can I try it for a day first?,6
+scn_gym_signup_07,scn_gym_signup,Staff,Absolutely. I can give you a free day pass right now.,7
+scn_hotel_checkin_01,scn_hotel_checkin,Clerk,Good evening. Welcome to the Grand Hotel. Checking in?,1
+scn_hotel_checkin_02,scn_hotel_checkin,Guest,Yes. I have a reservation under the name Parker.,2
+scn_hotel_checkin_03,scn_hotel_checkin,Clerk,Yes I see it here. A king room for two nights?,3
+scn_hotel_checkin_04,scn_hotel_checkin,Guest,That's correct.,4
+scn_hotel_checkin_05,scn_hotel_checkin,Clerk,May I see your ID and a credit card for incidentals?,5
+scn_hotel_checkin_06,scn_hotel_checkin,Guest,Here you are. What time is checkout?,6
+scn_hotel_checkin_07,scn_hotel_checkin,Clerk,Checkout is at eleven. Would you like a wake-up call?,7
+scn_hotel_checkin_08,scn_hotel_checkin,Guest,Yes please. Seven in the morning.,8
+scn_library_help_01,scn_library_help,Librarian,Can I help you find something?,1
+scn_library_help_02,scn_library_help,Patron,Yes I'm looking for books about gardening.,2
+scn_library_help_03,scn_library_help,Librarian,We have a whole section on that. Follow me.,3
+scn_library_help_04,scn_library_help,Patron,I'm particularly interested in vegetable gardening.,4
+scn_library_help_05,scn_library_help,Librarian,These three books are very popular with beginners.,5
+scn_library_help_06,scn_library_help,Patron,Thank you. How long can I keep them?,6
+scn_library_help_07,scn_library_help,Librarian,Three weeks. You can renew online if you need more time.,7
+scn_bakery_order_01,scn_bakery_order,Baker,Good morning. What can I get for you?,1
+scn_bakery_order_02,scn_bakery_order,Customer,I'd like two croissants and a blueberry muffin please.,2
+scn_bakery_order_03,scn_bakery_order,Baker,Fresh out of the oven. Anything else?,3
+scn_bakery_order_04,scn_bakery_order,Customer,Do you have any gluten-free options?,4
+scn_bakery_order_05,scn_bakery_order,Baker,Yes we have gluten-free brownies and cookies.,5
+scn_bakery_order_06,scn_bakery_order,Customer,I'll take two brownies as well.,6
+scn_bakery_order_07,scn_bakery_order,Baker,Your total is twelve seventy-five. For here or to go?,7
+scn_bakery_order_08,scn_bakery_order,Customer,To go please.,8
+scn_deli_counter_01,scn_deli_counter,Clerk,Who's next? What can I get for you?,1
+scn_deli_counter_02,scn_deli_counter,Customer,Half a pound of turkey breast please.,2
+scn_deli_counter_03,scn_deli_counter,Clerk,Thin sliced or regular?,3
+scn_deli_counter_04,scn_deli_counter,Customer,Thin sliced. And a quarter pound of swiss cheese.,4
+scn_deli_counter_05,scn_deli_counter,Clerk,Here's a sample of the turkey. Is that sliced thin enough?,5
+scn_deli_counter_06,scn_deli_counter,Customer,Perfect. Thank you.,6
+scn_deli_counter_07,scn_deli_counter,Clerk,Anything else today?,7
+scn_deli_counter_08,scn_deli_counter,Customer,That's all thanks.,8
+scn_movie_tickets_01,scn_movie_tickets,Cashier,Welcome to Star Cinema. What movie would you like to see?,1
+scn_movie_tickets_02,scn_movie_tickets,Customer,Two tickets for the seven o'clock showing of The Great Adventure.,2
+scn_movie_tickets_03,scn_movie_tickets,Cashier,That's in theater five. Would you like regular or IMAX?,3
+scn_movie_tickets_04,scn_movie_tickets,Customer,Regular is fine. What's the price difference?,4
+scn_movie_tickets_05,scn_movie_tickets,Cashier,IMAX is six dollars more per ticket.,5
+scn_movie_tickets_06,scn_movie_tickets,Customer,We'll stick with regular. Can we pick our seats?,6
+scn_movie_tickets_07,scn_movie_tickets,Cashier,Yes. The screen shows available seats in blue.,7
+scn_movie_tickets_08,scn_movie_tickets,Customer,Row G seats ten and eleven please.,8
+scn_dentist_checkin_01,scn_dentist_checkin,Receptionist,Good afternoon. Welcome to Bright Smiles Dental.,1
+scn_dentist_checkin_02,scn_dentist_checkin,Patient,Hi. I have a two-thirty appointment.,2
+scn_dentist_checkin_03,scn_dentist_checkin,Receptionist,Name please?,3
+scn_dentist_checkin_04,scn_dentist_checkin,Patient,Jennifer Adams.,4
+scn_dentist_checkin_05,scn_dentist_checkin,Receptionist,I see you. Is this for your regular cleaning?,5
+scn_dentist_checkin_06,scn_dentist_checkin,Patient,Yes and I've been having some sensitivity in my back teeth.,6
+scn_dentist_checkin_07,scn_dentist_checkin,Receptionist,I'll make a note for the dentist. Please fill out this form about your symptoms.,7
+scn_dentist_checkin_08,scn_dentist_checkin,Patient,Thank you. Where should I wait?,8
+scn_eye_doctor_01,scn_eye_doctor,Technician,Come on in. We'll start with some preliminary tests.,1
+scn_eye_doctor_02,scn_eye_doctor,Patient,What kind of tests?,2
+scn_eye_doctor_03,scn_eye_doctor,Technician,Just checking your eye pressure and taking some measurements.,3
+scn_eye_doctor_04,scn_eye_doctor,Patient,Will that hurt?,4
+scn_eye_doctor_05,scn_eye_doctor,Technician,Not at all. You might feel a small puff of air.,5
+scn_eye_doctor_06,scn_eye_doctor,Patient,Okay. My vision seems blurrier lately especially at night.,6
+scn_eye_doctor_07,scn_eye_doctor,Technician,The doctor will check that thoroughly. When did you notice the change?,7
+scn_eye_doctor_08,scn_eye_doctor,Patient,About two months ago. It's gotten gradually worse.,8
+scn_car_service_01,scn_car_service,Advisor,Good morning. Do you have an appointment with us today?,1
+scn_car_service_02,scn_car_service,Customer,Yes I called yesterday about my brakes making a squealing noise.,2
+scn_car_service_03,scn_car_service,Advisor,Let me pull up your information. Is this for the silver sedan?,3
+scn_car_service_04,scn_car_service,Customer,That's right. It started about two weeks ago.,4
+scn_car_service_05,scn_car_service,Advisor,We'll take a look at the brake pads and rotors. It should take about two hours.,5
+scn_car_service_06,scn_car_service,Customer,Do you have a waiting area or should I come back?,6
+scn_car_service_07,scn_car_service,Advisor,We have a lounge with coffee and wifi. I'll update you when it's ready.,7
+scn_car_service_08,scn_car_service,Customer,Great. Can you also check the oil level while it's in?,8
+scn_tech_support_01,scn_tech_support,Agent,Thank you for calling tech support. How can I help you today?,1
+scn_tech_support_02,scn_tech_support,Caller,My internet has been very slow since yesterday morning.,2
+scn_tech_support_03,scn_tech_support,Agent,I'm sorry to hear that. Can you tell me the model number on your router?,3
+scn_tech_support_04,scn_tech_support,Caller,It says N-three-hundred on the bottom label.,4
+scn_tech_support_05,scn_tech_support,Agent,Have you tried unplugging the router and waiting thirty seconds?,5
+scn_tech_support_06,scn_tech_support,Caller,Yes I've done that twice already. It didn't help.,6
+scn_tech_support_07,scn_tech_support,Agent,Let me run a diagnostic from our end. Can you stay on the line for about two minutes?,7
+scn_tech_support_08,scn_tech_support,Caller,Sure. I'll wait.,8
+scn_insurance_call_01,scn_insurance_call,Agent,Good afternoon. Can I have your policy number please?,1
+scn_insurance_call_02,scn_insurance_call,Caller,Yes it's H-K-four-seven-two-nine-one.,2
+scn_insurance_call_03,scn_insurance_call,Agent,Thank you. I see your account. What can I help you with today?,3
+scn_insurance_call_04,scn_insurance_call,Caller,I need to know if my plan covers hearing devices.,4
+scn_insurance_call_05,scn_insurance_call,Agent,Let me check your benefits. Your plan does cover hearing devices up to three thousand dollars.,5
+scn_insurance_call_06,scn_insurance_call,Caller,Is there a copay for the audiologist visit?,6
+scn_insurance_call_07,scn_insurance_call,Agent,There's a thirty dollar specialist copay per visit. Would you like me to find providers near you?,7
+scn_insurance_call_08,scn_insurance_call,Caller,Yes please. I'm in the downtown area.,8
+scn_flight_checkin_01,scn_flight_checkin,Agent,Next in line please. May I see your passport and booking confirmation?,1
+scn_flight_checkin_02,scn_flight_checkin,Passenger,Here you go. I'm on the two fifteen flight to Chicago.,2
+scn_flight_checkin_03,scn_flight_checkin,Agent,I see your reservation. Would you like a window or aisle seat?,3
+scn_flight_checkin_04,scn_flight_checkin,Passenger,Aisle please if one is available.,4
+scn_flight_checkin_05,scn_flight_checkin,Agent,I have fourteen C on the aisle. Are you checking any bags today?,5
+scn_flight_checkin_06,scn_flight_checkin,Passenger,Just this one suitcase. Is the flight on time?,6
+scn_flight_checkin_07,scn_flight_checkin,Agent,Yes it's on schedule. Your gate is B twelve. Boarding starts at one forty-five.,7
+scn_flight_checkin_08,scn_flight_checkin,Passenger,Thank you. Which way is security from here?,8
+scn_car_rental_01,scn_car_rental,Agent,Welcome to the rental counter. Do you have a reservation?,1
+scn_car_rental_02,scn_car_rental,Customer,Yes under the name Johnson. I reserved a mid-size car.,2
+scn_car_rental_03,scn_car_rental,Agent,I found it. Would you like to upgrade to a full-size for ten dollars more per day?,3
+scn_car_rental_04,scn_car_rental,Customer,No thank you. The mid-size is fine.,4
+scn_car_rental_05,scn_car_rental,Agent,Would you like to add insurance coverage?,5
+scn_car_rental_06,scn_car_rental,Customer,What does the basic coverage include?,6
+scn_car_rental_07,scn_car_rental,Agent,It covers collision damage with a five hundred dollar deductible. The full coverage has no deductible.,7
+scn_car_rental_08,scn_car_rental,Customer,I'll take the basic coverage. Where do I pick up the car?,8
+scn_pet_store_01,scn_pet_store,Employee,Hi there. Can I help you find something?,1
+scn_pet_store_02,scn_pet_store,Customer,I'm looking for food for my new kitten. She's about ten weeks old.,2
+scn_pet_store_03,scn_pet_store,Employee,Congratulations on the new kitten. The kitten food is in aisle three.,3
+scn_pet_store_04,scn_pet_store,Customer,Is there a brand you recommend?,4
+scn_pet_store_05,scn_pet_store,Employee,This one is very popular with our customers. It has everything a growing kitten needs.,5
+scn_pet_store_06,scn_pet_store,Customer,How much should I feed her each day?,6
+scn_pet_store_07,scn_pet_store,Employee,At ten weeks about a quarter cup three times a day. The bag has a feeding guide too.,7
+scn_pet_store_08,scn_pet_store,Customer,Perfect. I also need a small litter box if you have one.,8
+scn_fitness_class_01,scn_fitness_class,Instructor,Welcome. Are you here for the morning yoga class?,1
+scn_fitness_class_02,scn_fitness_class,Member,Yes. This is my first time. Do I need to sign in somewhere?,2
+scn_fitness_class_03,scn_fitness_class,Instructor,Just put your name on the sheet by the door. Have you done yoga before?,3
+scn_fitness_class_04,scn_fitness_class,Member,A few times at home with videos. Never in a real class.,4
+scn_fitness_class_05,scn_fitness_class,Instructor,You'll do great. Grab a mat from the shelf over there.,5
+scn_fitness_class_06,scn_fitness_class,Member,Should I take my shoes off?,6
+scn_fitness_class_07,scn_fitness_class,Instructor,Yes please. And feel free to modify any pose that's uncomfortable. Listen to your body.,7
+scn_fitness_class_08,scn_fitness_class,Member,Thanks. What time does the class end?,8
+scn_auto_parts_01,scn_auto_parts,Employee,What can I help you with today?,1
+scn_auto_parts_02,scn_auto_parts,Customer,I need wiper blades for a twenty twenty-two Honda Civic.,2
+scn_auto_parts_03,scn_auto_parts,Employee,Let me look that up. You'll need a twenty-six inch for the driver side and an eighteen for the passenger.,3
+scn_auto_parts_04,scn_auto_parts,Customer,Do you have different quality levels?,4
+scn_auto_parts_05,scn_auto_parts,Employee,We have standard and premium. The premium ones last about twice as long.,5
+scn_auto_parts_06,scn_auto_parts,Customer,I'll go with the premium. Can you show me how to install them?,6
+scn_auto_parts_07,scn_auto_parts,Employee,Sure. It's really easy. You just lift the arm and press the release tab.,7
+scn_auto_parts_08,scn_auto_parts,Customer,Great. I'll take both. Do you have windshield washer fluid too?,8
+scn_tax_prep_01,scn_tax_prep,Preparer,Good to see you again. Did you bring all your documents?,1
+scn_tax_prep_02,scn_tax_prep,Client,I have my W-two and the mortgage interest statement. I think that's everything.,2
+scn_tax_prep_03,scn_tax_prep,Preparer,Did you have any medical expenses this year?,3
+scn_tax_prep_04,scn_tax_prep,Client,Yes actually. I had hearing device expenses totaling about four thousand dollars.,4
+scn_tax_prep_05,scn_tax_prep,Preparer,Those may be deductible. Do you have the receipts?,5
+scn_tax_prep_06,scn_tax_prep,Client,I have them right here in this folder.,6
+scn_tax_prep_07,scn_tax_prep,Preparer,Perfect. Based on what I see so far you should expect a refund this year.,7
+scn_tax_prep_08,scn_tax_prep,Client,That's good news. How long until I receive it?,8
+scn_real_estate_01,scn_real_estate,Agent,This is the two-bedroom unit I mentioned. It was renovated last year.,1
+scn_real_estate_02,scn_real_estate,Client,The kitchen looks nice. Is the dishwasher new?,2
+scn_real_estate_03,scn_real_estate,Agent,Everything in the kitchen was replaced including the appliances and countertops.,3
+scn_real_estate_04,scn_real_estate,Client,What floor is this on?,4
+scn_real_estate_05,scn_real_estate,Agent,Third floor. There's an elevator in the building. The lease is twelve months.,5
+scn_real_estate_06,scn_real_estate,Client,Are utilities included in the rent?,6
+scn_real_estate_07,scn_real_estate,Agent,Water and trash are included. You'd pay for electricity and internet separately.,7
+scn_real_estate_08,scn_real_estate,Client,Can I see the bedroom? And is there parking available?,8
+scn_job_interview_01,scn_job_interview,Interviewer,Thank you for coming in today. Please have a seat.,1
+scn_job_interview_02,scn_job_interview,Candidate,Thank you. I'm excited to learn more about the position.,2
+scn_job_interview_03,scn_job_interview,Interviewer,Tell me about your experience in customer service.,3
+scn_job_interview_04,scn_job_interview,Candidate,I worked at a retail store for three years handling returns and helping customers find products.,4
+scn_job_interview_05,scn_job_interview,Interviewer,What would you say is your greatest strength?,5
+scn_job_interview_06,scn_job_interview,Candidate,I'm a good listener and I stay calm when things get busy.,6
+scn_job_interview_07,scn_job_interview,Interviewer,When could you start if offered the position?,7
+scn_job_interview_08,scn_job_interview,Candidate,I could start in two weeks. I'd need to give notice at my current job.,8
+scn_parent_teacher_01,scn_parent_teacher,Teacher,Thanks for coming in. Your daughter is doing very well in reading.,1
+scn_parent_teacher_02,scn_parent_teacher,Parent,That's great to hear. She reads at home every night before bed.,2
+scn_parent_teacher_03,scn_parent_teacher,Teacher,I can tell. Her vocabulary has improved a lot this semester.,3
+scn_parent_teacher_04,scn_parent_teacher,Parent,How is she doing in math?,4
+scn_parent_teacher_05,scn_parent_teacher,Teacher,Math is her weaker area. She sometimes struggles with word problems.,5
+scn_parent_teacher_06,scn_parent_teacher,Parent,Is there anything we can practice at home?,6
+scn_parent_teacher_07,scn_parent_teacher,Teacher,I'll send home some worksheets. Ten minutes a day makes a big difference.,7
+scn_parent_teacher_08,scn_parent_teacher,Parent,We'll do that. Does she get along well with the other children?,8
+scn_roadside_assist_01,scn_roadside_assist,Dispatcher,Roadside assistance. What's your location?,1
+scn_roadside_assist_02,scn_roadside_assist,Caller,I'm on Highway twenty-seven about two miles south of the Elm Street exit.,2
+scn_roadside_assist_03,scn_roadside_assist,Dispatcher,What seems to be the problem?,3
+scn_roadside_assist_04,scn_roadside_assist,Caller,I have a flat tire on the right rear. I don't have a spare.,4
+scn_roadside_assist_05,scn_roadside_assist,Dispatcher,Are you in a safe location off the road?,5
+scn_roadside_assist_06,scn_roadside_assist,Caller,Yes I pulled onto the shoulder. My hazard lights are on.,6
+scn_roadside_assist_07,scn_roadside_assist,Dispatcher,Good. I'm sending a tow truck. It should arrive in about thirty to forty-five minutes.,7
+scn_roadside_assist_08,scn_roadside_assist,Caller,Thank you. Should I stay in the car or wait outside?,8
+scn_drive_through_01,scn_drive_through,Employee,Welcome. Can I take your order?,1
+scn_drive_through_02,scn_drive_through,Customer,Yes. Can I get a number three combo with no onions?,2
+scn_drive_through_03,scn_drive_through,Employee,Sure. What size drink would you like?,3
+scn_drive_through_04,scn_drive_through,Customer,Medium please. And could I get that with a lemonade instead of soda?,4
+scn_drive_through_05,scn_drive_through,Employee,Lemonade is fine. Anything else?,5
+scn_drive_through_06,scn_drive_through,Customer,Can I also add a small fry on the side?,6
+scn_drive_through_07,scn_drive_through,Employee,Got it. Your total is nine forty-seven. Please pull forward to the first window.,7
+scn_drive_through_08,scn_drive_through,Customer,Thank you. Do you take contactless payment?,8
+scn_vet_visit_01,scn_vet_visit,Receptionist,Hi there. Welcome to the animal clinic. What's your pet's name?,1
+scn_vet_visit_02,scn_vet_visit,Owner,This is Daisy. She has an appointment at ten thirty.,2
+scn_vet_visit_03,scn_vet_visit,Receptionist,I see Daisy's appointment right here. Is this just a regular checkup?,3
+scn_vet_visit_04,scn_vet_visit,Owner,Mostly. But she's also been scratching her ears a lot lately.,4
+scn_vet_visit_05,scn_vet_visit,Receptionist,The doctor will take a look at that. Is Daisy up to date on her vaccinations?,5
+scn_vet_visit_06,scn_vet_visit,Owner,I think so but I'm not sure about the rabies shot.,6
+scn_vet_visit_07,scn_vet_visit,Receptionist,We'll check her records. Please have a seat and the vet will be right with you.,7
+scn_vet_visit_08,scn_vet_visit,Owner,Thank you. She gets a little nervous at the vet so I'll keep her on the leash.,8
+scn_clothing_return_01,scn_clothing_return,Associate,Hi. How can I help you today?,1
+scn_clothing_return_02,scn_clothing_return,Customer,I'd like to return this sweater. It doesn't fit right.,2
+scn_clothing_return_03,scn_clothing_return,Associate,Do you have the receipt?,3
+scn_clothing_return_04,scn_clothing_return,Customer,Yes here it is. I bought it last Saturday.,4
+scn_clothing_return_05,scn_clothing_return,Associate,That's within our thirty day return window. Would you like a refund or exchange?,5
+scn_clothing_return_06,scn_clothing_return,Customer,I'd like to exchange it for a larger size if you have one.,6
+scn_clothing_return_07,scn_clothing_return,Associate,Let me check the back. We might have a large in the same color.,7
+scn_clothing_return_08,scn_clothing_return,Customer,Thank you. If not I'll just take the refund.,8
+scn_coffee_order_01,scn_coffee_order,Barista,Good morning. What can I get started for you?,1
+scn_coffee_order_02,scn_coffee_order,Customer,Can I get a large latte with oat milk?,2
+scn_coffee_order_03,scn_coffee_order,Barista,Sure. Hot or iced?,3
+scn_coffee_order_04,scn_coffee_order,Customer,Hot please. And can you make it with an extra shot?,4
+scn_coffee_order_05,scn_coffee_order,Barista,Large hot oat milk latte with an extra shot. Anything else?,5
+scn_coffee_order_06,scn_coffee_order,Customer,Actually yes. Can I also get a blueberry muffin?,6
+scn_coffee_order_07,scn_coffee_order,Barista,Of course. Your total is eight twenty-five. Name for the order?,7
+scn_coffee_order_08,scn_coffee_order,Customer,It's Sarah. Thanks.,8
+scn_farmers_market_01,scn_farmers_market,Vendor,Good morning. Would you like to try a sample of our honey?,1
+scn_farmers_market_02,scn_farmers_market,Customer,Sure. Oh that's delicious. How much for a jar?,2
+scn_farmers_market_03,scn_farmers_market,Vendor,The small jar is eight dollars and the large is fourteen.,3
+scn_farmers_market_04,scn_farmers_market,Customer,I'll take a large one. Do you also sell beeswax candles?,4
+scn_farmers_market_05,scn_farmers_market,Vendor,We do. They're right here. Six dollars each or two for ten.,5
+scn_farmers_market_06,scn_farmers_market,Customer,I'll take two please. Do you accept cards?,6
+scn_farmers_market_07,scn_farmers_market,Vendor,Cash or card is fine. Would you like a bag?,7
+scn_farmers_market_08,scn_farmers_market,Customer,No thanks I brought my own. See you next week.,8
+scn_phone_banking_01,scn_phone_banking,System,Welcome to telephone banking. Please enter your account number followed by the pound key.,1
+scn_phone_banking_02,scn_phone_banking,Caller,I'd rather speak to a representative please.,2
+scn_phone_banking_03,scn_phone_banking,Agent,Thank you for your patience. I can help you. May I have your account number?,3
+scn_phone_banking_04,scn_phone_banking,Caller,It's seven-two-four-eight-three-one-zero.,4
+scn_phone_banking_05,scn_phone_banking,Agent,For security can you verify the last four digits of your social security number?,5
+scn_phone_banking_06,scn_phone_banking,Caller,Five-nine-two-one.,6
+scn_phone_banking_07,scn_phone_banking,Agent,Thank you. Your checking account balance is two thousand three hundred forty-seven dollars. Is there anything else?,7
+scn_phone_banking_08,scn_phone_banking,Caller,Can you also tell me if my direct deposit went through this week?,8
+scn_neighbor_chat_01,scn_neighbor_chat,Neighbor,Hey there. Your garden looks amazing this year.,1
+scn_neighbor_chat_02,scn_neighbor_chat,Resident,Thanks. I planted some new tomatoes and peppers this spring.,2
+scn_neighbor_chat_03,scn_neighbor_chat,Neighbor,I've been thinking about starting a garden. Is it a lot of work?,3
+scn_neighbor_chat_04,scn_neighbor_chat,Resident,Not really once you get it set up. Watering takes about fifteen minutes a day.,4
+scn_neighbor_chat_05,scn_neighbor_chat,Neighbor,Did you hear about the block party next Saturday?,5
+scn_neighbor_chat_06,scn_neighbor_chat,Resident,I saw the flyer. What time does it start?,6
+scn_neighbor_chat_07,scn_neighbor_chat,Neighbor,Four o'clock. They're closing off the street. Everyone's bringing food to share.,7
+scn_neighbor_chat_08,scn_neighbor_chat,Resident,Sounds fun. I'll bring some of these tomatoes if they're ripe by then.,8
+scn_gas_station_01,scn_gas_station,Cashier,Hi. What pump number?,1
+scn_gas_station_02,scn_gas_station,Customer,Pump number five. Can I get thirty dollars on regular?,2
+scn_gas_station_03,scn_gas_station,Cashier,Thirty on pump five. Cash or card?,3
+scn_gas_station_04,scn_gas_station,Customer,Cash. Here's a fifty. I'll need change back.,4
+scn_gas_station_05,scn_gas_station,Cashier,Your change is twenty dollars. Do you need anything else?,5
+scn_gas_station_06,scn_gas_station,Customer,Can I also get a bottle of water?,6
+scn_gas_station_07,scn_gas_station,Cashier,That'll be a dollar seventy-five. Eighteen twenty-five is your new change.,7
+scn_gas_station_08,scn_gas_station,Customer,Thanks. Is the restroom around back?,8
+scn_schedule_appt_01,scn_schedule_appt,Receptionist,Good morning. Doctor Miller's office. How can I help you?,1
+scn_schedule_appt_02,scn_schedule_appt,Caller,I'd like to schedule a checkup appointment please.,2
+scn_schedule_appt_03,scn_schedule_appt,Receptionist,Of course. Are you an existing patient?,3
+scn_schedule_appt_04,scn_schedule_appt,Caller,Yes. My last name is Thompson.,4
+scn_schedule_appt_05,scn_schedule_appt,Receptionist,I see your file. We have openings next Tuesday at nine or Thursday at two thirty.,5
+scn_schedule_appt_06,scn_schedule_appt,Caller,Thursday at two thirty works better for me.,6
+scn_schedule_appt_07,scn_schedule_appt,Receptionist,You're all set. Please arrive fifteen minutes early to fill out updated forms.,7
+scn_schedule_appt_08,scn_schedule_appt,Caller,Will do. Do I need to bring my insurance card?,8
+scn_package_delivery_01,scn_package_delivery,Driver,Hi. I have a delivery for this address. Are you the homeowner?,1
+scn_package_delivery_02,scn_package_delivery,Resident,Yes that's me. I've been expecting this package.,2
+scn_package_delivery_03,scn_package_delivery,Driver,Can you sign here on the screen please?,3
+scn_package_delivery_04,scn_package_delivery,Resident,Sure. Is this the only box or are there more?,4
+scn_package_delivery_05,scn_package_delivery,Driver,There's one more in the truck. It's a bit heavy. Where would you like it?,5
+scn_package_delivery_06,scn_package_delivery,Resident,Just inside the front door would be great.,6
+scn_package_delivery_07,scn_package_delivery,Driver,Here you go. Both packages are delivered. Have a nice day.,7
+scn_package_delivery_08,scn_package_delivery,Resident,Thank you so much. I appreciate the help with the heavy one.,8

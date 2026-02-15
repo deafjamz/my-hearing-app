@@ -1,0 +1,101 @@
+id,source_type,source_id,text,target_keyword,target_phoneme,rates_to_generate,priority,clinical_category
+rate_sent_001,sentence,sentence_1,The cat sat on the mat.,cat,/k/,"slow,fast",1,basic
+rate_sent_002,sentence,sentence_2,Please pass the salt.,salt,/s/,"slow,fast",1,dining
+rate_sent_003,sentence,sentence_3,What time is it?,time,/t/,"slow,fast",1,social
+rate_sent_004,sentence,sentence_4,The appointment is at three.,three,/θ/,"slow,fast",1,medical
+rate_sent_005,sentence,sentence_5,Can you hear me clearly?,hear,/h/,"slow,fast",1,communication
+rate_sent_006,sentence,sentence_6,I need to take my medication.,medication,/m/,"slow,fast",1,medical
+rate_sent_007,sentence,sentence_7,Turn left at the next light.,left,/l/,"slow,fast",1,directions
+rate_sent_008,sentence,sentence_8,The weather is beautiful today.,weather,/w/,"slow,fast",1,social
+rate_sent_009,sentence,sentence_9,Please speak more slowly.,slowly,/s/,"slow,fast",1,communication
+rate_sent_010,sentence,sentence_10,My phone number is five five five.,five,/f/,"slow,fast",1,phone
+rate_sent_011,sentence,sentence_11,The prescription is ready.,prescription,/pr/,"slow,fast",1,medical
+rate_sent_012,sentence,sentence_12,Would you like some water?,water,/w/,"slow,fast",1,dining
+rate_sent_013,sentence,sentence_13,The bus leaves at ten thirty.,thirty,/θ/,"slow,fast",1,transportation
+rate_sent_014,sentence,sentence_14,Please write down your address.,address,/æ/,"slow,fast",1,forms
+rate_sent_015,sentence,sentence_15,The total comes to fifteen dollars.,fifteen,/f/,"slow,fast",1,shopping
+rate_sent_016,sentence,sentence_16,I have an appointment with Doctor Smith.,Smith,/sm/,"slow,fast",1,medical
+rate_sent_017,sentence,sentence_17,Could you repeat that please?,repeat,/r/,"slow,fast",1,communication
+rate_sent_018,sentence,sentence_18,Take two pills twice daily.,twice,/t/,"slow,fast",1,medical
+rate_sent_019,sentence,sentence_19,The store closes at nine.,nine,/n/,"slow,fast",1,shopping
+rate_sent_020,sentence,sentence_20,Emergency exits are on your left.,emergency,/ɛ/,"slow,fast",1,safety
+rate_sent_021,sentence,sentence_21,Your blood pressure looks good.,pressure,/pr/,"slow,fast",2,medical
+rate_sent_022,sentence,sentence_22,The waiting room is down the hall.,waiting,/w/,"slow,fast",2,directions
+rate_sent_023,sentence,sentence_23,Sign your name at the bottom.,sign,/s/,"slow,fast",2,forms
+rate_sent_024,sentence,sentence_24,The restaurant is on Main Street.,Main,/m/,"slow,fast",2,directions
+rate_sent_025,sentence,sentence_25,I need to refill my prescription.,refill,/r/,"slow,fast",2,medical
+rate_sent_026,sentence,sentence_26,The meeting starts in fifteen minutes.,fifteen,/f/,"slow,fast",2,work
+rate_sent_027,sentence,sentence_27,Please have a seat in the lobby.,lobby,/l/,"slow,fast",2,directions
+rate_sent_028,sentence,sentence_28,The elevator is around the corner.,elevator,/ɛ/,"slow,fast",2,directions
+rate_sent_029,sentence,sentence_29,Your insurance will cover this.,insurance,/ʃ/,"slow,fast",2,medical
+rate_sent_030,sentence,sentence_30,The pharmacy opens at eight.,pharmacy,/f/,"slow,fast",2,medical
+rate_sent_031,sentence,sentence_31,Please bring your ID next time.,bring,/br/,"slow,fast",2,forms
+rate_sent_032,sentence,sentence_32,The results will be ready tomorrow.,results,/r/,"slow,fast",2,medical
+rate_sent_033,sentence,sentence_33,Take the third exit on the right.,third,/θ/,"slow,fast",2,directions
+rate_sent_034,sentence,sentence_34,Your copay is twenty-five dollars.,twenty,/t/,"slow,fast",2,medical
+rate_sent_035,sentence,sentence_35,The office is on the second floor.,second,/s/,"slow,fast",2,directions
+rate_sent_036,sentence,sentence_36,Please call us if symptoms persist.,symptoms,/s/,"slow,fast",2,medical
+rate_sent_037,sentence,sentence_37,The parking lot is behind the building.,parking,/p/,"slow,fast",2,directions
+rate_sent_038,sentence,sentence_38,Your next appointment is in two weeks.,weeks,/w/,"slow,fast",2,medical
+rate_sent_039,sentence,sentence_39,The coffee shop is across the street.,coffee,/k/,"slow,fast",2,directions
+rate_sent_040,sentence,sentence_40,Please arrive fifteen minutes early.,arrive,/r/,"slow,fast",2,appointments
+rate_sent_041,sentence,sentence_41,The lab is on the fourth floor.,fourth,/f/,"slow,fast",2,directions
+rate_sent_042,sentence,sentence_42,Your referral has been approved.,referral,/r/,"slow,fast",2,medical
+rate_sent_043,sentence,sentence_43,The waiting time is about an hour.,waiting,/w/,"slow,fast",2,appointments
+rate_sent_044,sentence,sentence_44,Please check in at the front desk.,check,/tʃ/,"slow,fast",2,appointments
+rate_sent_045,sentence,sentence_45,The specialist is running late today.,specialist,/sp/,"slow,fast",2,medical
+rate_sent_046,sentence,sentence_46,Your test results came back normal.,normal,/n/,"slow,fast",2,medical
+rate_sent_047,sentence,sentence_47,The nearest hospital is five miles away.,hospital,/h/,"slow,fast",2,directions
+rate_sent_048,sentence,sentence_48,Please fill out this form completely.,form,/f/,"slow,fast",2,forms
+rate_sent_049,sentence,sentence_49,The procedure takes about thirty minutes.,procedure,/pr/,"slow,fast",2,medical
+rate_sent_050,sentence,sentence_50,Your medication is ready for pickup.,pickup,/p/,"slow,fast",2,medical
+rate_word_001,word,bat,bat,bat,/b/,"slow,fast",2,discrimination
+rate_word_002,word,pat,pat,pat,/p/,"slow,fast",2,discrimination
+rate_word_003,word,time,time,time,/t/,"slow,fast",2,discrimination
+rate_word_004,word,dime,dime,dime,/d/,"slow,fast",2,discrimination
+rate_word_005,word,fan,fan,fan,/f/,"slow,fast",2,discrimination
+rate_word_006,word,van,van,van,/v/,"slow,fast",2,discrimination
+rate_word_007,word,sip,sip,sip,/s/,"slow,fast",2,discrimination
+rate_word_008,word,ship,ship,ship,/ʃ/,"slow,fast",2,discrimination
+rate_word_009,word,three,three,three,/θ/,"slow,fast",2,discrimination
+rate_word_010,word,free,free,free,/f/,"slow,fast",2,discrimination
+rate_word_011,word,chin,chin,chin,/tʃ/,"slow,fast",2,discrimination
+rate_word_012,word,gin,gin,gin,/dʒ/,"slow,fast",2,discrimination
+rate_word_013,word,beat,beat,beat,/iː/,"slow,fast",2,vowels
+rate_word_014,word,bit,bit,bit,/ɪ/,"slow,fast",2,vowels
+rate_word_015,word,bet,bet,bet,/ɛ/,"slow,fast",2,vowels
+rate_word_016,word,bat,bat,bat,/æ/,"slow,fast",2,vowels
+rate_word_017,word,cat,cat,cat,/k/,"slow,fast",2,discrimination
+rate_word_018,word,gap,gap,gap,/ɡ/,"slow,fast",2,discrimination
+rate_word_019,word,loose,loose,loose,/s/,"slow,fast",2,discrimination
+rate_word_020,word,lose,lose,lose,/z/,"slow,fast",2,discrimination
+rate_word_021,word,price,price,price,/s/,"slow,fast",2,discrimination
+rate_word_022,word,prize,prize,prize,/z/,"slow,fast",2,discrimination
+rate_word_023,word,leaf,leaf,leaf,/f/,"slow,fast",2,discrimination
+rate_word_024,word,leave,leave,leave,/v/,"slow,fast",2,discrimination
+rate_word_025,word,cap,cap,cap,/p/,"slow,fast",2,discrimination
+rate_word_026,word,cab,cab,cab,/b/,"slow,fast",2,discrimination
+rate_word_027,word,hit,hit,hit,/t/,"slow,fast",2,discrimination
+rate_word_028,word,hid,hid,hid,/d/,"slow,fast",2,discrimination
+rate_word_029,word,back,back,back,/k/,"slow,fast",2,discrimination
+rate_word_030,word,bag,bag,bag,/ɡ/,"slow,fast",2,discrimination
+rate_word_031,word,ice,ice,ice,/s/,"slow,fast",2,discrimination
+rate_word_032,word,eyes,eyes,eyes,/z/,"slow,fast",2,discrimination
+rate_word_033,word,rich,rich,rich,/tʃ/,"slow,fast",2,discrimination
+rate_word_034,word,ridge,ridge,ridge,/dʒ/,"slow,fast",2,discrimination
+rate_word_035,word,bath,bath,bath,/θ/,"slow,fast",2,discrimination
+rate_word_036,word,bathe,bathe,bathe,/ð/,"slow,fast",2,discrimination
+rate_word_037,word,feet,feet,feet,/iː/,"slow,fast",2,vowels
+rate_word_038,word,fit,fit,fit,/ɪ/,"slow,fast",2,vowels
+rate_word_039,word,head,head,head,/ɛ/,"slow,fast",2,vowels
+rate_word_040,word,had,had,had,/æ/,"slow,fast",2,vowels
+rate_word_041,word,seat,seat,seat,/iː/,"slow,fast",2,vowels
+rate_word_042,word,sit,sit,sit,/ɪ/,"slow,fast",2,vowels
+rate_word_043,word,pen,pen,pen,/ɛ/,"slow,fast",2,vowels
+rate_word_044,word,pan,pan,pan,/æ/,"slow,fast",2,vowels
+rate_word_045,word,bed,bed,bed,/ɛ/,"slow,fast",2,vowels
+rate_word_046,word,bad,bad,bad,/æ/,"slow,fast",2,vowels
+rate_word_047,word,met,met,met,/ɛ/,"slow,fast",2,vowels
+rate_word_048,word,mat,mat,mat,/æ/,"slow,fast",2,vowels
+rate_word_049,word,set,set,set,/ɛ/,"slow,fast",2,vowels
+rate_word_050,word,sat,sat,sat,/æ/,"slow,fast",2,vowels

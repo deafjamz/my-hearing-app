@@ -1,0 +1,201 @@
+id,drill_pack_id,pack_name,contrast_type,word_1,word_2,target_phoneme,contrast_phoneme,position,ipa_1,ipa_2,frequency_rank,difficulty,tier,clinical_note
+drill_pb_001,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pat,bat,/p/,/b/,initial,/pæt/,/bæt/,high,1,free,Strong VOT difference - good starter pair
+drill_pb_002,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pea,bee,/p/,/b/,initial,/piː/,/biː/,high,1,free,Clear vowel context
+drill_pb_003,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pie,buy,/p/,/b/,initial,/paɪ/,/baɪ/,high,1,free,Diphthong context
+drill_pb_004,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pin,bin,/p/,/b/,initial,/pɪn/,/bɪn/,high,1,free,Common word pair
+drill_pb_005,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pack,back,/p/,/b/,initial,/pæk/,/bæk/,high,1,free,Familiar words
+drill_pb_006,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pet,bet,/p/,/b/,initial,/pɛt/,/bɛt/,high,1,free,Short vowel context
+drill_pb_007,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pair,bear,/p/,/b/,initial,/pɛr/,/bɛr/,high,2,free,R-colored vowel
+drill_pb_008,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pig,big,/p/,/b/,initial,/pɪɡ/,/bɪɡ/,high,1,free,High frequency
+drill_pb_009,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pole,bowl,/p/,/b/,initial,/poʊl/,/boʊl/,medium,2,free,Diphthong with final L
+drill_pb_010,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,pay,bay,/p/,/b/,initial,/peɪ/,/beɪ/,high,1,free,Clear contrast
+drill_pb_011,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,cap,cab,/p/,/b/,final,/kæp/,/kæb/,high,2,free,Final position - vowel length cue
+drill_pb_012,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,cup,cub,/p/,/b/,final,/kʌp/,/kʌb/,medium,2,free,Final voicing contrast
+drill_pb_013,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,rope,robe,/p/,/b/,final,/roʊp/,/roʊb/,medium,2,free,Diphthong context final
+drill_pb_014,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,lap,lab,/p/,/b/,final,/læp/,/læb/,high,2,free,Common words
+drill_pb_015,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,rip,rib,/p/,/b/,final,/rɪp/,/rɪb/,medium,2,free,Short vowel final
+drill_pb_016,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,mop,mob,/p/,/b/,final,/mɑp/,/mɑb/,medium,2,free,Open vowel context
+drill_pb_017,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,tap,tab,/p/,/b/,final,/tæp/,/tæb/,high,2,free,High frequency pair
+drill_pb_018,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,cop,cob,/p/,/b/,final,/kɑp/,/kɑb/,medium,3,free,Less common pair
+drill_pb_019,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,hip,hub,/p/,/b/,final,/hɪp/,/hʌb/,medium,3,free,Different vowels add challenge
+drill_pb_020,pack_p_vs_b,Voicing: /p/ vs /b/,voicing,nap,nab,/p/,/b/,final,/næp/,/næb/,medium,2,free,Common final contrast
+drill_td_001,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,ten,den,/t/,/d/,initial,/tɛn/,/dɛn/,high,1,free,Clear initial contrast
+drill_td_002,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,time,dime,/t/,/d/,initial,/taɪm/,/daɪm/,high,1,free,Common word pair
+drill_td_003,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,tie,die,/t/,/d/,initial,/taɪ/,/daɪ/,high,1,free,Monosyllabic pair
+drill_td_004,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,tip,dip,/t/,/d/,initial,/tɪp/,/dɪp/,high,1,free,Short vowel context
+drill_td_005,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,town,down,/t/,/d/,initial,/taʊn/,/daʊn/,high,1,free,Diphthong context
+drill_td_006,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,tear,dear,/t/,/d/,initial,/tɪr/,/dɪr/,high,2,free,R-colored vowel
+drill_td_007,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,two,do,/t/,/d/,initial,/tuː/,/duː/,high,1,free,High frequency
+drill_td_008,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,toe,doe,/t/,/d/,initial,/toʊ/,/doʊ/,medium,2,free,Diphthong minimal pair
+drill_td_009,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,tab,dab,/t/,/d/,initial,/tæb/,/dæb/,medium,2,free,Less common
+drill_td_010,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,tank,dank,/t/,/d/,initial,/tæŋk/,/dæŋk/,medium,2,free,Velar nasal context
+drill_td_011,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,bat,bad,/t/,/d/,final,/bæt/,/bæd/,high,2,free,Final voicing cue
+drill_td_012,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,beat,bead,/t/,/d/,final,/biːt/,/biːd/,high,2,free,Long vowel final
+drill_td_013,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,seat,seed,/t/,/d/,final,/siːt/,/siːd/,high,2,free,Vowel length cue
+drill_td_014,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,hit,hid,/t/,/d/,final,/hɪt/,/hɪd/,high,2,free,Short vowel final
+drill_td_015,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,coat,code,/t/,/d/,final,/koʊt/,/koʊd/,high,2,free,Diphthong final
+drill_td_016,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,wet,wed,/t/,/d/,final,/wɛt/,/wɛd/,high,2,free,Common pair
+drill_td_017,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,bet,bed,/t/,/d/,final,/bɛt/,/bɛd/,high,2,free,High frequency
+drill_td_018,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,let,led,/t/,/d/,final,/lɛt/,/lɛd/,high,2,free,L-initial context
+drill_td_019,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,mat,mad,/t/,/d/,final,/mæt/,/mæd/,high,2,free,Clear contrast
+drill_td_020,pack_t_vs_d,Voicing: /t/ vs /d/,voicing,sight,side,/t/,/d/,final,/saɪt/,/saɪd/,high,2,free,Diphthong with final contrast
+drill_kg_001,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,cap,gap,/k/,/g/,initial,/kæp/,/ɡæp/,high,1,free,Clear initial contrast
+drill_kg_002,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,cat,gat,/k/,/g/,initial,/kæt/,/ɡæt/,high,1,free,Common word
+drill_kg_003,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,came,game,/k/,/g/,initial,/keɪm/,/ɡeɪm/,high,1,free,High frequency pair
+drill_kg_004,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,cold,gold,/k/,/g/,initial,/koʊld/,/ɡoʊld/,high,1,free,Familiar words
+drill_kg_005,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,coat,goat,/k/,/g/,initial,/koʊt/,/ɡoʊt/,high,1,free,Clear contrast
+drill_kg_006,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,curl,girl,/k/,/g/,initial,/kɜrl/,/ɡɜrl/,high,2,free,R-colored vowel
+drill_kg_007,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,cave,gave,/k/,/g/,initial,/keɪv/,/ɡeɪv/,medium,2,free,Less common pair
+drill_kg_008,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,cup,gup,/k/,/g/,initial,/kʌp/,/ɡʌp/,high,2,free,Schwa context
+drill_kg_009,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,card,guard,/k/,/g/,initial,/kɑrd/,/ɡɑrd/,high,2,free,Common words
+drill_kg_010,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,class,glass,/k/,/g/,initial,/klæs/,/ɡlæs/,high,2,free,Cluster contrast
+drill_kg_011,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,back,bag,/k/,/g/,final,/bæk/,/bæɡ/,high,2,free,Final voicing
+drill_kg_012,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,lock,log,/k/,/g/,final,/lɑk/,/lɑɡ/,high,2,free,Common pair
+drill_kg_013,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,pick,pig,/k/,/g/,final,/pɪk/,/pɪɡ/,high,2,free,High frequency
+drill_kg_014,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,duck,dug,/k/,/g/,final,/dʌk/,/dʌɡ/,high,2,free,Familiar words
+drill_kg_015,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,dock,dog,/k/,/g/,final,/dɑk/,/dɑɡ/,high,2,free,Common contrast
+drill_kg_016,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,rack,rag,/k/,/g/,final,/ræk/,/ræɡ/,medium,2,free,Clear vowel
+drill_kg_017,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,tack,tag,/k/,/g/,final,/tæk/,/tæɡ/,high,2,free,Common words
+drill_kg_018,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,leak,league,/k/,/g/,final,/liːk/,/liːɡ/,medium,3,free,Long vowel
+drill_kg_019,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,sack,sag,/k/,/g/,final,/sæk/,/sæɡ/,medium,2,free,S-initial context
+drill_kg_020,pack_k_vs_g,Voicing: /k/ vs /g/,voicing,luck,lug,/k/,/g/,final,/lʌk/,/lʌɡ/,high,2,free,Schwa final
+drill_fv_001,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fan,van,/f/,/v/,initial,/fæn/,/væn/,high,2,free,Clear fricative contrast
+drill_fv_002,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fine,vine,/f/,/v/,initial,/faɪn/,/vaɪn/,high,2,free,Diphthong context
+drill_fv_003,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fast,vast,/f/,/v/,initial,/fæst/,/væst/,medium,2,free,Cluster ending
+drill_fv_004,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fail,veil,/f/,/v/,initial,/feɪl/,/veɪl/,medium,3,free,Less common pair
+drill_fv_005,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,few,view,/f/,/v/,initial,/fjuː/,/vjuː/,high,2,free,Y-glide context
+drill_fv_006,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fear,veer,/f/,/v/,initial,/fɪr/,/vɪr/,medium,3,free,R-colored vowel
+drill_fv_007,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,ferry,very,/f/,/v/,initial,/fɛri/,/vɛri/,high,2,free,Two-syllable pair
+drill_fv_008,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,file,vile,/f/,/v/,initial,/faɪl/,/vaɪl/,medium,3,free,Diphthong with L
+drill_fv_009,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,fender,vendor,/f/,/v/,initial,/fɛndər/,/vɛndər/,medium,3,free,Two-syllable
+drill_fv_010,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,foul,vowel,/f/,/v/,initial,/faʊl/,/vaʊəl/,medium,3,free,Diphthong pair
+drill_fv_011,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,leaf,leave,/f/,/v/,final,/liːf/,/liːv/,high,2,free,Final fricative voicing
+drill_fv_012,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,safe,save,/f/,/v/,final,/seɪf/,/seɪv/,high,2,free,Common pair
+drill_fv_013,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,half,halve,/f/,/v/,final,/hæf/,/hæv/,high,2,free,Familiar words
+drill_fv_014,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,proof,prove,/f/,/v/,final,/pruːf/,/pruːv/,high,3,free,Long vowel context
+drill_fv_015,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,calf,calve,/f/,/v/,final,/kæf/,/kæv/,medium,3,free,Less common
+drill_fv_016,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,strife,strive,/f/,/v/,final,/straɪf/,/straɪv/,medium,4,free,Cluster initial
+drill_fv_017,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,belief,believe,/f/,/v/,final,/bɪliːf/,/bɪliːv/,high,3,free,Two-syllable pair
+drill_fv_018,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,grief,grieve,/f/,/v/,final,/ɡriːf/,/ɡriːv/,medium,3,free,Cluster initial final
+drill_fv_019,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,serf,serve,/f/,/v/,final,/sɜrf/,/sɜrv/,medium,4,free,R-colored vowel
+drill_fv_020,pack_f_vs_v,Voicing: /f/ vs /v/,voicing,life,live,/f/,/v/,final,/laɪf/,/laɪv/,high,2,free,Common pair
+drill_sz_001,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sip,zip,/s/,/z/,initial,/sɪp/,/zɪp/,high,2,free,Clear sibilant contrast
+drill_sz_002,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sue,zoo,/s/,/z/,initial,/suː/,/zuː/,high,2,free,Long vowel context
+drill_sz_003,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,seal,zeal,/s/,/z/,initial,/siːl/,/ziːl/,medium,3,free,Less common z-word
+drill_sz_004,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sink,zinc,/s/,/z/,initial,/sɪŋk/,/zɪŋk/,high,2,free,Common pair
+drill_sz_005,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sag,zag,/s/,/z/,initial,/sæɡ/,/zæɡ/,medium,3,free,Zigzag context
+drill_sz_006,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,said,zed,/s/,/z/,initial,/sɛd/,/zɛd/,high,3,free,British term
+drill_sz_007,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sap,zap,/s/,/z/,initial,/sæp/,/zæp/,medium,2,free,Clear contrast
+drill_sz_008,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sown,zone,/s/,/z/,initial,/soʊn/,/zoʊn/,high,2,free,Diphthong context
+drill_sz_009,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,send,Zend,/s/,/z/,initial,/sɛnd/,/zɛnd/,medium,4,free,Uncommon pair
+drill_sz_010,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,sore,czar,/s/,/z/,initial,/sɔr/,/zɑr/,medium,4,free,Unusual spelling
+drill_sz_011,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,ice,eyes,/s/,/z/,final,/aɪs/,/aɪz/,high,2,free,Final sibilant voicing
+drill_sz_012,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,bus,buzz,/s/,/z/,final,/bʌs/,/bʌz/,high,2,free,Common pair
+drill_sz_013,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,race,raise,/s/,/z/,final,/reɪs/,/reɪz/,high,2,free,Diphthong final
+drill_sz_014,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,price,prize,/s/,/z/,final,/praɪs/,/praɪz/,high,2,free,Cluster initial
+drill_sz_015,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,loose,lose,/s/,/z/,final,/luːs/,/luːz/,high,2,free,Common confusion
+drill_sz_016,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,place,plays,/s/,/z/,final,/pleɪs/,/pleɪz/,high,2,free,Plural marker
+drill_sz_017,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,rice,rise,/s/,/z/,final,/raɪs/,/raɪz/,high,2,free,Clear contrast
+drill_sz_018,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,peace,peas,/s/,/z/,final,/piːs/,/piːz/,high,2,free,Common pair
+drill_sz_019,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,lace,lays,/s/,/z/,final,/leɪs/,/leɪz/,medium,3,free,Verb vs noun
+drill_sz_020,pack_s_vs_z,Voicing: /s/ vs /z/,voicing,dose,doze,/s/,/z/,final,/doʊs/,/doʊz/,medium,3,free,Medical context
+drill_ssh_001,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sip,ship,/s/,/ʃ/,initial,/sɪp/,/ʃɪp/,high,3,free,High frequency contrast
+drill_ssh_002,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sea,she,/s/,/ʃ/,initial,/siː/,/ʃiː/,high,3,free,Common minimal pair
+drill_ssh_003,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sell,shell,/s/,/ʃ/,initial,/sɛl/,/ʃɛl/,high,3,free,Short vowel context
+drill_ssh_004,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sock,shock,/s/,/ʃ/,initial,/sɑk/,/ʃɑk/,high,3,free,Open vowel
+drill_ssh_005,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,seat,sheet,/s/,/ʃ/,initial,/siːt/,/ʃiːt/,high,3,free,Long vowel
+drill_ssh_006,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,save,shave,/s/,/ʃ/,initial,/seɪv/,/ʃeɪv/,high,3,free,Diphthong context
+drill_ssh_007,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sore,shore,/s/,/ʃ/,initial,/sɔr/,/ʃɔr/,high,3,free,R-colored vowel
+drill_ssh_008,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,so,show,/s/,/ʃ/,initial,/soʊ/,/ʃoʊ/,high,3,free,High frequency
+drill_ssh_009,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sue,shoe,/s/,/ʃ/,initial,/suː/,/ʃuː/,high,3,free,Back vowel
+drill_ssh_010,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,sack,shack,/s/,/ʃ/,initial,/sæk/,/ʃæk/,medium,3,free,Less common
+drill_ssh_011,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,mass,mash,/s/,/ʃ/,final,/mæs/,/mæʃ/,high,3,free,Final position
+drill_ssh_012,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,bass,bash,/s/,/ʃ/,final,/bæs/,/bæʃ/,medium,3,free,Clear contrast
+drill_ssh_013,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,mess,mesh,/s/,/ʃ/,final,/mɛs/,/mɛʃ/,medium,3,free,Short vowel
+drill_ssh_014,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,gas,gash,/s/,/ʃ/,final,/ɡæs/,/ɡæʃ/,high,3,free,Common words
+drill_ssh_015,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,leash,lease,/ʃ/,/s/,final,/liːʃ/,/liːs/,medium,3,free,Reversed contrast
+drill_ssh_016,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,wish,whisk,/ʃ/,/s/,final,/wɪʃ/,/wɪsk/,medium,4,free,Cluster comparison
+drill_ssh_017,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,diss,dish,/s/,/ʃ/,final,/dɪs/,/dɪʃ/,medium,3,free,Slang vs common
+drill_ssh_018,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,class,clash,/s/,/ʃ/,final,/klæs/,/klæʃ/,high,3,free,Cluster initial
+drill_ssh_019,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,puss,push,/s/,/ʃ/,final,/pʊs/,/pʊʃ/,medium,4,free,High back vowel
+drill_ssh_020,pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,crass,crash,/s/,/ʃ/,final,/kræs/,/kræʃ/,medium,4,free,Cluster comparison
+drill_thth_001,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thigh,thy,/θ/,/ð/,initial,/θaɪ/,/ðaɪ/,medium,3,free,Interdental contrast
+drill_thth_002,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thick,this,/θ/,/ð/,initial,/θɪk/,/ðɪs/,high,3,free,Common words
+drill_thth_003,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,think,this,/θ/,/ð/,initial,/θɪŋk/,/ðɪs/,high,3,free,High frequency
+drill_thth_004,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,three,the,/θ/,/ð/,initial,/θriː/,/ðə/,high,3,free,Very common
+drill_thth_005,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thin,then,/θ/,/ð/,initial,/θɪn/,/ðɛn/,high,3,free,Minimal pair
+drill_thth_006,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thank,than,/θ/,/ð/,initial,/θæŋk/,/ðæn/,high,3,free,Common contrast
+drill_thth_007,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thought,though,/θ/,/ð/,initial,/θɔːt/,/ðoʊ/,high,3,free,Long vowel
+drill_thth_008,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,through,threw,/θ/,/θ/,initial,/θruː/,/θruː/,high,4,free,Homophone practice
+drill_thth_009,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,therapy,there,/θ/,/ð/,initial,/θɛrəpi/,/ðɛr/,medium,4,free,Multi-syllable
+drill_thth_010,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,thunder,the,/θ/,/ð/,initial,/θʌndər/,/ðə/,medium,3,free,Common comparison
+drill_thth_011,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,ether,either,/θ/,/ð/,medial,/iːθər/,/iːðər/,medium,4,free,Medial position
+drill_thth_012,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,math,bathe,/θ/,/ð/,final,/mæθ/,/beɪð/,high,3,free,Final position
+drill_thth_013,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,bath,bathe,/θ/,/ð/,final,/bæθ/,/beɪð/,high,3,free,Noun vs verb
+drill_thth_014,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,breath,breathe,/θ/,/ð/,final,/brɛθ/,/briːð/,high,3,free,Common pair
+drill_thth_015,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,cloth,clothe,/θ/,/ð/,final,/klɔːθ/,/kloʊð/,medium,4,free,Vowel change
+drill_thth_016,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,teeth,teethe,/θ/,/ð/,final,/tiːθ/,/tiːð/,medium,4,free,Noun vs verb
+drill_thth_017,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,sheath,sheathe,/θ/,/ð/,final,/ʃiːθ/,/ʃiːð/,medium,5,free,Less common
+drill_thth_018,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,mouth,mouthe,/θ/,/ð/,final,/maʊθ/,/maʊð/,medium,4,free,Diphthong context
+drill_thth_019,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,loath,loathe,/θ/,/ð/,final,/loʊθ/,/loʊð/,medium,4,free,Similar meaning
+drill_thth_020,pack_th_voiced_unvoiced,Voicing: /θ/ vs /ð/,voicing,wreath,wreathe,/θ/,/ð/,final,/riːθ/,/riːð/,medium,5,free,Rare verb form
+drill_chdj_001,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chin,gin,/tʃ/,/dʒ/,initial,/tʃɪn/,/dʒɪn/,high,2,free,Clear affricate contrast
+drill_chdj_002,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,cheer,jeer,/tʃ/,/dʒ/,initial,/tʃɪr/,/dʒɪr/,medium,3,free,R-colored vowel
+drill_chdj_003,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chest,jest,/tʃ/,/dʒ/,initial,/tʃɛst/,/dʒɛst/,medium,3,free,Cluster ending
+drill_chdj_004,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,choke,joke,/tʃ/,/dʒ/,initial,/tʃoʊk/,/dʒoʊk/,high,2,free,Common words
+drill_chdj_005,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,cheap,jeep,/tʃ/,/dʒ/,initial,/tʃiːp/,/dʒiːp/,high,2,free,Long vowel
+drill_chdj_006,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chain,Jane,/tʃ/,/dʒ/,initial,/tʃeɪn/,/dʒeɪn/,high,2,free,Name pair
+drill_chdj_007,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chew,Jew,/tʃ/,/dʒ/,initial,/tʃuː/,/dʒuː/,medium,3,free,Back vowel
+drill_chdj_008,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chill,Jill,/tʃ/,/dʒ/,initial,/tʃɪl/,/dʒɪl/,medium,2,free,Name pair
+drill_chdj_009,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,chug,jug,/tʃ/,/dʒ/,initial,/tʃʌɡ/,/dʒʌɡ/,medium,2,free,Short vowel
+drill_chdj_010,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,char,jar,/tʃ/,/dʒ/,initial,/tʃɑr/,/dʒɑr/,high,2,free,R-colored vowel
+drill_chdj_011,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,batch,badge,/tʃ/,/dʒ/,final,/bætʃ/,/bædʒ/,high,2,free,Final affricate
+drill_chdj_012,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,rich,ridge,/tʃ/,/dʒ/,final,/rɪtʃ/,/rɪdʒ/,high,2,free,Common contrast
+drill_chdj_013,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,match,Madge,/tʃ/,/dʒ/,final,/mætʃ/,/mædʒ/,medium,3,free,Name pair
+drill_chdj_014,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,larch,large,/tʃ/,/dʒ/,final,/lɑrtʃ/,/lɑrdʒ/,medium,3,free,R-colored
+drill_chdj_015,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,etch,edge,/tʃ/,/dʒ/,final,/ɛtʃ/,/ɛdʒ/,high,2,free,Clear minimal pair
+drill_chdj_016,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,search,surge,/tʃ/,/dʒ/,final,/sɜrtʃ/,/sɜrdʒ/,high,3,free,Common words
+drill_chdj_017,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,hatch,Madge,/tʃ/,/dʒ/,final,/hætʃ/,/mædʒ/,medium,3,free,Different context
+drill_chdj_018,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,perch,purge,/tʃ/,/dʒ/,final,/pɜrtʃ/,/pɜrdʒ/,medium,3,free,R-colored vowel
+drill_chdj_019,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,lunch,lunge,/tʃ/,/dʒ/,final,/lʌntʃ/,/lʌndʒ/,high,2,free,Common words
+drill_chdj_020,pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,much,mug,/tʃ/,/ɡ/,final,/mʌtʃ/,/mʌɡ/,high,3,free,Different final
+drill_ii_001,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,beat,bit,/iː/,/ɪ/,medial,/biːt/,/bɪt/,high,2,free,Duration and formant cues
+drill_ii_002,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,feet,fit,/iː/,/ɪ/,medial,/fiːt/,/fɪt/,high,2,free,Common pair
+drill_ii_003,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,heat,hit,/iː/,/ɪ/,medial,/hiːt/,/hɪt/,high,2,free,H-initial context
+drill_ii_004,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,seat,sit,/iː/,/ɪ/,medial,/siːt/,/sɪt/,high,2,free,Very common
+drill_ii_005,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,meat,mitt,/iː/,/ɪ/,medial,/miːt/,/mɪt/,high,2,free,Food vs sports
+drill_ii_006,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,bead,bid,/iː/,/ɪ/,medial,/biːd/,/bɪd/,high,2,free,Final voiced
+drill_ii_007,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,lead,lid,/iː/,/ɪ/,medial,/liːd/,/lɪd/,high,2,free,L-initial
+drill_ii_008,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,peel,pill,/iː/,/ɪ/,medial,/piːl/,/pɪl/,high,2,free,L-final
+drill_ii_009,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,heel,hill,/iː/,/ɪ/,medial,/hiːl/,/hɪl/,high,2,free,Common words
+drill_ii_010,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,steal,still,/iː/,/ɪ/,medial,/stiːl/,/stɪl/,high,2,free,ST-cluster
+drill_ii_011,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,deed,did,/iː/,/ɪ/,medial,/diːd/,/dɪd/,high,2,free,D-context
+drill_ii_012,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,lean,Lynn,/iː/,/ɪ/,medial,/liːn/,/lɪn/,medium,3,free,Name pair
+drill_ii_013,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,peak,pick,/iː/,/ɪ/,medial,/piːk/,/pɪk/,high,2,free,K-final
+drill_ii_014,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,sleep,slip,/iː/,/ɪ/,medial,/sliːp/,/slɪp/,high,2,free,Cluster initial
+drill_ii_015,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,wheat,whit,/iː/,/ɪ/,medial,/wiːt/,/wɪt/,medium,3,free,W-initial
+drill_ii_016,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,teen,tin,/iː/,/ɪ/,medial,/tiːn/,/tɪn/,high,2,free,T-context
+drill_ii_017,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,sheet,shit,/iː/,/ɪ/,medial,/ʃiːt/,/ʃɪt/,high,3,free,Sensitive pair
+drill_ii_018,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,cheap,chip,/iː/,/ɪ/,medial,/tʃiːp/,/tʃɪp/,high,2,free,Affricate initial
+drill_ii_019,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,keep,kip,/iː/,/ɪ/,medial,/kiːp/,/kɪp/,high,2,free,K-initial
+drill_ii_020,pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,seek,sick,/iː/,/ɪ/,medial,/siːk/,/sɪk/,high,2,free,Common words
+drill_eae_001,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,bet,bat,/ɛ/,/æ/,medial,/bɛt/,/bæt/,high,3,free,Mid vs low front
+drill_eae_002,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,pen,pan,/ɛ/,/æ/,medial,/pɛn/,/pæn/,high,3,free,Common pair
+drill_eae_003,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,bed,bad,/ɛ/,/æ/,medial,/bɛd/,/bæd/,high,3,free,High frequency
+drill_eae_004,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,set,sat,/ɛ/,/æ/,medial,/sɛt/,/sæt/,high,3,free,Verb tense
+drill_eae_005,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,met,mat,/ɛ/,/æ/,medial,/mɛt/,/mæt/,high,3,free,Common words
+drill_eae_006,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,head,had,/ɛ/,/æ/,medial,/hɛd/,/hæd/,high,3,free,High frequency
+drill_eae_007,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,let,lat,/ɛ/,/æ/,medial,/lɛt/,/læt/,high,3,free,L-initial
+drill_eae_008,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,men,man,/ɛ/,/æ/,medial,/mɛn/,/mæn/,high,3,free,Plural vs singular
+drill_eae_009,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,pet,pat,/ɛ/,/æ/,medial,/pɛt/,/pæt/,high,3,free,Clear contrast
+drill_eae_010,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,ten,tan,/ɛ/,/æ/,medial,/tɛn/,/tæn/,high,3,free,Number vs color
+drill_eae_011,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,trek,track,/ɛ/,/æ/,medial,/trɛk/,/træk/,medium,4,free,Cluster initial
+drill_eae_012,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,send,sand,/ɛ/,/æ/,medial,/sɛnd/,/sænd/,high,3,free,Common words
+drill_eae_013,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,mesh,mash,/ɛ/,/æ/,medial,/mɛʃ/,/mæʃ/,medium,4,free,SH-final
+drill_eae_014,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,peck,pack,/ɛ/,/æ/,medial,/pɛk/,/pæk/,high,3,free,K-final
+drill_eae_015,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,leg,lag,/ɛ/,/æ/,medial,/lɛɡ/,/læɡ/,high,3,free,G-final
+drill_eae_016,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,gem,jam,/ɛ/,/æ/,medial,/dʒɛm/,/dʒæm/,high,3,free,Affricate initial
+drill_eae_017,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,deck,dack,/ɛ/,/æ/,medial,/dɛk/,/dæk/,medium,4,free,Less common pair
+drill_eae_018,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,wed,wad,/ɛ/,/æ/,medial,/wɛd/,/wɑd/,medium,4,free,W-initial
+drill_eae_019,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,less,lass,/ɛ/,/æ/,medial,/lɛs/,/læs/,medium,4,free,S-final
+drill_eae_020,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,said,sad,/ɛ/,/æ/,medial,/sɛd/,/sæd/,high,3,free,Common contrast

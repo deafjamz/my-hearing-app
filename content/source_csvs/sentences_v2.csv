@@ -1,0 +1,631 @@
+sentence_text,target_keyword,target_phoneme,question_text,correct_answer,acoustic_foil,semantic_foil,scenario,difficulty
+The nurse checked my blood pressure.,Pressure,/pr/,What did the nurse check?,Pressure,Treasure,Temperature,Medical,2
+Take one tablet every morning.,Tablet,/t/,What should you take?,Tablet,Table,Pill,Medical,1
+The doctor will see you now.,Doctor,/d/,Who will see you?,Doctor,Proctor,Nurse,Medical,1
+Please roll up your sleeve.,Sleeve,/sl/,What should I roll up?,Sleeve,Leave,Arm,Medical,2
+Your prescription is ready for pickup.,Prescription,/pr/,What is ready?,Prescription,Description,Medication,Medical,3
+The pharmacy opens at nine.,Pharmacy,/f/,What opens at nine?,Pharmacy,Harmony,Drugstore,Medical,2
+I need a refill on my medicine.,Refill,/r/,What do I need?,Refill,Landfill,New bottle,Medical,2
+The waiting room is full today.,Waiting,/w/,What room is full?,Waiting,Wading,Reception,Medical,2
+Schedule a follow up appointment.,Follow,/f/,What kind of appointment?,Follow,Hollow,Next,Medical,2
+The injection might sting briefly.,Injection,/dʒ/,What might sting?,Injection,Objection,Shot,Medical,3
+Your temperature is slightly elevated.,Temperature,/t/,What is elevated?,Temperature,Temper,Fever,Medical,3
+Please breathe deeply and hold.,Breathe,/br/,What should I do?,Breathe,Breathed,Inhale,Medical,2
+The results will arrive by mail.,Results,/r/,What will arrive?,Results,Insults,Report,Medical,2
+Apply the cream twice daily.,Cream,/kr/,What should I apply?,Cream,Dream,Ointment,Medical,2
+The surgeon explained the procedure.,Surgeon,/s/,Who explained it?,Surgeon,Sturgeon,Doctor,Medical,3
+I feel dizzy when I stand.,Dizzy,/d/,How do I feel?,Dizzy,Fizzy,Lightheaded,Medical,2
+The bandage needs to be changed.,Bandage,/b/,What needs changing?,Bandage,Damage,Dressing,Medical,2
+Drink plenty of fluids today.,Fluids,/fl/,What should I drink?,Fluids,Floods,Liquids,Medical,2
+The clinic is closed on weekends.,Clinic,/k/,What is closed?,Clinic,Cynic,Office,Medical,2
+Please complete this health form.,Health,/h/,What kind of form?,Health,Wealth,Medical,Medical,2
+Your insurance covers this visit.,Insurance,/ʃ/,What covers this?,Insurance,Assurance,Coverage,Medical,3
+The symptoms started three days ago.,Symptoms,/s/,What started?,Symptoms,Systems,Signs,Medical,3
+Take the medicine with food.,Medicine,/m/,What should you take?,Medicine,Madeline,Medication,Medical,1
+The X ray shows no fracture.,Fracture,/fr/,What does it show?,Fracture,Fractal,Break,Medical,3
+Schedule your annual checkup soon.,Checkup,/ch/,What should you schedule?,Checkup,Ketchup,Exam,Medical,2
+The vaccine is recommended for adults.,Vaccine,/v/,What is recommended?,Vaccine,Machine,Shot,Medical,3
+Please sign the consent form.,Consent,/k/,What kind of form?,Consent,Concept,Permission,Medical,3
+The therapist will call you tomorrow.,Therapist,/θ/,Who will call?,Therapist,Rapist,Counselor,Medical,3
+Your blood work came back normal.,Blood,/b/,What came back normal?,Blood,Flood,Test,Medical,2
+The hospital is on Oak Street.,Hospital,/h/,What is on Oak Street?,Hospital,Hospice,Clinic,Medical,2
+Keep the wound clean and dry.,Wound,/w/,What should you keep clean?,Wound,Sound,Injury,Medical,2
+The specialist requires a referral.,Referral,/r/,What is required?,Referral,Deferral,Recommendation,Medical,3
+Swallow the pill with water.,Swallow,/sw/,What should you do?,Swallow,Shallow,Take,Medical,2
+The scale measures your weight.,Scale,/sk/,What measures weight?,Scale,Tale,Device,Medical,2
+Please remove your glasses for the test.,Glasses,/g/,What should you remove?,Glasses,Classes,Eyewear,Medical,2
+Your heart rate is normal.,Heart,/h/,What is normal?,Heart,Art,Pulse,Medical,2
+The nurse will draw blood.,Draw,/dr/,What will the nurse do?,Draw,Raw,Take,Medical,2
+Bring your medication list to the visit.,Medication,/m/,What should you bring?,Medication,Meditation,Prescription,Medical,2
+The physician reviewed your chart.,Physician,/f/,Who reviewed the chart?,Physician,Magician,Doctor,Medical,3
+Rest your arm on the table.,Arm,/ɑ/,What should you rest?,Arm,Alarm,Elbow,Medical,1
+Take deep breaths during the exam.,Breaths,/br/,What should you take?,Breaths,Deaths,Inhales,Medical,2
+The allergy test was negative.,Allergy,/l/,What kind of test?,Allergy,Gallery,Sensitivity,Medical,3
+Your vitals look excellent today.,Vitals,/v/,What looks excellent?,Vitals,Recitals,Signs,Medical,2
+The emergency room is very busy.,Emergency,/ɛ/,What room is busy?,Emergency,Urgency,Critical,Medical,2
+Please describe your symptoms clearly.,Describe,/d/,What should you do?,Describe,Prescribe,Explain,Medical,2
+The healing process takes time.,Healing,/h/,What takes time?,Healing,Feeling,Recovery,Medical,2
+Your stitches can be removed Friday.,Stitches,/st/,What can be removed?,Stitches,Switches,Sutures,Medical,2
+The treatment is covered by insurance.,Treatment,/tr/,What is covered?,Treatment,Treaty,Therapy,Medical,3
+Avoid strenuous activity for two weeks.,Activity,/æ/,What should you avoid?,Activity,Captivity,Exercise,Medical,3
+The diagnosis was a relief.,Diagnosis,/d/,What was a relief?,Diagnosis,Prognosis,Finding,Medical,3
+That shirt costs thirty dollars.,Thirty,/θ/,How much does it cost?,Thirty,Dirty,Twenty,Shopping,2
+The sale ends on Sunday.,Sale,/s/,When does the sale end?,Sale,Sail,Discount,Shopping,1
+Would you like a receipt?,Receipt,/r/,What would you like?,Receipt,Deceit,Record,Shopping,2
+The fitting room is to your left.,Fitting,/f/,What is to the left?,Fitting,Sitting,Dressing,Shopping,2
+We accept credit and debit cards.,Credit,/kr/,What do we accept?,Credit,Credited,Charge,Shopping,2
+This item is on clearance.,Clearance,/kl/,What is this item on?,Clearance,Appearance,Sale,Shopping,3
+The return policy is thirty days.,Return,/r/,What is the policy?,Return,Returned,Exchange,Shopping,2
+Your total comes to fifty dollars.,Total,/t/,What is the total?,Total,Hotel,Sum,Shopping,1
+The warranty covers one year.,Warranty,/w/,What covers one year?,Warranty,Guarantee,Protection,Shopping,3
+Do you have this in a larger size?,Larger,/l/,What size do you need?,Larger,Charger,Bigger,Shopping,2
+The checkout line is very long.,Checkout,/ch/,What is very long?,Checkout,Check out,Payment line,Shopping,2
+This brand is very popular.,Brand,/br/,What is popular?,Brand,Bland,Name,Shopping,2
+We offer free gift wrapping.,Wrapping,/r/,What do we offer?,Wrapping,Rapping,Packaging,Shopping,2
+The store closes at nine tonight.,Closes,/k/,When does the store close?,Closes,Doses,Shuts,Shopping,1
+May I help you find something?,Find,/f/,What can I help you do?,Find,Mind,Locate,Shopping,1
+The price includes tax.,Price,/pr/,What includes tax?,Price,Prize,Cost,Shopping,2
+This color is out of stock.,Stock,/st/,What is out?,Stock,Stuck,Inventory,Shopping,2
+Would you like to open an account?,Account,/ɑ/,What would you like to open?,Account,Recount,Card,Shopping,2
+The coupon expires next week.,Coupon,/k/,What expires?,Coupon,Groupon,Discount,Shopping,2
+These shoes are on sale today.,Shoes,/ʃ/,What is on sale?,Shoes,Choose,Footwear,Shopping,1
+The cashier is ready to help.,Cashier,/k/,Who is ready?,Cashier,Catcher,Clerk,Shopping,2
+Please enter your PIN number.,PIN,/p/,What should you enter?,PIN,Bin,Code,Shopping,1
+The basket is by the entrance.,Basket,/b/,Where is the basket?,Basket,Casket,Cart,Shopping,2
+This sweater is made of wool.,Wool,/w/,What is it made of?,Wool,Pool,Cotton,Shopping,2
+Do you need a bag for that?,Bag,/b/,What do you need?,Bag,Rag,Sack,Shopping,1
+The discount is twenty percent.,Discount,/d/,What is twenty percent?,Discount,Account,Savings,Shopping,2
+Your order should arrive Thursday.,Arrive,/ɑ/,When should it arrive?,Arrive,Alive,Come,Shopping,2
+We have a layaway program.,Layaway,/l/,What program do we have?,Layaway,Runway,Payment plan,Shopping,3
+This fabric is machine washable.,Fabric,/f/,What is washable?,Fabric,Traffic,Material,Shopping,2
+The jewelry counter is upstairs.,Jewelry,/dʒ/,What is upstairs?,Jewelry,Jeweler,Accessories,Shopping,3
+Sign here for your package.,Package,/p/,What should you sign for?,Package,Baggage,Delivery,Shopping,2
+The minimum purchase is ten dollars.,Minimum,/m/,What is the minimum?,Minimum,Maximum,Lowest,Shopping,2
+The changing room is occupied.,Occupied,/ɑ/,What is occupied?,Occupied,Preoccupied,Taken,Shopping,3
+Your loyalty points have been added.,Loyalty,/l/,What has been added?,Loyalty,Royalty,Reward,Shopping,3
+The item was marked incorrectly.,Marked,/m/,How was it marked?,Marked,Sparked,Priced,Shopping,2
+Gift cards are available at checkout.,Cards,/k/,What is available?,Cards,Guards,Certificates,Shopping,2
+The express lane is for ten items.,Express,/ɛ/,What lane is it?,Express,Excess,Fast,Shopping,2
+Please wait for the next available.,Available,/ɑ/,What should you wait for?,Available,Avoidable,Open,Shopping,2
+The manager can help with that.,Manager,/m/,Who can help?,Manager,Messenger,Supervisor,Shopping,2
+This product has free shipping.,Shipping,/ʃ/,What is free?,Shipping,Chipping,Delivery,Shopping,2
+The batteries are sold separately.,Batteries,/b/,What is sold separately?,Batteries,Flattery,Power cells,Shopping,2
+Your purchase qualifies for a rebate.,Rebate,/r/,What does it qualify for?,Rebate,Debate,Refund,Shopping,3
+The garment needs dry cleaning.,Garment,/g/,What needs cleaning?,Garment,Argument,Clothing,Shopping,3
+We price match competitors.,Competitors,/k/,What do we match?,Competitors,Petitioners,Rivals,Shopping,3
+The electronics section is downstairs.,Electronics,/ɛ/,What is downstairs?,Electronics,Antics,Technology,Shopping,2
+Please place your items on the belt.,Belt,/b/,Where should you place items?,Belt,Melt,Conveyor,Shopping,1
+I would like the grilled salmon.,Salmon,/s/,What would you like?,Salmon,Solomon,Fish,Restaurant,2
+The soup of the day is tomato.,Tomato,/t/,What is the soup?,Tomato,Potato,Vegetable,Restaurant,1
+Could we have more bread please?,Bread,/br/,What would you like more of?,Bread,Red,Rolls,Restaurant,1
+The special includes a salad.,Salad,/s/,What does the special include?,Salad,Solid,Greens,Restaurant,1
+I would like my steak medium rare.,Medium,/m/,How would you like it?,Medium,Tedium,Cooked,Restaurant,2
+The dessert menu looks wonderful.,Dessert,/d/,What looks wonderful?,Dessert,Desert,Sweets,Restaurant,2
+May I see the wine list?,Wine,/w/,What would you like to see?,Wine,Whine,Drink,Restaurant,2
+The table by the window is available.,Table,/t/,What is available?,Table,Cable,Seat,Restaurant,1
+We have a reservation for seven.,Reservation,/r/,What do we have?,Reservation,Restoration,Booking,Restaurant,2
+The pasta is homemade here.,Homemade,/h/,What kind of pasta?,Homemade,Foam made,Fresh,Restaurant,2
+Could I get a glass of water?,Glass,/g/,What would you like?,Glass,Class,Cup,Restaurant,1
+The appetizer portion is generous.,Appetizer,/æ/,What is generous?,Appetizer,Advertiser,Starter,Restaurant,3
+Please bring the check when ready.,Check,/ch/,What should I bring?,Check,Deck,Bill,Restaurant,1
+The fish is fresh from the market.,Fish,/f/,What is fresh?,Fish,Dish,Seafood,Restaurant,1
+I am allergic to shellfish.,Shellfish,/ʃ/,What are you allergic to?,Shellfish,Selfish,Seafood,Restaurant,2
+The sauce is a bit spicy.,Spicy,/sp/,How is the sauce?,Spicy,Icy,Hot,Restaurant,2
+Could you wrap this to go?,Wrap,/r/,What should I do with this?,Wrap,Rap,Package,Restaurant,2
+The portions here are very large.,Portions,/p/,What is very large?,Portions,Proportions,Servings,Restaurant,2
+I would like dressing on the side.,Dressing,/dr/,What would you like on the side?,Dressing,Pressing,Sauce,Restaurant,2
+The chef recommends the special.,Chef,/ʃ/,Who recommends the special?,Chef,Chief,Cook,Restaurant,2
+We are out of the chocolate cake.,Chocolate,/ch/,What are we out of?,Chocolate,Chalked late,Dessert,Restaurant,2
+The restaurant opens at five.,Restaurant,/r/,What opens at five?,Restaurant,Rested,Eatery,Restaurant,2
+May I take your order now?,Order,/ɔ/,What may I take?,Order,Border,Request,Restaurant,1
+The menu has vegetarian options.,Vegetarian,/v/,What options does the menu have?,Vegetarian,Veteran,Meatless,Restaurant,3
+Would you like still or sparkling?,Sparkling,/sp/,What kind of water?,Sparkling,Parking,Fizzy,Restaurant,2
+The waiter will be right with you.,Waiter,/w/,Who will be right with you?,Waiter,Water,Server,Restaurant,1
+I need a few more minutes to decide.,Minutes,/m/,How much more time?,Minutes,Limits,Time,Restaurant,1
+The chicken is grilled to perfection.,Grilled,/gr/,How is the chicken?,Grilled,Filled,Cooked,Restaurant,2
+Could we sit in a booth please?,Booth,/b/,Where would you like to sit?,Booth,Tooth,Table,Restaurant,2
+The happy hour starts at four.,Happy,/h/,What starts at four?,Happy,Sappy,Discount,Restaurant,1
+I will have coffee with my meal.,Coffee,/k/,What will you have?,Coffee,Toffee,Drink,Restaurant,1
+The service here is excellent.,Service,/s/,What is excellent?,Service,Surface,Care,Restaurant,2
+Please remove the onions from mine.,Onions,/ʌ/,What should be removed?,Onions,Minions,Vegetables,Restaurant,2
+The seafood platter serves two.,Platter,/p/,What serves two?,Platter,Flatter,Dish,Restaurant,2
+I would prefer a quiet table.,Quiet,/kw/,What kind of table?,Quiet,Diet,Peaceful,Restaurant,2
+The daily special is lamb chops.,Lamb,/l/,What is the special?,Lamb,Jam,Meat,Restaurant,2
+Could I substitute rice for potatoes?,Substitute,/s/,What would you like to do?,Substitute,Institute,Change,Restaurant,3
+The brunch menu ends at two.,Brunch,/br/,What ends at two?,Brunch,Bunch,Meal,Restaurant,2
+Turn right at the traffic light.,Traffic,/tr/,What should I turn at?,Traffic,Tragic,Light,Directions,2
+The building is on the corner.,Corner,/k/,Where is the building?,Corner,Coroner,Edge,Directions,1
+Go straight for two blocks.,Straight,/str/,Which way should I go?,Straight,Great,Direct,Directions,2
+The entrance is around back.,Entrance,/ɛ/,Where is the entrance?,Entrance,France,Door,Directions,2
+Take the elevator to floor three.,Elevator,/ɛ/,What should you take?,Elevator,Later,Lift,Directions,2
+The parking lot is behind the store.,Parking,/p/,Where is the parking lot?,Parking,Barking,Garage,Directions,1
+You will see it on your left.,Left,/l/,Which side will you see it?,Left,Cleft,Other side,Directions,1
+Follow this road for one mile.,Road,/r/,What should you follow?,Road,Rode,Street,Directions,1
+The crosswalk is at the intersection.,Crosswalk,/kr/,Where is the crosswalk?,Crosswalk,Crossed,Crossing,Directions,2
+Turn left after the bridge.,Bridge,/br/,Turn after what?,Bridge,Ridge,Overpass,Directions,2
+The highway exit is number twelve.,Exit,/ɛ/,What number is the exit?,Exit,Exist,Ramp,Directions,2
+Go past the church on Main Street.,Church,/ch/,Go past what?,Church,Lurch,Building,Directions,2
+The shortcut saves ten minutes.,Shortcut,/ʃ/,What saves time?,Shortcut,Short cut,Quick way,Directions,2
+Merge onto the expressway heading north.,Expressway,/ɛ/,What should you merge onto?,Expressway,Express,Highway,Directions,3
+The roundabout has three exits.,Roundabout,/r/,What has three exits?,Roundabout,Round about,Circle,Directions,3
+Stay in the right lane.,Lane,/l/,What should you stay in?,Lane,Rain,Track,Directions,1
+The destination is on your GPS.,Destination,/d/,What is on your GPS?,Destination,Devastation,Location,Directions,3
+Cross the street at the signal.,Signal,/s/,What should you cross at?,Signal,Single,Light,Directions,2
+The pedestrian path is safer.,Pedestrian,/p/,What path is safer?,Pedestrian,Equestrian,Walking,Directions,3
+Take the second right turn.,Second,/s/,Which turn should you take?,Second,Seconded,Next,Directions,1
+The interstate goes directly downtown.,Interstate,/ɪ/,What goes downtown?,Interstate,Inner state,Highway,Directions,3
+Follow signs for the airport.,Airport,/ɛ/,What should you follow signs for?,Airport,Support,Terminal,Directions,2
+The tunnel is one mile long.,Tunnel,/t/,What is one mile long?,Tunnel,Funnel,Underground,Directions,2
+Make a U turn at the light.,U turn,/ju/,What should you make?,U turn,You turn,Reverse,Directions,2
+The overpass is under construction.,Overpass,/o/,What is under construction?,Overpass,Underpass,Bridge,Directions,3
+Continue past the shopping center.,Shopping,/ʃ/,Continue past what?,Shopping,Dropping,Mall,Directions,2
+The speed limit is forty five.,Limit,/l/,What is forty five?,Limit,Illicit,Maximum,Directions,2
+Park on the street if lots are full.,Street,/str/,Where should you park?,Street,Treat,Road,Directions,2
+The detour adds fifteen minutes.,Detour,/d/,What adds fifteen minutes?,Detour,Contour,Alternate,Directions,2
+Watch for pedestrians crossing here.,Pedestrians,/p/,Watch for what?,Pedestrians,Equestrians,Walkers,Directions,2
+The underpass leads to downtown.,Underpass,/ʌ/,What leads downtown?,Underpass,Under class,Tunnel,Directions,2
+Yield to oncoming traffic.,Yield,/j/,What should you do?,Yield,Field,Give way,Directions,2
+The scenic route is more beautiful.,Scenic,/s/,What route is beautiful?,Scenic,Cynic,Pretty,Directions,2
+Pass the courthouse on your right.,Courthouse,/k/,What should you pass?,Courthouse,Court house,Building,Directions,2
+The sidewalk ends at the park.,Sidewalk,/s/,What ends at the park?,Sidewalk,Side walk,Path,Directions,2
+Navigate using the compass.,Compass,/k/,What should you use?,Compass,Campus,Direction tool,Directions,3
+My phone number is five five five.,Number,/n/,What is five five five?,Number,Lumber,Digits,Phone,1
+Please leave a message after the tone.,Message,/m/,What should I leave?,Message,Passage,Voicemail,Phone,1
+The call dropped unexpectedly.,Dropped,/dr/,What happened to the call?,Dropped,Stopped,Ended,Phone,2
+I will return your call shortly.,Return,/r/,What will I do?,Return,Returned,Call back,Phone,2
+The signal is very weak here.,Signal,/s/,What is weak?,Signal,Single,Reception,Phone,2
+Please hold for the next agent.,Hold,/h/,What should I do?,Hold,Fold,Wait,Phone,1
+Press one for customer service.,Press,/pr/,What should I do?,Press,Dress,Push,Phone,1
+The voicemail box is full.,Voicemail,/v/,What is full?,Voicemail,Voice mail,Message box,Phone,2
+Can you hear me clearly now?,Hear,/h/,Can you do what?,Hear,Fear,Listen,Phone,1
+I am transferring you now.,Transferring,/tr/,What am I doing?,Transferring,Transfiguring,Connecting,Phone,3
+The line is busy at the moment.,Busy,/b/,What is the line?,Busy,Dizzy,Occupied,Phone,1
+Please verify your account number.,Verify,/v/,What should you do?,Verify,Certify,Confirm,Phone,2
+Your call is important to us.,Important,/ɪ/,What is your call?,Important,Impotent,Valuable,Phone,2
+The estimated wait time is ten minutes.,Estimated,/ɛ/,What is ten minutes?,Estimated,Decimated,Approximate,Phone,3
+Please speak clearly into the phone.,Clearly,/kl/,How should I speak?,Clearly,Nearly,Distinctly,Phone,2
+I will text you the details.,Text,/t/,What will I do?,Text,Texted,Message,Phone,1
+The battery is almost dead.,Battery,/b/,What is almost dead?,Battery,Flattery,Power,Phone,2
+Could you repeat that please?,Repeat,/r/,What should I do?,Repeat,Competed,Say again,Phone,1
+The ringtone is too loud.,Ringtone,/r/,What is too loud?,Ringtone,Ring tone,Sound,Phone,2
+Call me when you get this.,Call,/k/,What should you do?,Call,Tall,Phone,Phone,1
+The connection keeps breaking up.,Breaking,/br/,What keeps happening?,Breaking,Freaking,Cutting out,Phone,2
+I sent you an email instead.,Email,/i/,What did I send?,Email,He mail,Message,Phone,1
+The conference call starts at noon.,Conference,/k/,What starts at noon?,Conference,Preference,Meeting,Phone,2
+Please enter your password now.,Password,/p/,What should I enter?,Password,Passed word,Code,Phone,2
+The area code is three one four.,Area,/ɛ/,What is three one four?,Area,Era,Region code,Phone,2
+I missed your call earlier.,Missed,/m/,What did I do?,Missed,Kissed,Didn't answer,Phone,1
+The phone is charging now.,Charging,/ch/,What is the phone doing?,Charging,Marching,Powering,Phone,1
+Can I put you on speaker?,Speaker,/sp/,What can I put you on?,Speaker,Sneaker,Loudspeaker,Phone,2
+The notification just came through.,Notification,/n/,What came through?,Notification,Modification,Alert,Phone,3
+Please dial the extension number.,Extension,/ɛ/,What should I dial?,Extension,Tension,Additional number,Phone,2
+The operator will assist you.,Operator,/ɑ/,Who will assist you?,Operator,Elevator,Agent,Phone,2
+Your application has been received.,Application,/æ/,What has been received?,Application,Implication,Form,Phone,3
+I will forward the message.,Forward,/f/,What will I do?,Forward,Foreword,Send along,Phone,2
+The line is disconnected.,Disconnected,/d/,What is the line?,Disconnected,Connected,Cut off,Phone,2
+Please stay on the line.,Line,/l/,What should I stay on?,Line,Mine,Call,Phone,1
+The meeting starts at three o'clock.,Meeting,/m/,When does it start?,Meeting,Greeting,Gathering,Social,1
+Happy birthday to you.,Birthday,/b/,What is today?,Birthday,Earth day,Anniversary,Social,1
+Congratulations on your promotion.,Promotion,/pr/,What happened?,Promotion,Emotion,Advancement,Social,2
+Nice to meet you finally.,Meet,/m/,What is nice to do?,Meet,Meat,Greet,Social,1
+How have you been lately?,Lately,/l/,How have you been?,Lately,Lady,Recently,Social,1
+Thank you for your help.,Help,/h/,What do I thank you for?,Help,Yelp,Assistance,Social,1
+Sorry I am running late.,Late,/l/,What am I running?,Late,Plate,Behind,Social,1
+See you tomorrow morning.,Tomorrow,/t/,When will I see you?,Tomorrow,To morrow,Next day,Social,1
+Have a wonderful weekend.,Weekend,/w/,Have a wonderful what?,Weekend,Weakened,Days off,Social,1
+Welcome to the neighborhood.,Neighborhood,/n/,Welcome to what?,Neighborhood,Labor hood,Community,Social,2
+It was lovely seeing you.,Lovely,/l/,How was seeing you?,Lovely,Glove Lee,Nice,Social,1
+Please give my regards to your family.,Regards,/r/,What should I give?,Regards,Records,Greetings,Social,2
+The weather is beautiful today.,Weather,/w/,What is beautiful?,Weather,Whether,Climate,Social,1
+I hope you feel better soon.,Better,/b/,What do I hope?,Better,Butter,Improved,Social,1
+Let me know if you need anything.,Anything,/ɛ/,What should you let me know?,Anything,Any thing,Something,Social,1
+Take care of yourself.,Care,/k/,What should you take?,Care,Fair,Caution,Social,1
+It has been too long since we talked.,Long,/l/,How long has it been?,Long,Song,Extended,Social,1
+We should get together sometime.,Together,/t/,What should we do?,Together,To gather,Meet up,Social,2
+Please accept my apology.,Apology,/ɑ/,What should you accept?,Apology,Astrology,Sorry,Social,2
+I appreciate your kindness.,Kindness,/k/,What do I appreciate?,Kindness,Blindness,Generosity,Social,2
+You look wonderful today.,Wonderful,/w/,How do I look?,Wonderful,One dreadful,Great,Social,1
+Best wishes for the new year.,Wishes,/w/,What for the new year?,Wishes,Dishes,Hopes,Social,1
+It is nice to finally meet you.,Finally,/f/,How is it nice?,Finally,Find Lee,At last,Social,2
+Please join us for dinner.,Dinner,/d/,What should you join us for?,Dinner,Winner,Meal,Social,1
+Safe travels on your trip.,Travels,/tr/,What should be safe?,Travels,Taverns,Journey,Social,2
+I had a great time tonight.,Great,/gr/,What kind of time?,Great,Grate,Wonderful,Social,1
+Thank you for the invitation.,Invitation,/ɪ/,Thank you for what?,Invitation,Innovation,Request,Social,2
+Please come inside and sit down.,Inside,/ɪ/,Where should you come?,Inside,Incite,Indoors,Social,1
+I really enjoyed our conversation.,Conversation,/k/,What did I enjoy?,Conversation,Conservation,Talk,Social,2
+Let us plan something for next month.,Plan,/p/,What should we do?,Plan,Clan,Arrange,Social,2
+Happy anniversary to both of you.,Anniversary,/æ/,What is today?,Anniversary,Adversary,Special day,Social,2
+May I introduce my colleague.,Colleague,/k/,Who may I introduce?,Colleague,College,Coworker,Social,2
+Your presentation was excellent.,Presentation,/pr/,What was excellent?,Presentation,Preservation,Speech,Social,3
+Please have a seat.,Seat,/s/,What should you have?,Seat,Meet,Chair,Social,1
+The project deadline is Friday.,Deadline,/d/,When is the deadline?,Deadline,Dead line,Due date,Work,2
+Please submit your report by noon.,Submit,/s/,What should you do?,Submit,Admitted,Send,Work,2
+The conference room is reserved.,Reserved,/r/,What is the conference room?,Reserved,Deserved,Booked,Work,2
+I need your signature on this form.,Signature,/s/,What do I need?,Signature,Signatory,Autograph,Work,2
+The meeting has been postponed.,Postponed,/p/,What happened to the meeting?,Postponed,Proposed,Delayed,Work,3
+Please review the attached document.,Review,/r/,What should you do?,Review,Renew,Check,Work,2
+The budget was approved yesterday.,Budget,/b/,What was approved?,Budget,Budge it,Finances,Work,2
+I will be out of office next week.,Office,/ɑ/,Where will I be out of?,Office,Off ice,Work,Work,1
+The training session is mandatory.,Training,/tr/,What kind of session?,Training,Raining,Learning,Work,2
+Please forward this to the team.,Forward,/f/,What should you do?,Forward,Foreword,Send,Work,2
+The supervisor approved the request.,Supervisor,/s/,Who approved it?,Supervisor,Super visor,Manager,Work,2
+We need to schedule a follow up.,Schedule,/sk/,What do we need to do?,Schedule,Scheduled,Plan,Work,2
+The contract expires in December.,Contract,/k/,What expires?,Contract,Contacted,Agreement,Work,3
+Please complete the survey by Friday.,Survey,/s/,What should you complete?,Survey,Curvy,Questionnaire,Work,2
+The performance review is next week.,Performance,/p/,What is next week?,Performance,Conformance,Evaluation,Work,3
+I will send you the agenda shortly.,Agenda,/ɑ/,What will I send?,Agenda,Blender,Schedule,Work,2
+The policy change takes effect Monday.,Policy,/p/,What takes effect?,Policy,Polished,Rule,Work,2
+Please confirm your attendance.,Attendance,/ɑ/,What should you confirm?,Attendance,Attendants,Presence,Work,2
+The proposal needs more detail.,Proposal,/pr/,What needs more detail?,Proposal,Disposal,Plan,Work,2
+Our department is being restructured.,Restructured,/r/,What is happening?,Restructured,Instructured,Reorganized,Work,3
+The equipment will be delivered tomorrow.,Equipment,/ɪ/,What will be delivered?,Equipment,Shipment,Machines,Work,2
+Please log your hours daily.,Hours,/aʊ/,What should you log?,Hours,Ours,Time,Work,1
+The system is down for maintenance.,Maintenance,/m/,What is the system down for?,Maintenance,Maintenance,Repairs,Work,3
+I need authorization to proceed.,Authorization,/ɔ/,What do I need?,Authorization,Organization,Permission,Work,3
+The quarterly report is due soon.,Quarterly,/kw/,What is due soon?,Quarterly,Orderly,Report,Work,3
+Please update your contact information.,Contact,/k/,What should you update?,Contact,Contract,Info,Work,2
+The printer is out of paper.,Printer,/pr/,What is out of paper?,Printer,Winter,Machine,Work,1
+Your request has been processed.,Processed,/pr/,What has been done?,Processed,Professed,Handled,Work,2
+The memo will be distributed today.,Memo,/m/,What will be distributed?,Memo,Demo,Note,Work,2
+Please sign the acknowledgment form.,Acknowledgment,/æ/,What should you sign?,Acknowledgment,Agreement,Confirmation,Work,3
+The interview is scheduled for Tuesday.,Interview,/ɪ/,What is scheduled?,Interview,Inner view,Meeting,Work,2
+I need to reschedule our appointment.,Reschedule,/r/,What do I need to do?,Reschedule,Schedule,Change time,Work,2
+The handbook explains the procedures.,Handbook,/h/,What explains procedures?,Handbook,Hand book,Manual,Work,2
+Your feedback is valuable to us.,Feedback,/f/,What is valuable?,Feedback,Feed back,Response,Work,2
+Please clock in when you arrive.,Clock,/k/,What should you do?,Clock,Block,Sign in,Work,1
+The package was delivered this morning.,Package,/p/,What was delivered?,Package,Baggage,Parcel,Daily Life,1
+Please lock the door when you leave.,Lock,/l/,What should you do?,Lock,Dock,Secure,Daily Life,1
+The alarm goes off at seven.,Alarm,/ɑ/,What goes off?,Alarm,A larm,Clock,Daily Life,1
+I need to do laundry tonight.,Laundry,/l/,What do I need to do?,Laundry,Launder,Washing,Daily Life,1
+The refrigerator is making a noise.,Refrigerator,/r/,What is making noise?,Refrigerator,Radiator,Appliance,Daily Life,3
+Please take out the garbage.,Garbage,/g/,What should I take out?,Garbage,Cabbage,Trash,Daily Life,1
+The lawn needs to be mowed.,Lawn,/l/,What needs mowing?,Lawn,Dawn,Grass,Daily Life,2
+I forgot my keys inside.,Keys,/k/,What did I forget?,Keys,Peas,Items,Daily Life,1
+The sink is clogged again.,Clogged,/k/,What is the sink?,Clogged,Logged,Blocked,Daily Life,2
+Please water the plants today.,Plants,/p/,What should I water?,Plants,Pants,Flowers,Daily Life,1
+The light bulb needs replacing.,Bulb,/b/,What needs replacing?,Bulb,Bulk,Light,Daily Life,2
+I set the thermostat to seventy.,Thermostat,/θ/,What did I set?,Thermostat,Thermometer,Temperature,Daily Life,3
+The mailman comes at noon.,Mailman,/m/,Who comes at noon?,Mailman,Male man,Carrier,Daily Life,1
+Please empty the dishwasher.,Dishwasher,/d/,What should I empty?,Dishwasher,Dish washer,Appliance,Daily Life,2
+The batteries in the remote are dead.,Remote,/r/,What has dead batteries?,Remote,Promote,Control,Daily Life,2
+I need to renew my license.,License,/l/,What do I need to renew?,License,Silence,Permit,Daily Life,2
+The carpet should be vacuumed.,Carpet,/k/,What should be vacuumed?,Carpet,Carport,Rug,Daily Life,2
+Please turn off the lights.,Lights,/l/,What should I turn off?,Lights,Sights,Lamps,Daily Life,1
+The doorbell just rang.,Doorbell,/d/,What just rang?,Doorbell,Dumbbell,Chime,Daily Life,1
+I need to charge my phone.,Charge,/ch/,What do I need to do?,Charge,Large,Power,Daily Life,1
+The weather forecast calls for rain.,Forecast,/f/,What calls for rain?,Forecast,Forcast,Prediction,Daily Life,2
+Please close the curtains.,Curtains,/k/,What should I close?,Curtains,Certain,Drapes,Daily Life,1
+The toilet is running constantly.,Running,/r/,What is the toilet doing?,Running,Cunning,Flowing,Daily Life,2
+I scheduled a service appointment.,Service,/s/,What did I schedule?,Service,Surface,Repair,Daily Life,2
+The smoke detector needs new batteries.,Detector,/d/,What needs batteries?,Detector,Director,Alarm,Daily Life,2
+Please fold the laundry.,Fold,/f/,What should I do?,Fold,Gold,Put away,Daily Life,1
+The internet connection is slow.,Connection,/k/,What is slow?,Connection,Confession,Signal,Daily Life,2
+I need to pay the electric bill.,Electric,/ɪ/,What bill do I need to pay?,Electric,Eclectic,Power,Daily Life,2
+The calendar says today is the tenth.,Calendar,/k/,What says it is the tenth?,Calendar,Colander,Schedule,Daily Life,2
+Please set the table for dinner.,Table,/t/,What should I set?,Table,Stable,Furniture,Daily Life,1
+The faucet is dripping again.,Dripping,/dr/,What is the faucet doing?,Dripping,Tripping,Leaking,Daily Life,2
+I forgot to buy milk at the store.,Milk,/m/,What did I forget to buy?,Milk,Silk,Dairy,Daily Life,1
+The basement flooded last night.,Basement,/b/,What flooded?,Basement,Base meant,Downstairs,Daily Life,2
+Please hang up your coat.,Coat,/k/,What should I hang up?,Coat,Goat,Jacket,Daily Life,1
+The microwave just beeped.,Microwave,/m/,What beeped?,Microwave,Micro wave,Appliance,Daily Life,2
+I need to take the dog for a walk.,Walk,/w/,What should I take the dog for?,Walk,Talk,Exercise,Daily Life,1
+The heater is not working properly.,Heater,/h/,What is not working?,Heater,Eater,Furnace,Daily Life,2
+Please wipe down the counter.,Counter,/k/,What should I wipe down?,Counter,Ounter,Surface,Daily Life,1
+The window is stuck again.,Window,/w/,What is stuck?,Window,Wind oh,Glass,Daily Life,2
+I scheduled an oil change for Saturday.,Oil,/ɔɪ/,What did I schedule?,Oil,Foil,Car service,Daily Life,2
+The neighbors are having a party.,Neighbors,/n/,Who is having a party?,Neighbors,Labors,People nearby,Daily Life,1
+Please unplug the appliances before leaving.,Appliances,/ɑ/,What should I unplug?,Appliances,Alliances,Machines,Daily Life,2
+The ceiling fan wobbles slightly.,Ceiling,/s/,What wobbles?,Ceiling,Sealing,Fan,Daily Life,2
+I need to organize my closet.,Closet,/k/,What do I need to organize?,Closet,Closed,Storage,Daily Life,2
+The pipe under the sink is leaking.,Pipe,/p/,What is leaking?,Pipe,Ripe,Tube,Daily Life,2
+Please adjust the blinds.,Blinds,/b/,What should I adjust?,Blinds,Winds,Window coverings,Daily Life,1
+The answering machine has a message.,Answering,/æ/,What has a message?,Answering,Dancing,Machine,Daily Life,2
+I lost my wallet somewhere.,Wallet,/w/,What did I lose?,Wallet,Mallet,Billfold,Daily Life,1
+The air conditioner needs a filter change.,Filter,/f/,What needs changing?,Filter,Filler,Screen,Daily Life,2
+Please sweep the porch.,Porch,/p/,What should I sweep?,Porch,Torch,Deck,Daily Life,1
+The screen door has a hole in it.,Screen,/skr/,What has a hole?,Screen,Green,Door,Daily Life,2
+I need to defrost the freezer.,Defrost,/d/,What do I need to do?,Defrost,Frost,Thaw,Daily Life,2
+The washing machine makes a loud noise.,Washing,/w/,What makes noise?,Washing,Wishing,Appliance,Daily Life,2
+Please check the expiration date.,Expiration,/ɛ/,What should I check?,Expiration,Aspiration,Date,Daily Life,3
+The bookshelf needs to be dusted.,Bookshelf,/b/,What needs dusting?,Bookshelf,Book shelf,Furniture,Daily Life,2
+I scheduled a plumber for Tuesday.,Plumber,/p/,Who did I schedule?,Plumber,Lumber,Repairman,Daily Life,2
+The recycling bin is overflowing.,Recycling,/r/,What is overflowing?,Recycling,Bicycling,Bin,Daily Life,2
+Please replace the shower curtain.,Curtain,/k/,What should I replace?,Curtain,Certain,Cover,Daily Life,2
+The cable box needs to be reset.,Cable,/k/,What needs resetting?,Cable,Label,Box,Daily Life,2
+I forgot to set my alarm last night.,Alarm,/ɑ/,What did I forget to set?,Alarm,Farm,Clock,Daily Life,1
+The garden hose has a leak.,Hose,/h/,What has a leak?,Hose,Rose,Tube,Daily Life,2
+Please organize the junk drawer.,Drawer,/dr/,What should I organize?,Drawer,Raw,Storage,Daily Life,2
+The motion sensor light is broken.,Sensor,/s/,What is broken?,Sensor,Censor,Detector,Daily Life,2
+I need to call the exterminator.,Exterminator,/ɛ/,Who do I need to call?,Exterminator,Terminator,Pest control,Daily Life,3
+The driveway needs to be shoveled.,Driveway,/dr/,What needs shoveling?,Driveway,Drive way,Path,Daily Life,2
+Please tighten the loose screw.,Screw,/skr/,What should I tighten?,Screw,Brew,Fastener,Daily Life,2
+The roof is leaking in the corner.,Roof,/r/,What is leaking?,Roof,Proof,Top,Daily Life,2
+I scheduled an electrician for Monday.,Electrician,/ɛ/,Who did I schedule?,Electrician,Politician,Repair person,Daily Life,3
+The fireplace needs cleaning before winter.,Fireplace,/f/,What needs cleaning?,Fireplace,Fire place,Hearth,Daily Life,2
+The children are playing outside.,Playing,/p/,What are the children doing?,Playing,Praying,Running,Outdoors,1
+The garden needs more sunlight.,Sunlight,/s/,What does the garden need?,Sunlight,Sun light,Shade,Outdoors,2
+The birds are singing this morning.,Singing,/s/,What are the birds doing?,Singing,Stinging,Chirping,Outdoors,1
+The flowers bloomed early this year.,Bloomed,/b/,What did the flowers do?,Bloomed,Gloomed,Opened,Outdoors,2
+I need to rake the leaves.,Rake,/r/,What do I need to do?,Rake,Lake,Gather,Outdoors,1
+The sprinklers turn on at dawn.,Sprinklers,/spr/,What turns on at dawn?,Sprinklers,Sprinters,Watering,Outdoors,3
+The fence needs a new coat of paint.,Fence,/f/,What needs paint?,Fence,Dense,Barrier,Outdoors,2
+The picnic is planned for Sunday.,Picnic,/p/,What is planned?,Picnic,Panic,Outing,Outdoors,2
+The trail leads to the waterfall.,Trail,/tr/,Where does the trail lead?,Trail,Rail,Path,Outdoors,2
+The sunset was absolutely beautiful.,Sunset,/s/,What was beautiful?,Sunset,Sun set,Evening,Outdoors,2
+The squirrels gathered the acorns.,Squirrels,/skw/,What gathered acorns?,Squirrels,Spirals,Animals,Outdoors,3
+The breeze feels cool today.,Breeze,/br/,What feels cool?,Breeze,Trees,Wind,Outdoors,2
+The pond has frozen over.,Frozen,/fr/,What has the pond done?,Frozen,Chosen,Iced,Outdoors,2
+The hammock is hung between two trees.,Hammock,/h/,What is between two trees?,Hammock,Haddock,Swing,Outdoors,2
+The fireflies came out at dusk.,Fireflies,/f/,What came out?,Fireflies,Butterflies,Bugs,Outdoors,2
+The temperature dropped overnight.,Temperature,/t/,What dropped?,Temperature,Temperament,Weather,Outdoors,2
+The mosquitoes are bad this summer.,Mosquitoes,/m/,What is bad this summer?,Mosquitoes,Toes,Insects,Outdoors,3
+The grass is wet from the dew.,Dew,/d/,Why is the grass wet?,Dew,Do,Moisture,Outdoors,2
+The storm knocked down several branches.,Branches,/br/,What was knocked down?,Branches,Ranches,Limbs,Outdoors,2
+The shade under the tree is nice.,Shade,/ʃ/,What is nice?,Shade,Shape,Shadow,Outdoors,2
+The concert starts at eight.,Concert,/k/,What starts at eight?,Concert,Consort,Show,Entertainment,2
+The movie received excellent reviews.,Reviews,/r/,What did the movie receive?,Reviews,Remove,Ratings,Entertainment,2
+The tickets sold out quickly.,Tickets,/t/,What sold out?,Tickets,Thickets,Passes,Entertainment,1
+The band played until midnight.,Band,/b/,What played until midnight?,Band,Hand,Group,Entertainment,1
+The performance was outstanding.,Performance,/p/,What was outstanding?,Performance,Conformance,Show,Entertainment,2
+The theater is downtown.,Theater,/θ/,Where is the theater?,Theater,Beater,Building,Entertainment,2
+The comedy show was hilarious.,Comedy,/k/,What kind of show?,Comedy,Commodity,Funny,Entertainment,2
+The museum exhibit closes next month.,Exhibit,/ɛ/,What closes next month?,Exhibit,Inhibit,Display,Entertainment,3
+The festival attracts thousands of visitors.,Festival,/f/,What attracts visitors?,Festival,Festal,Event,Entertainment,3
+The documentary won several awards.,Documentary,/d/,What won awards?,Documentary,Momentary,Film,Entertainment,3
+The seats are in the front row.,Seats,/s/,Where are the seats?,Seats,Beats,Chairs,Entertainment,1
+The intermission lasts fifteen minutes.,Intermission,/ɪ/,What lasts fifteen minutes?,Intermission,Commission,Break,Entertainment,3
+The gallery features modern art.,Gallery,/g/,What features modern art?,Gallery,Salary,Museum,Entertainment,2
+The comedian told jokes all night.,Comedian,/k/,Who told jokes?,Comedian,Canadian,Performer,Entertainment,2
+The audience applauded loudly.,Applauded,/ɑ/,What did the audience do?,Applauded,Applauding,Clapped,Entertainment,2
+The show received a standing ovation.,Ovation,/o/,What did the show receive?,Ovation,Vacation,Applause,Entertainment,3
+The premiere is scheduled for Friday.,Premiere,/pr/,What is scheduled?,Premiere,Premier,Opening,Entertainment,3
+The actor delivered a powerful performance.,Actor,/æ/,Who delivered the performance?,Actor,Factor,Performer,Entertainment,2
+The stadium holds fifty thousand people.,Stadium,/st/,What holds fifty thousand?,Stadium,Stage,Arena,Entertainment,3
+The playlist includes my favorite songs.,Playlist,/p/,What includes my favorites?,Playlist,Play list,Music,Entertainment,2
+The volume is too loud.,Volume,/v/,What is too loud?,Volume,Column,Sound,Technology,1
+The software needs an update.,Software,/s/,What needs an update?,Software,Soft wear,Program,Technology,2
+The password must contain numbers.,Password,/p/,What must contain numbers?,Password,Pass word,Code,Technology,2
+The download will take ten minutes.,Download,/d/,What will take ten minutes?,Download,Down load,Transfer,Technology,2
+The website crashed this morning.,Website,/w/,What crashed?,Website,Web site,Page,Technology,2
+The app requires your permission.,Permission,/p/,What does the app require?,Permission,Admission,Approval,Technology,2
+The battery life is excellent.,Battery,/b/,What is excellent?,Battery,Flattery,Power,Technology,2
+The screen resolution is very sharp.,Resolution,/r/,What is very sharp?,Resolution,Revolution,Quality,Technology,3
+The keyboard shortcuts save time.,Shortcuts,/ʃ/,What saves time?,Shortcuts,Short cuts,Keys,Technology,2
+The file size is too large.,Size,/s/,What is too large?,Size,Rise,Amount,Technology,1
+The network is experiencing issues.,Network,/n/,What is experiencing issues?,Network,Net work,System,Technology,2
+The cursor moves too slowly.,Cursor,/k/,What moves slowly?,Cursor,Curser,Pointer,Technology,2
+The settings menu is easy to find.,Settings,/s/,What is easy to find?,Settings,Sittings,Options,Technology,2
+The browser keeps freezing.,Browser,/br/,What keeps freezing?,Browser,Rouse,Program,Technology,2
+The headphones have good sound quality.,Headphones,/h/,What has good quality?,Headphones,Head phones,Earbuds,Technology,2
+The data backup runs automatically.,Backup,/b/,What runs automatically?,Backup,Back up,Copy,Technology,2
+The touchscreen is very responsive.,Touchscreen,/t/,What is responsive?,Touchscreen,Touch screen,Display,Technology,2
+The microphone is not working.,Microphone,/m/,What is not working?,Microphone,Mike,Audio device,Technology,2
+The webcam quality could be better.,Webcam,/w/,What could be better?,Webcam,Web cam,Camera,Technology,2
+The storage space is almost full.,Storage,/st/,What is almost full?,Storage,Shortage,Space,Technology,2
+The flight departs at noon.,Departs,/d/,When does the flight leave?,Departs,The parts,Leaves,Travel,2
+The luggage carousel is downstairs.,Carousel,/k/,Where is the luggage?,Carousel,Carol sell,Conveyor,Travel,3
+The boarding pass is on my phone.,Boarding,/b/,What is on my phone?,Boarding,Hoarding,Pass,Travel,2
+The customs line is very long.,Customs,/k/,What is very long?,Customs,Customer,Immigration,Travel,2
+The cruise ship docks at seven.,Docks,/d/,When does the ship arrive?,Docks,Rocks,Arrives,Travel,2
+The rental car is in lot B.,Rental,/r/,Where is the car?,Rental,Dental,Lot,Travel,2
+The passport needs to be renewed.,Passport,/p/,What needs renewing?,Passport,Pass port,Document,Travel,2
+The turbulence was unexpected.,Turbulence,/t/,What was unexpected?,Turbulence,Turbo lens,Rough air,Travel,3
+The layover is three hours long.,Layover,/l/,How long is the layover?,Layover,Lay over,Wait,Travel,2
+The terminal is very crowded today.,Terminal,/t/,What is crowded?,Terminal,Eternal,Building,Travel,2
+The baggage claim is on level one.,Baggage,/b/,What is on level one?,Baggage,Cabbage,Luggage,Travel,2
+The security checkpoint is ahead.,Checkpoint,/ch/,What is ahead?,Checkpoint,Check point,Security,Travel,2
+The seatbelt sign is illuminated.,Seatbelt,/s/,What is illuminated?,Seatbelt,Seat belt,Sign,Travel,2
+The departure gate has changed.,Departure,/d/,What has changed?,Departure,The parture,Gate,Travel,2
+The itinerary includes three cities.,Itinerary,/ɪ/,What includes three cities?,Itinerary,Literary,Plan,Travel,3
+The connecting flight leaves soon.,Connecting,/k/,What leaves soon?,Connecting,Collecting,Flight,Travel,2
+The overhead bin is full.,Overhead,/o/,What is full?,Overhead,Over head,Compartment,Travel,2
+The vaccination record is required.,Vaccination,/v/,What is required?,Vaccination,Vacation,Record,Travel,3
+The currency exchange rate is favorable.,Currency,/k/,What is favorable?,Currency,Currentsy,Money rate,Travel,3
+The travel insurance covers delays.,Insurance,/ʃ/,What covers delays?,Insurance,Assurance,Protection,Travel,3
+The commute takes forty five minutes.,Commute,/k/,How long does it take?,Commute,Compute,Travel,Transportation,2
+The traffic is heavy this morning.,Traffic,/tr/,What is heavy?,Traffic,Tragic,Cars,Transportation,1
+The subway runs every five minutes.,Subway,/s/,What runs often?,Subway,Sub way,Train,Transportation,2
+The bus stop is on the corner.,Bus,/b/,Where is the stop?,Bus,Plus,Vehicle,Transportation,1
+The parking meter expires soon.,Meter,/m/,What expires?,Meter,Eater,Timer,Transportation,2
+The toll booth is one mile ahead.,Toll,/t/,What is ahead?,Toll,Tall,Booth,Transportation,2
+The carpool lane saves time.,Carpool,/k/,What saves time?,Carpool,Car pool,Lane,Transportation,2
+The bridge is closed for repairs.,Bridge,/br/,What is closed?,Bridge,Ridge,Overpass,Transportation,2
+The ferry departs from pier twelve.,Ferry,/f/,What departs?,Ferry,Merry,Boat,Transportation,2
+The bike lane is on the right.,Bike,/b/,What is on the right?,Bike,Like,Lane,Transportation,1
+The gas station is at the next exit.,Station,/st/,What is at the exit?,Station,Stationed,Stop,Transportation,2
+The train schedule changed recently.,Schedule,/sk/,What changed?,Schedule,Scheduled,Timetable,Transportation,2
+The crosswalk light just turned green.,Crosswalk,/kr/,What turned green?,Crosswalk,Cross walk,Light,Transportation,2
+The speed limit is thirty five.,Speed,/sp/,What is thirty five?,Speed,Seed,Limit,Transportation,1
+The intersection is very busy.,Intersection,/ɪ/,What is busy?,Intersection,Inner section,Crossing,Transportation,3
+The taxi fare is fifteen dollars.,Fare,/f/,What is fifteen dollars?,Fare,Fair,Cost,Transportation,2
+The shuttle runs to the airport.,Shuttle,/ʃ/,What runs to the airport?,Shuttle,Subtle,Bus,Transportation,2
+The highway is under construction.,Highway,/h/,What is under construction?,Highway,High way,Road,Transportation,2
+The rideshare pickup is downstairs.,Rideshare,/r/,What is downstairs?,Rideshare,Ride share,Pickup,Transportation,2
+The pedestrian bridge is safer.,Pedestrian,/p/,What is safer?,Pedestrian,Equestrian,Bridge,Transportation,2
+The student passed the exam.,Passed,/p/,What did the student do?,Passed,Past,Succeeded,Education,1
+The homework is due tomorrow.,Homework,/h/,What is due?,Homework,Home work,Assignment,Education,1
+The textbook costs fifty dollars.,Textbook,/t/,What costs fifty dollars?,Textbook,Text book,Book,Education,2
+The professor cancelled class today.,Professor,/pr/,Who cancelled class?,Professor,Professor,Teacher,Education,2
+The scholarship covers tuition.,Scholarship,/sk/,What covers tuition?,Scholarship,Scholarships,Award,Education,3
+The library closes at midnight.,Library,/l/,What closes at midnight?,Library,Lie berry,Building,Education,2
+The semester ends in December.,Semester,/s/,When does it end?,Semester,Trimester,Term,Education,2
+The diploma arrived by mail.,Diploma,/d/,What arrived?,Diploma,The ploma,Certificate,Education,2
+The lecture hall seats two hundred.,Lecture,/l/,What seats two hundred?,Lecture,Lector,Hall,Education,2
+The registration deadline is Friday.,Registration,/r/,What is Friday?,Registration,Rage station,Deadline,Education,3
+The curriculum was recently updated.,Curriculum,/k/,What was updated?,Curriculum,Particular,Program,Education,3
+The tutor helped with math problems.,Tutor,/t/,Who helped?,Tutor,Tudor,Helper,Education,2
+The dormitory is across campus.,Dormitory,/d/,Where is it?,Dormitory,Laboratory,Building,Education,3
+The syllabus outlines the course.,Syllabus,/s/,What outlines the course?,Syllabus,Silliest,Document,Education,3
+The graduate ceremony is Saturday.,Graduate,/gr/,What is Saturday?,Graduate,Gradual,Ceremony,Education,2
+The campus tour starts at ten.,Campus,/k/,What starts at ten?,Campus,Camp us,Tour,Education,2
+The finals week is very stressful.,Finals,/f/,What is stressful?,Finals,Finds,Week,Education,2
+The attendance policy is strict.,Attendance,/ɑ/,What is strict?,Attendance,Attendants,Policy,Education,2
+The prerequisite course is required.,Prerequisite,/pr/,What is required?,Prerequisite,Per requisite,Course,Education,3
+The academic advisor is helpful.,Advisor,/ɑ/,Who is helpful?,Advisor,Add visor,Counselor,Education,2
+The recipe calls for two eggs.,Recipe,/r/,What calls for eggs?,Recipe,Receive,Instructions,Cooking,2
+The oven should preheat first.,Preheat,/pr/,What should the oven do?,Preheat,Pre heat,Warm up,Cooking,2
+The ingredients are on the counter.,Ingredients,/ɪ/,What is on the counter?,Ingredients,Agreements,Items,Cooking,2
+The butter needs to be softened.,Butter,/b/,What needs softening?,Butter,Butter,Margarine,Cooking,1
+The cake needs twenty more minutes.,Cake,/k/,What needs more time?,Cake,Lake,Dessert,Cooking,1
+The vegetables should be chopped finely.,Vegetables,/v/,What should be chopped?,Vegetables,Vegetable,Produce,Cooking,2
+The sauce is simmering on low.,Simmering,/s/,What is the sauce doing?,Simmering,Shimmering,Cooking,Cooking,2
+The pan needs more oil.,Pan,/p/,What needs oil?,Pan,Can,Cookware,Cooking,1
+The dough should rise for an hour.,Dough,/d/,What should rise?,Dough,Doe,Mixture,Cooking,2
+The thermometer reads three fifty.,Thermometer,/θ/,What reads the temperature?,Thermometer,Barometer,Device,Cooking,3
+The mixture needs more flour.,Flour,/fl/,What needs more?,Flour,Flower,Ingredient,Cooking,2
+The soup is almost ready.,Soup,/s/,What is almost ready?,Soup,Scoop,Dish,Cooking,1
+The grill should be cleaned first.,Grill,/gr/,What should be cleaned?,Grill,Frill,Appliance,Cooking,2
+The seasoning makes a big difference.,Seasoning,/s/,What makes a difference?,Seasoning,Reasoning,Spice,Cooking,2
+The marinade needs overnight.,Marinade,/m/,What needs overnight?,Marinade,Marine,Sauce,Cooking,3
+The timer just went off.,Timer,/t/,What went off?,Timer,Rhymer,Device,Cooking,1
+The roast is in the slow cooker.,Roast,/r/,Where is the roast?,Roast,Toast,Meat,Cooking,2
+The blender is very powerful.,Blender,/b/,What is powerful?,Blender,Lender,Appliance,Cooking,2
+The frosting should be spreadable.,Frosting,/fr/,What should be spreadable?,Frosting,Costing,Icing,Cooking,2
+The leftovers go in the refrigerator.,Leftovers,/l/,Where do leftovers go?,Leftovers,Left overs,Fridge,Cooking,2
+The mechanic checked the brakes.,Brakes,/br/,What did the mechanic check?,Brakes,Breaks,Parts,Automotive,2
+The engine needs new oil.,Engine,/ɛ/,What needs oil?,Engine,Penguin,Motor,Automotive,2
+The tire pressure is too low.,Pressure,/pr/,What is too low?,Pressure,Treasure,Air,Automotive,2
+The windshield has a small crack.,Windshield,/w/,What has a crack?,Windshield,Wind shield,Glass,Automotive,2
+The headlights need replacing.,Headlights,/h/,What needs replacing?,Headlights,Headlines,Lights,Automotive,2
+The transmission is making a noise.,Transmission,/tr/,What is making noise?,Transmission,Admission,Part,Automotive,3
+The alignment was adjusted yesterday.,Alignment,/ɑ/,What was adjusted?,Alignment,Assignment,Service,Automotive,3
+The mileage on this car is low.,Mileage,/m/,What is low?,Mileage,Mile age,Distance,Automotive,2
+The warranty covers major repairs.,Warranty,/w/,What covers repairs?,Warranty,Guarantee,Protection,Automotive,2
+The inspection expires next month.,Inspection,/ɪ/,What expires?,Inspection,Selection,Sticker,Automotive,2
+The radiator needs coolant.,Radiator,/r/,What needs coolant?,Radiator,Gladiator,Part,Automotive,3
+The exhaust system is leaking.,Exhaust,/ɛ/,What is leaking?,Exhaust,Exalted,System,Automotive,3
+The interior needs a deep cleaning.,Interior,/ɪ/,What needs cleaning?,Interior,Exterior,Inside,Automotive,2
+The spark plugs should be changed.,Spark,/sp/,What should be changed?,Spark,Park,Parts,Automotive,2
+The fuel tank is nearly empty.,Tank,/t/,What is nearly empty?,Tank,Thank,Container,Automotive,1
+The steering wheel vibrates slightly.,Steering,/st/,What vibrates?,Steering,Staring,Wheel,Automotive,2
+The dashboard warning light came on.,Dashboard,/d/,What light came on?,Dashboard,Dash board,Display,Automotive,2
+The suspension needs repair work.,Suspension,/s/,What needs repair?,Suspension,Suspicion,Parts,Automotive,3
+The convertible top is stuck.,Convertible,/k/,What is stuck?,Convertible,Invert able,Top,Automotive,3
+The antifreeze level is low.,Antifreeze,/æ/,What is low?,Antifreeze,Anti freeze,Fluid,Automotive,3
+The sunset paints the sky orange.,Paints,/p/,What does the sunset do?,Paints,Faint,Colors,Nature,2
+The waterfall creates a mist.,Waterfall,/w/,What creates mist?,Waterfall,Water fall,Feature,Nature,2
+The mountains are covered in snow.,Mountains,/m/,What is covered in snow?,Mountains,Fountains,Peaks,Nature,2
+The river flows to the ocean.,River,/r/,Where does the river flow?,River,Liver,Water,Nature,1
+The forest is home to many animals.,Forest,/f/,What is home to animals?,Forest,Florist,Woods,Nature,2
+The valley is green and lush.,Valley,/v/,What is green?,Valley,Alley,Area,Nature,2
+The meadow is full of wildflowers.,Meadow,/m/,What is full of wildflowers?,Meadow,Shadow,Field,Nature,2
+The canyon walls are steep.,Canyon,/k/,What has steep walls?,Canyon,Cannon,Gorge,Nature,2
+The glacier moves very slowly.,Glacier,/gl/,What moves slowly?,Glacier,Glazier,Ice,Nature,3
+The desert gets very cold at night.,Desert,/d/,What gets cold?,Desert,Dessert,Land,Nature,2
+The reef is teeming with fish.,Reef,/r/,What is teeming with fish?,Reef,Leaf,Coral,Nature,2
+The volcano last erupted decades ago.,Volcano,/v/,What erupted?,Volcano,Vulcano,Mountain,Nature,3
+The coast stretches for miles.,Coast,/k/,What stretches for miles?,Coast,Toast,Shore,Nature,2
+The island is only accessible by boat.,Island,/ɑɪ/,How is it accessible?,Island,Ireland,Land,Nature,2
+The swamp is full of wildlife.,Swamp,/sw/,What is full of wildlife?,Swamp,Stamp,Wetland,Nature,2
+The prairie extends to the horizon.,Prairie,/pr/,What extends to the horizon?,Prairie,Parry,Grassland,Nature,3
+The lagoon is perfect for swimming.,Lagoon,/l/,What is perfect for swimming?,Lagoon,Balloon,Water,Nature,2
+The geyser erupts every hour.,Geyser,/g/,What erupts every hour?,Geyser,Geezer,Feature,Nature,3
+The tundra remains frozen year round.,Tundra,/t/,What remains frozen?,Tundra,Thunder,Land,Nature,3
+The aurora appeared in the night sky.,Aurora,/ɔ/,What appeared?,Aurora,A roar,Lights,Nature,3
+The athlete broke the record.,Athlete,/æ/,Who broke the record?,Athlete,Bath feet,Competitor,Sports,2
+The marathon starts at dawn.,Marathon,/m/,What starts at dawn?,Marathon,Triathlon,Race,Sports,2
+The referee made a controversial call.,Referee,/r/,Who made the call?,Referee,Refugees,Official,Sports,2
+The championship game is tonight.,Championship,/ch/,What is tonight?,Championship,Champ onship,Game,Sports,2
+The coach gave an inspiring speech.,Coach,/k/,Who gave the speech?,Coach,Roach,Trainer,Sports,2
+The tournament bracket was released.,Tournament,/t/,What was released?,Tournament,Journal,Bracket,Sports,3
+The stadium erupted in cheers.,Stadium,/st/,What erupted?,Stadium,Stage,Arena,Sports,2
+The quarterback threw a perfect pass.,Quarterback,/kw/,Who threw the pass?,Quarterback,Quarter back,Player,Sports,3
+The goalie made an incredible save.,Goalie,/g/,Who made the save?,Goalie,Goal,Keeper,Sports,2
+The playoffs begin next week.,Playoffs,/p/,What begins next week?,Playoffs,Play offs,Games,Sports,2
+The team won the trophy.,Trophy,/tr/,What did they win?,Trophy,Atrophy,Award,Sports,2
+The scoreboard shows a tied game.,Scoreboard,/sk/,What shows a tie?,Scoreboard,Score board,Display,Sports,2
+The inning ended with a strikeout.,Inning,/ɪ/,What ended?,Inning,In ing,Round,Sports,2
+The sprinter crossed the finish line.,Sprinter,/spr/,Who crossed the line?,Sprinter,Printer,Runner,Sports,3
+The gymnast performed a flawless routine.,Gymnast,/dʒ/,Who performed?,Gymnast,Jim nast,Athlete,Sports,3
+The relay team set a new record.,Relay,/r/,What team set a record?,Relay,Delay,Group,Sports,2
+The umpire called it a strike.,Umpire,/ʌ/,Who called it?,Umpire,Empire,Official,Sports,2
+The swimmer won the gold medal.,Swimmer,/sw/,Who won gold?,Swimmer,Swinger,Athlete,Sports,2
+The halftime show was entertaining.,Halftime,/h/,What was entertaining?,Halftime,Half time,Show,Sports,2
+The soccer match went into overtime.,Match,/m/,What went into overtime?,Match,Catch,Game,Sports,2
+The financial report looks promising.,Financial,/f/,What looks promising?,Financial,Finance shall,Report,Finance,3
+The budget needs to be reviewed.,Budget,/b/,What needs review?,Budget,Budge it,Plan,Finance,2
+The interest rate has increased.,Interest,/ɪ/,What has increased?,Interest,In rest,Rate,Finance,2
+The deposit was processed today.,Deposit,/d/,What was processed?,Deposit,Deposit,Payment,Finance,2
+The mortgage payment is due Monday.,Mortgage,/m/,What is due?,Mortgage,More gage,Payment,Finance,3
+The investment portfolio is diversified.,Portfolio,/p/,What is diversified?,Portfolio,Port folio,Investments,Finance,3
+The transaction was successful.,Transaction,/tr/,What was successful?,Transaction,Traction,Payment,Finance,2
+The statement shows the balance.,Statement,/st/,What shows the balance?,Statement,State meant,Document,Finance,2
+The inflation rate is rising.,Inflation,/ɪ/,What is rising?,Inflation,In flation,Rate,Finance,3
+The savings account earns interest.,Savings,/s/,What earns interest?,Savings,Saving,Account,Finance,2
+The dividend will be paid quarterly.,Dividend,/d/,What will be paid?,Dividend,Diva end,Payment,Finance,3
+The exchange rate fluctuates daily.,Exchange,/ɛ/,What fluctuates?,Exchange,Exchange,Rate,Finance,2
+The tax refund arrived today.,Refund,/r/,What arrived?,Refund,Reefed,Payment,Finance,2
+The premium is due next month.,Premium,/pr/,What is due?,Premium,Pre mum,Payment,Finance,2
+The equity in the house has grown.,Equity,/ɛ/,What has grown?,Equity,Equal,Value,Finance,3
+The retirement plan offers matching.,Retirement,/r/,What offers matching?,Retirement,Retire meant,Plan,Finance,3
+The credit score improved this year.,Credit,/kr/,What improved?,Credit,Credited,Score,Finance,2
+The loan application was approved.,Application,/æ/,What was approved?,Application,Implication,Form,Finance,2
+The annuity provides steady income.,Annuity,/ɑ/,What provides income?,Annuity,And new it,Account,Finance,3
+The broker recommended selling.,Broker,/br/,Who recommended selling?,Broker,Broken,Advisor,Finance,2
+The painter finished the mural.,Painter,/p/,Who finished the mural?,Painter,Fainted,Artist,Art,2
+The sculpture was carved from marble.,Sculpture,/sk/,What was carved?,Sculpture,Scolded,Art,Art,3
+The canvas is ready for painting.,Canvas,/k/,What is ready?,Canvas,Campus,Material,Art,2
+The gallery opening is Friday.,Opening,/o/,What is Friday?,Opening,Open ink,Event,Art,2
+The portrait captures her likeness.,Portrait,/p/,What captures her likeness?,Portrait,Poor trait,Painting,Art,2
+The brush strokes show great skill.,Brush,/br/,What shows skill?,Brush,Rush,Strokes,Art,2
+The pottery class meets Wednesdays.,Pottery,/p/,What meets Wednesdays?,Pottery,Lottery,Class,Art,2
+The palette contains many colors.,Palette,/p/,What contains colors?,Palette,Palace,Board,Art,2
+The sketch is almost complete.,Sketch,/sk/,What is almost complete?,Sketch,Catch,Drawing,Art,2
+The watercolor technique is difficult.,Watercolor,/w/,What technique is difficult?,Watercolor,Water color,Method,Art,3
+The frame complements the artwork.,Frame,/fr/,What complements the art?,Frame,Flame,Border,Art,2
+The photography exhibit is stunning.,Photography,/f/,What is stunning?,Photography,For tography,Exhibit,Art,3
+The ceramic vase is very delicate.,Ceramic,/s/,What is delicate?,Ceramic,Sir am ic,Vase,Art,3
+The charcoal drawing is expressive.,Charcoal,/ch/,What drawing is expressive?,Charcoal,Char coal,Medium,Art,3
+The abstract piece sparks conversation.,Abstract,/æ/,What sparks conversation?,Abstract,Contacted,Art,Art,3
+The mosaic took months to complete.,Mosaic,/m/,What took months?,Mosaic,Prozac,Art,Art,3
+The still life depicts fruit.,Still life,/st/,What depicts fruit?,Still life,Till wife,Painting,Art,2
+The artist uses bold colors.,Artist,/ɑ/,Who uses bold colors?,Artist,Arched,Painter,Art,2
+The easel holds the canvas steady.,Easel,/i/,What holds the canvas?,Easel,Weasel,Stand,Art,2
+The installation fills the entire room.,Installation,/ɪ/,What fills the room?,Installation,Station,Art,Art,3
+The author signed copies of her book.,Author,/ɔ/,Who signed books?,Author,Offer,Writer,Literature,2
+The novel received critical acclaim.,Novel,/n/,What received acclaim?,Novel,Shovel,Book,Literature,2
+The chapter ended with a cliffhanger.,Chapter,/ch/,What ended?,Chapter,Chapped,Section,Literature,2
+The biography reveals new details.,Biography,/b/,What reveals details?,Biography,Geography,Book,Literature,3
+The poem captures deep emotion.,Poem,/p/,What captures emotion?,Poem,Pom,Verse,Literature,2
+The narrator tells the story well.,Narrator,/n/,Who tells the story?,Narrator,Rater,Speaker,Literature,2
+The plot twists kept readers guessing.,Plot,/p/,What kept readers guessing?,Plot,Lot,Story,Literature,2
+The protagonist faces many challenges.,Protagonist,/pr/,Who faces challenges?,Protagonist,Pro tagonist,Character,Literature,3
+The dialogue feels very authentic.,Dialogue,/d/,What feels authentic?,Dialogue,Die log,Speech,Literature,3
+The memoir chronicles her journey.,Memoir,/m/,What chronicles her journey?,Memoir,Memory,Book,Literature,3
+The paperback edition is cheaper.,Paperback,/p/,What is cheaper?,Paperback,Paper back,Edition,Literature,2
+The library has an extensive collection.,Collection,/k/,What does the library have?,Collection,Selection,Books,Literature,2
+The publisher accepted the manuscript.,Publisher,/p/,Who accepted it?,Publisher,Punisher,Company,Literature,3
+The anthology includes many authors.,Anthology,/æ/,What includes many authors?,Anthology,And thology,Collection,Literature,3
+The fiction section is upstairs.,Fiction,/f/,What section is upstairs?,Fiction,Friction,Books,Literature,2
+The bestseller list was updated today.,Bestseller,/b/,What was updated?,Bestseller,Best seller,List,Literature,2
+The editor made helpful suggestions.,Editor,/ɛ/,Who made suggestions?,Editor,Ed it or,Person,Literature,2
+The preface explains the context.,Preface,/pr/,What explains the context?,Preface,Pre face,Section,Literature,3
+The footnotes provide more information.,Footnotes,/f/,What provides information?,Footnotes,Foot notes,Notes,Literature,2
+The epilogue wraps up the story.,Epilogue,/ɛ/,What wraps up the story?,Epilogue,Epic log,Ending,Literature,3
+The puppy needs to be trained.,Puppy,/p/,What needs training?,Puppy,Cup pea,Dog,Pets,1
+The veterinarian office is closed.,Veterinarian,/v/,What is closed?,Veterinarian,Veteran,Office,Pets,3
+The kitten plays with string.,Kitten,/k/,What plays with string?,Kitten,Mitten,Cat,Pets,1
+The hamster runs on the wheel.,Hamster,/h/,What runs on the wheel?,Hamster,Ham stir,Pet,Pets,2
+The aquarium needs a filter change.,Aquarium,/ɑ/,What needs a filter?,Aquarium,A quarium,Tank,Pets,3
+The parrot learned new words.,Parrot,/p/,What learned words?,Parrot,Carrot,Bird,Pets,2
+The rabbit loves fresh vegetables.,Rabbit,/r/,What loves vegetables?,Rabbit,Rabid,Pet,Pets,1
+The groomer trimmed the dog's fur.,Groomer,/gr/,Who trimmed the fur?,Groomer,Roomer,Person,Pets,2
+The leash keeps the dog safe.,Leash,/l/,What keeps the dog safe?,Leash,Lease,Strap,Pets,1
+The shelter has many animals.,Shelter,/ʃ/,What has many animals?,Shelter,Sheltered,Place,Pets,2
+The collar has identification tags.,Collar,/k/,What has tags?,Collar,Dollar,Neckband,Pets,2
+The pet food is on sale this week.,Food,/f/,What is on sale?,Food,Mood,Supplies,Pets,1
+The adoption process takes time.,Adoption,/ɑ/,What takes time?,Adoption,Option,Process,Pets,2
+The terrarium needs more humidity.,Terrarium,/t/,What needs humidity?,Terrarium,Aquarium,Tank,Pets,3
+The microchip provides identification.,Microchip,/m/,What provides ID?,Microchip,Micro chip,Device,Pets,3
+The wedding ceremony starts at four.,Ceremony,/s/,What starts at four?,Ceremony,Acrimony,Event,Events,3
+The reception hall is beautifully decorated.,Reception,/r/,What is decorated?,Reception,Deception,Hall,Events,2
+The anniversary party is Saturday.,Anniversary,/æ/,What is Saturday?,Anniversary,Adversary,Party,Events,2
+The graduation ceremony was inspiring.,Graduation,/gr/,What was inspiring?,Graduation,Gradation,Event,Events,2
+The reunion brought everyone together.,Reunion,/r/,What brought everyone together?,Reunion,Union,Event,Events,2
+The funeral service was touching.,Funeral,/f/,What was touching?,Funeral,Fun oral,Service,Events,2
+The christening is at the church.,Christening,/kr/,What is at the church?,Christening,Crisp ening,Event,Events,3
+The shower gifts were generous.,Shower,/ʃ/,What was generous?,Shower,Tower,Gifts,Events,2
+The engagement was announced yesterday.,Engagement,/ɪ/,What was announced?,Engagement,En gage ment,News,Events,2
+The celebration lasted all night.,Celebration,/s/,What lasted all night?,Celebration,Sell a bration,Party,Events,2
+The invitation arrived in the mail.,Invitation,/v/,What arrived in the mail?,Invitation,In citation,Letter,Events,2
+The reception was held at the garden.,Reception,/r/,Where was the reception held?,Reception,Ree ception,Venue,Events,2

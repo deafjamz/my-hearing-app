@@ -10,11 +10,11 @@
 
 | Metric | Value |
 |--------|-------|
-| **Total Audio Files** | **31,413** |
-| **Total When Complete** | **~39,114** |
-| **Completion Rate** | **80%** |
+| **Total Audio Files (current)** | **31,413** |
+| **Total When Phase 2+3 Complete** | **~46,957** |
+| **Completion Rate** | **67% (of target)** |
 | **Active Voices** | **9** |
-| **Content Types** | **8** |
+| **Content Types** | **9** (+ speed variants) |
 | **Quality Standard** | **HNR ≥ 10.0 dB, -20 LUFS** |
 
 ### Quick Health Check
@@ -23,14 +23,15 @@
 |----------|--------|-------|-------|
 | Words (Minimal Pairs) | ✅ COMPLETE | 20,301 | 100% coverage |
 | Sentences v1 | ✅ COMPLETE | 5,659 | 100% coverage |
-| Sentences v2 | ⚠️ PARTIAL | 2,790 | 49% - needs 2,862 more |
-| Stories | ✅ COMPLETE | 440 | 50 stories × 9 voices |
+| Sentences v2 | ⚠️ PARTIAL | 2,790 | 49% — needs 2,880 more (run `generate_sentences_v2.py`) |
+| Stories | ⚠️ NEEDS GEN | 440 | 50 done, 10 new in CSV (60 total × 9 = 540 target) |
 | Conversations | ✅ COMPLETE | 1,400 | 80 pairs × 9 voices |
 | Phoneme Drills | ✅ COMPLETE | 3,600 | 200 pairs × 9 voices |
 | Environmental Sounds | ✅ COMPLETE | 50 | 50 unique sounds |
 | Rate Variants | ✅ COMPLETE | 1,800 | 100 items × 2 rates × 9 voices |
-| Scenarios | ⚠️ PARTIAL | 15 | 3% - needs 529 more |
-| Noise Assets | ✅ COMPLETE | 8 | Clinical-grade |
+| Scenarios | ⚠️ NEEDS GEN | 15 | 40 scenarios defined, 23 with dialogue need audio |
+| Speed Variants | 🆕 PLANNED | 0 | 12,384 target (sentences + stories × 2 rates via ffmpeg) |
+| Noise Assets | ✅ COMPLETE | 8 | Training-grade |
 
 ---
 
@@ -279,20 +280,47 @@ python3 scripts/generate_sentences_v2.py  # Auto-resumes from checkpoint
 
 | Metric | Value |
 |--------|-------|
-| **Total Scenarios** | 32 |
-| **Dialogue Lines** | 136 |
+| **Total Scenarios** | 40 |
+| **Dialogue Lines** | 313 |
 | **Voice Combinations** | 4 |
-| **Target Files** | 544 |
+| **Target Files** | ~1,252 |
 | **Generated Files** | 15 |
 | **Storage Location** | `audio/scenarios/{combo_id}/` |
 | **Database Table** | `scenario_items` |
-| **Status** | ⚠️ 3% COMPLETE |
+| **Status** | ⚠️ NEEDS GENERATION |
 
-**Remaining Work:** 529 files needed
+**Session 30 Update:** Expanded from 30 → 40 scenarios. All 40 now have dialogue lines (313 total). 10 new scenarios added: drive-through, vet, clothing return, coffee shop, farmer's market, phone banking, neighbor chat, gas station, scheduling appointment, package delivery. 13 previously empty scenarios now have dialogue.
+
+**Remaining Work:** ~1,237 files need generation
 
 ---
 
-### 9. Background Noise Assets - SNR Training
+### 9. Speed Variants - Time-Compressed Speech Training
+
+**Purpose:** Practice understanding faster speech as skills improve
+
+| Metric | Value |
+|--------|-------|
+| **Source Content** | Sentences v1 (628) + Stories (60) |
+| **Speed Rates** | 1.2x (moderate), 1.5x (advanced) |
+| **Target Files** | 12,384 |
+| **Generated Files** | 0 |
+| **Storage Location** | `audio/sentences_speed/{voice}/{rate}/`, `audio/stories_speed/{voice}/{rate}/` |
+| **Status** | 🆕 PLANNED — FREE (ffmpeg, no ElevenLabs credits) |
+
+| Source | Per Voice | × 9 Voices | × 2 Rates | Total |
+|--------|-----------|------------|-----------|-------|
+| Sentences v1 | 628 | 5,652 | 11,304 | 11,304 |
+| Stories | 60 | 540 | 1,080 | 1,080 |
+| **Total** | | | | **12,384** |
+
+**Generation:** `python3 scripts/generate_speed_variants.py`
+**Method:** ffmpeg `atempo` filter (pitch-preserving), -20 LUFS normalization
+**Frontend:** Speed selector (1x / 1.2x / 1.5x) added to SentenceTraining and StoryPlayer
+
+---
+
+### 10. Background Noise Assets - SNR Training
 
 **Purpose:** Clinical-grade noise for Speech-in-Noise training
 
@@ -412,24 +440,40 @@ All audio files have metadata tracked in `audio_assets` table:
 
 ---
 
-## Remaining Work
+## Remaining Work (Session 30 Pipeline)
 
-### Priority 1: Sentences v2 Completion
-- **Files Needed:** 2,862
-- **Estimated Credits:** 8,000-10,000
-- **Impact:** Doubles sentence content library
-- **Command:** `python3 scripts/generate_sentences_v2.py`
+### Priority 1: Sentences v2 Completion (ElevenLabs)
+- **Files Needed:** 2,880 (320 sentences × 9 voices)
+- **Estimated Credits:** ~10,000
+- **Impact:** Doubles sentence content library to 1,260 total
+- **Command:** `python3 scripts/generate_sentences_v2.py --resume`
 
-### Priority 2: Scenarios Completion
-- **Files Needed:** 529
-- **Estimated Credits:** 5,000+
-- **Impact:** Enables multi-speaker dialogue exercises
+### Priority 2: New Stories (ElevenLabs)
+- **Files Needed:** 100 (10 new stories × 9 voices + 10 Aravind gap-fill)
+- **Estimated Credits:** ~2,200
+- **Impact:** CI-relevant stories (device fitting, phone calls, fire alarms)
+- **Command:** `python3 scripts/generate_stories_v3.py --resume`
+
+### Priority 3: Scenarios (ElevenLabs)
+- **Files Needed:** ~1,237
+- **Estimated Credits:** ~5,000
+- **Impact:** 40 real-world dialogue scenarios fully playable
 - **Command:** `python3 scripts/generate_scenario_audio.py`
 
-### Total Credits Needed
-- Sentences v2: ~10,000
-- Scenarios: ~5,000
-- **Total: ~15,000 credits**
+### Priority 4: Speed Variants (FREE — ffmpeg only)
+- **Files Needed:** 12,384
+- **Estimated Credits:** 0
+- **Impact:** Time-compressed speech training (1.2x, 1.5x)
+- **Command:** `python3 scripts/generate_speed_variants.py`
+
+### Total
+| Task | Files | Credits |
+|------|-------|---------|
+| Sentences v2 | 2,880 | ~10,000 |
+| New stories + gap-fill | 100 | ~2,200 |
+| Scenarios | ~1,237 | ~5,000 |
+| Speed variants | 12,384 | **0** |
+| **Total** | **~16,601** | **~17,200** |
 
 ---
 
@@ -437,6 +481,7 @@ All audio files have metadata tracked in `audio_assets` table:
 
 | Date | Action | Files Changed |
 |------|--------|---------------|
+| 2026-02-14 | Session 30: Content expansion pipeline — 10 stories, 2 sentences, 10 scenarios, 183 dialogue lines, speed variant scripts, speed UI | CSVs + scripts + frontend |
 | 2026-01-25 | Created master inventory | - |
 | 2026-01-24 | Content Expansion v2 (partial) | +10,618 |
 | 2026-01-23 | Ingested conversations, drills, environmental | +5,050 |
