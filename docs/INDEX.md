@@ -28,9 +28,13 @@
 ### For Content/Audio Work
 | Doc | Purpose |
 |-----|---------|
-| [AUDIO_INVENTORY.md](./AUDIO_INVENTORY.md) | Single source of truth for audio |
+| [AUDIO_MASTER_INVENTORY.md](./AUDIO_MASTER_INVENTORY.md) | Master inventory — 31,413+ files, 9 content types, all voices |
+| [AUDIO_INVENTORY.md](./AUDIO_INVENTORY.md) | Audio asset reference (original) |
 | [VOICE_LIBRARY.md](./VOICE_LIBRARY.md) | 9-voice roster, ElevenLabs IDs |
 | [CONTENT_PIPELINE_GEN2.md](./CONTENT_PIPELINE_GEN2.md) | Audio generation process |
+| [STORY_MODULE_STRATEGY.md](./STORY_MODULE_STRATEGY.md) | Story content design strategy |
+| [PRODUCTION_READY_GENERATION.md](./PRODUCTION_READY_GENERATION.md) | Production audio generation specs |
+| [scripts/README.md](../scripts/README.md) | Generation script documentation |
 
 ### For Regulatory/Legal
 | Doc | Purpose |
@@ -82,9 +86,14 @@
 │       └── ROADMAP.md
 │
 ├── src/                   # Application source
-├── scripts/               # Python generation scripts
-├── sql_migrations/        # Database migrations
-└── supabase/              # Edge functions
+│   └── test/              # Test setup (vitest, mocks)
+├── scripts/               # Python generation & ingestion scripts (31 files)
+├── content/source_csvs/   # Content definitions (stories, sentences, scenarios, etc.)
+├── seeds/                 # Database seed data
+├── sql_migrations/        # Database migrations (36 files)
+├── supabase/              # Edge functions (evaluate-session)
+├── .claude/               # Claude Code config (hooks, MCP, settings, rules, skills)
+└── .github/workflows/     # CI/CD (build-and-deploy, deploy-schema)
 ```
 
 ---
@@ -94,8 +103,9 @@
 ### Active (Current)
 | Doc | Last Updated | Status |
 |-----|--------------|--------|
-| STATUS.md | 2026-02-08 | ✅ Current |
+| STATUS.md | 2026-02-15 | ✅ Current (Session 30b — consolidation) |
 | CLAUDE.md | 2026-01-25 | ✅ Current |
+| AUDIO_MASTER_INVENTORY.md | 2026-02-15 | ✅ Current (31,413+ files, speed variants planned) |
 | AUTH_SETUP.md | 2026-02-08 | ✅ Current |
 | TESTING_FINDINGS.md | 2026-02-08 | ✅ Current |
 | INFRASTRUCTURE_AUDIT.md | 2026-02-08 | ✅ Current |
@@ -105,19 +115,27 @@
 | IOS_DEPLOYMENT.md | 2026-01-25 | ✅ Current |
 | ANDROID_DEPLOYMENT.md | 2026-01-25 | ✅ Current |
 
+### Historical Reference (Consolidated from Desktop — Session 30b)
+| Doc | Purpose |
+|-----|---------|
+| SMART_COACH_DAY1.md | Smart Coach development log — Day 1 |
+| SMART_COACH_DAY2.md | Smart Coach development log — Day 2 |
+| SMART_COACH_DAY3.md | Smart Coach development log — Day 3 |
+| SMART_COACH_DEPLOYMENT.md | Smart Coach deployment process |
+| SMART_COACH_DEPLOYMENT_COMPLETE.md | Smart Coach deployment completion |
+| SESSION_SUMMARY_SMART_COACH.md | Smart Coach session summary |
+| PILOT_REPORT.md | Pilot study report |
+| PILOT_VALIDATION.md | Pilot validation results |
+| BABBLE_GENERATION_CORRECTED.md | Babble noise generation corrections |
+| NOISE_GENERATION_ROADMAP.md | Noise asset generation plan |
+| PRODUCTION_READY_GENERATION.md | Production audio generation specs |
+| STORY_MODULE_STRATEGY.md | Story content module design |
+
 ### Needs Review
 | Doc | Issue |
 |-----|-------|
 | GEMINI.md | References vanilla HTML (app is React) |
-| core docs/* | From prototype phase (Nov 2024) |
 | ROADMAP.md | Multiple conflicting roadmaps exist |
-
-### Archive Candidates
-| Doc | Reason |
-|-----|--------|
-| SESSION_LOG*.md | Superseded by STATUS.md |
-| SMART_COACH_DAY*.md | Historical session logs |
-| MIGRATION_GUIDE.md | V5 migration complete |
 
 ---
 

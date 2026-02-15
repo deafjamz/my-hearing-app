@@ -1,6 +1,8 @@
 # SoundSteps Scripts
 
-This directory contains Python scripts for data migration, audio verification, and content pipeline management.
+Audio generation, content ingestion, and utility scripts for the SoundSteps hearing training app.
+
+> **Last Updated:** 2026-02-15 (Session 30b — repo consolidation)
 
 ## Setup
 
@@ -12,149 +14,189 @@ pip install -r scripts/requirements.txt
 
 ### 2. Configure Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file in the project root (see `.env.local.template`):
 
 ```bash
 # Supabase
-SUPABASE_URL="https://your-project.supabase.co"
+SUPABASE_URL="https://padfntxzoxhozfjsqnzc.supabase.co"
 SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
-SUPABASE_ANON_KEY="your-anon-key"
 
 # ElevenLabs (for audio generation)
 ELEVENLABS_API_KEY="your-elevenlabs-key"
 ```
 
-**Security Note:** Never commit `.env` to version control. It's already in `.gitignore`.
+**Security:** `.env` is in `.gitignore`. Never commit secrets.
 
-## Scripts
+---
 
-### Data Migration: `migrate_to_v5_schema.py`
+## Script Categories
 
-Migrates existing data from CSV files to the new v5 schema (`stimuli_catalog`, `audio_assets`).
+### Audio Generation (11 scripts)
 
-**Prerequisites:**
-- Run `sql_migrations/schema_v5_core_alignment.sql` in Supabase first
-- Ensure CSV files exist in `content/source_csvs/`
+These generate audio files using ElevenLabs TTS and upload to Supabase Storage.
 
-**Usage:**
+| Script | Content Type | Model | Notes |
+|--------|-------------|-------|-------|
+| `generate_sentences_v2.py` | Sentences | eleven_turbo_v2_5 | Resume-capable, ~630 × 9 voices |
+| `generate_stories_v3.py` | Stories | eleven_multilingual_v2 | Word-level timestamps for karaoke |
+| `generate_scenario_audio.py` | Scenario dialogue | eleven_turbo_v2_5 | 40 scenarios, multi-speaker |
+| `generate_conversations.py` | Conversations | eleven_turbo_v2_5 | 80 pairs |
+| `generate_environmental_sounds.py` | Environmental | eleven_turbo_v2_5 | 50 sounds |
+| `generate_phoneme_drills.py` | Phoneme drills | eleven_turbo_v2_5 | 200 pairs |
+| `generate_rate_variants.py` | Rate variants | eleven_turbo_v2_5 | 100 items at varied speeds |
+| `generate_sentences_all_voices.py` | Sentences (all voices) | eleven_turbo_v2_5 | Batch across 9 voices |
+| `generate_babble_simple.py` | Babble noise | — | Multi-talker noise for SNR mixing |
+| `generate_clinical_noise.py` | Training noise | — | Speech-shaped noise generation |
+| `generate_speed_variants.py` | Speed variants | — | **ffmpeg only, zero credits** |
+
+### Content Ingestion (5 scripts)
+
+These read CSVs from `content/source_csvs/` and insert into Supabase tables.
+
+| Script | Target Table |
+|--------|-------------|
+| `ingest_conversations.py` | stimuli_catalog + audio_assets |
+| `ingest_environmental.py` | stimuli_catalog + audio_assets |
+| `ingest_phoneme_drills.py` | stimuli_catalog + audio_assets |
+| `ingest_scenarios_v2.py` | scenarios + scenario_items |
+| `ingest_stories_v2.py` | stories + story_questions |
+
+### Utilities (12 scripts)
+
+| Script | Purpose |
+|--------|---------|
+| `verify_new_content.py` | Quality verification (duration, loudness, clipping) |
+| `check_audio_files.py` | Check audio file existence in Supabase Storage |
+| `check_supabase_storage.py` | Audit Supabase Storage bucket contents |
+| `verify_db_state.py` | Verify database table row counts |
+| `verify_programs_setup.py` | Verify programs/sessions schema |
+| `backfill_sentence_database_v2.py` | Backfill sentence metadata |
+| `link_sentence_audio.py` | Link sentence records to audio assets |
+| `link_word_audio.py` | Link word pair records to audio assets |
+| `link_github_audio.py` | Link legacy GitHub-hosted audio |
+| `populate_sessions.py` | Populate session/program data |
+| `sanitize_vocabulary.py` | Clean vocabulary entries |
+| `download_pilot_batch.py` | Download pilot batch for validation |
+
+---
+
+## 9-Voice Roster
+
+All generation scripts support these voices:
+
+| Voice | Region | Gender | ElevenLabs Model |
+|-------|--------|--------|-----------------|
+| sarah | US | Female | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| emma | US | Female | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| bill | US | Male | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| michael | US | Male | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| alice | UK | Female | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| daniel | UK | Male | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| matilda | AU | Female | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| charlie | AU | Male | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+| aravind | IN | Male | eleven_turbo_v2_5 / eleven_multilingual_v2 |
+
+---
+
+## Audio Standards
+
+- **Format:** MP3 128kbps
+- **Normalization:** -20 LUFS target
+- **Peak:** < -1.5 dB true peak (no clipping)
+- **Sample Rate:** 44.1 kHz
+- **Storage:** Supabase Storage bucket `audio`
+- **URL pattern:** `{SUPABASE_URL}/storage/v1/object/public/audio/{path}`
+
+### Storage Path Conventions
+
+```
+audio/
+├── words_v2/{voice}/{word}.mp3
+├── sentences_v1/{voice}/sentence_{id}.mp3
+├── stories/{voice}/story_v3_{category}_{id}.mp3
+├── scenarios/{voice}/{scenario_id}_{order}.mp3
+├── conversations/{voice}/conversation_{id}.mp3
+├── environmental/{voice}/env_{id}.mp3
+├── phoneme_drills/{voice}/drill_{id}.mp3
+├── rate_variants/{voice}/rate_{id}.mp3
+├── sentences_speed/{voice}/{rate}/sentence_{id}.mp3    ← speed variants
+└── stories_speed/{voice}/{rate}/story_{id}.mp3         ← speed variants
+```
+
+---
+
+## Common Workflows
+
+### Generate New Content End-to-End
+
 ```bash
-python scripts/migrate_to_v5_schema.py
+# 1. Edit CSV in content/source_csvs/
+# 2. Generate audio
+python3 scripts/generate_stories_v3.py --resume
+
+# 3. Verify quality
+python3 scripts/verify_new_content.py --type stories --spot-check
+
+# 4. Ingest to database
+python3 scripts/ingest_stories_v2.py
 ```
 
-**What it does:**
-1. Reads from `master_phonemes.csv`, `master_sentences.csv`, `master_stories.csv`
-2. Populates `stimuli_catalog` table with content
-3. Creates `audio_assets` entries for each voice (david, marcus, sarah, emma)
-4. Maps audio URLs to GitHub CDN paths
-5. Verifies migration success
+### Generate Speed Variants (Free — No Credits)
 
-**Output:**
-```
-📝 Migrating Phonemes (Word Pairs)...
-  ✅ Inserted 100 phoneme stimuli
-  ✅ Inserted 800 audio assets
-
-📝 Migrating Sentences...
-  ✅ Inserted 50 sentence stimuli
-  ✅ Inserted 200 audio assets
-
-🔍 Verifying Migration...
-  📊 Words: 100
-  📊 Sentences: 50
-  🎵 Audio Assets: 1000
-```
-
-### Audio Verification: `verify_audio.py`
-
-Verifies and normalizes audio files with intelligibility scoring.
-
-**Usage:**
 ```bash
-# Basic normalization
-python verify_audio.py input.mp3 output.wav
+# Pilot mode (5 files × 2 voices × 2 rates)
+python3 scripts/generate_speed_variants.py --pilot
 
-# With STOI verification (requires reference audio)
-python verify_audio.py input.mp3 output.wav --reference reference.wav --min-stoi 0.7
+# Full run (all sentences + stories × 9 voices × 2 rates)
+python3 scripts/generate_speed_variants.py
+
+# Specific voice/rate
+python3 scripts/generate_speed_variants.py --voices sarah,emma --rates 1.2x
 ```
 
-**What it does:**
-1. Loads audio file
-2. Trims silence (active speech detection)
-3. Measures RMS amplitude
-4. Normalizes to target dB level (default: -20.0 dB)
-5. (Optional) Calculates STOI score vs. reference
-6. Saves normalized audio
-7. Returns metadata for Supabase
+### Resume After Interruption
 
-**Output:**
-```json
-{
-  "success": true,
-  "verified_rms_db": -20.0,
-  "duration_ms": 3240,
-  "stoi_score": 0.89,
-  "intelligibility_pass": true
-}
-```
+Most generation scripts save progress to `*_progress.json` and support `--resume`:
 
-**Batch Processing:**
 ```bash
-# Verify all audio in a directory
-for file in audio/*.mp3; do
-  python verify_audio.py "$file" "verified/$(basename $file .mp3).wav"
-done
+python3 scripts/generate_sentences_v2.py --resume
 ```
 
-## Workflow
+---
 
-### New Content Pipeline
+## Content CSVs
 
-1. **Edit Content** - Update CSV files in `content/source_csvs/`
-2. **Generate Audio** - Use ElevenLabs API to generate MP3 files
-3. **Verify Audio** - Run `verify_audio.py` on all generated files
-4. **Upload to Supabase** - Upload verified audio to Supabase Storage
-5. **Update Database** - Run `migrate_to_v5_schema.py` to sync metadata
+Source content lives in `content/source_csvs/`:
 
-### Schema Updates
+| File | Rows | Description |
+|------|------|-------------|
+| `stories_v3.csv` | 60 | Story transcripts with phonemic targets |
+| `sentences_v2.csv` | 630 | Sentences with comprehension questions |
+| `scenarios_v2.csv` | 40 | Scenario definitions (setting, noise type) |
+| `scenario_items_v2.csv` | 313 | Dialogue lines for scenarios |
+| `story_questions_v2.csv` | 240 | Story comprehension questions (4 per story) |
+| `conversations_v1.csv` | 80 | Conversation pairs |
+| `environmental_sounds_v1.csv` | 50 | Environmental sound descriptions |
+| `phoneme_drills_v1.csv` | 200 | Phoneme drill pairs |
+| `rate_variants_v1.csv` | 100 | Rate variant items |
+| `minimal_pairs_master.csv` | 2,081 | Minimal pair word combinations |
 
-1. **Create Migration** - Add new `.sql` file to `sql_migrations/`
-2. **Test Locally** - Run in Supabase SQL Editor
-3. **Commit Changes** - Push to GitHub
-4. **Deploy** - GitHub Actions will notify you to run migration in production
+---
 
 ## Troubleshooting
 
-### `pystoi` not found
+### ElevenLabs rate limit
+Scripts include built-in retry with exponential backoff. If persistent, reduce `--batch-size`.
+
+### Supabase upload fails
+- Check `SUPABASE_SERVICE_ROLE_KEY` (not the anon key)
+- Verify Storage bucket `audio` exists and has public read access
+- Check file size (Supabase free tier: 50MB per file)
+
+### ffmpeg not found (speed variants)
 ```bash
-pip install pystoi
+brew install ffmpeg   # macOS
 ```
 
-### Supabase connection error
-- Check `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in `.env`
-- Verify Supabase project is active
-- Check firewall/network access
-
-### Audio verification fails
-- Ensure input file is valid audio (MP3, WAV supported)
-- Check file permissions
-- Verify `librosa` and `soundfile` are installed
-
-### Migration shows 0 records
-- Verify CSV files exist and have correct format
-- Check `stimuli_catalog` table exists (run schema migration first)
-- Look for error messages in script output
-
-## Best Practices
-
-1. **Always test migrations locally first** - Use Supabase local development
-2. **Backup before major migrations** - Export data via Supabase Dashboard
-3. **Verify audio quality** - Listen to normalized files before deployment
-4. **Use service role key sparingly** - Only for admin scripts, never in frontend
-5. **Document schema changes** - Add comments to SQL migration files
-
-## Resources
-
-- [Supabase Documentation](https://supabase.com/docs)
-- [Librosa Documentation](https://librosa.org/doc/latest/index.html)
-- [STOI (Intelligibility) Paper](https://ieeexplore.ieee.org/document/5713237)
-- [ElevenLabs API](https://docs.elevenlabs.io/)
+### Resume file corrupted
+Delete the `*_progress.json` file and restart generation. Already-uploaded files won't be re-uploaded (scripts check Storage first).
