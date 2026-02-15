@@ -170,7 +170,7 @@ export function ProgramDetail() {
                   </div>
                   <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
+                      className="h-full bg-teal-500 rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: `${progressPercent}%` }}
                       transition={{ duration: 1, ease: 'easeOut' }}
@@ -186,7 +186,7 @@ export function ProgramDetail() {
         {nextSessionId && (
           <Link
             to={`/session/${nextSessionId}`}
-            className="block mb-8 p-6 bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl hover:from-teal-400 hover:to-teal-500 transition-all group"
+            className="block mb-8 p-6 bg-teal-500 hover:bg-teal-400 rounded-2xl transition-all group"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -221,7 +221,7 @@ export function ProgramDetail() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-8 p-6 bg-gradient-to-r from-teal-900/30 to-green-900/30 border border-teal-700/50 rounded-2xl text-center"
+            className="mt-8 p-6 bg-teal-900/30 border border-teal-700/50 rounded-2xl text-center"
           >
             <div className="w-16 h-16 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="h-8 w-8 text-teal-400" />

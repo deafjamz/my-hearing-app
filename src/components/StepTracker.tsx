@@ -53,8 +53,8 @@ export function StepTracker({ current, goal = 100 }: StepTrackerProps) {
           <motion.div
             className={`absolute bottom-0 left-0 w-full rounded-full ${
               isGoalReached
-                ? 'bg-gradient-to-t from-teal-500 to-teal-400'
-                : 'bg-gradient-to-t from-teal-600 to-teal-500'
+                ? 'bg-teal-400'
+                : 'bg-teal-500'
             }`}
             initial={{ height: 0 }}
             animate={{

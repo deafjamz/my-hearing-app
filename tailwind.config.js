@@ -29,15 +29,13 @@ export default {
           info: '#00A79D',
         },
 
-        // === Legacy tokens — used by Player, SNRMixer, ActivityHeader, AudioPlayer, QuizCard ===
+        // === Legacy tokens — used by Player, SNRMixer, AudioPlayer, QuizCard ===
         // TODO: Remove after screen-by-screen design alignment sweep
         brand: {
-          // Aura brand colors (new)
           teal: '#00A79D',
           'teal-light': '#00CFC3',
           amber: '#FFB300',
           'amber-light': '#FFD54F',
-          // Legacy Vitality palette (still referenced in old components)
           primary: '#FF6B6B',
           secondary: '#FFD93D',
           tertiary: '#6C5CE7',
@@ -57,12 +55,6 @@ export default {
         secondary: { 500: '#64748b' },
         success: { 500: '#22c55e' },
         error: { 500: '#ef4444' },
-        // Neumorphic light mode fallback
-        neumorphic: {
-          base: '#E0E5EC',
-          light: '#FFFFFF',
-          shadow: '#A3B1C6',
-        },
       },
       fontFamily: {
         sans: ['Inter Variable', 'system-ui', '-apple-system', 'sans-serif'],
@@ -88,12 +80,6 @@ export default {
         'elevation-1': '0 2px 8px rgba(0, 167, 157, 0.1)',
         'elevation-2': '0 4px 16px rgba(0, 167, 157, 0.15)',
         'elevation-3': '0 8px 32px rgba(0, 167, 157, 0.2)',
-        // Legacy neumorphic shadows (ActivityHeader uses these)
-        'neumo-convex': '-6px -6px 16px rgba(255, 255, 255, 0.8), 6px 6px 16px rgba(163, 177, 198, 0.6)',
-        'neumo-concave': 'inset 6px 6px 16px rgba(163, 177, 198, 0.6), inset -6px -6px 16px rgba(255, 255, 255, 0.8)',
-        'neumo-flat': '6px 6px 16px rgba(163, 177, 198, 0.6)',
-        'dark-neumo-convex': '-6px -6px 16px rgba(30, 41, 59, 0.8), 6px 6px 16px rgba(0, 0, 0, 0.6)',
-        'dark-neumo-concave': 'inset 6px 6px 16px rgba(0, 0, 0, 0.6), inset -6px -6px 16px rgba(30, 41, 59, 0.8)',
       },
       transitionDuration: {
         '0': '0ms',

@@ -119,8 +119,8 @@ export function Dashboard() {
                 <motion.div
                   className={`h-full rounded-full ${
                     isGoalReached
-                      ? 'bg-gradient-to-r from-teal-500 to-teal-400'
-                      : 'bg-gradient-to-r from-teal-600 to-teal-500'
+                      ? 'bg-teal-400'
+                      : 'bg-teal-500'
                   }`}
                   initial={prefersReducedMotion ? false : { width: 0 }}
                   animate={{

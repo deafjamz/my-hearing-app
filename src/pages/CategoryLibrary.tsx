@@ -92,18 +92,8 @@ export function CategoryLibrary() {
     return categoryInfo[category]?.description || `Practice ${category.toLowerCase()} sound distinctions`;
   };
 
-  const getCategoryColor = (category: string): string => {
-    const colors: Record<string, string> = {
-      'Vowels': 'from-rose-500 to-pink-600',
-      'Consonant Voicing': 'from-blue-500 to-indigo-600',
-      'Manner': 'from-green-500 to-emerald-600',
-      'Place': 'from-orange-500 to-amber-600',
-      'Sibilants': 'from-cyan-500 to-sky-600',
-      'Plosives': 'from-red-500 to-rose-600',
-      'Fricatives': 'from-teal-500 to-cyan-600',
-      'Nasals': 'from-yellow-500 to-orange-600',
-    };
-    return colors[category] || 'from-teal-500 to-teal-600';
+  const getCategoryColor = (_category: string): string => {
+    return 'bg-teal-500/20 text-teal-400';
   };
 
   if (loading) {
@@ -124,8 +114,8 @@ export function CategoryLibrary() {
           </Link>
 
           <div className="flex items-center gap-4 mb-3">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center shadow-lg">
-              <Target className="h-7 w-7 text-white" strokeWidth={2.5} />
+            <div className="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center">
+              <Target className="h-7 w-7 text-teal-400" strokeWidth={2.5} />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-white">Word Pair Categories</h1>

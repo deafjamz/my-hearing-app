@@ -229,7 +229,7 @@ export function SentenceTraining() {
           <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
             isPlaying ? 'scale-110' : 'scale-100'
           }`}>
-            <div className={`relative w-32 h-32 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 shadow-2xl flex items-center justify-center ${
+            <div className={`relative w-32 h-32 rounded-full bg-teal-500 shadow-2xl flex items-center justify-center ${
               isPlaying ? 'animate-pulse' : ''
             }`}>
               <Volume2 className="h-12 w-12 text-white" />

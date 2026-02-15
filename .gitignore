@@ -36,6 +36,10 @@ public/noise_files/
 # macOS
 .DS_Store
 
+# Editor swap files
+*.swp
+*.swo
+
 # Regenerated audio output (uploaded to Supabase Storage)
 regen_output/
 

@@ -125,7 +125,7 @@ export function ActivityList() {
     const canAccess = devUnlock || !activity.requiredTier || hasAccess(activity.requiredTier);
 
     const cardBase = isOnramp
-      ? "group flex items-center p-4 bg-gradient-to-r from-emerald-50 to-cyan-50 dark:from-emerald-950/20 dark:to-cyan-950/20 border border-emerald-200 dark:border-emerald-800/50 rounded-[2rem] shadow-sm"
+      ? "group flex items-center p-4 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/50 rounded-[2rem] shadow-sm"
       : "group flex items-center p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm";
 
     const interactiveClass = canAccess
