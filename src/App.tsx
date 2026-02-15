@@ -42,6 +42,7 @@ function namedLazy<M, K extends keyof M>(
 }
 
 // Lazy-loaded pages (named export adapter with stale-chunk retry)
+const LandingPage = namedLazy(() => import('@/pages/LandingPage'), 'LandingPage');
 const ActivityList = namedLazy(() => import('@/pages/ActivityList'), 'ActivityList');
 const RapidFire = namedLazy(() => import('@/pages/RapidFire'), 'RapidFire');
 const StoryList = namedLazy(() => import('@/pages/StoryList'), 'StoryList');
@@ -79,7 +80,7 @@ function S({ children }: { children: React.ReactNode }) {
 const productionRoutes = [
   {
     path: '/',
-    element: <S><ActivityList /></S>,
+    element: <S><LandingPage /></S>,
   },
   {
     path: '/practice',

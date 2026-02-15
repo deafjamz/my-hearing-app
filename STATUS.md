@@ -1,17 +1,18 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-14
-> **Last Session:** Session 28 — Design System Primitives + Identity Polish
-> **Build Status:** ✅ PASSING
+> **Last Session:** Session 29 — Landing Page, Privacy Policy & ToS Updates, Competitive Analysis
+> **Build Status:** ✅ PASSING (4.75s)
 > **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
-> **Marketing:** ✅ Strategy doc + 5 skills + MCP setup guide
+> **Marketing:** ✅ Strategy doc + 5 skills + landing page live at `/`
 > **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment. Gradients purged (0 remaining).
 > **Design System:** Phase 1 ✅ (Satoshi font, deeper teal, haptics, ring burst) | Phase 2 ✅ (Button/Card primitives, full adoption across 14 files, QuizCard dark-mode fix, brand token purge, SNRMixer dark-mode alignment)
+> **Legal:** ✅ Privacy Policy + Terms of Service updated (Feb 14, 2026)
 
 ---
 
@@ -41,6 +42,63 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 29: Landing Page + Legal + Competitive Analysis (COMPLETE)
+
+### What Was Done
+
+**Landing Page (`src/pages/LandingPage.tsx`) — NEW**
+- Full marketing landing page at `/` for unauthenticated visitors
+- Authenticated users auto-redirect to `/practice` (no flash)
+- Sections: Hero, Stats Bar, Features (6 cards), How It Works (4 steps), Who It's For (4 audience cards), Final CTA, Footer
+- Uses Card primitive (subtle variant) per Session 28 design system
+- FadeIn scroll animations via Framer Motion (respects `prefers-reduced-motion`)
+- Footer links to `/privacy`, `/terms`, and `mailto:support@soundsteps.app`
+- Regulatory-safe copy — zero prohibited terms (verified via grep)
+- 9.5KB chunk (3.2KB gzipped)
+
+**Routing Changes**
+- `/` → LandingPage (was ActivityList)
+- `/practice` → ActivityList (practice hub, unchanged)
+- Layout nav "Practice" link updated from `/` to `/practice`
+- Layout logo link updated from `/` to `/practice`
+- Nav active state updated to match `/practice` prefix
+
+**Privacy Policy Updates (`src/pages/PrivacyPolicy.tsx`)**
+- Date updated to February 14, 2026
+- Added Google/Apple OAuth data disclosure (what data we receive per provider)
+- Added "What We Do NOT Collect" section (no microphone, no health data, no biometrics, no location, no contacts)
+- Added "Data Retention" section (deleted within 30 days on account removal)
+- Added "Third-Party Services" section (Supabase, Vercel, Google, Apple — named explicitly)
+- Removed guest mode reference (auth is now mandatory)
+
+**Terms of Service Updates (`src/pages/TermsOfService.tsx`)**
+- Date updated to February 14, 2026
+- Removed guest mode reference (account required)
+
+**Competitive Analysis: LACE AI Pro**
+- Reviewed Dr. Cliff Olson's YouTube reviews (2 videos, 29 screenshots)
+- Reviewed Neurotone website (neurotone.com/for-patients)
+- Key findings: robotic voice cloning, uncanny AI avatars, shallow topic selection masking small library, working memory is scope creep, clinic-gated distribution is a growth bottleneck
+- SoundSteps advantages: voice quality (9 natural voices), Erber-structured progression, dark mode UI, direct-to-consumer, phoneme-level analytics, built by a CI user
+
+### Files Modified (5)
+| File | Change |
+|------|--------|
+| `src/pages/LandingPage.tsx` | **NEW** — Full marketing landing page |
+| `src/pages/PrivacyPolicy.tsx` | OAuth, retention, third-party, "do not collect" sections |
+| `src/pages/TermsOfService.tsx` | Date update, removed guest mode |
+| `src/App.tsx` | Added LandingPage lazy import, `/` route → LandingPage |
+| `src/components/Layout.tsx` | Nav + logo links → `/practice`, active state fix |
+
+### Design System Compliance
+- Card primitive (subtle variant) used for all feature/audience cards
+- CTA `<Link>` elements exempt from Button primitive per Session 28 exclusion rules (`<Link>` renders `<a>`, not `<button>`)
+- Color tokens: teal-400/500, slate-400/500/600/800/900/950 — all from Aura palette
+- Background orbs match WelcomeScreen + Layout pattern
+- Satoshi font inherited from global config
 
 ---
 
@@ -205,8 +263,9 @@ To add a new voice:
 | Core Features | ✅ Ready | Detection, Gross Discrim, Word Pairs, Stories |
 | Error Handling | ✅ Ready | ErrorBoundary catches crashes |
 | Deployment | ✅ Ready | Can deploy to Vercel |
-| Privacy Policy | ⚠️ TODO | Required for app stores |
-| Terms of Service | ⚠️ TODO | Required for app stores |
+| Privacy Policy | ✅ Draft | At `/privacy` — needs legal review before app stores |
+| Terms of Service | ✅ Draft | At `/terms` — needs legal review before app stores |
+| Landing Page | ✅ Ready | At `/` — marketing page for unauthenticated visitors |
 
 ### Security Hardening (2026-01-25)
 - ✅ Rotated all API keys (Supabase anon, service role, ElevenLabs)
@@ -387,8 +446,9 @@ python3 scripts/generate_sentences_v2.py
 - [ ] **Verify BT audio routing** — Have Mark (iPhone + BT hearing aids) test placement + all activities.
 
 #### Marketing & Growth
-- [ ] **Marketing Phase 2 — Competitive research** — Use Playwright MCP to screenshot LACE, Angel Sound, AB Clix. Save to `/tmp/competitive_research.md`.
-- [ ] **Marketing Phase 2 — Landing pages** — Build 3 audience-specific landing pages (CI Users, Audiologists, Family Members) using positioning + copy skills.
+- [x] ~~**Marketing Phase 2 — Competitive research**~~ ✅ (Session 29 — LACE AI Pro reviewed via Dr. Cliff Olson YouTube + Neurotone website. Key insight: weak product, clinic-gated growth model, robotic voices.)
+- [x] ~~**Marketing Phase 2 — Landing page**~~ ✅ (Session 29 — `src/pages/LandingPage.tsx` at `/`. Hero + features + how-it-works + audience cards + CTA. Card primitive, dark mode, regulatory-safe.)
+- [ ] **Privacy Policy + Terms of Service** — ✅ Updated (Session 29) but need legal review before app store submission.
 
 #### Infrastructure
 - [ ] **Sprint 3 Phase D — Weekly email** — Set up Resend account, create Supabase Edge Function, deploy pg_cron schedule.

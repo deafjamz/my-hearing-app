@@ -15,7 +15,7 @@ export function Layout({ className }: LayoutProps) {
   const showChrome = user || loading;  // Show nav during loading (avoid flash of empty)
 
   const navItems = [
-    { icon: Headphones, label: 'Practice', path: '/' },
+    { icon: Headphones, label: 'Practice', path: '/practice' },
     { icon: Activity, label: 'Progress', path: '/progress' },
     { icon: Settings, label: 'Settings', path: '/settings' },
   ];
@@ -33,7 +33,7 @@ export function Layout({ className }: LayoutProps) {
       {showChrome && (
         <div className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex justify-between items-center pointer-events-none">
            <Link
-              to="/"
+              to="/practice"
               className="pointer-events-auto"
            >
                <img src="/logo.png" alt="SoundSteps" className="w-8 h-8 rounded-lg" />
@@ -72,8 +72,8 @@ export function Layout({ className }: LayoutProps) {
           <div className="flex justify-between items-center max-w-md mx-auto px-6 py-3">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = item.path === '/'
-                ? (location.pathname === '/' || location.pathname.startsWith('/practice') || location.pathname.startsWith('/categories'))
+              const isActive = item.path === '/practice'
+                ? (location.pathname === '/practice' || location.pathname.startsWith('/practice/') || location.pathname.startsWith('/categories'))
                 : location.pathname === item.path;
 
               return (

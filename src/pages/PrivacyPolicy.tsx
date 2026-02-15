@@ -20,7 +20,7 @@ export function PrivacyPolicy() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Privacy Policy</h1>
-            <p className="text-sm text-slate-500">Last updated: January 24, 2026</p>
+            <p className="text-sm text-slate-500">Last updated: February 14, 2026</p>
           </div>
         </div>
 
@@ -40,8 +40,10 @@ export function PrivacyPolicy() {
 
             <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 mt-4 mb-2">Account Information</h3>
             <p className="text-slate-600 dark:text-slate-400">
-              If you create an account, we collect your email address for authentication purposes.
-              You may also use the app in guest mode without providing any personal information.
+              When you create an account, we collect your email address for authentication purposes.
+              If you sign in using Google, we receive your email address and display name from Google.
+              If you sign in using Apple, we receive your email address (which may be masked if you
+              choose Apple's private relay). We do not access your contacts, photos, or other account data.
             </p>
 
             <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 mt-4 mb-2">Training Data</h3>
@@ -55,6 +57,13 @@ export function PrivacyPolicy() {
             <p className="text-slate-600 dark:text-slate-400">
               We may collect basic device information (device type, operating system) to ensure
               the app functions correctly on your device.
+            </p>
+
+            <h3 className="text-lg font-medium text-slate-800 dark:text-slate-200 mt-4 mb-2">What We Do NOT Collect</h3>
+            <p className="text-slate-600 dark:text-slate-400">
+              SoundSteps does not use your microphone or record any audio from you. You listen to
+              pre-recorded exercises — we never capture your voice. We do not collect health or
+              medical data, biometric data, location data, or information from your contacts.
             </p>
           </section>
 
@@ -72,8 +81,33 @@ export function PrivacyPolicy() {
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Data Storage & Security</h2>
             <p className="text-slate-600 dark:text-slate-400">
               Your data is stored securely using Supabase, a trusted cloud infrastructure provider.
-              We implement industry-standard security measures including encryption in transit and at rest.
-              Access to user data is restricted and logged.
+              We implement industry-standard security measures including encryption in transit (TLS)
+              and at rest. Access to user data is restricted by row-level security policies — only
+              you can see your own training data.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Data Retention</h2>
+            <p className="text-slate-600 dark:text-slate-400">
+              We retain your training data for as long as your account is active. If you delete your
+              account, all associated data is permanently removed within 30 days. You can request
+              deletion at any time by contacting us.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">Third-Party Services</h2>
+            <p className="text-slate-600 dark:text-slate-400">We use the following third-party services:</p>
+            <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-2 mt-2">
+              <li><strong>Supabase</strong> — database hosting and authentication</li>
+              <li><strong>Vercel</strong> — application hosting and content delivery</li>
+              <li><strong>Google</strong> — optional sign-in (if you choose Google login)</li>
+              <li><strong>Apple</strong> — optional sign-in (if you choose Apple login)</li>
+            </ul>
+            <p className="text-slate-600 dark:text-slate-400 mt-3">
+              These services have their own privacy policies. We do not share your training data
+              with any of these providers beyond what is necessary to operate the app.
             </p>
           </section>
 

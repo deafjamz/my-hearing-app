@@ -20,7 +20,7 @@ export function TermsOfService() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Terms of Service</h1>
-            <p className="text-sm text-slate-500">Last updated: January 24, 2026</p>
+            <p className="text-sm text-slate-500">Last updated: February 14, 2026</p>
           </div>
         </div>
 
@@ -55,7 +55,7 @@ export function TermsOfService() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">User Accounts</h2>
             <p className="text-slate-600 dark:text-slate-400">
-              You may use SoundSteps as a guest or create an account. If you create an account:
+              An account is required to use SoundSteps. When you create an account:
             </p>
             <ul className="list-disc pl-6 text-slate-600 dark:text-slate-400 space-y-2 mt-2">
               <li>You are responsible for maintaining the confidentiality of your account</li>
