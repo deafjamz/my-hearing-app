@@ -32,3 +32,38 @@ export function buildWordAudioUrl(voice: string, word: string): string {
   const normalized = word.toLowerCase().replace(/\s+/g, '_');
   return `${SUPABASE_URL}/storage/v1/object/public/audio/words_v2/${voice}/${normalized}.mp3`;
 }
+
+export type SpeedRate = 'normal' | '1.2x' | '1.5x';
+
+/**
+ * Transform a storage path to its speed variant equivalent.
+ *
+ * Examples:
+ *   getSpeedVariantPath("sentences_v1/sarah/sentence_1.mp3", "1.2x")
+ *   → "sentences_speed/sarah/1.2x/sentence_1.mp3"
+ *
+ *   getSpeedVariantPath("stories/sarah/story_v3_dl_001.mp3", "1.5x")
+ *   → "stories_speed/sarah/1.5x/story_v3_dl_001.mp3"
+ *
+ * @param storagePath — original path (e.g. "sentences_v1/sarah/sentence_1.mp3")
+ * @param speed — speed rate ('normal', '1.2x', '1.5x')
+ * @returns transformed path, or original if speed is 'normal'
+ */
+export function getSpeedVariantPath(storagePath: string, speed: SpeedRate): string {
+  if (speed === 'normal') return storagePath;
+
+  // Split: "sentences_v1/sarah/sentence_1.mp3" → ["sentences_v1", "sarah", "sentence_1.mp3"]
+  const parts = storagePath.split('/');
+  if (parts.length < 3) return storagePath;
+
+  const [prefix, voice, ...rest] = parts;
+  const filename = rest.join('/');
+
+  // Map source prefix to speed variant prefix
+  const speedPrefix = prefix.startsWith('sentences') ? 'sentences_speed'
+    : prefix.startsWith('stories') ? 'stories_speed'
+    : `${prefix}_speed`;
+
+  // Rate key without 'x': "1.2x" → "1.2x" (keep the x for storage path)
+  return `${speedPrefix}/${voice}/${speed}/${filename}`;
+}

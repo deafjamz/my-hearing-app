@@ -13,6 +13,7 @@ import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
+import { type SpeedRate, getSpeedVariantPath, getStorageUrl } from '@/lib/audio';
 
 const SESSION_LENGTH = 10;
 
@@ -27,6 +28,7 @@ export function SentenceTraining() {
 
   // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
+  const [speed, setSpeed] = useState<SpeedRate>('normal');
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [replayCount, setReplayCount] = useState(0);
@@ -81,7 +83,8 @@ export function SentenceTraining() {
     // Build URL inline and play through sentinel's AudioContext
     const storagePath = currentSentence.audio_assets[0]?.storage_path;
     if (storagePath) {
-      const url = getAudioUrl(storagePath);
+      const finalPath = speed === 'normal' ? storagePath : getSpeedVariantPath(storagePath, speed);
+      const url = getStorageUrl(finalPath);
       try {
         setAudioError(false);
         await playUrl(url);
@@ -130,6 +133,7 @@ export function SentenceTraining() {
         trialNumber: currentIndex,
         replayCount,
         scenario: currentSentence.clinical_metadata.scenario,
+        speed,
       },
     });
 
@@ -220,8 +224,26 @@ export function SentenceTraining() {
         <div className="text-sm font-medium text-slate-700 dark:text-slate-300">
           Sentences
         </div>
-        <div className="text-sm text-slate-500 dark:text-slate-400">
-          {responses.length > 0 && `${Math.round((responses.filter(r => r.correct).length / responses.length) * 100)}%`}
+        <div className="flex items-center gap-2">
+          {/* Speed selector */}
+          <div className="flex bg-slate-200 dark:bg-slate-800 rounded-full p-0.5">
+            {(['normal', '1.2x', '1.5x'] as SpeedRate[]).map((rate) => (
+              <button
+                key={rate}
+                onClick={() => { hapticSelection(); setSpeed(rate); }}
+                className={`px-2 py-0.5 rounded-full text-xs font-medium transition-colors ${
+                  speed === rate
+                    ? 'bg-teal-500 text-white'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+                }`}
+              >
+                {rate === 'normal' ? '1x' : rate}
+              </button>
+            ))}
+          </div>
+          <span className="text-sm text-slate-500 dark:text-slate-400">
+            {responses.length > 0 && `${Math.round((responses.filter(r => r.correct).length / responses.length) * 100)}%`}
+          </span>
         </div>
       </motion.header>
 

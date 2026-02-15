@@ -1,9 +1,9 @@
 # SoundSteps - Current Status
 
 > **Last Updated:** 2026-02-14
-> **Last Session:** Session 29 — Landing Page, Privacy Policy & ToS Updates, Competitive Analysis
-> **Build Status:** ✅ PASSING (4.75s)
-> **Deployment:** ✅ DEPLOYED — pushed to main (Vercel auto-deploy)
+> **Last Session:** Session 30 — Content Expansion Pipeline (stories, sentences, scenarios, speed variants)
+> **Build Status:** ✅ PASSING (8.15s)
+> **Deployment:** Pending push
 > **Tests:** ✅ 31 PASSING (Vitest)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
@@ -13,6 +13,7 @@
 > **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment. Gradients purged (0 remaining).
 > **Design System:** Phase 1 ✅ (Satoshi font, deeper teal, haptics, ring burst) | Phase 2 ✅ (Button/Card primitives, full adoption across 14 files, QuizCard dark-mode fix, brand token purge, SNRMixer dark-mode alignment)
 > **Legal:** ✅ Privacy Policy + Terms of Service updated (Feb 14, 2026)
+> **Content Pipeline:** Session 30 — CSVs complete (60 stories, 630 sentences, 40 scenarios, 313 dialogue lines). Speed variant scripts + UI ready. Audio generation pending (run scripts).
 
 ---
 
@@ -42,6 +43,106 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 30: Content Expansion Pipeline (COMPLETE — audio generation pending)
+
+### What Was Done
+
+**Phase 1: Content CSV Creation**
+- **10 new stories** added to `stories_v3.csv` (50 → 60, ×10 target met)
+  - CI-relevant themes: device fitting, restaurant noise, phone calls, fire alarm, support group, airport, video call, music discovery, grandchild's voice, waiting room
+  - All 50-62 words, difficulty 2-3, with phonemic targets
+- **2 new sentences** added to `sentences_v2.csv` (628 → 630, ×10 target met)
+- **10 new scenarios** added to `scenarios_v2.csv` (30 → 40, ×10 target met)
+  - Drive-through, vet, clothing return, coffee shop, farmer's market, phone banking, neighbor chat, gas station, scheduling appointment, package delivery
+- **183 new dialogue lines** added to `scenario_items_v2.csv` (129 → 313)
+  - 13 existing scenarios that had NO dialogue now have 8 lines each
+  - 10 new scenarios each have 8 dialogue lines
+- **40 comprehension questions** added to `story_questions_v2.csv` for the 10 new stories (4 per story)
+
+**Phase 2: Speed Variant Infrastructure**
+- Created `scripts/generate_speed_variants.py` — ffmpeg-based batch processor
+  - Downloads from Supabase → applies `atempo` filter → normalizes to -20 LUFS → uploads
+  - 1.2x (moderate challenge) and 1.5x (advanced challenge) rates
+  - Progress tracking with resume capability, pilot mode
+  - **Zero ElevenLabs credits** — all ffmpeg processing
+  - Target: 12,384 new files (sentences v1 × 2 rates + stories × 2 rates)
+- Created `scripts/verify_new_content.py` — quality verification script
+  - Checks existence, duration, loudness, and clipping for all audio files
+  - Generates JSON failure report for regeneration
+  - Spot-check mode (random 10 per voice) for quick validation
+
+**Phase 3: Frontend Speed Training UI**
+- Added `SpeedRate` type and `getSpeedVariantPath()` helper to `src/lib/audio.ts`
+- **SentenceTraining.tsx** — Speed selector (1x / 1.2x / 1.5x) in header bar
+  - Transforms audio URL to speed variant path when non-normal speed selected
+  - Logs `speed` field in per-trial progress metadata for data engine
+- **StoryPlayer.tsx** — Speed selector in difficulty selection screen
+  - Disables karaoke word highlighting for speed variants (alignment timestamps don't match)
+  - Falls back to full transcript display without word-level sync
+  - Logs `speed` field in quiz progress metadata
+
+### Content Pool Summary (After Session 30)
+
+| Content Type | Before | After | Target | Status |
+|-------------|--------|-------|--------|--------|
+| Stories | 50 | 60 | 60 (×10) | ✅ CSV ready, needs audio gen |
+| Sentences v2 | 628 | 630 | 630 (×10) | ✅ CSV ready, needs audio gen |
+| Scenarios | 30 (17 w/ dialogue) | 40 (40 w/ dialogue) | 40 (×10) | ✅ CSV ready, needs audio gen |
+| Story Questions | 200 | 240 | 240 | ✅ CSV ready |
+| Speed Variants | 0 | 0 | 12,384 | ✅ Script ready, needs run |
+| Conversations | 80 | 80 | 80 (×10) | ✅ Complete |
+| Phoneme Drills | 200 | 200 | 200 (×10) | ✅ Complete |
+| Environmental | 50 | 50 | 50 (×10) | ✅ Complete |
+| Rate Variants | 100 | 100 | 100 (×10) | ✅ Complete |
+
+### Files Modified/Created
+
+| File | Change |
+|------|--------|
+| `content/source_csvs/stories_v3.csv` | +10 stories (50→60) |
+| `content/source_csvs/sentences_v2.csv` | +2 sentences (628→630) |
+| `content/source_csvs/scenarios_v2.csv` | +10 scenarios (30→40) |
+| `content/source_csvs/scenario_items_v2.csv` | +183 dialogue lines (129→313) |
+| `content/source_csvs/story_questions_v2.csv` | +40 questions (200→240) |
+| `scripts/generate_speed_variants.py` | **NEW** — ffmpeg speed variant batch processor |
+| `scripts/verify_new_content.py` | **NEW** — Audio quality verification |
+| `src/lib/audio.ts` | Added `SpeedRate`, `getSpeedVariantPath()` |
+| `src/pages/SentenceTraining.tsx` | Speed selector UI + metadata logging |
+| `src/pages/StoryPlayer.tsx` | Speed selector in difficulty screen + metadata logging |
+| `docs/AUDIO_MASTER_INVENTORY.md` | Updated counts, added speed variants section |
+
+### Audio Generation Commands (Run When Ready)
+
+```bash
+cd /Users/clyle/Desktop/my-hearing-app
+
+# 1. Complete sentences v2 (311-630 × 9 voices) — ~10K credits
+python3 scripts/generate_sentences_v2.py --resume
+
+# 2. Generate 10 new stories + Aravind gap-fill — ~2.2K credits
+python3 scripts/generate_stories_v3.py --resume
+
+# 3. Generate scenario audio — ~5K credits
+python3 scripts/generate_scenario_audio.py
+
+# 4. Generate speed variants (FREE — ffmpeg only)
+# Pilot first:
+python3 scripts/generate_speed_variants.py --pilot
+# Then full:
+python3 scripts/generate_speed_variants.py
+
+# 5. Verify all new content
+python3 scripts/verify_new_content.py --spot-check
+```
+
+### Verification
+- `npm run build` — ✅ passes clean (8.15s)
+- `npm test` — ✅ 31 tests pass
+- Speed selector renders in SentenceTraining and StoryPlayer
+- `speed` field logged in progress metadata for data engine analytics
 
 ---
 

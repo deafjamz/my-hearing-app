@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useKaraokePlayer } from '@/hooks/useKaraokePlayer';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
-import { getStorageUrl } from '@/lib/audio';
+import { getStorageUrl, getSpeedVariantPath, type SpeedRate } from '@/lib/audio';
 import { supabase } from '@/lib/supabase';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { Button } from '@/components/primitives';
+import { hapticSelection } from '@/lib/haptics';
 
 // Define types for our data
 interface Story {
@@ -30,9 +31,32 @@ type TextVisibility = 'Full' | 'Partial' | 'None';
 
 
 // --- Child Components ---
-const DifficultySelector = ({ onStart }: { onStart: (difficulty: TextVisibility) => void }) => (
+const DifficultySelector = ({ onStart, speed, onSpeedChange }: { onStart: (difficulty: TextVisibility) => void; speed: SpeedRate; onSpeedChange: (s: SpeedRate) => void }) => (
   <div className="p-8 max-w-lg mx-auto">
     <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white mb-6">Choose Your Challenge</h2>
+
+    {/* Speed selector */}
+    <div className="mb-6">
+      <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2 text-center">Speaking Speed</p>
+      <div className="flex justify-center">
+        <div className="flex bg-slate-200 dark:bg-slate-800 rounded-full p-1">
+          {(['normal', '1.2x', '1.5x'] as SpeedRate[]).map((rate) => (
+            <button
+              key={rate}
+              onClick={() => { hapticSelection(); onSpeedChange(rate); }}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                speed === rate
+                  ? 'bg-teal-500 text-white'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              }`}
+            >
+              {rate === 'normal' ? 'Normal' : rate}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
     <div className="grid grid-cols-1 gap-4">
       <button onClick={() => onStart('Full')} className="p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-left hover:border-teal-500 transition-colors">
         <h3 className="font-bold text-lg text-slate-900 dark:text-white">Full Support</h3>
@@ -50,13 +74,20 @@ const DifficultySelector = ({ onStart }: { onStart: (difficulty: TextVisibility)
   </div>
 );
 
-const KaraokeDisplay = ({ story, onEnded, textVisibility }: { story: Story; onEnded: () => void; textVisibility: TextVisibility }) => {
-  const { 
-    words, 
-    activeWordIndex, 
-    isPlaying, 
-    togglePlay 
-  } = useKaraokePlayer(getStorageUrl(story.audio_female_path), getStorageUrl(story.alignment_female_path), { onEnded });
+const KaraokeDisplay = ({ story, onEnded, textVisibility, speed = 'normal' }: { story: Story; onEnded: () => void; textVisibility: TextVisibility; speed?: SpeedRate }) => {
+  // For speed variants, use the speed-adjusted audio but keep original alignment
+  // (karaoke sync disabled for speed variants since timestamps don't match)
+  const audioPath = speed === 'normal'
+    ? story.audio_female_path
+    : getSpeedVariantPath(story.audio_female_path, speed);
+  const alignmentPath = speed === 'normal' ? story.alignment_female_path : undefined;
+
+  const {
+    words,
+    activeWordIndex,
+    isPlaying,
+    togglePlay
+  } = useKaraokePlayer(getStorageUrl(audioPath), alignmentPath ? getStorageUrl(alignmentPath) : undefined, { onEnded });
 
   const renderTranscript = () => {
     if (textVisibility === 'None') {
@@ -179,8 +210,9 @@ export function StoryPlayer() {
   const [gameState, setGameState] = useState<GameState>('difficulty_selection');
   const [story, setStory] = useState<Story | null>(null);
   const [questions, setQuestions] = useState<StoryQuestion[]>([]);
-  const [loading, setLoading] = useState(true); // Unified loading state
+  const [loading, setLoading] = useState(true);
   const [difficulty, setDifficulty] = useState<TextVisibility>('Full');
+  const [speed, setSpeed] = useState<SpeedRate>('normal');
   const [score, setScore] = useState(0);
 
   const { logProgress } = useProgress();
@@ -234,11 +266,12 @@ export function StoryPlayer() {
         metadata: {
           activityType: 'story',
           storyId: story!.id,
-          voiceGender: getVoiceGender('sarah'), // Stories currently use female voice
+          voiceGender: getVoiceGender('sarah'),
           trialNumber: idx,
           questionType: q.question_type,
           phonemicTarget: q.phonemic_target,
           difficulty: difficulty,
+          speed,
         }
       });
     });
@@ -258,9 +291,9 @@ export function StoryPlayer() {
 
     switch (gameState) {
       case 'difficulty_selection':
-        return <DifficultySelector onStart={handleStartStory} />;
+        return <DifficultySelector onStart={handleStartStory} speed={speed} onSpeedChange={setSpeed} />;
       case 'playing':
-        return <KaraokeDisplay story={story} onEnded={handleStoryEnd} textVisibility={difficulty} />;
+        return <KaraokeDisplay story={story} onEnded={handleStoryEnd} textVisibility={difficulty} speed={speed} />;
       case 'challenge':
         return <QuizChallenge questions={questions} onSubmit={handleQuizSubmit} />;
       case 'results':
