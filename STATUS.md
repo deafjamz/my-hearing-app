@@ -1,10 +1,11 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-14
-> **Last Session:** Session 30 — Content Expansion Pipeline (stories, sentences, scenarios, speed variants)
-> **Build Status:** ✅ PASSING (8.15s)
+> **Last Updated:** 2026-02-15
+> **Last Session:** Session 30b — Repo Consolidation (Desktop → Projects, once and for all)
+> **Canonical Directory:** `~/Projects/my-hearing-app` (symlinked from `~/Desktop/my-hearing-app`)
+> **Build Status:** ✅ PASSING (5.4s)
 > **Deployment:** Pending push
-> **Tests:** ✅ 31 PASSING (Vitest)
+> **Tests:** ✅ 31 PASSING (Vitest + jsdom)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
@@ -21,9 +22,12 @@
 
 ```
 1. Read STATUS.md (this file)
-2. For voice/audio questions, see docs/VOICE_LIBRARY.md (CRITICAL architecture info)
-3. For infrastructure, see docs/INFRASTRUCTURE_AUDIT.md
-4. Deploy: git push to main (auto-deploys via Vercel)
+2. Canonical directory: ~/Projects/my-hearing-app
+   (~/Desktop/my-hearing-app is a symlink to the same place)
+3. For voice/audio questions, see docs/VOICE_LIBRARY.md
+4. For infrastructure, see docs/INFRASTRUCTURE_AUDIT.md
+5. For audio generation, run scripts from ~/Projects/my-hearing-app/scripts/
+6. Deploy: git push to main (auto-deploys via Vercel)
 ```
 
 ---
@@ -43,6 +47,51 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 30b: Repo Consolidation (COMPLETE)
+
+### Problem
+Two clones of the same repo existed:
+- `~/Projects/my-hearing-app` — Active production repo (Session 29, Vercel deployment)
+- `~/Desktop/my-hearing-app` — Development workspace (Session 12, 17 commits behind) with all generation scripts, expanded content CSVs, and ~300MB of temp artifacts
+
+This caused confusion about which directory was canonical and risked losing work.
+
+### Solution
+Consolidated everything into `~/Projects/my-hearing-app` as the single canonical directory.
+
+**What was copied (104 files):**
+| Category | Count | Examples |
+|----------|-------|---------|
+| Content CSVs | 17 | stories_v3, sentences_v2, scenarios_v2, minimal_pairs_master |
+| Generation scripts | 11 | generate_sentences_v2, generate_stories_v3, generate_speed_variants |
+| Ingestion scripts | 5 | ingest_conversations, ingest_scenarios_v2 |
+| Utility scripts | 12 | verify_new_content, check_audio_files, sanitize_vocabulary |
+| SQL migrations | 25 | schema_v3-v5, content_expansion, ElevenLabs integration |
+| Documentation | 14 | Audio inventory, pilot reports, Smart Coach sessions |
+| Config | 8 | .claude hooks/mcp/settings, GitHub Actions, Capacitor, Supabase |
+| Test infra | 3 | vitest.config.ts, src/test/setup.ts, testUtils.tsx |
+
+**What was intentionally NOT copied:**
+- 58+ temp/test MP3 files (audio lives in Supabase Storage)
+- 28+ generation logs and progress JSONs
+- ~50 one-off audit/regen/diagnostic scripts (completed work)
+- android/ and ios/ build output (regenerable via `npx cap add`)
+- .aider.* files, .vite/ cache, deprecated CSVs
+
+**Directory layout after consolidation:**
+```
+~/Projects/my-hearing-app/          ← Canonical repo (all work goes here)
+~/Desktop/my-hearing-app            ← Symlink to above (convenience)
+~/Desktop/my-hearing-app-ARCHIVED-2026-02-15  ← Old workspace (safe to delete after 2 weeks)
+~/Desktop/my-hearing-app-BACKUP-2026-02-15    ← Safety backup (delete after confirming)
+```
+
+### Commits
+1. `e9a1d1d` — `feat: Speed selector UI for sentence training and story player`
+2. `37d170d` — `chore: Consolidate content, scripts, and config from Desktop workspace`
 
 ---
 
@@ -117,7 +166,7 @@ Git push to `main` auto-deploys to production via Vercel.
 ### Audio Generation Commands (Run When Ready)
 
 ```bash
-cd /Users/clyle/Desktop/my-hearing-app
+cd ~/Projects/my-hearing-app
 
 # 1. Complete sentences v2 (311-630 × 9 voices) — ~10K credits
 python3 scripts/generate_sentences_v2.py --resume
