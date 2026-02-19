@@ -37,6 +37,8 @@ scn_bus_directions_03,scn_bus_directions,Passenger,Will you announce the stop or
 scn_bus_directions_04,scn_bus_directions,Driver,I announce all major stops. Downtown is stop number fourteen.,4
 scn_bus_directions_05,scn_bus_directions,Passenger,Thank you. Is there a transfer point there for the eastside routes?,5
 scn_bus_directions_06,scn_bus_directions,Driver,Yes. Routes fifteen and twenty-three both connect there.,6
+scn_bus_directions_07,scn_bus_directions,Passenger,Great. I'll watch for the downtown stop. What time does the last bus run?,7
+scn_bus_directions_08,scn_bus_directions,Driver,The last bus leaves downtown at eleven thirty on weeknights.,8
 scn_appointment_checkin_01,scn_appointment_checkin,Receptionist,Good morning. Do you have an appointment today?,1
 scn_appointment_checkin_02,scn_appointment_checkin,Patient,Yes I have a ten o'clock with Doctor Patel.,2
 scn_appointment_checkin_03,scn_appointment_checkin,Receptionist,Your name please?,3
@@ -51,6 +53,8 @@ scn_hair_salon_03,scn_hair_salon,Stylist,How much length do you want to take off
 scn_hair_salon_04,scn_hair_salon,Customer,About an inch. I want to keep most of the length.,4
 scn_hair_salon_05,scn_hair_salon,Stylist,Sounds good. Do you want me to style it after or just blow dry?,5
 scn_hair_salon_06,scn_hair_salon,Customer,Just a simple blow dry is fine.,6
+scn_hair_salon_07,scn_hair_salon,Stylist,Would you like to schedule your next appointment before you leave?,7
+scn_hair_salon_08,scn_hair_salon,Customer,Yes please. Same time next month would be perfect.,8
 scn_dry_cleaner_01,scn_dry_cleaner,Employee,Hi. Picking up or dropping off today?,1
 scn_dry_cleaner_02,scn_dry_cleaner,Customer,Picking up. The last name is Garcia.,2
 scn_dry_cleaner_03,scn_dry_cleaner,Employee,Do you have your ticket?,3
@@ -58,6 +62,7 @@ scn_dry_cleaner_04,scn_dry_cleaner,Customer,I think I lost it. I dropped off a s
 scn_dry_cleaner_05,scn_dry_cleaner,Employee,No problem. Can I see your ID?,5
 scn_dry_cleaner_06,scn_dry_cleaner,Customer,Sure. Here you go.,6
 scn_dry_cleaner_07,scn_dry_cleaner,Employee,I found it. That will be twenty-three fifty.,7
+scn_dry_cleaner_08,scn_dry_cleaner,Customer,Here you go. Thank you for finding it without the ticket.,8
 scn_post_office_01,scn_post_office,Clerk,Next please. How can I help you?,1
 scn_post_office_02,scn_post_office,Customer,I need to mail this package to California.,2
 scn_post_office_03,scn_post_office,Clerk,Would you like regular mail or priority?,3
@@ -73,6 +78,7 @@ scn_gym_signup_04,scn_gym_signup,Customer,What's included in the basic membershi
 scn_gym_signup_05,scn_gym_signup,Staff,Full access to all equipment and group classes. Personal training is extra.,5
 scn_gym_signup_06,scn_gym_signup,Customer,Can I try it for a day first?,6
 scn_gym_signup_07,scn_gym_signup,Staff,Absolutely. I can give you a free day pass right now.,7
+scn_gym_signup_08,scn_gym_signup,Customer,That would be great. Where are the locker rooms?,8
 scn_hotel_checkin_01,scn_hotel_checkin,Clerk,Good evening. Welcome to the Grand Hotel. Checking in?,1
 scn_hotel_checkin_02,scn_hotel_checkin,Guest,Yes. I have a reservation under the name Parker.,2
 scn_hotel_checkin_03,scn_hotel_checkin,Clerk,Yes I see it here. A king room for two nights?,3
@@ -88,6 +94,7 @@ scn_library_help_04,scn_library_help,Patron,I'm particularly interested in veget
 scn_library_help_05,scn_library_help,Librarian,These three books are very popular with beginners.,5
 scn_library_help_06,scn_library_help,Patron,Thank you. How long can I keep them?,6
 scn_library_help_07,scn_library_help,Librarian,Three weeks. You can renew online if you need more time.,7
+scn_library_help_08,scn_library_help,Patron,That's very helpful. I'll start with these three. Thank you.,8
 scn_bakery_order_01,scn_bakery_order,Baker,Good morning. What can I get for you?,1
 scn_bakery_order_02,scn_bakery_order,Customer,I'd like two croissants and a blueberry muffin please.,2
 scn_bakery_order_03,scn_bakery_order,Baker,Fresh out of the oven. Anything else?,3
@@ -312,3 +319,323 @@ scn_package_delivery_05,scn_package_delivery,Driver,There's one more in the truc
 scn_package_delivery_06,scn_package_delivery,Resident,Just inside the front door would be great.,6
 scn_package_delivery_07,scn_package_delivery,Driver,Here you go. Both packages are delivered. Have a nice day.,7
 scn_package_delivery_08,scn_package_delivery,Resident,Thank you so much. I appreciate the help with the heavy one.,8
+scn_bank_teller_01,scn_bank_teller,Teller,Good afternoon. How can I help you today?,1
+scn_bank_teller_02,scn_bank_teller,Customer,I need to send a wire transfer to my daughter's account in Portland.,2
+scn_bank_teller_03,scn_bank_teller,Teller,I can help with that. Do you have the routing number and account number for the receiving bank?,3
+scn_bank_teller_04,scn_bank_teller,Customer,Yes. The routing number is zero-two-one-zero-zero-zero-zero-eight-nine and the account is four-seven-three-two-one-six.,4
+scn_bank_teller_05,scn_bank_teller,Teller,And how much would you like to send?,5
+scn_bank_teller_06,scn_bank_teller,Customer,Fifteen hundred dollars. How long will it take to arrive?,6
+scn_bank_teller_07,scn_bank_teller,Teller,Domestic wires typically arrive the same business day. There is a twenty-five dollar fee for the transfer.,7
+scn_bank_teller_08,scn_bank_teller,Customer,That's fine. Can I get a confirmation receipt when it goes through?,8
+scn_post_office_passport_01,scn_post_office_passport,Clerk,Are you here for passport services?,1
+scn_post_office_passport_02,scn_post_office_passport,Applicant,Yes. I need to apply for a new passport. Mine expired three years ago.,2
+scn_post_office_passport_03,scn_post_office_passport,Clerk,You'll need to fill out form DS-eleven. Did you bring a passport photo and your birth certificate?,3
+scn_post_office_passport_04,scn_post_office_passport,Applicant,I have the birth certificate but I still need the photo taken.,4
+scn_post_office_passport_05,scn_post_office_passport,Clerk,We can take your photo here for fifteen dollars. The passport application fee is a hundred and thirty.,5
+scn_post_office_passport_06,scn_post_office_passport,Applicant,Do you accept credit cards for the fees?,6
+scn_post_office_passport_07,scn_post_office_passport,Clerk,We accept cards for the photo but the application fee must be a check or money order payable to the U.S. Department of State.,7
+scn_post_office_passport_08,scn_post_office_passport,Applicant,I have a check. How long until I receive the passport?,8
+scn_gas_station_repair_01,scn_gas_station_repair,Attendant,You doing okay over there? Looks like you're having trouble.,1
+scn_gas_station_repair_02,scn_gas_station_repair,Driver,My car won't start. The engine just clicks when I turn the key.,2
+scn_gas_station_repair_03,scn_gas_station_repair,Attendant,That sounds like it could be the battery. How old is it?,3
+scn_gas_station_repair_04,scn_gas_station_repair,Driver,I'm not sure. Maybe four or five years. I haven't replaced it.,4
+scn_gas_station_repair_05,scn_gas_station_repair,Attendant,I can try to jump start it for you. Let me pull my truck around.,5
+scn_gas_station_repair_06,scn_gas_station_repair,Driver,That would be great. Should I pop the hood?,6
+scn_gas_station_repair_07,scn_gas_station_repair,Attendant,Yes go ahead. And there's an auto parts store about two blocks east on Main Street if you need a new battery.,7
+scn_gas_station_repair_08,scn_gas_station_repair,Driver,Thank you so much. I really appreciate the help.,8
+scn_car_mechanic_01,scn_car_mechanic,Mechanic,I took a look at your car. I found a couple of things.,1
+scn_car_mechanic_02,scn_car_mechanic,Customer,What's going on with it?,2
+scn_car_mechanic_03,scn_car_mechanic,Mechanic,Your front brake pads are worn down to about two millimeters. They need to be replaced soon.,3
+scn_car_mechanic_04,scn_car_mechanic,Customer,How much would that cost?,4
+scn_car_mechanic_05,scn_car_mechanic,Mechanic,Parts and labor come to about three hundred and fifty dollars for both front wheels.,5
+scn_car_mechanic_06,scn_car_mechanic,Customer,That's not too bad. Was there anything else?,6
+scn_car_mechanic_07,scn_car_mechanic,Mechanic,Your air filter is pretty dirty. I'd recommend replacing it. That's another thirty-five dollars.,7
+scn_car_mechanic_08,scn_car_mechanic,Customer,Go ahead and do both. How long will it take?,8
+scn_pet_store_fish_01,scn_pet_store_fish,Employee,Looking at the fish tanks? Are you thinking about starting an aquarium?,1
+scn_pet_store_fish_02,scn_pet_store_fish,Customer,Yes. My kids want fish but I've never had any before.,2
+scn_pet_store_fish_03,scn_pet_store_fish,Employee,I'd recommend starting with a ten-gallon freshwater tank. It's a good beginner size.,3
+scn_pet_store_fish_04,scn_pet_store_fish,Customer,What comes with the starter kit?,4
+scn_pet_store_fish_05,scn_pet_store_fish,Employee,You get the tank a filter a heater and a light. You'll need to buy gravel and decorations separately.,5
+scn_pet_store_fish_06,scn_pet_store_fish,Customer,How many fish can I put in a ten-gallon tank?,6
+scn_pet_store_fish_07,scn_pet_store_fish,Employee,About eight to ten small fish like tetras or guppies. You'll want to add them gradually over a few weeks.,7
+scn_pet_store_fish_08,scn_pet_store_fish,Customer,That sounds perfect. I'll take the starter kit and a bag of blue gravel.,8
+scn_shoe_store_01,scn_shoe_store,Associate,Welcome in. What brings you in today?,1
+scn_shoe_store_02,scn_shoe_store,Customer,I need a new pair of running shoes. I've been getting knee pain with my old ones.,2
+scn_shoe_store_03,scn_shoe_store,Associate,Let me measure your feet first. Sometimes the wrong size causes problems. What size do you usually wear?,3
+scn_shoe_store_04,scn_shoe_store,Customer,I usually wear a ten and a half.,4
+scn_shoe_store_05,scn_shoe_store,Associate,You're actually closer to an eleven. That could be why you're having issues. Do you run on pavement or trails?,5
+scn_shoe_store_06,scn_shoe_store,Customer,Mostly pavement. I run about three miles four times a week.,6
+scn_shoe_store_07,scn_shoe_store,Associate,I'd suggest this model. It has extra cushioning for road running and good arch support. It's a hundred and thirty-nine dollars.,7
+scn_shoe_store_08,scn_shoe_store,Customer,Can I try them on? And do you have them in black?,8
+scn_tech_support_printer_01,scn_tech_support_printer,Agent,Thank you for calling. Can I have your name and the model number of your printer?,1
+scn_tech_support_printer_02,scn_tech_support_printer,Caller,My name is Robert Chen. The model is an HP OfficeJet Pro nine-zero-one-five.,2
+scn_tech_support_printer_03,scn_tech_support_printer,Agent,Thank you Robert. What issue are you experiencing?,3
+scn_tech_support_printer_04,scn_tech_support_printer,Caller,It shows offline even though it's connected to my wifi. I've already restarted it twice.,4
+scn_tech_support_printer_05,scn_tech_support_printer,Agent,Let's try removing the printer from your computer and adding it again. Go to Settings then Printers and Scanners.,5
+scn_tech_support_printer_06,scn_tech_support_printer,Caller,Okay I'm there. I see the printer listed. Should I click remove?,6
+scn_tech_support_printer_07,scn_tech_support_printer,Agent,Yes remove it and then click Add Printer. It should detect the OfficeJet on your network automatically.,7
+scn_tech_support_printer_08,scn_tech_support_printer,Caller,It found it. And the status now says ready. That worked. Thank you.,8
+scn_home_repair_01,scn_home_repair,Contractor,Thanks for having me out. You said you have some water damage in the bathroom?,1
+scn_home_repair_02,scn_home_repair,Homeowner,Yes. There's a brown stain on the ceiling below the upstairs bathroom. It appeared about a week ago.,2
+scn_home_repair_03,scn_home_repair,Contractor,I'll need to take a look upstairs. It could be a leaky pipe or a problem with the shower seal.,3
+scn_home_repair_04,scn_home_repair,Homeowner,How much does something like this usually cost to fix?,4
+scn_home_repair_05,scn_home_repair,Contractor,If it's just the shower seal we're looking at about two hundred. A pipe repair could be five hundred or more depending on access.,5
+scn_home_repair_06,scn_home_repair,Homeowner,Do you need to open up the ceiling to find the leak?,6
+scn_home_repair_07,scn_home_repair,Contractor,Possibly. But let me check upstairs first. Sometimes the source is obvious. I'll give you a written estimate before starting any work.,7
+scn_home_repair_08,scn_home_repair,Homeowner,I appreciate that. The bathroom is at the top of the stairs on the left.,8
+scn_eye_exam_glasses_01,scn_eye_exam_glasses,Optician,Your exam is finished. Let's go pick out some frames for you.,1
+scn_eye_exam_glasses_02,scn_eye_exam_glasses,Patient,The doctor said I need progressive lenses. Does that limit my frame choices?,2
+scn_eye_exam_glasses_03,scn_eye_exam_glasses,Optician,Not too much but you'll want a taller frame so the lens has room for all three zones. These rectangular frames work well.,3
+scn_eye_exam_glasses_04,scn_eye_exam_glasses,Patient,I like these dark brown ones. How much are they?,4
+scn_eye_exam_glasses_05,scn_eye_exam_glasses,Optician,The frames are two hundred and nineteen. With progressive lenses and anti-glare coating the total would be about four hundred and seventy.,5
+scn_eye_exam_glasses_06,scn_eye_exam_glasses,Patient,Does my insurance cover any of that?,6
+scn_eye_exam_glasses_07,scn_eye_exam_glasses,Optician,Your plan covers a hundred and fifty toward frames and lenses. So your out of pocket would be around three hundred and twenty.,7
+scn_eye_exam_glasses_08,scn_eye_exam_glasses,Patient,That's reasonable. I'll go with the brown ones. When will they be ready?,8
+scn_physical_therapy_01,scn_physical_therapy,Therapist,Welcome in. I reviewed the notes from your doctor. You're here for your right shoulder?,1
+scn_physical_therapy_02,scn_physical_therapy,Patient,Yes. I had surgery six weeks ago and the doctor said I should start training exercises.,2
+scn_physical_therapy_03,scn_physical_therapy,Therapist,Let me see your range of motion. Can you slowly raise your arm as high as comfortable?,3
+scn_physical_therapy_04,scn_physical_therapy,Patient,That's about as far as I can go. It gets tight right around here.,4
+scn_physical_therapy_05,scn_physical_therapy,Therapist,That's actually pretty good for six weeks. We'll work on gentle stretching first then build up to strengthening.,5
+scn_physical_therapy_06,scn_physical_therapy,Patient,How often will I need to come in?,6
+scn_physical_therapy_07,scn_physical_therapy,Therapist,I'd recommend twice a week for about eight weeks. I'll also give you exercises to do at home every day.,7
+scn_physical_therapy_08,scn_physical_therapy,Patient,That works for me. Is Tuesday and Thursday at nine available?,8
+scn_blood_test_01,scn_blood_test,Technician,Good morning. Have a seat. Can I see your lab order and your ID?,1
+scn_blood_test_02,scn_blood_test,Patient,Here they are. My doctor ordered a complete metabolic panel.,2
+scn_blood_test_03,scn_blood_test,Technician,I see that. Were you fasting for at least eight hours?,3
+scn_blood_test_04,scn_blood_test,Patient,Yes I haven't eaten since ten o'clock last night.,4
+scn_blood_test_05,scn_blood_test,Technician,Perfect. I'm going to draw from your left arm. You'll feel a small pinch. Are you okay with needles?,5
+scn_blood_test_06,scn_blood_test,Patient,I'm a little nervous but I'll be fine. How many vials do you need?,6
+scn_blood_test_07,scn_blood_test,Technician,Just three. It'll be over in less than a minute. Results should be available online within two business days.,7
+scn_blood_test_08,scn_blood_test,Patient,Should I keep the bandage on for a while?,8
+scn_hearing_aid_fitting_01,scn_hearing_aid_fitting,Specialist,Welcome back. Today we're going to fit your new hearing devices and make some adjustments.,1
+scn_hearing_aid_fitting_02,scn_hearing_aid_fitting,Patient,I'm excited but a little nervous. These are my first ones.,2
+scn_hearing_aid_fitting_03,scn_hearing_aid_fitting,Specialist,That's completely normal. I'm going to place the left one first. Tell me how it feels behind your ear.,3
+scn_hearing_aid_fitting_04,scn_hearing_aid_fitting,Patient,It feels a bit snug but not uncomfortable. Everything sounds much louder.,4
+scn_hearing_aid_fitting_05,scn_hearing_aid_fitting,Specialist,I'll turn the volume down slightly. We start at about seventy percent and gradually increase over the next few weeks.,5
+scn_hearing_aid_fitting_06,scn_hearing_aid_fitting,Patient,That's better. My own voice sounds strange though. Is that normal?,6
+scn_hearing_aid_fitting_07,scn_hearing_aid_fitting,Specialist,Very normal. Your brain will adjust in about a week. Wear them at least eight hours a day to help with the adjustment.,7
+scn_hearing_aid_fitting_08,scn_hearing_aid_fitting,Patient,Should I come back if something doesn't feel right before my next appointment?,8
+scn_nutrition_consult_01,scn_nutrition_consult,Nutritionist,Thanks for coming in. I've reviewed the food diary you sent over. Tell me about your goals.,1
+scn_nutrition_consult_02,scn_nutrition_consult,Client,I want to lower my cholesterol. My doctor said it was two forty-five at my last checkup.,2
+scn_nutrition_consult_03,scn_nutrition_consult,Nutritionist,That's definitely something we can work on through diet. I noticed you eat a lot of red meat and fried foods.,3
+scn_nutrition_consult_04,scn_nutrition_consult,Client,I know. I eat out for lunch almost every day. Old habits.,4
+scn_nutrition_consult_05,scn_nutrition_consult,Nutritionist,Let's start with small changes. Could you swap two of those lunches per week for grilled chicken or fish?,5
+scn_nutrition_consult_06,scn_nutrition_consult,Client,I could try that. What about breakfast? I usually skip it.,6
+scn_nutrition_consult_07,scn_nutrition_consult,Nutritionist,Skipping breakfast often leads to overeating at lunch. Try oatmeal with berries. It takes five minutes and helps lower cholesterol.,7
+scn_nutrition_consult_08,scn_nutrition_consult,Client,I'll give it a shot. When should I come back for a follow-up?,8
+scn_urgent_care_01,scn_urgent_care,Nurse,What brings you in today?,1
+scn_urgent_care_02,scn_urgent_care,Patient,I woke up with a really sore throat and a fever. My temperature was a hundred and one point four this morning.,2
+scn_urgent_care_03,scn_urgent_care,Nurse,How long have you been feeling this way?,3
+scn_urgent_care_04,scn_urgent_care,Patient,Since yesterday evening. It started with a scratchy throat and got worse overnight.,4
+scn_urgent_care_05,scn_urgent_care,Nurse,Any cough or congestion?,5
+scn_urgent_care_06,scn_urgent_care,Patient,No cough but my glands feel swollen on both sides of my neck.,6
+scn_urgent_care_07,scn_urgent_care,Nurse,We'll do a rapid strep test. It only takes about five minutes. Are you allergic to any medications?,7
+scn_urgent_care_08,scn_urgent_care,Patient,Just penicillin. I break out in a rash.,8
+scn_mental_health_intake_01,scn_mental_health_intake,Coordinator,Welcome. This is your first visit so we'll spend some time going over paperwork and getting to know you.,1
+scn_mental_health_intake_02,scn_mental_health_intake,Client,Okay. I wasn't sure what to expect. How long does this usually take?,2
+scn_mental_health_intake_03,scn_mental_health_intake,Coordinator,About forty-five minutes. I'll ask some general questions about your background and what brought you here today.,3
+scn_mental_health_intake_04,scn_mental_health_intake,Client,I've been having trouble sleeping and feeling anxious at work for the past few months.,4
+scn_mental_health_intake_05,scn_mental_health_intake,Coordinator,I'm glad you reached out. Can you tell me if you've ever spoken to a counselor before?,5
+scn_mental_health_intake_06,scn_mental_health_intake,Client,I saw someone briefly about ten years ago but didn't continue.,6
+scn_mental_health_intake_07,scn_mental_health_intake,Coordinator,That's helpful to know. Based on what you've shared I think you'd benefit from meeting with Doctor Ramirez. She has an opening next Wednesday at four.,7
+scn_mental_health_intake_08,scn_mental_health_intake,Client,That would work. Do I need to bring anything to the first session?,8
+scn_flu_shot_01,scn_flu_shot,Pharmacist,Hi there. Are you here for a flu shot?,1
+scn_flu_shot_02,scn_flu_shot,Customer,Yes please. Do I need an appointment?,2
+scn_flu_shot_03,scn_flu_shot,Pharmacist,No walk-ins are welcome. Can I see your insurance card and a photo ID?,3
+scn_flu_shot_04,scn_flu_shot,Customer,Here you go. Is the flu shot covered by my insurance?,4
+scn_flu_shot_05,scn_flu_shot,Pharmacist,Let me check. Yes your plan covers it at no cost. Have you had any reactions to flu shots in the past?,5
+scn_flu_shot_06,scn_flu_shot,Customer,No never. Just a sore arm for a day or two.,6
+scn_flu_shot_07,scn_flu_shot,Pharmacist,That's very common. Please fill out this short form and I'll give you the shot in about five minutes.,7
+scn_flu_shot_08,scn_flu_shot,Customer,Great. Which arm should I roll up my sleeve on?,8
+scn_job_interview_tech_01,scn_job_interview_tech,Interviewer,Thanks for coming in. I see on your resume that you have five years of experience in web development.,1
+scn_job_interview_tech_02,scn_job_interview_tech,Candidate,That's right. Most recently I worked at a startup building their customer-facing dashboard.,2
+scn_job_interview_tech_03,scn_job_interview_tech,Interviewer,What technologies did you use on that project?,3
+scn_job_interview_tech_04,scn_job_interview_tech,Candidate,React and TypeScript on the front end with a Node.js backend and a PostgreSQL database.,4
+scn_job_interview_tech_05,scn_job_interview_tech,Interviewer,We use a similar stack here. How comfortable are you with writing automated tests?,5
+scn_job_interview_tech_06,scn_job_interview_tech,Candidate,Very comfortable. I wrote unit tests and integration tests for about eighty percent of our codebase.,6
+scn_job_interview_tech_07,scn_job_interview_tech,Interviewer,That's great. This role is for a senior developer. The salary range is between a hundred and twenty and a hundred and forty-five thousand. Does that work for you?,7
+scn_job_interview_tech_08,scn_job_interview_tech,Candidate,Yes that's within my range. When would the position start?,8
+scn_team_meeting_01,scn_team_meeting,Manager,All right everyone let's get started. Sarah can you give us an update on the website redesign?,1
+scn_team_meeting_02,scn_team_meeting,Employee,Sure. We finished the homepage mockups on Monday. The client reviewed them yesterday and approved the design.,2
+scn_team_meeting_03,scn_team_meeting,Manager,That's ahead of schedule. When do you think the development phase will wrap up?,3
+scn_team_meeting_04,scn_team_meeting,Employee,If testing goes smoothly we should have the site ready by March fifteenth.,4
+scn_team_meeting_05,scn_team_meeting,Manager,Good. Are there any blockers the rest of the team should know about?,5
+scn_team_meeting_06,scn_team_meeting,Employee,We're still waiting on final product images from the marketing department. We need those by next Friday at the latest.,6
+scn_team_meeting_07,scn_team_meeting,Manager,I'll follow up with marketing today. Anyone else have updates before we wrap up?,7
+scn_team_meeting_08,scn_team_meeting,Employee,One more thing. The client asked about adding a live chat feature. Should I put together a cost estimate?,8
+scn_client_call_01,scn_client_call,Account Manager,Good morning Andrea. Thanks for making time for this call. I wanted to discuss the project timeline.,1
+scn_client_call_02,scn_client_call,Client,Good morning. I actually wanted to bring up the same thing. We've had a change on our end.,2
+scn_client_call_03,scn_client_call,Account Manager,Oh okay. What's changed?,3
+scn_client_call_04,scn_client_call,Client,Our launch date moved up two weeks to April first. Can your team meet that deadline?,4
+scn_client_call_05,scn_client_call,Account Manager,That's tight. We'd need to get all your content and approvals by March fifteenth. Is that realistic on your side?,5
+scn_client_call_06,scn_client_call,Client,I can commit to that. Will the earlier deadline affect the cost?,6
+scn_client_call_07,scn_client_call,Account Manager,There may be a small rush fee of about ten percent for overtime hours. I'll send you a revised quote by end of day tomorrow.,7
+scn_client_call_08,scn_client_call,Client,That sounds fair. Send it over and I'll get approval from my director.,8
+scn_office_tour_01,scn_office_tour,Guide,Welcome to the team. I'm Lisa from HR. Let me show you around the office.,1
+scn_office_tour_02,scn_office_tour,New Employee,Thank you Lisa. This is a lot bigger than I expected.,2
+scn_office_tour_03,scn_office_tour,Guide,This floor has the engineering and design teams. The break room is at the end of the hall on the right.,3
+scn_office_tour_04,scn_office_tour,New Employee,Where will my desk be?,4
+scn_office_tour_05,scn_office_tour,Guide,You'll be in section B near the windows. Your manager Kevin sits right across from you.,5
+scn_office_tour_06,scn_office_tour,New Employee,Great. Where are the meeting rooms?,6
+scn_office_tour_07,scn_office_tour,Guide,There are four meeting rooms on this floor. You can book them through the calendar app on your laptop. IT will set that up this afternoon.,7
+scn_office_tour_08,scn_office_tour,New Employee,And where do I park? I noticed the garage outside.,8
+scn_break_room_chat_01,scn_break_room_chat,Coworker A,Hey did you try the new coffee machine? It makes lattes now.,1
+scn_break_room_chat_02,scn_break_room_chat,Coworker B,Really? I've been going to the cafe downstairs every morning. This could save me four dollars a day.,2
+scn_break_room_chat_03,scn_break_room_chat,Coworker A,I know right. Just press the third button and it even froths the milk.,3
+scn_break_room_chat_04,scn_break_room_chat,Coworker B,Nice. Hey did you hear about the company picnic next month?,4
+scn_break_room_chat_05,scn_break_room_chat,Coworker A,Yeah June twenty-first at Riverside Park. Are you going to sign up for the softball game?,5
+scn_break_room_chat_06,scn_break_room_chat,Coworker B,Maybe. My arm isn't what it used to be. Are they doing teams by department?,6
+scn_break_room_chat_07,scn_break_room_chat,Coworker A,I think it's mixed teams. Sign up sheet is on the bulletin board by the elevator.,7
+scn_break_room_chat_08,scn_break_room_chat,Coworker B,I'll check it out. Oh the microwave is free. I need to heat up my lunch before the noon meeting.,8
+scn_performance_review_01,scn_performance_review,Manager,Thanks for sitting down with me. Let's go over your performance from this past year.,1
+scn_performance_review_02,scn_performance_review,Employee,I've been looking forward to this. I feel like it was a strong year.,2
+scn_performance_review_03,scn_performance_review,Manager,I agree. Your numbers were excellent. You exceeded your sales target by eighteen percent.,3
+scn_performance_review_04,scn_performance_review,Employee,Thank you. I focused a lot on building relationships with the mid-size accounts this year.,4
+scn_performance_review_05,scn_performance_review,Manager,That showed in the client retention numbers. One area for growth is presenting at team meetings. How do you feel about that?,5
+scn_performance_review_06,scn_performance_review,Employee,Public speaking makes me a bit nervous but I'm willing to work on it.,6
+scn_performance_review_07,scn_performance_review,Manager,We have a great workshop coming up in March. I'd like to nominate you for it. Also I'm recommending a four percent raise effective next month.,7
+scn_performance_review_08,scn_performance_review,Employee,That's really generous. Thank you. I'll definitely sign up for that workshop.,8
+scn_training_session_01,scn_training_session,Trainer,Good morning everyone. Today we're learning the new project management software. Has anyone used it before?,1
+scn_training_session_02,scn_training_session,Attendee,I've seen it but never used it. Is it similar to the old system?,2
+scn_training_session_03,scn_training_session,Trainer,The layout is different but the concepts are the same. Let me share my screen. You should see the main dashboard now.,3
+scn_training_session_04,scn_training_session,Attendee,I see it. Where do we create a new project?,4
+scn_training_session_05,scn_training_session,Trainer,Click the blue plus button in the top right corner. Then fill in the project name and select your team members.,5
+scn_training_session_06,scn_training_session,Attendee,How do we assign tasks to people?,6
+scn_training_session_07,scn_training_session,Trainer,Drag the task card to the person's column. You can also set deadlines by clicking the calendar icon. I'll send everyone a quick reference guide after this session.,7
+scn_training_session_08,scn_training_session,Attendee,Will this be recorded so we can review it later?,8
+scn_coworker_lunch_01,scn_coworker_lunch,Coworker A,This place has great reviews. Have you been here before?,1
+scn_coworker_lunch_02,scn_coworker_lunch,Coworker B,Once with my family. The pasta is excellent. I had the carbonara.,2
+scn_coworker_lunch_03,scn_coworker_lunch,Coworker A,I'm thinking about the grilled chicken salad. Are we splitting the bill?,3
+scn_coworker_lunch_04,scn_coworker_lunch,Coworker B,Sure that's easiest. Hey did you hear we're getting new monitors for the whole team?,4
+scn_coworker_lunch_05,scn_coworker_lunch,Coworker A,No way. When?,5
+scn_coworker_lunch_06,scn_coworker_lunch,Coworker B,Sometime next week. Twenty-seven inch ultra-wide screens. Kevin put in the request last month.,6
+scn_coworker_lunch_07,scn_coworker_lunch,Coworker A,That's awesome. I've been squinting at my old monitor for two years. What are you getting to drink?,7
+scn_coworker_lunch_08,scn_coworker_lunch,Coworker B,Just water for me. We should head back by one. I have that client call at one fifteen.,8
+scn_book_club_01,scn_book_club,Host,Okay everyone. What did we think of this month's book? Who wants to start?,1
+scn_book_club_02,scn_book_club,Member,I'll go first. I thought the first half was slow but the ending completely surprised me.,2
+scn_book_club_03,scn_book_club,Host,I felt the same way. The twist in chapter fourteen changed everything for me.,3
+scn_book_club_04,scn_book_club,Member,Did anyone else notice the parallels between the main character and the author's own life?,4
+scn_book_club_05,scn_book_club,Host,Good catch. I read an interview where the author admitted the protagonist is partly autobiographical.,5
+scn_book_club_06,scn_book_club,Member,That makes so much sense. So what are we reading next month?,6
+scn_book_club_07,scn_book_club,Host,I have three suggestions. A mystery by Ruth Ware a memoir by Trevor Noah or a science fiction novel by Becky Chambers. Let's take a vote.,7
+scn_book_club_08,scn_book_club,Member,I vote for the Ruth Ware mystery. I've been wanting to read more of her work.,8
+scn_neighborhood_bbq_01,scn_neighborhood_bbq,Host,Hey welcome. Glad you could make it. Grab a plate and help yourself.,1
+scn_neighborhood_bbq_02,scn_neighborhood_bbq,Neighbor,Thanks for inviting us. Everything smells amazing. What's on the grill?,2
+scn_neighborhood_bbq_03,scn_neighborhood_bbq,Host,Burgers hot dogs and some veggie kebabs. There's also a cooler of drinks by the table.,3
+scn_neighborhood_bbq_04,scn_neighborhood_bbq,Neighbor,I brought a potato salad. Where should I put it?,4
+scn_neighborhood_bbq_05,scn_neighborhood_bbq,Host,Right on the long table with the other sides. The Hendersons brought their famous coleslaw too.,5
+scn_neighborhood_bbq_06,scn_neighborhood_bbq,Neighbor,Great. By the way have you met the new family that moved in on the corner?,6
+scn_neighborhood_bbq_07,scn_neighborhood_bbq,Host,Not yet. They have two young kids I think. I left a welcome card in their mailbox last week.,7
+scn_neighborhood_bbq_08,scn_neighborhood_bbq,Neighbor,That's nice of you. Oh there's Mark and Susan. I'll go say hello.,8
+scn_birthday_party_01,scn_birthday_party,Guest A,Happy birthday! How does it feel to be forty?,1
+scn_birthday_party_02,scn_birthday_party,Guest B,Ha thanks. Honestly I don't feel any different than thirty-nine. I'm just glad everyone could come.,2
+scn_birthday_party_03,scn_birthday_party,Guest A,This is a great turnout. There must be thirty people here.,3
+scn_birthday_party_04,scn_birthday_party,Guest B,My wife organized the whole thing. I had no idea until I walked in.,4
+scn_birthday_party_05,scn_birthday_party,Guest A,A surprise party? That's impressive. She kept it a complete secret.,5
+scn_birthday_party_06,scn_birthday_party,Guest B,Totally. I thought we were just going out to dinner. Then I walked in and everyone yelled surprise.,6
+scn_birthday_party_07,scn_birthday_party,Guest A,Did you see the cake? It's shaped like a guitar because she knows you've been taking lessons.,7
+scn_birthday_party_08,scn_birthday_party,Guest B,I saw it. She even got the bakery on Oak Street to make it. That place does incredible work.,8
+scn_volunteer_orientation_01,scn_volunteer_orientation,Coordinator,Welcome to the food bank orientation. Thank you all for signing up to volunteer.,1
+scn_volunteer_orientation_02,scn_volunteer_orientation,Volunteer,Happy to be here. What will we be doing today?,2
+scn_volunteer_orientation_03,scn_volunteer_orientation,Coordinator,Today I'll walk you through our sorting process and food safety guidelines. Then we'll do a practice run.,3
+scn_volunteer_orientation_04,scn_volunteer_orientation,Volunteer,How often do volunteers usually come in?,4
+scn_volunteer_orientation_05,scn_volunteer_orientation,Coordinator,Most of our regulars come once a week. Saturdays from nine to noon are our busiest shifts. We serve about two hundred families per week.,5
+scn_volunteer_orientation_06,scn_volunteer_orientation,Volunteer,I could commit to every other Saturday. Do I need to sign up each time?,6
+scn_volunteer_orientation_07,scn_volunteer_orientation,Coordinator,You can set a recurring schedule in our app. It'll send you a reminder the day before. You'll also need to wear closed-toe shoes and tie back long hair.,7
+scn_volunteer_orientation_08,scn_volunteer_orientation,Volunteer,Got it. Is parking available here or should I take the bus?,8
+scn_sports_game_01,scn_sports_game,Friend A,Can you believe that play? The shortstop made an incredible diving catch.,1
+scn_sports_game_02,scn_sports_game,Friend B,I know. That saved at least two runs. Hey do you want another hot dog?,2
+scn_sports_game_03,scn_sports_game,Friend A,Sure. And can you grab me a lemonade too? Here's a twenty.,3
+scn_sports_game_04,scn_sports_game,Friend B,Got it. The line was pretty long last time. I'll probably miss the next inning.,4
+scn_sports_game_05,scn_sports_game,Friend A,No rush. It's only the fifth inning. The score is still three to one.,5
+scn_sports_game_06,scn_sports_game,Friend B,I think our team can pull ahead if Rodriguez comes up to bat with runners on.,6
+scn_sports_game_07,scn_sports_game,Friend A,He's been on fire this season. Twelve home runs in the last thirty games.,7
+scn_sports_game_08,scn_sports_game,Friend B,Okay I'm heading to the concession stand. Save my seat. I'll be right back.,8
+scn_movie_night_01,scn_movie_night,Friend A,So what are we watching tonight? I brought popcorn and candy.,1
+scn_movie_night_02,scn_movie_night,Friend B,I was thinking either a comedy or that new thriller everyone's been talking about.,2
+scn_movie_night_03,scn_movie_night,Friend A,What's the thriller called? Is it the one with Sandra Bullock?,3
+scn_movie_night_04,scn_movie_night,Friend B,No it's called The Last Signal. It came out on streaming last Friday.,4
+scn_movie_night_05,scn_movie_night,Friend A,Oh I've heard good things about that one. Is it really scary though? I don't do well with jump scares.,5
+scn_movie_night_06,scn_movie_night,Friend B,It's more suspenseful than scary. No jump scares from what I've read. Should I put it on?,6
+scn_movie_night_07,scn_movie_night,Friend A,Sure let's try it. If it's too intense we can always switch. Do you want butter on the popcorn?,7
+scn_movie_night_08,scn_movie_night,Friend B,Yes please. And grab a couple of blankets from the closet. It's cold in here.,8
+scn_community_garden_01,scn_community_garden,Manager,Hi there. Are you interested in getting a garden plot this season?,1
+scn_community_garden_02,scn_community_garden,Gardener,Yes. My apartment doesn't have any outdoor space so this would be perfect.,2
+scn_community_garden_03,scn_community_garden,Manager,We have a few plots available. The small ones are four feet by eight feet and cost forty dollars per year.,3
+scn_community_garden_04,scn_community_garden,Gardener,That sounds just right. What's included with the plot?,4
+scn_community_garden_05,scn_community_garden,Manager,You get access to the shared tool shed water spigots and the compost bins. We also hold monthly workshops.,5
+scn_community_garden_06,scn_community_garden,Gardener,Are there any rules about what I can grow?,6
+scn_community_garden_07,scn_community_garden,Manager,No restrictions on vegetables or flowers. We just ask that you keep your plot weeded and don't use any chemical pesticides.,7
+scn_community_garden_08,scn_community_garden,Gardener,That's fine with me. When does the growing season officially start?,8
+scn_dance_class_01,scn_dance_class,Instructor,Welcome to beginner salsa. Is this your first dance class?,1
+scn_dance_class_02,scn_dance_class,Student,Yes. I've never taken any kind of dance class before. I'm pretty nervous.,2
+scn_dance_class_03,scn_dance_class,Instructor,Don't worry at all. Everyone here started with zero experience. The first thing we learn is the basic step.,3
+scn_dance_class_04,scn_dance_class,Student,Do I need a partner or can I come alone?,4
+scn_dance_class_05,scn_dance_class,Instructor,You can come alone. We rotate partners throughout the class so everyone dances with everyone.,5
+scn_dance_class_06,scn_dance_class,Student,That's a relief. How long is each session?,6
+scn_dance_class_07,scn_dance_class,Instructor,One hour every Wednesday at seven. The eight-week series is a hundred and twenty dollars or you can drop in for eighteen per class.,7
+scn_dance_class_08,scn_dance_class,Student,I'll start with the drop-in option and see how I like it. Should I wear special shoes?,8
+scn_hotel_checkin_late_01,scn_hotel_checkin_late,Clerk,Good evening. Welcome to the Riverside Inn. Are you checking in?,1
+scn_hotel_checkin_late_02,scn_hotel_checkin_late,Guest,Yes I'm sorry I'm arriving so late. My flight was delayed three hours. The reservation is under Martinez.,2
+scn_hotel_checkin_late_03,scn_hotel_checkin_late,Clerk,No problem at all. I have your reservation right here. A queen room for three nights?,3
+scn_hotel_checkin_late_04,scn_hotel_checkin_late,Guest,That's correct. Is the restaurant still open? I haven't had dinner yet.,4
+scn_hotel_checkin_late_05,scn_hotel_checkin_late,Clerk,The restaurant closes at ten but room service is available until midnight. I can leave a menu in your room.,5
+scn_hotel_checkin_late_06,scn_hotel_checkin_late,Guest,That would be wonderful. What floor am I on?,6
+scn_hotel_checkin_late_07,scn_hotel_checkin_late,Clerk,Room four-twelve on the fourth floor. The elevator is just past the lobby. Breakfast is from six thirty to ten in the dining room.,7
+scn_hotel_checkin_late_08,scn_hotel_checkin_late,Guest,Thank you. Could I also get a late checkout on my last day? My flight isn't until four.,8
+scn_car_rental_return_01,scn_car_rental_return,Agent,Welcome back. Are you returning a vehicle today?,1
+scn_car_rental_return_02,scn_car_rental_return,Customer,Yes. It's the blue Camry parked in slot seventeen. Here are the keys.,2
+scn_car_rental_return_03,scn_car_rental_return,Agent,Thank you. Let me walk around and do a quick inspection. Did the car run well for you?,3
+scn_car_rental_return_04,scn_car_rental_return,Customer,It ran great. I did put a lot of miles on it though. I drove about six hundred miles total.,4
+scn_car_rental_return_05,scn_car_rental_return,Agent,That's fine. Your plan includes unlimited mileage. I do see the gas tank is at about a quarter. You prepaid for a full tank right?,5
+scn_car_rental_return_06,scn_car_rental_return,Customer,Yes I chose the prepaid fuel option when I picked it up.,6
+scn_car_rental_return_07,scn_car_rental_return,Agent,Then you're all set. No additional charges. Your final receipt will be emailed to the address on file within twenty-four hours.,7
+scn_car_rental_return_08,scn_car_rental_return,Customer,Perfect. Can you point me toward the airport shuttle?,8
+scn_train_station_01,scn_train_station,Agent,How can I help you?,1
+scn_train_station_02,scn_train_station,Passenger,I need two tickets to Philadelphia on the next available train.,2
+scn_train_station_03,scn_train_station,Agent,The next train departs at two forty-five from platform three. Would you like coach or business class?,3
+scn_train_station_04,scn_train_station,Passenger,What's the price difference?,4
+scn_train_station_05,scn_train_station,Agent,Coach is forty-seven dollars each and business class is seventy-two. Business class includes wider seats and a quiet car option.,5
+scn_train_station_06,scn_train_station,Passenger,Coach is fine for both tickets. Can we pick our seats?,6
+scn_train_station_07,scn_train_station,Agent,Seating is first come first served in coach. I'd suggest boarding early for the best selection. The trip takes about an hour and forty minutes.,7
+scn_train_station_08,scn_train_station,Passenger,Thank you. Is there food available on the train?,8
+scn_border_crossing_01,scn_border_crossing,Officer,Good afternoon. Passports and identification for everyone in the vehicle please.,1
+scn_border_crossing_02,scn_border_crossing,Traveler,Here are our passports. There are two of us.,2
+scn_border_crossing_03,scn_border_crossing,Officer,What is the purpose of your visit?,3
+scn_border_crossing_04,scn_border_crossing,Traveler,We're on vacation. We're spending four days in Vancouver visiting friends.,4
+scn_border_crossing_05,scn_border_crossing,Officer,Where will you be staying?,5
+scn_border_crossing_06,scn_border_crossing,Traveler,At our friend's home on West Eighth Avenue. I have the address written down if you need it.,6
+scn_border_crossing_07,scn_border_crossing,Officer,That won't be necessary. Are you bringing any food alcohol or tobacco into the country?,7
+scn_border_crossing_08,scn_border_crossing,Traveler,No. Just our personal belongings and clothes.,8
+scn_tour_guide_01,scn_tour_guide,Guide,Welcome to the historic downtown walking tour. My name is Marcus and I'll be your guide for the next ninety minutes.,1
+scn_tour_guide_02,scn_tour_guide,Tourist,Hi Marcus. Is it okay to take photos along the way?,2
+scn_tour_guide_03,scn_tour_guide,Guide,Absolutely. I'll point out the best photo spots. We're starting here at the old courthouse which was built in eighteen seventy-six.,3
+scn_tour_guide_04,scn_tour_guide,Tourist,It's beautiful. Is it still a working courthouse?,4
+scn_tour_guide_05,scn_tour_guide,Guide,No it was converted into a museum in nineteen ninety-five. Our next stop is the waterfront which is about a five minute walk from here.,5
+scn_tour_guide_06,scn_tour_guide,Tourist,How many stops are there on the tour total?,6
+scn_tour_guide_07,scn_tour_guide,Guide,Seven stops in all. We'll end at the farmer's market where you'll have free time to explore. I recommend the fresh cider stand.,7
+scn_tour_guide_08,scn_tour_guide,Tourist,That sounds wonderful. Do you have a map of the route we can follow along with?,8
+scn_cruise_ship_01,scn_cruise_ship,Staff,Welcome aboard. May I see your boarding pass and photo ID?,1
+scn_cruise_ship_02,scn_cruise_ship,Passenger,Here you go. This is our first cruise. We're very excited.,2
+scn_cruise_ship_03,scn_cruise_ship,Staff,You're going to have a wonderful time. Your cabin is on deck seven room seven-fourteen. Take the elevators to the right.,3
+scn_cruise_ship_04,scn_cruise_ship,Passenger,Thank you. What time do we set sail?,4
+scn_cruise_ship_05,scn_cruise_ship,Staff,We depart at five o'clock. There's a mandatory safety drill at four fifteen. You'll hear an announcement and head to your muster station.,5
+scn_cruise_ship_06,scn_cruise_ship,Passenger,Where is our muster station?,6
+scn_cruise_ship_07,scn_cruise_ship,Staff,Station D on deck three. It's marked on the map behind your cabin door. Dinner tonight is at seven in the main dining room on deck five.,7
+scn_cruise_ship_08,scn_cruise_ship,Passenger,Is the dining room formal or can we wear casual clothes?,8
+scn_bus_tour_01,scn_bus_tour,Guide,Good morning everyone. Welcome to the Hollywood sightseeing tour. We'll be making six stops over the next three hours.,1
+scn_bus_tour_02,scn_bus_tour,Tourist,Can we get off the bus at each stop?,2
+scn_bus_tour_03,scn_bus_tour,Guide,Yes this is a hop-on hop-off tour. You can stay as long as you want and catch the next bus. They come every twenty minutes.,3
+scn_bus_tour_04,scn_bus_tour,Tourist,Where's the best stop for taking pictures of the Hollywood sign?,4
+scn_bus_tour_05,scn_bus_tour,Guide,Stop number four at Griffith Observatory has the best view. I'd recommend spending about forty-five minutes there.,5
+scn_bus_tour_06,scn_bus_tour,Tourist,And where does the tour end?,6
+scn_bus_tour_07,scn_bus_tour,Guide,It loops back here to Hollywood Boulevard. The last bus of the day leaves Griffith at five thirty. Make sure you don't miss it.,7
+scn_bus_tour_08,scn_bus_tour,Tourist,Thank you. Is there a restroom on the bus?,8
+scn_roadside_assist_tow_01,scn_roadside_assist_tow,Driver,Are you the one who called about the breakdown? Is this your silver SUV?,1
+scn_roadside_assist_tow_02,scn_roadside_assist_tow,Motorist,Yes that's me. Thank you for getting here so quickly.,2
+scn_roadside_assist_tow_03,scn_roadside_assist_tow,Driver,No problem. The dispatch said your engine overheated. Did you see any steam or warning lights?,3
+scn_roadside_assist_tow_04,scn_roadside_assist_tow,Motorist,The temperature gauge went into the red and then steam started coming from under the hood.,4
+scn_roadside_assist_tow_05,scn_roadside_assist_tow,Driver,Sounds like it could be the radiator or a blown hose. I'll need to tow it. Where's your preferred shop?,5
+scn_roadside_assist_tow_06,scn_roadside_assist_tow,Motorist,I usually go to Valley Auto on Pine Street. Is that within the towing range?,6
+scn_roadside_assist_tow_07,scn_roadside_assist_tow,Driver,That's about eight miles from here. Your plan covers up to fifteen miles so you're good. Grab your personal items and you can ride in the cab with me.,7
+scn_roadside_assist_tow_08,scn_roadside_assist_tow,Motorist,Let me get my bag and my phone charger. Will the shop be open when we arrive?,8

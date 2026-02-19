@@ -1,241 +1,453 @@
 id,story_id,question_text,question_type,answer_options,correct_answer,difficulty_level,phonemic_target
-q_dl_001_01,story_dl_001_morning_coffee,"What time does Sarah wake up?","detail","[""Five o'clock"", ""Six o'clock"", ""Seven o'clock"", ""Eight o'clock""]","Six o'clock",1,""
-q_dl_001_02,story_dl_001_morning_coffee,"What does Sarah add to her coffee?","detail","[""Cream and honey"", ""Milk and sugar"", ""Nothing at all"", ""Cinnamon""]","Milk and sugar",1,""
-q_dl_001_03,story_dl_001_morning_coffee,"Why does Sarah sit by the window?","inference","[""To read the newspaper"", ""To watch the sun rise"", ""To use her phone"", ""To eat breakfast""]","To watch the sun rise",2,""
-q_dl_001_04,story_dl_001_morning_coffee,"What is the main idea of this story?","main_idea","[""Coffee is delicious"", ""Mornings are difficult"", ""Quiet time helps start the day"", ""Windows provide good light""]","Quiet time helps start the day",2,""
-q_dl_002_01,story_dl_002_grocery_trip,"What day did Tom go to the store?","detail","[""Friday"", ""Saturday"", ""Sunday"", ""Monday""]","Saturday",1,""
-q_dl_002_02,story_dl_002_grocery_trip,"Where was the bread aisle located?","detail","[""Near the entrance"", ""In the middle"", ""At the back"", ""By the checkout""]","At the back",1,""
-q_dl_002_03,story_dl_002_grocery_trip,"What kind of bread did Tom buy?","detail","[""White bread"", ""Sourdough"", ""Whole wheat"", ""Rye bread""]","Whole wheat",1,""
-q_dl_002_04,story_dl_002_grocery_trip,"How much did Tom pay?","detail","[""Ten dollars"", ""Fifteen dollars"", ""Twenty dollars"", ""Twenty-five dollars""]","Twenty dollars",1,""
-q_dl_003_01,story_dl_003_saturday_market,"What did the baker always save for Maria?","detail","[""Apple pie"", ""Cinnamon rolls"", ""Blueberry muffins"", ""Chocolate croissants""]","Cinnamon rolls",1,""
-q_dl_003_02,story_dl_003_saturday_market,"What new vendor did Maria discover?","detail","[""Cheese vendor"", ""Flower vendor"", ""Honey vendor"", ""Jam vendor""]","Honey vendor",1,""
-q_dl_003_03,story_dl_003_saturday_market,"What made the honey special?","detail","[""It was organic"", ""It was lavender flavored"", ""It was very cheap"", ""It was from local bees""]","It was lavender flavored",2,""
-q_dl_003_04,story_dl_003_saturday_market,"Why does Maria enjoy the market?","inference","[""The low prices"", ""The personal connections"", ""The parking is free"", ""It's close to her home""]","The personal connections",2,""
-q_dl_004_01,story_dl_004_fixing_sink,"Where was water pooling?","detail","[""On the floor"", ""On the shelf in the cabinet"", ""In the sink"", ""On the counter""]","On the shelf in the cabinet",1,""
-q_dl_004_02,story_dl_004_fixing_sink,"What was wrong with the old washer?","detail","[""It was loose"", ""It had cracked"", ""It was missing"", ""It was rusted""]","It had cracked",1,""
-q_dl_004_03,story_dl_004_fixing_sink,"How long did the repair take after getting parts?","detail","[""Ten minutes"", ""Twenty minutes"", ""Thirty minutes"", ""One hour""]","Twenty minutes",2,""
-q_dl_004_04,story_dl_004_fixing_sink,"How did James feel at the end?","inference","[""Frustrated"", ""Proud"", ""Exhausted"", ""Relieved""]","Proud",2,""
-q_dl_005_01,story_dl_005_neighborhood_walk,"What is the dog's name?","detail","[""Buddy"", ""Max"", ""Rex"", ""Charlie""]","Max",1,""
-q_dl_005_02,story_dl_005_neighborhood_walk,"Where does Max always stop to sniff?","detail","[""The oak tree"", ""The fire hydrant"", ""The mailbox"", ""The fence""]","The fire hydrant",1,""
-q_dl_005_03,story_dl_005_neighborhood_walk,"When does Robert walk his dog?","detail","[""Morning before work"", ""Afternoon"", ""After dinner"", ""Before lunch""]","After dinner",1,""
-q_dl_005_04,story_dl_005_neighborhood_walk,"What does Robert do during the walk?","inference","[""Listens to music"", ""Talks on the phone"", ""Thinks about the day"", ""Exercises vigorously""]","Thinks about the day",2,""
-q_dl_006_01,story_dl_006_cooking_together,"What dish did Lisa and Emma make?","detail","[""Pizza"", ""Tacos"", ""Pasta"", ""Soup""]","Pasta",1,""
-q_dl_006_02,story_dl_006_cooking_together,"What did Lisa show Emma how to do?","detail","[""Stir the sauce"", ""Boil water"", ""Chop vegetables safely"", ""Set the table""]","Chop vegetables safely",1,""
-q_dl_006_03,story_dl_006_cooking_together,"What did they decide at the end?","detail","[""To order takeout next time"", ""To cook together every Sunday"", ""To try a new restaurant"", ""To invite friends over""]","To cook together every Sunday",2,""
-q_dl_006_04,story_dl_006_cooking_together,"Why did dinner taste better?","inference","[""They used expensive ingredients"", ""They were very hungry"", ""They made it together"", ""They followed a new recipe""]","They made it together",2,""
-q_dl_007_01,story_dl_007_backyard_garden,"When did Margaret start planning her garden?","detail","[""December"", ""January"", ""February"", ""March""]","January",1,""
-q_dl_007_02,story_dl_007_backyard_garden,"Where did she plant the tomatoes?","detail","[""Near the patio"", ""In ceramic pots"", ""Along the sunny fence"", ""By the kitchen door""]","Along the sunny fence",1,""
-q_dl_007_03,story_dl_007_backyard_garden,"How long until the first sprouts appeared?","detail","[""One week"", ""Two weeks"", ""Three weeks"", ""One month""]","Two weeks",2,""
-q_dl_007_04,story_dl_007_backyard_garden,"What became her peaceful retreat?","main_idea","[""The kitchen"", ""The patio"", ""Her garden"", ""The fence area""]","Her garden",2,""
-q_dl_008_01,story_dl_008_family_reunion,"When does the Henderson family reunion happen?","detail","[""July"", ""August"", ""September"", ""June""]","August",1,""
-q_dl_008_02,story_dl_008_family_reunion,"What did Aunt Martha bring?","detail","[""Apple pie"", ""Potato salad"", ""Coleslaw"", ""Baked beans""]","Potato salad",1,""
-q_dl_008_03,story_dl_008_family_reunion,"How long has the tradition continued?","detail","[""Twenty-five years"", ""Thirty years"", ""Thirty-seven years"", ""Forty years""]","Thirty-seven years",2,""
-q_dl_008_04,story_dl_008_family_reunion,"What did the photo albums make people do?","detail","[""Fall asleep"", ""Argue"", ""Laugh and cry"", ""Leave early""]","Laugh and cry",2,""
-q_dl_009_01,story_dl_009_moving_day,"How long had Jennifer lived in the apartment?","detail","[""Five years"", ""Six years"", ""Eight years"", ""Ten years""]","Eight years",1,""
-q_dl_009_02,story_dl_009_moving_day,"Where is her new home?","detail","[""In another city"", ""Across town"", ""In the suburbs"", ""Near her parents""]","Across town",1,""
-q_dl_009_03,story_dl_009_moving_day,"What does the new home offer?","detail","[""Lower rent"", ""A garage"", ""More space and a quieter neighborhood"", ""A swimming pool""]","More space and a quieter neighborhood",2,""
-q_dl_009_04,story_dl_009_moving_day,"How did Jennifer feel about the change?","inference","[""Excited only"", ""Scared but knowing it was necessary"", ""Sad and reluctant"", ""Indifferent""]","Scared but knowing it was necessary",2,""
-q_dl_010_01,story_dl_010_rainy_sunday,"What task had David postponed?","detail","[""Cleaning the bathroom"", ""Organizing his closet"", ""Fixing the car"", ""Doing laundry""]","Organizing his closet",1,""
-q_dl_010_02,story_dl_010_rainy_sunday,"What did he find in the closet?","detail","[""Old books and magazines"", ""Concert tickets and birthday cards"", ""Sports equipment"", ""Holiday decorations""]","Concert tickets and birthday cards",1,""
-q_dl_010_03,story_dl_010_rainy_sunday,"Who had knitted the sweater?","detail","[""His mother"", ""His grandmother"", ""His aunt"", ""His wife""]","His grandmother",2,""
-q_dl_010_04,story_dl_010_rainy_sunday,"What does the story suggest about rainy days?","inference","[""They are boring"", ""They bring unexpected gifts"", ""They cause delays"", ""They ruin plans""]","They bring unexpected gifts",2,""
-q_dl_011_01,story_dl_011_new_neighbor,"What did Michael bake for the new neighbor?","detail","[""Brownies"", ""Banana bread"", ""Chocolate chip cookies"", ""Apple pie""]","Chocolate chip cookies",1,""
-q_dl_011_02,story_dl_011_new_neighbor,"What is Angela's profession?","detail","[""Teacher"", ""Nurse"", ""Lawyer"", ""Accountant""]","Nurse",1,""
-q_dl_011_03,story_dl_011_new_neighbor,"Where did Angela transfer from?","detail","[""Portland"", ""Seattle"", ""Denver"", ""Chicago""]","Seattle",2,""
-q_dl_011_04,story_dl_011_new_neighbor,"What did Angela say makes a house feel like home?","inference","[""Nice furniture"", ""Good location"", ""Good neighbors"", ""A garden""]","Good neighbors",2,""
-q_dl_012_01,story_dl_012_birthday_surprise,"Why did Karen think everyone forgot her birthday?","inference","[""No one sent cards"", ""Her husband and children seemed unaware"", ""She didn't remind anyone"", ""It fell on a workday""]","Her husband and children seemed unaware",2,""
-q_dl_012_02,story_dl_012_birthday_surprise,"How many people were at the surprise party?","detail","[""Twenty people"", ""Twenty-five people"", ""Thirty people"", ""Forty people""]","Thirty people",1,""
-q_dl_012_03,story_dl_012_birthday_surprise,"What was the house like when Karen arrived?","detail","[""Decorated with balloons"", ""Dark"", ""Full of music"", ""Empty""]","Dark",1,""
-q_dl_012_04,story_dl_012_birthday_surprise,"How did Karen react to the surprise?","detail","[""She was angry"", ""She cried happy tears"", ""She laughed"", ""She was speechless""]","She cried happy tears",2,""
-q_hw_001_01,story_hw_001_doctors_visit,"Who waited nervously on the examination table?","detail","[""Mrs. Chen"", ""Mrs. Wong"", ""Mrs. Park"", ""Mrs. Kim""]","Mrs. Chen",1,""
-q_hw_001_02,story_hw_001_doctors_visit,"What did the nurse check?","detail","[""Weight and height"", ""Blood pressure and temperature"", ""Heart rate and oxygen"", ""Blood sugar""]","Blood pressure and temperature",1,""
-q_hw_001_03,story_hw_001_doctors_visit,"What did the doctor recommend for headaches?","detail","[""Take medication"", ""Get more sleep"", ""Drink more water"", ""Reduce stress""]","Drink more water",2,""
-q_hw_001_04,story_hw_001_doctors_visit,"How did the checkup results turn out?","inference","[""Concerning"", ""Normal and healthy"", ""Mixed results"", ""Unclear""]","Normal and healthy",2,""
-q_hw_002_01,story_hw_002_morning_exercise,"Why did Paul start exercising?","detail","[""To lose weight"", ""Doctor's suggestion for energy"", ""To train for a race"", ""His wife wanted him to""]","Doctor's suggestion for energy",1,""
-q_hw_002_02,story_hw_002_morning_exercise,"How long did Paul walk at first?","detail","[""Five minutes"", ""Ten minutes"", ""Fifteen minutes"", ""Twenty minutes""]","Ten minutes",1,""
-q_hw_002_03,story_hw_002_morning_exercise,"How long does Paul exercise now?","detail","[""Thirty minutes"", ""Forty-five minutes"", ""One hour"", ""Twenty minutes""]","Forty-five minutes",2,""
-q_hw_002_04,story_hw_002_morning_exercise,"What improved for Paul?","detail","[""His appetite"", ""His sleep and stress"", ""His appearance"", ""His social life""]","His sleep and stress",2,""
-q_hw_003_01,story_hw_003_pharmacy_visit,"Who is the pharmacist?","detail","[""Mr. Garcia"", ""Mr. Rodriguez"", ""Mr. Martinez"", ""Mr. Lopez""]","Mr. Rodriguez",1,""
-q_hw_003_02,story_hw_003_pharmacy_visit,"What covered most of the cost?","detail","[""A coupon"", ""Her insurance"", ""A discount program"", ""A rebate""]","Her insurance",1,""
-q_hw_003_03,story_hw_003_pharmacy_visit,"How should Linda take the medication?","detail","[""Once daily without food"", ""Twice daily with food"", ""Three times daily"", ""As needed""]","Twice daily with food",2,""
-q_hw_003_04,story_hw_003_pharmacy_visit,"What did Linda appreciate about the pharmacist?","inference","[""His speed"", ""His patience in answering questions"", ""His friendliness"", ""His appearance""]","His patience in answering questions",2,""
-q_hw_004_01,story_hw_004_physical_therapy,"Why did Rebecca need physical therapy?","detail","[""Car accident"", ""Knee surgery"", ""Back injury"", ""Hip replacement""]","Knee surgery",1,""
-q_hw_004_02,story_hw_004_physical_therapy,"How often did Rebecca have therapy?","detail","[""Once a week"", ""Twice a week"", ""Three times weekly"", ""Daily""]","Three times weekly",1,""
-q_hw_004_03,story_hw_004_physical_therapy,"When did Rebecca notice improvement?","detail","[""Week two"", ""Week four"", ""Week six"", ""Week eight""]","Week six",2,""
-q_hw_004_04,story_hw_004_physical_therapy,"How long until Rebecca walked without assistance?","detail","[""One month"", ""Two months"", ""Three months"", ""Six months""]","Three months",2,""
-q_hw_005_01,story_hw_005_healthy_eating,"What was too high in George's checkup?","detail","[""Blood pressure"", ""Blood sugar"", ""Cholesterol"", ""Weight""]","Cholesterol",1,""
-q_hw_005_02,story_hw_005_healthy_eating,"What did George reduce?","detail","[""Salt"", ""Sugar"", ""Fried foods"", ""Carbohydrates""]","Fried foods",1,""
-q_hw_005_03,story_hw_005_healthy_eating,"Who helped George with new recipes?","detail","[""His doctor"", ""His wife"", ""His daughter"", ""A nutritionist""]","His wife",2,""
-q_hw_005_04,story_hw_005_healthy_eating,"What did George learn about choices?","inference","[""Big changes work best"", ""Small daily choices create big results"", ""Diet doesn't matter much"", ""Exercise is more important""]","Small daily choices create big results",2,""
-q_hw_006_01,story_hw_006_mental_health,"What did Catherine struggle with?","detail","[""Depression"", ""Anxiety"", ""Insomnia"", ""Grief""]","Anxiety",1,""
-q_hw_006_02,story_hw_006_mental_health,"What did her therapist teach her?","detail","[""Exercise routines"", ""Breathing techniques"", ""Diet changes"", ""Sleep habits""]","Breathing techniques",1,""
-q_hw_006_03,story_hw_006_mental_health,"What became part of her daily routine?","detail","[""Journaling"", ""Exercise"", ""Meditation"", ""Reading""]","Meditation",2,""
-q_hw_006_04,story_hw_006_mental_health,"What did Catherine wish?","inference","[""That therapy was cheaper"", ""That she had reached out sooner"", ""That sessions were longer"", ""That medication worked faster""]","That she had reached out sooner",2,""
-q_hw_007_01,story_hw_007_sleep_improvement,"How long had Richard slept poorly?","detail","[""Years"", ""Months"", ""Decades"", ""A few weeks""]","Decades",1,""
-q_hw_007_02,story_hw_007_sleep_improvement,"What disrupted his circadian rhythm?","detail","[""His phone"", ""The bright television"", ""Street lights"", ""His alarm clock""]","The bright television",1,""
-q_hw_007_03,story_hw_007_sleep_improvement,"When should Richard avoid caffeine?","detail","[""After breakfast"", ""After noon"", ""After dinner"", ""All day""]","After noon",2,""
-q_hw_007_04,story_hw_007_sleep_improvement,"What was the result of the changes?","inference","[""No improvement"", ""Slight improvement"", ""Deep, restorative sleep"", ""Different problems""]","Deep, restorative sleep",2,""
-q_hw_008_01,story_hw_008_hearing_journey,"What did Martha notice happening more often?","detail","[""Missing phone calls"", ""Asking people to repeat themselves"", ""Turning up the TV"", ""Misunderstanding texts""]","Asking people to repeat themselves",1,""
-q_hw_008_02,story_hw_008_hearing_journey,"What did the audiologist confirm?","detail","[""Perfect hearing"", ""Mild hearing loss"", ""Moderate hearing loss"", ""Severe hearing loss""]","Moderate hearing loss",1,""
-q_hw_008_03,story_hw_008_hearing_journey,"What could Martha hear after adjustment?","detail","[""Only loud sounds"", ""Birds and grandchildren whispering"", ""Just conversations"", ""Music only""]","Birds and grandchildren whispering",2,""
-q_hw_008_04,story_hw_008_hearing_journey,"What had the technology given back?","inference","[""Her youth"", ""Her job"", ""Something precious"", ""Her independence""]","Something precious",2,""
-q_hw_009_01,story_hw_009_dental_care,"How long had James avoided the dentist?","detail","[""One year"", ""Two years"", ""Three years"", ""Five years""]","Three years",1,""
-q_hw_009_02,story_hw_009_dental_care,"Who was understanding and helpful?","detail","[""The receptionist"", ""Dr. Patel"", ""The hygienist"", ""The assistant""]","Dr. Patel",1,""
-q_hw_009_03,story_hw_009_dental_care,"How many cavities were found?","detail","[""One"", ""Two"", ""Three"", ""None""]","Two",2,""
-q_hw_009_04,story_hw_009_dental_care,"What did James realize about checkups?","inference","[""They are always painful"", ""They are less scary than neglect"", ""They are unnecessary"", ""They are too expensive""]","They are less scary than neglect",2,""
-q_hw_010_01,story_hw_010_recovery_story,"What happened to Eleanor?","detail","[""Stroke"", ""Heart attack"", ""Surgery"", ""Accident""]","Heart attack",1,""
-q_hw_010_02,story_hw_010_recovery_story,"How long was Eleanor in the hospital?","detail","[""One week"", ""Two weeks"", ""Three weeks"", ""One month""]","Two weeks",1,""
-q_hw_010_03,story_hw_010_recovery_story,"Who attended sessions to support her?","detail","[""Her husband"", ""Her daughter"", ""Her son"", ""Her sister""]","Her daughter",2,""
-q_hw_010_04,story_hw_010_recovery_story,"What did Eleanor complete one year later?","detail","[""A marathon"", ""A charity walk"", ""Physical therapy"", ""A cooking class""]","A charity walk",2,""
-q_ws_001_01,story_ws_001_job_interview,"How early did Michael arrive?","detail","[""Five minutes"", ""Ten minutes"", ""Fifteen minutes"", ""Twenty minutes""]","Fifteen minutes",1,""
-q_ws_001_02,story_ws_001_job_interview,"What did the receptionist offer?","detail","[""Coffee"", ""Tea"", ""Water"", ""A magazine""]","Water",1,""
-q_ws_001_03,story_ws_001_job_interview,"How long did the interview last?","detail","[""Thirty minutes"", ""Forty-five minutes"", ""One hour"", ""Twenty minutes""]","Forty-five minutes",2,""
-q_ws_001_04,story_ws_001_job_interview,"When would Ms. Thompson call?","detail","[""That evening"", ""The next day"", ""Within a week"", ""In two weeks""]","Within a week",2,""
-q_ws_002_01,story_ws_002_team_meeting,"When does the design team meet?","detail","[""Friday afternoon"", ""Monday morning"", ""Wednesday afternoon"", ""Tuesday morning""]","Monday morning",1,""
-q_ws_002_02,story_ws_002_team_meeting,"What did the discussion focus on today?","detail","[""Budget cuts"", ""New hires"", ""Product launch"", ""Office redesign""]","Product launch",1,""
-q_ws_002_03,story_ws_002_team_meeting,"Who presented research on competitors?","detail","[""Michael"", ""Sarah"", ""The project manager"", ""David""]","Sarah",2,""
-q_ws_002_04,story_ws_002_team_meeting,"What do these meetings accomplish?","inference","[""Waste time"", ""Keep everyone aligned"", ""Create conflict"", ""Delay projects""]","Keep everyone aligned",2,""
-q_ws_003_01,story_ws_003_networking_event,"How did Jennifer feel entering the hall?","detail","[""Excited"", ""Confident"", ""Nervous"", ""Bored""]","Nervous",1,""
-q_ws_003_02,story_ws_003_networking_event,"Who introduced himself to Jennifer?","detail","[""A young intern"", ""An older gentleman"", ""The host"", ""A server""]","An older gentleman",1,""
-q_ws_003_03,story_ws_003_networking_event,"What was his job?","detail","[""Sales director"", ""Marketing director"", ""CEO"", ""Consultant""]","Marketing director",2,""
-q_ws_003_04,story_ws_003_networking_event,"What did Jennifer discover about networking?","inference","[""It requires special skills"", ""It's simply having genuine conversations"", ""It's only for extroverts"", ""It's always uncomfortable""]","It's simply having genuine conversations",2,""
-q_ws_004_01,story_ws_004_difficult_conversation,"Who was having performance issues?","detail","[""Michael"", ""Steve"", ""Robert"", ""David""]","Steve",1,""
-q_ws_004_02,story_ws_004_difficult_conversation,"What had caused most problems?","detail","[""Lack of skill"", ""Bad attitude"", ""Miscommunication"", ""Laziness""]","Miscommunication",1,""
-q_ws_004_03,story_ws_004_difficult_conversation,"What did they create together?","detail","[""A new schedule"", ""An improvement plan"", ""A formal warning"", ""A transfer request""]","An improvement plan",2,""
-q_ws_004_04,story_ws_004_difficult_conversation,"What did the conversation strengthen?","inference","[""Robert's authority"", ""Company policy"", ""Their working relationship"", ""The team structure""]","Their working relationship",2,""
-q_ws_005_01,story_ws_005_retirement_party,"How long had Barbara worked at the company?","detail","[""Twenty-five years"", ""Thirty years"", ""Thirty-five years"", ""Forty years""]","Thirty-five years",1,""
-q_ws_005_02,story_ws_005_retirement_party,"What was Barbara's first position?","detail","[""Manager"", ""Assistant"", ""Secretary"", ""Receptionist""]","Assistant",1,""
-q_ws_005_03,story_ws_005_retirement_party,"How did Barbara feel about leaving?","detail","[""Only excited"", ""Only sad"", ""Bittersweet"", ""Relieved""]","Bittersweet",2,""
-q_ws_005_04,story_ws_005_retirement_party,"What had Barbara's contributions done?","inference","[""Made her rich"", ""Shaped the department"", ""Created problems"", ""Gone unnoticed""]","Shaped the department",2,""
-q_ws_006_01,story_ws_006_book_club,"How often does the book club meet?","detail","[""Weekly"", ""Biweekly"", ""Monthly"", ""Quarterly""]","Monthly",1,""
-q_ws_006_02,story_ws_006_book_club,"What was the novel about?","detail","[""Mystery and crime"", ""Immigration and identity"", ""Romance"", ""Historical events""]","Immigration and identity",1,""
-q_ws_006_03,story_ws_006_book_club,"Whose experience did the story remind Patricia of?","detail","[""Her own"", ""Her mother's"", ""Her grandmother's"", ""Her daughter's""]","Her grandmother's",2,""
-q_ws_006_04,story_ws_006_book_club,"What did the group agree about literature?","inference","[""It's best read alone"", ""It's best experienced in community"", ""It's too expensive"", ""It takes too much time""]","It's best experienced in community",2,""
-q_ws_007_01,story_ws_007_volunteer_work,"When do the Hendersons volunteer?","detail","[""Sunday morning"", ""Saturday morning"", ""Friday evening"", ""Wednesday afternoon""]","Saturday morning",1,""
-q_ws_007_02,story_ws_007_volunteer_work,"Where do they volunteer?","detail","[""Homeless shelter"", ""Animal shelter"", ""Food bank"", ""Hospital""]","Food bank",1,""
-q_ws_007_03,story_ws_007_volunteer_work,"How did the teenage son initially feel?","detail","[""Excited"", ""Resistant"", ""Indifferent"", ""Enthusiastic""]","Resistant",2,""
-q_ws_007_04,story_ws_007_volunteer_work,"What has serving others become?","inference","[""A chore"", ""A family tradition"", ""An obligation"", ""A requirement""]","A family tradition",2,""
-q_ws_008_01,story_ws_008_community_board,"What was being discussed?","detail","[""Road repairs"", ""Park renovation"", ""New housing"", ""School funding""]","Park renovation",1,""
-q_ws_008_02,story_ws_008_community_board,"What did some residents want?","detail","[""A swimming pool"", ""A playground"", ""A parking lot"", ""A dog park""]","A playground",1,""
-q_ws_008_03,story_ws_008_community_board,"How did the vote pass?","detail","[""Narrowly"", ""Unanimously"", ""By majority"", ""After a tie-breaker""]","Unanimously",2,""
-q_ws_008_04,story_ws_008_community_board,"What did the meeting prove?","inference","[""Meetings are pointless"", ""Patient dialogue can resolve disagreements"", ""Compromise is impossible"", ""Voting doesn't work""]","Patient dialogue can resolve disagreements",2,""
-q_ta_001_01,story_ta_001_train_journey,"Which direction was the train heading?","detail","[""South"", ""East"", ""West"", ""North""]","North",1,""
-q_ta_001_02,story_ta_001_train_journey,"What did the friendly woman share stories about?","detail","[""Her travels"", ""Her grandchildren"", ""Her work"", ""Her hobbies""]","Her grandchildren",1,""
-q_ta_001_03,story_ta_001_train_journey,"How long was the train ride?","detail","[""Two hours"", ""Three hours"", ""Four hours"", ""Five hours""]","Four hours",2,""
-q_ta_001_04,story_ta_001_train_journey,"What did Helen decide about train travel?","inference","[""It's too slow"", ""It's better than flying"", ""It's uncomfortable"", ""It's too expensive""]","It's better than flying",2,""
-q_ta_002_01,story_ta_002_beach_vacation,"How long did the family drive?","detail","[""Four hours"", ""Five hours"", ""Six hours"", ""Seven hours""]","Six hours",1,""
-q_ta_002_02,story_ta_002_beach_vacation,"What did children do upon arrival?","detail","[""Unpacked luggage"", ""Ran to the beach"", ""Took a nap"", ""Ate lunch""]","Ran to the beach",1,""
-q_ta_002_03,story_ta_002_beach_vacation,"What did evenings feature?","detail","[""Movie watching"", ""Board games"", ""Seafood dinners and sunset watching"", ""Shopping""]","Seafood dinners and sunset watching",2,""
-q_ta_002_04,story_ta_002_beach_vacation,"Why did the vacation feel perfect?","inference","[""Great weather"", ""No schedules or phones"", ""Expensive activities"", ""New experiences""]","No schedules or phones",2,""
-q_ta_003_01,story_ta_003_mountain_hike,"When did they arrive at the trailhead?","detail","[""At dawn"", ""Before sunrise"", ""Mid-morning"", ""Noon""]","Before sunrise",1,""
-q_ta_003_02,story_ta_003_mountain_hike,"How many counties could they see from the summit?","detail","[""Two"", ""Three"", ""Four"", ""Five""]","Three",1,""
-q_ta_003_03,story_ta_003_mountain_hike,"What was harder, going up or down?","detail","[""Going up"", ""The descent"", ""Both equally"", ""Neither""]","The descent",2,""
-q_ta_003_04,story_ta_003_mountain_hike,"Was the effort worth it?","detail","[""No"", ""Yes"", ""Uncertain"", ""Too difficult""]","Yes",2,""
-q_ta_004_01,story_ta_004_city_exploration,"How did Maria explore the city this time?","detail","[""By bus"", ""By car"", ""By walking"", ""By bicycle""]","By walking",1,""
-q_ta_004_02,story_ta_004_city_exploration,"What did she discover?","detail","[""Museums and galleries"", ""Hidden courtyards and local coffee shops"", ""Famous landmarks"", ""Shopping centers""]","Hidden courtyards and local coffee shops",1,""
-q_ta_004_03,story_ta_004_city_exploration,"What was the street musician playing?","detail","[""Classical music"", ""Rock music"", ""Jazz"", ""Folk songs""]","Jazz",2,""
-q_ta_004_04,story_ta_004_city_exploration,"What did Maria realize about slowing down?","inference","[""It wastes time"", ""It reveals treasures"", ""It's boring"", ""It's impractical""]","It reveals treasures",2,""
-q_ta_005_01,story_ta_005_road_trip,"Where did Thomas start his trip?","detail","[""Seattle"", ""Portland"", ""San Francisco"", ""Los Angeles""]","Portland",1,""
-q_ta_005_02,story_ta_005_road_trip,"How many days was the planned trip?","detail","[""Five days"", ""Six days"", ""Seven days"", ""Ten days""]","Seven days",1,""
-q_ta_005_03,story_ta_005_road_trip,"What surprised Thomas about Kansas?","detail","[""The cities"", ""The beautiful sunsets"", ""The mountains"", ""The cold weather""]","The beautiful sunsets",2,""
-q_ta_005_04,story_ta_005_road_trip,"What did Thomas discover about America?","inference","[""It's too big"", ""It's more friendly and varied than imagined"", ""It's dangerous"", ""It's all the same""]","It's more friendly and varied than imagined",2,""
-q_cw_001_01,story_cw_001_library_book,"How long had the book traveled?","detail","[""Fifty years"", ""Sixty years"", ""Seventy years"", ""Eighty years""]","Seventy years",1,""
-q_cw_001_02,story_cw_001_library_book,"What traces did borrowers leave?","detail","[""Torn pages"", ""Pressed flowers and notes"", ""Bookmarks"", ""Highlighting""]","Pressed flowers and notes",1,""
-q_cw_001_03,story_cw_001_library_book,"What brought new readers?","detail","[""A movie adaptation"", ""A school assignment"", ""Renewed interest in vintage literature"", ""A famous review""]","Renewed interest in vintage literature",2,""
-q_cw_001_04,story_cw_001_library_book,"What does the book still have?","inference","[""Good binding"", ""Stories to share"", ""Perfect pages"", ""Its original cover""]","Stories to share",2,""
-q_cw_002_01,story_cw_002_kitchen_appliances,"What did the toaster have opinions about?","detail","[""The blender"", ""The coffee maker"", ""The microwave"", ""The refrigerator""]","The coffee maker",1,""
-q_cw_002_02,story_cw_002_kitchen_appliances,"Who mediated disputes?","detail","[""The toaster"", ""The blender"", ""The refrigerator"", ""The microwave""]","The refrigerator",1,""
-q_cw_002_03,story_cw_002_kitchen_appliances,"What new appliance arrived?","detail","[""An instant pot"", ""A food processor"", ""An air fryer"", ""A bread maker""]","An air fryer",2,""
-q_cw_002_04,story_cw_002_kitchen_appliances,"What did the toaster admit?","inference","[""It was the best"", ""It was outdated"", ""There was room for everyone"", ""The coffee maker was better""]","There was room for everyone",2,""
-q_cw_003_01,story_cw_003_garden_gnome,"What is the garden gnome's name?","detail","[""Gerald"", ""Chester"", ""Charles"", ""Gordon""]","Chester",1,""
-q_cw_003_02,story_cw_003_garden_gnome,"How long has Chester watched the family?","detail","[""Ten years"", ""Fifteen years"", ""Twenty years"", ""Twenty-five years""]","Fifteen years",1,""
-q_cw_003_03,story_cw_003_garden_gnome,"What does Chester chase away?","detail","[""Squirrels"", ""Birds"", ""Rabbits"", ""Deer""]","Rabbits",2,""
-q_cw_003_04,story_cw_003_garden_gnome,"How does Chester see himself?","inference","[""As decoration"", ""As a guardian"", ""As useless"", ""As entertaining""]","As a guardian",2,""
-q_cw_004_01,story_cw_004_old_piano,"What had gathered on the piano's keys?","detail","[""Cobwebs"", ""Dust"", ""Papers"", ""Toys""]","Dust",1,""
-q_cw_004_02,story_cw_004_old_piano,"What does the family gather around now?","detail","[""The television"", ""The fireplace"", ""Screens"", ""The kitchen table""]","Screens",1,""
-q_cw_004_03,story_cw_004_old_piano,"Who sat down to play one afternoon?","detail","[""The grandfather"", ""The mother"", ""The grandmother"", ""The father""]","The grandmother",2,""
-q_cw_004_04,story_cw_004_old_piano,"What did the granddaughter ask to do?","detail","[""Sell the piano"", ""Move the piano"", ""Learn to play"", ""Dust the piano""]","Learn to play",2,""
-q_cw_005_01,story_cw_005_umbrella_tale,"What color is the umbrella?","detail","[""Blue"", ""Black"", ""Red"", ""Yellow""]","Red",1,""
-q_cw_005_02,story_cw_005_umbrella_tale,"How many buses had it been left on?","detail","[""Twelve"", ""Fifteen"", ""Seventeen"", ""Twenty""]","Seventeen",1,""
-q_cw_005_03,story_cw_005_umbrella_tale,"What did the businessman check on the bus?","detail","[""His email"", ""Stocks"", ""The news"", ""Social media""]","Stocks",2,""
-q_cw_005_04,story_cw_005_umbrella_tale,"What happened to the umbrella eventually?","inference","[""It was thrown away"", ""It found its way back to its original owner"", ""It was donated"", ""It broke""]","It found its way back to its original owner",2,""
-q_cw_006_01,story_cw_006_lighthouse_keeper,"How long had Harold tended the lighthouse?","detail","[""Thirty years"", ""Thirty-five years"", ""Forty-three years"", ""Fifty years""]","Forty-three years",1,""
-q_cw_006_02,story_cw_006_lighthouse_keeper,"What made his job unnecessary?","detail","[""Budget cuts"", ""Automation"", ""His age"", ""New regulations""]","Automation",1,""
-q_cw_006_03,story_cw_006_lighthouse_keeper,"What did Harold do during storms?","detail","[""Hid inside"", ""Talked to the lighthouse"", ""Called for help"", ""Checked equipment""]","Talked to the lighthouse",2,""
-q_cw_006_04,story_cw_006_lighthouse_keeper,"What happened when Harold retired?","inference","[""Nothing changed"", ""The light flickered sadly"", ""The lighthouse was torn down"", ""Someone replaced him""]","The light flickered sadly",2,""
-q_cw_007_01,story_cw_007_tree_wisdom,"How many centuries has the oak witnessed?","detail","[""Two"", ""Three"", ""Four"", ""Five""]","Three",1,""
-q_cw_007_02,story_cw_007_tree_wisdom,"What gathered beneath its branches?","detail","[""Farmers"", ""Revolutionary soldiers"", ""Merchants"", ""Students""]","Revolutionary soldiers",1,""
-q_cw_007_03,story_cw_007_tree_wisdom,"What did the city council want to build?","detail","[""A shopping center"", ""A parking structure"", ""An office building"", ""A playground""]","A parking structure",2,""
-q_cw_007_04,story_cw_007_tree_wisdom,"What did some citizens do?","detail","[""Ignored the debate"", ""Moved away"", ""Organized to save it"", ""Agreed with the council""]","Organized to save it",2,""
-q_cw_008_01,story_cw_008_sock_mystery,"When do socks disappear?","detail","[""During washing"", ""Every laundry day"", ""While drying"", ""During folding""]","Every laundry day",1,""
-q_cw_008_02,story_cw_008_sock_mystery,"What did Margaret's theory involve?","detail","[""Mice"", ""A portal in the dryer"", ""Static electricity"", ""Children hiding them""]","A portal in the dryer",1,""
-q_cw_008_03,story_cw_008_sock_mystery,"What did socks celebrate in the other dimension?","detail","[""Birthdays"", ""Their escape from sweaty feet"", ""Holidays"", ""New arrivals""]","Their escape from sweaty feet",2,""
-q_cw_008_04,story_cw_008_sock_mystery,"How did Margaret's husband react?","inference","[""He laughed at her"", ""He agreed immediately"", ""He smiled tolerantly but wondered if she was right"", ""He ignored her""]","He smiled tolerantly but wondered if she was right",2,""
-q_cw_009_01,story_cw_009_clock_thoughts,"How long has the grandfather clock been counting seconds?","detail","[""One hundred years"", ""One hundred and twenty years"", ""One hundred and fifty years"", ""Eighty years""]","One hundred and twenty years",1,""
-q_cw_009_02,story_cw_009_clock_thoughts,"What did families gather in before?","detail","[""Dining rooms"", ""Kitchens"", ""Parlors"", ""Bedrooms""]","Parlors",1,""
-q_cw_009_03,story_cw_009_clock_thoughts,"Does the grandfather clock feel inferior?","detail","[""Yes"", ""No"", ""Sometimes"", ""Often""]","No",2,""
-q_cw_009_04,story_cw_009_clock_thoughts,"What does the clock understand that digital devices don't?","inference","[""How to tell time"", ""That some things are valuable because they require patience"", ""Technology"", ""Human emotions""]","That some things are valuable because they require patience",2,""
-q_cw_010_01,story_cw_010_teacup_collection,"Where did the teacup cross from?","detail","[""England"", ""China"", ""The ocean"", ""France""]","The ocean",1,""
-q_cw_010_02,story_cw_010_teacup_collection,"What was it a gift for?","detail","[""A birthday"", ""A wedding"", ""Christmas"", ""Graduation""]","A wedding",1,""
-q_cw_010_03,story_cw_010_teacup_collection,"When is the teacup used now?","detail","[""Every day"", ""Never"", ""Special occasions only"", ""Weekends""]","Special occasions only",2,""
-q_cw_010_04,story_cw_010_teacup_collection,"What does the teacup understand about being precious?","inference","[""It means being expensive"", ""It means being beautiful"", ""It means being preserved for moments worth remembering"", ""It means being old""]","It means being preserved for moments worth remembering",2,""
-q_cw_011_01,story_cw_011_bench_memories,"What color is the park bench?","detail","[""Brown"", ""Blue"", ""Green"", ""Red""]","Green",1,""
-q_cw_011_02,story_cw_011_bench_memories,"Where is the bench located?","detail","[""Near the playground"", ""Near the fountain"", ""By the path"", ""Under a tree""]","Near the fountain",1,""
-q_cw_011_03,story_cw_011_bench_memories,"Who spent winter nights on the bench?","detail","[""A student"", ""A homeless man"", ""An elderly woman"", ""A security guard""]","A homeless man",2,""
-q_cw_011_04,story_cw_011_bench_memories,"What could the bench's stories fill?","inference","[""A newspaper"", ""A book"", ""Libraries"", ""A magazine""]","Libraries",2,""
-q_cw_012_01,story_cw_012_mailbox_vigil,"How long has the mailbox served the neighborhood?","detail","[""Forty years"", ""Fifty years"", ""Sixty years"", ""Seventy years""]","Sixty years",1,""
-q_cw_012_02,story_cw_012_mailbox_vigil,"Who posted hope-filled envelopes during wars?","detail","[""Children"", ""Soldiers' wives"", ""Parents"", ""Business owners""]","Soldiers' wives",1,""
-q_cw_012_03,story_cw_012_mailbox_vigil,"What dominates the mail contents now?","detail","[""Love letters"", ""Postcards"", ""Bills and advertisements"", ""Invitations""]","Bills and advertisements",2,""
-q_cw_012_04,story_cw_012_mailbox_vigil,"Why does the mailbox wait faithfully?","inference","[""It has no choice"", ""Some messages are too important for electronic delivery"", ""It enjoys the work"", ""It's being watched""]","Some messages are too important for electronic delivery",2,""
-q_cw_013_01,story_cw_013_compass_journey,"What is the compass made of?","detail","[""Silver"", ""Bronze"", ""Brass"", ""Gold""]","Brass",1,""
-q_cw_013_02,story_cw_013_compass_journey,"What did the great-grandfather use it for?","detail","[""Hunting"", ""Surveying western territories"", ""Sailing"", ""Mountain climbing""]","Surveying western territories",1,""
-q_cw_013_03,story_cw_013_compass_journey,"Where did the father take it?","detail","[""European battlefields"", ""African safaris"", ""Caribbean islands"", ""Asian temples""]","Caribbean islands",2,""
-q_cw_013_04,story_cw_013_compass_journey,"What is the compass waiting for?","inference","[""To be sold"", ""To be repaired"", ""The next adventure"", ""To be displayed""]","The next adventure",2,""
-q_cw_014_01,story_cw_014_recipe_box,"What is the recipe box made of?","detail","[""Metal"", ""Plastic"", ""Wood"", ""Cardboard""]","Wood",1,""
-q_cw_014_02,story_cw_014_recipe_box,"When did grandmother make the apple pie?","detail","[""When grandfather proposed"", ""For Christmas"", ""For a birthday"", ""When they first met""]","When grandfather proposed",1,""
-q_cw_014_03,story_cw_014_recipe_box,"What did the family fight over?","detail","[""The house"", ""Jewelry and furniture"", ""Money"", ""The recipe box""]","Jewelry and furniture",2,""
-q_cw_014_04,story_cw_014_recipe_box,"Why did the granddaughter want only the recipe box?","inference","[""It was valuable"", ""She liked cooking"", ""She understood its true value"", ""No one else wanted it""]","She understood its true value",2,""
-q_cw_015_01,story_cw_015_bicycle_bell,"What color is the bicycle bell?","detail","[""Gold"", ""Bronze"", ""Silver"", ""Chrome""]","Silver",1,""
-q_cw_015_02,story_cw_015_bicycle_bell,"How long has the bell been ringing?","detail","[""Twenty years"", ""Twenty-five years"", ""Thirty years"", ""Thirty-five years""]","Thirty years",1,""
-q_cw_015_03,story_cw_015_bicycle_bell,"What spots the bicycle's frame now?","detail","[""Paint chips"", ""Rust"", ""Stickers"", ""Scratches""]","Rust",2,""
-q_cw_015_04,story_cw_015_bicycle_bell,"What does the bicycle think about aging?","inference","[""All parts age equally"", ""Some parts remain forever young while the rest ages"", ""Aging is bad"", ""New is always better""]","Some parts remain forever young while the rest ages",2,""
-q_v3_dl_011_01,story_v3_dl_011,"Where did the audiologist place the processor?","detail","[""In her ear"", ""Behind her ear"", ""On her wrist"", ""Around her neck""]","Behind her ear",1,""
-q_v3_dl_011_02,story_v3_dl_011,"What sound did she notice from the clock?","detail","[""Chiming"", ""Buzzing"", ""Ticking"", ""Ringing""]","Ticking",1,""
-q_v3_dl_011_03,story_v3_dl_011,"Why did she laugh when her husband spoke?","inference","[""He told a joke"", ""His voice sounded different than she remembered"", ""She was nervous"", ""He was whispering""]","His voice sounded different than she remembered",2,""
-q_v3_dl_011_04,story_v3_dl_011,"What is the main idea of this story?","main_idea","[""Technology is amazing"", ""Adjusting to new hearing takes time and practice"", ""Husbands are funny"", ""Clocks are loud""]","Adjusting to new hearing takes time and practice",2,""
-q_v3_dl_012_01,story_v3_dl_012,"How many friends met for dinner?","detail","[""Four"", ""Five"", ""Six"", ""Seven""]","Six",1,""
-q_v3_dl_012_02,story_v3_dl_012,"What type of restaurant did they go to?","detail","[""Chinese"", ""Mexican"", ""Italian"", ""French""]","Italian",1,""
-q_v3_dl_012_03,story_v3_dl_012,"How many times did Sarah ask people to repeat?","detail","[""Once"", ""Twice"", ""Three times"", ""She didn't ask""]","Twice",1,""
-q_v3_dl_012_04,story_v3_dl_012,"Why did Sarah value these dinners?","inference","[""The food was excellent"", ""The connections with friends mattered"", ""It was close to home"", ""It was affordable""]","The connections with friends mattered",2,""
-q_v3_dl_013_01,story_v3_dl_013,"How long did Marcus stare at his phone before dialing?","detail","[""Two minutes"", ""Five minutes"", ""Ten minutes"", ""One minute""]","Five minutes",1,""
-q_v3_dl_013_02,story_v3_dl_013,"Who did Marcus call?","detail","[""His friend"", ""The pharmacy"", ""The doctor's office"", ""His mother""]","The doctor's office",1,""
-q_v3_dl_013_03,story_v3_dl_013,"What did Marcus ask the receptionist to do?","detail","[""Speak louder"", ""Slow down"", ""Repeat her name"", ""Send an email instead""]","Slow down",1,""
-q_v3_dl_013_04,story_v3_dl_013,"How did Marcus feel after the call?","inference","[""Frustrated"", ""Angry"", ""Proud of himself"", ""Exhausted""]","Proud of himself",2,""
-q_v3_dl_014_01,story_v3_dl_014,"What time did the smoke detector go off?","detail","[""One in the morning"", ""Two in the morning"", ""Three in the morning"", ""Midnight""]","Three in the morning",1,""
-q_v3_dl_014_02,story_v3_dl_014,"Why did the alarm go off?","detail","[""There was a fire"", ""Someone was cooking"", ""The battery was low"", ""It was a test""]","The battery was low",1,""
-q_v3_dl_014_03,story_v3_dl_014,"Where did James find the replacement battery?","detail","[""The garage"", ""The kitchen drawer"", ""The store"", ""The bedroom""]","The kitchen drawer",1,""
-q_v3_dl_014_04,story_v3_dl_014,"What brought James comfort?","inference","[""Going back to sleep"", ""Knowing there was no fire"", ""Knowing he could hear the alarms"", ""Having extra batteries""]","Knowing he could hear the alarms",2,""
-q_v3_hw_011_01,story_v3_hw_011,"What was playing in the waiting room?","detail","[""A television"", ""Soft music"", ""A podcast"", ""Nothing""]","Soft music",1,""
-q_v3_hw_011_02,story_v3_hw_011,"How many other people were waiting?","detail","[""One"", ""Two"", ""Three"", ""Four""]","Two",1,""
-q_v3_hw_011_03,story_v3_hw_011,"What did the young woman point to?","detail","[""Her phone"", ""A magazine"", ""Her hearing device"", ""The exit""]","Her hearing device",1,""
-q_v3_hw_011_04,story_v3_hw_011,"What did the two women talk about?","detail","[""The weather"", ""Their families"", ""Their favorite listening exercises"", ""Their doctors""]","Their favorite listening exercises",2,""
-q_v3_hw_012_01,story_v3_hw_012,"How many people gathered at the meeting?","detail","[""Eight"", ""Ten"", ""Twelve"", ""Fifteen""]","Twelve",1,""
-q_v3_hw_012_02,story_v3_hw_012,"What day did the group meet?","detail","[""Monday"", ""Wednesday"", ""Thursday"", ""Saturday""]","Thursday",1,""
-q_v3_hw_012_03,story_v3_hw_012,"What did the young father describe?","detail","[""Learning to use the phone"", ""Hearing his baby laugh"", ""Getting a new device"", ""Going back to work""]","Hearing his baby laugh",1,""
-q_v3_hw_012_04,story_v3_hw_012,"What did these meetings give the members?","inference","[""Medical advice"", ""Free devices"", ""Courage to keep practicing"", ""Job opportunities""]","Courage to keep practicing",2,""
-q_v3_ta_011_01,story_v3_ta_011,"What gate was Rebecca's flight at?","detail","[""Gate ten"", ""Gate twelve"", ""Gate fourteen"", ""Gate sixteen""]","Gate fourteen",1,""
-q_v3_ta_011_02,story_v3_ta_011,"How long was the flight delayed?","detail","[""Fifteen minutes"", ""Thirty minutes"", ""Forty-five minutes"", ""One hour""]","Thirty minutes",1,""
-q_v3_ta_011_03,story_v3_ta_011,"What did Rebecca use during the delay?","detail","[""A book"", ""A language app"", ""A crossword puzzle"", ""A music player""]","A language app",1,""
-q_v3_ta_011_04,story_v3_ta_011,"Why did Rebecca watch the screen instead of listening to announcements?","inference","[""She couldn't read"", ""The speaker was broken"", ""Visual information was more reliable for her"", ""She was bored""]","Visual information was more reliable for her",2,""
-q_v3_ws_011_01,story_v3_ws_011,"What time did the team meeting start?","detail","[""Eight"", ""Nine"", ""Ten"", ""Eleven""]","Nine",1,""
-q_v3_ws_011_02,story_v3_ws_011,"What did Jake turn on to help follow the conversation?","detail","[""Speaker volume"", ""Captions"", ""A microphone"", ""A recording""]","Captions",1,""
-q_v3_ws_011_03,story_v3_ws_011,"What did Jake's colleague say about his presentation?","detail","[""It was too long"", ""It was the best part"", ""It needed more data"", ""It was unclear""]","It was the best part",1,""
-q_v3_ws_011_04,story_v3_ws_011,"What is the main message about remote work?","inference","[""It's always better"", ""It doesn't work"", ""It has both challenges and advantages"", ""Everyone should return to the office""]","It has both challenges and advantages",2,""
-q_v3_cw_011_01,story_v3_cw_011,"What did music sound like at first after activation?","detail","[""Beautiful melodies"", ""Pots banging together"", ""Quiet whispers"", ""Bird songs""]","Pots banging together",1,""
-q_v3_cw_011_02,story_v3_cw_011,"How long until she could recognize simple melodies?","detail","[""One month"", ""Two months"", ""Three months"", ""Six months""]","Three months",1,""
-q_v3_cw_011_03,story_v3_cw_011,"What type of music did she start with?","detail","[""Rock bands"", ""Orchestras"", ""Piano pieces"", ""Vocal music""]","Piano pieces",1,""
-q_v3_cw_011_04,story_v3_cw_011,"How did she feel about music now compared to before?","inference","[""It was exactly the same"", ""It was worse and she hated it"", ""It was different but beautiful in a new way"", ""She gave up on music""]","It was different but beautiful in a new way",2,""
-q_v3_cw_012_01,story_v3_cw_012,"When was the granddaughter born?","detail","[""Before his activation"", ""While he was adjusting to his device"", ""After he learned to hear"", ""When he was a child""]","While he was adjusting to his device",1,""
-q_v3_cw_012_02,story_v3_cw_012,"How did he first hear her voice?","detail","[""In person"", ""On a video call"", ""On a phone call"", ""On a recording""]","On a video call",1,""
-q_v3_cw_012_03,story_v3_cw_012,"What did he do with the recording of her voice?","detail","[""Deleted it"", ""Shared it online"", ""Played it back dozens of times"", ""Forgot about it""]","Played it back dozens of times",2,""
-q_v3_cw_012_04,story_v3_cw_012,"What is the story's message about patience?","inference","[""Some things aren't worth waiting for"", ""Patience is overrated"", ""Some sounds are worth waiting a lifetime to hear"", ""Technology fixes everything""]","Some sounds are worth waiting a lifetime to hear",2,""
+q_v3_dl_001_01,story_v3_dl_001,What time does Sarah wake up?,detail,"[""Five o'clock"", ""Six o'clock"", ""Seven o'clock"", ""Eight o'clock""]",Six o'clock,1,
+q_v3_dl_001_02,story_v3_dl_001,What does Sarah add to her coffee?,detail,"[""Cream and honey"", ""Milk and sugar"", ""Nothing at all"", ""Cinnamon""]",Milk and sugar,1,
+q_v3_dl_001_03,story_v3_dl_001,Why does Sarah sit by the window?,inference,"[""To read the newspaper"", ""To watch the sun rise"", ""To use her phone"", ""To eat breakfast""]",To watch the sun rise,2,
+q_v3_dl_001_04,story_v3_dl_001,What is the main idea of this story?,main_idea,"[""Coffee is delicious"", ""Mornings are difficult"", ""Quiet time helps start the day"", ""Windows provide good light""]",Quiet time helps start the day,2,
+q_v3_dl_002_01,story_v3_dl_002,What day did Tom go to the store?,detail,"[""Friday"", ""Saturday"", ""Sunday"", ""Monday""]",Saturday,1,
+q_v3_dl_002_02,story_v3_dl_002,Where was the bread aisle located?,detail,"[""Near the entrance"", ""In the middle"", ""At the back"", ""By the checkout""]",At the back,1,
+q_v3_dl_002_03,story_v3_dl_002,What kind of bread did Tom buy?,detail,"[""White bread"", ""Sourdough"", ""Whole wheat"", ""Rye bread""]",Whole wheat,1,
+q_v3_dl_002_04,story_v3_dl_002,How much did Tom pay?,detail,"[""Ten dollars"", ""Fifteen dollars"", ""Twenty dollars"", ""Twenty-five dollars""]",Twenty dollars,1,
+q_v3_dl_003_01,story_v3_dl_003,What did the baker always save for Maria?,detail,"[""Apple pie"", ""Cinnamon rolls"", ""Blueberry muffins"", ""Chocolate croissants""]",Cinnamon rolls,1,
+q_v3_dl_003_02,story_v3_dl_003,What new vendor did Maria discover?,detail,"[""Cheese vendor"", ""Flower vendor"", ""Honey vendor"", ""Jam vendor""]",Honey vendor,1,
+q_v3_dl_003_03,story_v3_dl_003,What made the honey special?,detail,"[""It was organic"", ""It was lavender flavored"", ""It was very cheap"", ""It was from local bees""]",It was lavender flavored,2,
+q_v3_dl_003_04,story_v3_dl_003,Why does Maria enjoy the market?,inference,"[""The low prices"", ""The personal connections"", ""The parking is free"", ""It's close to her home""]",The personal connections,2,
+q_v3_dl_004_01,story_v3_dl_004,Where was water pooling?,detail,"[""On the floor"", ""On the shelf in the cabinet"", ""In the sink"", ""On the counter""]",On the shelf in the cabinet,1,
+q_v3_dl_004_02,story_v3_dl_004,What was wrong with the old washer?,detail,"[""It was loose"", ""It had cracked"", ""It was missing"", ""It was rusted""]",It had cracked,1,
+q_v3_dl_004_03,story_v3_dl_004,How long did the repair take after getting parts?,detail,"[""Ten minutes"", ""Twenty minutes"", ""Thirty minutes"", ""One hour""]",Twenty minutes,2,
+q_v3_dl_004_04,story_v3_dl_004,How did James feel at the end?,inference,"[""Frustrated"", ""Proud"", ""Exhausted"", ""Relieved""]",Proud,2,
+q_v3_dl_005_01,story_v3_dl_005,What is the dog's name?,detail,"[""Buddy"", ""Max"", ""Rex"", ""Charlie""]",Max,1,
+q_v3_dl_005_02,story_v3_dl_005,Where does Max always stop to sniff?,detail,"[""The oak tree"", ""The fire hydrant"", ""The mailbox"", ""The fence""]",The fire hydrant,1,
+q_v3_dl_005_03,story_v3_dl_005,When does Robert walk his dog?,detail,"[""Morning before work"", ""Afternoon"", ""After dinner"", ""Before lunch""]",After dinner,1,
+q_v3_dl_005_04,story_v3_dl_005,What does Robert do during the walk?,inference,"[""Listens to music"", ""Talks on the phone"", ""Thinks about the day"", ""Exercises vigorously""]",Thinks about the day,2,
+q_v3_dl_006_01,story_v3_dl_006,What dish did Lisa and Emma make?,detail,"[""Pizza"", ""Tacos"", ""Pasta"", ""Soup""]",Pasta,1,
+q_v3_dl_006_02,story_v3_dl_006,What did Lisa show Emma how to do?,detail,"[""Stir the sauce"", ""Boil water"", ""Chop vegetables safely"", ""Set the table""]",Chop vegetables safely,1,
+q_v3_dl_006_03,story_v3_dl_006,What did they decide at the end?,detail,"[""To order takeout next time"", ""To cook together every Sunday"", ""To try a new restaurant"", ""To invite friends over""]",To cook together every Sunday,2,
+q_v3_dl_006_04,story_v3_dl_006,Why did dinner taste better?,inference,"[""They used expensive ingredients"", ""They were very hungry"", ""They made it together"", ""They followed a new recipe""]",They made it together,2,
+q_v3_dl_007_01,story_v3_dl_007,When did Margaret start planning her garden?,detail,"[""December"", ""January"", ""February"", ""March""]",January,1,
+q_v3_dl_007_02,story_v3_dl_007,Where did she plant the tomatoes?,detail,"[""Near the patio"", ""In ceramic pots"", ""Along the sunny fence"", ""By the kitchen door""]",Along the sunny fence,1,
+q_v3_dl_007_03,story_v3_dl_007,How long until the first sprouts appeared?,detail,"[""One week"", ""Two weeks"", ""Three weeks"", ""One month""]",Two weeks,2,
+q_v3_dl_007_04,story_v3_dl_007,What became her peaceful retreat?,main_idea,"[""The kitchen"", ""The patio"", ""Her garden"", ""The fence area""]",Her garden,2,
+q_v3_dl_008_01,story_v3_dl_008,When does the Henderson family reunion happen?,detail,"[""July"", ""August"", ""September"", ""June""]",August,1,
+q_v3_dl_008_02,story_v3_dl_008,What did Aunt Martha bring?,detail,"[""Apple pie"", ""Potato salad"", ""Coleslaw"", ""Baked beans""]",Potato salad,1,
+q_v3_dl_008_03,story_v3_dl_008,How long has the tradition continued?,detail,"[""Twenty-five years"", ""Thirty years"", ""Thirty-seven years"", ""Forty years""]",Thirty-seven years,2,
+q_v3_dl_008_04,story_v3_dl_008,What did the photo albums make people do?,detail,"[""Fall asleep"", ""Argue"", ""Laugh and cry"", ""Leave early""]",Laugh and cry,2,
+q_v3_dl_009_01,story_v3_dl_009,How long had Jennifer lived in the apartment?,detail,"[""Five years"", ""Six years"", ""Eight years"", ""Ten years""]",Eight years,1,
+q_v3_dl_009_02,story_v3_dl_009,Where is her new home?,detail,"[""In another city"", ""Across town"", ""In the suburbs"", ""Near her parents""]",Across town,1,
+q_v3_dl_009_03,story_v3_dl_009,What does the new home offer?,detail,"[""Lower rent"", ""A garage"", ""More space and a quieter neighborhood"", ""A swimming pool""]",More space and a quieter neighborhood,2,
+q_v3_dl_009_04,story_v3_dl_009,How did Jennifer feel about the change?,inference,"[""Excited only"", ""Scared but knowing it was necessary"", ""Sad and reluctant"", ""Indifferent""]",Scared but knowing it was necessary,2,
+q_v3_dl_010_01,story_v3_dl_010,What task had David postponed?,detail,"[""Cleaning the bathroom"", ""Organizing his closet"", ""Fixing the car"", ""Doing laundry""]",Organizing his closet,1,
+q_v3_dl_010_02,story_v3_dl_010,What did he find in the closet?,detail,"[""Old books and magazines"", ""Concert tickets and birthday cards"", ""Sports equipment"", ""Holiday decorations""]",Concert tickets and birthday cards,1,
+q_v3_dl_010_03,story_v3_dl_010,Who had knitted the sweater?,detail,"[""His mother"", ""His grandmother"", ""His aunt"", ""His wife""]",His grandmother,2,
+q_v3_dl_010_04,story_v3_dl_010,What does the story suggest about rainy days?,inference,"[""They are boring"", ""They bring unexpected gifts"", ""They cause delays"", ""They ruin plans""]",They bring unexpected gifts,2,
+q_v3_hw_001_01,story_v3_hw_001,Who waited nervously on the examination table?,detail,"[""Mrs. Chen"", ""Mrs. Wong"", ""Mrs. Park"", ""Mrs. Kim""]",Mrs. Chen,1,
+q_v3_hw_001_02,story_v3_hw_001,What did the nurse check?,detail,"[""Weight and height"", ""Blood pressure and temperature"", ""Heart rate and oxygen"", ""Blood sugar""]",Blood pressure and temperature,1,
+q_v3_hw_001_03,story_v3_hw_001,What did the doctor recommend for headaches?,detail,"[""Take medication"", ""Get more sleep"", ""Drink more water"", ""Reduce stress""]",Drink more water,2,
+q_v3_hw_001_04,story_v3_hw_001,How did the checkup results turn out?,inference,"[""Concerning"", ""Normal and healthy"", ""Mixed results"", ""Unclear""]",Normal and healthy,2,
+q_v3_hw_002_01,story_v3_hw_002,Why did Paul start exercising?,detail,"[""To lose weight"", ""Doctor's suggestion for energy"", ""To train for a race"", ""His wife wanted him to""]",Doctor's suggestion for energy,1,
+q_v3_hw_002_02,story_v3_hw_002,How long did Paul walk at first?,detail,"[""Five minutes"", ""Ten minutes"", ""Fifteen minutes"", ""Twenty minutes""]",Ten minutes,1,
+q_v3_hw_002_03,story_v3_hw_002,How long does Paul exercise now?,detail,"[""Thirty minutes"", ""Forty-five minutes"", ""One hour"", ""Twenty minutes""]",Forty-five minutes,2,
+q_v3_hw_002_04,story_v3_hw_002,What improved for Paul?,detail,"[""His appetite"", ""His sleep and stress"", ""His appearance"", ""His social life""]",His sleep and stress,2,
+q_v3_hw_003_01,story_v3_hw_003,Who is the pharmacist?,detail,"[""Mr. Garcia"", ""Mr. Rodriguez"", ""Mr. Martinez"", ""Mr. Lopez""]",Mr. Rodriguez,1,
+q_v3_hw_003_02,story_v3_hw_003,What covered most of the cost?,detail,"[""A coupon"", ""Her insurance"", ""A discount program"", ""A rebate""]",Her insurance,1,
+q_v3_hw_003_03,story_v3_hw_003,How should Linda take the medication?,detail,"[""Once daily without food"", ""Twice daily with food"", ""Three times daily"", ""As needed""]",Twice daily with food,2,
+q_v3_hw_003_04,story_v3_hw_003,What did Linda appreciate about the pharmacist?,inference,"[""His speed"", ""His patience in answering questions"", ""His friendliness"", ""His appearance""]",His patience in answering questions,2,
+q_v3_hw_004_01,story_v3_hw_004,Why did Rebecca need physical therapy?,detail,"[""Car accident"", ""Knee surgery"", ""Back injury"", ""Hip replacement""]",Knee surgery,1,
+q_v3_hw_004_02,story_v3_hw_004,How often did Rebecca have therapy?,detail,"[""Once a week"", ""Twice a week"", ""Three times weekly"", ""Daily""]",Three times weekly,1,
+q_v3_hw_004_03,story_v3_hw_004,When did Rebecca notice improvement?,detail,"[""Week two"", ""Week four"", ""Week six"", ""Week eight""]",Week six,2,
+q_v3_hw_004_04,story_v3_hw_004,How long until Rebecca walked without assistance?,detail,"[""One month"", ""Two months"", ""Three months"", ""Six months""]",Three months,2,
+q_v3_hw_005_01,story_v3_hw_005,What was too high in George's checkup?,detail,"[""Blood pressure"", ""Blood sugar"", ""Cholesterol"", ""Weight""]",Cholesterol,1,
+q_v3_hw_005_02,story_v3_hw_005,What did George reduce?,detail,"[""Salt"", ""Sugar"", ""Fried foods"", ""Carbohydrates""]",Fried foods,1,
+q_v3_hw_005_03,story_v3_hw_005,Who helped George with new recipes?,detail,"[""His doctor"", ""His wife"", ""His daughter"", ""A nutritionist""]",His wife,2,
+q_v3_hw_005_04,story_v3_hw_005,What did George learn about choices?,inference,"[""Big changes work best"", ""Small daily choices create big results"", ""Diet doesn't matter much"", ""Exercise is more important""]",Small daily choices create big results,2,
+q_v3_hw_006_01,story_v3_hw_006,What did Catherine struggle with?,detail,"[""Depression"", ""Anxiety"", ""Insomnia"", ""Grief""]",Anxiety,1,
+q_v3_hw_006_02,story_v3_hw_006,What did her therapist teach her?,detail,"[""Exercise routines"", ""Breathing techniques"", ""Diet changes"", ""Sleep habits""]",Breathing techniques,1,
+q_v3_hw_006_03,story_v3_hw_006,What became part of her daily routine?,detail,"[""Journaling"", ""Exercise"", ""Meditation"", ""Reading""]",Meditation,2,
+q_v3_hw_006_04,story_v3_hw_006,What did Catherine wish?,inference,"[""That therapy was cheaper"", ""That she had reached out sooner"", ""That sessions were longer"", ""That medication worked faster""]",That she had reached out sooner,2,
+q_v3_hw_007_01,story_v3_hw_007,How long had Richard slept poorly?,detail,"[""Years"", ""Months"", ""Decades"", ""A few weeks""]",Decades,1,
+q_v3_hw_007_02,story_v3_hw_007,What disrupted his circadian rhythm?,detail,"[""His phone"", ""The bright television"", ""Street lights"", ""His alarm clock""]",The bright television,1,
+q_v3_hw_007_03,story_v3_hw_007,When should Richard avoid caffeine?,detail,"[""After breakfast"", ""After noon"", ""After dinner"", ""All day""]",After noon,2,
+q_v3_hw_007_04,story_v3_hw_007,What was the result of the changes?,inference,"[""No improvement"", ""Slight improvement"", ""Deep, restorative sleep"", ""Different problems""]","Deep, restorative sleep",2,
+q_v3_hw_008_01,story_v3_hw_008,What did Martha notice happening more often?,detail,"[""Missing phone calls"", ""Asking people to repeat themselves"", ""Turning up the TV"", ""Misunderstanding texts""]",Asking people to repeat themselves,1,
+q_v3_hw_008_02,story_v3_hw_008,What did the audiologist confirm?,detail,"[""Perfect hearing"", ""Mild hearing loss"", ""Moderate hearing loss"", ""Severe hearing loss""]",Moderate hearing loss,1,
+q_v3_hw_008_03,story_v3_hw_008,What could Martha hear after adjustment?,detail,"[""Only loud sounds"", ""Birds and grandchildren whispering"", ""Just conversations"", ""Music only""]",Birds and grandchildren whispering,2,
+q_v3_hw_008_04,story_v3_hw_008,What had the technology given back?,inference,"[""Her youth"", ""Her job"", ""Something precious"", ""Her independence""]",Something precious,2,
+q_v3_hw_009_01,story_v3_hw_009,How long had James avoided the dentist?,detail,"[""One year"", ""Two years"", ""Three years"", ""Five years""]",Three years,1,
+q_v3_hw_009_02,story_v3_hw_009,Who was understanding and helpful?,detail,"[""The receptionist"", ""Dr. Patel"", ""The hygienist"", ""The assistant""]",Dr. Patel,1,
+q_v3_hw_009_03,story_v3_hw_009,How many cavities were found?,detail,"[""One"", ""Two"", ""Three"", ""None""]",Two,2,
+q_v3_hw_009_04,story_v3_hw_009,What did James realize about checkups?,inference,"[""They are always painful"", ""They are less scary than neglect"", ""They are unnecessary"", ""They are too expensive""]",They are less scary than neglect,2,
+q_v3_hw_010_01,story_v3_hw_010,What happened to Eleanor?,detail,"[""Stroke"", ""Heart attack"", ""Surgery"", ""Accident""]",Heart attack,1,
+q_v3_hw_010_02,story_v3_hw_010,How long was Eleanor in the hospital?,detail,"[""One week"", ""Two weeks"", ""Three weeks"", ""One month""]",Two weeks,1,
+q_v3_hw_010_03,story_v3_hw_010,Who attended sessions to support her?,detail,"[""Her husband"", ""Her daughter"", ""Her son"", ""Her sister""]",Her daughter,2,
+q_v3_hw_010_04,story_v3_hw_010,What did Eleanor complete one year later?,detail,"[""A marathon"", ""A charity walk"", ""Physical therapy"", ""A cooking class""]",A charity walk,2,
+q_v3_ws_001_01,story_v3_ws_001,How early did Michael arrive?,detail,"[""Five minutes"", ""Ten minutes"", ""Fifteen minutes"", ""Twenty minutes""]",Fifteen minutes,1,
+q_v3_ws_001_02,story_v3_ws_001,What did the receptionist offer?,detail,"[""Coffee"", ""Tea"", ""Water"", ""A magazine""]",Water,1,
+q_v3_ws_001_03,story_v3_ws_001,How long did the interview last?,detail,"[""Thirty minutes"", ""Forty-five minutes"", ""One hour"", ""Twenty minutes""]",Forty-five minutes,2,
+q_v3_ws_001_04,story_v3_ws_001,When would Ms. Thompson call?,detail,"[""That evening"", ""The next day"", ""Within a week"", ""In two weeks""]",Within a week,2,
+q_v3_ws_002_01,story_v3_ws_002,When does the design team meet?,detail,"[""Friday afternoon"", ""Monday morning"", ""Wednesday afternoon"", ""Tuesday morning""]",Monday morning,1,
+q_v3_ws_002_02,story_v3_ws_002,What did the discussion focus on today?,detail,"[""Budget cuts"", ""New hires"", ""Product launch"", ""Office redesign""]",Product launch,1,
+q_v3_ws_002_03,story_v3_ws_002,Who presented research on competitors?,detail,"[""Michael"", ""Sarah"", ""The project manager"", ""David""]",Sarah,2,
+q_v3_ws_002_04,story_v3_ws_002,What do these meetings accomplish?,inference,"[""Waste time"", ""Keep everyone aligned"", ""Create conflict"", ""Delay projects""]",Keep everyone aligned,2,
+q_v3_ws_003_01,story_v3_ws_003,How did Jennifer feel entering the hall?,detail,"[""Excited"", ""Confident"", ""Nervous"", ""Bored""]",Nervous,1,
+q_v3_ws_003_02,story_v3_ws_003,Who introduced himself to Jennifer?,detail,"[""A young intern"", ""An older gentleman"", ""The host"", ""A server""]",An older gentleman,1,
+q_v3_ws_003_03,story_v3_ws_003,What was his job?,detail,"[""Sales director"", ""Marketing director"", ""CEO"", ""Consultant""]",Marketing director,2,
+q_v3_ws_003_04,story_v3_ws_003,What did Jennifer discover about networking?,inference,"[""It requires special skills"", ""It's simply having genuine conversations"", ""It's only for extroverts"", ""It's always uncomfortable""]",It's simply having genuine conversations,2,
+q_v3_ws_004_01,story_v3_ws_004,Who was having performance issues?,detail,"[""Michael"", ""Steve"", ""Robert"", ""David""]",Steve,1,
+q_v3_ws_004_02,story_v3_ws_004,What had caused most problems?,detail,"[""Lack of skill"", ""Bad attitude"", ""Miscommunication"", ""Laziness""]",Miscommunication,1,
+q_v3_ws_004_03,story_v3_ws_004,What did they create together?,detail,"[""A new schedule"", ""An improvement plan"", ""A formal warning"", ""A transfer request""]",An improvement plan,2,
+q_v3_ws_004_04,story_v3_ws_004,What did the conversation strengthen?,inference,"[""Robert's authority"", ""Company policy"", ""Their working relationship"", ""The team structure""]",Their working relationship,2,
+q_v3_ws_005_01,story_v3_ws_005,How long had Barbara worked at the company?,detail,"[""Twenty-five years"", ""Thirty years"", ""Thirty-five years"", ""Forty years""]",Thirty-five years,1,
+q_v3_ws_005_02,story_v3_ws_005,What was Barbara's first position?,detail,"[""Manager"", ""Assistant"", ""Secretary"", ""Receptionist""]",Assistant,1,
+q_v3_ws_005_03,story_v3_ws_005,How did Barbara feel about leaving?,detail,"[""Only excited"", ""Only sad"", ""Bittersweet"", ""Relieved""]",Bittersweet,2,
+q_v3_ws_005_04,story_v3_ws_005,What had Barbara's contributions done?,inference,"[""Made her rich"", ""Shaped the department"", ""Created problems"", ""Gone unnoticed""]",Shaped the department,2,
+q_v3_ws_006_01,story_v3_ws_006,How often does the book club meet?,detail,"[""Weekly"", ""Biweekly"", ""Monthly"", ""Quarterly""]",Monthly,1,
+q_v3_ws_006_02,story_v3_ws_006,What was the novel about?,detail,"[""Mystery and crime"", ""Immigration and identity"", ""Romance"", ""Historical events""]",Immigration and identity,1,
+q_v3_ws_006_03,story_v3_ws_006,Whose experience did the story remind Patricia of?,detail,"[""Her own"", ""Her mother's"", ""Her grandmother's"", ""Her daughter's""]",Her grandmother's,2,
+q_v3_ws_006_04,story_v3_ws_006,What did the group agree about literature?,inference,"[""It's best read alone"", ""It's best experienced in community"", ""It's too expensive"", ""It takes too much time""]",It's best experienced in community,2,
+q_v3_ws_007_01,story_v3_ws_007,When do the Hendersons volunteer?,detail,"[""Sunday morning"", ""Saturday morning"", ""Friday evening"", ""Wednesday afternoon""]",Saturday morning,1,
+q_v3_ws_007_02,story_v3_ws_007,Where do they volunteer?,detail,"[""Homeless shelter"", ""Animal shelter"", ""Food bank"", ""Hospital""]",Food bank,1,
+q_v3_ws_007_03,story_v3_ws_007,How did the teenage son initially feel?,detail,"[""Excited"", ""Resistant"", ""Indifferent"", ""Enthusiastic""]",Resistant,2,
+q_v3_ws_007_04,story_v3_ws_007,What has serving others become?,inference,"[""A chore"", ""A family tradition"", ""An obligation"", ""A requirement""]",A family tradition,2,
+q_v3_ws_008_01,story_v3_ws_008,What was being discussed?,detail,"[""Road repairs"", ""Park renovation"", ""New housing"", ""School funding""]",Park renovation,1,
+q_v3_ws_008_02,story_v3_ws_008,What did some residents want?,detail,"[""A swimming pool"", ""A playground"", ""A parking lot"", ""A dog park""]",A playground,1,
+q_v3_ws_008_03,story_v3_ws_008,How did the vote pass?,detail,"[""Narrowly"", ""Unanimously"", ""By majority"", ""After a tie-breaker""]",Unanimously,2,
+q_v3_ws_008_04,story_v3_ws_008,What did the meeting prove?,inference,"[""Meetings are pointless"", ""Patient dialogue can resolve disagreements"", ""Compromise is impossible"", ""Voting doesn't work""]",Patient dialogue can resolve disagreements,2,
+q_v3_ta_001_01,story_v3_ta_001,Which direction was the train heading?,detail,"[""South"", ""East"", ""West"", ""North""]",North,1,
+q_v3_ta_001_02,story_v3_ta_001,What did the friendly woman share stories about?,detail,"[""Her travels"", ""Her grandchildren"", ""Her work"", ""Her hobbies""]",Her grandchildren,1,
+q_v3_ta_001_03,story_v3_ta_001,How long was the train ride?,detail,"[""Two hours"", ""Three hours"", ""Four hours"", ""Five hours""]",Four hours,2,
+q_v3_ta_001_04,story_v3_ta_001,What did Helen decide about train travel?,inference,"[""It's too slow"", ""It's better than flying"", ""It's uncomfortable"", ""It's too expensive""]",It's better than flying,2,
+q_v3_ta_002_01,story_v3_ta_002,How long did the family drive?,detail,"[""Four hours"", ""Five hours"", ""Six hours"", ""Seven hours""]",Six hours,1,
+q_v3_ta_002_02,story_v3_ta_002,What did children do upon arrival?,detail,"[""Unpacked luggage"", ""Ran to the beach"", ""Took a nap"", ""Ate lunch""]",Ran to the beach,1,
+q_v3_ta_002_03,story_v3_ta_002,What did evenings feature?,detail,"[""Movie watching"", ""Board games"", ""Seafood dinners and sunset watching"", ""Shopping""]",Seafood dinners and sunset watching,2,
+q_v3_ta_002_04,story_v3_ta_002,Why did the vacation feel perfect?,inference,"[""Great weather"", ""No schedules or phones"", ""Expensive activities"", ""New experiences""]",No schedules or phones,2,
+q_v3_ta_003_01,story_v3_ta_003,When did they arrive at the trailhead?,detail,"[""At dawn"", ""Before sunrise"", ""Mid-morning"", ""Noon""]",Before sunrise,1,
+q_v3_ta_003_02,story_v3_ta_003,How many counties could they see from the summit?,detail,"[""Two"", ""Three"", ""Four"", ""Five""]",Three,1,
+q_v3_ta_003_03,story_v3_ta_003,"What was harder, going up or down?",detail,"[""Going up"", ""The descent"", ""Both equally"", ""Neither""]",The descent,2,
+q_v3_ta_003_04,story_v3_ta_003,Was the effort worth it?,detail,"[""No"", ""Yes"", ""Uncertain"", ""Too difficult""]",Yes,2,
+q_v3_ta_004_01,story_v3_ta_004,How did Maria explore the city this time?,detail,"[""By bus"", ""By car"", ""By walking"", ""By bicycle""]",By walking,1,
+q_v3_ta_004_02,story_v3_ta_004,What did she discover?,detail,"[""Museums and galleries"", ""Hidden courtyards and local coffee shops"", ""Famous landmarks"", ""Shopping centers""]",Hidden courtyards and local coffee shops,1,
+q_v3_ta_004_03,story_v3_ta_004,What was the street musician playing?,detail,"[""Classical music"", ""Rock music"", ""Jazz"", ""Folk songs""]",Jazz,2,
+q_v3_ta_004_04,story_v3_ta_004,What did Maria realize about slowing down?,inference,"[""It wastes time"", ""It reveals treasures"", ""It's boring"", ""It's impractical""]",It reveals treasures,2,
+q_v3_ta_005_01,story_v3_ta_005,Where did Thomas start his trip?,detail,"[""Seattle"", ""Portland"", ""San Francisco"", ""Los Angeles""]",Portland,1,
+q_v3_ta_005_02,story_v3_ta_005,How many days was the planned trip?,detail,"[""Five days"", ""Six days"", ""Seven days"", ""Ten days""]",Seven days,1,
+q_v3_ta_005_03,story_v3_ta_005,What surprised Thomas about Kansas?,detail,"[""The cities"", ""The beautiful sunsets"", ""The mountains"", ""The cold weather""]",The beautiful sunsets,2,
+q_v3_ta_005_04,story_v3_ta_005,What did Thomas discover about America?,inference,"[""It's too big"", ""It's more friendly and varied than imagined"", ""It's dangerous"", ""It's all the same""]",It's more friendly and varied than imagined,2,
+q_v3_cw_001_01,story_v3_cw_001,How long had the book traveled?,detail,"[""Fifty years"", ""Sixty years"", ""Seventy years"", ""Eighty years""]",Seventy years,1,
+q_v3_cw_001_02,story_v3_cw_001,What traces did borrowers leave?,detail,"[""Torn pages"", ""Pressed flowers and notes"", ""Bookmarks"", ""Highlighting""]",Pressed flowers and notes,1,
+q_v3_cw_001_03,story_v3_cw_001,What brought new readers?,detail,"[""A movie adaptation"", ""A school assignment"", ""Renewed interest in vintage literature"", ""A famous review""]",Renewed interest in vintage literature,2,
+q_v3_cw_001_04,story_v3_cw_001,What does the book still have?,inference,"[""Good binding"", ""Stories to share"", ""Perfect pages"", ""Its original cover""]",Stories to share,2,
+q_v3_cw_002_01,story_v3_cw_002,What did the toaster have opinions about?,detail,"[""The blender"", ""The coffee maker"", ""The microwave"", ""The refrigerator""]",The coffee maker,1,
+q_v3_cw_002_02,story_v3_cw_002,Who mediated disputes?,detail,"[""The toaster"", ""The blender"", ""The refrigerator"", ""The microwave""]",The refrigerator,1,
+q_v3_cw_002_03,story_v3_cw_002,What new appliance arrived?,detail,"[""An instant pot"", ""A food processor"", ""An air fryer"", ""A bread maker""]",An air fryer,2,
+q_v3_cw_002_04,story_v3_cw_002,What did the toaster admit?,inference,"[""It was the best"", ""It was outdated"", ""There was room for everyone"", ""The coffee maker was better""]",There was room for everyone,2,
+q_v3_cw_003_01,story_v3_cw_003,What is the garden gnome's name?,detail,"[""Gerald"", ""Chester"", ""Charles"", ""Gordon""]",Chester,1,
+q_v3_cw_003_02,story_v3_cw_003,How long has Chester watched the family?,detail,"[""Ten years"", ""Fifteen years"", ""Twenty years"", ""Twenty-five years""]",Fifteen years,1,
+q_v3_cw_003_03,story_v3_cw_003,What does Chester chase away?,detail,"[""Squirrels"", ""Birds"", ""Rabbits"", ""Deer""]",Rabbits,2,
+q_v3_cw_003_04,story_v3_cw_003,How does Chester see himself?,inference,"[""As decoration"", ""As a guardian"", ""As useless"", ""As entertaining""]",As a guardian,2,
+q_v3_cw_004_01,story_v3_cw_004,What had gathered on the piano's keys?,detail,"[""Cobwebs"", ""Dust"", ""Papers"", ""Toys""]",Dust,1,
+q_v3_cw_004_02,story_v3_cw_004,What does the family gather around now?,detail,"[""The television"", ""The fireplace"", ""Screens"", ""The kitchen table""]",Screens,1,
+q_v3_cw_004_03,story_v3_cw_004,Who sat down to play one afternoon?,detail,"[""The grandfather"", ""The mother"", ""The grandmother"", ""The father""]",The grandmother,2,
+q_v3_cw_004_04,story_v3_cw_004,What did the granddaughter ask to do?,detail,"[""Sell the piano"", ""Move the piano"", ""Learn to play"", ""Dust the piano""]",Learn to play,2,
+q_v3_cw_005_01,story_v3_cw_005,What color is the umbrella?,detail,"[""Blue"", ""Black"", ""Red"", ""Yellow""]",Red,1,
+q_v3_cw_005_02,story_v3_cw_005,How many buses had it been left on?,detail,"[""Twelve"", ""Fifteen"", ""Seventeen"", ""Twenty""]",Seventeen,1,
+q_v3_cw_005_03,story_v3_cw_005,What did the businessman check on the bus?,detail,"[""His email"", ""Stocks"", ""The news"", ""Social media""]",Stocks,2,
+q_v3_cw_005_04,story_v3_cw_005,What happened to the umbrella eventually?,inference,"[""It was thrown away"", ""It found its way back to its original owner"", ""It was donated"", ""It broke""]",It found its way back to its original owner,2,
+q_v3_cw_006_01,story_v3_cw_006,How long had Harold tended the lighthouse?,detail,"[""Thirty years"", ""Thirty-five years"", ""Forty-three years"", ""Fifty years""]",Forty-three years,1,
+q_v3_cw_006_02,story_v3_cw_006,What made his job unnecessary?,detail,"[""Budget cuts"", ""Automation"", ""His age"", ""New regulations""]",Automation,1,
+q_v3_cw_006_03,story_v3_cw_006,What did Harold do during storms?,detail,"[""Hid inside"", ""Talked to the lighthouse"", ""Called for help"", ""Checked equipment""]",Talked to the lighthouse,2,
+q_v3_cw_006_04,story_v3_cw_006,What happened when Harold retired?,inference,"[""Nothing changed"", ""The light flickered sadly"", ""The lighthouse was torn down"", ""Someone replaced him""]",The light flickered sadly,2,
+q_v3_cw_007_01,story_v3_cw_007,How many centuries has the oak witnessed?,detail,"[""Two"", ""Three"", ""Four"", ""Five""]",Three,1,
+q_v3_cw_007_02,story_v3_cw_007,What gathered beneath its branches?,detail,"[""Farmers"", ""Revolutionary soldiers"", ""Merchants"", ""Students""]",Revolutionary soldiers,1,
+q_v3_cw_007_03,story_v3_cw_007,What did the city council want to build?,detail,"[""A shopping center"", ""A parking structure"", ""An office building"", ""A playground""]",A parking structure,2,
+q_v3_cw_007_04,story_v3_cw_007,What did some citizens do?,detail,"[""Ignored the debate"", ""Moved away"", ""Organized to save it"", ""Agreed with the council""]",Organized to save it,2,
+q_v3_cw_008_01,story_v3_cw_008,When do socks disappear?,detail,"[""During washing"", ""Every laundry day"", ""While drying"", ""During folding""]",Every laundry day,1,
+q_v3_cw_008_02,story_v3_cw_008,What did Margaret's theory involve?,detail,"[""Mice"", ""A portal in the dryer"", ""Static electricity"", ""Children hiding them""]",A portal in the dryer,1,
+q_v3_cw_008_03,story_v3_cw_008,What did socks celebrate in the other dimension?,detail,"[""Birthdays"", ""Their escape from sweaty feet"", ""Holidays"", ""New arrivals""]",Their escape from sweaty feet,2,
+q_v3_cw_008_04,story_v3_cw_008,How did Margaret's husband react?,inference,"[""He laughed at her"", ""He agreed immediately"", ""He smiled tolerantly but wondered if she was right"", ""He ignored her""]",He smiled tolerantly but wondered if she was right,2,
+q_v3_cw_009_01,story_v3_cw_009,How long has the grandfather clock been counting seconds?,detail,"[""One hundred years"", ""One hundred and twenty years"", ""One hundred and fifty years"", ""Eighty years""]",One hundred and twenty years,1,
+q_v3_cw_009_02,story_v3_cw_009,What did families gather in before?,detail,"[""Dining rooms"", ""Kitchens"", ""Parlors"", ""Bedrooms""]",Parlors,1,
+q_v3_cw_009_03,story_v3_cw_009,Does the grandfather clock feel inferior?,detail,"[""Yes"", ""No"", ""Sometimes"", ""Often""]",No,2,
+q_v3_cw_009_04,story_v3_cw_009,What does the clock understand that digital devices don't?,inference,"[""How to tell time"", ""That some things are valuable because they require patience"", ""Technology"", ""Human emotions""]",That some things are valuable because they require patience,2,
+q_v3_cw_010_01,story_v3_cw_010,Where did the teacup cross from?,detail,"[""England"", ""China"", ""The ocean"", ""France""]",The ocean,1,
+q_v3_cw_010_02,story_v3_cw_010,What was it a gift for?,detail,"[""A birthday"", ""A wedding"", ""Christmas"", ""Graduation""]",A wedding,1,
+q_v3_cw_010_03,story_v3_cw_010,When is the teacup used now?,detail,"[""Every day"", ""Never"", ""Special occasions only"", ""Weekends""]",Special occasions only,2,
+q_v3_cw_010_04,story_v3_cw_010,What does the teacup understand about being precious?,inference,"[""It means being expensive"", ""It means being beautiful"", ""It means being preserved for moments worth remembering"", ""It means being old""]",It means being preserved for moments worth remembering,2,
+q_v3_dl_011_01,story_v3_dl_011,Where did the audiologist place the processor?,detail,"[""In her ear"", ""Behind her ear"", ""On her wrist"", ""Around her neck""]",Behind her ear,1,
+q_v3_dl_011_02,story_v3_dl_011,What sound did she notice from the clock?,detail,"[""Chiming"", ""Buzzing"", ""Ticking"", ""Ringing""]",Ticking,1,
+q_v3_dl_011_03,story_v3_dl_011,Why did she laugh when her husband spoke?,inference,"[""He told a joke"", ""His voice sounded different than she remembered"", ""She was nervous"", ""He was whispering""]",His voice sounded different than she remembered,2,
+q_v3_dl_011_04,story_v3_dl_011,What is the main idea of this story?,main_idea,"[""Technology is amazing"", ""Adjusting to new hearing takes time and practice"", ""Husbands are funny"", ""Clocks are loud""]",Adjusting to new hearing takes time and practice,2,
+q_v3_dl_012_01,story_v3_dl_012,How many friends met for dinner?,detail,"[""Four"", ""Five"", ""Six"", ""Seven""]",Six,1,
+q_v3_dl_012_02,story_v3_dl_012,What type of restaurant did they go to?,detail,"[""Chinese"", ""Mexican"", ""Italian"", ""French""]",Italian,1,
+q_v3_dl_012_03,story_v3_dl_012,How many times did Sarah ask people to repeat?,detail,"[""Once"", ""Twice"", ""Three times"", ""She didn't ask""]",Twice,1,
+q_v3_dl_012_04,story_v3_dl_012,Why did Sarah value these dinners?,inference,"[""The food was excellent"", ""The connections with friends mattered"", ""It was close to home"", ""It was affordable""]",The connections with friends mattered,2,
+q_v3_dl_013_01,story_v3_dl_013,How long did Marcus stare at his phone before dialing?,detail,"[""Two minutes"", ""Five minutes"", ""Ten minutes"", ""One minute""]",Five minutes,1,
+q_v3_dl_013_02,story_v3_dl_013,Who did Marcus call?,detail,"[""His friend"", ""The pharmacy"", ""The doctor's office"", ""His mother""]",The doctor's office,1,
+q_v3_dl_013_03,story_v3_dl_013,What did Marcus ask the receptionist to do?,detail,"[""Speak louder"", ""Slow down"", ""Repeat her name"", ""Send an email instead""]",Slow down,1,
+q_v3_dl_013_04,story_v3_dl_013,How did Marcus feel after the call?,inference,"[""Frustrated"", ""Angry"", ""Proud of himself"", ""Exhausted""]",Proud of himself,2,
+q_v3_dl_014_01,story_v3_dl_014,What time did the smoke detector go off?,detail,"[""One in the morning"", ""Two in the morning"", ""Three in the morning"", ""Midnight""]",Three in the morning,1,
+q_v3_dl_014_02,story_v3_dl_014,Why did the alarm go off?,detail,"[""There was a fire"", ""Someone was cooking"", ""The battery was low"", ""It was a test""]",The battery was low,1,
+q_v3_dl_014_03,story_v3_dl_014,Where did James find the replacement battery?,detail,"[""The garage"", ""The kitchen drawer"", ""The store"", ""The bedroom""]",The kitchen drawer,1,
+q_v3_dl_014_04,story_v3_dl_014,What brought James comfort?,inference,"[""Going back to sleep"", ""Knowing there was no fire"", ""Knowing he could hear the alarms"", ""Having extra batteries""]",Knowing he could hear the alarms,2,
+q_v3_hw_011_01,story_v3_hw_011,What was playing in the waiting room?,detail,"[""A television"", ""Soft music"", ""A podcast"", ""Nothing""]",Soft music,1,
+q_v3_hw_011_02,story_v3_hw_011,How many other people were waiting?,detail,"[""One"", ""Two"", ""Three"", ""Four""]",Two,1,
+q_v3_hw_011_03,story_v3_hw_011,What did the young woman point to?,detail,"[""Her phone"", ""A magazine"", ""Her hearing device"", ""The exit""]",Her hearing device,1,
+q_v3_hw_011_04,story_v3_hw_011,What did the two women talk about?,detail,"[""The weather"", ""Their families"", ""Their favorite listening exercises"", ""Their doctors""]",Their favorite listening exercises,2,
+q_v3_hw_012_01,story_v3_hw_012,How many people gathered at the meeting?,detail,"[""Eight"", ""Ten"", ""Twelve"", ""Fifteen""]",Twelve,1,
+q_v3_hw_012_02,story_v3_hw_012,What day did the group meet?,detail,"[""Monday"", ""Wednesday"", ""Thursday"", ""Saturday""]",Thursday,1,
+q_v3_hw_012_03,story_v3_hw_012,What did the young father describe?,detail,"[""Learning to use the phone"", ""Hearing his baby laugh"", ""Getting a new device"", ""Going back to work""]",Hearing his baby laugh,1,
+q_v3_hw_012_04,story_v3_hw_012,What did these meetings give the members?,inference,"[""Medical advice"", ""Free devices"", ""Courage to keep practicing"", ""Job opportunities""]",Courage to keep practicing,2,
+q_v3_ta_011_01,story_v3_ta_011,What gate was Rebecca's flight at?,detail,"[""Gate ten"", ""Gate twelve"", ""Gate fourteen"", ""Gate sixteen""]",Gate fourteen,1,
+q_v3_ta_011_02,story_v3_ta_011,How long was the flight delayed?,detail,"[""Fifteen minutes"", ""Thirty minutes"", ""Forty-five minutes"", ""One hour""]",Thirty minutes,1,
+q_v3_ta_011_03,story_v3_ta_011,What did Rebecca use during the delay?,detail,"[""A book"", ""A language app"", ""A crossword puzzle"", ""A music player""]",A language app,1,
+q_v3_ta_011_04,story_v3_ta_011,Why did Rebecca watch the screen instead of listening to announcements?,inference,"[""She couldn't read"", ""The speaker was broken"", ""Visual information was more reliable for her"", ""She was bored""]",Visual information was more reliable for her,2,
+q_v3_ws_011_01,story_v3_ws_011,What time did the team meeting start?,detail,"[""Eight"", ""Nine"", ""Ten"", ""Eleven""]",Nine,1,
+q_v3_ws_011_02,story_v3_ws_011,What did Jake turn on to help follow the conversation?,detail,"[""Speaker volume"", ""Captions"", ""A microphone"", ""A recording""]",Captions,1,
+q_v3_ws_011_03,story_v3_ws_011,What did Jake's colleague say about his presentation?,detail,"[""It was too long"", ""It was the best part"", ""It needed more data"", ""It was unclear""]",It was the best part,1,
+q_v3_ws_011_04,story_v3_ws_011,What is the main message about remote work?,inference,"[""It's always better"", ""It doesn't work"", ""It has both challenges and advantages"", ""Everyone should return to the office""]",It has both challenges and advantages,2,
+q_v3_cw_011_01,story_v3_cw_011,What did music sound like at first after activation?,detail,"[""Beautiful melodies"", ""Pots banging together"", ""Quiet whispers"", ""Bird songs""]",Pots banging together,1,
+q_v3_cw_011_02,story_v3_cw_011,How long until she could recognize simple melodies?,detail,"[""One month"", ""Two months"", ""Three months"", ""Six months""]",Three months,1,
+q_v3_cw_011_03,story_v3_cw_011,What type of music did she start with?,detail,"[""Rock bands"", ""Orchestras"", ""Piano pieces"", ""Vocal music""]",Piano pieces,1,
+q_v3_cw_011_04,story_v3_cw_011,How did she feel about music now compared to before?,inference,"[""It was exactly the same"", ""It was worse and she hated it"", ""It was different but beautiful in a new way"", ""She gave up on music""]",It was different but beautiful in a new way,2,
+q_v3_cw_012_01,story_v3_cw_012,When was the granddaughter born?,detail,"[""Before his activation"", ""While he was adjusting to his device"", ""After he learned to hear"", ""When he was a child""]",While he was adjusting to his device,1,
+q_v3_cw_012_02,story_v3_cw_012,How did he first hear her voice?,detail,"[""In person"", ""On a video call"", ""On a phone call"", ""On a recording""]",On a video call,1,
+q_v3_cw_012_03,story_v3_cw_012,What did he do with the recording of her voice?,detail,"[""Deleted it"", ""Shared it online"", ""Played it back dozens of times"", ""Forgot about it""]",Played it back dozens of times,2,
+q_v3_cw_012_04,story_v3_cw_012,What is the story's message about patience?,inference,"[""Some things aren't worth waiting for"", ""Patience is overrated"", ""Some sounds are worth waiting a lifetime to hear"", ""Technology fixes everything""]",Some sounds are worth waiting a lifetime to hear,2,
+q_v3_dl_015_01,story_v3_dl_015,How many baskets of laundry did Helen carry?,factual,"[""Two"", ""Three"", ""Four"", ""Five""]",Three,1,l
+q_v3_dl_015_02,story_v3_dl_015,Why did Helen check every pocket?,inferential,"[""To find her keys"", ""To look for loose change"", ""To remove tissues"", ""To check for stains""]",To look for loose change,1,ch
+q_v3_dl_015_03,story_v3_dl_015,What does the word 'worthwhile' mean in this story?,vocabulary,"[""Expensive"", ""Worth the effort"", ""Exhausting"", ""Unnecessary""]",Worth the effort,1,w
+q_v3_dl_015_04,story_v3_dl_015,What did Helen do after folding towels from the dryer?,sequence,"[""She started sorting laundry"", ""She hung clothes on the line"", ""She went back to bed"", ""She carried baskets upstairs""]",She hung clothes on the line,1,l
+q_v3_dl_016_01,story_v3_dl_016,What did Ben make to drink?,factual,"[""Coffee"", ""Hot chocolate"", ""Tea"", ""Lemonade""]",Hot chocolate,2,ch
+q_v3_dl_016_02,story_v3_dl_016,What does the story suggest about unplugging from technology?,inferential,"[""It is boring"", ""It can lead to peaceful and satisfying days"", ""It is impossible"", ""It causes anxiety""]",It can lead to peaceful and satisfying days,2,p
+q_v3_dl_016_03,story_v3_dl_016,What does the word 'pattered' describe?,vocabulary,"[""Loud crashing"", ""Gentle repeated tapping"", ""Slow dripping"", ""Heavy flooding""]",Gentle repeated tapping,2,p
+q_v3_dl_016_04,story_v3_dl_016,What happened after Ben sat in his armchair?,sequence,"[""He made hot chocolate"", ""His cat curled up on his lap"", ""He went outside"", ""He turned on the television""]",His cat curled up on his lap,2,k
+q_v3_dl_017_01,story_v3_dl_017,How much did the bouncy castle cost to rent?,factual,"[""Thirty dollars"", ""Fifty dollars"", ""Seventy five dollars"", ""One hundred dollars""]",Fifty dollars,3,b
+q_v3_dl_017_02,story_v3_dl_017,Why did the spring rolls disappear so quickly?,inferential,"[""They were free"", ""They were delicious and popular"", ""There were very few"", ""Children took them all""]",They were delicious and popular,3,spr
+q_v3_dl_017_03,story_v3_dl_017,What does the word 'residents' mean?,vocabulary,"[""Visitors"", ""People who live in a place"", ""Workers"", ""Friends""]",People who live in a place,3,r
+q_v3_dl_017_04,story_v3_dl_017,What did people do after eating?,sequence,"[""They set up tables"", ""They went home"", ""They danced to music"", ""They played in the bouncy castle""]",They danced to music,3,d
+q_v3_dl_018_01,story_v3_dl_018,How much did the replacement part cost?,factual,"[""Eight dollars"", ""Twelve dollars"", ""Twenty dollars"", ""Thirty dollars""]",Twelve dollars,2,d
+q_v3_dl_018_02,story_v3_dl_018,Why did Sandra bake a pie for Paul?,inferential,"[""It was his birthday"", ""To thank him for helping"", ""She had extra ingredients"", ""He asked for one""]",To thank him for helping,2,th
+q_v3_dl_018_03,story_v3_dl_018,What does the word 'pooled' mean in this story?,vocabulary,"[""Swam"", ""Collected in one place"", ""Splashed"", ""Dripped slowly""]",Collected in one place,2,p
+q_v3_dl_018_04,story_v3_dl_018,What happened after Paul found the cracked hose?,sequence,"[""Sandra called a plumber"", ""They drove to the hardware store"", ""They cleaned the floor"", ""Paul went home""]",They drove to the hardware store,2,dr
+q_v3_dl_019_01,story_v3_dl_019,Where did Carlos get the boxes from?,factual,"[""The garage"", ""The basement"", ""The attic"", ""The closet""]",The attic,2,t
+q_v3_dl_019_02,story_v3_dl_019,Why did the youngest daughter sit on her father's shoulders?,inferential,"[""She was tired"", ""To reach the top of the tree"", ""She was scared"", ""To see the neighbors""]",To reach the top of the tree,2,tr
+q_v3_dl_019_03,story_v3_dl_019,What does the word 'display' mean here?,vocabulary,"[""A sale"", ""An arrangement shown for others to see"", ""A competition"", ""A tradition""]",An arrangement shown for others to see,2,d
+q_v3_dl_019_04,story_v3_dl_019,What did the daughters do before hanging the wreath?,sequence,"[""They placed candles in windows"", ""They untangled string lights"", ""They put the star on the tree"", ""They invited the neighbors""]",They untangled string lights,2,str
+q_v3_dl_020_01,story_v3_dl_020,How long has Amy been visiting the market?,factual,"[""Three years"", ""Five years"", ""Seven years"", ""Ten years""]",Seven years,1,s
+q_v3_dl_020_02,story_v3_dl_020,Why does Mr. Patterson save Amy the best tomatoes?,inferential,"[""She pays extra"", ""She is his friend"", ""She has been a loyal customer for years"", ""She grows them for him""]",She has been a loyal customer for years,1,t
+q_v3_dl_020_03,story_v3_dl_020,What does the phrase 'farmer's market' mean?,vocabulary,"[""A grocery store"", ""An outdoor market selling locally grown food"", ""A farm supply shop"", ""A restaurant""]",An outdoor market selling locally grown food,1,f
+q_v3_dl_020_04,story_v3_dl_020,What does Amy do after picking up bread and honey?,sequence,"[""She visits Mr. Patterson"", ""She walks home through the park"", ""She drives to work"", ""She eats breakfast""]",She walks home through the park,1,w
+q_v3_dl_021_01,story_v3_dl_021,What is the puppy's name?,factual,"[""Cookie"", ""Biscuit"", ""Muffin"", ""Brownie""]",Biscuit,3,b
+q_v3_dl_021_02,story_v3_dl_021,Why was everyone awake at midnight?,inferential,"[""The children were fighting"", ""The puppy was whimpering"", ""There was a storm"", ""The alarm went off""]",The puppy was whimpering,3,p
+q_v3_dl_021_03,story_v3_dl_021,What does the word 'whimpering' mean?,vocabulary,"[""Barking loudly"", ""Making soft crying sounds"", ""Growling"", ""Snoring""]",Making soft crying sounds,3,w
+q_v3_dl_021_04,story_v3_dl_021,What happened after a week of training?,sequence,"[""They returned the puppy"", ""She learned to sit and stay"", ""She chewed more shoes"", ""The children lost interest""]",She learned to sit and stay,3,st
+q_v3_dl_022_01,story_v3_dl_022,How long had Robert not opened his garage?,factual,"[""Six months"", ""One year"", ""Almost two years"", ""Five years""]",Almost two years,3,y
+q_v3_dl_022_02,story_v3_dl_022,Why were the wedding photos special to find?,inferential,"[""They were valuable"", ""They were lost memories rediscovered"", ""They needed to be framed"", ""They were damaged""]",They were lost memories rediscovered,3,m
+q_v3_dl_022_03,story_v3_dl_022,What does the word 'donate' mean?,vocabulary,"[""Sell at a low price"", ""Throw away"", ""Give to charity"", ""Store in the attic""]",Give to charity,3,d
+q_v3_dl_022_04,story_v3_dl_022,What could they do after finishing the cleanup?,sequence,"[""Sort everything again"", ""Park the car inside"", ""Open more boxes"", ""Call their friends""]",Park the car inside,3,k
+q_v3_dl_023_01,story_v3_dl_023,What time does Rose start cooking?,factual,"[""Noon"", ""One in the afternoon"", ""Two in the afternoon"", ""Three in the afternoon""]",Two in the afternoon,2,t
+q_v3_dl_023_02,story_v3_dl_023,What does Rose consider the greatest pleasure of her life?,inferential,"[""Cooking new recipes"", ""Having a large house"", ""Feeding her family"", ""Collecting good plates""]",Feeding her family,2,f
+q_v3_dl_023_03,story_v3_dl_023,What does the word 'joyful' mean?,vocabulary,"[""Quiet"", ""Full of happiness"", ""Polite"", ""Careful""]",Full of happiness,2,j
+q_v3_dl_023_04,story_v3_dl_023,What do the grandchildren do before dinner is served?,sequence,"[""They arrive at six"", ""They set the table"", ""They help cook"", ""They play outside""]",They set the table,2,s
+q_v3_dl_024_01,story_v3_dl_024,What row does Daniel always sit in?,factual,"[""The first row"", ""The second row"", ""The third row"", ""The last row""]",The third row,2,th
+q_v3_dl_024_02,story_v3_dl_024,Why did everyone cheer when the replacement bus arrived?,inferential,"[""They recognized the driver"", ""They were cold and relieved"", ""It was a nicer bus"", ""They were late for a party""]",They were cold and relieved,2,ch
+q_v3_dl_024_03,story_v3_dl_024,What does 'broke down' mean in this story?,vocabulary,"[""Crashed into something"", ""Stopped working"", ""Went too fast"", ""Took a different route""]",Stopped working,2,b
+q_v3_dl_024_04,story_v3_dl_024,What happened after the bus broke down?,sequence,"[""Daniel walked to work"", ""The passengers waited in the cold"", ""Daniel called a taxi"", ""The driver fixed the bus""]",The passengers waited in the cold,2,p
+q_v3_dl_025_01,story_v3_dl_025,How long was the total drive?,factual,"[""Four hours"", ""Five hours"", ""Six hours"", ""Eight hours""]",Six hours,3,s
+q_v3_dl_025_02,story_v3_dl_025,Why did the family stop at the scenic overlook?,inferential,"[""The car needed gas"", ""The children were hungry"", ""The attendant recommended it"", ""They were lost""]",The attendant recommended it,3,r
+q_v3_dl_025_03,story_v3_dl_025,What does the word 'scenic' mean?,vocabulary,"[""Dangerous"", ""Having beautiful natural views"", ""Flat and boring"", ""Very long""]",Having beautiful natural views,3,s
+q_v3_dl_025_04,story_v3_dl_025,What did the family do after buying snacks?,sequence,"[""They drove home"", ""They filled the car with gas"", ""They ate lunch"", ""They visited a friend""]",They filled the car with gas,3,f
+q_v3_dl_026_01,story_v3_dl_026,How many days did packing take?,factual,"[""One day"", ""Two days"", ""Three days"", ""Five days""]",Three days,3,d
+q_v3_dl_026_02,story_v3_dl_026,Why did they eat pizza on the floor?,inferential,"[""They liked floor picnics"", ""The furniture was not set up yet"", ""The kitchen was dirty"", ""They were celebrating""]",The furniture was not set up yet,3,f
+q_v3_dl_026_03,story_v3_dl_026,What does the word 'labeled' mean?,vocabulary,"[""Sealed shut"", ""Marked with identifying information"", ""Stacked neatly"", ""Painted""]",Marked with identifying information,3,l
+q_v3_dl_026_04,story_v3_dl_026,What did two friends help them do?,sequence,"[""Pack boxes"", ""Drive the truck"", ""Carry furniture down stairs"", ""Unpack at the new house""]",Carry furniture down stairs,3,k
+q_v3_hw_013_01,story_v3_hw_013,What day does Patricia attend yoga?,factual,"[""Monday"", ""Tuesday"", ""Wednesday"", ""Thursday""]",Tuesday,2,t
+q_v3_hw_013_02,story_v3_hw_013,Why did Patricia's balance improve?,inferential,"[""She bought new shoes"", ""Consistent yoga practice strengthened her body"", ""She started running"", ""She took medication""]",Consistent yoga practice strengthened her body,2,b
+q_v3_hw_013_03,story_v3_hw_013,What does 'range of motion' mean?,vocabulary,"[""Walking speed"", ""How far a body part can move"", ""Heart rate"", ""Muscle size""]",How far a body part can move,2,m
+q_v3_hw_013_04,story_v3_hw_013,What happened after eight weeks of practice?,sequence,"[""She quit the class"", ""Her balance improved and back pain decreased"", ""She became an instructor"", ""She switched to running""]",Her balance improved and back pain decreased,2,b
+q_v3_hw_014_01,story_v3_hw_014,How much weight did Thomas gain in one year?,factual,"[""Ten pounds"", ""Fifteen pounds"", ""Twenty pounds"", ""Twenty five pounds""]",Twenty pounds,3,tw
+q_v3_hw_014_02,story_v3_hw_014,What was the most important change Thomas made?,inferential,"[""Drinking more water"", ""Taking vitamins"", ""Learning to cook his own meals"", ""Joining a gym""]",Learning to cook his own meals,3,k
+q_v3_hw_014_03,story_v3_hw_014,What does 'food diary' mean?,vocabulary,"[""A cookbook"", ""A record of what you eat"", ""A grocery list"", ""A restaurant menu""]",A record of what you eat,3,d
+q_v3_hw_014_04,story_v3_hw_014,What did Dr. Wallace do before creating the meal plan?,sequence,"[""She weighed Thomas"", ""She reviewed his food diary"", ""She took blood samples"", ""She measured his height""]",She reviewed his food diary,3,f
+q_v3_hw_015_01,story_v3_hw_015,What day are the swimming lessons?,factual,"[""Monday"", ""Wednesday"", ""Friday"", ""Saturday""]",Wednesday,2,w
+q_v3_hw_015_02,story_v3_hw_015,Why did Margaret panic in deep water?,inferential,"[""She saw a fish"", ""She was learning and felt unsafe"", ""The water was cold"", ""The instructor left""]",She was learning and felt unsafe,2,l
+q_v3_hw_015_03,story_v3_hw_015,What does 'enrolled' mean?,vocabulary,"[""Signed up for"", ""Quit"", ""Watched"", ""Taught""]",Signed up for,2,s
+q_v3_hw_015_04,story_v3_hw_015,What could Margaret do by the tenth lesson?,sequence,"[""Dive from the board"", ""Swim two full laps"", ""Teach other students"", ""Float on her back""]",Swim two full laps,2,sw
+q_v3_hw_016_01,story_v3_hw_016,How often does Kevin donate blood?,factual,"[""Every four weeks"", ""Every six weeks"", ""Every eight weeks"", ""Every twelve weeks""]",Every eight weeks,2,w
+q_v3_hw_016_02,story_v3_hw_016,Why did Kevin start donating blood?,inferential,"[""His doctor told him to"", ""He saw an advertisement"", ""His brother needed a transfusion"", ""He wanted free cookies""]",His brother needed a transfusion,2,br
+q_v3_hw_016_03,story_v3_hw_016,What does 'transfusion' mean?,vocabulary,"[""A blood test"", ""Transfer of blood from one person to another"", ""A type of surgery"", ""A medicine""]",Transfer of blood from one person to another,2,tr
+q_v3_hw_016_04,story_v3_hw_016,What does Kevin do after the donation?,sequence,"[""Goes home immediately"", ""Drinks juice and eats cookies"", ""Takes a walk"", ""Makes another appointment""]",Drinks juice and eats cookies,2,d
+q_v3_hw_017_01,story_v3_hw_017,How many days was the wellness retreat?,factual,"[""Two"", ""Three"", ""Five"", ""Seven""]",Three,3,th
+q_v3_hw_017_02,story_v3_hw_017,Why does Sandra plan to return next spring?,inferential,"[""It was cheap"", ""The experience was deeply beneficial"", ""Her friend works there"", ""She forgot her luggage""]",The experience was deeply beneficial,3,b
+q_v3_hw_017_03,story_v3_hw_017,What does 'refreshed' mean?,vocabulary,"[""Exhausted"", ""Feeling new energy and strength"", ""Confused"", ""Hungry""]",Feeling new energy and strength,3,r
+q_v3_hw_017_04,story_v3_hw_017,What did Sandra do after returning home?,sequence,"[""She forgot everything"", ""She continued practicing the techniques"", ""She went back immediately"", ""She complained to friends""]",She continued practicing the techniques,3,k
+q_v3_hw_018_01,story_v3_hw_018,What time does the running club meet?,factual,"[""Six in the morning"", ""Seven in the morning"", ""Eight in the morning"", ""Nine in the morning""]",Seven in the morning,3,s
+q_v3_hw_018_02,story_v3_hw_018,Why did the coach suggest increasing distance gradually?,inferential,"[""To save time"", ""To prevent injury and build endurance safely"", ""To keep up with others"", ""To lose weight faster""]",To prevent injury and build endurance safely,3,s
+q_v3_hw_018_03,story_v3_hw_018,What does 'endurance' mean?,vocabulary,"[""Speed"", ""The ability to keep going for a long time"", ""Flexibility"", ""Strength""]",The ability to keep going for a long time,3,n
+q_v3_hw_018_04,story_v3_hw_018,What did Greg accomplish after four months?,sequence,"[""He became the club coach"", ""He quit the club"", ""He completed his first five kilometer race"", ""He ran a marathon""]",He completed his first five kilometer race,3,k
+q_v3_hw_019_01,story_v3_hw_019,How long does Linda spend stretching each morning?,factual,"[""Five minutes"", ""Ten minutes"", ""Fifteen minutes"", ""Twenty minutes""]",Fifteen minutes,2,f
+q_v3_hw_019_02,story_v3_hw_019,What does Linda credit for her progress?,inferential,"[""Expensive equipment"", ""Consistency"", ""A special diet"", ""New medication""]",Consistency,2,k
+q_v3_hw_019_03,story_v3_hw_019,What does 'range of motion' mean?,vocabulary,"[""How fast you can move"", ""The distance a joint can move through its arc"", ""How strong you are"", ""Your reaction time""]",The distance a joint can move through its arc,2,m
+q_v3_hw_019_04,story_v3_hw_019,What happened after the movements stopped being painful?,sequence,"[""She stopped stretching"", ""They felt natural"", ""She changed the routine"", ""Her doctor was worried""]",They felt natural,2,n
+q_v3_hw_020_01,story_v3_hw_020,How long had Charlotte avoided the dentist?,factual,"[""Six months"", ""One year"", ""Two years"", ""Three years""]",Two years,2,t
+q_v3_hw_020_02,story_v3_hw_020,Why did explaining each step help Charlotte?,inferential,"[""She was curious"", ""It helped her feel in control and less anxious"", ""She wanted to learn dentistry"", ""She was hard of hearing""]",It helped her feel in control and less anxious,2,k
+q_v3_hw_020_03,story_v3_hw_020,What does 'specializes' mean?,vocabulary,"[""Avoids"", ""Focuses on a particular area of expertise"", ""Works part time"", ""Charges more""]",Focuses on a particular area of expertise,2,sp
+q_v3_hw_020_04,story_v3_hw_020,What did Charlotte do after the cleaning was finished?,sequence,"[""She complained"", ""She scheduled her next visit"", ""She changed dentists"", ""She cancelled future appointments""]",She scheduled her next visit,2,sh
+q_v3_hw_021_01,story_v3_hw_021,How many people were in the meditation group?,factual,"[""Ten"", ""Twelve"", ""Fifteen"", ""Twenty""]",Fifteen,4,f
+q_v3_hw_021_02,story_v3_hw_021,Why was sitting still difficult for James at first?,inferential,"[""The chairs were uncomfortable"", ""His mind was restless and unfocused"", ""He was in pain"", ""The room was too cold""]",His mind was restless and unfocused,4,m
+q_v3_hw_021_03,story_v3_hw_021,What does 'body scan' mean in meditation?,vocabulary,"[""A medical procedure"", ""Paying attention to each part of the body in turn"", ""An X-ray"", ""A stretching exercise""]",Paying attention to each part of the body in turn,4,b
+q_v3_hw_021_04,story_v3_hw_021,What did James do after the workshop ended?,sequence,"[""He forgot about meditation"", ""He signed up for another workshop"", ""He downloaded an app and practices nightly"", ""He became a teacher""]",He downloaded an app and practices nightly,4,pr
+q_v3_hw_022_01,story_v3_hw_022,How much did the vitamins cost?,factual,"[""Twenty five dollars"", ""Thirty five dollars"", ""Forty five dollars"", ""Fifty five dollars""]",Forty five dollars,2,f
+q_v3_hw_022_02,story_v3_hw_022,Why did the pharmacist recommend vitamin D?,inferential,"[""It was on sale"", ""Nancy spent most of her time indoors"", ""Her doctor demanded it"", ""It was the most popular vitamin""]",Nancy spent most of her time indoors,2,v
+q_v3_hw_022_03,story_v3_hw_022,What does 'supplement' mean?,vocabulary,"[""A replacement"", ""Something added to complete or enhance"", ""A type of food"", ""A prescription drug""]",Something added to complete or enhance,2,s
+q_v3_hw_022_04,story_v3_hw_022,What did Nancy do to remember her vitamins?,sequence,"[""She put them on the counter"", ""She asked her husband to remind her"", ""She set a daily alarm on her phone"", ""She wrote a note on the fridge""]",She set a daily alarm on her phone,2,l
+q_v3_hw_023_01,story_v3_hw_023,How many weeks after surgery did Martin start therapy?,factual,"[""Four"", ""Six"", ""Eight"", ""Ten""]",Eight,3,t
+q_v3_hw_023_02,story_v3_hw_023,Why was the surgeon impressed?,inferential,"[""Martin came early"", ""Martin's recovery exceeded expectations"", ""Martin was polite"", ""Martin brought a gift""]",Martin's recovery exceeded expectations,3,r
+q_v3_hw_023_03,story_v3_hw_023,What does 'wince' mean?,vocabulary,"[""Smile"", ""Flinch in pain"", ""Laugh"", ""Yawn""]",Flinch in pain,3,w
+q_v3_hw_023_04,story_v3_hw_023,What could Martin do by the twelfth session?,sequence,"[""Run a mile"", ""Lift heavy weights"", ""Raise his arm above his head"", ""Swim laps""]",Raise his arm above his head,3,r
+q_v3_hw_024_01,story_v3_hw_024,What time does Betty turn off screens?,factual,"[""Eight o'clock"", ""Nine o'clock"", ""Ten o'clock"", ""Eleven o'clock""]",Nine o'clock,2,n
+q_v3_hw_024_02,story_v3_hw_024,Why does Betty say the routine feels like a reward?,inferential,"[""She gets paid for it"", ""The activities are enjoyable not punishing"", ""Someone gives her a prize"", ""She watches television""]",The activities are enjoyable not punishing,2,r
+q_v3_hw_024_03,story_v3_hw_024,What does 'consistent' mean?,vocabulary,"[""Occasional"", ""Done regularly without change"", ""Difficult"", ""Expensive""]",Done regularly without change,2,k
+q_v3_hw_024_04,story_v3_hw_024,What does Betty do after reading for thirty minutes?,sequence,"[""She drinks tea"", ""She watches television"", ""She does deep breathing"", ""She turns off lights""]",She does deep breathing,2,br
+q_v3_ta_012_01,story_v3_ta_012,How long did the Parkers drive to reach Pine Lake?,factual,"[""Two hours"", ""Three hours"", ""Four hours"", ""Five hours""]",Four hours,2,f
+q_v3_ta_012_02,story_v3_ta_012,Why did the youngest boy ask if the owl was friendly?,inferential,"[""He was scared of the dark"", ""The hooting was unfamiliar and he was curious"", ""He wanted a pet"", ""His father told him to""]",The hooting was unfamiliar and he was curious,2,h
+q_v3_ta_012_03,story_v3_ta_012,What does 'pitched' mean when talking about a tent?,vocabulary,"[""Threw away"", ""Set up and secured"", ""Folded"", ""Painted""]",Set up and secured,2,p
+q_v3_ta_012_04,story_v3_ta_012,What did the family do after building the campfire?,sequence,"[""They pitched the tent"", ""They roasted hot dogs and marshmallows"", ""They went swimming"", ""They drove to town""]",They roasted hot dogs and marshmallows,2,r
+q_v3_ta_013_01,story_v3_ta_013,How long was the train journey?,factual,"[""Three hours"", ""Four hours"", ""Six hours"", ""Eight hours""]",Six hours,3,s
+q_v3_ta_013_02,story_v3_ta_013,Why did the guide point out abandoned mining towns?,inferential,"[""To scare passengers"", ""To share the region's history"", ""To suggest places to visit"", ""To fill time""]",To share the region's history,3,sh
+q_v3_ta_013_03,story_v3_ta_013,What does 'scenic' mean?,vocabulary,"[""Fast"", ""Providing beautiful natural views"", ""Underground"", ""Expensive""]",Providing beautiful natural views,3,s
+q_v3_ta_013_04,story_v3_ta_013,What did Claire do after the guide pointed out eagle nests?,sequence,"[""She took the train home"", ""She ate lunch in the dining car"", ""She left the train"", ""She fell asleep""]",She ate lunch in the dining car,3,l
+q_v3_ta_014_01,story_v3_ta_014,What is the name of the restaurant they visited?,factual,"[""Captain Joe's"", ""Captain Pete's"", ""Captain Bob's"", ""Captain Sam's""]",Captain Pete's,2,p
+q_v3_ta_014_02,story_v3_ta_014,Why did nobody want to leave on Sunday?,inferential,"[""The weather was bad"", ""They were having too wonderful a time"", ""Their car broke down"", ""The hotel offered a discount""]",They were having too wonderful a time,2,t
+q_v3_ta_014_03,story_v3_ta_014,What does 'shoreline' mean?,vocabulary,"[""A fishing dock"", ""The edge where land meets water"", ""A swimming pool"", ""A sand dune""]",The edge where land meets water,2,sh
+q_v3_ta_014_04,story_v3_ta_014,What did the father do while the mother read novels?,sequence,"[""He napped"", ""He went fishing"", ""He taught the children to bodysurf"", ""He cooked dinner""]",He taught the children to bodysurf,2,b
+q_v3_ta_015_01,story_v3_ta_015,What time did Jake and his brother start hiking?,factual,"[""Five o'clock"", ""Five thirty"", ""Six o'clock"", ""Six thirty""]",Five thirty,3,f
+q_v3_ta_015_02,story_v3_ta_015,Why did they start so early in the morning?,inferential,"[""To beat the crowds"", ""To see the sunrise"", ""To finish before afternoon heat"", ""The trail closes at noon""]",To finish before afternoon heat,3,h
+q_v3_ta_015_03,story_v3_ta_015,What does 'alpine' mean?,vocabulary,"[""Underground"", ""Related to high mountains"", ""Tropical"", ""Flat""]",Related to high mountains,3,l
+q_v3_ta_015_04,story_v3_ta_015,What did they see after reaching the alpine meadow?,sequence,"[""They went back down"", ""They crossed two bridges"", ""They made the final push to the summit"", ""They set up camp""]",They made the final push to the summit,3,s
+q_v3_ta_016_01,story_v3_ta_016,How long was the walking tour?,factual,"[""One hour"", ""Two hours"", ""Three hours"", ""Four hours""]",Three hours,3,th
+q_v3_ta_016_02,story_v3_ta_016,Why did the guide carry old photographs?,inferential,"[""To sell them"", ""To show how buildings looked in the past"", ""They were personal souvenirs"", ""The museum asked him to""]",To show how buildings looked in the past,3,sh
+q_v3_ta_016_03,story_v3_ta_016,What does 'historic' mean?,vocabulary,"[""Modern"", ""Famous or important in history"", ""Expensive"", ""Very tall""]",Famous or important in history,3,h
+q_v3_ta_016_04,story_v3_ta_016,What did Megan buy at the end of the tour?,sequence,"[""A straw hat"", ""A book about Charleston"", ""A box of pralines and a postcard"", ""A leather folder""]",A box of pralines and a postcard,3,pr
+q_v3_ta_017_01,story_v3_ta_017,How long did Oliver spend in the dinosaur hall?,factual,"[""Thirty minutes"", ""One hour"", ""Two hours"", ""Three hours""]",One hour,3,w
+q_v3_ta_017_02,story_v3_ta_017,Why did the emerald glow under the spotlight?,inferential,"[""It was electric"", ""The light enhanced the gemstone's natural color"", ""It was fake"", ""Someone polished it""]",The light enhanced the gemstone's natural color,3,l
+q_v3_ta_017_03,story_v3_ta_017,What does 'appreciation' mean?,vocabulary,"[""Anger"", ""Understanding of worth or value"", ""Confusion"", ""Fear""]",Understanding of worth or value,3,pr
+q_v3_ta_017_04,story_v3_ta_017,What did Oliver do after visiting the dinosaur hall?,sequence,"[""He went home"", ""He visited the gemstone collection"", ""He ate lunch"", ""He talked to the volunteer""]",He visited the gemstone collection,3,v
+q_v3_ta_018_01,story_v3_ta_018,How many students were in the sailing class?,factual,"[""Eight"", ""Ten"", ""Twelve"", ""Fifteen""]",Twelve,4,tw
+q_v3_ta_018_02,story_v3_ta_018,Why did everyone grip the rails and laugh?,inferential,"[""They saw a dolphin"", ""The boat leaned sharply and they were both scared and excited"", ""The instructor told a joke"", ""They won a race""]",The boat leaned sharply and they were both scared and excited,4,sh
+q_v3_ta_018_03,story_v3_ta_018,What does 'tack' mean in sailing?,vocabulary,"[""To go straight"", ""To change direction against the wind"", ""To anchor"", ""To stop""]",To change direction against the wind,4,t
+q_v3_ta_018_04,story_v3_ta_018,What did the students do before boarding the sailboat?,sequence,"[""They sailed alone"", ""They practiced knots on land"", ""They ate lunch"", ""They swam to the boat""]",They practiced knots on land,4,n
+q_v3_ta_019_01,story_v3_ta_019,How far did Rita drive to reach Yellowstone?,factual,"[""Three hours"", ""Four hours"", ""Five hours"", ""Seven hours""]",Five hours,3,f
+q_v3_ta_019_02,story_v3_ta_019,Why did Old Faithful amaze them?,inferential,"[""It was very tall"", ""It erupted at exactly the predicted time"", ""It was their first geyser"", ""A ranger explained its history""]",It erupted at exactly the predicted time,3,pr
+q_v3_ta_019_03,story_v3_ta_019,What does 'geyser' mean?,vocabulary,"[""A type of animal"", ""A hot spring that shoots water into the air"", ""A mountain peak"", ""A river""]",A hot spring that shoots water into the air,3,g
+q_v3_ta_019_04,story_v3_ta_019,What did Rita and her husband do after the guided walk?,sequence,"[""They drove home"", ""They camped for two nights"", ""They visited a museum"", ""They left the park""]",They camped for two nights,3,k
+q_v3_ta_020_01,story_v3_ta_020,What birthday was Helen celebrating?,factual,"[""Fiftieth"", ""Fifty fifth"", ""Sixtieth"", ""Sixty fifth""]",Sixtieth,4,s
+q_v3_ta_020_02,story_v3_ta_020,Why did Helen call it the most magical experience?,inferential,"[""It was expensive"", ""The beauty and wonder overwhelmed her"", ""She won a prize"", ""Her children were there""]",The beauty and wonder overwhelmed her,4,m
+q_v3_ta_020_03,story_v3_ta_020,What does 'inflated' mean?,vocabulary,"[""Deflated"", ""Filled with air or gas"", ""Decorated"", ""Folded""]",Filled with air or gas,4,fl
+q_v3_ta_020_04,story_v3_ta_020,What happened after the balloon rose above the desert?,sequence,"[""It landed immediately"", ""Helen could see for fifty miles"", ""They had breakfast"", ""The pilot turned around""]",Helen could see for fifty miles,4,f
+q_v3_ta_021_01,story_v3_ta_021,How many friends went kayaking?,factual,"[""Three"", ""Four"", ""Five"", ""Six""]",Five,3,f
+q_v3_ta_021_02,story_v3_ta_021,Why did the return trip take longer?,inferential,"[""They got lost"", ""They paddled against a headwind"", ""They stopped to swim"", ""It was getting dark""]",They paddled against a headwind,3,w
+q_v3_ta_021_03,story_v3_ta_021,What does 'preserve' mean in this story?,vocabulary,"[""A type of jam"", ""A protected natural area"", ""A parking lot"", ""A campground""]",A protected natural area,3,pr
+q_v3_ta_021_04,story_v3_ta_021,What did the group do after reaching the small island?,sequence,"[""They kept paddling"", ""They ate sandwiches and lemonade"", ""They took photos"", ""They called for help""]",They ate sandwiches and lemonade,3,s
+q_v3_ta_022_01,story_v3_ta_022,How many miles did the trip cover?,factual,"[""Two thousand"", ""Two thousand five hundred"", ""Three thousand"", ""Three thousand five hundred""]",Three thousand,4,th
+q_v3_ta_022_02,story_v3_ta_022,Why did starting over feel both terrifying and wonderful?,inferential,"[""He had no friends"", ""It was a complete unknown full of possibility"", ""Portland was dangerous"", ""He missed Boston""]",It was a complete unknown full of possibility,4,p
+q_v3_ta_022_03,story_v3_ta_022,What does 'start fresh' mean?,vocabulary,"[""Take a shower"", ""Begin again with a new start"", ""Buy new clothes"", ""Clean the house""]",Begin again with a new start,4,st
+q_v3_ta_022_04,story_v3_ta_022,What did the farmer give Tony after giving him directions?,sequence,"[""Money"", ""A map"", ""A bag of fresh corn"", ""A place to sleep""]",A bag of fresh corn,4,k
+q_v3_ta_023_01,story_v3_ta_023,How many pounds of peaches did Lynn buy?,factual,"[""One"", ""Two"", ""Three"", ""Five""]",Three,2,th
+q_v3_ta_023_02,story_v3_ta_023,Why did Lynn not mind arriving late?,inferential,"[""She had no appointment"", ""The unexpected detour was enjoyable"", ""She called ahead"", ""She was on vacation""]",The unexpected detour was enjoyable,2,d
+q_v3_ta_023_03,story_v3_ta_023,What does 'detour' mean?,vocabulary,"[""A shortcut"", ""An alternate route away from the main road"", ""A traffic light"", ""A dead end""]",An alternate route away from the main road,2,d
+q_v3_ta_023_04,story_v3_ta_023,What did Lynn do after buying peaches from Dorothy?,sequence,"[""She drove straight home"", ""She talked with Dorothy for twenty minutes"", ""She turned around"", ""She called her husband""]",She talked with Dorothy for twenty minutes,2,t
+q_v3_ws_012_01,story_v3_ws_012,How early did Jenna arrive on her first day?,factual,"[""Ten minutes"", ""Fifteen minutes"", ""Thirty minutes"", ""One hour""]",Thirty minutes,2,th
+q_v3_ws_012_02,story_v3_ws_012,Why did Jenna feel hopeful despite being exhausted?,inferential,"[""She got a raise"", ""Her colleagues were welcoming and kind"", ""The office was beautiful"", ""She left early""]",Her colleagues were welcoming and kind,2,w
+q_v3_ws_012_03,story_v3_ws_012,What does 'welcome packet' mean?,vocabulary,"[""A gift basket"", ""Information given to new employees"", ""A lunch menu"", ""A set of keys""]",Information given to new employees,2,w
+q_v3_ws_012_04,story_v3_ws_012,What happened after IT set up Jenna's laptop?,sequence,"[""She went home"", ""She met her manager"", ""Marcus invited her to lunch"", ""She had a meeting""]",Marcus invited her to lunch,2,l
+q_v3_ws_013_01,story_v3_ws_013,How much time did teams have to escape?,factual,"[""Thirty minutes"", ""Forty five minutes"", ""Sixty minutes"", ""Ninety minutes""]",Sixty minutes,3,s
+q_v3_ws_013_02,story_v3_ws_013,Why did the manager say the day improved communication?,inferential,"[""People talked more"", ""Working together on puzzles built trust"", ""They learned new words"", ""Email was disabled""]",Working together on puzzles built trust,3,tr
+q_v3_ws_013_03,story_v3_ws_013,What does 'quarterly' mean?,vocabulary,"[""Every week"", ""Every month"", ""Every three months"", ""Every year""]",Every three months,3,kw
+q_v3_ws_013_04,story_v3_ws_013,What did the group do after the escape room?,sequence,"[""They went back to work"", ""They went to a pizza restaurant"", ""They had a meeting"", ""They drove home""]",They went to a pizza restaurant,3,p
+q_v3_ws_014_01,story_v3_ws_014,Where do Steven and Joan meet?,factual,"[""The office cafeteria"", ""A coffee shop"", ""The sandwich shop across from the office"", ""A park bench""]",The sandwich shop across from the office,3,s
+q_v3_ws_014_02,story_v3_ws_014,Why did Joan suggest a direct conversation instead of email?,inferential,"[""Email was broken"", ""Face to face communication resolves conflicts better"", ""Steven types slowly"", ""The coworker does not use email""]",Face to face communication resolves conflicts better,3,k
+q_v3_ws_014_03,story_v3_ws_014,What does 'mentor' mean?,vocabulary,"[""A boss"", ""An experienced person who guides someone less experienced"", ""A friend"", ""A competitor""]",An experienced person who guides someone less experienced,3,m
+q_v3_ws_014_04,story_v3_ws_014,What happened after Steven took Joan's advice?,sequence,"[""The conflict got worse"", ""He resolved the issue by Friday"", ""He quit his job"", ""Joan resolved it for him""]",He resolved the issue by Friday,3,r
+q_v3_ws_015_01,story_v3_ws_015,How many people did Angela present to?,factual,"[""Fifteen"", ""Twenty"", ""Twenty five"", ""Thirty""]",Twenty five,3,tw
+q_v3_ws_015_02,story_v3_ws_015,Why did Angela's husband suggest she slow down during the data section?,inferential,"[""He was bored"", ""Dense information needs more time for the audience to absorb"", ""She was speaking too quietly"", ""The slides were wrong""]",Dense information needs more time for the audience to absorb,3,d
+q_v3_ws_015_03,story_v3_ws_015,What does 'rehearsed' mean?,vocabulary,"[""Memorized"", ""Practiced before performing"", ""Wrote down"", ""Ignored""]",Practiced before performing,3,r
+q_v3_ws_015_04,story_v3_ws_015,What happened after Angela presented on Monday?,sequence,"[""She was fired"", ""Her director praised her in an email"", ""She took the day off"", ""She revised her slides""]",Her director praised her in an email,3,pr
+q_v3_ws_016_01,story_v3_ws_016,How often do Brian and Jessica meet?,factual,"[""Every week"", ""Every other Wednesday"", ""Once a month"", ""Every Friday""]",Every other Wednesday,3,w
+q_v3_ws_016_02,story_v3_ws_016,Why did Brian remember his own early experience?,inferential,"[""Jessica reminded him"", ""He identified with feeling overwhelmed as a newcomer"", ""His manager told him to"", ""He read old emails""]",He identified with feeling overwhelmed as a newcomer,3,n
+q_v3_ws_016_03,story_v3_ws_016,What does 'mentee' mean?,vocabulary,"[""A teacher"", ""A manager"", ""A person being guided by a mentor"", ""A coworker""]",A person being guided by a mentor,3,m
+q_v3_ws_016_04,story_v3_ws_016,What did Jessica accomplish after three months?,sequence,"[""She quit her job"", ""She completed her first solo project ahead of schedule"", ""She became a mentor"", ""She transferred departments""]",She completed her first solo project ahead of schedule,3,k
+q_v3_ws_017_01,story_v3_ws_017,What days does Allison work from home?,factual,"[""Tuesday and Thursday"", ""Monday and Friday"", ""Wednesday and Friday"", ""Monday and Wednesday""]",Monday and Friday,2,m
+q_v3_ws_017_02,story_v3_ws_017,Why does the hybrid schedule work well for Allison?,inferential,"[""She saves money"", ""It combines quiet focus time with in-person collaboration"", ""She dislikes her coworkers"", ""Her commute is long""]",It combines quiet focus time with in-person collaboration,2,k
+q_v3_ws_017_03,story_v3_ws_017,What does 'hybrid' mean in this context?,vocabulary,"[""A type of car"", ""A mix of two different approaches"", ""Working overtime"", ""A new technology""]",A mix of two different approaches,2,h
+q_v3_ws_017_04,story_v3_ws_017,What does Allison do at lunch on remote days?,sequence,"[""She eats at her desk"", ""She takes a thirty minute walk"", ""She calls a friend"", ""She watches television""]",She takes a thirty minute walk,2,w
+q_v3_ws_018_01,story_v3_ws_018,How many professionals attended the conference?,factual,"[""One hundred"", ""Two hundred"", ""Three hundred"", ""Five hundred""]",Three hundred,3,th
+q_v3_ws_018_02,story_v3_ws_018,What did Phil learn about networking?,inferential,"[""You need special training"", ""The hardest part is simply showing up"", ""It only works for extroverts"", ""You need business cards""]",The hardest part is simply showing up,3,sh
+q_v3_ws_018_03,story_v3_ws_018,What does 'consulting' mean?,vocabulary,"[""Selling products"", ""Providing expert advice professionally"", ""Working in an office"", ""Teaching at a school""]",Providing expert advice professionally,3,k
+q_v3_ws_018_04,story_v3_ws_018,What happened after Phil and Sonia discovered their shared university?,sequence,"[""They exchanged phone numbers"", ""Sonia connected Phil with two people"", ""They left the event"", ""They went to dinner""]",Sonia connected Phil with two people,3,k
+q_v3_ws_019_01,story_v3_ws_019,How many days was the conference?,factual,"[""Two"", ""Three"", ""Four"", ""Five""]",Three,4,th
+q_v3_ws_019_02,story_v3_ws_019,Why was the Finnish program relevant to Laura?,inferential,"[""She speaks Finnish"", ""It helped students with hearing differences like her own work"", ""She visited Finland"", ""Her boss told her to attend""]",It helped students with hearing differences like her own work,4,h
+q_v3_ws_019_03,story_v3_ws_019,What does 'accessibility' mean?,vocabulary,"[""Being popular"", ""The quality of being easy to use for people with different needs"", ""Being expensive"", ""Being online""]",The quality of being easy to use for people with different needs,4,s
+q_v3_ws_019_04,story_v3_ws_019,What happened on the last evening of the conference?,sequence,"[""Laura flew home"", ""There was a dinner cruise"", ""They had a workshop"", ""Laura gave a presentation""]",There was a dinner cruise,4,d
+q_v3_ws_020_01,story_v3_ws_020,How many years had Maria been in the department?,factual,"[""Three"", ""Four"", ""Five"", ""Seven""]",Five,2,f
+q_v3_ws_020_02,story_v3_ws_020,Why was the custodian's signature on the card meaningful?,inferential,"[""He was the boss"", ""It showed that people at all levels cared about her"", ""He organized the party"", ""He bought the cake""]",It showed that people at all levels cared about her,2,k
+q_v3_ws_020_03,story_v3_ws_020,What does 'promotion' mean?,vocabulary,"[""A pay cut"", ""An advancement to a higher position"", ""A transfer"", ""A vacation""]",An advancement to a higher position,2,pr
+q_v3_ws_020_04,story_v3_ws_020,What did Maria do the evening after receiving the promotion?,sequence,"[""She called her parents"", ""She went shopping"", ""Her husband took her to dinner"", ""She worked late""]",Her husband took her to dinner,2,d
+q_v3_ws_021_01,story_v3_ws_021,Where did the client fly in from?,factual,"[""Seoul"", ""Beijing"", ""Tokyo"", ""Shanghai""]",Tokyo,4,t
+q_v3_ws_021_02,story_v3_ws_021,Why did Nathan clean the conference room before the visit?,inferential,"[""It was dirty"", ""He wanted to make a professional impression"", ""His manager ordered it"", ""The client is very strict""]",He wanted to make a professional impression,4,pr
+q_v3_ws_021_03,story_v3_ws_021,What does 'translator' mean?,vocabulary,"[""A travel agent"", ""A person who converts one language to another"", ""An assistant"", ""A bodyguard""]",A person who converts one language to another,4,tr
+q_v3_ws_021_04,story_v3_ws_021,What did Nathan's manager tell him after the meeting?,sequence,"[""The client was unhappy"", ""The client approved the next phase"", ""Nathan needed more training"", ""Another meeting was needed""]",The client approved the next phase,4,k
+q_v3_ws_022_01,story_v3_ws_022,What street did the company move to?,factual,"[""Park Avenue"", ""Main Street"", ""River Street"", ""Oak Boulevard""]",River Street,3,r
+q_v3_ws_022_02,story_v3_ws_022,Why was the new floor plan noisier?,inferential,"[""More people were hired"", ""The open layout had fewer walls to block sound"", ""Construction was nearby"", ""The building was old""]",The open layout had fewer walls to block sound,3,n
+q_v3_ws_022_03,story_v3_ws_022,What does 'relocated' mean?,vocabulary,"[""Renovated"", ""Moved to a new place"", ""Closed down"", ""Expanded""]",Moved to a new place,3,l
+q_v3_ws_022_04,story_v3_ws_022,What did most people agree about within two weeks?,sequence,"[""The old office was better"", ""They wanted to move again"", ""The new kitchen was a big improvement"", ""The noise was unbearable""]",The new kitchen was a big improvement,3,k
+q_v3_ws_023_01,story_v3_ws_023,How many years did Principal Chen serve in the district?,factual,"[""Twenty"", ""Twenty five"", ""Twenty eight"", ""Thirty""]",Twenty eight,3,tw
+q_v3_ws_023_02,story_v3_ws_023,Why did Margaret say the children gave her more than she gave them?,inferential,"[""They paid tuition"", ""Their growth and love enriched her life beyond measure"", ""They gave her gifts"", ""They helped her retire""]",Their growth and love enriched her life beyond measure,3,l
+q_v3_ws_023_03,story_v3_ws_023,What does 'bleachers' mean?,vocabulary,"[""Classrooms"", ""Rows of tiered seating"", ""Hallways"", ""Stages""]",Rows of tiered seating,3,b
+q_v3_ws_023_04,story_v3_ws_023,What happened after former students shared their stories?,sequence,"[""Everyone left"", ""Margaret thanked the crowd through tears"", ""The music started"", ""They cut the cake""]",Margaret thanked the crowd through tears,3,th
+q_v3_cw_013_01,story_v3_cw_013,When was the time capsule buried?,factual,"[""Nineteen eighty five"", ""Nineteen ninety"", ""Nineteen ninety five"", ""Two thousand""]",Nineteen ninety five,2,n
+q_v3_cw_013_02,story_v3_cw_013,Why did Marcus laugh reading his letter?,inferential,"[""It was badly written"", ""His childhood dream was very different from his actual life"", ""Someone else wrote it"", ""The letter was blank""]",His childhood dream was very different from his actual life,2,l
+q_v3_cw_013_03,story_v3_cw_013,What does 'time capsule' mean?,vocabulary,"[""A clock"", ""A container preserving items for future discovery"", ""A treasure chest"", ""A school project""]",A container preserving items for future discovery,2,k
+q_v3_cw_013_04,story_v3_cw_013,What did they find inside the container after digging it up?,sequence,"[""Only dirt"", ""Letters and drawings and a cassette tape"", ""Money and jewelry"", ""Photographs and a phone""]",Letters and drawings and a cassette tape,2,t
+q_v3_cw_014_01,story_v3_cw_014,Where is Mr. Bellini originally from?,factual,"[""Rome"", ""Venice"", ""Florence"", ""Naples""]",Florence,3,fl
+q_v3_cw_014_02,story_v3_cw_014,Why does Louise say she found art at exactly the right time?,inferential,"[""She was bored"", ""Art gave her joy and purpose in her later years"", ""She needed a hobby"", ""Her doctor recommended it""]",Art gave her joy and purpose in her later years,3,t
+q_v3_cw_014_03,story_v3_cw_014,What does 'watercolor' mean?,vocabulary,"[""A type of marker"", ""Paint that uses water as a solvent"", ""Colored pencils"", ""Oil paint""]",Paint that uses water as a solvent,3,w
+q_v3_cw_014_04,story_v3_cw_014,What happened after one of Louise's paintings was displayed?,sequence,"[""She quit the class"", ""She continued painting with renewed confidence"", ""She sold the painting"", ""Mr. Bellini retired""]",She continued painting with renewed confidence,3,k
+q_v3_cw_015_01,story_v3_cw_015,How many children attended the magic show?,factual,"[""Twenty"", ""Thirty"", ""Forty"", ""Fifty""]",Forty,2,f
+q_v3_cw_015_02,story_v3_cw_015,What did Fernando mean by saying the real magic is believing?,inferential,"[""He was selling tickets"", ""Wonder and imagination are more powerful than tricks"", ""The tricks were not real"", ""He wanted to be famous""]",Wonder and imagination are more powerful than tricks,2,m
+q_v3_cw_015_03,story_v3_cw_015,What does 'sealed' mean?,vocabulary,"[""Open"", ""Closed completely so nothing can get in or out"", ""Broken"", ""Decorated""]",Closed completely so nothing can get in or out,2,s
+q_v3_cw_015_04,story_v3_cw_015,What was Fernando's best trick?,sequence,"[""Pulling scarves from boxes"", ""Making a coin disappear"", ""A goldfish appearing in a sealed bowl"", ""Sawing someone in half""]",A goldfish appearing in a sealed bowl,2,g
+q_v3_cw_016_01,story_v3_cw_016,How many envelopes did Grandpa Walter hide?,factual,"[""Eight"", ""Ten"", ""Twelve"", ""Fifteen""]",Twelve,2,tw
+q_v3_cw_016_02,story_v3_cw_016,Why did Walter grin from his armchair?,inferential,"[""He was eating candy"", ""Watching his grandchildren's excitement brought him joy"", ""He was reading a book"", ""He won a game""]",Watching his grandchildren's excitement brought him joy,2,j
+q_v3_cw_016_03,story_v3_cw_016,What does 'riddle' mean?,vocabulary,"[""A map"", ""A puzzle or question requiring clever thinking"", ""A coupon"", ""A recipe""]",A puzzle or question requiring clever thinking,2,r
+q_v3_cw_016_04,story_v3_cw_016,Where was the final prize hidden?,sequence,"[""Under the kitchen table"", ""In the garden"", ""Inside the piano bench"", ""In the closet""]",Inside the piano bench,2,p
+q_v3_cw_017_01,story_v3_cw_017,How old is Sofia?,factual,"[""Eight"", ""Ten"", ""Twelve"", ""Fourteen""]",Twelve,3,tw
+q_v3_cw_017_02,story_v3_cw_017,Why did Sofia say some things are better than any screen?,inferential,"[""Screens were broken"", ""The real night sky was more awe-inspiring than technology"", ""Her father told her to say that"", ""She does not own a phone""]",The real night sky was more awe-inspiring than technology,3,sk
+q_v3_cw_017_03,story_v3_cw_017,What does 'constellation' mean?,vocabulary,"[""A single bright star"", ""A group of stars forming a recognized pattern"", ""A planet"", ""A meteor shower""]",A group of stars forming a recognized pattern,3,st
+q_v3_cw_017_04,story_v3_cw_017,What happened after they spotted Saturn's rings?,sequence,"[""They went inside"", ""Hector told her about ancient sailors"", ""They packed up the telescope"", ""Sofia fell asleep""]",Hector told her about ancient sailors,3,s
+q_v3_cw_018_01,story_v3_cw_018,How many species has Peter identified?,factual,"[""Ninety eight"", ""One hundred and fifteen"", ""One hundred and thirty seven"", ""Two hundred""]",One hundred and thirty seven,3,th
+q_v3_cw_018_02,story_v3_cw_018,Why did Peter sit perfectly still for twenty minutes?,inferential,"[""He was tired"", ""He did not want to scare the bird away"", ""He was meditating"", ""Someone told him to""]",He did not want to scare the bird away,3,b
+q_v3_cw_018_03,story_v3_cw_018,What does 'field guide' mean?,vocabulary,"[""A tour guide"", ""A book for identifying plants or animals in nature"", ""A map"", ""A compass""]",A book for identifying plants or animals in nature,3,f
+q_v3_cw_018_04,story_v3_cw_018,What did Peter do when the woman said she had been looking for that bird?,sequence,"[""He ignored her"", ""He walked away"", ""He smiled and pointed so she could see"", ""He took a photograph""]",He smiled and pointed so she could see,3,s
+q_v3_cw_019_01,story_v3_cw_019,How old is Charlie?,factual,"[""Seven"", ""Eight"", ""Nine"", ""Ten""]",Nine,2,n
+q_v3_cw_019_02,story_v3_cw_019,Why did Charlie's kite finally succeed on the fourth try?,inferential,"[""The wind changed"", ""The older man helped him adjust the tail length"", ""He ran faster"", ""He used a different kite""]",The older man helped him adjust the tail length,2,t
+q_v3_cw_019_03,story_v3_cw_019,What does 'soared' mean?,vocabulary,"[""Crashed"", ""Rose and flew high in the air"", ""Spun in circles"", ""Fell slowly""]",Rose and flew high in the air,2,s
+q_v3_cw_019_04,story_v3_cw_019,What happened after the older man adjusted the tail?,sequence,"[""Charlie went home"", ""The kite dove into the grass again"", ""The kite soared higher than any other"", ""The wind stopped""]",The kite soared higher than any other,2,s
+q_v3_cw_020_01,story_v3_cw_020,How many cookies does the factory produce daily?,factual,"[""One thousand"", ""Two thousand"", ""Three thousand"", ""Five thousand""]",Three thousand,3,th
+q_v3_cw_020_02,story_v3_cw_020,Why did the grandmother keep Mei Lin's fortune in the rotation?,inferential,"[""She forgot to remove it"", ""The message was beautiful and worth sharing"", ""They ran out of others"", ""Mei Lin demanded it""]",The message was beautiful and worth sharing,3,sh
+q_v3_cw_020_03,story_v3_cw_020,What does 'rotation' mean here?,vocabulary,"[""Spinning motion"", ""The regular cycle of items being used"", ""A type of cookie"", ""A factory schedule""]",The regular cycle of items being used,3,r
+q_v3_cw_020_04,story_v3_cw_020,What does Mei Lin do on Saturday mornings?,sequence,"[""She goes to school"", ""She folds cookies and slips in fortunes"", ""She writes new fortunes"", ""She delivers cookies to stores""]",She folds cookies and slips in fortunes,3,f
+q_v3_cw_021_01,story_v3_cw_021,How long has Edna been walking to the lighthouse?,factual,"[""Ten years"", ""Twenty years"", ""Thirty years"", ""Forty years""]",Thirty years,3,th
+q_v3_cw_021_02,story_v3_cw_021,Why does Edna say she needs the lighthouse?,inferential,"[""She works there"", ""It connects her to her husband's memory and her sense of purpose"", ""She has nowhere else to go"", ""The fishermen need her""]",It connects her to her husband's memory and her sense of purpose,3,m
+q_v3_cw_021_03,story_v3_cw_021,What does 'automated' mean?,vocabulary,"[""Abandoned"", ""Run by machines without human operators"", ""Painted"", ""Demolished""]",Run by machines without human operators,3,t
+q_v3_cw_021_04,story_v3_cw_021,What does Edna do after checking the glass for cracks?,sequence,"[""She goes home"", ""She waves to fishermen"", ""She pulls weeds from the path"", ""She climbs the stairs""]",She pulls weeds from the path,3,p
+q_v3_cw_022_01,story_v3_cw_022,What color is Gerald's hat?,factual,"[""Blue"", ""Green"", ""Red"", ""Yellow""]",Red,3,r
+q_v3_cw_022_02,story_v3_cw_022,Why is Gerald called the most resilient member of the family?,inferential,"[""He is the strongest"", ""He has survived more hardships than anyone else"", ""He is the oldest"", ""He never complains""]",He has survived more hardships than anyone else,3,h
+q_v3_cw_022_03,story_v3_cw_022,What does 'resilient' mean?,vocabulary,"[""Fragile"", ""Able to recover from difficulties"", ""Beautiful"", ""Old""]",Able to recover from difficulties,3,r
+q_v3_cw_022_04,story_v3_cw_022,What did Mr. Kowalski do after the snowplow chipped Gerald's nose?,sequence,"[""He threw Gerald away"", ""He bought a new gnome"", ""He glued him back together"", ""He moved Gerald inside""]",He glued him back together,3,g
+q_v3_cw_023_01,story_v3_cw_023,How long did the thunderstorm last?,factual,"[""One hour"", ""Two hours"", ""Three hours"", ""Four hours""]",Three hours,4,th
+q_v3_cw_023_02,story_v3_cw_023,Why did Mr. Henderson have tears in his eyes?,inferential,"[""He was scared"", ""The beauty of the rainbow moved him deeply"", ""The wind hurt his eyes"", ""He was sad about the damage""]",The beauty of the rainbow moved him deeply,4,b
+q_v3_cw_023_03,story_v3_cw_023,What does 'arched' mean?,vocabulary,"[""Fell"", ""Curved in a bow shape across the sky"", ""Disappeared"", ""Flickered""]",Curved in a bow shape across the sky,4,ch
+q_v3_cw_023_04,story_v3_cw_023,What did the children do when the clouds cleared?,sequence,"[""They stayed inside"", ""They went to school"", ""They ran outside and pointed"", ""They called their friends""]",They ran outside and pointed,4,r
+q_v3_cw_024_01,story_v3_cw_024,What instrument does Theo play?,factual,"[""Guitar"", ""Trumpet"", ""Violin"", ""Piano""]",Violin,4,v
+q_v3_cw_024_02,story_v3_cw_024,Why did Theo say the best music should be free and unexpected?,inferential,"[""He could not afford a concert hall"", ""He believes music should be accessible to everyone"", ""He was too shy for a stage"", ""No one invited him""]",He believes music should be accessible to everyone,4,m
+q_v3_cw_024_03,story_v3_cw_024,What does 'conservatory' mean?,vocabulary,"[""A greenhouse"", ""A school for studying music or arts"", ""A concert hall"", ""A recording studio""]",A school for studying music or arts,4,k
+q_v3_cw_024_04,story_v3_cw_024,What does the girl who asked Theo the question do now?,sequence,"[""She plays on street corners"", ""She studies violin at the conservatory"", ""She teaches children"", ""She quit music""]",She studies violin at the conservatory,4,v

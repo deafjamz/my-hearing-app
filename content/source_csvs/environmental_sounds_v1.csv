@@ -49,3 +49,103 @@ env_safety_002,carbon_monoxide,Carbon monoxide detector alarm,safety,very_loud,C
 env_safety_003,car_alarm,Car alarm sounding,safety,very_loud,Car alarm,House alarm,Police siren,Emergency alert,multi_tone_alarm,1,free,true
 env_safety_004,backup_beep,Vehicle backup warning beep,safety,moderate,Backup beep,Crosswalk signal,Timer beep,Equipment alert,repetitive_beep,1,free,true
 env_safety_005,emergency_broadcast,Emergency broadcast alert tone,safety,loud,Emergency broadcast,Amber alert,Weather alert,Test signal,alert_tone,1,free,true
+env_051,shower_running,Shower water spraying against glass door,home,moderate,Shower running,Rain falling,Faucet running,Sprinkler,water_flow,2,free,false
+env_052,ceiling_fan,Ceiling fan spinning on medium speed,home,quiet,Ceiling fan,Air conditioner,Refrigerator hum,Desk fan,air_flow,3,free,false
+env_053,window_opening,Window sliding open along track,home,quiet,Window opening,Drawer opening,Sliding door,Curtain pulling,sliding_friction,3,free,false
+env_054,clock_ticking,Wall clock ticking steadily,home,quiet,Clock ticking,Dripping faucet,Metronome,Clicking pen,rhythmic_click,2,free,false
+env_055,dishes_clinking,Plates and bowls being stacked,home,moderate,Dishes clinking,Glass breaking,Silverware clanking,Keys jangling,hard_contact,2,free,false
+env_056,cabinet_closing,Kitchen cabinet door closing,home,quiet,Cabinet closing,Door closing,Drawer shutting,Book dropping,wood_impact,3,free,false
+env_057,light_switch,Light switch being flipped,home,quiet,Light switch,Lock clicking,Stapler,Pen clicking,mechanical_click,3,free,false
+env_058,stairs_creaking,Wooden stairs creaking under footsteps,home,quiet,Stairs creaking,Floor creaking,Door hinge,Rocking chair,wood_stress,3,free,false
+env_059,bathtub_draining,Bathtub water draining with gurgle,home,moderate,Bathtub draining,Toilet flush,Sink draining,Coffee percolating,water_drain,2,free,false
+env_060,recliner_chair,Recliner chair mechanism opening,home,moderate,Recliner opening,Garage door,Folding table,Office chair adjusting,mechanical_movement,3,free,false
+env_061,ice_cubes_tray,Ice cubes cracking from tray,home,quiet,Ice tray cracking,Knuckles cracking,Celery snapping,Plastic cracking,cracking_sound,3,free,false
+env_062,zipper,Jacket zipper being zipped up,home,quiet,Zipper,Velcro tearing,Tape pulling,Curtain sliding,friction_slide,3,free,false
+env_063,keys_in_lock,Key turning in door lock,home,quiet,Key in lock,Light switch,Latch clicking,Deadbolt turning,metal_click,2,free,false
+env_064,paper_ripping,Paper being torn in half,home,quiet,Paper tearing,Velcro ripping,Tape peeling,Fabric tearing,tearing_sound,3,free,false
+env_065,doorbell_ring,Wireless electronic doorbell chime,home,moderate,Wireless doorbell,Phone ringing,Timer alert,Notification chime,electronic_chime,2,free,false
+env_066,pet_collar_jingle,Pet collar tags jingling while walking,home,quiet,Pet collar jingle,Keys jangling,Wind chimes,Bracelet rattling,metal_jingle,3,free,false
+env_067,screen_door,Screen door closing with spring,home,moderate,Screen door,Gate closing,Mousetrap,Spring releasing,spring_slam,2,free,false
+env_068,dishwasher_end,Dishwasher cycle completion chime,home,quiet,Dishwasher chime,Microwave beep,Oven timer,Dryer buzzer,appliance_chime,2,free,false
+env_069,trash_can_lid,Step-on trash can lid opening,home,quiet,Trash can opening,Pedal pressing,Can popping,Hinge squeaking,pedal_mechanism,3,free,false
+env_070,soap_dispenser,Automatic soap dispenser activating,home,quiet,Soap dispenser,Air freshener spray,Hand sanitizer pump,Spray bottle,pump_mechanism,3,free,false
+env_071,blinds_opening,Window blinds being raised,home,quiet,Blinds raising,Zipper,Chain pulling,Curtain opening,cord_mechanism,3,free,false
+env_072,ironing_steam,Steam iron releasing a burst of steam,home,quiet,Iron steaming,Kettle steaming,Pressure cooker,Radiator hissing,steam_release,3,free,false
+env_073,furniture_scraping,Chair being dragged across floor,home,moderate,Chair scraping,Drawer opening,Door dragging,Mop pushing,friction_scrape,2,free,false
+env_074,smoke_alarm_low_battery,Smoke alarm chirping for low battery,home,quiet,Smoke alarm chirp,Bird chirp,Cricket,Phone notification,single_chirp,2,free,true
+env_075,door_creaking,Old door hinge creaking when opened,home,quiet,Door creaking,Floor creaking,Rocking chair,Stairs creaking,wood_friction,2,free,false
+env_076,wind_through_trees,Wind blowing through tree leaves,outdoor,moderate,Wind in trees,Rain on leaves,Water stream,White noise,broadband_rustle,2,free,false
+env_077,helicopter,Helicopter flying overhead,outdoor,loud,Helicopter,Drone buzzing,Propeller plane,Large fan,rotor_chop,2,free,false
+env_078,cicadas,Cicadas buzzing in summer,outdoor,moderate,Cicadas,Power lines humming,Lawn sprinkler,Electric motor,insect_buzz,3,free,false
+env_079,children_playing,Children laughing and playing at a park,outdoor,moderate,Children playing,Crowd cheering,Birds chirping,TV playing,human_vocal_group,2,free,false
+env_080,sprinkler,Lawn sprinkler rotating and clicking,outdoor,moderate,Sprinkler,Rain falling,Shower running,Water hose,water_pattern,2,free,false
+env_081,gravel_footsteps,Footsteps crunching on gravel path,outdoor,quiet,Gravel footsteps,Leaves crunching,Snow footsteps,Crackling fire,granular_crunch,3,free,false
+env_082,church_bells,Church bells ringing in the distance,outdoor,loud,Church bells,Clock tower chiming,Wind chimes,School bell,bell_resonance,2,free,false
+env_083,jet_airplane,Commercial jet airplane flying overhead,outdoor,loud,Jet airplane,Helicopter,Thunderclap,Rocket,jet_roar,1,free,false
+env_084,wind_chimes,Wind chimes tinkling in a breeze,outdoor,quiet,Wind chimes,Glass clinking,Bells ringing,Keys jangling,metallic_tinkle,2,free,false
+env_085,woodpecker,Woodpecker drumming on a tree,outdoor,moderate,Woodpecker,Hammering,Jackhammer,Knocking,rapid_percussion,3,free,false
+env_086,creek_flowing,Small creek flowing over rocks,outdoor,quiet,Creek flowing,Rain gutter,Fountain,Faucet running,continuous_water,2,free,false
+env_087,geese_honking,Flock of geese honking overhead,outdoor,moderate,Geese honking,Ducks quacking,Car horn,Trumpet playing,animal_horn,2,free,false
+env_088,fireworks,Fireworks exploding in the sky,outdoor,loud,Fireworks,Thunder,Gunshot,Car backfire,explosive_pop,2,free,false
+env_089,skateboard,Skateboard rolling on pavement,outdoor,moderate,Skateboard,Rolling suitcase,Shopping cart,Roller skates,wheeled_rolling,3,free,false
+env_090,leaf_blower,Gas leaf blower in a yard,outdoor,loud,Leaf blower,Vacuum cleaner,Hair dryer,Jet engine,air_motor,2,free,false
+env_091,chainsaw,Chainsaw cutting wood,outdoor,loud,Chainsaw,Motorcycle revving,Lawn mower,Circular saw,engine_high_rpm,2,free,false
+env_092,pool_splash,Person jumping into a swimming pool,outdoor,moderate,Pool splash,Water pouring,Waterfall,Belly flop,water_impact,2,free,false
+env_093,ice_cream_truck,Ice cream truck music approaching,outdoor,moderate,Ice cream truck,Music box,Carousel,Phone ringtone,melodic_pattern,1,free,false
+env_094,crow_cawing,Crow cawing repeatedly,outdoor,moderate,Crow cawing,Seagull calling,Parrot squawking,Dog barking,harsh_animal_call,2,free,false
+env_095,garden_hose,Garden hose spraying water,outdoor,moderate,Garden hose,Shower spray,Rain on metal,Pressure washer,water_spray,2,free,false
+env_096,voicemail_tone,Voicemail notification alert tone,communication,quiet,Voicemail alert,Text message,Email notification,App alert,notification_tone,2,free,false
+env_097,fax_machine,Fax machine handshake and transmission,communication,moderate,Fax machine,Modem dialing,Printer scanning,Phone static,electronic_screech,3,free,false
+env_098,intercom_buzz,Apartment intercom buzzer,communication,moderate,Intercom buzz,Doorbell,Timer alarm,Phone ringing,buzzer_tone,2,free,false
+env_099,walkie_talkie,Walkie-talkie squelch and beep,communication,moderate,Walkie-talkie,Radio static,Phone call connecting,Microphone feedback,radio_squelch,3,free,false
+env_100,calendar_alert,Calendar reminder alert sound,communication,quiet,Calendar alert,Text message,Email chime,Alarm clock,notification_chime,2,free,false
+env_101,facetime_ring,FaceTime incoming call ringtone,communication,moderate,FaceTime ring,Phone ringing,Video call ring,Doorbell chime,ringtone_pattern,2,free,false
+env_102,touchscreen_tap,Touchscreen keyboard tap sound,communication,quiet,Touchscreen tap,Tapping on table,Water drip,Clock ticking,light_tap,3,free,false
+env_103,screenshot_sound,Phone screenshot capture sound,communication,quiet,Screenshot sound,Camera shutter,Stapler,Lock clicking,shutter_click,3,free,false
+env_104,bluetooth_pairing,Bluetooth device pairing chime,communication,quiet,Bluetooth chime,Charging sound,Notification ping,Startup tone,connection_chime,3,free,false
+env_105,smartwatch_haptic,Smartwatch notification buzz,communication,quiet,Smartwatch buzz,Phone vibrating,Electric toothbrush,Massage device,vibration_short,3,free,false
+env_106,speakerphone,Speakerphone ringing on table,communication,moderate,Speakerphone ring,Landline ringing,Alarm clock,Doorbell,amplified_ring,2,free,false
+env_107,zoom_waiting,Video meeting waiting room chime,communication,quiet,Zoom waiting chime,Elevator ding,Notification,Door chime,digital_chime,3,free,false
+env_108,hearing_aid_feedback,Hearing aid feedback squeal,communication,moderate,Hearing aid feedback,Microphone feedback,High-pitched whistle,Radio interference,high_frequency_squeal,2,free,false
+env_109,smart_speaker_wake,Smart speaker wake-up acknowledgment tone,communication,quiet,Smart speaker tone,Notification ping,Alert chime,Status beep,activation_tone,3,free,false
+env_110,message_sent,Message sent confirmation whoosh,communication,quiet,Message sent sound,Page turning,Wind gust,Swipe sound,whoosh_tone,3,free,false
+env_111,phone_unlocking,Phone unlock click sound,communication,quiet,Phone unlock,Camera shutter,Light switch,Pen click,digital_click,3,free,false
+env_112,scanner_beep,Barcode scanner beep at checkout,communication,moderate,Scanner beep,Timer beep,Notification chime,Microwave beep,single_beep,2,free,false
+env_113,video_doorbell,Video doorbell ring notification,communication,moderate,Video doorbell,Standard doorbell,Phone ringing,Intercom,electronic_ring,2,free,false
+env_114,podcast_notification,Podcast download complete notification,communication,quiet,Podcast notification,Text message,Email alert,Calendar reminder,app_notification,3,free,false
+env_115,call_ending,Phone call ending beep tone,communication,quiet,Call ending tone,Error beep,Low battery,Notification,disconnect_tone,3,free,false
+env_116,food_processor,Food processor chopping at high speed,appliance,loud,Food processor,Blender,Garbage disposal,Coffee grinder,high_motor_chop,2,free,false
+env_117,pressure_cooker,Pressure cooker releasing steam valve,appliance,moderate,Pressure cooker,Tea kettle,Steam iron,Radiator,steam_release,2,free,false
+env_118,stand_mixer,Stand mixer running on medium speed,appliance,moderate,Stand mixer,Washing machine,Drill,Electric motor,motor_whir,3,free,false
+env_119,coffee_grinder,Electric coffee grinder buzzing,appliance,moderate,Coffee grinder,Pepper mill,Blender,Electric shaver,grinding_motor,2,free,false
+env_120,robot_vacuum,Robot vacuum running and bumping,appliance,moderate,Robot vacuum,Regular vacuum,Remote control car,Floor polisher,motor_movement,3,free,false
+env_121,space_heater,Portable space heater fan running,appliance,moderate,Space heater,Hair dryer,Desk fan,Air conditioner,heated_air_flow,3,free,false
+env_122,dehumidifier,Dehumidifier compressor cycling on,appliance,quiet,Dehumidifier,Refrigerator,Air purifier,Furnace,compressor_hum,3,free,false
+env_123,electric_kettle,Electric kettle heating water to boil,appliance,moderate,Electric kettle,Pot boiling,Coffee maker,Tea kettle,water_heating,2,free,false
+env_124,paper_shredder,Paper shredder destroying documents,appliance,moderate,Paper shredder,Printer,Fax machine,Garbage disposal,mechanical_shred,2,free,false
+env_125,air_purifier,Air purifier fan on medium setting,appliance,quiet,Air purifier,Ceiling fan,Dehumidifier,White noise machine,steady_fan,3,free,false
+env_126,electric_toothbrush,Electric toothbrush buzzing,appliance,quiet,Electric toothbrush,Phone vibrating,Electric shaver,Small motor,vibration_buzz,3,free,false
+env_127,sewing_machine,Sewing machine stitching fabric,appliance,moderate,Sewing machine,Typewriter,Clock mechanism,Woodpecker,rapid_mechanical,3,free,false
+env_128,range_hood,Kitchen range hood fan on high,appliance,loud,Range hood,Bathroom exhaust fan,Air conditioner,Leaf blower,air_motor_loud,2,free,false
+env_129,slow_cooker,Slow cooker lid rattling from steam,appliance,quiet,Slow cooker,Pot simmering,Pressure cooker,Bubbling water,lid_rattle,3,free,false
+env_130,instant_pot_beep,Instant Pot completion beep sequence,appliance,moderate,Instant Pot beep,Microwave beep,Oven timer,Dryer buzzer,appliance_beep,2,free,false
+env_131,fire_alarm_building,Building fire alarm bell ringing,safety,very_loud,Fire alarm bell,School bell,Church bell,Alarm clock,loud_bell,1,free,true
+env_132,weather_siren,Tornado or severe weather siren,safety,very_loud,Weather siren,Air raid siren,Emergency vehicle,Factory whistle,rising_siren,1,free,true
+env_133,security_alarm,Home security system alarm triggered,safety,very_loud,Security alarm,Car alarm,Smoke detector,Fire alarm,multi_tone_alarm,1,free,true
+env_134,crosswalk_signal,Pedestrian crosswalk beeping signal,safety,moderate,Crosswalk signal,Backup beep,Timer beep,Metronome,rhythmic_beep,1,free,true
+env_135,gas_leak_detector,Gas leak detector alarm beeping,safety,loud,Gas leak alarm,Smoke detector,Carbon monoxide alarm,Low battery chirp,alarm_beep,1,free,true
+env_136,pool_whistle,Lifeguard whistle blast,safety,loud,Lifeguard whistle,Referee whistle,Train whistle,Tea kettle whistle,sharp_whistle,1,free,true
+env_137,tsunami_warning,Tsunami warning siren wailing,safety,very_loud,Tsunami warning,Weather siren,Emergency broadcast,Factory horn,wailing_siren,1,free,true
+env_138,elevator_alarm,Elevator emergency alarm bell,safety,loud,Elevator alarm,Fire alarm,Security alarm,Door buzzer,alarm_bell,1,free,true
+env_139,railroad_crossing,Railroad crossing bell dinging,safety,loud,Railroad crossing,Church bell,School bell,Alarm bell,rapid_bell,1,free,true
+env_140,propane_alarm,Propane or RV gas detector alarm,safety,loud,Propane alarm,Smoke detector,Carbon monoxide alarm,Security beep,high_beep_alarm,1,free,true
+env_141,child_safety_alarm,Child pool safety gate alarm,safety,moderate,Child safety alarm,Door chime,Timer beep,Phone alarm,alert_beep,1,free,true
+env_142,medical_alert,Medical alert device alarm button,safety,moderate,Medical alert,Phone alarm,Notification,Timer beep,emergency_beep,1,free,true
+env_143,flood_alarm,Basement flood sensor alarm,safety,moderate,Flood alarm,Smoke detector,Timer beep,Low battery chirp,alarm_tone,1,free,true
+env_144,motion_detector,Motion detector alert chime,safety,quiet,Motion detector chime,Door chime,Notification,Intercom beep,electronic_chime,2,free,true
+env_145,driveway_alert,Driveway motion sensor alert,safety,moderate,Driveway alert,Doorbell,Intercom buzz,Timer beep,alert_chime,2,free,true
+env_146,city_bus,City bus air brakes releasing,transportation,loud,Bus air brakes,Truck brakes,Air compressor,Pneumatic drill,air_release,2,free,false
+env_147,subway_train,Subway train arriving at station,transportation,loud,Subway train,Train passing,Bus pulling in,Escalator,rail_screech,2,free,false
+env_148,bicycle_bell,Bicycle bell ringing on a path,transportation,moderate,Bicycle bell,Shop door bell,Wind chime,Phone notification,small_bell,1,free,false
+env_149,car_turn_signal,Car turn signal clicking inside vehicle,transportation,quiet,Turn signal,Clock ticking,Pen clicking,Metronome,rhythmic_click,2,free,false
+env_150,train_whistle,Passenger train horn at crossing,transportation,loud,Train whistle,Ship horn,Truck horn,Factory whistle,deep_horn,1,free,true

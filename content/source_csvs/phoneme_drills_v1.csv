@@ -199,3 +199,303 @@ drill_eae_017,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,deck,dack,/ɛ/,/æ/,medial
 drill_eae_018,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,wed,wad,/ɛ/,/æ/,medial,/wɛd/,/wɑd/,medium,4,free,W-initial
 drill_eae_019,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,less,lass,/ɛ/,/æ/,medial,/lɛs/,/læs/,medium,4,free,S-final
 drill_eae_020,pack_e_vs_ae,Vowels: /E/ vs /ae/,height,said,sad,/ɛ/,/æ/,medial,/sɛd/,/sæd/,high,3,free,Common contrast
+drill_201,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sip,ship,/s/,/ʃ/,Initial,/sɪp/,/ʃɪp/,1,2,1,Classic CI challenge - spectral peak difference in high frequencies
+drill_202,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sin,shin,/s/,/ʃ/,Initial,/sɪn/,/ʃɪn/,1,2,1,Front vowel context highlights sibilant contrast
+drill_203,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sore,shore,/s/,/ʃ/,Initial,/sɔːr/,/ʃɔːr/,1,2,1,R-colored vowel provides stable context for fricative cue
+drill_204,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,seed,she'd,/s/,/ʃ/,Initial,/siːd/,/ʃiːd/,1,2,1,Long vowel helps isolate fricative difference
+drill_205,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sake,shake,/s/,/ʃ/,Initial,/seɪk/,/ʃeɪk/,1,2,1,High frequency words aid recall
+drill_206,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,seer,sheer,/s/,/ʃ/,Initial,/sɪr/,/ʃɪr/,2,3,2,Less common pair increases cognitive load
+drill_207,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,same,shame,/s/,/ʃ/,Initial,/seɪm/,/ʃeɪm/,1,2,1,Nasal final keeps attention on initial fricative
+drill_208,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sag,shag,/s/,/ʃ/,Initial,/sæɡ/,/ʃæɡ/,2,3,2,Open vowel context
+drill_209,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sack,shack,/s/,/ʃ/,Initial,/sæk/,/ʃæk/,2,2,1,Velar stop final provides clear boundary
+drill_210,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,saw,shaw,/s/,/ʃ/,Initial,/sɔː/,/ʃɔː/,1,2,1,Open syllable lets fricative resonate
+drill_211,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sawn,shawn,/s/,/ʃ/,Initial,/sɔːn/,/ʃɔːn/,2,3,2,Nasal coda adds complexity
+drill_212,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sail,shale,/s/,/ʃ/,Initial,/seɪl/,/ʃeɪl/,2,3,2,Lateral coda with diphthong nucleus
+drill_213,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sank,shank,/s/,/ʃ/,Initial,/sæŋk/,/ʃæŋk/,2,3,2,Velar nasal cluster in coda
+drill_214,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sign,shine,/s/,/ʃ/,Initial,/saɪn/,/ʃaɪn/,1,2,1,Diphthong context with common words
+drill_215,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sick,chic,/s/,/ʃ/,Initial,/sɪk/,/ʃiːk/,1,3,2,Spelling mismatch adds processing challenge
+drill_216,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sight,shite,/s/,/ʃ/,Initial,/saɪt/,/ʃaɪt/,1,3,2,Diphthong with voiceless stop coda
+drill_217,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sob,shop,/s/,/ʃ/,Initial,/sɑb/,/ʃɑp/,1,2,1,Near-minimal pair with open vowel
+drill_218,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sum,shum,/s/,/ʃ/,Initial,/sʌm/,/ʃʌm/,2,3,2,Schwa context tests subtle spectral cue
+drill_219,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sup,shut,/s/,/ʃ/,Initial,/sʌp/,/ʃʌt/,2,3,2,Near-minimal pair with different codas
+drill_220,drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,sort,short,/s/,/ʃ/,Initial,/sɔːrt/,/ʃɔːrt/,1,2,1,Very common words reinforce learning
+drill_221,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,mass,mash,/s/,/ʃ/,Final,/mæs/,/mæʃ/,1,3,2,Final position harder for CI - less spectral energy
+drill_222,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,bass,bash,/s/,/ʃ/,Final,/bæs/,/bæʃ/,2,3,2,Voiced initial helps focus on final contrast
+drill_223,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,mess,mesh,/s/,/ʃ/,Final,/mɛs/,/mɛʃ/,2,3,2,Short front vowel context
+drill_224,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,gas,gash,/s/,/ʃ/,Final,/ɡæs/,/ɡæʃ/,1,3,2,Stop initial isolates final fricative
+drill_225,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,class,clash,/s/,/ʃ/,Final,/klæs/,/klæʃ/,1,3,2,Cluster onset adds naturalistic complexity
+drill_226,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,lease,leash,/s/,/ʃ/,Final,/liːs/,/liːʃ/,2,3,2,Long vowel with final sibilant
+drill_227,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,puss,push,/s/,/ʃ/,Final,/pʊs/,/pʊʃ/,2,4,2,High back vowel masks spectral cues
+drill_228,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,crass,crash,/s/,/ʃ/,Final,/kræs/,/kræʃ/,3,4,3,Cluster onset with low frequency pair
+drill_229,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,lass,lash,/s/,/ʃ/,Final,/læs/,/læʃ/,2,3,2,Lateral initial with open vowel
+drill_230,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,bliss,blitz,/s/,/ʃ/,Final,/blɪs/,/blɪʃ/,2,4,3,Cluster onset with short vowel
+drill_231,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,dose,dosh,/s/,/ʃ/,Final,/doʊs/,/dɒʃ/,2,4,3,Diphthong vs monophthong adds challenge
+drill_232,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,truss,thrush,/s/,/ʃ/,Final,/trʌs/,/θrʌʃ/,3,4,3,Near-minimal pair with cluster variation
+drill_233,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,cross,crosh,/s/,/ʃ/,Final,/krɒs/,/krɒʃ/,2,4,3,Back rounded vowel context
+drill_234,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,boss,bosh,/s/,/ʃ/,Final,/bɒs/,/bɒʃ/,2,3,2,Simple CVC with back vowel
+drill_235,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,hiss,his,/s/,/z/,Final,/hɪs/,/hɪz/,1,3,2,Voicing contrast mixed in for discrimination
+drill_236,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,plus,plush,/s/,/ʃ/,Final,/plʌs/,/plʌʃ/,1,3,2,Cluster onset with schwa vowel
+drill_237,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,fuss,flush,/s/,/ʃ/,Final,/fʌs/,/flʌʃ/,2,4,3,Near-minimal with cluster variation
+drill_238,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,kiss,kitsch,/s/,/ʃ/,Final,/kɪs/,/kɪtʃ/,2,4,3,Sibilant vs affricate tests place resolution
+drill_239,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,purse,perch,/s/,/ʃ/,Final,/pɜːrs/,/pɜːrtʃ/,2,4,3,R-colored vowel with final contrast
+drill_240,drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,miss,mish,/s/,/ʃ/,Final,/mɪs/,/mɪʃ/,1,3,2,Nasal initial with short vowel
+drill_241,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,light,right,/l/,/r/,Initial,/laɪt/,/raɪt/,1,3,2,Critical for CI - formant transition differences
+drill_242,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,long,wrong,/l/,/r/,Initial,/lɔːŋ/,/rɔːŋ/,1,3,2,Very common words reinforce liquid distinction
+drill_243,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lip,rip,/l/,/r/,Initial,/lɪp/,/rɪp/,1,2,1,Short vowel CVC - clear and simple
+drill_244,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lack,rack,/l/,/r/,Initial,/læk/,/ræk/,1,2,1,Open vowel context makes liquid easier to hear
+drill_245,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,led,red,/l/,/r/,Initial,/lɛd/,/rɛd/,1,2,1,High frequency pair for everyday practice
+drill_246,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lane,rain,/l/,/r/,Initial,/leɪn/,/reɪn/,1,2,1,Diphthong context with nasal coda
+drill_247,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,law,raw,/l/,/r/,Initial,/lɔː/,/rɔː/,1,2,1,Open syllable lets liquid resonate fully
+drill_248,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,leaf,reef,/l/,/r/,Initial,/liːf/,/riːf/,1,3,2,Long vowel with voiceless fricative coda
+drill_249,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lace,race,/l/,/r/,Initial,/leɪs/,/reɪs/,1,2,1,Diphthong with sibilant coda
+drill_250,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lime,rhyme,/l/,/r/,Initial,/laɪm/,/raɪm/,1,3,2,Diphthong with nasal coda
+drill_251,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lock,rock,/l/,/r/,Initial,/lɑk/,/rɑk/,1,2,1,Back vowel with velar stop
+drill_252,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,load,road,/l/,/r/,Initial,/loʊd/,/roʊd/,1,2,1,Common words with diphthong
+drill_253,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,loom,room,/l/,/r/,Initial,/luːm/,/ruːm/,1,2,1,Back rounded vowel shows formant shift
+drill_254,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,low,row,/l/,/r/,Initial,/loʊ/,/roʊ/,1,2,1,Simple open syllable minimal pair
+drill_255,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lug,rug,/l/,/r/,Initial,/lʌɡ/,/rʌɡ/,2,2,1,Schwa vowel with voiced stop
+drill_256,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lend,rend,/l/,/r/,Initial,/lɛnd/,/rɛnd/,2,3,2,Nasal cluster coda adds complexity
+drill_257,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,link,rink,/l/,/r/,Initial,/lɪŋk/,/rɪŋk/,2,3,2,Velar nasal cluster coda
+drill_258,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lush,rush,/l/,/r/,Initial,/lʌʃ/,/rʌʃ/,2,3,2,Postalveolar coda with schwa vowel
+drill_259,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lice,rice,/l/,/r/,Initial,/laɪs/,/raɪs/,1,2,1,Diphthong with voiceless sibilant
+drill_260,drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,lot,rot,/l/,/r/,Initial,/lɑt/,/rɑt/,1,2,1,Simple CVC with back vowel
+drill_261,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,file,fire,/l/,/r/,Final,/faɪl/,/faɪr/,1,3,2,Diphthong context - coda liquid hard for CI
+drill_262,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,bowl,bore,/l/,/r/,Final,/boʊl/,/bɔːr/,1,3,2,Back vowel with liquid coda distinction
+drill_263,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,call,car,/l/,/r/,Final,/kɔːl/,/kɑːr/,1,3,2,Very common words - vowel also shifts slightly
+drill_264,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,fail,fair,/l/,/r/,Final,/feɪl/,/fɛr/,1,3,2,Diphthong vs monophthong adds complexity
+drill_265,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,feel,fear,/l/,/r/,Final,/fiːl/,/fɪr/,1,3,2,Long vowel context with fricative onset
+drill_266,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,foal,four,/l/,/r/,Final,/foʊl/,/fɔːr/,2,3,2,Back diphthong with liquid distinction
+drill_267,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,goal,gore,/l/,/r/,Final,/ɡoʊl/,/ɡɔːr/,1,3,2,Velar onset with back vowel
+drill_268,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,heal,hear,/l/,/r/,Final,/hiːl/,/hɪr/,1,3,2,Common words test final liquid perception
+drill_269,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,kneel,near,/l/,/r/,Final,/niːl/,/nɪr/,2,3,2,Nasal onset with long vowel
+drill_270,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,mail,mare,/l/,/r/,Final,/meɪl/,/mɛr/,1,3,2,Nasal onset diphthong pair
+drill_271,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,pail,pair,/l/,/r/,Final,/peɪl/,/pɛr/,1,3,2,Stop onset with diphthong
+drill_272,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,sail,scare,/l/,/r/,Final,/seɪl/,/skɛr/,1,4,3,Near-minimal pair with cluster onset
+drill_273,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,tall,tar,/l/,/r/,Final,/tɔːl/,/tɑːr/,1,3,2,Simple CVC with back vowel
+drill_274,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,tool,tour,/l/,/r/,Final,/tuːl/,/tʊr/,1,3,2,Back rounded vowel context
+drill_275,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,veil,veer,/l/,/r/,Final,/veɪl/,/vɪr/,2,4,3,Fricative onset with different vowels
+drill_276,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,wail,wear,/l/,/r/,Final,/weɪl/,/wɛr/,2,3,2,Glide onset with diphthong shift
+drill_277,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,tile,tire,/l/,/r/,Final,/taɪl/,/taɪr/,1,3,2,Diphthong context - true minimal pair
+drill_278,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,pole,pour,/l/,/r/,Final,/poʊl/,/pɔːr/,1,3,2,Labial onset with back vowel
+drill_279,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,stale,stare,/l/,/r/,Final,/steɪl/,/stɛr/,2,4,3,Cluster onset increases difficulty
+drill_280,drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,while,wire,/l/,/r/,Final,/waɪl/,/waɪr/,1,3,2,Glide onset with diphthong - true minimal pair
+drill_281,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mat,gnat,/m/,/n/,Initial,/mæt/,/næt/,1,2,1,Bilabial vs alveolar - visual cue available
+drill_282,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mow,know,/m/,/n/,Initial,/moʊ/,/noʊ/,1,2,1,Common words with diphthong
+drill_283,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,may,neigh,/m/,/n/,Initial,/meɪ/,/neɪ/,1,2,1,Diphthong open syllable
+drill_284,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mice,nice,/m/,/n/,Initial,/maɪs/,/naɪs/,1,2,1,Diphthong with sibilant coda
+drill_285,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mile,Nile,/m/,/n/,Initial,/maɪl/,/naɪl/,1,3,2,Diphthong with lateral coda
+drill_286,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mine,nine,/m/,/n/,Initial,/maɪn/,/naɪn/,1,2,1,Diphthong with nasal coda reinforces contrast
+drill_287,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mitt,knit,/m/,/n/,Initial,/mɪt/,/nɪt/,1,2,1,Short vowel CVC easy pair
+drill_288,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mop,nod,/m/,/n/,Initial,/mɑp/,/nɑd/,1,2,1,Back vowel near-minimal pair
+drill_289,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mug,nug,/m/,/n/,Initial,/mʌɡ/,/nʌɡ/,2,2,1,Schwa vowel simple CVC
+drill_290,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mud,nud,/m/,/n/,Initial,/mʌd/,/nʌd/,2,2,1,Voiced stop coda with schwa
+drill_291,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mail,nail,/m/,/n/,Initial,/meɪl/,/neɪl/,1,2,1,Common diphthong pair with lateral coda
+drill_292,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mock,knock,/m/,/n/,Initial,/mɑk/,/nɑk/,2,2,1,Silent letter adds reading complexity
+drill_293,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mole,knoll,/m/,/n/,Initial,/moʊl/,/noʊl/,2,3,2,Diphthong with lateral coda
+drill_294,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mood,nude,/m/,/n/,Initial,/muːd/,/nuːd/,1,2,1,Back rounded vowel context
+drill_295,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mare,near,/m/,/n/,Initial,/mɛr/,/nɪr/,1,3,2,R-colored vowel with different nuclei
+drill_296,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,moose,noose,/m/,/n/,Initial,/muːs/,/nuːs/,2,3,2,Back vowel with sibilant coda
+drill_297,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,map,nap,/m/,/n/,Initial,/mæp/,/næp/,1,2,1,Very common words for beginners
+drill_298,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,met,net,/m/,/n/,Initial,/mɛt/,/nɛt/,1,2,1,Short front vowel simple pair
+drill_299,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,make,nape,/m/,/n/,Initial,/meɪk/,/neɪp/,1,3,2,Near-minimal with different codas
+drill_300,drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,mix,nix,/m/,/n/,Initial,/mɪks/,/nɪks/,2,3,2,Cluster coda increases complexity
+drill_301,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,ham,han,/m/,/n/,Final,/hæm/,/hæn/,1,3,2,Final nasal place hard without visual cue
+drill_302,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,beam,bean,/m/,/n/,Final,/biːm/,/biːn/,1,3,2,Long vowel with final nasal - common words
+drill_303,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,came,cane,/m/,/n/,Final,/keɪm/,/keɪn/,1,3,2,Diphthong true minimal pair
+drill_304,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,dime,dine,/m/,/n/,Final,/daɪm/,/daɪn/,1,3,2,Diphthong with clear nasal distinction
+drill_305,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,fame,fane,/m/,/n/,Final,/feɪm/,/feɪn/,2,3,2,Fricative onset with diphthong
+drill_306,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,game,gain,/m/,/n/,Final,/ɡeɪm/,/ɡeɪn/,1,3,2,High frequency pair builds confidence
+drill_307,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,gum,gun,/m/,/n/,Final,/ɡʌm/,/ɡʌn/,1,3,2,Short vowel common words
+drill_308,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,him,hin,/m/,/n/,Final,/hɪm/,/hɪn/,1,3,2,Very common pronoun vs archaic word
+drill_309,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,jam,Jan,/m/,/n/,Final,/dʒæm/,/dʒæn/,1,3,2,Affricate onset with open vowel
+drill_310,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,lamb,land,/m/,/n/,Final,/læm/,/lænd/,1,3,2,Near-minimal - cluster coda on one side
+drill_311,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,lime,line,/m/,/n/,Final,/laɪm/,/laɪn/,1,3,2,Diphthong with lateral onset
+drill_312,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,room,rune,/m/,/n/,Final,/ruːm/,/ruːn/,2,3,2,Back rounded vowel context
+drill_313,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,same,sane,/m/,/n/,Final,/seɪm/,/seɪn/,1,3,2,Common diphthong pair
+drill_314,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,seam,seen,/m/,/n/,Final,/siːm/,/siːn/,1,3,2,Long vowel minimal pair
+drill_315,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,swim,twin,/m/,/n/,Final,/swɪm/,/twɪn/,1,3,2,Near-minimal with cluster onsets
+drill_316,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,team,teen,/m/,/n/,Final,/tiːm/,/tiːn/,1,3,2,Common long vowel pair
+drill_317,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,time,tine,/m/,/n/,Final,/taɪm/,/taɪn/,1,3,2,Diphthong with voiceless stop onset
+drill_318,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,roam,roan,/m/,/n/,Final,/roʊm/,/roʊn/,3,4,3,Less common pair tests true perception
+drill_319,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,some,sun,/m/,/n/,Final,/sʌm/,/sʌn/,1,3,2,Very high frequency words
+drill_320,drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,tram,train,/m/,/n/,Final,/træm/,/treɪn/,2,4,3,Near-minimal with vowel difference
+drill_321,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,ban,van,/b/,/v/,Initial,/bæn/,/væn/,1,3,2,Stop vs fricative - manner distinction critical for CI
+drill_322,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bat,vat,/b/,/v/,Initial,/bæt/,/væt/,1,3,2,Both labial - pure manner contrast
+drill_323,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bent,vent,/b/,/v/,Initial,/bɛnt/,/vɛnt/,1,3,2,Cluster coda with nasal
+drill_324,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bet,vet,/b/,/v/,Initial,/bɛt/,/vɛt/,1,2,1,Common words - good starter pair
+drill_325,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bale,vale,/b/,/v/,Initial,/beɪl/,/veɪl/,2,3,2,Diphthong with lateral coda
+drill_326,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,best,vest,/b/,/v/,Initial,/bɛst/,/vɛst/,1,2,1,Very common words reinforce learning
+drill_327,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bolt,volt,/b/,/v/,Initial,/boʊlt/,/voʊlt/,2,3,2,Diphthong with lateral cluster coda
+drill_328,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bow,vow,/b/,/v/,Initial,/baʊ/,/vaʊ/,1,3,2,Diphthong open syllable
+drill_329,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bine,vine,/b/,/v/,Initial,/baɪn/,/vaɪn/,2,3,2,Diphthong with nasal coda
+drill_330,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,beer,veer,/b/,/v/,Initial,/bɪr/,/vɪr/,1,3,2,R-colored vowel context
+drill_331,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,base,vase,/b/,/v/,Initial,/beɪs/,/veɪs/,1,2,1,Common words with sibilant coda
+drill_332,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bile,vile,/b/,/v/,Initial,/baɪl/,/vaɪl/,3,4,3,Less frequent pair tests fine discrimination
+drill_333,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,berry,very,/b/,/v/,Initial,/bɛri/,/vɛri/,1,2,1,Two-syllable high frequency pair
+drill_334,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bone,vone,/b/,/v/,Initial,/boʊn/,/voʊn/,2,3,2,Diphthong with nasal coda
+drill_335,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bout,vout,/b/,/v/,Initial,/baʊt/,/vaʊt/,2,3,2,Diphthong with voiceless stop coda
+drill_336,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,balm,valve,/b/,/v/,Initial,/bɑːm/,/vælv/,2,4,3,Near-minimal with different vowels and codas
+drill_337,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bore,vore,/b/,/v/,Initial,/bɔːr/,/vɔːr/,2,3,2,R-colored vowel back context
+drill_338,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,broom,vroom,/b/,/v/,Initial,/bruːm/,/vruːm/,2,3,2,Cluster onset tests manner in context
+drill_339,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bus,versus,/b/,/v/,Initial,/bʌs/,/vɜːrsəs/,1,4,3,Length mismatch adds processing challenge
+drill_340,drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,bury,vary,/b/,/v/,Initial,/bɛri/,/vɛri/,1,3,2,Two-syllable pair with identical vowels
+drill_341,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,bit,beat,/ɪ/,/iː/,Medial,/bɪt/,/biːt/,1,2,1,Duration and F1/F2 difference - core CI training
+drill_342,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,fill,feel,/ɪ/,/iː/,Medial,/fɪl/,/fiːl/,1,2,1,Fricative onset with lateral coda
+drill_343,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,grin,green,/ɪ/,/iː/,Medial,/ɡrɪn/,/ɡriːn/,1,2,1,Cluster onset common pair
+drill_344,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,hill,heal,/ɪ/,/iː/,Medial,/hɪl/,/hiːl/,1,2,1,H-onset with lateral coda
+drill_345,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,kin,keen,/ɪ/,/iː/,Medial,/kɪn/,/kiːn/,2,2,1,Velar stop with nasal coda
+drill_346,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,lid,lead,/ɪ/,/iː/,Medial,/lɪd/,/liːd/,1,2,1,Lateral onset high frequency pair
+drill_347,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,mill,meal,/ɪ/,/iː/,Medial,/mɪl/,/miːl/,1,2,1,Nasal onset with lateral coda
+drill_348,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,pill,peel,/ɪ/,/iː/,Medial,/pɪl/,/piːl/,1,2,1,Stop onset common pair
+drill_349,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,rich,reach,/ɪ/,/iː/,Medial,/rɪtʃ/,/riːtʃ/,1,2,1,Liquid onset with affricate coda
+drill_350,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,sin,seen,/ɪ/,/iː/,Medial,/sɪn/,/siːn/,1,2,1,Sibilant onset common words
+drill_351,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,ship,sheep,/ɪ/,/iː/,Medial,/ʃɪp/,/ʃiːp/,1,2,1,Postalveolar onset with stop coda
+drill_352,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,dip,deep,/ɪ/,/iː/,Medial,/dɪp/,/diːp/,1,2,1,Voiced stop onset simple pair
+drill_353,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,gin,jean,/ɪ/,/iː/,Medial,/dʒɪn/,/dʒiːn/,2,3,2,Affricate onset with nasal coda
+drill_354,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,grid,greed,/ɪ/,/iː/,Medial,/ɡrɪd/,/ɡriːd/,2,3,2,Cluster onset adds complexity
+drill_355,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,lip,leap,/ɪ/,/iː/,Medial,/lɪp/,/liːp/,1,2,1,Lateral onset with stop coda
+drill_356,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,pick,peak,/ɪ/,/iː/,Medial,/pɪk/,/piːk/,1,2,1,Voiceless stop frame
+drill_357,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,fist,feast,/ɪ/,/iː/,Medial,/fɪst/,/fiːst/,2,3,2,Cluster coda with fricative onset
+drill_358,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,wick,week,/ɪ/,/iː/,Medial,/wɪk/,/wiːk/,1,2,1,Glide onset with velar stop coda
+drill_359,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,trip,tree,/ɪ/,/iː/,Medial,/trɪp/,/triː/,1,3,2,Near-minimal different syllable structure
+drill_360,drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,wrist,wreath,/ɪ/,/iː/,Medial,/rɪst/,/riːθ/,2,4,3,Different codas increase difficulty
+drill_361,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,full,fool,/ʊ/,/uː/,Medial,/fʊl/,/fuːl/,1,3,2,Duration cue primary for back vowels in CI
+drill_362,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,pull,pool,/ʊ/,/uː/,Medial,/pʊl/,/puːl/,1,3,2,Bilabial stop onset with lateral coda
+drill_363,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,bull,bool,/ʊ/,/uː/,Medial,/bʊl/,/buːl/,2,3,2,Voiced bilabial with lateral coda
+drill_364,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,look,Luke,/ʊ/,/uː/,Medial,/lʊk/,/luːk/,1,3,2,Common word vs proper name
+drill_365,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,book,boo,/ʊ/,/uː/,Medial,/bʊk/,/buː/,1,3,2,Near-minimal with different structure
+drill_366,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,good,gooed,/ʊ/,/uː/,Medial,/ɡʊd/,/ɡuːd/,1,3,2,Common word vs less common form
+drill_367,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,hood,who'd,/ʊ/,/uː/,Medial,/hʊd/,/huːd/,1,3,2,H-onset with voiced stop coda
+drill_368,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,wood,wooed,/ʊ/,/uː/,Medial,/wʊd/,/wuːd/,1,3,2,Glide onset minimal pair
+drill_369,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,soot,suit,/ʊ/,/uː/,Medial,/sʊt/,/suːt/,2,3,2,Sibilant onset common pair
+drill_370,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,cook,coo,/ʊ/,/uː/,Medial,/kʊk/,/kuː/,1,3,2,Near-minimal different coda structure
+drill_371,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,foot,food,/ʊ/,/uː/,Medial,/fʊt/,/fuːd/,1,3,2,Common words - voicing difference in coda adds challenge
+drill_372,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,took,two,/ʊ/,/uː/,Medial,/tʊk/,/tuː/,1,3,2,High frequency near-minimal pair
+drill_373,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,shook,shoot,/ʊ/,/uː/,Medial,/ʃʊk/,/ʃuːt/,1,3,2,Postalveolar onset near-minimal
+drill_374,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,hook,hoop,/ʊ/,/uː/,Medial,/hʊk/,/huːp/,2,3,2,H-onset with different codas
+drill_375,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,nook,noon,/ʊ/,/uː/,Medial,/nʊk/,/nuːn/,2,4,3,Nasal onset with different codas
+drill_376,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,rook,rude,/ʊ/,/uː/,Medial,/rʊk/,/ruːd/,3,4,3,Liquid onset - less common pair
+drill_377,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,brook,brood,/ʊ/,/uː/,Medial,/brʊk/,/bruːd/,3,4,3,Cluster onset adds processing load
+drill_378,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,could,cooed,/ʊ/,/uː/,Medial,/kʊd/,/kuːd/,1,3,2,Very common word vs past tense form
+drill_379,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,push,pooch,/ʊ/,/uː/,Medial,/pʊʃ/,/puːtʃ/,2,4,3,Different codas test vowel focus
+drill_380,drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,bush,boost,/ʊ/,/uː/,Medial,/bʊʃ/,/buːst/,2,4,3,Near-minimal with cluster coda
+drill_381,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,buy,boy,/aɪ/,/ɔɪ/,Medial,/baɪ/,/bɔɪ/,1,3,2,Diphthong onset difference - F2 transition cue
+drill_382,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,tie,toy,/aɪ/,/ɔɪ/,Medial,/taɪ/,/tɔɪ/,1,3,2,Voiceless stop onset common pair
+drill_383,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,file,foil,/aɪ/,/ɔɪ/,Medial,/faɪl/,/fɔɪl/,1,3,2,Fricative onset with lateral coda
+drill_384,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,lied,Lloyd,/aɪ/,/ɔɪ/,Medial,/laɪd/,/lɔɪd/,2,3,2,Lateral onset with voiced stop coda
+drill_385,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,mile,moil,/aɪ/,/ɔɪ/,Medial,/maɪl/,/mɔɪl/,2,4,3,Nasal onset with lateral coda
+drill_386,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,might,moist,/aɪ/,/ɔɪ/,Medial,/maɪt/,/mɔɪst/,1,4,3,Near-minimal with cluster coda
+drill_387,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,line,loin,/aɪ/,/ɔɪ/,Medial,/laɪn/,/lɔɪn/,1,3,2,Lateral onset nasal coda
+drill_388,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,sigh,soy,/aɪ/,/ɔɪ/,Medial,/saɪ/,/sɔɪ/,1,3,2,Sibilant onset open syllable
+drill_389,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,vice,voice,/aɪ/,/ɔɪ/,Medial,/vaɪs/,/vɔɪs/,1,3,2,Fricative onset with sibilant coda
+drill_390,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,bile,boil,/aɪ/,/ɔɪ/,Medial,/baɪl/,/bɔɪl/,2,3,2,Stop onset lateral coda minimal pair
+drill_391,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,jibe,joy,/aɪ/,/ɔɪ/,Medial,/dʒaɪb/,/dʒɔɪ/,2,4,3,Affricate onset near-minimal pair
+drill_392,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,kite,coit,/aɪ/,/ɔɪ/,Medial,/kaɪt/,/kɔɪt/,3,4,3,Velar stop frame with archaic word
+drill_393,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,pint,point,/aɪ/,/ɔɪ/,Medial,/paɪnt/,/pɔɪnt/,1,3,2,Common words with nasal cluster coda
+drill_394,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,height,hoist,/aɪ/,/ɔɪ/,Medial,/haɪt/,/hɔɪst/,1,4,3,H-onset near-minimal with cluster coda
+drill_395,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,right,Roy,/aɪ/,/ɔɪ/,Medial,/raɪt/,/rɔɪ/,1,3,2,Liquid onset high frequency words
+drill_396,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,dine,join,/aɪ/,/ɔɪ/,Medial,/daɪn/,/dʒɔɪn/,1,4,3,Different onsets add complexity
+drill_397,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,nice,noise,/aɪ/,/ɔɪ/,Medial,/naɪs/,/nɔɪz/,1,3,2,Nasal onset with sibilant coda
+drill_398,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,tile,toil,/aɪ/,/ɔɪ/,Medial,/taɪl/,/tɔɪl/,1,3,2,Voiceless stop onset lateral coda
+drill_399,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,rile,roil,/aɪ/,/ɔɪ/,Medial,/raɪl/,/rɔɪl/,3,4,3,Liquid onset and coda - true minimal pair
+drill_400,drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,pike,poi,/aɪ/,/ɔɪ/,Medial,/paɪk/,/pɔɪ/,2,4,3,Near-minimal with different syllable structure
+drill_401,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chip,ship,/tʃ/,/ʃ/,Initial,/tʃɪp/,/ʃɪp/,1,3,2,Stop burst before frication is key CI cue
+drill_402,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chin,shin,/tʃ/,/ʃ/,Initial,/tʃɪn/,/ʃɪn/,1,3,2,Short vowel with nasal coda
+drill_403,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chair,share,/tʃ/,/ʃ/,Initial,/tʃɛr/,/ʃɛr/,1,3,2,Common words with R-colored vowel
+drill_404,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,cheat,sheet,/tʃ/,/ʃ/,Initial,/tʃiːt/,/ʃiːt/,1,3,2,Long vowel with voiceless stop coda
+drill_405,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,cheese,she's,/tʃ/,/ʃ/,Initial,/tʃiːz/,/ʃiːz/,1,3,2,Long vowel with sibilant coda
+drill_406,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chew,shoe,/tʃ/,/ʃ/,Initial,/tʃuː/,/ʃuː/,1,3,2,Back rounded vowel open syllable
+drill_407,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chose,shows,/tʃ/,/ʃ/,Initial,/tʃoʊz/,/ʃoʊz/,1,3,2,Diphthong with sibilant coda
+drill_408,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chop,shop,/tʃ/,/ʃ/,Initial,/tʃɑp/,/ʃɑp/,1,2,1,Open vowel common words
+drill_409,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chuck,shuck,/tʃ/,/ʃ/,Initial,/tʃʌk/,/ʃʌk/,2,3,2,Schwa vowel with velar stop
+drill_410,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chore,shore,/tʃ/,/ʃ/,Initial,/tʃɔːr/,/ʃɔːr/,1,3,2,R-colored vowel context
+drill_411,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chain,Shane,/tʃ/,/ʃ/,Initial,/tʃeɪn/,/ʃeɪn/,1,3,2,Diphthong with nasal coda
+drill_412,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chap,shap,/tʃ/,/ʃ/,Initial,/tʃæp/,/ʃæp/,2,3,2,Open vowel with voiceless stop
+drill_413,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,charm,sham,/tʃ/,/ʃ/,Initial,/tʃɑːrm/,/ʃæm/,1,4,3,Near-minimal with vowel and coda difference
+drill_414,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chalk,shock,/tʃ/,/ʃ/,Initial,/tʃɔːk/,/ʃɑk/,1,3,2,Near-minimal with back vowel
+drill_415,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,change,shange,/tʃ/,/ʃ/,Initial,/tʃeɪndʒ/,/ʃeɪndʒ/,1,4,3,Complex coda with nasal cluster
+drill_416,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,cheer,sheer,/tʃ/,/ʃ/,Initial,/tʃɪr/,/ʃɪr/,1,3,2,R-colored vowel true minimal pair
+drill_417,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chest,shed,/tʃ/,/ʃ/,Initial,/tʃɛst/,/ʃɛd/,1,3,2,Near-minimal with different codas
+drill_418,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,cheek,sheik,/tʃ/,/ʃ/,Initial,/tʃiːk/,/ʃiːk/,2,3,2,Long vowel with velar stop
+drill_419,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,cheap,sheep,/tʃ/,/ʃ/,Initial,/tʃiːp/,/ʃiːp/,1,2,1,High frequency pair for everyday use
+drill_420,drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,chief,sheaf,/tʃ/,/ʃ/,Initial,/tʃiːf/,/ʃiːf/,2,4,3,Long vowel with fricative coda
+drill_421,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,gin,vision,/dʒ/,/ʒ/,Initial,/dʒɪn/,/vɪʒən/,2,4,3,Voiced affricate vs fricative - rare English contrast
+drill_422,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,jar,czar,/dʒ/,/z/,Initial,/dʒɑːr/,/zɑːr/,2,4,3,Affricate vs sibilant tests manner perception
+drill_423,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,badge,beige,/dʒ/,/ʒ/,Final,/bædʒ/,/beɪʒ/,1,4,3,Final position affricate vs fricative
+drill_424,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,age,Asia,/dʒ/,/ʒ/,Final,/eɪdʒ/,/eɪʒə/,1,4,3,Common word vs near-minimal
+drill_425,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,edge,measure,/dʒ/,/ʒ/,Final,/ɛdʒ/,/mɛʒər/,1,4,3,Medial vs final position comparison
+drill_426,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,ridge,rouge,/dʒ/,/ʒ/,Final,/rɪdʒ/,/ruːʒ/,2,4,3,Different vowels add processing load
+drill_427,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,ledge,leisure,/dʒ/,/ʒ/,Final,/lɛdʒ/,/lɛʒər/,2,4,3,Lateral onset with final contrast
+drill_428,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,stage,mirage,/dʒ/,/ʒ/,Final,/steɪdʒ/,/mɪrɑːʒ/,1,5,3,Two-syllable comparison tests attention
+drill_429,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,page,garage,/dʒ/,/ʒ/,Final,/peɪdʒ/,/ɡərɑːʒ/,1,4,3,Common words with final manner contrast
+drill_430,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,huge,rouge,/dʒ/,/ʒ/,Final,/hjuːdʒ/,/ruːʒ/,1,4,3,Different vowels isolate final contrast
+drill_431,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,rage,regime,/dʒ/,/ʒ/,Final,/reɪdʒ/,/rəʒiːm/,2,5,3,Multi-syllable with different stress
+drill_432,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,cage,camouflage,/dʒ/,/ʒ/,Final,/keɪdʒ/,/kæməflɑːʒ/,1,5,3,Length mismatch focuses on final sound
+drill_433,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,George,genre,/dʒ/,/ʒ/,Initial,/dʒɔːrdʒ/,/ʒɑːnrə/,1,4,3,Both have target sound - different position
+drill_434,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,wedge,beige,/dʒ/,/ʒ/,Final,/wɛdʒ/,/beɪʒ/,2,4,3,Different onsets and vowels focus on coda
+drill_435,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,budge,barrage,/dʒ/,/ʒ/,Final,/bʌdʒ/,/bərɑːʒ/,2,5,3,Multi-syllable with stress difference
+drill_436,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,judge,luge,/dʒ/,/ʒ/,Final,/dʒʌdʒ/,/luːʒ/,1,4,3,Common vs less common with same coda position
+drill_437,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,lodge,collage,/dʒ/,/ʒ/,Final,/lɑdʒ/,/kəlɑːʒ/,2,5,3,Multi-syllable French borrowing
+drill_438,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,siege,prestige,/dʒ/,/ʒ/,Final,/siːdʒ/,/prɛstiːʒ/,2,5,3,Both have long vowel before final
+drill_439,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,surge,massage,/dʒ/,/ʒ/,Final,/sɜːrdʒ/,/məsɑːʒ/,2,5,3,R-colored vs open vowel before final
+drill_440,drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,merge,mirage,/dʒ/,/ʒ/,Final,/mɜːrdʒ/,/mɪrɑːʒ/,2,5,3,Same nasal onset different vowel and coda
+drill_441,drill_pack_23,Voicing Clusters: Initial,Cluster,spy,buy,/sp/,/b/,Cluster,/spaɪ/,/baɪ/,1,3,2,Cluster vs singleton tests aspiration cue
+drill_442,drill_pack_23,Voicing Clusters: Initial,Cluster,spin,bin,/sp/,/b/,Cluster,/spɪn/,/bɪn/,1,3,2,Sibilant cluster strips aspiration from stop
+drill_443,drill_pack_23,Voicing Clusters: Initial,Cluster,spit,bit,/sp/,/b/,Cluster,/spɪt/,/bɪt/,1,3,2,Short vowel CVC tests cluster perception
+drill_444,drill_pack_23,Voicing Clusters: Initial,Cluster,spoke,broke,/sp/,/br/,Cluster,/spoʊk/,/broʊk/,1,4,3,Different clusters with diphthong
+drill_445,drill_pack_23,Voicing Clusters: Initial,Cluster,star,tar,/st/,/t/,Cluster,/stɑːr/,/tɑːr/,1,3,2,S-cluster vs singleton - aspiration difference
+drill_446,drill_pack_23,Voicing Clusters: Initial,Cluster,stain,dane,/st/,/d/,Cluster,/steɪn/,/deɪn/,2,3,2,Cluster onset vs voiced singleton
+drill_447,drill_pack_23,Voicing Clusters: Initial,Cluster,steam,dream,/st/,/dr/,Cluster,/stiːm/,/driːm/,1,4,3,Different cluster types with long vowel
+drill_448,drill_pack_23,Voicing Clusters: Initial,Cluster,still,dill,/st/,/d/,Cluster,/stɪl/,/dɪl/,1,3,2,Cluster vs voiced stop with lateral coda
+drill_449,drill_pack_23,Voicing Clusters: Initial,Cluster,stone,done,/st/,/d/,Cluster,/stoʊn/,/dʌn/,1,3,2,Near-minimal with vowel difference
+drill_450,drill_pack_23,Voicing Clusters: Initial,Cluster,stop,drop,/st/,/dr/,Cluster,/stɑp/,/drɑp/,1,4,3,Different clusters - manner and voicing
+drill_451,drill_pack_23,Voicing Clusters: Initial,Cluster,scan,can,/sk/,/k/,Cluster,/skæn/,/kæn/,1,3,2,Velar cluster vs singleton
+drill_452,drill_pack_23,Voicing Clusters: Initial,Cluster,skip,dip,/sk/,/d/,Cluster,/skɪp/,/dɪp/,1,3,2,Velar cluster vs voiced alveolar
+drill_453,drill_pack_23,Voicing Clusters: Initial,Cluster,slab,lab,/sl/,/l/,Cluster,/slæb/,/læb/,1,3,2,S + liquid cluster vs singleton liquid
+drill_454,drill_pack_23,Voicing Clusters: Initial,Cluster,slide,glide,/sl/,/ɡl/,Cluster,/slaɪd/,/ɡlaɪd/,2,4,3,S-liquid vs voiced stop-liquid cluster
+drill_455,drill_pack_23,Voicing Clusters: Initial,Cluster,snap,nap,/sn/,/n/,Cluster,/snæp/,/næp/,1,3,2,S-nasal cluster vs singleton nasal
+drill_456,drill_pack_23,Voicing Clusters: Initial,Cluster,snow,know,/sn/,/n/,Cluster,/snoʊ/,/noʊ/,1,3,2,Common words - diphthong context
+drill_457,drill_pack_23,Voicing Clusters: Initial,Cluster,splash,flash,/spl/,/fl/,Cluster,/splæʃ/,/flæʃ/,2,4,3,Three-element vs two-element cluster
+drill_458,drill_pack_23,Voicing Clusters: Initial,Cluster,spray,pray,/spr/,/pr/,Cluster,/spreɪ/,/preɪ/,1,4,3,S-addition to existing cluster
+drill_459,drill_pack_23,Voicing Clusters: Initial,Cluster,strap,trap,/str/,/tr/,Cluster,/stræp/,/træp/,1,3,2,Three-element vs two-element cluster
+drill_460,drill_pack_23,Voicing Clusters: Initial,Cluster,string,ring,/str/,/r/,Cluster,/strɪŋ/,/rɪŋ/,1,4,3,Three-element cluster vs singleton
+drill_461,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,boat,bow,/t/,/∅/,Final,/boʊt/,/boʊ/,1,3,2,Final stop deletion common in CI perception
+drill_462,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,coat,co,/t/,/∅/,Final,/koʊt/,/koʊ/,1,3,2,Stop coda presence test
+drill_463,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,date,day,/t/,/∅/,Final,/deɪt/,/deɪ/,1,2,1,High frequency near-minimal
+drill_464,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,gate,gay,/t/,/∅/,Final,/ɡeɪt/,/ɡeɪ/,1,3,2,Velar onset with diphthong
+drill_465,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,heat,he,/t/,/∅/,Final,/hiːt/,/hiː/,1,2,1,Simple CVC vs CV comparison
+drill_466,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,late,lay,/t/,/∅/,Final,/leɪt/,/leɪ/,1,2,1,Common words test final stop awareness
+drill_467,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,might,my,/t/,/∅/,Final,/maɪt/,/maɪ/,1,2,1,Diphthong high frequency pair
+drill_468,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,neat,knee,/t/,/∅/,Final,/niːt/,/niː/,1,3,2,Nasal onset long vowel
+drill_469,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,seat,sea,/t/,/∅/,Final,/siːt/,/siː/,1,2,1,Sibilant onset very common pair
+drill_470,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,wait,way,/t/,/∅/,Final,/weɪt/,/weɪ/,1,2,1,Glide onset with diphthong
+drill_471,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,bead,bee,/d/,/∅/,Final,/biːd/,/biː/,1,3,2,Voiced stop deletion test
+drill_472,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,seed,see,/d/,/∅/,Final,/siːd/,/siː/,1,3,2,Voiced final stop presence
+drill_473,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,feed,fee,/d/,/∅/,Final,/fiːd/,/fiː/,1,3,2,Fricative onset with voiced coda
+drill_474,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,bake,bay,/k/,/∅/,Final,/beɪk/,/beɪ/,1,3,2,Velar stop deletion awareness
+drill_475,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,make,may,/k/,/∅/,Final,/meɪk/,/meɪ/,1,2,1,Very common pair tests velar coda
+drill_476,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,lake,lay,/k/,/∅/,Final,/leɪk/,/leɪ/,1,3,2,Lateral onset with velar coda test
+drill_477,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,goat,go,/t/,/∅/,Final,/ɡoʊt/,/ɡoʊ/,1,2,1,Common pair with diphthong
+drill_478,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,night,nigh,/t/,/∅/,Final,/naɪt/,/naɪ/,2,3,2,Less common open syllable word
+drill_479,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,right,rye,/t/,/∅/,Final,/raɪt/,/raɪ/,1,3,2,Liquid onset diphthong pair
+drill_480,drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,sight,sigh,/t/,/∅/,Final,/saɪt/,/saɪ/,1,3,2,Sibilant onset diphthong awareness
+drill_481,drill_pack_25,Mixed Review: Hardest Pairs,Fricative,sigh,shy,/s/,/ʃ/,Initial,/saɪ/,/ʃaɪ/,1,4,3,Diphthong context masks subtle fricative cue
+drill_482,drill_pack_25,Mixed Review: Hardest Pairs,Liquid,play,pray,/l/,/r/,Cluster,/pleɪ/,/preɪ/,1,4,3,Liquid contrast in cluster position
+drill_483,drill_pack_25,Mixed Review: Hardest Pairs,Nasal,clam,clan,/m/,/n/,Final,/klæm/,/klæn/,2,4,3,Cluster onset with final nasal place
+drill_484,drill_pack_25,Mixed Review: Hardest Pairs,Consonant Manner,ban,van,/b/,/v/,Initial,/bæn/,/væn/,1,4,3,Stop vs fricative manner with same place
+drill_485,drill_pack_25,Mixed Review: Hardest Pairs,Vowel Height,full,fool,/ʊ/,/uː/,Medial,/fʊl/,/fuːl/,1,4,3,Back vowel duration distinction
+drill_486,drill_pack_25,Mixed Review: Hardest Pairs,Diphthong,file,foil,/aɪ/,/ɔɪ/,Medial,/faɪl/,/fɔɪl/,1,4,3,Diphthong onset height difference
+drill_487,drill_pack_25,Mixed Review: Hardest Pairs,Affricate,chip,ship,/tʃ/,/ʃ/,Initial,/tʃɪp/,/ʃɪp/,1,4,3,Affricate burst vs pure frication
+drill_488,drill_pack_25,Mixed Review: Hardest Pairs,Consonant Voicing,niece,knees,/s/,/z/,Final,/niːs/,/niːz/,1,4,3,Final voicing with nasal onset
+drill_489,drill_pack_25,Mixed Review: Hardest Pairs,Cluster,strap,trap,/str/,/tr/,Cluster,/stræp/,/træp/,1,4,3,Three vs two element cluster
+drill_490,drill_pack_25,Mixed Review: Hardest Pairs,Consonant Manner,goat,go,/t/,/∅/,Final,/ɡoʊt/,/ɡoʊ/,1,4,3,Final consonant presence detection
+drill_491,drill_pack_25,Mixed Review: Hardest Pairs,Vowel Height,bit,beat,/ɪ/,/iː/,Medial,/bɪt/,/biːt/,1,4,3,Front vowel height with duration cue
+drill_492,drill_pack_25,Mixed Review: Hardest Pairs,Fricative,plus,plush,/s/,/ʃ/,Final,/plʌs/,/plʌʃ/,1,4,3,Cluster onset with final sibilant place
+drill_493,drill_pack_25,Mixed Review: Hardest Pairs,Liquid,while,wire,/l/,/r/,Final,/waɪl/,/waɪr/,1,4,3,Final liquid in diphthong context
+drill_494,drill_pack_25,Mixed Review: Hardest Pairs,Nasal,seam,seen,/m/,/n/,Final,/siːm/,/siːn/,1,4,3,Final nasal place without visual cue
+drill_495,drill_pack_25,Mixed Review: Hardest Pairs,Consonant Voicing,proof,prove,/f/,/v/,Final,/pruːf/,/pruːv/,1,4,3,Final fricative voicing cluster onset
+drill_496,drill_pack_25,Mixed Review: Hardest Pairs,Diphthong,vice,voice,/aɪ/,/ɔɪ/,Medial,/vaɪs/,/vɔɪs/,1,4,3,Fricative frame with diphthong contrast
+drill_497,drill_pack_25,Mixed Review: Hardest Pairs,Affricate,badge,beige,/dʒ/,/ʒ/,Final,/bædʒ/,/beɪʒ/,1,5,3,Voiced affricate vs fricative in final
+drill_498,drill_pack_25,Mixed Review: Hardest Pairs,Cluster,splash,flash,/spl/,/fl/,Cluster,/splæʃ/,/flæʃ/,2,5,3,Three vs two element cluster complex
+drill_499,drill_pack_25,Mixed Review: Hardest Pairs,Consonant Manner,berry,very,/b/,/v/,Initial,/bɛri/,/vɛri/,1,4,3,Two-syllable manner contrast
+drill_500,drill_pack_25,Mixed Review: Hardest Pairs,Vowel Height,brook,brood,/ʊ/,/uː/,Medial,/brʊk/,/bruːd/,3,5,3,Cluster onset back vowel with different coda

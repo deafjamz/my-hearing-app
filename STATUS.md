@@ -1,20 +1,21 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-15
-> **Last Session:** Session 30b — Repo Consolidation (Desktop → Projects, once and for all)
+> **Last Updated:** 2026-02-18
+> **Last Session:** Session 32 — 5 New Features (Drills, Conversations, Sounds, Speed Variants, Email Digest)
 > **Canonical Directory:** `~/Projects/my-hearing-app` (symlinked from `~/Desktop/my-hearing-app`)
-> **Build Status:** ✅ PASSING (5.4s)
+> **Build Status:** ✅ PASSING (4.25s)
 > **Deployment:** Pending push
-> **Tests:** ✅ 31 PASSING (Vitest + jsdom)
+> **Tests:** ✅ 83 PASSING across 7 test files (Vitest + jsdom)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
-> **Data Engine:** Sprint 1 ✅ (per-trial logging) | Sprint 2 ✅ (analytics cards) | Sprint 3 ✅ Phases A-C (phoneme mastery, longitudinal, export) | Phase D planned (weekly email)
+> **Data Engine:** Sprint 1 ✅ | Sprint 2 ✅ | Sprint 3 ✅ Phases A-D (phoneme mastery, longitudinal, export, weekly email)
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
 > **Marketing:** ✅ Strategy doc + 5 skills + landing page live at `/`
-> **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment. Gradients purged (0 remaining).
-> **Design System:** Phase 1 ✅ (Satoshi font, deeper teal, haptics, ring burst) | Phase 2 ✅ (Button/Card primitives, full adoption across 14 files, QuizCard dark-mode fix, brand token purge, SNRMixer dark-mode alignment)
+> **Branding:** ✅ Logo v1 integrated — favicon, PWA icons, nav header, WelcomeScreen, PlacementAssessment
+> **Design System:** Phase 1 ✅ | Phase 2 ✅ (primitives, full adoption)
 > **Legal:** ✅ Privacy Policy + Terms of Service updated (Feb 14, 2026)
-> **Content Pipeline:** Session 30 — CSVs complete (60 stories, 630 sentences, 40 scenarios, 313 dialogue lines). Speed variant scripts + UI ready. Audio generation pending (run scripts).
+> **Content Pipeline:** All content expanded to ×10 targets. Speed variants ✅ (15,278 files). **Blocker:** Scenario audio 767/2,588 (ElevenLabs credits exhausted). Resume: `python3 scripts/generate_scenario_audio.py`
+> **New Activities:** Phoneme Drills ✅ | Conversations ✅ | Sound Awareness ✅ (all with tests)
 
 ---
 
@@ -51,6 +52,127 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 32: Five New Features — Drills, Conversations, Sounds, Speed Variants, Email Digest
+
+### Feature 1: Speed Variants (Verification)
+- Verified 7 audio URLs accessible across `sentences_speed/` and `stories_speed/` in Supabase Storage
+- Frontend UI (speed selector) already built in prior sessions
+- **Status:** ✅ Complete
+
+### Feature 2: Phoneme Drills (New Pages + Tests)
+- **`DrillPackList.tsx`** — Grid of phoneme contrast packs (purple theme, motion animations)
+- **`DrillPackPlayer.tsx`** — Trial-by-trial 2-choice player with ActivityBriefing → trial loop → SessionSummary
+- Fixed React hooks ordering bug: moved `useMemo` before conditional returns
+- Added `sessionPairs.length` to `useMemo` deps to fix stale shuffle on data load
+- Wired into ActivityList.tsx (Target icon), App.tsx routes, ERBER_MAP
+- **Tests:** 17 passing (DrillPackList: 8, DrillPackPlayer: 9)
+
+### Feature 3: Conversations (New Pages + Tests)
+- **`ConversationList.tsx`** — Category grid with conversation counts (pink theme)
+- **`ConversationPlayer.tsx`** — 4-choice keyword identification with prompt text context
+- Wired into ActivityList.tsx (MessageCircle icon), App.tsx routes, ERBER_MAP
+- **Tests:** 17 passing (ConversationList: 7, ConversationPlayer: 10)
+
+### Feature 4: Environmental Sounds (New Pages + Tests)
+- **`EnvironmentalSoundList.tsx`** — Category grid with safety-critical badges (green theme, ShieldAlert icon)
+- **`EnvironmentalSoundPlayer.tsx`** — Multiple-choice with description feedback, no voice selection
+- Safety-critical categories sorted first in list
+- Wired into ActivityList.tsx (AudioLines icon), App.tsx routes, ERBER_MAP
+- **Tests:** 18 passing (EnvironmentalSoundList: 9, EnvironmentalSoundPlayer: 9)
+
+### Feature 5: Weekly Email Digest
+- **SQL:** `add_email_digest_to_profiles.sql` — Boolean column + partial index
+- **SQL:** `add_weekly_digest_cron.sql` — pg_cron schedule (Monday 8am UTC)
+- **Edge Function:** `supabase/functions/send-weekly-digest/index.ts` — Aggregates weekly stats, generates HTML email, sends via Resend API
+- **Settings.tsx:** Added "Notifications" section with "Weekly Summary" toggle (updates Supabase profile)
+- Regulatory-safe language in email: training disclaimer, no medical claims
+- **Status:** ✅ Code complete (deploy when Resend API key + pg_cron configured)
+
+### Cross-Cutting Changes
+| File | Changes |
+|------|---------|
+| `ActivityList.tsx` | +3 activities (Phoneme Drills, Conversations, Sound Awareness) |
+| `App.tsx` | +6 lazy imports, +6 routes (before catch-all) |
+| `useLongitudinalAnalytics.ts` | +3 ERBER_MAP entries (phoneme_drill, conversation, environmental_sound) |
+| `Settings.tsx` | +Notifications section with email digest toggle |
+
+### Test Summary
+- **Before:** 31 tests (1 test file)
+- **After:** 83 tests (7 test files) — +52 new tests
+- All tests green, build clean (4.25s)
+
+### Next Steps
+1. Deploy to production: `git push main`
+2. Run SQL migrations for email digest
+3. Configure Resend API key in Supabase secrets
+4. Enable pg_cron in Supabase dashboard
+5. Resume scenario audio generation when ElevenLabs credits refresh
+
+---
+
+## ✅ Session 31: Content Expansion + Audio Generation + DB Ingestion
+
+### What Was Done
+
+**Phase 1: Fix ×10 Issues**
+- Scenario items: 313 → 320 (added 7 dialogue lines to 5 short scenarios)
+- Minimal pairs: 2,081 → 2,080 (removed 1 duplicate)
+
+**Phase 2: Content Expansion CSVs**
+All content types expanded to meet ×10 divisibility targets:
+
+| Content Type | Before | After | New Rows |
+|-------------|--------|-------|----------|
+| Stories | 60 | 120 | +60 |
+| Story Questions | 240 | 452 | +212 |
+| Sentences | 630 | 1,000 | +370 |
+| Scenarios | 40 | 80 | +40 |
+| Scenario Items | 320 | 640 | +320 |
+| Conversations | 80 | 160 | +80 |
+| Environmental Sounds | 50 | 150 | +100 |
+| Phoneme Drills | 200 | 500 | +300 |
+
+**Phase 3: Audio Generation (ElevenLabs TTS)**
+
+| Content | New Files | Failures | Status |
+|---------|-----------|----------|--------|
+| Sentences (9 voices) | 3,328 | 2 | ✅ Done |
+| Stories (9 voices) | 540 | 0 | ✅ Done |
+| Conversations (9 voices) | 1,440 | 0 | ✅ Done |
+| Environmental Sounds | 100 | 0 | ✅ Done |
+| Phoneme Drills (9 voices) | ~5,400 | 16 | ✅ Done |
+| Scenarios (4 combos) | 223 new | — | ⏳ **767/2,588 total — credits exhausted** |
+
+**Phase 4: Database Ingestion (Supabase)**
+
+| Table | Records | Status |
+|-------|---------|--------|
+| stories | 120 | ✅ Upserted |
+| story_questions | 452 | ✅ Upserted |
+| scenarios | 82 | ✅ Upserted |
+| scenario_items | 647 | ✅ Upserted |
+| stimuli_catalog (sentences) | +996 new | ✅ Inserted |
+| stimuli_catalog (conversations) | 240 | ✅ Inserted |
+| stimuli_catalog (environmental) | 200 | ✅ Inserted |
+| stimuli_catalog (phoneme_drill) | 560 | ✅ Inserted |
+
+### Fixes Applied During Ingestion
+- `scripts/ingest_stories_v2.py`: Updated CSV path (→ stories_v3.csv), added new question types (factual, inferential, vocabulary), added numeric tiers (1, 2, 3), fixed tier validation for mixed types
+- `story_questions_v2.csv`: Fixed 200 story_id references (named format → story_v3_* format), deduplicated 28 overlapping questions
+- `stories_v3.csv`: Fixed 8 internal duplicate titles + 9 DB title conflicts
+
+### Blocker
+- **Scenario audio generation paused at 767/2,588** — ElevenLabs credits exhausted
+- Progress saved in `scenario_audio_progress.json`
+- Resume command: `python3 scripts/generate_scenario_audio.py`
+- Remaining: ~1,821 files across combos 2-4
+
+### Known Minor Issues
+- `audio_assets` table missing `voice_name` column (non-critical — app uses dynamic URL construction)
+- 18 total audio generation failures across all content (sentences: 2, phoneme drills: 16) — 99.8% success rate
 
 ---
 

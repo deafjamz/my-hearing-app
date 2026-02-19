@@ -45,7 +45,7 @@ def get_key_from_env_file(key_name, file_path=".env"):
 SUPABASE_URL = get_key_from_env_file("SUPABASE_URL")
 SUPABASE_KEY = get_key_from_env_file("SUPABASE_SERVICE_ROLE_KEY")
 
-STORIES_CSV = "content/source_csvs/stories_v2.csv"
+STORIES_CSV = "content/source_csvs/stories_v3.csv"
 QUESTIONS_CSV = "content/source_csvs/story_questions_v2.csv"
 
 # Expected schema
@@ -53,8 +53,8 @@ STORY_COLUMNS = ['id', 'title', 'transcript', 'category', 'difficulty_level', 'w
 QUESTION_COLUMNS = ['id', 'story_id', 'question_text', 'question_type', 'answer_options', 'correct_answer', 'difficulty_level', 'phonemic_target']
 
 VALID_CATEGORIES = ['daily_life', 'health_wellness', 'workplace_social', 'travel_adventure', 'creative_whimsical']
-VALID_TIERS = ['free', 'paid', 'Free', 'Paid']
-VALID_QUESTION_TYPES = ['detail', 'inference', 'sequence', 'main_idea']
+VALID_TIERS = ['free', 'paid', 'Free', 'Paid', '1', '2', '3', 1, 2, 3]
+VALID_QUESTION_TYPES = ['detail', 'inference', 'sequence', 'main_idea', 'factual', 'inferential', 'vocabulary']
 
 # =============================================================================
 # VALIDATION
@@ -79,8 +79,9 @@ def validate_stories(df):
     if len(invalid_cats) > 0:
         errors.append(f"Invalid categories: {invalid_cats}")
 
-    # Check tiers
-    invalid_tiers = df[~df['tier'].str.lower().isin([t.lower() for t in VALID_TIERS])]['tier'].unique()
+    # Check tiers (handle both string and numeric tier values)
+    valid_tier_strs = [str(t).lower() for t in VALID_TIERS]
+    invalid_tiers = df[~df['tier'].astype(str).str.lower().isin(valid_tier_strs)]['tier'].unique()
     if len(invalid_tiers) > 0:
         errors.append(f"Invalid tiers: {invalid_tiers}")
 
@@ -146,6 +147,14 @@ def validate_questions(df, story_ids):
 # DATA PROCESSING
 # =============================================================================
 
+def _normalize_tier(tier_value):
+    """Normalize tier to 'Free' or 'Paid' (handles string and numeric formats)."""
+    tier_str = str(tier_value).strip().lower()
+    if tier_str in ('free', '1'):
+        return 'Free'
+    return 'Paid'  # '2', '3', 'paid', 'standard', 'premium' all map to Paid
+
+
 def process_stories(df):
     """Process stories DataFrame for database ingestion.
 
@@ -161,7 +170,7 @@ def process_stories(df):
             'id': row['id'],
             'title': row['title'],
             'transcript': row['transcript'],
-            'tier': row['tier'].capitalize(),  # Normalize to 'Free' or 'Paid'
+            'tier': _normalize_tier(row['tier']),
         }
 
         # Handle phonemic_targets array

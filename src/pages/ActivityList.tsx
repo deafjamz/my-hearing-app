@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronRight, Zap, BookOpen, Coffee, Mic, Headphones, Ear, Volume2, Lock, X } from 'lucide-react';
+import { ChevronRight, Zap, BookOpen, Coffee, Mic, Headphones, Ear, Volume2, Target, MessageCircle, AudioLines, Lock, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { hapticSelection } from '@/lib/haptics';
 import { useUser } from '@/store/UserContext';
@@ -106,6 +106,33 @@ export function ActivityList() {
       icon: Mic,
       color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
       path: '/sentences',
+      requiredTier: 'Standard'
+    },
+    {
+      id: 'phoneme-drills',
+      title: 'Phoneme Drills',
+      description: 'Practice hearing specific sound contrasts.',
+      icon: Target,
+      color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
+      path: '/practice/drills',
+      requiredTier: 'Standard'
+    },
+    {
+      id: 'conversations',
+      title: 'Conversations',
+      description: 'Identify keywords in everyday exchanges.',
+      icon: MessageCircle,
+      color: 'bg-pink-100 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400',
+      path: '/practice/conversations',
+      requiredTier: 'Standard'
+    },
+    {
+      id: 'environmental-sounds',
+      title: 'Sound Awareness',
+      description: 'Identify everyday sounds around you.',
+      icon: AudioLines,
+      color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400',
+      path: '/practice/sounds',
       requiredTier: 'Standard'
     },
     {

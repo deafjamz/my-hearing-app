@@ -2,12 +2,38 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '../store/ThemeContext';
 import { useUser } from '../store/UserContext';
 import { useVoice } from '../store/VoiceContext';
-import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight, EyeOff } from 'lucide-react';
+import { useState } from 'react';
+import { Mic, Moon, Sun, Check, Settings as SettingsIcon, Shield, FileText, ChevronRight, EyeOff, Mail } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
-  const { voice, setVoice, hardMode, setHardMode } = useUser();
+  const { user, voice, setVoice, hardMode, setHardMode } = useUser();
   const { availableVoices } = useVoice();
+  const [emailDigest, setEmailDigest] = useState<boolean>(() => {
+    return localStorage.getItem('emailWeeklyDigest') === 'true';
+  });
+  const [digestSaving, setDigestSaving] = useState(false);
+
+  const toggleEmailDigest = async () => {
+    if (!user || digestSaving) return;
+    const newValue = !emailDigest;
+    setDigestSaving(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ email_weekly_digest: newValue })
+        .eq('id', user.id);
+      if (!error) {
+        setEmailDigest(newValue);
+        localStorage.setItem('emailWeeklyDigest', newValue.toString());
+      }
+    } catch {
+      // Silently fail — user can retry
+    } finally {
+      setDigestSaving(false);
+    }
+  };
 
   return (
     <div className="max-w-lg mx-auto w-full px-6 pt-6 pb-32"> {/* Padding for bottom nav */}
@@ -96,6 +122,30 @@ export function Settings() {
           ))}
         </div>
       </section>
+
+      {/* Notifications */}
+      {user && (
+        <section className="mt-8 mb-8">
+          <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Notifications</h2>
+          <div
+            onClick={toggleEmailDigest}
+            className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm cursor-pointer hover:scale-[1.02] transition-transform duration-200"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                <Mail size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-slate-900 dark:text-white">Weekly Summary</h3>
+                <p className="text-xs text-slate-500 font-medium">Get a training recap every Monday</p>
+              </div>
+            </div>
+            <div className={`w-12 h-7 rounded-full p-1 transition-colors duration-300 ${emailDigest ? 'bg-blue-500' : 'bg-slate-200 dark:bg-slate-700'}`}>
+              <div className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-300 ${emailDigest ? 'translate-x-5' : 'translate-x-0'}`} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Legal */}
       <section className="mt-8">

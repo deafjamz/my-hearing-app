@@ -59,6 +59,12 @@ const ProgramDetail = namedLazy(() => import('@/pages/ProgramDetail'), 'ProgramD
 const SessionPlayer = namedLazy(() => import('@/pages/SessionPlayer'), 'SessionPlayer');
 const CategoryLibrary = namedLazy(() => import('@/pages/CategoryLibrary'), 'CategoryLibrary');
 const CategoryPlayer = namedLazy(() => import('@/pages/CategoryPlayer'), 'CategoryPlayer');
+const DrillPackList = namedLazy(() => import('@/pages/DrillPackList'), 'DrillPackList');
+const DrillPackPlayer = namedLazy(() => import('@/pages/DrillPackPlayer'), 'DrillPackPlayer');
+const ConversationList = namedLazy(() => import('@/pages/ConversationList'), 'ConversationList');
+const ConversationPlayer = namedLazy(() => import('@/pages/ConversationPlayer'), 'ConversationPlayer');
+const EnvironmentalSoundList = namedLazy(() => import('@/pages/EnvironmentalSoundList'), 'EnvironmentalSoundList');
+const EnvironmentalSoundPlayer = namedLazy(() => import('@/pages/EnvironmentalSoundPlayer'), 'EnvironmentalSoundPlayer');
 const PrivacyPolicy = namedLazy(() => import('@/pages/PrivacyPolicy'), 'PrivacyPolicy');
 const TermsOfService = namedLazy(() => import('@/pages/TermsOfService'), 'TermsOfService');
 const ProgressReport = namedLazy(() => import('@/pages/ProgressReport'), 'ProgressReport');
@@ -113,6 +119,30 @@ const productionRoutes = [
   {
     path: '/practice/gross-discrimination',
     element: <S><RequireAuth><GrossDiscrimination /></RequireAuth></S>,
+  },
+  {
+    path: '/practice/drills',
+    element: <S><RequireAuth><DrillPackList /></RequireAuth></S>,
+  },
+  {
+    path: '/practice/drills/:packId',
+    element: <S><RequireAuth><DrillPackPlayer /></RequireAuth></S>,
+  },
+  {
+    path: '/practice/conversations',
+    element: <S><RequireAuth><ConversationList /></RequireAuth></S>,
+  },
+  {
+    path: '/player/conversation/:category',
+    element: <S><RequireAuth><ConversationPlayer /></RequireAuth></S>,
+  },
+  {
+    path: '/practice/sounds',
+    element: <S><RequireAuth><EnvironmentalSoundList /></RequireAuth></S>,
+  },
+  {
+    path: '/player/sound/:category',
+    element: <S><RequireAuth><EnvironmentalSoundPlayer /></RequireAuth></S>,
   },
   {
     path: '/practice/stories',

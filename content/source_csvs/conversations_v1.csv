@@ -79,3 +79,83 @@ conv_med_017,medical,"Where should I apply the cream?","On the affected area twi
 conv_med_018,medical,"Is this medicine safe during pregnancy?","Consult your OB before taking it.",consult your OB,/k/,definitely safe,avoid completely,only in third trimester,3,free
 conv_med_019,medical,"What if I miss a dose?","Take it as soon as you remember.",as soon as you remember,/s/,skip it entirely,double the next dose,wait until tomorrow,2,free
 conv_med_020,medical,"Do I need to fast for blood work?","Yes, no eating for twelve hours.",twelve hours,/t/,eight hours,not necessary,just light snacks,2,free
+conv_081,greetings,"Hi there, how are you doing?","I'm doing great, thanks for asking.",great,/ɡ/,late,good,fine,1,1
+conv_082,greetings,"Good morning! Did you sleep well?","Yes, I slept like a log.",slept,/s/,swept,rested,dozed,1,1
+conv_083,greetings,"Hey, long time no see!","It's been at least three months.",three months,/θ/,three weeks,a while,too long,2,1
+conv_084,greetings,"How's everything going with you?","Things have been pretty hectic lately.",hectic,/k/,frantic,busy,stressful,2,2
+conv_085,greetings,"Welcome back! How was your trip?","It was absolutely fantastic.",fantastic,/f/,dramatic,wonderful,interesting,2,2
+conv_086,greetings,"Nice to see you again, Sharon.","Likewise, it's always a pleasure.",pleasure,/ʒ/,treasure,delight,honor,3,2
+conv_087,greetings,"I don't think we've met before.","No, I'm Charles from accounting.",Charles,/tʃ/,Carlos,the new hire,the manager,3,2
+conv_088,greetings,"Good evening! Are you here for the event?","Yes, I've been looking forward to this for weeks.",for weeks,/f/,for months,all day,quite a bit,3,3
+conv_089,small_talk,"Can you believe how fast this year is going?","I know, it's already the middle of February.",February,/f/,January,springtime,the new year,2,1
+conv_090,small_talk,"Did you catch the game last night?","No, I fell asleep on the couch.",fell asleep,/f/,felt sick,missed it,was out,2,1
+conv_091,small_talk,"Have you tried that new restaurant on Fifth?","Yes, the shrimp pasta was incredible.",shrimp,/ʃ/,crimp,lobster,chicken,3,2
+conv_092,small_talk,"What are you reading these days?","A thriller by Stephen King.",thriller,/θ/,filler,mystery,biography,2,2
+conv_093,small_talk,"Do you have any pets?","We have two cats and a fish tank.",fish tank,/f/,dish rack,aquarium,bird cage,2,1
+conv_094,small_talk,"What did you do over the holiday?","We drove up to the mountains for some fresh air.",fresh air,/f/,brisk walk,good scenery,relaxation,3,2
+conv_095,small_talk,"Have you seen any good shows lately?","There's a fascinating documentary on streaming.",fascinating,/f/,captivating,interesting,entertaining,3,3
+conv_096,small_talk,"How's your garden coming along?","The sunflowers are finally starting to bloom.",sunflowers,/s/,cornflowers,roses,tulips,3,2
+conv_097,directions,"Which way to the train station?","Go straight for two blocks then turn right on Seventh.",Seventh,/s/,Eleventh,the next street,the main road,2,1
+conv_098,directions,"Can you tell me where the library is?","It's across the street from the church on Maple.",church on Maple,/tʃ/,church on Main,the big building,right around here,3,2
+conv_099,directions,"I'm lost. Where is Cherry Lane?","Take your third right after the traffic light.",third right,/θ/,first right,next turn,second left,2,2
+conv_100,directions,"How far is the airport from here?","About thirty-five minutes on the highway.",thirty-five minutes,/θ/,twenty-five minutes,half an hour,depends on traffic,3,2
+conv_101,directions,"Where's the closest gas station?","There's a Shell station about a mile south.",Shell station,/ʃ/,cell station,fuel stop,service center,2,1
+conv_102,directions,"Do I stay on this road?","No, merge onto the freeway at exit fourteen.",exit fourteen,/f/,exit forty,the next ramp,keep going straight,3,2
+conv_103,directions,"Which floor is the dentist on?","The sixth floor, suite six twelve.",sixth floor,/s/,fifth floor,top floor,second floor,2,2
+conv_104,directions,"Is there a shortcut to avoid traffic?","Yes, take Chester Avenue instead of the highway.",Chester Avenue,/tʃ/,Lester Avenue,the side streets,the back road,3,3
+conv_105,shopping,"Do you have this shirt in a medium?","Let me check. We might have one in the shipment.",shipment,/ʃ/,basement,delivery,warehouse,3,2
+conv_106,shopping,"What time do you open on Saturdays?","We open at eight thirty in the morning.",eight thirty,/θ/,eight fifteen,nine o'clock,the usual time,2,1
+conv_107,shopping,"Is there a warranty on this?","Yes, a two-year manufacturer's warranty.",manufacturer's,/f/,distributor's,store,extended,3,3
+conv_108,shopping,"Can I get this gift-wrapped?","Sure, that'll be an extra three fifty.",three fifty,/θ/,four fifty,a small fee,no charge,2,1
+conv_109,shopping,"Where are your fresh vegetables?","In the produce section near the front entrance.",front entrance,/f/,back entrance,by the deli,aisle three,2,2
+conv_110,shopping,"Do you price match other stores?","Yes, bring in their flyer and we'll match it.",flyer,/f/,buyer,ad,coupon,2,2
+conv_111,shopping,"Is this the checkout line?","No, this line is for customer service only.",customer service,/s/,self-checkout,returns,exchanges,2,1
+conv_112,shopping,"Can I use this coupon with the sale?","Sorry, those discounts can't be combined.",combined,/k/,applied,stacked,transferred,3,3
+conv_113,dining,"Do you have a table for four?","Yes, there's one available by the window.",by the window,/w/,by the kitchen,in the corner,near the bar,2,1
+conv_114,dining,"What's today's special?","Grilled salmon with roasted vegetables and rice.",salmon,/s/,walnut,trout,chicken,2,1
+conv_115,dining,"Are there any gluten-free options?","Yes, the chef can prepare the chicken dish without flour.",without flour,/f/,without flavor,no bread,as a substitute,3,2
+conv_116,dining,"How spicy is the Thai curry?","It's fairly mild unless you request extra chili.",extra chili,/tʃ/,extra chilly,more heat,a kick,3,2
+conv_117,dining,"Can we get separate checks?","Of course, I'll split them for you at the end.",split them,/s/,print them,add them up,bring them,2,2
+conv_118,dining,"What do you recommend for dessert?","The chocolate souffle is our most popular choice.",souffle,/s/,parfait,cake,pie,3,3
+conv_119,dining,"Is there a wait for brunch?","About a thirty-minute wait right now.",thirty-minute,/θ/,thirteen-minute,short,long,2,1
+conv_120,dining,"Does this dish contain shellfish?","Yes, it has shrimp and crab in the sauce.",shrimp and crab,/ʃ/,fish and crab,lobster,mussels,3,2
+conv_121,health,"How are you feeling after the procedure?","Still a bit sore but much better than before.",sore,/s/,more,achy,tired,2,1
+conv_122,health,"Did you take your vitamins this morning?","Yes, I took them right after breakfast.",after breakfast,/f/,before breakfast,with lunch,on an empty stomach,2,1
+conv_123,health,"How often should I stretch?","At least three times a week for thirty minutes.",three times,/θ/,two times,daily,once a week,2,2
+conv_124,health,"What exercises help with balance?","Tai chi and gentle stretching are very effective.",stretching,/tʃ/,sketching,yoga,walking,3,2
+conv_125,health,"Should I ice or heat my shoulder?","Use ice for the first forty-eight hours.",forty-eight hours,/f/,twenty-four hours,couple of days,until it feels better,3,2
+conv_126,health,"When is my follow-up visit?","It's scheduled for Thursday the fifteenth.",Thursday the fifteenth,/θ/,Tuesday the thirteenth,next week,in two weeks,3,2
+conv_127,health,"Is it safe to go swimming yet?","Wait until the stitches dissolve completely.",stitches dissolve,/s/,splints come off,wound closes,swelling goes down,3,3
+conv_128,health,"What should I eat to feel more energized?","Focus on whole grains and fresh fruit for sustained energy.",fresh fruit,/f/,less food,vegetables,protein,3,3
+conv_129,weather,"What's the forecast for the weekend?","They're calling for sunshine and temperatures in the seventies.",seventies,/s/,sixties,warm weather,high eighties,2,1
+conv_130,weather,"Do I need an umbrella today?","Yes, there's a chance of showers this afternoon.",showers,/ʃ/,flowers,drizzle,thunderstorms,2,1
+conv_131,weather,"How cold is it supposed to get tonight?","Down to about thirty-three degrees with frost.",thirty-three,/θ/,twenty-three,below freezing,pretty cold,2,2
+conv_132,weather,"Is the heat wave going to continue?","Forecasters say it should break by Thursday.",break by Thursday,/θ/,peak by Tuesday,last all week,cool off soon,3,2
+conv_133,weather,"Was there any damage from the storm?","A few trees fell on Chestnut Street.",Chestnut Street,/tʃ/,Crescent Street,the neighborhood,some houses,3,2
+conv_134,weather,"Should we cancel the outdoor picnic?","Let's wait and check the forecast at noon.",forecast at noon,/f/,forecast by phone,weather report,radar first,3,2
+conv_135,weather,"How much snow did we get last night?","About six inches with more expected this evening.",six inches,/s/,six feet,a dusting,a lot,2,1
+conv_136,weather,"Is it supposed to be this humid?","Yes, the humidity is at ninety-three percent today.",ninety-three percent,/θ/,eighty-three percent,very high,above average,3,3
+conv_137,travel,"When does our flight depart?","The flight leaves at six fifteen from Terminal B.",six fifteen,/s/,seven fifteen,early morning,before dawn,2,1
+conv_138,travel,"Did you remember to pack the charger?","Yes, it's in the front pocket of the suitcase.",front pocket,/f/,back pocket,side pouch,carry-on bag,2,1
+conv_139,travel,"How long is the layover in Chicago?","About three and a half hours at O'Hare.",three and a half,/θ/,two and a half,a long time,enough time,3,2
+conv_140,travel,"Should we book the shuttle or take a taxi?","The shuttle is cheaper but takes forty-five minutes.",forty-five minutes,/f/,twenty-five minutes,much longer,about the same,3,2
+conv_141,travel,"What's the exchange rate right now?","About one thirty-five to the euro.",one thirty-five,/θ/,one forty-five,pretty favorable,about the same,3,3
+conv_142,travel,"Is our hotel near the beach?","Yes, it's just a short walk from the shore.",shore,/ʃ/,store,ocean,boardwalk,2,2
+conv_143,travel,"Do we need a visa for this country?","No, but your passport must be valid for six months.",six months,/s/,three months,at least a year,the whole trip,3,2
+conv_144,travel,"What time is checkout at the hotel?","Checkout is at eleven sharp, but you can request a late one.",eleven sharp,/ʃ/,seven sharp,noon,in the morning,2,2
+conv_145,work,"When is the project deadline?","It's due next Friday the twenty-first.",twenty-first,/θ/,twenty-third,end of the month,next week,2,1
+conv_146,work,"Did you finish the quarterly report?","Yes, I submitted it to Sharon this morning.",Sharon,/ʃ/,Karen,the manager,the director,2,1
+conv_147,work,"What time is the staff meeting?","It starts at three forty-five in Conference Room C.",three forty-five,/θ/,two forty-five,after lunch,this afternoon,2,2
+conv_148,work,"Who's covering for me while I'm out?","Michelle from the Chicago office will fill in.",Michelle,/ʃ/,Rachel,your coworker,the temp,2,2
+conv_149,work,"Has the client responded to our proposal?","They said they'd get back to us by Thursday.",by Thursday,/θ/,by Tuesday,this week,very soon,2,2
+conv_150,work,"Can you send me the spreadsheet with the figures?","Sure, I'll forward it to your work email within the hour.",within the hour,/θ/,by the hour,right away,when I can,3,2
+conv_151,work,"Are we still on schedule for the launch?","We're slightly behind due to a software issue.",software issue,/s/,hardware issue,small delay,minor setback,3,3
+conv_152,work,"What was the outcome of the client pitch?","They chose our firm over three other finalists.",three other finalists,/θ/,two other finalists,the competition,some other firms,4,3
+conv_153,family,"How's your daughter doing in school?","She's thriving, especially in math and science.",thriving,/θ/,driving,excelling,improving,3,2
+conv_154,family,"When is your brother's birthday?","It's on the thirtieth of March.",thirtieth,/θ/,thirteenth,end of the month,sometime in spring,2,1
+conv_155,family,"Are the kids coming for Thanksgiving?","Yes, everyone will be there except my nephew Steven.",nephew Steven,/s/,nephew Stephen,youngest son,cousin,3,2
+conv_156,family,"How old is your granddaughter now?","She just turned four and a half in January.",four and a half,/f/,three and a half,almost five,still little,2,1
+conv_157,family,"Did your son finish his thesis?","Yes, he defended it successfully last Thursday.",last Thursday,/θ/,last Tuesday,recently,a few weeks ago,3,2
+conv_158,family,"Where does your sister live now?","She moved to a place on Birch Street in Philadelphia.",Philadelphia,/f/,Virginia,the East Coast,out of state,3,2
+conv_159,family,"Is your father still teaching?","No, he officially retired in March after thirty-five years.",thirty-five years,/θ/,twenty-five years,a long career,quite some time,3,3
+conv_160,family,"How's your mother feeling these days?","She's been much more cheerful since she joined the church choir.",church choir,/tʃ/,search party,singing group,book club,3,3

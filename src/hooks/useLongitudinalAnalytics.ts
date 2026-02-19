@@ -76,8 +76,11 @@ const ERBER_MAP: Record<string, keyof ErberJourney> = {
   rapid_fire: 'discrimination',
   gross_discrimination: 'discrimination',
   category_practice: 'identification',
+  phoneme_drill: 'identification',
   session_player: 'identification',
   sentence_training: 'comprehension',
+  conversation: 'comprehension',
+  environmental_sound: 'detection',
   story: 'comprehension',
   scenario: 'comprehension',
 };

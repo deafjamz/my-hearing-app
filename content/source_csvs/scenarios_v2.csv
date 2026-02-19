@@ -39,3 +39,43 @@ scn_neighbor_chat,Neighbor Conversation,Chatting with a neighbor outside,2,free,
 scn_gas_station,Gas Station,Paying inside at a gas station,2,standard,errands,speech_shaped_steady
 scn_schedule_appt,Scheduling an Appointment,Calling to schedule a doctor appointment,3,standard,phone,speech_shaped_steady
 scn_package_delivery,Package Delivery,Receiving a delivery at home,2,free,errands,speech_shaped_modulated
+scn_bank_teller,Bank Teller Wire Transfer,Sending a wire transfer at the bank,3,standard,errands,speech_shaped_steady
+scn_post_office_passport,Post Office Passport,Applying for a passport at the post office,3,standard,errands,speech_shaped_steady
+scn_gas_station_repair,Gas Station Car Trouble,Asking for help when your car won't start at a gas station,3,standard,errands,transit_ambient
+scn_car_mechanic,Car Mechanic Estimate,Getting a repair estimate from the mechanic,3,premium,services,speech_shaped_steady
+scn_pet_store_fish,Pet Store Fish Tank,Setting up a fish tank with pet store guidance,2,standard,shopping,speech_shaped_steady
+scn_shoe_store,Shoe Store Fitting,Getting fitted for new running shoes,2,standard,shopping,babble_8talker_cafeteria
+scn_tech_support_printer,Tech Support Printer,Calling tech support about a printer issue,4,premium,phone,speech_shaped_steady
+scn_home_repair,Home Repair Estimate,Getting an estimate from a home repair contractor,3,premium,services,speech_shaped_modulated
+scn_eye_exam_glasses,Eye Exam Glasses Fitting,Choosing new glasses frames after an eye exam,2,standard,medical,medical_office_ambient
+scn_physical_therapy,Physical Therapy Session,Starting a new physical training program,3,standard,medical,medical_office_ambient
+scn_blood_test,Blood Test Lab Visit,Checking in for a blood draw at the lab,3,standard,medical,medical_office_ambient
+scn_hearing_aid_fitting,Hearing Device Fitting,Getting fitted for a new hearing device,3,premium,medical,medical_office_ambient
+scn_nutrition_consult,Nutrition Consultation,Meeting with a nutritionist about dietary goals,3,premium,medical,speech_shaped_modulated
+scn_urgent_care,Urgent Care Visit,Visiting urgent care for a sudden illness,3,standard,medical,medical_office_ambient
+scn_mental_health_intake,Wellness Intake Appointment,Completing an intake form at a wellness office,4,premium,medical,speech_shaped_modulated
+scn_flu_shot,Flu Shot at Pharmacy,Getting a flu shot at the pharmacy counter,2,free,medical,grocery_store_ambient
+scn_job_interview_tech,Technical Job Interview,Interviewing for a technology position,4,premium,professional,speech_shaped_modulated
+scn_team_meeting,Team Meeting Update,Giving a project update at a team meeting,3,standard,professional,babble_8talker_cafeteria
+scn_client_call,Client Phone Call,Discussing a project timeline with a client,4,premium,phone,speech_shaped_steady
+scn_office_tour,New Employee Office Tour,Being shown around the office on your first day,2,free,professional,babble_8talker_cafeteria
+scn_break_room_chat,Break Room Conversation,Chatting with coworkers during a break,2,free,social,babble_8talker_cafeteria
+scn_performance_review,Performance Review Meeting,Discussing annual performance goals with a manager,4,premium,professional,speech_shaped_modulated
+scn_training_session,Workplace Training Session,Attending a new software training session,3,standard,professional,babble_8talker_cafeteria
+scn_coworker_lunch,Coworker Lunch Outing,Having lunch with coworkers at a restaurant,2,standard,dining,restaurant_moderate
+scn_book_club,Book Club Meeting,Discussing a novel at a monthly book club,3,standard,social,babble_8talker_cafeteria
+scn_neighborhood_bbq,Neighborhood Barbecue,Chatting with neighbors at a summer barbecue,2,free,social,babble_8talker_cafeteria
+scn_birthday_party,Birthday Party Conversation,Talking with guests at a birthday celebration,2,free,social,babble_8talker_cafeteria
+scn_volunteer_orientation,Volunteer Orientation,Signing up and learning about volunteer duties,3,standard,social,speech_shaped_modulated
+scn_sports_game,Sports Game Outing,Chatting with a friend at a live sports event,3,standard,entertainment,babble_8talker_cafeteria
+scn_movie_night,Movie Night Planning,Deciding what to watch with friends at home,2,free,social,speech_shaped_modulated
+scn_community_garden,Community Garden Plot,Signing up for a plot at a community garden,2,free,social,speech_shaped_modulated
+scn_dance_class,Dance Class Registration,Signing up for a beginner dance class,2,standard,services,babble_8talker_cafeteria
+scn_hotel_checkin_late,Late Hotel Check-in,Arriving late to check in at a hotel,3,standard,travel,speech_shaped_steady
+scn_car_rental_return,Car Rental Return,Returning a rental car and settling the bill,3,standard,travel,transit_ambient
+scn_train_station,Train Station Tickets,Buying tickets at the train station counter,3,standard,travel,transit_ambient
+scn_border_crossing,Border Crossing Checkpoint,Answering questions at a border checkpoint,4,premium,travel,transit_ambient
+scn_tour_guide,Tour Guide Excursion,Joining a guided walking tour of a city,3,standard,travel,babble_8talker_cafeteria
+scn_cruise_ship,Cruise Ship Embarkation,Boarding a cruise ship and finding your cabin,3,premium,travel,babble_8talker_cafeteria
+scn_bus_tour,Bus Tour Sightseeing,Talking with the guide on a sightseeing bus tour,3,standard,travel,transit_ambient
+scn_roadside_assist_tow,Roadside Tow Truck Arrival,Coordinating with a tow truck driver on the roadside,3,premium,travel,transit_ambient
