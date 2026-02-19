@@ -46,6 +46,7 @@
 ### For Deployment/Ops
 | Doc | Purpose |
 |-----|---------|
+| [SW_DEPLOYMENT_GUIDE.md](./SW_DEPLOYMENT_GUIDE.md) | **Service Worker cache-busting & deploy best practices** |
 | [IOS_DEPLOYMENT.md](./IOS_DEPLOYMENT.md) | iOS build & TestFlight |
 | [ANDROID_DEPLOYMENT.md](./ANDROID_DEPLOYMENT.md) | Android build & Play Store |
 | [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) | Database configuration |

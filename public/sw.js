@@ -1,7 +1,8 @@
-// SoundSteps Service Worker v1.0.0
-// Minimal caching strategy for PWA support
+// SoundSteps Service Worker
+// Cache version is auto-stamped at build time by vite.config.js
+// In dev/fallback, the placeholder stays and acts as a static cache name
 
-const CACHE_NAME = 'soundsteps-v3';
+const CACHE_NAME = 'soundsteps-__BUILD_VERSION__';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
