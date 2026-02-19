@@ -1,10 +1,10 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-18
-> **Last Session:** Session 32 — 5 New Features (Drills, Conversations, Sounds, Speed Variants, Email Digest)
+> **Last Updated:** 2026-02-19
+> **Last Session:** Session 33 — Production Fixes + Database Ingestion
 > **Canonical Directory:** `~/Projects/my-hearing-app` (symlinked from `~/Desktop/my-hearing-app`)
-> **Build Status:** ✅ PASSING (4.25s)
-> **Deployment:** Pending push
+> **Build Status:** ✅ PASSING (4.73s)
+> **Deployment:** ✅ LIVE (commit `3696684`)
 > **Tests:** ✅ 83 PASSING across 7 test files (Vitest + jsdom)
 > **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
 > **Data Engine:** Sprint 1 ✅ | Sprint 2 ✅ | Sprint 3 ✅ Phases A-D (phoneme mastery, longitudinal, export, weekly email)
@@ -15,7 +15,8 @@
 > **Design System:** Phase 1 ✅ | Phase 2 ✅ (primitives, full adoption)
 > **Legal:** ✅ Privacy Policy + Terms of Service updated (Feb 14, 2026)
 > **Content Pipeline:** All content expanded to ×10 targets. Speed variants ✅ (15,278 files). **Blocker:** Scenario audio 767/2,588 (ElevenLabs credits exhausted). Resume: `python3 scripts/generate_scenario_audio.py`
-> **New Activities:** Phoneme Drills ✅ | Conversations ✅ | Sound Awareness ✅ (all with tests)
+> **New Activities:** Phoneme Drills ✅ | Conversations ✅ | Sound Awareness ✅ (all with tests + data ingested)
+> **Database:** `content_expansion_v2.sql` migration ✅ | All 3 ingest scripts ✅ | `audio_assets` linked ✅
 
 ---
 
@@ -52,6 +53,111 @@
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+
+---
+
+## ✅ Session 33: Production Fixes + Database Ingestion + Schema Alignment
+
+### Production Crash Fix (commit `1d1471d`)
+- **Bug:** `SentenceTraining.tsx` crashed with `TypeError: Cannot destructure property 'correct_answer' of 's.clinical_metadata' as it is null`
+- **Root cause:** Some sentences in DB (from Session 31 ingestion) have null `clinical_metadata`
+- **Fix:** Changed `if (currentSentence)` → `if (currentSentence?.clinical_metadata)` on line 52
+- **Impact:** SentenceTraining page was completely broken in production (spinning wheel)
+
+### Story Audio Fix (commit `3696684`)
+- **Bug:** "Music Again" and other stories showed "No audio source provided"
+- **Root cause:** `StoryList.tsx` linked to `/player/${story.id}` → legacy `Player.tsx`, which reads `audio_male_path` (null for v3 stories). The newer `StoryPlayer.tsx` at `/player/story/:id` correctly reads `audio_female_path`
+- **Fix:** Changed StoryList link from `/player/${story.id}` to `/player/story/${story.id}`
+- **File:** `src/pages/StoryList.tsx` (1-line change)
+
+### Scenario Loading Fix (commit `3696684`)
+- **Bug:** ScenarioList stuck on "Loading scenarios..." forever if Supabase query throws
+- **Root cause:** No try/catch around the fetch — if the `await` throws, `setLoading(false)` is never reached
+- **Fix:** Wrapped in try/catch/finally block
+- **File:** `src/pages/ScenarioList.tsx`
+
+### Database Schema Migration
+- **Migration:** `content_expansion_v2.sql` run in Supabase SQL Editor
+- Extends `stimuli_catalog` type constraint: +`conversation`, `environmental_sound`, `phoneme_drill`
+- Extends `user_progress` content_type constraint: +`conversation`, `environmental`
+- Adds columns: `drill_pack_id`, `prompt_text`, `response_text`, `text_alt`, `contrast_phoneme`, `phoneme_position`
+- Adds `speaking_rate` to `audio_assets`
+- Creates 3 database views:
+  - `drill_pack_summary` — aggregates drill packs for UI
+  - `conversation_categories` — groups conversations by category
+  - `environmental_sound_categories` — groups sounds with safety counts
+- Adds indexes for new query patterns
+- Adds RLS policies (public read, service role write)
+
+### Data Ingestion (All Successful)
+
+| Script | Table | Stimuli | Audio Assets | Status |
+|--------|-------|---------|-------------|--------|
+| `ingest_phoneme_drills.py` | `stimuli_catalog` | 500 drill pairs | 9,000 | ✅ |
+| `ingest_conversations.py` | `stimuli_catalog` | 160 pairs | 2,880 | ✅ |
+| `ingest_environmental.py` | `stimuli_catalog` | 150 sounds | 150 | ✅ |
+
+### Ingest Script Fixes (commit `3696684`)
+- **Column mismatch:** Scripts used `voice_name` but production `audio_assets` table has `voice_id`
+- **Constraint mismatch:** Scripts used `upsert` with `on_conflict='stimulus_id,voice_name,storage_path'` — no such unique constraint exists
+- **Fix:** Changed `voice_name` → `voice_id` in all 3 scripts, changed `upsert` → `insert`
+- **Discovery method:** Probed production table columns via Python:
+  ```
+  Actual columns: id, stimuli_id, storage_path, voice_id, verified_rms_db, duration_ms, created_at, speaking_rate, stimulus_id
+  ```
+
+### Type Safety (commit `3696684`)
+- **Created:** `src/types/database.types.ts` — TypeScript interfaces matching Supabase schema
+  - `StimulusCatalog` — stimuli_catalog row type
+  - `DrillPackSummary` — drill_pack_summary view type
+  - `ConversationCategory` — conversation_categories view type
+  - `EnvironmentalSoundCategory` — environmental_sound_categories view type
+- Previously the hooks imported these types but the file didn't exist (Vite transpiles without strict type checking, so build passed)
+
+### Schema Discovery: `audio_assets` Production vs Migration
+
+| Migration Schema (`schema_v5_minimal_elevenlabs.sql`) | Production Reality |
+|---|---|
+| `voice_name TEXT NOT NULL` | `voice_id TEXT` |
+| `voice_gender TEXT` | ❌ Missing |
+| `storage_url TEXT NOT NULL UNIQUE` | ❌ Missing |
+| `elevenlabs_voice_id TEXT` | ❌ Missing |
+| `f0_mean_hz`, `hnr_db`, `stoi_score`, etc. | ❌ Missing |
+| `alignment_data JSONB` | ❌ Missing |
+| `UNIQUE (stimulus_id, voice_name)` | No unique constraint |
+
+**Note:** The production `audio_assets` table is a minimal version. The app works because audio URLs are constructed dynamically via `getAudioUrl()` / `buildWordAudioUrl()` — it doesn't depend on the full schema.
+
+### Commits This Session
+| Hash | Description |
+|------|-------------|
+| `1d1471d` | fix: Guard against null clinical_metadata in SentenceTraining |
+| `3696684` | fix: Story audio routing, scenario loading, and ingest script column names |
+
+### Files Changed
+| File | Change |
+|------|--------|
+| `src/pages/SentenceTraining.tsx` | Null guard on `clinical_metadata` (line 52) |
+| `src/pages/StoryList.tsx` | Route fix: `/player/` → `/player/story/` |
+| `src/pages/ScenarioList.tsx` | try/catch/finally on scenario fetch |
+| `src/types/database.types.ts` | **NEW** — TypeScript types for stimuli_catalog + views |
+| `scripts/ingest_phoneme_drills.py` | `voice_name` → `voice_id`, `upsert` → `insert` |
+| `scripts/ingest_conversations.py` | `voice_name` → `voice_id`, `upsert` → `insert` |
+| `scripts/ingest_environmental.py` | `voice_name` → `voice_id`, `upsert` → `insert` |
+
+### Known Remaining Issues
+1. **Scenario audio incomplete:** 767/2,588 files generated (ElevenLabs credits exhausted). ScenarioList may show scenarios but audio won't play for most.
+2. **audio_assets schema drift:** Production table is minimal vs full ElevenLabs schema in migrations. Non-blocking but should be reconciled eventually.
+3. **Hooks query `stimuli_catalog`:** The data hooks (`useDrillPackData`, `useConversationData`, `useEnvironmentalData`) query fields like `type`, `tags`, `drill_pack_id` — the actual production `stimuli_catalog` uses `content_type` and `clinical_metadata` instead of `type` and `tags`. **The views abstract this correctly if the migration was run**, but the fallback code in the hooks may not match.
+4. **New activities not in Today's Practice:** `useTodaysPractice.ts` doesn't include phoneme_drill, conversation, or environmental_sound activities.
+5. **Recommendations engine:** `useRecommendations.ts` doesn't know about new activity paths.
+
+### Next Steps
+1. **Verify new pages in browser** — navigate to Phoneme Drills, Conversations, Sound Awareness and confirm data loads
+2. **If views return empty:** Check if `stimuli_catalog` column names match what the views expect (`type` vs `content_type`, `tags` vs `clinical_metadata`)
+3. Resume scenario audio generation when ElevenLabs credits refresh
+4. Wire new activities into Today's Practice plan system
+5. Configure Resend API key + pg_cron for weekly email digest
 
 ---
 
