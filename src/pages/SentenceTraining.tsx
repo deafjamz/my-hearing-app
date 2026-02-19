@@ -49,7 +49,7 @@ export function SentenceTraining() {
   const [answers, setAnswers] = useState<string[]>([]);
 
   useEffect(() => {
-    if (currentSentence) {
+    if (currentSentence?.clinical_metadata) {
       const { correct_answer, distractor_1, distractor_2, distractor_3 } = currentSentence.clinical_metadata;
 
       // Use the distractors from database (acoustic foil, semantic foil, generated distractor)
