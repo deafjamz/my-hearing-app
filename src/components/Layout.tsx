@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Headphones, Settings, Activity, User as UserIcon } from 'lucide-react';
+import { Headphones, Settings, Activity, User as UserIcon, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useUser } from '@/store/UserContext';
 import { hapticSelection } from '@/lib/haptics';
+import { AuthModal } from '@/components/auth/AuthModal';
 
 interface LayoutProps {
   className?: string;
@@ -12,7 +14,11 @@ interface LayoutProps {
 export function Layout({ className }: LayoutProps) {
   const location = useLocation();
   const { user, loading } = useUser();
-  const showChrome = user || loading;  // Show nav during loading (avoid flash of empty)
+  const [showAuth, setShowAuth] = useState(false);
+
+  // Show nav on all pages except the landing page (which has its own layout)
+  const isLandingPage = location.pathname === '/';
+  const showChrome = !isLandingPage;
 
   const navItems = [
     { icon: Headphones, label: 'Practice', path: '/practice' },
@@ -29,7 +35,10 @@ export function Layout({ className }: LayoutProps) {
         <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-[120px]" />
       </div>
       
-      {/* Top Bar (Mobile Header) — only for authenticated users */}
+      {/* Auth Modal */}
+      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
+
+      {/* Top Bar (Mobile Header) */}
       {showChrome && (
         <div className="fixed top-0 left-0 right-0 z-40 px-6 py-4 flex justify-between items-center pointer-events-none">
            <Link
@@ -38,16 +47,27 @@ export function Layout({ className }: LayoutProps) {
            >
                <img src="/logo.png" alt="SoundSteps" className="w-8 h-8 rounded-lg" />
            </Link>
-           <Link
-              to="/settings"
-              onClick={() => hapticSelection()}
-              aria-label="Settings"
-              className="pointer-events-auto bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-800 hover:scale-105 transition-all"
-           >
-               <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center">
-                   <UserIcon size={18} />
-               </div>
-           </Link>
+           {user ? (
+             <Link
+                to="/settings"
+                onClick={() => hapticSelection()}
+                aria-label="Settings"
+                className="pointer-events-auto bg-slate-900/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-slate-800 hover:scale-105 transition-all"
+             >
+                 <div className="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center">
+                     <UserIcon size={18} />
+                 </div>
+             </Link>
+           ) : !loading && (
+             <button
+                onClick={() => { hapticSelection(); setShowAuth(true); }}
+                aria-label="Sign In"
+                className="pointer-events-auto bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-sm flex items-center gap-2 transition-all"
+             >
+                 <LogIn size={16} />
+                 Sign In
+             </button>
+           )}
         </div>
       )}
 
