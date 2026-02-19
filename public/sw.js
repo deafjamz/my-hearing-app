@@ -1,7 +1,7 @@
 // SoundSteps Service Worker v1.0.0
 // Minimal caching strategy for PWA support
 
-const CACHE_NAME = 'soundsteps-v2';
+const CACHE_NAME = 'soundsteps-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -52,12 +52,29 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets: Cache-first
+  // Hashed assets (JS/CSS bundles): Network-first to prevent stale chunks after deploy
+  // Vite content-hashes filenames so stale cache = broken app
+  if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || Promise.reject('offline')))
+    );
+    return;
+  }
+
+  // Static assets (images, fonts): Cache-first
   if (
-    url.pathname.endsWith('.js') ||
-    url.pathname.endsWith('.css') ||
     url.pathname.endsWith('.png') ||
-    url.pathname.endsWith('.woff2')
+    url.pathname.endsWith('.woff2') ||
+    url.pathname.endsWith('.ico') ||
+    url.pathname.endsWith('.svg')
   ) {
     event.respondWith(
       caches.match(request).then((cached) => {
