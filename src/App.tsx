@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useRouteError } from 'react-router-dom';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Layout } from '@/components/Layout';
 import { RequireAuth } from '@/components/RequireAuth';
@@ -10,6 +10,55 @@ function PageLoader() {
   return (
     <div className="flex items-center justify-center min-h-[60vh]">
       <div className="w-8 h-8 border-4 border-teal-200 border-t-teal-500 rounded-full animate-spin" />
+    </div>
+  );
+}
+
+// Route-level error fallback — catches chunk load failures inside React Router
+function RouteErrorFallback() {
+  const error = useRouteError() as Error;
+  const msg = error?.message || '';
+  const isChunk =
+    msg.includes('dynamically imported module') ||
+    msg.includes('Failed to fetch') ||
+    msg.includes('Loading chunk');
+
+  if (isChunk) {
+    const key = 'chunk_reload';
+    if (!sessionStorage.getItem(key)) {
+      sessionStorage.setItem(key, '1');
+      window.location.reload();
+      return null;
+    }
+    sessionStorage.removeItem(key);
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 p-6">
+      <div className="max-w-md text-center space-y-4">
+        <h1 className="text-2xl font-bold text-white">
+          {isChunk ? 'App Updated' : 'Something went wrong'}
+        </h1>
+        <p className="text-slate-400">
+          {isChunk
+            ? 'A new version of SoundSteps is available. Please refresh to continue.'
+            : 'The app ran into an unexpected error.'}
+        </p>
+        <div className="flex gap-3 justify-center pt-2">
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-400"
+          >
+            Refresh
+          </button>
+          <button
+            onClick={() => window.location.assign('/')}
+            className="px-4 py-2 bg-slate-800 text-slate-300 rounded-lg font-medium hover:bg-slate-700"
+          >
+            Go Home
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -233,6 +282,7 @@ const devRoutes = import.meta.env.DEV ? [
 const router = createBrowserRouter([
   {
     element: <Layout />,
+    errorElement: <RouteErrorFallback />,
     children: [...productionRoutes, ...devRoutes],
   },
 ]);

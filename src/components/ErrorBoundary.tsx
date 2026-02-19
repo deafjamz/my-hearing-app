@@ -22,22 +22,53 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error('[ErrorBoundary] Caught error:', error, info.componentStack);
+
+    // Auto-reload on stale chunk errors (happens after new deploys)
+    if (this.isChunkError(error)) {
+      const key = 'chunk_reload';
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, '1');
+        window.location.reload();
+        return;
+      }
+      sessionStorage.removeItem(key);
+    }
+  }
+
+  private isChunkError(error: Error): boolean {
+    const msg = error.message || '';
+    return (
+      msg.includes('dynamically imported module') ||
+      msg.includes('Failed to fetch') ||
+      msg.includes('Loading chunk') ||
+      msg.includes('Loading CSS chunk')
+    );
   }
 
   handleRetry = () => {
     this.setState({ hasError: false, error: null });
   };
 
+  handleReload = () => {
+    window.location.reload();
+  };
+
   render() {
     if (this.state.hasError) {
+      const isChunk = this.state.error ? this.isChunkError(this.state.error) : false;
+
       return (
         <div className="min-h-screen flex items-center justify-center bg-slate-950 p-6">
           <div className="max-w-md text-center space-y-4">
-            <h1 className="text-2xl font-bold text-white">Something went wrong</h1>
+            <h1 className="text-2xl font-bold text-white">
+              {isChunk ? 'App Updated' : 'Something went wrong'}
+            </h1>
             <p className="text-slate-400">
-              The app ran into an unexpected error. This has been logged.
+              {isChunk
+                ? 'A new version of SoundSteps is available. Please refresh to continue.'
+                : 'The app ran into an unexpected error. This has been logged.'}
             </p>
-            {this.state.error && (
+            {!isChunk && this.state.error && (
               <pre className="text-left text-xs text-red-400 bg-slate-900 rounded-lg p-4 overflow-auto max-h-32">
                 {this.state.error.message}
               </pre>
@@ -45,10 +76,10 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="flex gap-3 justify-center pt-2">
               <Button
                 size="sm"
-                onClick={this.handleRetry}
+                onClick={isChunk ? this.handleReload : this.handleRetry}
                 className="rounded-lg"
               >
-                Try Again
+                {isChunk ? 'Refresh' : 'Try Again'}
               </Button>
               <Button
                 variant="secondary"
