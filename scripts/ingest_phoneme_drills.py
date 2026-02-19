@@ -155,14 +155,14 @@ def main():
             # Word 1 audio
             audio_records.append({
                 'stimulus_id': record_uuid,
-                'voice_name': voice,
+                'voice_id': voice,
                 'storage_path': f"drills/{voice}/{pack_id}/{csv_id}_{word_1}.mp3",
                 'speaking_rate': 'normal'
             })
             # Word 2 audio
             audio_records.append({
                 'stimulus_id': record_uuid,
-                'voice_name': voice,
+                'voice_id': voice,
                 'storage_path': f"drills/{voice}/{pack_id}/{csv_id}_{word_2}.mp3",
                 'speaking_rate': 'normal'
             })
@@ -173,10 +173,7 @@ def main():
         batch_size = 500
         for i in range(0, len(audio_records), batch_size):
             batch = audio_records[i:i+batch_size]
-            supabase.table('audio_assets').upsert(
-                batch,
-                on_conflict='stimulus_id,voice_name,storage_path'
-            ).execute()
+            supabase.table('audio_assets').insert(batch).execute()
             print(f"   ✅ Batch {i//batch_size + 1}: {len(batch)} records")
     except Exception as e:
         print(f"   ⚠️ Audio assets error: {e}")

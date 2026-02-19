@@ -138,13 +138,13 @@ def main():
             # Create audio asset records (will link if audio exists)
             audio_records.append({
                 'stimulus_id': record_uuid,
-                'voice_name': voice,
+                'voice_id': voice,
                 'storage_path': prompt_path,
                 'speaking_rate': 'normal'
             })
             audio_records.append({
                 'stimulus_id': record_uuid,
-                'voice_name': voice,
+                'voice_id': voice,
                 'storage_path': response_path,
                 'speaking_rate': 'normal'
             })
@@ -152,17 +152,13 @@ def main():
     print(f"   📝 Prepared {len(audio_records)} audio_assets records")
 
     try:
-        # Insert in batches
         batch_size = 500
         for i in range(0, len(audio_records), batch_size):
             batch = audio_records[i:i+batch_size]
-            supabase.table('audio_assets').upsert(
-                batch,
-                on_conflict='stimulus_id,voice_name,storage_path'
-            ).execute()
+            supabase.table('audio_assets').insert(batch).execute()
             print(f"   ✅ Batch {i//batch_size + 1}: {len(batch)} records")
     except Exception as e:
-        print(f"   ⚠️ Audio assets error (may need schema update): {e}")
+        print(f"   ⚠️ Audio assets error: {e}")
 
     print("\n" + "=" * 60)
     print("✅ INGESTION COMPLETE")

@@ -25,7 +25,7 @@ export function StoryList() {
             stories.map((story) => (
               <Link
                 key={story.id}
-                to={`/player/${story.id}`}
+                to={`/player/story/${story.id}`}
                 className="group bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 hover:border-teal-200 dark:hover:border-teal-800"
               >
                 <div className="flex items-start gap-4">

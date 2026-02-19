@@ -142,7 +142,7 @@ def main():
 
         audio_records.append({
             'stimulus_id': record_uuid,
-            'voice_name': 'environmental',  # Special marker for non-voice audio
+            'voice_id': 'environmental',  # Special marker for non-voice audio
             'storage_path': storage_path,
             'speaking_rate': 'normal'
         })
@@ -150,11 +150,11 @@ def main():
     print(f"   📝 Prepared {len(audio_records)} audio_assets records")
 
     try:
-        supabase.table('audio_assets').upsert(
-            audio_records,
-            on_conflict='stimulus_id,voice_name,storage_path'
-        ).execute()
-        print(f"   ✅ Inserted {len(audio_records)} records")
+        batch_size = 500
+        for i in range(0, len(audio_records), batch_size):
+            batch = audio_records[i:i+batch_size]
+            supabase.table('audio_assets').insert(batch).execute()
+            print(f"   ✅ Batch {i//batch_size + 1}: {len(batch)} records")
     except Exception as e:
         print(f"   ⚠️ Audio assets error: {e}")
 

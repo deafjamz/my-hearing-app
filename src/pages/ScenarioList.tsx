@@ -11,18 +11,23 @@ export function ScenarioList() {
 
   useEffect(() => {
     const fetchScenarios = async () => {
-      const { data, error } = await supabase
-        .from('scenarios')
-        .select('id, title, description, difficulty, tier')
-        .order('title')
-        .limit(50);
+      try {
+        const { data, error } = await supabase
+          .from('scenarios')
+          .select('id, title, description, difficulty, tier')
+          .order('title')
+          .limit(50);
 
-      if (error) {
-        console.error("Error fetching scenarios:", error);
-      } else if (data) {
-        setScenarios(data as Scenario[]);
+        if (error) {
+          console.error("Error fetching scenarios:", error);
+        } else if (data) {
+          setScenarios(data as Scenario[]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch scenarios:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchScenarios();
