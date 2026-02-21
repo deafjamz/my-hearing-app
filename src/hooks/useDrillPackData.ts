@@ -35,23 +35,24 @@ interface UseDrillPackDataReturn {
 }
 
 export function useDrillPackData(): UseDrillPackDataReturn {
-  const { selectedVoice } = useVoice();
+  const { currentVoice } = useVoice();
   const [drillPairs, setDrillPairs] = useState<DrillPair[]>([]);
   const [packs, setPacks] = useState<DrillPackSummary[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const getAudioUrl = useCallback((drillId: string, packId: string, word: string): string => {
-    const voiceName = selectedVoice?.name || 'sarah';
-    const path = `drills/${voiceName}/${packId}/${drillId}_${word}.mp3`;
+    const path = `drills/${currentVoice}/${packId}/${drillId}_${word}.mp3`;
     const { data } = supabase.storage.from('audio').getPublicUrl(path);
     return data.publicUrl;
-  }, [selectedVoice]);
+  }, [currentVoice]);
 
   const transformRow = useCallback((row: StimulusCatalog): DrillPair => {
-    const tags = typeof row.tags === 'string' ? JSON.parse(row.tags) : row.tags || {};
+    const meta = typeof row.clinical_metadata === 'string'
+      ? JSON.parse(row.clinical_metadata)
+      : row.clinical_metadata || {};
     const packId = row.drill_pack_id || '';
-    const word1 = row.text;
+    const word1 = row.content_text;
     const word2 = row.text_alt || '';
 
     return {
@@ -62,13 +63,13 @@ export function useDrillPackData(): UseDrillPackDataReturn {
       contrastPhoneme: row.contrast_phoneme || '',
       position: (row.phoneme_position as 'initial' | 'medial' | 'final') || 'initial',
       packId,
-      packName: tags.pack_name || '',
-      contrastType: tags.contrast_type || '',
+      packName: meta.pack_name || '',
+      contrastType: meta.contrast_type || '',
       difficulty: row.difficulty || 2,
       tier: row.tier,
-      ipa1: tags.ipa_1 || '',
-      ipa2: tags.ipa_2 || '',
-      clinicalNote: tags.clinical_note || '',
+      ipa1: meta.ipa_1 || '',
+      ipa2: meta.ipa_2 || '',
+      clinicalNote: meta.clinical_note || '',
       word1AudioUrl: getAudioUrl(row.id, packId, word1),
       word2AudioUrl: getAudioUrl(row.id, packId, word2),
     };
@@ -82,7 +83,7 @@ export function useDrillPackData(): UseDrillPackDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'phoneme_drill')
+        .eq('content_type', 'phoneme_drill')
         .order('drill_pack_id', { ascending: true })
         .order('difficulty', { ascending: true });
 
@@ -105,7 +106,7 @@ export function useDrillPackData(): UseDrillPackDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'phoneme_drill')
+        .eq('content_type', 'phoneme_drill')
         .eq('drill_pack_id', packId)
         .order('difficulty', { ascending: true });
 
@@ -132,8 +133,8 @@ export function useDrillPackData(): UseDrillPackDataReturn {
 
         const { data: fallbackData } = await supabase
           .from('stimuli_catalog')
-          .select('drill_pack_id, target_phoneme, contrast_phoneme, tags, difficulty')
-          .eq('type', 'phoneme_drill');
+          .select('drill_pack_id, target_phoneme, contrast_phoneme, clinical_metadata, difficulty')
+          .eq('content_type', 'phoneme_drill');
 
         if (fallbackData) {
           const packMap = new Map<string, DrillPackSummary>();
@@ -141,13 +142,15 @@ export function useDrillPackData(): UseDrillPackDataReturn {
             const packId = row.drill_pack_id;
             if (!packId) continue;
 
-            const tags = typeof row.tags === 'string' ? JSON.parse(row.tags) : row.tags || {};
+            const meta = typeof row.clinical_metadata === 'string'
+              ? JSON.parse(row.clinical_metadata)
+              : row.clinical_metadata || {};
 
             if (!packMap.has(packId)) {
               packMap.set(packId, {
                 drill_pack_id: packId,
-                pack_name: tags.pack_name || packId,
-                contrast_type: tags.contrast_type || '',
+                pack_name: meta.pack_name || packId,
+                contrast_type: meta.contrast_type || '',
                 target_phoneme: row.target_phoneme || '',
                 contrast_phoneme: row.contrast_phoneme || '',
                 total_pairs: 0,
@@ -185,10 +188,9 @@ export function useDrillPackData(): UseDrillPackDataReturn {
 
   const getPackProgress = useCallback((packId: string): { total: number; completed: number } => {
     const pack = packs.find(p => p.drill_pack_id === packId);
-    // TODO: Integrate with user_progress to get actual completion
     return {
       total: pack?.total_pairs || 0,
-      completed: 0, // Placeholder - implement with user progress
+      completed: 0,
     };
   }, [packs]);
 

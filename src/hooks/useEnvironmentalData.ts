@@ -42,21 +42,23 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
   }, []);
 
   const transformRow = useCallback((row: StimulusCatalog): EnvironmentalSound => {
-    const tags = typeof row.tags === 'string' ? JSON.parse(row.tags) : row.tags || {};
+    const meta = typeof row.clinical_metadata === 'string'
+      ? JSON.parse(row.clinical_metadata)
+      : row.clinical_metadata || {};
 
     return {
       id: row.id,
-      name: tags.name || row.text,
-      description: tags.description || '',
-      correctAnswer: row.text,
-      category: tags.category || 'general',
-      intensity: tags.intensity || 'moderate',
+      name: meta.name || row.content_text,
+      description: meta.description || '',
+      correctAnswer: row.content_text,
+      category: meta.category || 'general',
+      intensity: meta.intensity || 'moderate',
       difficulty: row.difficulty || 1,
       tier: row.tier,
-      foils: tags.foils || [],
-      acousticSimilarity: tags.acoustic_similarity || '',
-      safetyCritical: tags.safety_critical || false,
-      audioUrl: getAudioUrl(row.id, tags.category || 'general'),
+      foils: meta.foils || [],
+      acousticSimilarity: meta.acoustic_similarity || '',
+      safetyCritical: meta.safety_critical || false,
+      audioUrl: getAudioUrl(row.id, meta.category || 'general'),
     };
   }, [getAudioUrl]);
 
@@ -68,7 +70,7 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'environmental_sound')
+        .eq('content_type', 'environmental_sound')
         .order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
@@ -90,8 +92,8 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'environmental_sound')
-        .contains('tags', { category })
+        .eq('content_type', 'environmental_sound')
+        .contains('clinical_metadata', { category })
         .order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
@@ -113,8 +115,8 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'environmental_sound')
-        .contains('tags', { safety_critical: true })
+        .eq('content_type', 'environmental_sound')
+        .contains('clinical_metadata', { safety_critical: true })
         .order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
@@ -135,7 +137,41 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
         .select('*');
 
       if (queryError) {
-        console.warn('environmental_sound_categories view not available');
+        // View might not exist — fallback to manual aggregation
+        console.warn('environmental_sound_categories view not available, using fallback');
+
+        const { data: fallbackData } = await supabase
+          .from('stimuli_catalog')
+          .select('clinical_metadata, difficulty')
+          .eq('content_type', 'environmental_sound');
+
+        if (fallbackData) {
+          const catMap = new Map<string, EnvironmentalSoundCategory>();
+          for (const row of fallbackData) {
+            const meta = typeof row.clinical_metadata === 'string'
+              ? JSON.parse(row.clinical_metadata)
+              : row.clinical_metadata || {};
+            const cat = meta.category || 'general';
+
+            if (!catMap.has(cat)) {
+              catMap.set(cat, {
+                category: cat,
+                total_sounds: 0,
+                safety_critical_count: 0,
+                min_difficulty: row.difficulty || 1,
+                max_difficulty: row.difficulty || 1,
+              });
+            }
+
+            const entry = catMap.get(cat)!;
+            entry.total_sounds++;
+            if (meta.safety_critical) entry.safety_critical_count++;
+            entry.min_difficulty = Math.min(entry.min_difficulty, row.difficulty || 1);
+            entry.max_difficulty = Math.max(entry.max_difficulty, row.difficulty || 1);
+          }
+
+          setCategories(Array.from(catMap.values()));
+        }
         return;
       }
 

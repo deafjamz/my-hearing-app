@@ -31,34 +31,35 @@ interface UseConversationDataReturn {
 }
 
 export function useConversationData(): UseConversationDataReturn {
-  const { selectedVoice } = useVoice();
+  const { currentVoice } = useVoice();
   const [conversations, setConversations] = useState<ConversationPair[]>([]);
   const [categories, setCategories] = useState<ConversationCategory[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const getAudioUrl = useCallback((conversationId: string, type: 'prompt' | 'response'): string => {
-    const voiceName = selectedVoice?.name || 'sarah';
-    const path = `conversations/${voiceName}/${conversationId}_${type}.mp3`;
+    const path = `conversations/${currentVoice}/${conversationId}_${type}.mp3`;
     const { data } = supabase.storage.from('audio').getPublicUrl(path);
     return data.publicUrl;
-  }, [selectedVoice]);
+  }, [currentVoice]);
 
   const transformRow = useCallback((row: StimulusCatalog): ConversationPair => {
-    const tags = typeof row.tags === 'string' ? JSON.parse(row.tags) : row.tags || {};
+    const meta = typeof row.clinical_metadata === 'string'
+      ? JSON.parse(row.clinical_metadata)
+      : row.clinical_metadata || {};
 
     return {
       id: row.id,
-      promptText: row.prompt_text || row.text,
+      promptText: row.prompt_text || row.content_text,
       responseText: row.response_text || '',
-      targetKeyword: tags.target_keyword || '',
+      targetKeyword: meta.target_keyword || '',
       targetPhoneme: row.target_phoneme,
-      category: tags.category || 'general',
+      category: meta.category || 'general',
       difficulty: row.difficulty || 2,
       tier: row.tier,
-      acousticFoil: tags.acoustic_foil || '',
-      semanticFoil: tags.semantic_foil || '',
-      plausibleFoil: tags.plausible_foil || '',
+      acousticFoil: meta.acoustic_foil || '',
+      semanticFoil: meta.semantic_foil || '',
+      plausibleFoil: meta.plausible_foil || '',
       promptAudioUrl: getAudioUrl(row.id, 'prompt'),
       responseAudioUrl: getAudioUrl(row.id, 'response'),
     };
@@ -72,7 +73,7 @@ export function useConversationData(): UseConversationDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'conversation')
+        .eq('content_type', 'conversation')
         .order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
@@ -94,8 +95,8 @@ export function useConversationData(): UseConversationDataReturn {
       const { data, error: queryError } = await supabase
         .from('stimuli_catalog')
         .select('*')
-        .eq('type', 'conversation')
-        .contains('tags', { category })
+        .eq('content_type', 'conversation')
+        .contains('clinical_metadata', { category })
         .order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
@@ -116,8 +117,40 @@ export function useConversationData(): UseConversationDataReturn {
         .select('*');
 
       if (queryError) {
-        // View might not exist yet, fallback to manual aggregation
-        console.warn('conversation_categories view not available');
+        // View might not exist — fallback to manual aggregation
+        console.warn('conversation_categories view not available, using fallback');
+
+        const { data: fallbackData } = await supabase
+          .from('stimuli_catalog')
+          .select('clinical_metadata, difficulty, target_phoneme')
+          .eq('content_type', 'conversation');
+
+        if (fallbackData) {
+          const catMap = new Map<string, ConversationCategory>();
+          for (const row of fallbackData) {
+            const meta = typeof row.clinical_metadata === 'string'
+              ? JSON.parse(row.clinical_metadata)
+              : row.clinical_metadata || {};
+            const cat = meta.category || 'general';
+
+            if (!catMap.has(cat)) {
+              catMap.set(cat, {
+                category: cat,
+                total_pairs: 0,
+                min_difficulty: row.difficulty || 1,
+                max_difficulty: row.difficulty || 1,
+                target_phonemes: null,
+              });
+            }
+
+            const entry = catMap.get(cat)!;
+            entry.total_pairs++;
+            entry.min_difficulty = Math.min(entry.min_difficulty, row.difficulty || 1);
+            entry.max_difficulty = Math.max(entry.max_difficulty, row.difficulty || 1);
+          }
+
+          setCategories(Array.from(catMap.values()));
+        }
         return;
       }
 

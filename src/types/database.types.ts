@@ -1,20 +1,23 @@
 /**
  * Types mirroring Supabase stimuli_catalog table and related views.
- * These are used by the data hooks for phoneme drills, conversations,
- * and environmental sounds.
+ *
+ * IMPORTANT: Production column names differ from the original migration:
+ *   - content_type (NOT type)
+ *   - content_text (NOT text)
+ *   - clinical_metadata (NOT tags) — JSONB column
  */
 
 export interface StimulusCatalog {
   id: string;
-  type: 'word' | 'sentence' | 'story' | 'scenario' | 'conversation' | 'environmental_sound' | 'phoneme_drill';
-  text: string;
+  content_type: string;
+  content_text: string;
   text_alt: string | null;
   erber_level: string | null;
   difficulty: number;
   target_phoneme: string | null;
   contrast_phoneme: string | null;
   phoneme_position: string | null;
-  tags: Record<string, unknown> | string;
+  clinical_metadata: Record<string, unknown> | null;
   tier: string;
   drill_pack_id: string | null;
   prompt_text: string | null;
