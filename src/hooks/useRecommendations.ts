@@ -7,7 +7,7 @@ import type { AnalyticsData } from './useAnalytics';
 export interface Recommendation {
   id: string;
   priority: 1 | 2 | 3;
-  type: 'phoneme' | 'erber_level' | 'voice' | 'noise' | 'position' | 'consistency';
+  type: 'phoneme' | 'erber_level' | 'voice' | 'noise' | 'position' | 'consistency' | 'activity_diversity';
   title: string;
   description: string;
   actionPath?: string;
@@ -63,9 +63,9 @@ export function useRecommendations(
     if (longitudinalData?.erberJourney) {
       const journey = longitudinalData.erberJourney;
       const levels = [
-        { key: 'detection', label: 'Sound Detection', next: 'Word Pairs', nextPath: '/practice/rapid-fire', data: journey.detection },
-        { key: 'discrimination', label: 'Word Pairs', next: 'Sentences', nextPath: '/practice/sentences', data: journey.discrimination },
-        { key: 'identification', label: 'Identification', next: 'Sentences', nextPath: '/practice/sentences', data: journey.identification },
+        { key: 'detection', label: 'Sound Detection', next: 'Sound Awareness', nextPath: '/practice/sounds', data: journey.detection },
+        { key: 'discrimination', label: 'Word Pairs', next: 'Sound Contrast Drills', nextPath: '/practice/drills', data: journey.discrimination },
+        { key: 'identification', label: 'Identification', next: 'Conversations', nextPath: '/practice/conversations', data: journey.identification },
       ] as const;
 
       for (const level of levels) {
@@ -158,8 +158,8 @@ export function useRecommendations(
           type: 'position',
           title: `Focus on ${posLabel} sounds`,
           description: `You're at ${weakPosition.accuracy}% for sounds at the ${posLabel} of words — some focused practice here will help!`,
-          actionPath: '/practice/rapid-fire',
-          actionLabel: 'Practice',
+          actionPath: '/practice/drills',
+          actionLabel: 'Practice Drills',
           metric: weakPosition.accuracy,
         });
       }
@@ -177,6 +177,54 @@ export function useRecommendations(
           description: 'A few minutes of daily practice makes a big difference. Jump in today!',
           actionPath: '/',
           actionLabel: 'Start Practicing',
+        });
+      }
+    }
+
+    // 7. Targeted drill recommendation (struggling phoneme pairs)
+    if (phonemeData?.strugglingPairs && phonemeData.strugglingPairs.length >= 2
+        && !recs.some(r => r.id === 'phoneme-weakest')) {
+      recs.push({
+        id: 'drill-targeted',
+        priority: 2,
+        type: 'activity_diversity',
+        title: 'Try Sound Contrast Drills',
+        description: `You have ${phonemeData.strugglingPairs.length} phoneme pairs that need focused practice.`,
+        actionPath: '/practice/drills',
+        actionLabel: 'Open Drills',
+      });
+    }
+
+    // 8. Environmental sound awareness (detection level needs work)
+    if (longitudinalData?.erberJourney) {
+      const detection = longitudinalData.erberJourney.detection;
+      if (detection.trials < 20 && !detection.mastered) {
+        recs.push({
+          id: 'environmental-awareness',
+          priority: 2,
+          type: 'activity_diversity',
+          title: 'Build Sound Awareness',
+          description: 'Identifying everyday sounds strengthens your listening foundation.',
+          actionPath: '/practice/sounds',
+          actionLabel: 'Try Sounds',
+        });
+      }
+    }
+
+    // 9. Conversation readiness (sentences strong but conversations untried)
+    if (analyticsData?.byActivity) {
+      const sentenceActivity = analyticsData.byActivity.find(a => a.activityType === 'sentence_training');
+      const conversationActivity = analyticsData.byActivity.find(a => a.activityType === 'conversation');
+      if (sentenceActivity && sentenceActivity.accuracy >= 80 && sentenceActivity.trials >= 20
+          && (!conversationActivity || conversationActivity.trials < 10)) {
+        recs.push({
+          id: 'conversation-ready',
+          priority: 2,
+          type: 'activity_diversity',
+          title: 'Ready for Conversations',
+          description: `Your sentence accuracy is ${sentenceActivity.accuracy}%. Conversations are the next step!`,
+          actionPath: '/practice/conversations',
+          actionLabel: 'Try Conversations',
         });
       }
     }

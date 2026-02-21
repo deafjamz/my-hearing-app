@@ -184,7 +184,7 @@ describe('ConversationPlayer', () => {
     await waitFor(() => {
       expect(mockLogProgress).toHaveBeenCalledWith(
         expect.objectContaining({
-          contentType: 'sentence',
+          contentType: 'conversation',
           metadata: expect.objectContaining({
             activityType: 'conversation',
             voiceId: 'sarah',

@@ -52,3 +52,8 @@ export interface EnvironmentalSoundCategory {
   min_difficulty: number;
   max_difficulty: number;
 }
+
+export type ContentType =
+  | 'word' | 'sentence' | 'story' | 'scenario'
+  | 'conversation' | 'environmental'
+  | 'phoneme_drill' | 'story_question';

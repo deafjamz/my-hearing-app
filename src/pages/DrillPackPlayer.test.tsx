@@ -206,7 +206,7 @@ describe('DrillPackPlayer', () => {
     await waitFor(() => {
       expect(mockLogProgress).toHaveBeenCalledWith(
         expect.objectContaining({
-          contentType: 'word',
+          contentType: 'phoneme_drill',
           metadata: expect.objectContaining({
             activityType: 'phoneme_drill',
             voiceId: 'sarah',

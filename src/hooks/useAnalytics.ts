@@ -3,16 +3,20 @@ import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
 import { subDays, format } from 'date-fns';
 
-/** Friendly labels for activityType values logged by Sprint 1 */
+/** Friendly labels for activityType values logged in user_progress content_tags */
 export const ACTIVITY_LABELS: Record<string, string> = {
   detection: 'Sound Detection',
   gross_discrimination: 'Word Basics',
   rapid_fire: 'Word Pairs',
+  phoneme_drill: 'Sound Contrast Drills',
   category_practice: 'Category Practice',
   sentence_training: 'Sentences',
+  conversation: 'Conversations',
+  environmental_sound: 'Sound Awareness',
   story: 'Stories',
   scenario: 'Scenarios',
   session_player: 'Program Sessions',
+  placement: 'Listening Check',
 };
 
 export interface ActivityBreakdown {

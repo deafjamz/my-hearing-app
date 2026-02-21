@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useUser } from '../store/UserContext';
+import type { ContentType } from '@/types/database.types';
 
 export interface ProgressPayload {
-  contentType: 'word' | 'story' | 'sentence' | 'scenario' | 'environmental' | 'story_question';
+  contentType: ContentType;
   contentId: string;
   result: 'correct' | 'incorrect' | 'skipped';
   userResponse?: string;
@@ -73,7 +74,7 @@ export function useProgress() {
         correct_response: payload.correctResponse,
         content_tags: payload.metadata,
         response_time_ms: payload.responseTimeMs,
-        listening_condition: payload.metadata?.noiseLevel || 'quiet',
+        listening_condition: payload.metadata?.noiseEnabled ? 'noise' : 'quiet',
         created_at: timestamp
       });
 

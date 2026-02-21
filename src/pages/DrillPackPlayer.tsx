@@ -132,7 +132,7 @@ export function DrillPackPlayer() {
     setFeedback({ isCorrect, correctWord, selectedWord });
 
     logProgress({
-      contentType: 'word',
+      contentType: 'phoneme_drill',
       contentId: pair.id,
       result: isCorrect ? 'correct' : 'incorrect',
       userResponse: selectedWord,
@@ -144,6 +144,8 @@ export function DrillPackPlayer() {
         voiceGender: getVoiceGender(selectedVoice),
         targetPhoneme: pair.targetPhoneme,
         contrastPhoneme: pair.contrastPhoneme,
+        position: pair.position,
+        tier: pair.tier,
         packId: pair.packId,
         trialNumber: currentIndex,
         replayCount,

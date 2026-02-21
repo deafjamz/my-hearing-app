@@ -133,7 +133,7 @@ export function ConversationPlayer() {
     setFeedback({ isCorrect, correctWord, selectedWord });
 
     logProgress({
-      contentType: 'sentence',
+      contentType: 'conversation',
       contentId: currentItem.id,
       result: isCorrect ? 'correct' : 'incorrect',
       userResponse: selectedWord,

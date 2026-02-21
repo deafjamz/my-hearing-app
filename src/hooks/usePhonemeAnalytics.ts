@@ -42,9 +42,10 @@ interface RawRow {
 // --- Hook ---
 
 /**
- * Phoneme-pair mastery analytics — lifetime data from RapidFire trials.
+ * Phoneme-pair mastery analytics — lifetime data from phoneme contrast trials
+ * (Word Pairs + Drill Packs).
  *
- * Queries user_progress where activityType = 'rapid_fire' (no time limit).
+ * Queries user_progress where activityType is 'rapid_fire' or 'phoneme_drill'.
  * Computes per-phoneme-pair accuracy, confusion direction, mastery status,
  * and position breakdowns.
  */
@@ -63,13 +64,12 @@ export function usePhonemeAnalytics() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Single query — lifetime RapidFire data only
-        // Filter on content_tags JSONB: activityType = 'rapid_fire'
+        // Single query — lifetime phoneme contrast data (Word Pairs + Drill Packs)
         const { data: rows, error } = await supabase
           .from('user_progress')
           .select('result, user_response, correct_response, content_tags, created_at')
           .eq('user_id', user.id)
-          .eq('content_tags->>activityType', 'rapid_fire');
+          .or('content_tags->>activityType.eq.rapid_fire,content_tags->>activityType.eq.phoneme_drill');
 
         if (error || !rows || rows.length === 0) {
           setData(null);

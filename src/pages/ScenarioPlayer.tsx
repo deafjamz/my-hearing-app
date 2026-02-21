@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { Play, Pause, FastForward, Rewind, Volume2, VolumeX } from 'lucide-react';
 import { useActivityData } from '@/hooks/useActivityData';
+import { useProgress } from '@/hooks/useProgress';
+import { useUser } from '@/store/UserContext';
+import { getVoiceGender } from '@/lib/voiceGender';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { Scenario } from '@/types/activity';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
@@ -16,6 +19,11 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 export function ScenarioPlayer() {
   const { id } = useParams<{ id: string }>();
   const { data: scenario, loading, error } = useActivityData(id);
+  const { logProgress } = useProgress();
+  const { voice } = useUser();
+  const selectedVoice = voice || 'sarah';
+  const sessionStartRef = useRef<number>(Date.now());
+  const hasLoggedCompletionRef = useRef(false);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [ambienceVolume, setAmbienceVolume] = useState(0.5);
@@ -183,12 +191,29 @@ export function ScenarioPlayer() {
         setCurrentLineIndex(nextIdx);
         playLine(nextIdx);
       } else {
-        // End of scenario
+        // End of scenario — log completion
         isPlayingRef.current = false;
         setIsPlaying(false);
         currentLineIndexRef.current = 0;
         setCurrentLineIndex(0);
         stopAmbience();
+
+        if (!hasLoggedCompletionRef.current) {
+          hasLoggedCompletionRef.current = true;
+          const scn = scenarioRef.current as Scenario | null;
+          logProgress({
+            contentType: 'scenario',
+            contentId: scn?.id || id || 'unknown',
+            result: 'correct',
+            metadata: {
+              activityType: 'scenario',
+              voiceId: selectedVoice,
+              voiceGender: getVoiceGender(selectedVoice),
+              totalLines: items.length,
+              listeningDurationMs: Date.now() - sessionStartRef.current,
+            },
+          });
+        }
       }
     };
 

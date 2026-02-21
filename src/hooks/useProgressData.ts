@@ -116,9 +116,8 @@ export function useProgressData() {
           const date = format(new Date(entry.created_at), 'yyyy-MM-dd');
 
           // SCHEMA-AGNOSTIC: Support both v5 (user_trials) and current (user_progress)
-          // v5 schema: condition_snr INTEGER (dedicated column)
-          // current schema: content_tags.snr (JSONB nested)
-          const snr = entry.condition_snr ?? entry.content_tags?.snr ?? 10;
+          // Only include SNR when the activity actually uses noise mixing
+          const snr: number | null = entry.condition_snr ?? entry.content_tags?.snr ?? null;
 
           // Support both v5 (is_correct BOOLEAN) and current (result TEXT)
           const isCorrect = entry.is_correct ?? (entry.result === 'correct');
@@ -128,7 +127,7 @@ export function useProgressData() {
           }
 
           const dayStats = dailyData.get(date)!;
-          dayStats.snrs.push(snr);
+          if (snr !== null) dayStats.snrs.push(snr);
           dayStats.trials++;
           if (isCorrect) dayStats.correct++;
 
@@ -140,14 +139,23 @@ export function useProgressData() {
         // Convert to chart data
         const chartData: ProgressDataPoint[] = Array.from(dailyData.entries()).map(([date, stats]) => ({
           date,
-          snr: Math.round(stats.snrs.reduce((sum, val) => sum + val, 0) / stats.snrs.length),
+          snr: stats.snrs.length > 0
+            ? Math.round(stats.snrs.reduce((sum, val) => sum + val, 0) / stats.snrs.length)
+            : 0,
           trials: stats.trials,
           accuracy: Math.round((stats.correct / stats.trials) * 100)
         }));
 
-        // Get most recent SNR (schema-agnostic)
-        const latestEntry = progressData[progressData.length - 1];
-        const currentSNR = latestEntry?.condition_snr ?? latestEntry?.content_tags?.snr ?? 10;
+        // Get most recent SNR from an entry that actually has SNR data
+        let currentSNR = 10;
+        for (let i = progressData.length - 1; i >= 0; i--) {
+          const e = progressData[i] as ProgressEntry;
+          const eSNR = e.condition_snr ?? e.content_tags?.snr;
+          if (eSNR != null) {
+            currentSNR = eSNR;
+            break;
+          }
+        }
 
         // Estimate minutes (10 trials ≈ 2-3 minutes)
         const estimatedMinutes = Math.round((totalTrials / 10) * 2.5);

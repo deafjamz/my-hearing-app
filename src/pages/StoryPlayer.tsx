@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useKaraokePlayer } from '@/hooks/useKaraokePlayer';
 import { useProgress } from '@/hooks/useProgress';
+import { useUser } from '@/store/UserContext';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { getStorageUrl, getSpeedVariantPath, type SpeedRate } from '@/lib/audio';
 import { supabase } from '@/lib/supabase';
@@ -216,6 +217,8 @@ export function StoryPlayer() {
   const [score, setScore] = useState(0);
 
   const { logProgress } = useProgress();
+  const { voice } = useUser();
+  const selectedVoice = voice || 'sarah';
 
   // Data Fetching
   useEffect(() => {
@@ -266,7 +269,8 @@ export function StoryPlayer() {
         metadata: {
           activityType: 'story',
           storyId: story!.id,
-          voiceGender: getVoiceGender('sarah'),
+          voiceId: selectedVoice,
+          voiceGender: getVoiceGender(selectedVoice),
           trialNumber: idx,
           questionType: q.question_type,
           phonemicTarget: q.phonemic_target,
