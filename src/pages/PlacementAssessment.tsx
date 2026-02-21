@@ -106,7 +106,13 @@ export function PlacementAssessment() {
 
   // Data hooks
   const { pairs, loading: pairsLoading } = useWordPairs(voice);
-  const { sentences, loading: sentencesLoading, error: sentencesError } = useSentenceData({ limit: 4, voiceId: voice });
+  const { sentences: rawSentences, loading: sentencesLoading, error: sentencesError } = useSentenceData({ limit: 4, voiceId: voice });
+
+  // Filter out sentences with null clinical_metadata (some DB rows lack it)
+  const sentences = useMemo(
+    () => rawSentences.filter(s => s.clinical_metadata?.correct_answer),
+    [rawSentences]
+  );
 
   // Debug: log loading states in dev
   useEffect(() => {
@@ -237,7 +243,7 @@ export function PlacementAssessment() {
       }
     } else if (currentTrial.level === 'comprehension') {
       const sentence = sentences[currentTrial.index];
-      if (sentence) {
+      if (sentence?.clinical_metadata) {
         isCorrect = answer === sentence.clinical_metadata.correct_answer;
       }
     }
@@ -281,7 +287,7 @@ export function PlacementAssessment() {
       correctResponse: currentTrial.level === 'detection'
         ? (detectionHasSound[currentTrial.index] ? 'yes' : 'no')
         : currentTrial.level === 'comprehension'
-          ? sentence?.clinical_metadata.correct_answer
+          ? sentence?.clinical_metadata?.correct_answer
           : pair?.word_1,
       responseTimeMs,
       metadata: {
@@ -359,7 +365,7 @@ export function PlacementAssessment() {
 
     if (currentTrial.level === 'comprehension') {
       const sentence = sentences[currentTrial.index];
-      if (!sentence) return [];
+      if (!sentence?.clinical_metadata) return [];
       const m = sentence.clinical_metadata;
       const all = [
         m.correct_answer,
@@ -562,7 +568,7 @@ export function PlacementAssessment() {
                     currentTrial.level === 'detection'
                       ? (detectionHasSound[currentTrial.index] ? 'yes' : 'no')
                       : currentTrial.level === 'comprehension'
-                        ? sentences[currentTrial.index]?.clinical_metadata.correct_answer
+                        ? sentences[currentTrial.index]?.clinical_metadata?.correct_answer
                         : (currentTrial.level === 'discrimination' ? discriminationPairs : identificationPairs)[currentTrial.index]?.word_1
                   )) {
                     btnClass += 'bg-emerald-500/20 border-emerald-500 text-emerald-400';
@@ -570,7 +576,7 @@ export function PlacementAssessment() {
                     currentTrial.level === 'detection'
                       ? (detectionHasSound[currentTrial.index] ? 'yes' : 'no')
                       : currentTrial.level === 'comprehension'
-                        ? sentences[currentTrial.index]?.clinical_metadata.correct_answer
+                        ? sentences[currentTrial.index]?.clinical_metadata?.correct_answer
                         : (currentTrial.level === 'discrimination' ? discriminationPairs : identificationPairs)[currentTrial.index]?.word_1
                   )) {
                     // Show correct answer highlighted in green on wrong answer

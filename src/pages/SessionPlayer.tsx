@@ -168,8 +168,8 @@ export function SessionPlayer() {
       result: isCorrect ? 'correct' : 'incorrect',
       userResponse: answer,
       correctResponse: isWordPair
-        ? (stimulus.clinical_metadata.word_1 || '')
-        : (stimulus.clinical_metadata.correct_answer || ''),
+        ? (stimulus.clinical_metadata?.word_1 || '')
+        : (stimulus.clinical_metadata?.correct_answer || ''),
       responseTimeMs: responseTime,
       metadata: {
         activityType: 'session_player',
@@ -177,13 +177,13 @@ export function SessionPlayer() {
         voiceGender: getVoiceGender(selectedVoice),
         trialNumber: currentIndex,
         replayCount,
-        clinicalCategory: stimulus.clinical_metadata.contrast_category,
+        clinicalCategory: stimulus.clinical_metadata?.contrast_category,
         ...(isWordPair ? {
-          distractorWord: stimulus.clinical_metadata.word_2,
+          distractorWord: stimulus.clinical_metadata?.word_2,
         } : {
-          questionText: stimulus.clinical_metadata.question_text,
+          questionText: stimulus.clinical_metadata?.question_text,
           sentenceText: stimulus.content_text,
-          difficulty: String(stimulus.clinical_metadata.difficulty || ''),
+          difficulty: String(stimulus.clinical_metadata?.difficulty || ''),
         }),
       },
     });
@@ -294,8 +294,8 @@ export function SessionPlayer() {
         {/* Polymorphic Content Area */}
         {stimulus.content_type === 'word_pair' ? (
           <WordPairPlayer
-            word1={stimulus.clinical_metadata.word_1 || ''}
-            word2={stimulus.clinical_metadata.word_2 || ''}
+            word1={stimulus.clinical_metadata?.word_1 || ''}
+            word2={stimulus.clinical_metadata?.word_2 || ''}
             audioPath={audioAsset?.storage_path}
             onResponse={handleResponse}
             onPlayAudio={() => {
@@ -308,12 +308,12 @@ export function SessionPlayer() {
           />
         ) : (
           <SentencePlayer
-            questionText={stimulus.clinical_metadata.question_text || ''}
-            correctAnswer={stimulus.clinical_metadata.correct_answer || ''}
+            questionText={stimulus.clinical_metadata?.question_text || ''}
+            correctAnswer={stimulus.clinical_metadata?.correct_answer || ''}
             distractors={[
-              stimulus.clinical_metadata.distractor_1 || '',
-              stimulus.clinical_metadata.distractor_2 || '',
-              stimulus.clinical_metadata.distractor_3 || '',
+              stimulus.clinical_metadata?.distractor_1 || '',
+              stimulus.clinical_metadata?.distractor_2 || '',
+              stimulus.clinical_metadata?.distractor_3 || '',
             ]}
             audioPath={audioAsset?.storage_path}
             onResponse={handleResponse}

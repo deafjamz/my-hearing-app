@@ -99,7 +99,7 @@ export function SentenceTraining() {
 
   // Handle answer selection
   const handleAnswer = (answer: string) => {
-    if (!currentSentence || !startTime) return;
+    if (!currentSentence?.clinical_metadata || !startTime) return;
 
     const isCorrect = answer === currentSentence.clinical_metadata.correct_answer;
     if (isCorrect) hapticSuccess(); else hapticFailure();
