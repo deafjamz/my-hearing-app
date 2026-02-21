@@ -27,6 +27,7 @@ interface ActivityOption extends PlanStep {
 const LEVEL_ACTIVITIES: Record<string, ActivityOption[]> = {
   detection: [
     { activityId: 'detection', path: '/practice/detection', label: 'Sound Detection', description: 'Did you hear a word?' },
+    { activityId: 'environmental-sounds', path: '/practice/sounds', label: 'Sound Awareness', description: 'Identify everyday sounds around you', requiredTier: 'Standard' },
   ],
   discrimination: [
     { activityId: 'rapid-fire', path: '/practice/rapid-fire', label: 'Word Pairs', description: 'Hear the difference between similar words' },
@@ -34,10 +35,12 @@ const LEVEL_ACTIVITIES: Record<string, ActivityOption[]> = {
   ],
   identification: [
     { activityId: 'categories', path: '/categories', label: 'Word Categories', description: 'Practice with specific sound contrasts' },
+    { activityId: 'phoneme-drills', path: '/practice/drills', label: 'Phoneme Drills', description: 'Practice hearing specific sound contrasts', requiredTier: 'Standard' },
     { activityId: 'sentences', path: '/sentences', label: 'Sentences', description: 'Answer questions about what you heard', requiredTier: 'Standard' },
   ],
   comprehension: [
     { activityId: 'sentences', path: '/sentences', label: 'Sentences', description: 'Answer questions about what you heard', requiredTier: 'Standard' },
+    { activityId: 'conversations', path: '/practice/conversations', label: 'Conversations', description: 'Identify keywords in everyday exchanges', requiredTier: 'Standard' },
     { activityId: 'stories', path: '/practice/stories', label: 'Stories', description: 'Follow along with short stories', requiredTier: 'Standard' },
     { activityId: 'scenarios', path: '/scenarios', label: 'Everyday Scenarios', description: 'Real-world dialogue with background noise', requiredTier: 'Premium' },
   ],

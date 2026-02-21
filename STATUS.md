@@ -1,12 +1,11 @@
 # SoundSteps - Current Status
 
-> **Last Updated:** 2026-02-19
-> **Last Session:** Session 33 — Production Fixes + Database Ingestion
+> **Last Updated:** 2026-02-20
+> **Last Session:** Session 34 — Deploy Resilience + Auth UX + Schema Alignment
 > **Canonical Directory:** `~/Projects/my-hearing-app` (symlinked from `~/Desktop/my-hearing-app`)
-> **Build Status:** ✅ PASSING (4.73s)
-> **Deployment:** ✅ LIVE (commit `3696684`)
-> **Tests:** ✅ 83 PASSING across 7 test files (Vitest + jsdom)
-> **Testing:** 27 findings tracked in `docs/TESTING_FINDINGS.md` (25 fixed, 0 open, 1 deferred, 1 superseded)
+> **Build Status:** ✅ PASSING (4.21s)
+> **Deployment:** ✅ LIVE (commit `2ae4b72`)
+> **Tests:** ✅ 135 PASSING across 10 test files (Vitest + jsdom)
 > **Data Engine:** Sprint 1 ✅ | Sprint 2 ✅ | Sprint 3 ✅ Phases A-D (phoneme mastery, longitudinal, export, weekly email)
 > **Today's Practice:** ✅ COMPLETE — hero card + 2-step navigation sequencer + dynamic nextActivity on 5 activities
 > **Placement Assessment:** ✅ COMPLETE — 10-trial Listening Check across 4 Erber levels at `/placement`
@@ -15,8 +14,9 @@
 > **Design System:** Phase 1 ✅ | Phase 2 ✅ (primitives, full adoption)
 > **Legal:** ✅ Privacy Policy + Terms of Service updated (Feb 14, 2026)
 > **Content Pipeline:** All content expanded to ×10 targets. Speed variants ✅ (15,278 files). **Blocker:** Scenario audio 767/2,588 (ElevenLabs credits exhausted). Resume: `python3 scripts/generate_scenario_audio.py`
-> **New Activities:** Phoneme Drills ✅ | Conversations ✅ | Sound Awareness ✅ (all with tests + data ingested)
-> **Database:** `content_expansion_v2.sql` migration ✅ | All 3 ingest scripts ✅ | `audio_assets` linked ✅
+> **New Activities:** Phoneme Drills ✅ | Conversations ✅ | Sound Awareness ✅ (hooks aligned, data ingested, SQL views created)
+> **Database:** `content_expansion_v2.sql` ✅ | `fix_content_views_v2.sql` ✅ | All 3 ingest scripts ✅
+> **Deploy Safety:** ✅ Auto-versioned SW cache + update detection + chunk error recovery (see `docs/SW_DEPLOYMENT_GUIDE.md`)
 
 ---
 
@@ -48,11 +48,63 @@
 - **Progress Reports:** /progress page with charts and print-to-PDF
 
 ### Known Issues (Low Priority)
-- PWA meta tag deprecation warning in console
 - Auth spinner on login (cosmetic)
 
 ### Deployment
 Git push to `main` auto-deploys to production via Vercel.
+SW cache busts automatically on every deploy (see `docs/SW_DEPLOYMENT_GUIDE.md`).
+
+---
+
+## ✅ Session 34: Deploy Resilience + Auth UX + Schema Alignment (2026-02-20)
+
+### Service Worker Auto-Versioning (commit `2061109`)
+- **Problem:** Stale SW cache served old JS chunks after deploy → infinite spinner, `TypeError: Failed to fetch dynamically imported module`
+- **Root cause:** `/assets/` caching was cache-first — old chunk hashes don't exist on new deploy
+- **Fix (4 layers):**
+  1. `vite.config.js`: `swVersionPlugin` stamps unique build version into `sw.js` cache name on every build
+  2. `public/sw.js`: `/assets/` changed from cache-first to **network-first**; images/fonts stay cache-first
+  3. `src/main.tsx`: SW update detection — 60s polling, `updatefound`/`controllerchange` auto-reload with infinite-loop guard
+  4. `src/App.tsx`: Multi-layer chunk recovery — `lazyRetry()`, `RouteErrorFallback`, `ErrorBoundary`
+- **Docs:** `docs/SW_DEPLOYMENT_GUIDE.md` — architecture decision record + deploy checklist + troubleshooting
+
+### Landing Page + In-App Sign In (commit `5172a6c`)
+- **Bug:** Landing page stuck on spinner if `supabase.auth.getSession()` throws
+- **Fix:** Wrapped `fetchSessionAndProfile()` in `UserContext.tsx` with try/catch/finally
+- **Feature:** Nav bar now shows on ALL pages except `/` (landing page has own layout)
+- **Feature:** Teal "Sign In" button in top-right for unauthenticated users → opens `AuthModal`
+
+### Null `clinical_metadata` Crashes (commit `f53b90b`)
+- **Bug:** PlacementAssessment, SentenceTraining, SessionPlayer all crashed on sentences with null `clinical_metadata`
+- **Fix:** Filter out invalid sentences + optional chaining on all `clinical_metadata` accesses
+- **Also:** Added `<meta name="mobile-web-app-capable">` to `index.html`
+
+### Content Hooks Schema Alignment (commit `2ae4b72`)
+- **Bug:** All 3 new content hooks queried wrong column names → no data returned → "No drill packs found"
+- **Root cause:** Hooks used `type`/`tags`/`text` but production has `content_type`/`clinical_metadata`/`content_text`. Also destructured `selectedVoice` from `useVoice()` but VoiceContext exports `currentVoice`.
+- **Fixed files:**
+  - `src/types/database.types.ts` — `type`→`content_type`, `text`→`content_text`, `tags`→`clinical_metadata`
+  - `src/hooks/useDrillPackData.ts` — all column refs + `currentVoice`
+  - `src/hooks/useConversationData.ts` — all column refs + `currentVoice` + added fallback aggregation
+  - `src/hooks/useEnvironmentalData.ts` — all column refs + added fallback aggregation
+- **SQL:** Created `sql_migrations/fix_content_views_v2.sql` — views with correct column names (run ✅)
+
+### Commits This Session
+| Hash | Description |
+|------|-------------|
+| `2061109` | feat: Auto-version service worker on build |
+| `5172a6c` | fix: Landing page loading + in-app sign-in |
+| `f53b90b` | fix: Null clinical_metadata in PlacementAssessment/SentenceTraining/SessionPlayer |
+| `2ae4b72` | fix: Align content hooks with production schema |
+
+### Known Remaining Issues
+1. **Scenario audio incomplete:** 767/2,588 (ElevenLabs credits exhausted)
+2. **Weekly email edge function:** Settings toggle built, SQL column exists, function not deployed
+
+### Next Steps
+1. Smoke test Phoneme Drills, Conversations, Sound Awareness in production
+2. Resume scenario audio when ElevenLabs credits refresh
+3. Deploy weekly email edge function
 
 ---
 
