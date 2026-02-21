@@ -83,6 +83,7 @@ const ERBER_MAP: Record<string, keyof ErberJourney> = {
   environmental_sound: 'detection',
   story: 'comprehension',
   scenario: 'comprehension',
+  placement: 'detection', // Placement assessment — map to detection as baseline
 };
 
 // --- Hook ---

@@ -56,11 +56,25 @@ export function useProgress() {
       resetStreak();
     }
 
-    // 2. Supabase Insert
+    // 2. Supabase Insert (or localStorage fallback for guests)
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        setError('Not signed in — progress not saved');
+        // Guest mode — save to localStorage so Dashboard can display it
+        try {
+          const guestTrials = parseInt(localStorage.getItem('guest_total_trials') || '0', 10);
+          localStorage.setItem('guest_total_trials', String(guestTrials + 1));
+
+          const guestCorrect = parseInt(localStorage.getItem('guest_correct_trials') || '0', 10);
+          if (payload.result === 'correct') {
+            localStorage.setItem('guest_correct_trials', String(guestCorrect + 1));
+          }
+
+          if (payload.metadata?.snr != null) {
+            localStorage.setItem('guest_current_snr', String(payload.metadata.snr));
+          }
+        } catch { /* localStorage unavailable */ }
+        setIsLogging(false);
         return;
       }
 

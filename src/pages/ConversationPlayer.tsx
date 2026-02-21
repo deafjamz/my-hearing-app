@@ -132,6 +132,14 @@ export function ConversationPlayer() {
     setResponses(prev => [...prev, { correct: isCorrect, responseTime }]);
     setFeedback({ isCorrect, correctWord, selectedWord });
 
+    // Determine which foil type the user selected (if incorrect)
+    const foilType = !isCorrect
+      ? selectedWord === currentItem.acousticFoil ? 'acoustic'
+        : selectedWord === currentItem.semanticFoil ? 'semantic'
+        : selectedWord === currentItem.plausibleFoil ? 'plausible'
+        : 'unknown'
+      : undefined;
+
     logProgress({
       contentType: 'conversation',
       contentId: currentItem.id,
@@ -146,6 +154,7 @@ export function ConversationPlayer() {
         category: currentItem.category,
         trialNumber: currentIndex,
         replayCount,
+        foilType,
       },
     });
 

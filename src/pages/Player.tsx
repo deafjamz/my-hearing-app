@@ -21,9 +21,9 @@ export function Player() {
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [audioHasPlayed, setAudioHasPlayed] = useState(false);
-  
-  // Track time spent on activity
-  const [startTime] = useState<number>(Date.now());
+
+  // Track time per question (resets on each answer)
+  const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
 
   // Clear feedback timer
   useEffect(() => {
@@ -59,16 +59,19 @@ export function Player() {
         result: isCorrect ? 'correct' : 'incorrect',
         userResponse: userAnswer,
         correctResponse: correctAnswer,
-        responseTimeMs: Date.now() - startTime,
+        responseTimeMs: Date.now() - questionStartTime,
         metadata: {
             activityType: isScenario ? 'scenario' : 'story',
             voiceId: voice || 'sarah',
             voiceGender: getVoiceGender(voice || 'sarah'),
             storyId: activityData.id,
             questionText: questionId,
-            noiseLevel: isScenario ? 'mixed' : 'quiet',
+            noiseEnabled: isScenario,
         }
     });
+
+    // Reset timer for next question
+    setQuestionStartTime(Date.now());
   };
 
   return (

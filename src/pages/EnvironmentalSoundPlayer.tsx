@@ -133,6 +133,7 @@ export function EnvironmentalSoundPlayer() {
         category: currentItem.category,
         intensity: currentItem.intensity,
         safetyCritical: currentItem.safetyCritical,
+        difficulty: String(currentItem.difficulty),
         trialNumber: currentIndex,
         replayCount,
       },

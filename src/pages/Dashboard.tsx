@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Play, HeadphonesIcon } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { format } from 'date-fns';
 import { useProgressData } from '@/hooks/useProgressData';
 import { usePhonemeAnalytics } from '@/hooks/usePhonemeAnalytics';
 import { useAnalytics } from '@/hooks/useAnalytics';
@@ -23,13 +24,10 @@ export function Dashboard() {
   const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
 
-  // Calculate daily steps
+  // Calculate daily steps — use yyyy-MM-dd format to match progressData dates
   useEffect(() => {
-    const today = new Date().toDateString();
-    const todaysData = stats.progressData.filter(entry => {
-      const entryDate = new Date(entry.date).toDateString();
-      return entryDate === today;
-    });
+    const today = format(new Date(), 'yyyy-MM-dd');
+    const todaysData = stats.progressData.filter(entry => entry.date === today);
     const todayTrials = todaysData.reduce((sum, entry) => sum + entry.trials, 0);
     setDailySteps(todayTrials);
   }, [stats.progressData]);
@@ -65,8 +63,9 @@ export function Dashboard() {
   const progress = Math.min((dailySteps / goal) * 100, 100);
   const isGoalReached = dailySteps >= goal;
 
-  // SNR Progress (circular)
-  const snrProgress = Math.min(Math.abs(stats.currentSNR) / 20 * 100, 100);
+  // SNR Progress (circular) — range is +20 (easiest) to -10 (hardest)
+  // Lower SNR = harder = more progress. Map 20→0% to -10→100%
+  const snrProgress = Math.min(Math.max(((20 - stats.currentSNR) / 30) * 100, 0), 100);
 
   // Stagger animation (disabled when user prefers reduced motion)
   const container = prefersReducedMotion

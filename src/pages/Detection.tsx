@@ -153,7 +153,7 @@ export function Detection() {
 
     // Log progress with detection-specific metadata
     logProgress({
-      contentType: 'environmental', // Using environmental as detection proxy
+      contentType: 'word',
       contentId: currentRound.id,
       result: isCorrect ? 'correct' : 'incorrect',
       userResponse: userSaidYes ? 'yes' : 'no',

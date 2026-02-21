@@ -293,7 +293,9 @@ export function PlacementAssessment() {
       metadata: {
         activityType: 'placement',
         trialNumber: trialIndex + 1,
-        voiceGender: getVoiceGender(voice),
+        voiceId: voice || 'sarah',
+        voiceGender: getVoiceGender(voice || 'sarah'),
+        erberLevel: currentTrial.level,
         word: pair?.word_1,
       },
     });
