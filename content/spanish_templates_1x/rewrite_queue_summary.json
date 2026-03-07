@@ -1,6 +1,6 @@
 {
-  "sentences_requiring_rewrite": 96,
-  "conversations_requiring_rewrite": 5,
+  "sentences_requiring_rewrite": 56,
+  "conversations_requiring_rewrite": 0,
   "sentence_queue": "/tmp/main-sync/content/spanish_templates_1x/sentences_foil_rewrite_queue.csv",
   "conversation_queue": "/tmp/main-sync/content/spanish_templates_1x/conversations_foil_rewrite_queue.csv"
 }
