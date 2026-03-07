@@ -1,0 +1,21 @@
+source_pack_id,source_row_id,source_pack_name,difficulty,tier,position,proposed_pack_id,proposed_pack_name,proposed_target_phoneme_es,proposed_contrast_phoneme_es,clinical_goal,candidate_slot,proposed_word_1_es,proposed_word_2_es,lexical_naturalness_notes,regional_notes,approval_status
+pack_th_voiced_unvoiced,drill_thth_001,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,1,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_002,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,2,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_003,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,3,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_004,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,4,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_005,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,5,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_006,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,6,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_007,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,7,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_008,Voicing: /θ/ vs /ð/,4,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,8,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_009,Voicing: /θ/ vs /ð/,4,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,9,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_010,Voicing: /θ/ vs /ð/,3,free,initial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,10,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_011,Voicing: /θ/ vs /ð/,4,free,medial,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,11,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_012,Voicing: /θ/ vs /ð/,3,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,12,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_013,Voicing: /θ/ vs /ð/,3,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,13,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_014,Voicing: /θ/ vs /ð/,3,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,14,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_015,Voicing: /θ/ vs /ð/,4,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,15,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_016,Voicing: /θ/ vs /ð/,4,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,16,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_017,Voicing: /θ/ vs /ð/,5,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,17,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_018,Voicing: /θ/ vs /ð/,4,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,18,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_019,Voicing: /θ/ vs /ð/,4,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,19,,,,,draft
+pack_th_voiced_unvoiced,drill_thth_020,Voicing: /θ/ vs /ð/,5,free,final,pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,/t/,/d/,stable Spanish voicing contrast with strong transfer value,20,,,,,draft

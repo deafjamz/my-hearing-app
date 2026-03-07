@@ -32,9 +32,10 @@ The remaining packs may be salvageable, but they are still blocked because:
 
 ## Immediate order
 1. Use `content/spanish_templates_1x/phoneme_drill_pack_audit.csv` as the pack backlog.
-2. Rewrite the `redesign_required` packs first.
-3. Only after pack redesign, review the salvageable packs for Spanish-native lexical replacements.
-4. Promote rows to `clinically_reviewed` only after pack-level approval.
+2. Use `content/spanish_templates_1x/phoneme_drill_redesign_backlog.csv` and `content/spanish_templates_1x/drill_redesign_workspaces/` as the active redesign workspace.
+3. Rewrite the `redesign_required` packs first.
+4. Only after pack redesign, review the salvageable packs for Spanish-native lexical replacements.
+5. Promote rows to `clinically_reviewed` only after pack-level approval.
 
 ## Why this prevents recurrence
 The drill audit forces planning at the pack level.
