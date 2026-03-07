@@ -38,6 +38,8 @@ const makePair = (i: number): DrillPair => ({
   clinicalNote: '',
   word1AudioUrl: `https://audio.test/drill_${i}_pat${i}.mp3`,
   word2AudioUrl: `https://audio.test/drill_${i}_bat${i}.mp3`,
+  contentLanguage: 'en',
+  sourceRowId: `drill_${i}`,
 });
 
 const mockPairs: DrillPair[] = Array.from({ length: 15 }, (_, i) => makePair(i));
@@ -89,14 +91,9 @@ vi.mock('@/store/UserContext', () => ({
   useUser: () => ({
     user: { id: 'test-user' },
     voice: 'sarah',
+    preferredLanguage: 'en',
     hasAccess: () => true,
     loading: false,
-  }),
-}));
-
-vi.mock('@/store/VoiceContext', () => ({
-  useVoice: () => ({
-    selectedVoice: { name: 'sarah', gender: 'female' },
   }),
 }));
 

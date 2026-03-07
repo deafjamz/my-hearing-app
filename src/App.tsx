@@ -64,22 +64,24 @@ function RouteErrorFallback() {
 }
 
 // Retry wrapper for lazy imports — handles stale chunks after deploy
-function lazyRetry<T extends { default: React.ComponentType }>(
-  factory: () => Promise<T>
-): React.LazyExoticComponent<T['default']> {
-  return lazy(() =>
-    factory().catch(() => {
+function lazyRetry<T extends React.ComponentType<any>>(
+  factory: () => Promise<{ default: T }>
+): React.LazyExoticComponent<T> {
+  return lazy(async () => {
+    try {
+      return await factory();
+    } catch {
       // Chunk failed to load (stale deploy) — reload once
       const key = 'chunk_reload';
       if (!sessionStorage.getItem(key)) {
         sessionStorage.setItem(key, '1');
         window.location.reload();
-        return new Promise(() => {}); // Never resolves (page is reloading)
+        return new Promise<{ default: T }>(() => {}); // Never resolves (page is reloading)
       }
       sessionStorage.removeItem(key);
       return factory(); // Second attempt after reload
-    })
-  );
+    }
+  });
 }
 
 // Named export adapter with retry
@@ -87,7 +89,10 @@ function namedLazy<M, K extends keyof M>(
   importFn: () => Promise<M>,
   name: K
 ) {
-  return lazyRetry(() => importFn().then(m => ({ default: m[name] as React.ComponentType })));
+  return lazyRetry(async () => {
+    const mod = await importFn();
+    return { default: mod[name] as React.ComponentType<any> };
+  });
 }
 
 // Lazy-loaded pages (named export adapter with stale-chunk retry)

@@ -255,8 +255,16 @@ export function useWordPairs(voice?: string) {
 export function useClinicalSummary() {
   const [summary, setSummary] = useState<ClinicalSummaryData[]>([]);
   const [loading, setLoading] = useState(true);
-  const { data: userSession } = supabase.auth.getUser(); // Get user for RLS
-  const userId = userSession?.user?.id;
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      setUserId(userData.user?.id ?? null);
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchSummary = async () => {

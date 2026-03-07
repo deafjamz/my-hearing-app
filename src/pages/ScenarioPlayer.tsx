@@ -5,6 +5,7 @@ import { useActivityData } from '@/hooks/useActivityData';
 import { useProgress } from '@/hooks/useProgress';
 import { useUser } from '@/store/UserContext';
 import { getVoiceGender } from '@/lib/voiceGender';
+import { isSpanishScenarioId } from '@/lib/spanishScenarioCatalog';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { Scenario } from '@/types/activity';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
@@ -22,12 +23,17 @@ export function ScenarioPlayer() {
   const { logProgress } = useProgress();
   const { voice } = useUser();
   const selectedVoice = voice || 'sarah';
+  const contentLanguage = id && isSpanishScenarioId(id) ? 'es' : 'en';
   const sessionStartRef = useRef<number>(Date.now());
   const hasLoggedCompletionRef = useRef(false);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [ambienceVolume, setAmbienceVolume] = useState(0.5);
   const [isAmbiencePlaying, setIsAmbiencePlaying] = useState(false);
+
+  const isScenarioData = (value: unknown): value is Scenario => {
+    return !!value && typeof value === 'object' && 'items' in value;
+  };
 
   // Refs for stable callback access (avoids stale closures)
   const scenarioRef = useRef(scenario);
@@ -104,11 +110,11 @@ export function ScenarioPlayer() {
 
   // 2. Pre-fetch ambience audio on scenario load
   useEffect(() => {
-    if (!scenario?.ambience_path) return;
+    if (!isScenarioData(scenario) || !scenario.ambience_path) return;
     getBuffer(scenario.ambience_path).then(buf => {
       if (buf) ambienceBufferRef.current = buf;
     });
-  }, [scenario?.ambience_path, getBuffer]);
+  }, [scenario, getBuffer]);
 
   // 3. Ambience controls
   const stopAmbience = useCallback(() => {
@@ -209,6 +215,7 @@ export function ScenarioPlayer() {
               activityType: 'scenario',
               voiceId: selectedVoice,
               voiceGender: getVoiceGender(selectedVoice),
+              contentLanguage,
               totalLines: items.length,
               listeningDurationMs: Date.now() - sessionStartRef.current,
             },
@@ -218,7 +225,7 @@ export function ScenarioPlayer() {
     };
 
     source.start(0);
-  }, [ensureResumed, getBuffer, stopAmbience]);
+  }, [contentLanguage, ensureResumed, getBuffer, id, logProgress, selectedVoice, stopAmbience]);
 
   // 5. Play/Pause toggle
   const togglePlayback = useCallback(async () => {
@@ -267,9 +274,11 @@ export function ScenarioPlayer() {
   }, [isAmbiencePlaying, ensureResumed, startAmbience, stopAmbience]);
 
   if (loading) return <LoadingSpinner message="Loading scenario..." />;
-  if (error || !scenario) return <div className="p-8 text-center text-red-500">Error loading scenario.</div>;
+  if (error || !scenario || !isScenarioData(scenario)) {
+    return <div className="p-8 text-center text-red-500">Error loading scenario.</div>;
+  }
 
-  const dialogueItems = (scenario as Scenario).items;
+  const dialogueItems = scenario.items;
   const currentLine = dialogueItems[currentLineIndex];
 
   return (

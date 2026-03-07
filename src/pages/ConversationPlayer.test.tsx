@@ -33,6 +33,8 @@ const makeConversation = (i: number): ConversationPair => ({
   plausibleFoil: `schedule${i}`,
   promptAudioUrl: `https://audio.test/conv_${i}_prompt.mp3`,
   responseAudioUrl: `https://audio.test/conv_${i}_response.mp3`,
+  contentLanguage: 'en',
+  sourceRowId: `conv_${i}`,
 });
 
 const mockConversations: ConversationPair[] = Array.from({ length: 15 }, (_, i) => makeConversation(i));
@@ -71,14 +73,9 @@ vi.mock('@/store/UserContext', () => ({
   useUser: () => ({
     user: { id: 'test-user' },
     voice: 'sarah',
+    preferredLanguage: 'en',
     hasAccess: () => true,
     loading: false,
-  }),
-}));
-
-vi.mock('@/store/VoiceContext', () => ({
-  useVoice: () => ({
-    selectedVoice: { name: 'sarah', gender: 'female' },
   }),
 }));
 

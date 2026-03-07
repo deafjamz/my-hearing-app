@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { AudioPlayer } from '@/components/ui/AudioPlayer';
 import { SNRMixer } from '@/components/ui/SNRMixer';
@@ -11,6 +11,13 @@ import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
 import { KaraokeTranscript } from '@/components/ui/KaraokeTranscript';
 import { useProgress } from '@/hooks/useProgress';
 import { getVoiceGender } from '@/lib/voiceGender';
+import type { ActivityData, AlignmentData } from '@/types/activity';
+
+type StoryLikeActivity = ActivityData & { alignmentData?: AlignmentData };
+
+function isStoryLikeActivity(activity: unknown): activity is StoryLikeActivity {
+  return !!activity && typeof activity === 'object' && 'audioSrc' in activity && 'questions' in activity;
+}
 
 export function Player() {
   const { id } = useParams<{ id: string }>();
@@ -46,16 +53,26 @@ export function Player() {
     return <div className="p-8 text-center text-red-500">Activity not found or failed to load.</div>;
   }
 
+  if (!isStoryLikeActivity(activityData)) {
+    return (
+      <div className="p-8 text-center text-slate-500">
+        This player supports story content only. Use the scenario player for dialogue sessions.
+      </div>
+    );
+  }
+
+  const storyData = activityData;
+
   // Dynamic path resolution
-  const dynamicAudioSrc = getAudioPath(activityData, voice || 'sarah');
-  const isScenario = !!activityData.noiseSrc;
+  const dynamicAudioSrc = getAudioPath(storyData, voice || 'sarah');
+  const isScenario = !!storyData.noiseSrc;
 
   const handleAnswer = (isCorrect: boolean, questionId: string, userAnswer: string, correctAnswer: string) => {
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 
     logProgress({
         contentType: isScenario ? 'scenario' : 'story',
-        contentId: activityData.id,
+        contentId: storyData.id,
         result: isCorrect ? 'correct' : 'incorrect',
         userResponse: userAnswer,
         correctResponse: correctAnswer,
@@ -64,7 +81,7 @@ export function Player() {
             activityType: isScenario ? 'scenario' : 'story',
             voiceId: voice || 'sarah',
             voiceGender: getVoiceGender(voice || 'sarah'),
-            storyId: activityData.id,
+            storyId: storyData.id,
             questionText: questionId,
             noiseEnabled: isScenario,
         }
@@ -82,10 +99,10 @@ export function Player() {
         <ActivityHeader streak={0} />
 
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center space-y-4">
-          <h1 className="text-xl font-bold text-slate-900">{activityData.title}</h1>
+          <h1 className="text-xl font-bold text-slate-900">{storyData.title}</h1>
           
           {isScenario ? (
-            <SNRMixer voiceSrc={dynamicAudioSrc} noiseSrc={activityData.noiseSrc!} />
+            <SNRMixer voiceSrc={dynamicAudioSrc} noiseSrc={storyData.noiseSrc!} />
           ) : (
             <AudioPlayer src={dynamicAudioSrc} onTimeUpdate={handleTimeUpdate} />
           )}
@@ -94,28 +111,28 @@ export function Player() {
             <p className="font-semibold mb-1">Transcript:</p>
             {hardMode && !audioHasPlayed ? (
               <p className="text-slate-400 italic">Listen to the audio first...</p>
-            ) : activityData.transcript && 'alignmentData' in activityData && activityData.alignmentData ? (
+            ) : storyData.transcript && storyData.alignmentData ? (
               <KaraokeTranscript
-                transcript={activityData.transcript}
-                alignmentData={activityData.alignmentData}
+                transcript={storyData.transcript}
+                alignmentData={storyData.alignmentData}
                 currentTime={currentTime}
                 voiceId={voice || 'sarah'}
               />
             ) : (
-              <p>{activityData.transcript}</p>
+              <p>{storyData.transcript}</p>
             )}
           </div>
         </div>
 
         <div className="space-y-6">
-          {activityData.questions.length > 0 && (
+          {storyData.questions.length > 0 && (
             <>
               <div className="flex items-center gap-2">
                 <div className="h-8 w-1 bg-teal-500 rounded-full" />
                 <h2 className="text-xl font-bold text-slate-200">Comprehension Check</h2>
               </div>
               
-              {activityData.questions.map(q => (
+              {storyData.questions.map((q) => (
                 <QuizCard
                   key={q.id}
                   question={q}

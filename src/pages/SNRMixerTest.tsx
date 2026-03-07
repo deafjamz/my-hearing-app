@@ -23,11 +23,10 @@ export function SNRMixerTest() {
   const [noiseUrl, setNoiseUrl] = useState<string>('');
   const [targetSNR, setTargetSNR] = useState(10);
 
-  const { isPlaying, isLoading, error, snr, play, stop, setSNR } = useSNRMixer({
-    speechUrl,
+  const { isPlaying, isLoading, error, snr, playTarget, startNoise, stop, setSNR, setNoiseEnabled } = useSNRMixer({
     noiseUrl,
     initialSNR: 10,
-    loopSpeech: true, // Loop for continuous testing
+    noiseEnabled: true,
   });
 
   // Fetch a sample word and clinical babble from database
@@ -62,7 +61,11 @@ export function SNRMixerTest() {
     if (isPlaying) {
       stop();
     } else {
-      play();
+      setNoiseEnabled(true);
+      void startNoise();
+      if (speechUrl) {
+        void playTarget(speechUrl);
+      }
     }
   };
 
