@@ -3,6 +3,8 @@
 ## Purpose
 This document records what is currently true across the repo, live Supabase, and deployed app state after the Spanish launch-content work.
 
+Verified and updated on March 7, 2026 after PR `#1` merged into `main`.
+
 ## Step Status
 1. Drill remediation: complete for the current hold set.
    - `2` drill rows were repaired and promoted.
@@ -14,16 +16,16 @@ This document records what is currently true across the repo, live Supabase, and
    - `36` live `audio_assets` rows now exist for `spanish/detection/%`.
    - the repo now contains a dedicated Spanish detection path instead of reusing English `word_pairs`.
 
-3. QC workflow: scaffold complete, listening review still pending.
-   - `reports/spanish_qc_manifest.csv` exists.
-   - no clinician listening results are recorded yet.
+3. QC workflow: scaffold complete, but broader content hardening is still required.
+   - bilingual listening review is still pending
+   - source-content validation is now the main blocker for broader Spanish exposure, not runtime plumbing
 
-4. Runtime and instrumentation: product-wired locally, not yet deployed to production frontend.
+4. Runtime and instrumentation: deployed and production-wired.
    - language-aware sentence, conversation, and drill fetching is implemented in repo.
    - English fallback was preserved for legacy rows with null `content_language`.
    - sentence fetching now normalizes both `clinical_metadata` and legacy `training_metadata`.
    - progress metadata now carries `contentLanguage` for sentence, conversation, drill, detection, and scenario sessions.
-   - Spanish scenarios are now routable through the deployed legacy `scenarios/scenario_items` path once the frontend is redeployed.
+   - Spanish scenarios are routable through the deployed legacy `scenarios/scenario_items` path.
 
 5. Credit allocation guidance: still valid.
    - next credit spend should go to detection audio, remaining drill-pack redesign, and Spanish scenario/runtime completion.
@@ -72,26 +74,26 @@ Implication:
 - rollout verification is now fully green for the current launch scope
 
 ## Production App Status
-`soundsteps.app` is still behind the repo at the time of this document update.
+`soundsteps.app` is aligned with the merged release branch for the current rollout slice.
 
 Implication:
-- the repo now contains the runtime changes needed for Spanish-aware sentences, conversations, drills, detection, and scenarios
-- live Supabase now contains Spanish sentence/conversation/drill/detection content
-- live legacy scenario tables now contain Spanish scenarios and dialogue items
-- deployed production code is still behind the repo until a real deployment is performed
+- the repo contains the runtime changes needed for Spanish-aware sentences, conversations, drills, detection, and scenarios
+- live Supabase contains Spanish sentence/conversation/drill/detection content
+- live legacy scenario tables contain Spanish scenarios and dialogue items
+- deployed production code matches that runtime state
 
 This means:
 - Supabase is now ready for the current Spanish launch shape
 - storage and database are aligned for the current runtime strategy
-- the deployed app is still not a full Spanish launch build
+- the deployed app is operationally aligned with the repo
+- the main remaining risk is Spanish content validity, especially drills and translated foil logic
 
 ## Git Status
-The worktree is dirty with many unrelated pre-existing changes.
+`main` now contains the merged Spanish rollout runtime via PR `#1`.
 
 Important constraint:
-- Spanish work is now documented and implemented locally
-- it is not committed in this turn
-- it should be reviewed carefully before any deploy because unrelated local modifications are present
+- the primary local checkout may still contain unrelated dirty changes
+- use a clean worktree for follow-on rollout and content-hardening work
 
 ## Operational Reading
 What is now genuinely live:
@@ -105,7 +107,9 @@ What is now genuinely live:
 - Spanish conversation, drill, and scenario audio present in storage
 
 What is still staged:
-- updated frontend runtime on `soundsteps.app`
+- Spanish source-content hardening
+- Spanish foil and drill-pack remediation
+- bilingual listening QC results
 
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
@@ -113,7 +117,7 @@ Verification artifact:
 
 ## Next Actions
 1. Run bilingual listening QC before exposing Spanish widely.
-2. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+2. Enforce repo-level validation before any future Spanish audio generation or ingest.
 3. Finish redesigning the remaining held drill packs.
-4. Split Spanish launch analytics from English in dashboard/reporting views.
-5. Merge the release branch through PR so `main` matches production.
+4. Rewrite sentence and conversation foil sets where English translation erased the intended auditory task.
+5. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
