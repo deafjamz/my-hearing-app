@@ -1,44 +1,4 @@
 source_row_id,scenario,difficulty,issue,sentence_text_en,sentence_text_es,correct_answer_en,correct_answer_es,acoustic_foil_en,acoustic_foil_es,semantic_foil_en,semantic_foil_es,translation_status
-6,Medical,2,semantic_foil_collapses_to_correct_answer,The pharmacy opens at nine.,La farmacia abre a las nueve.,Pharmacy,Farmacia,Harmony,Armonía,Drugstore,Farmacia,machine_translated
-16,Medical,2,semantic_foil_collapses_to_correct_answer,I feel dizzy when I stand.,Me siento mareado cuando me levanto.,Dizzy,Mareado,Fizzy,Gaseoso,Lightheaded,Mareado,machine_translated
-17,Medical,2,semantic_foil_collapses_to_correct_answer,The bandage needs to be changed.,Es necesario cambiar el vendaje.,Bandage,Vendaje,Damage,Daño,Dressing,Vendaje,machine_translated
-23,Medical,1,semantic_foil_collapses_to_correct_answer,Take the medicine with food.,Tome el medicamento con comida.,Medicine,Medicamento,Madeline,madeline,Medication,Medicamento,machine_translated
-60,Shopping,2,semantic_foil_collapses_to_correct_answer,Do you have this in a larger size?,¿Tienes esto en un tamaño más grande?,Larger,Más grande,Charger,Cargador,Bigger,Más grande,machine_translated
-61,Shopping,2,acoustic_foil_collapses_to_correct_answer,The checkout line is very long.,La fila para pagar es muy larga.,Checkout,Verificar,Check out,Verificar,Payment line,linea de pago,machine_translated
-64,Shopping,1,semantic_foil_collapses_to_correct_answer,The store closes at nine tonight.,La tienda cierra a las nueve de la noche.,Closes,Cierra,Doses,Dosis,Shuts,Cierra,machine_translated
-75,Shopping,1,semantic_foil_collapses_to_correct_answer,Do you need a bag for that?,¿Necesitas una bolsa para eso?,Bag,Bolsa,Rag,Trapo,Sack,Bolsa,machine_translated
-92,Shopping,3,semantic_foil_collapses_to_correct_answer,Your purchase qualifies for a rebate.,Su compra califica para un reembolso.,Rebate,Reembolso,Debate,Debate,Refund,Reembolso,machine_translated
-105,Restaurant,2,semantic_foil_collapses_to_correct_answer,We have a reservation for seven.,Tenemos una reserva para siete.,Reservation,Reserva,Restoration,Restauración,Booking,Reserva,machine_translated
-111,Restaurant,2,semantic_foil_collapses_to_correct_answer,I am allergic to shellfish.,Soy alérgico a los mariscos.,Shellfish,Mariscos,Selfish,Egoísta,Seafood,Mariscos,machine_translated
-114,Restaurant,2,semantic_foil_collapses_to_correct_answer,The portions here are very large.,Las porciones aquí son muy grandes.,Portions,Porciones,Proportions,Dimensiones,Servings,Porciones,machine_translated
-118,Restaurant,2,semantic_foil_collapses_to_correct_answer,The restaurant opens at five.,El restaurante abre a las cinco.,Restaurant,Restaurante,Rested,Descansado,Eatery,Restaurante,machine_translated
-130,Restaurant,2,semantic_foil_collapses_to_correct_answer,The seafood platter serves two.,La tabla de mariscos sirve para dos personas.,Platter,Plato,Flatter,Halagar,Dish,Plato,machine_translated
-147,Directions,2,acoustic_foil_collapses_to_correct_answer,The shortcut saves ten minutes.,El atajo ahorra diez minutos.,Shortcut,Atajo,Short cut,atajo,Quick way,Manera rápida,machine_translated
-168,Directions,2,acoustic_foil_collapses_to_correct_answer,Pass the courthouse on your right.,Pase el juzgado a su derecha.,Courthouse,Palacio de justicia,Court house,palacio de justicia,Building,Edificio,machine_translated
-178,Phone,2,acoustic_foil_collapses_to_correct_answer,The voicemail box is full.,El buzón de voz está lleno.,Voicemail,Correo de voz,Voice mail,correo de voz,Message box,cuadro de mensaje,machine_translated
-179,Phone,1,semantic_foil_collapses_to_correct_answer,Can you hear me clearly now?,¿Puedes oírme claramente ahora?,Hear,Escuchar,Fear,Miedo,Listen,Escuchar,machine_translated
-181,Phone,1,semantic_foil_collapses_to_correct_answer,The line is busy at the moment.,La línea está ocupada en estos momentos.,Busy,Ocupado,Dizzy,Mareado,Occupied,Ocupado,machine_translated
-189,Phone,2,acoustic_foil_collapses_to_correct_answer,The ringtone is too loud.,El tono de llamada es demasiado alto.,Ringtone,Tono de llamada,Ring tone,tono de llamada,Sound,Sonido,machine_translated
-206,Social,1,semantic_foil_collapses_to_correct_answer,The meeting starts at three o'clock.,La reunión comienza a las tres en punto.,Meeting,Reunión,Greeting,Saludo,Gathering,Reunión,machine_translated
-213,Social,1,acoustic_foil_collapses_to_correct_answer,See you tomorrow morning.,Nos vemos mañana por la mañana.,Tomorrow,Mañana,To morrow,Mañana,Next day,dia siguiente,machine_translated
-217,Social,2,semantic_foil_collapses_to_correct_answer,Please give my regards to your family.,"Por favor, saluda de mi parte a tu familia.",Regards,Saludos,Records,Archivos,Greetings,Saludos,machine_translated
-218,Social,1,semantic_foil_collapses_to_correct_answer,The weather is beautiful today.,El clima está hermoso hoy.,Weather,Clima,Whether,Si,Climate,Clima,machine_translated
-220,Social,1,acoustic_foil_collapses_to_correct_answer,Let me know if you need anything.,Déjame saber si necesitas algo.,Anything,Cualquier cosa,Any thing,Cualquier cosa,Something,Algo,machine_translated
-237,Social,2,acoustic_foil_collapses_to_correct_answer,May I introduce my colleague.,¿Puedo presentarles a mi colega?,Colleague,Colega,College,Colega,Coworker,compañero de trabajo,machine_translated
-240,Work,2,acoustic_foil_collapses_to_correct_answer,The project deadline is Friday.,La fecha límite del proyecto es el viernes.,Deadline,Fecha límite,Dead line,Fecha límite,Due date,Fecha de vencimiento,machine_translated
-242,Work,2,semantic_foil_collapses_to_correct_answer,The conference room is reserved.,La sala de conferencias está reservada.,Reserved,Reservado,Deserved,Merecido,Booked,Reservado,machine_translated
-247,Work,1,acoustic_foil_collapses_to_correct_answer,I will be out of office next week.,Estaré fuera del cargo la próxima semana.,Office,Oficina,Off ice,Oficina,Work,Trabajar,machine_translated
-250,Work,2,acoustic_foil_collapses_to_correct_answer,The supervisor approved the request.,El supervisor aprobó la solicitud.,Supervisor,Supervisor,Super visor,Supervisor,Manager,Gerente,machine_translated
-262,Work,3,acoustic_foil_collapses_to_correct_answer,The system is down for maintenance.,El sistema está inactivo por mantenimiento.,Maintenance,Mantenimiento,Maintenance,Mantenimiento,Repairs,Refacción,machine_translated
-272,Work,2,acoustic_foil_collapses_to_correct_answer;semantic_foil_collapses_to_correct_answer,The handbook explains the procedures.,El manual explica los procedimientos.,Handbook,Manual,Hand book,manual,Manual,Manual,machine_translated
-273,Work,2,acoustic_foil_collapses_to_correct_answer,Your feedback is valuable to us.,Sus comentarios son valiosos para nosotros.,Feedback,Comentario,Feed back,Comentario,Response,Respuesta,machine_translated
-277,Daily Life,1,acoustic_foil_collapses_to_correct_answer,The alarm goes off at seven.,La alarma suena a las siete.,Alarm,Alarma,A larm,Alarma,Clock,Reloj,machine_translated
-280,Daily Life,1,semantic_foil_collapses_to_correct_answer,Please take out the garbage.,Por favor saca la basura.,Garbage,Basura,Cabbage,Repollo,Trash,Basura,machine_translated
-281,Daily Life,2,semantic_foil_collapses_to_correct_answer,The lawn needs to be mowed.,Es necesario cortar el césped.,Lawn,Césped,Dawn,Amanecer,Grass,Césped,machine_translated
-283,Daily Life,2,semantic_foil_collapses_to_correct_answer,The sink is clogged again.,El fregadero está nuevamente atascado.,Clogged,obstruido,Logged,registrado,Blocked,Obstruido,machine_translated
-288,Daily Life,2,acoustic_foil_collapses_to_correct_answer,Please empty the dishwasher.,"Por favor, vacíe el lavavajillas.",Dishwasher,Lavavajillas,Dish washer,Lavavajillas,Appliance,Aparato,machine_translated
-291,Daily Life,2,semantic_foil_collapses_to_correct_answer,The carpet should be vacuumed.,Se debe aspirar la alfombra.,Carpet,Alfombra,Carport,Cochera,Rug,Alfombra,machine_translated
-295,Daily Life,2,acoustic_foil_collapses_to_correct_answer,The weather forecast calls for rain.,El pronóstico del tiempo anuncia lluvias.,Forecast,Pronóstico,Forcast,pronóstico,Prediction,Predicción,machine_translated
 296,Daily Life,1,semantic_foil_collapses_to_correct_answer,Please close the curtains.,"Por favor, cierra las cortinas.",Curtains,Cortinas,Certain,Cierto,Drapes,cortinas,machine_translated
 319,Daily Life,2,semantic_foil_collapses_to_correct_answer,The pipe under the sink is leaking.,La tubería debajo del fregadero tiene una fuga.,Pipe,Tubo,Ripe,Maduro,Tube,Tubo,machine_translated
 329,Daily Life,2,acoustic_foil_collapses_to_correct_answer,The bookshelf needs to be dusted.,Es necesario quitar el polvo de la estantería.,Bookshelf,Estante para libros,Book shelf,estante para libros,Furniture,Muebles,machine_translated
