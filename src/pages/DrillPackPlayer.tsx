@@ -10,8 +10,8 @@ import { useDrillPackData, type DrillPair } from '@/hooks/useDrillPackData';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
 import { useUser } from '@/store/UserContext';
-import { useVoice } from '@/store/VoiceContext';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
+import { getAudioVoiceKey, normalizeTrainingLanguage } from '@/lib/trainingLanguage';
 import { getVoiceGender } from '@/lib/voiceGender';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 
@@ -23,14 +23,13 @@ import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 export function DrillPackPlayer() {
   const { packId } = useParams<{ packId: string }>();
   const navigate = useNavigate();
-  const { voice } = useUser();
-  const { selectedVoice: voiceObj } = useVoice();
+  const { voice, preferredLanguage } = useUser();
   const { ensureResumed, playUrl, stopPlayback } = useSilentSentinel();
   const { logProgress } = useProgress();
   const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
-  const { drillPairs, packs, loading, fetchByPack, getAudioUrl } = useDrillPackData();
-
-  const selectedVoice = voice || 'sarah';
+  const { drillPairs, packs, loading, fetchByPack } = useDrillPackData();
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
+  const selectedVoice = getAudioVoiceKey(voice, contentLanguage);
 
   // State machine
   const [hasStarted, setHasStarted] = useState(false);
@@ -142,11 +141,13 @@ export function DrillPackPlayer() {
         activityType: 'phoneme_drill',
         voiceId: selectedVoice,
         voiceGender: getVoiceGender(selectedVoice),
+        contentLanguage,
         targetPhoneme: pair.targetPhoneme,
         contrastPhoneme: pair.contrastPhoneme,
         position: pair.position,
         tier: pair.tier,
         packId: pair.packId,
+        sourceRowId: pair.sourceRowId,
         trialNumber: currentIndex,
         replayCount,
       },

@@ -32,7 +32,7 @@ export function Aura({
   className = '',
 }: AuraProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const [amplitude, setAmplitude] = useState(0);
 
@@ -104,7 +104,7 @@ export function Aura({
     updateAmplitude();
 
     return () => {
-      if (animationFrameRef.current) {
+      if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };

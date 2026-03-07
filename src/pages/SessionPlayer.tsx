@@ -125,7 +125,7 @@ export function SessionPlayer() {
 
       if (itemsError) throw itemsError;
 
-      setItems(itemsData as SessionItem[]);
+      setItems(itemsData as unknown as SessionItem[]);
       setTrialStartTime(Date.now());
     } catch (err) {
       console.error('Error fetching session data:', err);

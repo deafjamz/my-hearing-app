@@ -3,12 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Play, Check, Volume2, ChevronRight, Ear, ArrowRight, ArrowLeftRight, Target, MessageSquare } from 'lucide-react';
 import { useWordPairs, type WordPair } from '@/hooks/useActivityData';
-import { useSentenceData, getAudioUrl, type SentenceWithAudio } from '@/hooks/useSentenceData';
+import { useSentenceData, getAudioUrl } from '@/hooks/useSentenceData';
 import { useSilentSentinel } from '@/hooks/useSilentSentinel';
 import { useProgress } from '@/hooks/useProgress';
 import { useUser } from '@/store/UserContext';
 import { getVoiceGender } from '@/lib/voiceGender';
-import { buildWordAudioUrl } from '@/lib/audio';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 import { Button, Card } from '@/components/primitives';
 
@@ -163,7 +162,6 @@ export function PlacementAssessment() {
       if (!categories.has(cat)) categories.set(cat, []);
       categories.get(cat)!.push(p);
     }
-    const catKeys = [...categories.keys()];
     const discriminationPairs: WordPair[] = [];
     // Pick 3 pairs where word_1 and word_2 come from different pairs (very different)
     for (let i = 0; i < Math.min(3, shuffled.length); i++) {

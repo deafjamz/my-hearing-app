@@ -9,7 +9,8 @@
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

@@ -15,6 +15,7 @@ interface DailyRecord { date: string; seconds: number; }
 interface Profile {
   id: string;
   subscription_tier: 'Free' | 'Standard' | 'Premium';
+  preferred_language?: 'en' | 'es' | null;
   // Add other profile fields as needed
 }
 
@@ -33,6 +34,8 @@ interface UserContextType {
   setDailyGoalMinutes: (goal: number) => void;
   voice: string;
   setVoice: (v: string) => void;
+  preferredLanguage: 'en' | 'es';
+  setPreferredLanguage: (v: 'en' | 'es') => void;
   hardMode: boolean;
   setHardMode: (v: boolean) => void;
   history: DailyRecord[];
@@ -60,6 +63,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Local State
   const [dailyGoalMinutes, setDailyGoalMinutes] = useState<number>(() => parseInt(localStorage.getItem('dailyGoalMinutes') || '25'));
   const [voice, setVoice] = useState<string>(() => (localStorage.getItem('voice') || 'sarah'));
+  const [preferredLanguage, setPreferredLanguage] = useState<'en' | 'es'>(() => (
+    localStorage.getItem('trainingLanguage') === 'es' ? 'es' : 'en'
+  ));
   const [hardMode, setHardMode] = useState<boolean>(() => localStorage.getItem('hardMode') === 'true');
   const [history, setHistory] = useState<DailyRecord[]>(() => {
     try {
@@ -96,6 +102,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
             console.error('Error fetching profile:', error);
           } else {
             setProfile(userProfile);
+            if (userProfile?.preferred_language === 'es' || userProfile?.preferred_language === 'en') {
+              setPreferredLanguage(userProfile.preferred_language);
+            }
           }
         }
       } catch (err) {
@@ -143,6 +152,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
           console.error('Error fetching profile on auth change:', error);
         } else {
           setProfile(userProfile);
+          if (userProfile?.preferred_language === 'es' || userProfile?.preferred_language === 'en') {
+            setPreferredLanguage(userProfile.preferred_language);
+          }
 
           // Enable audio caching for premium users
           if (userProfile.subscription_tier === 'Premium' || userProfile.subscription_tier === 'Standard') {
@@ -176,6 +188,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // Persist Local State
   useEffect(() => { localStorage.setItem('dailyGoalMinutes', dailyGoalMinutes.toString()); }, [dailyGoalMinutes]);
   useEffect(() => { localStorage.setItem('voice', voice); }, [voice]);
+  useEffect(() => { localStorage.setItem('trainingLanguage', preferredLanguage); }, [preferredLanguage]);
   useEffect(() => { localStorage.setItem('hardMode', hardMode.toString()); }, [hardMode]);
   useEffect(() => { localStorage.setItem('history', JSON.stringify(history)); }, [history]);
   useEffect(() => { localStorage.setItem('currentStreak', currentStreak.toString()); }, [currentStreak]);
@@ -228,6 +241,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       user, session, profile, loading, hasAccess,
       dailyGoalMinutes, setDailyGoalMinutes,
       voice, setVoice,
+      preferredLanguage, setPreferredLanguage,
       hardMode, setHardMode,
       history,
       sessionSeconds, isPracticing, startPracticeSession, endPracticeSession,

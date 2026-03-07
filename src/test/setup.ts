@@ -274,11 +274,11 @@ export { mockSupabaseUser, mockSupabaseSession };
 
 // Helper to set authenticated state in tests
 export const setMockAuthenticatedUser = (user = mockSupabaseUser) => {
-  mockSupabase.auth.getSession.mockResolvedValue({
+  (mockSupabase.auth.getSession as any).mockResolvedValue({
     data: { session: { ...mockSupabaseSession, user } },
     error: null,
   });
-  mockSupabase.auth.getUser.mockResolvedValue({
+  (mockSupabase.auth.getUser as any).mockResolvedValue({
     data: { user },
     error: null,
   });
@@ -286,11 +286,11 @@ export const setMockAuthenticatedUser = (user = mockSupabaseUser) => {
 
 // Helper to set guest (unauthenticated) state in tests
 export const setMockGuestUser = () => {
-  mockSupabase.auth.getSession.mockResolvedValue({
+  (mockSupabase.auth.getSession as any).mockResolvedValue({
     data: { session: null },
     error: null,
   });
-  mockSupabase.auth.getUser.mockResolvedValue({
+  (mockSupabase.auth.getUser as any).mockResolvedValue({
     data: { user: null },
     error: null,
   });

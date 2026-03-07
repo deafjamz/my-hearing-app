@@ -165,7 +165,7 @@ export function useEnvironmentalData(): UseEnvironmentalDataReturn {
 
             const entry = catMap.get(cat)!;
             entry.total_sounds++;
-            if (meta.safety_critical) entry.safety_critical_count++;
+            if (meta.safety_critical) entry.safety_critical_count = (entry.safety_critical_count ?? 0) + 1;
             entry.min_difficulty = Math.min(entry.min_difficulty, row.difficulty || 1);
             entry.max_difficulty = Math.max(entry.max_difficulty, row.difficulty || 1);
           }

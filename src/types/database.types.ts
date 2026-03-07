@@ -39,16 +39,18 @@ export interface DrillPackSummary {
 
 export interface ConversationCategory {
   category: string;
-  total_pairs: number;
+  total_pairs?: number;
+  total_conversations?: number;
   min_difficulty: number;
   max_difficulty: number;
-  target_phonemes: string[] | null;
+  target_phonemes?: string[] | null;
 }
 
 export interface EnvironmentalSoundCategory {
   category: string;
   total_sounds: number;
-  safety_critical_count: number;
+  safety_critical_count?: number;
+  has_safety_critical?: boolean;
   min_difficulty: number;
   max_difficulty: number;
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
+import { matchesAnalyticsLanguage, type AnalyticsLanguageFilter } from '@/lib/analyticsLanguage';
 
 // --- Exported types ---
 
@@ -49,7 +50,7 @@ interface RawRow {
  * Computes per-phoneme-pair accuracy, confusion direction, mastery status,
  * and position breakdowns.
  */
-export function usePhonemeAnalytics() {
+export function usePhonemeAnalytics(language: AnalyticsLanguageFilter = 'all') {
   const { user } = useUser();
   const [data, setData] = useState<PhonemeMasteryData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,7 +78,8 @@ export function usePhonemeAnalytics() {
           return;
         }
 
-        setData(aggregate(rows as RawRow[]));
+        const filteredRows = (rows as RawRow[]).filter((row) => matchesAnalyticsLanguage(row.content_tags, language));
+        setData(filteredRows.length > 0 ? aggregate(filteredRows) : null);
       } catch {
         setData(null);
       } finally {
@@ -86,7 +88,7 @@ export function usePhonemeAnalytics() {
     };
 
     fetchData();
-  }, [user?.id]);
+  }, [user?.id, language]);
 
   return { data, loading };
 }

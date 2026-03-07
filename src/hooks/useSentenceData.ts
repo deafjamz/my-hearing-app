@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import {
+  applyClinicalMetadataLanguageFilter,
+  normalizeTrainingLanguage,
+  type TrainingLanguage,
+} from '@/lib/trainingLanguage';
 
 /**
  * Hook to fetch sentence stimuli from v5 schema
@@ -35,11 +40,41 @@ export interface SentenceWithAudio extends SentenceStimulus {
   }[];
 }
 
+type SentenceMetadata = SentenceStimulus['clinical_metadata'];
+type RawSentenceRow = SentenceStimulus & {
+  training_metadata?: Partial<SentenceMetadata> | null;
+  clinical_metadata: Partial<SentenceMetadata> | null;
+  difficulty?: number | null;
+};
+
 interface UseSentenceDataOptions {
   difficulty?: number;
   scenario?: string;
   voiceId?: string;
   limit?: number;
+  contentLanguage?: TrainingLanguage;
+}
+
+function normalizeSentenceMetadata(row: RawSentenceRow): SentenceStimulus {
+  const training = row.training_metadata || {};
+  const clinical = row.clinical_metadata || {};
+
+  return {
+    ...row,
+    clinical_metadata: {
+      target_keyword: clinical.target_keyword || training.target_keyword || '',
+      target_phoneme: clinical.target_phoneme || training.target_phoneme || '',
+      question_text: clinical.question_text || training.question_text || '',
+      correct_answer: clinical.correct_answer || training.correct_answer || '',
+      acoustic_foil: clinical.acoustic_foil || training.acoustic_foil,
+      semantic_foil: clinical.semantic_foil || training.semantic_foil,
+      distractor_1: clinical.distractor_1 || training.distractor_1 || clinical.acoustic_foil || training.acoustic_foil,
+      distractor_2: clinical.distractor_2 || training.distractor_2 || clinical.semantic_foil || training.semantic_foil,
+      distractor_3: clinical.distractor_3 || training.distractor_3,
+      scenario: clinical.scenario || training.scenario || '',
+      difficulty: clinical.difficulty || training.difficulty || row.difficulty || 1,
+    },
+  };
 }
 
 export function useSentenceData(options: UseSentenceDataOptions = {}) {
@@ -56,11 +91,16 @@ export function useSentenceData(options: UseSentenceDataOptions = {}) {
     setError(null);
 
     try {
+      const contentLanguage = normalizeTrainingLanguage(options.contentLanguage);
+
       // Fetch stimuli WHERE content_type = 'sentence'
-      let stimuliQuery = supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('content_type', 'sentence');
+      let stimuliQuery = applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('content_type', 'sentence'),
+        contentLanguage
+      );
 
       // Apply filters on clinical_metadata JSONB
       if (options.difficulty) {
@@ -98,8 +138,8 @@ export function useSentenceData(options: UseSentenceDataOptions = {}) {
       if (audioError) throw audioError;
 
       // Merge stimuli with audio assets
-      const sentencesWithAudio: SentenceWithAudio[] = stimuliData.map((stimulus) => ({
-        ...stimulus,
+      const sentencesWithAudio: SentenceWithAudio[] = (stimuliData as RawSentenceRow[]).map((stimulus) => ({
+        ...normalizeSentenceMetadata(stimulus),
         audio_assets: audioData?.filter((a) => a.stimuli_id === stimulus.id) || [],
       }));
 
@@ -118,7 +158,7 @@ export function useSentenceData(options: UseSentenceDataOptions = {}) {
 /**
  * Hook to get a single sentence with audio
  */
-export function useSentence(sentenceId: string, voiceId: string) {
+export function useSentence(sentenceId: string, voiceId: string, contentLanguage: TrainingLanguage = 'en') {
   const [sentence, setSentence] = useState<SentenceWithAudio | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -126,7 +166,7 @@ export function useSentence(sentenceId: string, voiceId: string) {
   useEffect(() => {
     if (!sentenceId) return;
     fetchSentence();
-  }, [sentenceId, voiceId]);
+  }, [sentenceId, voiceId, contentLanguage]);
 
   const fetchSentence = async () => {
     setLoading(true);
@@ -134,12 +174,14 @@ export function useSentence(sentenceId: string, voiceId: string) {
 
     try {
       // Fetch stimulus
-      const { data: stimulusData, error: stimulusError } = await supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('id', sentenceId)
-        .eq('content_type', 'sentence')
-        .single();
+      const { data: stimulusData, error: stimulusError } = await applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('id', sentenceId)
+          .eq('content_type', 'sentence'),
+        normalizeTrainingLanguage(contentLanguage)
+      ).single();
 
       if (stimulusError) throw stimulusError;
 
@@ -153,7 +195,7 @@ export function useSentence(sentenceId: string, voiceId: string) {
       if (audioError) throw audioError;
 
       setSentence({
-        ...stimulusData,
+        ...normalizeSentenceMetadata(stimulusData as RawSentenceRow),
         audio_assets: audioData || [],
       });
     } catch (err) {

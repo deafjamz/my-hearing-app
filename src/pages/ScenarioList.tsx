@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import { Coffee, ChevronRight } from 'lucide-react';
 import { ActivityHeader } from '@/components/ui/ActivityHeader';
 import { supabase } from '@/lib/supabase';
+import { useUser } from '@/store/UserContext';
+import { normalizeTrainingLanguage } from '@/lib/trainingLanguage';
+import { isSpanishScenarioId } from '@/lib/spanishScenarioCatalog';
 import { Scenario } from '@/types/activity';
 
 export function ScenarioList() {
+  const { preferredLanguage } = useUser();
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +26,12 @@ export function ScenarioList() {
         if (error) {
           console.error("Error fetching scenarios:", error);
         } else if (data) {
-          setScenarios(data as Scenario[]);
+          const localized = (data as Scenario[]).filter((scenario) => (
+            contentLanguage === 'es'
+              ? isSpanishScenarioId(scenario.id)
+              : !isSpanishScenarioId(scenario.id)
+          ));
+          setScenarios(localized);
         }
       } catch (err) {
         console.error("Failed to fetch scenarios:", err);
@@ -31,12 +41,12 @@ export function ScenarioList() {
     };
 
     fetchScenarios();
-  }, []);
+  }, [contentLanguage]);
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <header className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50">
-        <ActivityHeader title="Everyday Scenarios" backPath="/practice" />
+        <ActivityHeader title={contentLanguage === 'es' ? 'Escenarios cotidianos' : 'Everyday Scenarios'} backPath="/practice" />
       </header>
 
       <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1">
