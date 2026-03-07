@@ -1,0 +1,85 @@
+{
+  "source_manifests": {
+    "templates": "content/spanish_templates_1x/spanish_launch_manifest.json",
+    "voice_report": "reports/spanish_voice_benchmark_deep.json"
+  },
+  "selected_voices": {
+    "male": {
+      "voice_id": "SHkfxEDcLXK31yPii5xM",
+      "name": "Sergio",
+      "locale": "es-CO",
+      "accent": "colombian",
+      "score": 0.2456
+    },
+    "female": {
+      "voice_id": "6Mo5ciGH5nWiQacn5FYk",
+      "name": "Roma",
+      "locale": "es-AR",
+      "accent": "argentine",
+      "score": 0.3092
+    }
+  },
+  "corpus_targets": {
+    "sentences": {
+      "target_count": 1000,
+      "source_count": 1000,
+      "strata": [
+        "difficulty",
+        "scenario"
+      ]
+    },
+    "conversations": {
+      "target_count": 160,
+      "source_count": 160,
+      "strata": [
+        "difficulty",
+        "category"
+      ]
+    },
+    "phoneme_drills": {
+      "target_count": 500,
+      "source_count": 500,
+      "strata": [
+        "difficulty",
+        "drill_pack_id"
+      ]
+    },
+    "scenarios": {
+      "target_count": 80,
+      "source_count": 80,
+      "strata": [
+        "difficulty",
+        "category",
+        "tier"
+      ]
+    },
+    "scenario_items": {
+      "target_count": 640,
+      "source_count": 640,
+      "strata": []
+    }
+  },
+  "credits": {
+    "monthly_available": 475000,
+    "projection": {
+      "sentence_chars_per_voice": 41821,
+      "conversation_chars_per_voice": 10575,
+      "phoneme_drill_chars_per_voice": 9085,
+      "scenario_chars_single_mix": 41628,
+      "total_chars_two_voice": 164590,
+      "total_chars_with_15pct_headroom": 189278
+    },
+    "projected_pct_of_monthly": 39.85,
+    "remaining_after_projection": 285722
+  },
+  "generation_defaults": {
+    "model_id": "eleven_multilingual_v2",
+    "voice_settings": {
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "style": 0.0
+    },
+    "normalization_lufs": -20.0,
+    "sample_rate_hz": 44100
+  }
+}

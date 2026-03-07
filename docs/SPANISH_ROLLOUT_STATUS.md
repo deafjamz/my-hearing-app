@@ -110,6 +110,7 @@ What is still staged:
 - Spanish source-content hardening
 - Spanish foil and drill-pack remediation
 - bilingual listening QC results
+- source-of-truth Spanish templates and rewrite queues awaiting merge
 
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
@@ -118,6 +119,7 @@ Verification artifact:
 ## Next Actions
 1. Run bilingual listening QC before exposing Spanish widely.
 2. Enforce repo-level validation before any future Spanish audio generation or ingest.
-3. Finish redesigning the remaining held drill packs.
-4. Rewrite sentence and conversation foil sets where English translation erased the intended auditory task.
-5. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+3. Version the Spanish source templates and rewrite queues as the canonical authoring set.
+4. Finish redesigning the remaining held drill packs.
+5. Rewrite sentence and conversation foil sets where English translation erased the intended auditory task.
+6. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.

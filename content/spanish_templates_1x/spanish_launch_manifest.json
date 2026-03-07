@@ -1,0 +1,325 @@
+{
+  "generated_by": "scripts/build_spanish_launch_templates.py",
+  "scale": 1.0,
+  "seed": 42,
+  "corpora": {
+    "sentences": {
+      "source_file": "content/source_csvs/sentences_v2.csv",
+      "output_file": "content/spanish_templates_1x/sentences_es_launch_template.csv",
+      "source_count": 1000,
+      "target_count": 1000,
+      "strata": [
+        "difficulty",
+        "scenario"
+      ],
+      "source_distribution": {
+        "difficulty": {
+          "2": 528,
+          "3": 338,
+          "1": 116,
+          "4": 18
+        },
+        "scenario": {
+          "Daily Life": 79,
+          "Medical": 61,
+          "Shopping": 55,
+          "Restaurant": 48,
+          "Directions": 45,
+          "Phone": 44,
+          "Work": 44,
+          "Social": 43,
+          "Travel": 27,
+          "Transportation": 27,
+          "Outdoors": 27,
+          "Technology": 27,
+          "Sports": 27,
+          "Nature": 27,
+          "Entertainment": 26,
+          "Finance": 26,
+          "Art": 25,
+          "Literature": 25,
+          "Automotive": 25,
+          "Cooking": 25,
+          "Education": 25,
+          "Pets": 20,
+          "Events": 17,
+          "Coffee Roaster": 13,
+          "Car Repair": 12,
+          "Laundromat": 12,
+          "Florist": 12,
+          "Bookstore": 12,
+          "Ice Cream Shop": 12,
+          "Hotel": 12,
+          "Dentist": 12,
+          "Barber": 12,
+          "Tailor": 12,
+          "Hardware Store": 12,
+          "Aquarium": 12,
+          "Bowling Alley": 12,
+          "Arcade": 12,
+          "Farmers Market": 12,
+          "Yoga Studio": 12,
+          "Gas Station": 12
+        }
+      },
+      "target_distribution": {
+        "difficulty": {
+          "2": 528,
+          "3": 338,
+          "1": 116,
+          "4": 18
+        },
+        "scenario": {
+          "Daily Life": 79,
+          "Medical": 61,
+          "Shopping": 55,
+          "Restaurant": 48,
+          "Directions": 45,
+          "Phone": 44,
+          "Work": 44,
+          "Social": 43,
+          "Travel": 27,
+          "Transportation": 27,
+          "Outdoors": 27,
+          "Technology": 27,
+          "Sports": 27,
+          "Nature": 27,
+          "Entertainment": 26,
+          "Finance": 26,
+          "Art": 25,
+          "Literature": 25,
+          "Automotive": 25,
+          "Cooking": 25,
+          "Education": 25,
+          "Pets": 20,
+          "Events": 17,
+          "Coffee Roaster": 13,
+          "Car Repair": 12,
+          "Laundromat": 12,
+          "Florist": 12,
+          "Bookstore": 12,
+          "Ice Cream Shop": 12,
+          "Hotel": 12,
+          "Dentist": 12,
+          "Barber": 12,
+          "Tailor": 12,
+          "Hardware Store": 12,
+          "Aquarium": 12,
+          "Bowling Alley": 12,
+          "Arcade": 12,
+          "Farmers Market": 12,
+          "Yoga Studio": 12,
+          "Gas Station": 12
+        }
+      }
+    },
+    "conversations": {
+      "source_file": "content/source_csvs/conversations_v1.csv",
+      "output_file": "content/spanish_templates_1x/conversations_es_launch_template.csv",
+      "source_count": 160,
+      "target_count": 160,
+      "strata": [
+        "difficulty",
+        "category"
+      ],
+      "source_distribution": {
+        "difficulty": {
+          "2": 90,
+          "3": 58,
+          "1": 11,
+          "4": 1
+        },
+        "category": {
+          "social": 20,
+          "medical": 20,
+          "directions": 18,
+          "shopping": 18,
+          "appointments": 10,
+          "phone_calls": 10,
+          "greetings": 8,
+          "small_talk": 8,
+          "dining": 8,
+          "health": 8,
+          "weather": 8,
+          "travel": 8,
+          "work": 8,
+          "family": 8
+        }
+      },
+      "target_distribution": {
+        "difficulty": {
+          "2": 90,
+          "3": 58,
+          "1": 11,
+          "4": 1
+        },
+        "category": {
+          "social": 20,
+          "medical": 20,
+          "directions": 18,
+          "shopping": 18,
+          "appointments": 10,
+          "phone_calls": 10,
+          "greetings": 8,
+          "small_talk": 8,
+          "dining": 8,
+          "health": 8,
+          "weather": 8,
+          "travel": 8,
+          "work": 8,
+          "family": 8
+        }
+      }
+    },
+    "phoneme_drills": {
+      "source_file": "content/source_csvs/phoneme_drills_v1.csv",
+      "output_file": "content/spanish_templates_1x/phoneme_drills_es_launch_template.csv",
+      "source_count": 500,
+      "target_count": 500,
+      "strata": [
+        "difficulty",
+        "drill_pack_id"
+      ],
+      "source_distribution": {
+        "difficulty": {
+          "3": 224,
+          "2": 155,
+          "4": 89,
+          "1": 19,
+          "5": 13
+        },
+        "drill_pack_id": {
+          "pack_p_vs_b": 20,
+          "drill_pack_14": 20,
+          "drill_pack_24": 20,
+          "drill_pack_23": 20,
+          "drill_pack_22": 20,
+          "drill_pack_21": 20,
+          "drill_pack_20": 20,
+          "drill_pack_19": 20,
+          "drill_pack_18": 20,
+          "drill_pack_17": 20,
+          "drill_pack_16": 20,
+          "drill_pack_15": 20,
+          "drill_pack_13": 20,
+          "pack_t_vs_d": 20,
+          "drill_pack_12": 20,
+          "drill_pack_11": 20,
+          "pack_e_vs_ae": 20,
+          "pack_i_vs_I": 20,
+          "pack_ch_vs_j": 20,
+          "pack_th_voiced_unvoiced": 20,
+          "pack_s_vs_sh": 20,
+          "pack_s_vs_z": 20,
+          "pack_f_vs_v": 20,
+          "pack_k_vs_g": 20,
+          "drill_pack_25": 20
+        }
+      },
+      "target_distribution": {
+        "difficulty": {
+          "3": 224,
+          "2": 155,
+          "4": 89,
+          "1": 19,
+          "5": 13
+        },
+        "drill_pack_id": {
+          "pack_p_vs_b": 20,
+          "drill_pack_14": 20,
+          "drill_pack_24": 20,
+          "drill_pack_23": 20,
+          "drill_pack_22": 20,
+          "drill_pack_21": 20,
+          "drill_pack_20": 20,
+          "drill_pack_19": 20,
+          "drill_pack_18": 20,
+          "drill_pack_17": 20,
+          "drill_pack_16": 20,
+          "drill_pack_15": 20,
+          "drill_pack_13": 20,
+          "pack_t_vs_d": 20,
+          "drill_pack_12": 20,
+          "drill_pack_11": 20,
+          "pack_e_vs_ae": 20,
+          "pack_i_vs_I": 20,
+          "pack_ch_vs_j": 20,
+          "pack_th_voiced_unvoiced": 20,
+          "pack_s_vs_sh": 20,
+          "pack_s_vs_z": 20,
+          "pack_f_vs_v": 20,
+          "pack_k_vs_g": 20,
+          "drill_pack_25": 20
+        }
+      }
+    },
+    "scenarios": {
+      "source_file": "content/source_csvs/scenarios_v2.csv",
+      "output_file": "content/spanish_templates_1x/scenarios_es_launch_template.csv",
+      "source_count": 80,
+      "target_count": 80,
+      "strata": [
+        "difficulty",
+        "category",
+        "tier"
+      ],
+      "source_distribution": {
+        "difficulty": {
+          "3": 40,
+          "2": 29,
+          "4": 11
+        },
+        "category": {
+          "medical": 13,
+          "travel": 11,
+          "shopping": 9,
+          "professional": 9,
+          "errands": 8,
+          "services": 8,
+          "social": 8,
+          "phone": 7,
+          "dining": 4,
+          "entertainment": 2,
+          "transit": 1
+        },
+        "tier": {
+          "standard": 40,
+          "premium": 23,
+          "free": 17
+        }
+      },
+      "target_distribution": {
+        "difficulty": {
+          "3": 40,
+          "2": 29,
+          "4": 11
+        },
+        "category": {
+          "medical": 13,
+          "travel": 11,
+          "shopping": 9,
+          "professional": 9,
+          "errands": 8,
+          "services": 8,
+          "social": 8,
+          "phone": 7,
+          "dining": 4,
+          "entertainment": 2,
+          "transit": 1
+        },
+        "tier": {
+          "standard": 40,
+          "premium": 23,
+          "free": 17
+        }
+      }
+    },
+    "scenario_items": {
+      "source_file": "content/source_csvs/scenario_items_v2.csv",
+      "output_file": "content/spanish_templates_1x/scenario_items_es_launch_template.csv",
+      "source_count": 640,
+      "target_count": 640,
+      "selection_logic": "All items belonging to selected scenarios"
+    }
+  }
+}

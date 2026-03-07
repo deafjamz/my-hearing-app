@@ -31,11 +31,24 @@ Result:
 ## Required Workflow
 1. Author or revise Spanish source templates.
 2. Run `python3 scripts/build_spanish_review_queues.py`.
-3. Run `python3 scripts/validate_spanish_launch_content.py --templates-dir <dir>`.
-4. Resolve all validation errors.
-5. Generate audio only after validation is clean.
-6. Run bilingual listening QC on generated assets.
-7. Ingest only validated, reviewed content.
+3. Run `python3 scripts/build_spanish_rewrite_queues.py`.
+4. Run `python3 scripts/validate_spanish_launch_content.py --templates-dir <dir>`.
+5. Resolve all validation errors.
+6. Generate audio only after validation is clean.
+7. Run bilingual listening QC on generated assets.
+8. Ingest only validated, reviewed content.
+
+## Source Of Truth
+The current Spanish launch source of truth lives in:
+- `content/spanish_templates_1x/`
+
+That directory should carry:
+- launch templates
+- execution manifests
+- drill redesign queues
+- sentence and conversation foil rewrite queues
+
+Derived caches should stay out of the source-of-truth path.
 
 ## Governance Standard
 For Spanish content, the unit of approval is:
@@ -50,6 +63,11 @@ Not just an individual translated row.
 - Spanish detection is directionally sound.
 - Spanish drills need pack-level redesign wherever English phonology drove the source contrast.
 - Spanish sentences and conversations need foil review where translation erased the auditory task.
+
+Current queued rewrite scope from the versioned source set:
+- `96` sentence rows in `sentences_foil_rewrite_queue.csv`
+- `5` conversation rows in `conversations_foil_rewrite_queue.csv`
+- `8` drill rows in `phoneme_drills_pack_redesign_queue.csv`
 
 ## Non-Negotiable Prevention
 If Spanish source content is not versioned, reviewed, validated, and blocked by code when weak, this failure will recur.
