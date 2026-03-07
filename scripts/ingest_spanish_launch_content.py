@@ -24,12 +24,14 @@ from typing import Iterable
 import pandas as pd
 from supabase import Client, create_client
 
+from validate_spanish_launch_content import summarize_findings, validate_templates
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TEMPLATES_DIR = ROOT / "content" / "spanish_templates_1x"
 DEFAULT_REPORT_PATH = ROOT / "reports" / "spanish_ingest_plan.json"
 VOICE_IDS = ("sergio", "roma")
-APPROVED_DRILL_STATUSES = {"", "machine_translated", "clinically_reviewed", "approved_for_launch"}
+APPROVED_DRILL_STATUSES = {"clinically_reviewed", "approved_for_launch"}
 UUID_NAMESPACE = uuid.UUID("3cb41992-5ab6-4f8a-9f93-71ba0f6714e0")
 
 
@@ -347,10 +349,23 @@ def main() -> None:
     parser.add_argument("--report", default=str(DEFAULT_REPORT_PATH))
     parser.add_argument("--apply", action="store_true", help="Write records to Supabase")
     parser.add_argument("--batch-size", type=int, default=250)
+    parser.add_argument(
+        "--skip-validation",
+        action="store_true",
+        help="Skip launch-content validation. Use only for forensic inspection, not production ingest.",
+    )
     args = parser.parse_args()
 
     templates_dir = Path(args.templates_dir)
     report_path = Path(args.report)
+
+    if not args.skip_validation:
+        findings = validate_templates(templates_dir)
+        if findings["errors"]:
+            print("Spanish content validation failed:")
+            print(json.dumps(summarize_findings(findings), indent=2, ensure_ascii=False))
+            raise SystemExit(1)
+
     plan = build_plan(templates_dir)
     write_report(report_path, plan)
 
