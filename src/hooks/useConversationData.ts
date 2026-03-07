@@ -1,6 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
-import { useVoice } from '../store/VoiceContext';
+import { useUser } from '@/store/UserContext';
+import {
+  applyClinicalMetadataLanguageFilter,
+  getAudioVoiceKey,
+  normalizeTrainingLanguage,
+} from '@/lib/trainingLanguage';
 import type { StimulusCatalog, ConversationCategory } from '../types/database.types';
 
 export interface ConversationPair {
@@ -17,6 +22,8 @@ export interface ConversationPair {
   plausibleFoil: string;
   promptAudioUrl: string | null;
   responseAudioUrl: string | null;
+  contentLanguage: 'en' | 'es';
+  sourceRowId: string;
 }
 
 interface UseConversationDataReturn {
@@ -31,22 +38,27 @@ interface UseConversationDataReturn {
 }
 
 export function useConversationData(): UseConversationDataReturn {
-  const { currentVoice } = useVoice();
+  const { voice, preferredLanguage } = useUser();
   const [conversations, setConversations] = useState<ConversationPair[]>([]);
   const [categories, setCategories] = useState<ConversationCategory[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const trainingLanguage = normalizeTrainingLanguage(preferredLanguage);
+  const audioVoiceKey = getAudioVoiceKey(voice, trainingLanguage);
 
   const getAudioUrl = useCallback((conversationId: string, type: 'prompt' | 'response'): string => {
-    const path = `conversations/${currentVoice}/${conversationId}_${type}.mp3`;
+    const path = trainingLanguage === 'es'
+      ? `spanish/conversations/${audioVoiceKey}/${conversationId}_${type}.mp3`
+      : `conversations/${audioVoiceKey}/${conversationId}_${type}.mp3`;
     const { data } = supabase.storage.from('audio').getPublicUrl(path);
     return data.publicUrl;
-  }, [currentVoice]);
+  }, [audioVoiceKey, trainingLanguage]);
 
   const transformRow = useCallback((row: StimulusCatalog): ConversationPair => {
     const meta = typeof row.clinical_metadata === 'string'
       ? JSON.parse(row.clinical_metadata)
       : row.clinical_metadata || {};
+    const sourceRowId = String(meta.source_row_id || row.id);
 
     return {
       id: row.id,
@@ -60,21 +72,25 @@ export function useConversationData(): UseConversationDataReturn {
       acousticFoil: meta.acoustic_foil || '',
       semanticFoil: meta.semantic_foil || '',
       plausibleFoil: meta.plausible_foil || '',
-      promptAudioUrl: getAudioUrl(row.id, 'prompt'),
-      responseAudioUrl: getAudioUrl(row.id, 'response'),
+      promptAudioUrl: getAudioUrl(sourceRowId, 'prompt'),
+      responseAudioUrl: getAudioUrl(sourceRowId, 'response'),
+      contentLanguage: trainingLanguage,
+      sourceRowId,
     };
-  }, [getAudioUrl]);
+  }, [getAudioUrl, trainingLanguage]);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data, error: queryError } = await supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('content_type', 'conversation')
-        .order('difficulty', { ascending: true });
+      const { data, error: queryError } = await applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('content_type', 'conversation'),
+        trainingLanguage
+      ).order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
 
@@ -85,19 +101,21 @@ export function useConversationData(): UseConversationDataReturn {
     } finally {
       setLoading(false);
     }
-  }, [transformRow]);
+  }, [trainingLanguage, transformRow]);
 
   const fetchByCategory = useCallback(async (category: string) => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data, error: queryError } = await supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('content_type', 'conversation')
-        .contains('clinical_metadata', { category })
-        .order('difficulty', { ascending: true });
+      const { data, error: queryError } = await applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('content_type', 'conversation')
+          .contains('clinical_metadata', { category }),
+        trainingLanguage
+      ).order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
 
@@ -108,10 +126,14 @@ export function useConversationData(): UseConversationDataReturn {
     } finally {
       setLoading(false);
     }
-  }, [transformRow]);
+  }, [trainingLanguage, transformRow]);
 
   const fetchCategories = useCallback(async () => {
     try {
+      if (trainingLanguage === 'es') {
+        throw new Error('use fallback for localized categories');
+      }
+
       const { data, error: queryError } = await supabase
         .from('conversation_categories')
         .select('*');
@@ -124,10 +146,19 @@ export function useConversationData(): UseConversationDataReturn {
           .from('stimuli_catalog')
           .select('clinical_metadata, difficulty, target_phoneme')
           .eq('content_type', 'conversation');
+          // Language segmentation is stored in clinical_metadata for Spanish.
 
-        if (fallbackData) {
+        const localizedData = (fallbackData || []).filter((row) => {
+          const meta = typeof row.clinical_metadata === 'string'
+            ? JSON.parse(row.clinical_metadata)
+            : row.clinical_metadata || {};
+          const rowLanguage = meta.content_language || 'en';
+          return rowLanguage === trainingLanguage;
+        });
+
+        if (localizedData.length > 0) {
           const catMap = new Map<string, ConversationCategory>();
-          for (const row of fallbackData) {
+          for (const row of localizedData) {
             const meta = typeof row.clinical_metadata === 'string'
               ? JSON.parse(row.clinical_metadata)
               : row.clinical_metadata || {};
@@ -144,7 +175,7 @@ export function useConversationData(): UseConversationDataReturn {
             }
 
             const entry = catMap.get(cat)!;
-            entry.total_pairs++;
+            entry.total_pairs = (entry.total_pairs ?? 0) + 1;
             entry.min_difficulty = Math.min(entry.min_difficulty, row.difficulty || 1);
             entry.max_difficulty = Math.max(entry.max_difficulty, row.difficulty || 1);
           }
@@ -158,7 +189,7 @@ export function useConversationData(): UseConversationDataReturn {
     } catch (e) {
       console.warn('Failed to fetch conversation categories:', e);
     }
-  }, []);
+  }, [trainingLanguage]);
 
   const getRandomPair = useCallback((category?: string): ConversationPair | null => {
     let pool = conversations;

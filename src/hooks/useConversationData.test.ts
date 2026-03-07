@@ -13,6 +13,8 @@ function createQueryChain(resolvedValue: { data: unknown; error: unknown }) {
 
   chain.select = vi.fn(() => chain);
   chain.eq = vi.fn(() => chain);
+  chain.filter = vi.fn(() => chain);
+  chain.or = vi.fn(() => chain);
   chain.contains = vi.fn(() => chain);
   chain.order = vi.fn(() => chain);
   chain.limit = vi.fn(() => chain);
@@ -42,8 +44,8 @@ vi.mock('@/lib/supabase', () => ({
   },
 }));
 
-vi.mock('@/store/VoiceContext', () => ({
-  useVoice: () => ({ currentVoice: 'sarah' }),
+vi.mock('@/store/UserContext', () => ({
+  useUser: () => ({ voice: 'sarah', preferredLanguage: 'en' }),
 }));
 
 // --- Sample data ---
@@ -193,6 +195,7 @@ describe('useConversationData', () => {
 
       expect(mockFrom).toHaveBeenCalledWith('stimuli_catalog');
       expect(catalogChain.eq).toHaveBeenCalledWith('content_type', 'conversation');
+      expect(catalogChain.or).toHaveBeenCalledWith('clinical_metadata->>content_language.is.null,clinical_metadata->>content_language.eq.en');
     });
 
     it('sets loading to false and error to null on success', async () => {
@@ -230,6 +233,7 @@ describe('useConversationData', () => {
       });
 
       expect(catalogChain.contains).toHaveBeenCalledWith('clinical_metadata', { category: 'appointments' });
+      expect(catalogChain.or).toHaveBeenCalledWith('clinical_metadata->>content_language.is.null,clinical_metadata->>content_language.eq.en');
     });
   });
 
@@ -255,7 +259,7 @@ describe('useConversationData', () => {
     it('falls back to manual aggregation when view query errors', async () => {
       viewChain = createQueryChain({ data: null, error: { message: 'relation does not exist' } });
 
-      const { result } = renderHook(() => useConversationData());
+      renderHook(() => useConversationData());
 
       // Fallback uses stimuli_catalog; the mock returns conv rows
       await waitFor(() => {
@@ -266,8 +270,11 @@ describe('useConversationData', () => {
   });
 
   describe('getRandomPair', () => {
-    it('returns null when no conversations loaded', () => {
+    it('returns null when no conversations loaded', async () => {
       const { result } = renderHook(() => useConversationData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('conversation_categories');
+      });
       expect(result.current.getRandomPair()).toBeNull();
     });
 
@@ -316,15 +323,21 @@ describe('useConversationData', () => {
   });
 
   describe('getAudioUrl', () => {
-    it('builds URL with voice and conversation type', () => {
+    it('builds URL with voice and conversation type', async () => {
       const { result } = renderHook(() => useConversationData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('conversation_categories');
+      });
       const url = result.current.getAudioUrl('conv-001', 'prompt');
       expect(mockGetPublicUrl).toHaveBeenCalledWith('conversations/sarah/conv-001_prompt.mp3');
       expect(url).toContain('conversations/sarah/conv-001_prompt.mp3');
     });
 
-    it('builds response URL correctly', () => {
+    it('builds response URL correctly', async () => {
       const { result } = renderHook(() => useConversationData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('conversation_categories');
+      });
       const url = result.current.getAudioUrl('conv-001', 'response');
       expect(mockGetPublicUrl).toHaveBeenCalledWith('conversations/sarah/conv-001_response.mp3');
       expect(url).toContain('conversations/sarah/conv-001_response.mp3');

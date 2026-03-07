@@ -1,6 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
-import { useVoice } from '../store/VoiceContext';
+import { useUser } from '@/store/UserContext';
+import {
+  applyClinicalMetadataLanguageFilter,
+  getAudioVoiceKey,
+  normalizeTrainingLanguage,
+  slugifyAudioToken,
+} from '@/lib/trainingLanguage';
 import type { StimulusCatalog, DrillPackSummary } from '../types/database.types';
 
 export interface DrillPair {
@@ -20,6 +26,8 @@ export interface DrillPair {
   clinicalNote: string;
   word1AudioUrl: string | null;
   word2AudioUrl: string | null;
+  contentLanguage: 'en' | 'es';
+  sourceRowId: string;
 }
 
 interface UseDrillPackDataReturn {
@@ -35,17 +43,22 @@ interface UseDrillPackDataReturn {
 }
 
 export function useDrillPackData(): UseDrillPackDataReturn {
-  const { currentVoice } = useVoice();
+  const { voice, preferredLanguage } = useUser();
   const [drillPairs, setDrillPairs] = useState<DrillPair[]>([]);
   const [packs, setPacks] = useState<DrillPackSummary[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const trainingLanguage = normalizeTrainingLanguage(preferredLanguage);
+  const audioVoiceKey = getAudioVoiceKey(voice, trainingLanguage);
 
   const getAudioUrl = useCallback((drillId: string, packId: string, word: string): string => {
-    const path = `drills/${currentVoice}/${packId}/${drillId}_${word}.mp3`;
+    const token = trainingLanguage === 'es' ? slugifyAudioToken(word) : word;
+    const path = trainingLanguage === 'es'
+      ? `spanish/drills/${audioVoiceKey}/${packId}/${drillId}_${token}.mp3`
+      : `drills/${audioVoiceKey}/${packId}/${drillId}_${word}.mp3`;
     const { data } = supabase.storage.from('audio').getPublicUrl(path);
     return data.publicUrl;
-  }, [currentVoice]);
+  }, [audioVoiceKey, trainingLanguage]);
 
   const transformRow = useCallback((row: StimulusCatalog): DrillPair => {
     const meta = typeof row.clinical_metadata === 'string'
@@ -54,6 +67,7 @@ export function useDrillPackData(): UseDrillPackDataReturn {
     const packId = row.drill_pack_id || '';
     const word1 = row.content_text;
     const word2 = row.text_alt || '';
+    const sourceRowId = String(meta.source_row_id || row.id);
 
     return {
       id: row.id,
@@ -70,20 +84,25 @@ export function useDrillPackData(): UseDrillPackDataReturn {
       ipa1: meta.ipa_1 || '',
       ipa2: meta.ipa_2 || '',
       clinicalNote: meta.clinical_note || '',
-      word1AudioUrl: getAudioUrl(row.id, packId, word1),
-      word2AudioUrl: getAudioUrl(row.id, packId, word2),
+      word1AudioUrl: getAudioUrl(sourceRowId, packId, word1),
+      word2AudioUrl: getAudioUrl(sourceRowId, packId, word2),
+      contentLanguage: trainingLanguage,
+      sourceRowId,
     };
-  }, [getAudioUrl]);
+  }, [getAudioUrl, trainingLanguage]);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data, error: queryError } = await supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('content_type', 'phoneme_drill')
+      const { data, error: queryError } = await applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('content_type', 'phoneme_drill'),
+        trainingLanguage
+      )
         .order('drill_pack_id', { ascending: true })
         .order('difficulty', { ascending: true });
 
@@ -96,19 +115,21 @@ export function useDrillPackData(): UseDrillPackDataReturn {
     } finally {
       setLoading(false);
     }
-  }, [transformRow]);
+  }, [trainingLanguage, transformRow]);
 
   const fetchByPack = useCallback(async (packId: string) => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data, error: queryError } = await supabase
-        .from('stimuli_catalog')
-        .select('*')
-        .eq('content_type', 'phoneme_drill')
-        .eq('drill_pack_id', packId)
-        .order('difficulty', { ascending: true });
+      const { data, error: queryError } = await applyClinicalMetadataLanguageFilter(
+        supabase
+          .from('stimuli_catalog')
+          .select('*')
+          .eq('content_type', 'phoneme_drill')
+          .eq('drill_pack_id', packId),
+        trainingLanguage
+      ).order('difficulty', { ascending: true });
 
       if (queryError) throw queryError;
 
@@ -119,10 +140,14 @@ export function useDrillPackData(): UseDrillPackDataReturn {
     } finally {
       setLoading(false);
     }
-  }, [transformRow]);
+  }, [trainingLanguage, transformRow]);
 
   const fetchPacks = useCallback(async () => {
     try {
+      if (trainingLanguage === 'es') {
+        throw new Error('use fallback for localized drill packs');
+      }
+
       const { data, error: queryError } = await supabase
         .from('drill_pack_summary')
         .select('*');
@@ -136,9 +161,17 @@ export function useDrillPackData(): UseDrillPackDataReturn {
           .select('drill_pack_id, target_phoneme, contrast_phoneme, clinical_metadata, difficulty')
           .eq('content_type', 'phoneme_drill');
 
-        if (fallbackData) {
+        const localizedData = (fallbackData || []).filter((row) => {
+          const meta = typeof row.clinical_metadata === 'string'
+            ? JSON.parse(row.clinical_metadata)
+            : row.clinical_metadata || {};
+          const rowLanguage = meta.content_language || 'en';
+          return rowLanguage === trainingLanguage;
+        });
+
+        if (localizedData.length > 0) {
           const packMap = new Map<string, DrillPackSummary>();
-          for (const row of fallbackData) {
+          for (const row of localizedData) {
             const packId = row.drill_pack_id;
             if (!packId) continue;
 
@@ -175,7 +208,7 @@ export function useDrillPackData(): UseDrillPackDataReturn {
     } catch (e) {
       console.warn('Failed to fetch drill packs:', e);
     }
-  }, []);
+  }, [trainingLanguage]);
 
   const getRandomPair = useCallback((packId?: string): DrillPair | null => {
     let pool = drillPairs;

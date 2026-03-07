@@ -8,12 +8,13 @@ import { supabase } from '@/lib/supabase';
 
 export function Settings() {
   const { theme, toggleTheme } = useTheme();
-  const { user, voice, setVoice, hardMode, setHardMode } = useUser();
+  const { user, voice, setVoice, preferredLanguage, setPreferredLanguage, hardMode, setHardMode } = useUser();
   const { availableVoices } = useVoice();
   const [emailDigest, setEmailDigest] = useState<boolean>(() => {
     return localStorage.getItem('emailWeeklyDigest') === 'true';
   });
   const [digestSaving, setDigestSaving] = useState(false);
+  const [languageSaving, setLanguageSaving] = useState(false);
 
   const toggleEmailDigest = async () => {
     if (!user || digestSaving) return;
@@ -32,6 +33,28 @@ export function Settings() {
       // Silently fail — user can retry
     } finally {
       setDigestSaving(false);
+    }
+  };
+
+  const handleLanguageChange = async (nextLanguage: 'en' | 'es') => {
+    if (preferredLanguage === nextLanguage || languageSaving) return;
+
+    setPreferredLanguage(nextLanguage);
+    if (!user) return;
+
+    setLanguageSaving(true);
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ preferred_language: nextLanguage })
+        .eq('id', user.id);
+      if (error) {
+        console.warn('Could not sync preferred language to profile:', error.message);
+      }
+    } catch {
+      // Keep local preference even if cloud sync is not available yet.
+    } finally {
+      setLanguageSaving(false);
     }
   };
 
@@ -69,6 +92,30 @@ export function Settings() {
       {/* Training Mode */}
       <section className="mb-8">
         <h2 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 ml-1">Training Mode</h2>
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <button
+            onClick={() => handleLanguageChange('en')}
+            className={`p-4 rounded-[2rem] border text-left transition-all ${
+              preferredLanguage === 'en'
+                ? 'bg-teal-50 dark:bg-teal-900/10 border-teal-200 dark:border-teal-800 ring-1 ring-teal-500/20'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white">English</div>
+            <div className="text-xs text-slate-500 font-medium">Current launch baseline</div>
+          </button>
+          <button
+            onClick={() => handleLanguageChange('es')}
+            className={`p-4 rounded-[2rem] border text-left transition-all ${
+              preferredLanguage === 'es'
+                ? 'bg-teal-50 dark:bg-teal-900/10 border-teal-200 dark:border-teal-800 ring-1 ring-teal-500/20'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white">Spanish</div>
+            <div className="text-xs text-slate-500 font-medium">Launch corpus in progress</div>
+          </button>
+        </div>
         <div
           onClick={() => setHardMode(!hardMode)}
           className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-sm cursor-pointer hover:scale-[1.02] transition-transform duration-200"

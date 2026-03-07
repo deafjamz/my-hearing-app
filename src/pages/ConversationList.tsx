@@ -72,7 +72,7 @@ export function ConversationList() {
                       <div className="flex items-center gap-2 flex-wrap">
                         <div className="px-3 py-1 bg-slate-800 rounded-full">
                           <span className="text-slate-300 text-xs font-medium">
-                            {cat.total_conversations} conversations
+                            {cat.total_conversations ?? cat.total_pairs ?? 0} conversations
                           </span>
                         </div>
                         <div className="px-3 py-1 bg-slate-800 rounded-full">

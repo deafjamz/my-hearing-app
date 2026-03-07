@@ -3,6 +3,7 @@ import { Play, ArrowRight, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useWordPairs } from '../hooks/useActivityData';
+import { useDetectionData } from '../hooks/useDetectionData';
 import { ActivityHeader } from '../components/ui/ActivityHeader';
 import { SessionSummary } from '../components/SessionSummary';
 import { useProgress } from '../hooks/useProgress';
@@ -15,43 +16,35 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { useSilentSentinel } from '../hooks/useSilentSentinel';
 import { getVoiceGender } from '../lib/voiceGender';
 import { useTodaysPlan } from '../hooks/useTodaysPlan';
+import { getAudioVoiceKey, normalizeTrainingLanguage } from '../lib/trainingLanguage';
 
 const SESSION_LENGTH = 10;
 
-/**
- * Detection Activity - Erber Level 1 (Easiest)
- *
- * "Did you hear a word?"
- * - Plays either a word OR silence
- * - User responds Yes or No
- * - 95%+ accuracy expected for CI users
- * - Builds confidence before discrimination training
- *
- * Reuses existing word audio from words_v2
- */
-
 interface DetectionRound {
   id: string;
-  hasSound: boolean;       // true = play word, false = silence
-  audioUrl: string | null; // null for silence rounds
-  word: string | null;     // The word (for logging), null for silence
+  hasSound: boolean;
+  audioUrl: string | null;
+  word: string | null;
+  blockType?: string;
 }
 
 export function Detection() {
   const navigate = useNavigate();
   const { logProgress } = useProgress();
-  const { voice, startPracticeSession, endPracticeSession } = useUser();
+  const { voice, preferredLanguage, startPracticeSession, endPracticeSession } = useUser();
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
+  const selectedVoice = getAudioVoiceKey(voice, contentLanguage);
+  const usingSpanishDetection = contentLanguage === 'es';
   const { pairs, loading } = useWordPairs(voice || 'sarah');
-
-  // Silent Sentinel — keeps BT audio route alive for CI accessories
-  // playUrl routes audio through same AudioContext so BT hearing aids receive it
+  const {
+    stimuli: detectionStimuli,
+    loading: detectionLoading,
+    error: detectionError,
+  } = useDetectionData({ voiceId: selectedVoice, contentLanguage });
   const { ensureResumed, playUrl } = useSilentSentinel();
   const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
 
-  // Briefing state
   const [hasStarted, setHasStarted] = useState(false);
-
-  // Session state
   const [rounds, setRounds] = useState<DetectionRound[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
@@ -60,26 +53,38 @@ export function Detection() {
   const [isComplete, setIsComplete] = useState(false);
   const [startTime, setStartTime] = useState<number>(Date.now());
   const [audioError, setAudioError] = useState(false);
-
-  // Replay tracking
   const [replayCount, setReplayCount] = useState(0);
-
-  // Stats
   const [correct, setCorrect] = useState(0);
   const [total, setTotal] = useState(0);
 
   const currentRound = rounds[currentIndex];
   const hasAnswered = selectedAnswer !== null;
 
-  // Generate rounds from available words
   useEffect(() => {
-    if (!loading && pairs.length > 0) {
-      // Shuffle pairs and take session length
-      const shuffled = [...pairs].sort(() => Math.random() - 0.5).slice(0, SESSION_LENGTH);
+    if (usingSpanishDetection) {
+      if (!detectionLoading && detectionStimuli.length > 0) {
+        const shuffled = [...detectionStimuli].sort(() => Math.random() - 0.5).slice(0, SESSION_LENGTH);
+        const detectionRounds: DetectionRound[] = shuffled.map((stimulus, i) => {
+          const hasSound = Math.random() > 0.3;
+          return {
+            id: stimulus.id || `detection-es-${i}`,
+            hasSound,
+            audioUrl: hasSound ? stimulus.audioUrl : null,
+            word: hasSound ? stimulus.text : null,
+            blockType: stimulus.blockType,
+          };
+        });
+        setRounds(detectionRounds);
+        setCurrentIndex(0);
+        setStartTime(Date.now());
+      }
+      return;
+    }
 
-      // Create detection rounds - 70% sound, 30% silence
+    if (!loading && pairs.length > 0) {
+      const shuffled = [...pairs].sort(() => Math.random() - 0.5).slice(0, SESSION_LENGTH);
       const detectionRounds: DetectionRound[] = shuffled.map((pair, i) => {
-        const hasSound = Math.random() > 0.3; // 70% have sound
+        const hasSound = Math.random() > 0.3;
         const isWord1 = Math.random() > 0.5;
         const word = isWord1 ? pair.word_1 : pair.word_2;
         const audio = isWord1 ? pair.audio_1 : pair.audio_2;
@@ -89,6 +94,7 @@ export function Detection() {
           hasSound,
           audioUrl: hasSound ? audio : null,
           word: hasSound ? word : null,
+          blockType: 'word_pair',
         };
       });
 
@@ -96,26 +102,23 @@ export function Detection() {
       setCurrentIndex(0);
       setStartTime(Date.now());
     }
-  }, [loading, pairs]);
+  }, [loading, pairs, usingSpanishDetection, detectionLoading, detectionStimuli]);
 
-  // Start/end practice session
   useEffect(() => {
     startPracticeSession();
     return () => endPracticeSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Play audio (word or silence) — routes through Web Audio API for BT hearing aids
   const handlePlay = useCallback(async () => {
     if (!currentRound || isPlaying) return;
 
-    await ensureResumed(); // Warm up BT route on first tap
+    await ensureResumed();
     if (audioPlayed) setReplayCount(prev => prev + 1);
     setIsPlaying(true);
     setStartTime(Date.now());
 
     if (currentRound.hasSound && currentRound.audioUrl) {
-      // Play through sentinel's AudioContext (same destination as BT keepalive)
       try {
         setAudioError(false);
         await playUrl(currentRound.audioUrl);
@@ -125,18 +128,16 @@ export function Detection() {
       setIsPlaying(false);
       setAudioPlayed(true);
     } else {
-      // Silence - just wait 1-2 seconds
       const silenceDuration = 1000 + Math.random() * 1000;
       setTimeout(() => {
         setIsPlaying(false);
         setAudioPlayed(true);
       }, silenceDuration);
     }
-  }, [currentRound, isPlaying, ensureResumed, playUrl]);
+  }, [currentRound, isPlaying, ensureResumed, playUrl, audioPlayed]);
 
-  // Handle user answer
   const handleAnswer = (userSaidYes: boolean) => {
-    if (hasAnswered || !audioPlayed) return;
+    if (hasAnswered || !audioPlayed || !currentRound) return;
 
     const responseTime = Date.now() - startTime;
     const isCorrect = userSaidYes === currentRound.hasSound;
@@ -151,9 +152,8 @@ export function Detection() {
       hapticFailure();
     }
 
-    // Log progress with detection-specific metadata
     logProgress({
-      contentType: 'word',
+      contentType: usingSpanishDetection ? 'sentence' : 'word',
       contentId: currentRound.id,
       result: isCorrect ? 'correct' : 'incorrect',
       userResponse: userSaidYes ? 'yes' : 'no',
@@ -161,10 +161,12 @@ export function Detection() {
       responseTimeMs: responseTime,
       metadata: {
         activityType: 'detection',
-        voiceId: voice || 'sarah',
-        voiceGender: getVoiceGender(voice || 'sarah'),
+        voiceId: selectedVoice,
+        voiceGender: getVoiceGender(selectedVoice),
+        contentLanguage,
         word: currentRound.word || undefined,
         hasSound: currentRound.hasSound,
+        blockType: currentRound.blockType,
         trialNumber: currentIndex,
         replayCount,
         clinicalCategory: 'detection',
@@ -172,7 +174,6 @@ export function Detection() {
     });
   };
 
-  // Advance to next round
   const handleNext = () => {
     if (currentIndex < rounds.length - 1) {
       setCurrentIndex(prev => prev + 1);
@@ -185,12 +186,18 @@ export function Detection() {
     }
   };
 
+  const detectionTitle = usingSpanishDetection ? 'Detección de sonido' : 'Sound Detection';
+  const detectionPrompt = usingSpanishDetection ? 'Escuchaste una palabra?' : 'Did you hear a word?';
+  const detectionSubtitle = usingSpanishDetection ? 'Escucha con atención y responde Sí o No' : 'Listen carefully, then answer Yes or No';
+  const yesLabel = usingSpanishDetection ? 'Sí' : 'Yes';
+  const noLabel = usingSpanishDetection ? 'No' : 'No';
+
   if (!hasStarted) {
     return (
       <ActivityBriefing
-        title="Sound Detection"
-        description="Can you tell when a word is played?"
-        instructions="You'll hear either a word or silence. After listening, tap Yes if you heard a word, or No if it was silent."
+        title={detectionTitle}
+        description={usingSpanishDetection ? 'Puedes notar cuando aparece una palabra o aviso hablado?' : 'Can you tell when a word is played?'}
+        instructions={usingSpanishDetection ? 'Escucharás una palabra o un aviso breve, o bien silencio. Después de escuchar, toca Sí si hubo sonido, o No si fue silencio.' : 'You\'ll hear either a word or silence. After listening, tap Yes if you heard a word, or No if it was silent.'}
         sessionInfo="10 rounds · About 2 minutes"
         onStart={() => { ensureResumed(); setHasStarted(true); }}
       />
@@ -201,7 +208,7 @@ export function Detection() {
     const finalAccuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
     return (
       <SessionSummary
-        sessionTitle="Sound Detection"
+        sessionTitle={detectionTitle}
         accuracy={finalAccuracy}
         totalItems={total}
         correctCount={correct}
@@ -218,7 +225,11 @@ export function Detection() {
     );
   }
 
-  if (loading || rounds.length === 0) {
+  if ((usingSpanishDetection ? detectionLoading : loading) || rounds.length === 0) {
+    return <LoadingSpinner message="Loading detection exercises..." />;
+  }
+
+  if (usingSpanishDetection && detectionError) {
     return <LoadingSpinner message="Loading detection exercises..." />;
   }
 
@@ -227,29 +238,27 @@ export function Detection() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
-      {/* Header */}
       <motion.header
         animate={{ opacity: isPlaying ? 0.2 : 1 }}
         transition={{ duration: 0.3 }}
         className="sticky top-0 z-10 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50"
       >
-        <ActivityHeader title="Sound Detection" backPath="/practice" />
+        <ActivityHeader title={detectionTitle} backPath="/practice" />
         <div className="text-sm text-slate-500 dark:text-slate-400 mr-14">
           {total > 0 && `${accuracy}% · ${correct}/${total}`}
         </div>
       </motion.header>
 
       <main className="max-w-lg mx-auto w-full px-6 py-4 flex-1 flex flex-col">
-        {/* Instructions */}
         <motion.div
           animate={{ opacity: isPlaying ? 0.2 : 1 }}
           className="text-center mb-4"
         >
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-            Did you hear a word?
+            {detectionPrompt}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Listen carefully, then answer Yes or No
+            {detectionSubtitle}
           </p>
         </motion.div>
 
@@ -257,7 +266,6 @@ export function Detection() {
           <p className="text-center text-sm text-red-500 dark:text-red-400 mb-2">Audio failed to load. Tap to retry.</p>
         )}
 
-        {/* Play Button with Aura */}
         <div className="flex justify-center mb-6 relative">
           <AuraVisualizer isPlaying={isPlaying} currentSnr={20} />
 
@@ -288,7 +296,6 @@ export function Detection() {
           </HapticButton>
         </div>
 
-        {/* Feedback */}
         <AnimatePresence>
           {hasAnswered && (
             <motion.div
@@ -313,12 +320,12 @@ export function Detection() {
           )}
         </AnimatePresence>
 
-        {/* Answer Buttons */}
         <div className="grid grid-cols-2 gap-4">
           <HapticButton
             onClick={() => handleAnswer(true)}
             disabled={!audioPlayed || hasAnswered}
-            className={`p-6 rounded-2xl border-2 font-bold text-xl flex flex-col items-center gap-2 transition-all ${
+            aria-label="Yes, I heard a word"
+            className={`p-4 rounded-2xl border-2 font-bold text-xl flex flex-col items-center gap-2 transition-all ${
               hasAnswered
                 ? selectedAnswer === true
                   ? currentRound.hasSound
@@ -333,13 +340,14 @@ export function Detection() {
             }`}
           >
             <Check size={32} />
-            <span>Yes</span>
+            <span>{yesLabel}</span>
           </HapticButton>
 
           <HapticButton
             onClick={() => handleAnswer(false)}
             disabled={!audioPlayed || hasAnswered}
-            className={`p-6 rounded-2xl border-2 font-bold text-xl flex flex-col items-center gap-2 transition-all ${
+            aria-label="No, I did not hear a word"
+            className={`p-4 rounded-2xl border-2 font-bold text-xl flex flex-col items-center gap-2 transition-all ${
               hasAnswered
                 ? selectedAnswer === false
                   ? !currentRound.hasSound
@@ -354,12 +362,11 @@ export function Detection() {
             }`}
           >
             <X size={32} />
-            <span>No</span>
+            <span>{noLabel}</span>
           </HapticButton>
         </div>
 
-        {/* Progress indicator */}
-        <div className="mt-auto pt-8">
+        <div className="mt-auto pt-4">
           <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
             <span>Round {currentIndex + 1} of {rounds.length}</span>
             <span>Erber Level: Detection</span>

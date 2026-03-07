@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Volume2, Play, CheckCircle, XCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useSentenceData, getAudioUrl } from '@/hooks/useSentenceData';
+import { useSentenceData } from '@/hooks/useSentenceData';
 import { useUser } from '@/store/UserContext';
 import { useProgress } from '@/hooks/useProgress';
 import { FeedbackOverlay } from '@/components/ui/FeedbackOverlay';
@@ -14,15 +14,17 @@ import { getVoiceGender } from '@/lib/voiceGender';
 import { useTodaysPlan } from '@/hooks/useTodaysPlan';
 import { hapticSelection, hapticSuccess, hapticFailure } from '@/lib/haptics';
 import { type SpeedRate, getSpeedVariantPath, getStorageUrl } from '@/lib/audio';
+import { getAudioVoiceKey, normalizeTrainingLanguage } from '@/lib/trainingLanguage';
 
 const SESSION_LENGTH = 10;
 
 export function SentenceTraining() {
   const navigate = useNavigate();
-  const { voice } = useUser();
+  const { voice, preferredLanguage } = useUser();
   const { nextActivity: planNext, advancePlan, isInPlan } = useTodaysPlan();
-  const currentVoice = voice || 'sarah';
-  const { sentences, loading, error } = useSentenceData({ limit: SESSION_LENGTH, voiceId: currentVoice });
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
+  const currentVoice = getAudioVoiceKey(voice, contentLanguage);
+  const { sentences, loading, error } = useSentenceData({ limit: SESSION_LENGTH, voiceId: currentVoice, contentLanguage });
   const { logProgress } = useProgress();
   const { ensureResumed, playUrl } = useSilentSentinel();
 
@@ -54,7 +56,7 @@ export function SentenceTraining() {
 
       // Use the distractors from database (acoustic foil, semantic foil, generated distractor)
       const allAnswers = [correct_answer, distractor_1, distractor_2, distractor_3]
-        .filter(Boolean)
+        .filter((value): value is string => Boolean(value))
         .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
 
       // Fisher-Yates shuffle
@@ -122,6 +124,7 @@ export function SentenceTraining() {
         activityType: 'sentence_training',
         voiceId: currentVoice,
         voiceGender: getVoiceGender(currentVoice),
+        contentLanguage,
         questionText: currentSentence.clinical_metadata.question_text,
         sentenceText: currentSentence.content_text,
         distractors: [
@@ -129,7 +132,7 @@ export function SentenceTraining() {
           currentSentence.clinical_metadata.distractor_2,
           currentSentence.clinical_metadata.distractor_3,
         ].filter(Boolean) as string[],
-        difficulty: currentSentence.clinical_metadata.difficulty,
+        difficulty: String(currentSentence.clinical_metadata.difficulty ?? ''),
         trialNumber: currentIndex,
         replayCount,
         scenario: currentSentence.clinical_metadata.scenario,
@@ -248,9 +251,9 @@ export function SentenceTraining() {
       </motion.header>
 
       {/* Main Content */}
-      <main className="max-w-lg mx-auto w-full px-6 py-8 flex-1 flex flex-col">
+      <main className="max-w-lg mx-auto w-full px-6 py-4 flex-1 flex flex-col">
         {/* Aura Visualizer */}
-        <div className="relative flex items-center justify-center h-64">
+        <div className="relative flex items-center justify-center h-40">
           <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
             isPlaying ? 'scale-110' : 'scale-100'
           }`}>
@@ -304,7 +307,7 @@ export function SentenceTraining() {
                     onClick={() => handleAnswer(answer)}
                     disabled={selectedAnswer !== null}
                     className={`
-                      py-6 px-4 rounded-xl font-bold text-center transition-all text-lg flex items-center justify-center gap-2
+                      py-4 px-3 rounded-xl font-bold text-center transition-all text-lg flex items-center justify-center gap-2
                       ${!showResult && 'bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/50 active:scale-95 border-2 border-teal-200 dark:border-teal-800'}
                       ${showResult && isSelected && isCorrect && 'bg-teal-500 text-white scale-105 border-2 border-teal-600'}
                       ${showResult && isSelected && !isCorrect && 'bg-slate-700 text-white scale-95 border-2 border-slate-800'}
@@ -324,7 +327,7 @@ export function SentenceTraining() {
         )}
 
         {/* Progress indicator */}
-        <div className="mt-auto pt-8">
+        <div className="mt-auto pt-4">
           <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
             <span>Round {currentIndex + 1} of {totalRounds}</span>
             <span>Erber Level: Comprehension</span>

@@ -11,11 +11,13 @@ const mockGetPublicUrl = vi.fn((path: string) => ({
 // Chainable query builder that records calls
 function createQueryChain(resolvedValue: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {};
-  const terminalFn = vi.fn(async () => resolvedValue);
+  const terminalFn = vi.fn();
 
   // Every method returns the chain, terminal methods resolve
   chain.select = vi.fn(() => chain);
   chain.eq = vi.fn(() => chain);
+  chain.filter = vi.fn(() => chain);
+  chain.or = vi.fn(() => chain);
   chain.contains = vi.fn(() => chain);
   chain.order = vi.fn(() => chain);
   chain.limit = vi.fn(() => chain);
@@ -23,7 +25,8 @@ function createQueryChain(resolvedValue: { data: unknown; error: unknown }) {
 
   // Make the chain thenable so await works on any terminal call
   chain.then = terminalFn.mockImplementation(
-    (resolve: (v: unknown) => void) => Promise.resolve(resolvedValue).then(resolve)
+    ((onfulfilled?: any, onrejected?: any) =>
+      Promise.resolve(resolvedValue).then(onfulfilled ?? undefined, onrejected ?? undefined)) as any
   );
 
   return chain;
@@ -47,8 +50,8 @@ vi.mock('@/lib/supabase', () => ({
   },
 }));
 
-vi.mock('@/store/VoiceContext', () => ({
-  useVoice: () => ({ currentVoice: 'sarah' }),
+vi.mock('@/store/UserContext', () => ({
+  useUser: () => ({ voice: 'sarah', preferredLanguage: 'en' }),
 }));
 
 // --- Sample data matching production schema ---
@@ -212,6 +215,7 @@ describe('useDrillPackData', () => {
 
       expect(mockFrom).toHaveBeenCalledWith('stimuli_catalog');
       expect(catalogChain.eq).toHaveBeenCalledWith('content_type', 'phoneme_drill');
+      expect(catalogChain.or).toHaveBeenCalledWith('clinical_metadata->>content_language.is.null,clinical_metadata->>content_language.eq.en');
     });
 
     it('sets loading true during fetch and false after', async () => {
@@ -253,6 +257,7 @@ describe('useDrillPackData', () => {
       expect(mockFrom).toHaveBeenCalledWith('stimuli_catalog');
       expect(catalogChain.eq).toHaveBeenCalledWith('content_type', 'phoneme_drill');
       expect(catalogChain.eq).toHaveBeenCalledWith('drill_pack_id', 'pack_p_b');
+      expect(catalogChain.or).toHaveBeenCalledWith('clinical_metadata->>content_language.is.null,clinical_metadata->>content_language.eq.en');
     });
   });
 
@@ -290,8 +295,11 @@ describe('useDrillPackData', () => {
   });
 
   describe('getRandomPair', () => {
-    it('returns null when no pairs loaded', () => {
+    it('returns null when no pairs loaded', async () => {
       const { result } = renderHook(() => useDrillPackData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('drill_pack_summary');
+      });
       expect(result.current.getRandomPair()).toBeNull();
     });
 
@@ -352,8 +360,11 @@ describe('useDrillPackData', () => {
       expect(progress.completed).toBe(0);
     });
 
-    it('returns zeros for unknown pack', () => {
+    it('returns zeros for unknown pack', async () => {
       const { result } = renderHook(() => useDrillPackData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('drill_pack_summary');
+      });
       const progress = result.current.getPackProgress('unknown');
       expect(progress.total).toBe(0);
       expect(progress.completed).toBe(0);
@@ -361,8 +372,11 @@ describe('useDrillPackData', () => {
   });
 
   describe('getAudioUrl', () => {
-    it('builds URL with voice, packId, and word', () => {
+    it('builds URL with voice, packId, and word', async () => {
       const { result } = renderHook(() => useDrillPackData());
+      await waitFor(() => {
+        expect(mockFrom).toHaveBeenCalledWith('drill_pack_summary');
+      });
       const url = result.current.getAudioUrl('drill-001', 'pack_p_b', 'pat');
       expect(mockGetPublicUrl).toHaveBeenCalledWith('drills/sarah/pack_p_b/drill-001_pat.mp3');
       expect(url).toContain('drills/sarah/pack_p_b/drill-001_pat.mp3');
