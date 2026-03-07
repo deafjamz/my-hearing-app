@@ -1,0 +1,19 @@
+id,block_type,stimulus_text_es,acoustic_focus,difficulty,tier,clinical_note_es,status
+det_speech_001,speech_token,mamá,low_frequency_voicing,1,free,Voz nasal grave y patrón bisilábico frecuente,approved_for_launch
+det_speech_002,speech_token,uno,low_back_vowel,1,free,Vocal posterior redondeada con inicio nasal,approved_for_launch
+det_speech_003,speech_token,bueno,low_mid_mix,1,free,Señal de banda ancha con consonante bilabial sonora,approved_for_launch
+det_speech_004,speech_token,mesa,mid_frequency_speech,1,free,Patrón claro de habla cotidiana con fricativa suave,approved_for_launch
+det_speech_005,speech_token,taza,mid_stop_burst,1,free,Explosión oclusiva breve útil para detección básica,approved_for_launch
+det_speech_006,speech_token,dedo,mid_voiced_stop,1,free,Contraste de sonoridad en marco bisilábico frecuente,approved_for_launch
+det_speech_007,speech_token,sí,high_frequency_frication,1,free,Fricación aguda breve de alta transferencia funcional,approved_for_launch
+det_speech_008,speech_token,sopa,high_frequency_frication,1,free,Inicio con /s/ sostenida para acceso a alta frecuencia,approved_for_launch
+det_speech_009,speech_token,chao,high_affricate_release,2,free,Africada inicial útil como equivalente panregional al extremo agudo del set,approved_for_launch
+det_speech_010,speech_token,luz,final_sibilance,2,free,Cierre con sibilancia final útil para detección de alta frecuencia,approved_for_launch
+det_alert_001,environmental_alert,Se abre la puerta.,public_transit_alert,2,free,Anuncio breve de alto valor funcional en transporte,approved_for_launch
+det_alert_002,environmental_alert,Última parada.,public_transit_alert,2,free,Frase corta de anuncio público con alta relevancia funcional,approved_for_launch
+det_alert_003,environmental_alert,"Su número, cuarenta y dos.",queue_callout,2,free,Llamado de turno con números hablados,approved_for_launch
+det_alert_004,environmental_alert,Receta lista.,pharmacy_alert,2,free,Mensaje corto y frecuente en contexto médico,approved_for_launch
+det_alert_005,environmental_alert,"Cuidado, vehículo atrás.",safety_alert,3,free,Alerta de seguridad con valor ecológico alto,approved_for_launch
+det_alert_006,environmental_alert,Atención por favor.,attention_signal,2,free,Señal atencional generalizable a múltiples contextos,approved_for_launch
+det_alert_007,environmental_alert,Pasajeros al tren.,station_call,3,free,Llamado de abordaje con ritmo claro de megafonía,approved_for_launch
+det_alert_008,environmental_alert,Turno siguiente.,queue_callout,2,free,Frase de flujo de fila útil para oficinas y clínicas,approved_for_launch
