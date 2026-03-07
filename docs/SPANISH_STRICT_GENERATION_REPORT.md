@@ -144,8 +144,7 @@ What is now strong:
 What is not yet complete from an Erber perspective:
 - pack redesign for the remaining held drill rows
 - evidence that Spanish foils and drill difficulty ladders behave as expected in actual user sessions
-- a live production deploy of the updated frontend runtime
-- remote persistence of language preference in `profiles.preferred_language`
+- separate Spanish analytics and monitoring views for launch learning
 
 The current Spanish launch pack is materially stronger than a broader but less rigorous pack would have been.
 
@@ -161,10 +160,10 @@ Priority order should stay clinical-first.
 3. Add launch instrumentation for Spanish usage separately from English.
    Track start rate, completion rate, repeat rate, and error clusters by phase so weak Spanish content becomes visible quickly.
 
-4. Deploy the updated frontend runtime and verify `soundsteps.app` against the live Spanish corpus.
-
-5. Prioritize remaining ElevenLabs credits for clinically meaningful Spanish expansion before novelty features.
+4. Prioritize remaining ElevenLabs credits for clinically meaningful Spanish expansion before novelty features.
    Best likely uses are detection content, reviewed replacement drills, and additional comprehension scenarios in high-transfer contexts.
+
+5. Merge the release branch through PR so repository history catches up to production.
 
 ## Files To Reference
 - `docs/SPANISH_ERBER_LAUNCH_NOTES.md`

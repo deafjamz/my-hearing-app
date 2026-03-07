@@ -10,8 +10,8 @@
   - `audio_assets`: sentence and detection audio
   - conversations and drills remain storage-derived in runtime, not `audio_assets`-indexed
 - live legacy `scenarios/scenario_items` tables now carry Spanish scenarios for the existing runtime path
-- Production app deployment is **not** yet updated.
-- `profiles.preferred_language` is still missing in the live database, so language persistence is currently local-only.
+- production deployment is now live on `soundsteps.app`
+- `profiles.preferred_language` is now live in the production database
 - Completion report: `docs/SPANISH_STRICT_GENERATION_REPORT.md`
 - Rollout verifier: `scripts/verify_spanish_rollout.py`
 

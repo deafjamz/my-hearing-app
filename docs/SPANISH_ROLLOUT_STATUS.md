@@ -64,12 +64,12 @@ Spanish files verified in Supabase Storage:
 - `spanish/scenarios/sergio_roma`: `640`
 
 ## Live Backend Gaps
-The live database still does **not** have `profiles.preferred_language`.
+`profiles.preferred_language` is now live in the production database.
 
 Implication:
-- Spanish language preference can be stored locally in the browser
-- authenticated cloud persistence of the selected language is not live yet
-- the migration file now exists locally at `sql_migrations/add_preferred_language_to_profiles.sql`
+- Spanish language preference can now persist for authenticated users
+- local browser persistence remains as a fallback for signed-out use
+- rollout verification is now fully green for the current launch scope
 
 ## Production App Status
 `soundsteps.app` is still behind the repo at the time of this document update.
@@ -81,7 +81,7 @@ Implication:
 - deployed production code is still behind the repo until a real deployment is performed
 
 This means:
-- Supabase is now ready for the current Spanish launch shape except for `profiles.preferred_language`
+- Supabase is now ready for the current Spanish launch shape
 - storage and database are aligned for the current runtime strategy
 - the deployed app is still not a full Spanish launch build
 
@@ -106,15 +106,14 @@ What is now genuinely live:
 
 What is still staged:
 - updated frontend runtime on `soundsteps.app`
-- remote persistence of language preference
 
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
 - `scripts/verify_spanish_rollout.py`
 
 ## Next Actions
-1. Apply `sql_migrations/add_preferred_language_to_profiles.sql` to the live database.
-2. Deploy the current frontend so `soundsteps.app` can actually use the Spanish-aware hooks and metadata.
-3. Run bilingual listening QC before exposing Spanish widely.
-4. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
-5. Finish redesigning the remaining held drill packs.
+1. Run bilingual listening QC before exposing Spanish widely.
+2. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+3. Finish redesigning the remaining held drill packs.
+4. Split Spanish launch analytics from English in dashboard/reporting views.
+5. Merge the release branch through PR so `main` matches production.
