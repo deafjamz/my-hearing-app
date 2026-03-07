@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
 import { format, startOfWeek, differenceInCalendarDays, subDays } from 'date-fns';
+import { matchesAnalyticsLanguage, type AnalyticsLanguageFilter } from '@/lib/analyticsLanguage';
 
 // --- Exported types ---
 
@@ -92,7 +93,7 @@ const ERBER_MAP: Record<string, keyof ErberJourney> = {
  * Longitudinal analytics — lifetime data for trends, streaks, fatigue, and Erber journey.
  * Single Supabase query with no time window (all-time data).
  */
-export function useLongitudinalAnalytics() {
+export function useLongitudinalAnalytics(language: AnalyticsLanguageFilter = 'all') {
   const { user } = useUser();
   const [data, setData] = useState<LongitudinalData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -119,7 +120,8 @@ export function useLongitudinalAnalytics() {
           return;
         }
 
-        setData(aggregate(rows as RawRow[]));
+        const filteredRows = (rows as RawRow[]).filter((row) => matchesAnalyticsLanguage(row.content_tags, language));
+        setData(filteredRows.length > 0 ? aggregate(filteredRows) : null);
       } catch {
         setData(null);
       } finally {
@@ -128,7 +130,7 @@ export function useLongitudinalAnalytics() {
     };
 
     fetchData();
-  }, [user?.id]);
+  }, [user?.id, language]);
 
   return { data, loading };
 }

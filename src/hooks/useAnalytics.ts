@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useUser } from '@/store/UserContext';
 import { subDays, format } from 'date-fns';
+import {
+  getProgressContentLanguage,
+  matchesAnalyticsLanguage,
+  type AnalyticsLanguageFilter,
+} from '@/lib/analyticsLanguage';
 
 /** Friendly labels for activityType values logged in user_progress content_tags */
 export const ACTIVITY_LABELS: Record<string, string> = {
@@ -33,6 +38,13 @@ export interface VoiceBreakdown {
   accuracy: number;
 }
 
+export interface LanguageBreakdown {
+  language: 'en' | 'es';
+  label: string;
+  trials: number;
+  accuracy: number;
+}
+
 export interface PositionBreakdown {
   position: string;
   trials: number;
@@ -56,6 +68,7 @@ export interface ResponseTimeTrendPoint {
 }
 
 export interface AnalyticsData {
+  byLanguage: LanguageBreakdown[];
   byActivity: ActivityBreakdown[];
   byVoice: VoiceBreakdown[];
   byPosition: PositionBreakdown[];
@@ -71,7 +84,7 @@ interface RawEntry {
   created_at: string;
 }
 
-export function useAnalytics(days: number = 30) {
+export function useAnalytics(days: number = 30, language: AnalyticsLanguageFilter = 'all') {
   const { user } = useUser();
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -99,7 +112,7 @@ export function useAnalytics(days: number = 30) {
           return;
         }
 
-        setData(aggregate(rows as RawEntry[]));
+        setData(aggregate(rows as RawEntry[], language));
       } catch {
         setData(null);
       } finally {
@@ -108,12 +121,23 @@ export function useAnalytics(days: number = 30) {
     };
 
     fetch();
-  }, [user?.id, days]);
+  }, [user?.id, days, language]);
 
   return { data, loading };
 }
 
-function aggregate(rows: RawEntry[]): AnalyticsData {
+function aggregate(rows: RawEntry[], language: AnalyticsLanguageFilter): AnalyticsData {
+  const filteredRows = rows.filter((row) => matchesAnalyticsLanguage(row.content_tags, language));
+  const languageMap = new Map<'en' | 'es', { trials: number; correct: number }>();
+
+  for (const row of rows) {
+    const contentLanguage = getProgressContentLanguage(row.content_tags);
+    const entry = languageMap.get(contentLanguage) || { trials: 0, correct: 0 };
+    entry.trials++;
+    if (row.result === 'correct') entry.correct++;
+    languageMap.set(contentLanguage, entry);
+  }
+
   // --- byActivity ---
   const actMap = new Map<string, { trials: number; correct: number }>();
   // --- byVoice ---
@@ -130,7 +154,7 @@ function aggregate(rows: RawEntry[]): AnalyticsData {
   // --- response time ---
   const rtMap = new Map<string, { sum: number; count: number }>();
 
-  for (const row of rows) {
+  for (const row of filteredRows) {
     const tags = row.content_tags;
     const isCorrect = row.result === 'correct';
     const actType = (tags?.activityType as string) || null;
@@ -196,6 +220,21 @@ function aggregate(rows: RawEntry[]): AnalyticsData {
   const pct = (correct: number, trials: number) =>
     trials > 0 ? Math.round((correct / trials) * 100) : 0;
 
+  const byLanguage: LanguageBreakdown[] = ([
+    { language: 'en', label: 'English' },
+    { language: 'es', label: 'Spanish' },
+  ] as const)
+    .map(({ language: currentLanguage, label }) => {
+      const stats = languageMap.get(currentLanguage) || { trials: 0, correct: 0 };
+      return {
+        language: currentLanguage,
+        label,
+        trials: stats.trials,
+        accuracy: pct(stats.correct, stats.trials),
+      };
+    })
+    .filter((entry) => entry.trials > 0);
+
   const byActivity: ActivityBreakdown[] = Array.from(actMap.entries())
     .map(([activityType, s]) => ({
       activityType,
@@ -233,5 +272,5 @@ function aggregate(rows: RawEntry[]): AnalyticsData {
     .map(([date, s]) => ({ date, avgMs: Math.round(s.sum / s.count) }))
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  return { byActivity, byVoice, byPosition, noiseComparison, replayStats, responseTimeTrend };
+  return { byLanguage, byActivity, byVoice, byPosition, noiseComparison, replayStats, responseTimeTrend };
 }

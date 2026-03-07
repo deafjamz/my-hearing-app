@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Printer, Lock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
@@ -9,6 +10,7 @@ import { useUser } from '@/store/UserContext';
 import { format } from 'date-fns';
 import {
   ActivityBreakdownCard,
+  LanguageBreakdownCard,
   VoiceComparisonCard,
   PositionAnalysisCard,
   NoiseEffectivenessCard,
@@ -24,9 +26,10 @@ import {
 
 export function ProgressReport() {
   const { stats, loading, isGuest } = useProgressData();
-  const { data: analytics, loading: analyticsLoading } = useAnalytics();
-  const { data: phonemeData, loading: phonemeLoading } = usePhonemeAnalytics();
-  const { data: longitudinalData, loading: longitudinalLoading } = useLongitudinalAnalytics();
+  const [languageFilter, setLanguageFilter] = useState<'all' | 'en' | 'es'>('all');
+  const { data: analytics, loading: analyticsLoading } = useAnalytics(30, languageFilter);
+  const { data: phonemeData, loading: phonemeLoading } = usePhonemeAnalytics(languageFilter);
+  const { data: longitudinalData, loading: longitudinalLoading } = useLongitudinalAnalytics(languageFilter);
   const { hasAccess } = useUser();
 
   const canPrint = hasAccess('Premium');
@@ -225,7 +228,30 @@ export function ProgressReport() {
           <h2 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 px-1 print:text-black">
             Insights
           </h2>
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            {([
+              { value: 'all', label: 'All training' },
+              { value: 'en', label: 'English' },
+              { value: 'es', label: 'Spanish' },
+            ] as const).map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setLanguageFilter(option.value)}
+                className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors ${
+                  languageFilter === option.value
+                    ? 'bg-teal-500 text-white'
+                    : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+            <span className="text-xs text-slate-400 dark:text-slate-500">
+              Filter applies to insights, phoneme mastery, and training journey.
+            </span>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <LanguageBreakdownCard data={analytics.byLanguage} activeFilter={languageFilter} />
             <ActivityBreakdownCard data={analytics.byActivity} />
             <VoiceComparisonCard data={analytics.byVoice} />
             <PositionAnalysisCard data={analytics.byPosition} />

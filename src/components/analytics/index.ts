@@ -1,4 +1,5 @@
 export { ActivityBreakdownCard } from './ActivityBreakdownCard';
+export { LanguageBreakdownCard } from './LanguageBreakdownCard';
 export { VoiceComparisonCard } from './VoiceComparisonCard';
 export { PositionAnalysisCard } from './PositionAnalysisCard';
 export { NoiseEffectivenessCard } from './NoiseEffectivenessCard';
