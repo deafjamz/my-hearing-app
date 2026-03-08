@@ -11,8 +11,9 @@
 - `pack_k_vs_g` has now been rewritten as a Spanish-native reviewed pack
 - `pack_f_vs_v` has now been replaced in-source by `pack_es_f_vs_b`
 - `drill_pack_15` has now been rewritten as a Spanish-native reviewed /m/ vs /n/ pack
+- `drill_pack_13` has now been rewritten as a Spanish-native reviewed /l/ vs /r/ initial pack
 - redesign backlog is now `16` packs after correcting additional under-called English-only contrasts
-- clinical-review backlog is now `3` packs
+- clinical-review backlog is now `2` packs
 
 ## Reading
 This is not a row-cleanup problem anymore.

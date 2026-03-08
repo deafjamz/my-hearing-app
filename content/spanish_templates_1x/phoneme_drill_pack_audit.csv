@@ -15,7 +15,7 @@ pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,20,19,0,0,1,redesign_required,/tʃ/
 pack_e_vs_ae,Vowels: /E/ vs /ae/,height,20,20,0,0,0,redesign_required,English /ɛ/ vs /æ/ contrast does not map to Spanish vowel inventory,/e/ vs /a/
 pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,20,20,0,0,0,redesign_required,English /i/ vs /ɪ/ contrast does not map to Spanish vowel inventory,/i/ vs /e/
 pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,20,20,0,0,0,redesign_required,/s/ vs /ʃ/ is not a pan-regional launch contrast in Spanish,/s/ vs /tʃ/ or /s/ vs /x/
-drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
+drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
