@@ -9,6 +9,7 @@
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
 - `pack_k_vs_g` has now been rewritten as a Spanish-native reviewed pack
+- redesign backlog has expanded to `11` packs after correcting under-called English-only contrasts
 
 ## Reading
 This is not a row-cleanup problem anymore.
@@ -20,14 +21,22 @@ The drill layer now needs to be handled in two lanes:
 ## Redesign-required packs
 These pack families should not be salvaged by line editing:
 - `pack_ch_vs_j`
+- `pack_f_vs_v`
+- `drill_pack_17`
+- `drill_pack_18`
 - `drill_pack_19`
 - `drill_pack_20`
 - `drill_pack_21`
+- `drill_pack_22`
+- `drill_pack_24`
+- `pack_i_vs_I`
+- `pack_e_vs_ae`
 
 Reason:
 - English phonology is baked into the contrast itself, not just the word choice.
 - For the former `/θ/` vs `/ð/` pack, the Spanish replacement uses word-initial and medial `/t/` vs `/d/` items because word-final `/d/` is too weak and variable to anchor launch-quality discrimination work.
 - For the former `/s/` vs `/z/` pack, the Spanish replacement uses initial `/s/` vs `/f/` because `/z/` is not a pan-regional launch contrast in Spanish.
+- The audit now also treats English tense/lax vowels, orthographic `b/v`, and English-only final-consonant awareness packs as redesign work rather than line-by-line review.
 
 ## Clinical-review-required packs
 The remaining packs may be salvageable, but they are still blocked because:

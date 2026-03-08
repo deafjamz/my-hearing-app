@@ -1,0 +1,21 @@
+source_pack_id,source_row_id,source_pack_name,difficulty,tier,position,proposed_pack_id,proposed_pack_name,proposed_target_phoneme_es,proposed_contrast_phoneme_es,clinical_goal,candidate_slot,proposed_word_1_es,proposed_word_2_es,lexical_naturalness_notes,regional_notes,approval_status
+pack_f_vs_v,drill_fv_001,Voicing: /f/ vs /v/,2,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,1,,,,,draft
+pack_f_vs_v,drill_fv_002,Voicing: /f/ vs /v/,2,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,2,,,,,draft
+pack_f_vs_v,drill_fv_003,Voicing: /f/ vs /v/,2,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,3,,,,,draft
+pack_f_vs_v,drill_fv_004,Voicing: /f/ vs /v/,3,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,4,,,,,draft
+pack_f_vs_v,drill_fv_005,Voicing: /f/ vs /v/,2,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,5,,,,,draft
+pack_f_vs_v,drill_fv_006,Voicing: /f/ vs /v/,3,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,6,,,,,draft
+pack_f_vs_v,drill_fv_007,Voicing: /f/ vs /v/,2,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,7,,,,,draft
+pack_f_vs_v,drill_fv_008,Voicing: /f/ vs /v/,3,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,8,,,,,draft
+pack_f_vs_v,drill_fv_009,Voicing: /f/ vs /v/,3,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,9,,,,,draft
+pack_f_vs_v,drill_fv_010,Voicing: /f/ vs /v/,3,free,initial,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,10,,,,,draft
+pack_f_vs_v,drill_fv_011,Voicing: /f/ vs /v/,2,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,11,,,,,draft
+pack_f_vs_v,drill_fv_012,Voicing: /f/ vs /v/,2,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,12,,,,,draft
+pack_f_vs_v,drill_fv_013,Voicing: /f/ vs /v/,2,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,13,,,,,draft
+pack_f_vs_v,drill_fv_014,Voicing: /f/ vs /v/,3,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,14,,,,,draft
+pack_f_vs_v,drill_fv_015,Voicing: /f/ vs /v/,3,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,15,,,,,draft
+pack_f_vs_v,drill_fv_016,Voicing: /f/ vs /v/,4,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,16,,,,,draft
+pack_f_vs_v,drill_fv_017,Voicing: /f/ vs /v/,3,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,17,,,,,draft
+pack_f_vs_v,drill_fv_018,Voicing: /f/ vs /v/,3,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,18,,,,,draft
+pack_f_vs_v,drill_fv_019,Voicing: /f/ vs /v/,4,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,19,,,,,draft
+pack_f_vs_v,drill_fv_020,Voicing: /f/ vs /v/,2,free,final,pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,/f/,/b/,replace English /f/ vs /v/ with a Spanish-native labial contrast,20,,,,,draft
