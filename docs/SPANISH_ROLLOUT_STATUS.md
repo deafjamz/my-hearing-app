@@ -118,6 +118,9 @@ What is still staged:
 - Spanish scenario migration to the modern `stimuli_catalog` path, or an explicit decision to keep them on `scenarios/scenario_items`
 - future Spanish expansion beyond the current launch corpus
 
+Launch decision memo:
+- `docs/SPANISH_LAUNCH_DECISION_OPTIONS.md`
+
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
 - `scripts/verify_spanish_rollout.py`

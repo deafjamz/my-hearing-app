@@ -184,6 +184,9 @@ What to watch after launch:
 
 That is a calibration question for post-launch analytics, not a pre-launch blocker.
 
+## Launch Positioning Options
+Detailed scope-positioning options, tradeoffs, and ElevenLabs credit recommendations are documented in `docs/SPANISH_LAUNCH_DECISION_OPTIONS.md`.
+
 ## Launch Recommendation
 Spanish is launchable when:
 1. human bilingual listening QC is complete and clean
