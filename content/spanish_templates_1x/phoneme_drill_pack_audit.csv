@@ -13,7 +13,7 @@ drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,20,20,0,0,0,clinica
 drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
+drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_23,Voicing Clusters: Initial,Cluster,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_25,Mixed Review: Hardest Pairs,Fricative,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",

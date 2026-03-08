@@ -4,13 +4,15 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `395`
+- blocked drill rows: `375`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
 - `pack_k_vs_g` has now been rewritten as a Spanish-native reviewed pack
 - `pack_f_vs_v` has now been replaced in-source by `pack_es_f_vs_b`
+- `drill_pack_15` has now been rewritten as a Spanish-native reviewed /m/ vs /n/ pack
 - redesign backlog is now `10` packs after correcting under-called English-only contrasts and clearing the /f/ vs /b/ replacement
+- clinical-review backlog is now `9` packs
 
 ## Reading
 This is not a row-cleanup problem anymore.
