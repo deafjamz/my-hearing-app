@@ -30,6 +30,10 @@ The remaining packs may be salvageable, but they are still blocked because:
 - drill words remain machine translated
 - Spanish phoneme metadata has not been clinically reviewed at pack level
 
+The active review workspace for these packs is:
+- `content/spanish_templates_1x/phoneme_drill_review_backlog.csv`
+- `content/spanish_templates_1x/drill_review_workspaces/`
+
 ## Immediate order
 1. Use `content/spanish_templates_1x/phoneme_drill_pack_audit.csv` as the pack backlog.
 2. Use `content/spanish_templates_1x/phoneme_drill_redesign_backlog.csv` and `content/spanish_templates_1x/drill_redesign_workspaces/` as the active redesign workspace.
