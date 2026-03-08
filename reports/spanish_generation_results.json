@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-03-08T00:30:44.355314",
+  "phase": "drills",
+  "pilot": false,
+  "limit": null,
+  "include_low_confidence_drills": false,
+  "male_voice": {
+    "name": "Sergio",
+    "voice_id": "SHkfxEDcLXK31yPii5xM"
+  },
+  "female_voice": {
+    "name": "Roma",
+    "voice_id": "6Mo5ciGH5nWiQacn5FYk"
+  },
+  "results": {
+    "drills": {
+      "jobs_total": 2000,
+      "jobs_pending": 1950,
+      "success": 1950,
+      "failed": 0,
+      "skipped_short": 0
+    }
+  }
+}

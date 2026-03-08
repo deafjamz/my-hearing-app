@@ -3,12 +3,13 @@
 ## Purpose
 This document records what is currently true across the repo, live Supabase, and deployed app state after the Spanish launch-content work.
 
-Verified and updated on March 7, 2026 after PR `#1` merged into `main`.
+Verified and updated on March 7, 2026 after Spanish drill remediation, audio refresh, live Supabase apply, and rollout re-verification on `main`.
 
 ## Step Status
-1. Drill remediation: complete for the current hold set.
-   - `2` drill rows were repaired and promoted.
-   - `8` rows were moved to `needs_pack_redesign`.
+1. Drill remediation: complete for the current launch corpus.
+   - `500` Spanish drill rows now exist in the canonical template and are marked `approved_for_launch`.
+   - pack-level redesign and review backlogs are now empty.
+   - the drill layer is no longer blocked by machine-translated or English-shaped launch rows.
 
 2. Detection block: content complete and production-wired in repo plus live Supabase.
    - `18` rows exist in `content/spanish_templates_1x/detection_es_launch_template.csv`.
@@ -16,9 +17,10 @@ Verified and updated on March 7, 2026 after PR `#1` merged into `main`.
    - `36` live `audio_assets` rows now exist for `spanish/detection/%`.
    - the repo now contains a dedicated Spanish detection path instead of reusing English `word_pairs`.
 
-3. QC workflow: scaffold complete, but broader content hardening is still required.
-   - bilingual listening review is still pending
-   - source-content validation is now the main blocker for broader Spanish exposure, not runtime plumbing
+3. QC workflow: automated generation and storage validation complete.
+   - Spanish drill audio was fully regenerated after remediation
+   - automated drill storage and duration audit passed at `2000 / 2000` files with `0` sampled duration flags
+   - human bilingual listening review is still recommended before broad external exposure
 
 4. Runtime and instrumentation: deployed and production-wired.
    - language-aware sentence, conversation, and drill fetching is implemented in repo.
@@ -27,9 +29,9 @@ Verified and updated on March 7, 2026 after PR `#1` merged into `main`.
    - progress metadata now carries `contentLanguage` for sentence, conversation, drill, detection, and scenario sessions.
    - Spanish scenarios are routable through the deployed legacy `scenarios/scenario_items` path.
 
-5. Credit allocation guidance: still valid.
-   - next credit spend should go to detection audio, remaining drill-pack redesign, and Spanish scenario/runtime completion.
-   - after this pass, that means redesign work and QC, not more launch-ingest work.
+5. Credit allocation guidance: updated.
+   - drill remediation and launch-safe drill audio are complete for the current corpus
+   - next credit spend should go to Spanish scenario/runtime alignment, additional clinically authored Spanish content, and human listening QC sampling rather than more salvage work on this launch drill set
 
 ## Live Supabase State
 Verified on March 7, 2026.
@@ -37,7 +39,7 @@ Verified on March 7, 2026.
 Spanish stimuli now present in `stimuli_catalog`:
 - `sentence`: `1000`
 - `conversation`: `160`
-- `phoneme_drill`: `492`
+- `phoneme_drill`: `500`
 - `detection`: `18`
 
 Spanish audio rows in `audio_assets`:
@@ -61,8 +63,8 @@ Spanish files verified in Supabase Storage:
 - `spanish/sentences/roma`: `1000`
 - `spanish/conversations/sergio`: `320`
 - `spanish/conversations/roma`: `320`
-- `spanish/drills/sergio`: `984`
-- `spanish/drills/roma`: `984`
+- `spanish/drills/sergio`: `1000`
+- `spanish/drills/roma`: `1000`
 - `spanish/scenarios/sergio_roma`: `640`
 
 ## Live Backend Gaps
@@ -107,19 +109,16 @@ What is now genuinely live:
 - Spanish conversation, drill, and scenario audio present in storage
 
 What is still staged:
-- Spanish source-content hardening
-- Spanish foil and drill-pack remediation
-- bilingual listening QC results
-- source-of-truth Spanish templates and rewrite queues awaiting merge
+- human bilingual listening QC signoff
+- Spanish scenario migration to the modern `stimuli_catalog` path, or an explicit decision to keep them on `scenarios/scenario_items`
+- future Spanish expansion beyond the current launch corpus
 
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
 - `scripts/verify_spanish_rollout.py`
 
 ## Next Actions
-1. Run bilingual listening QC before exposing Spanish widely.
-2. Enforce repo-level validation before any future Spanish audio generation or ingest.
-3. Version the Spanish source templates and rewrite queues as the canonical authoring set.
-4. Finish redesigning the remaining held drill packs.
-5. Rewrite sentence and conversation foil sets where English translation erased the intended auditory task.
-6. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+1. Run targeted human bilingual listening QC on the refreshed Spanish drill corpus.
+2. Keep repo-level validation blocking any future Spanish audio generation or ingest.
+3. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+4. Add post-launch Spanish analytics slices that isolate completion, repeat rate, and error clusters from English.

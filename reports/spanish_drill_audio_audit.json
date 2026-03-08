@@ -1,0 +1,265 @@
+{
+  "expected_file_count": 2000,
+  "existing_file_count": 2000,
+  "missing_file_count": 0,
+  "missing_paths": [],
+  "sampled_file_count": 50,
+  "sampled_duration_flags": [],
+  "sampled_results": [
+    {
+      "storage_path": "spanish/drills/roma/drill_pack_13/drill_241_lata.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/drill_pack_15/drill_281_mano.mp3",
+      "duration_s": 1.115,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_b_vs_m_initial/drill_321_bala.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_e_vs_a/drill_eae_001_paso.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_f_vs_b/drill_fv_001_boca.mp3",
+      "duration_s": 1.022,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_a/drill_ssh_001_dia.mp3",
+      "duration_s": 1.022,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_b/drill_chdj_001_dias.mp3",
+      "duration_s": 0.929,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_c/drill_201_fume.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_d/drill_221_bota.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_e/drill_261_bolo.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_f/drill_361_palos.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_g/drill_381_catas.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_h/drill_401_lema.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_i/drill_421_fibra.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_j/drill_441_domas.mp3",
+      "duration_s": 1.115,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_k/drill_461_mudas.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_generalization_l/drill_481_mesa.mp3",
+      "duration_s": 0.929,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_i_vs_e/drill_ii_001_peso.mp3",
+      "duration_s": 1.254,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_i_vs_e_medial/drill_341_pesa.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_m_vs_n_medial/drill_301_cama.mp3",
+      "duration_s": 1.022,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_s_vs_f/drill_sz_001_fuma.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_es_t_vs_d/drill_thth_001_dia.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_k_vs_g/drill_kg_001_cala.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_p_vs_b/drill_pb_001_bala.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/roma/pack_t_vs_d/drill_td_001_dia.mp3",
+      "duration_s": 0.882,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/drill_pack_13/drill_241_lata.mp3",
+      "duration_s": 1.022,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/drill_pack_15/drill_281_mano.mp3",
+      "duration_s": 1.254,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_b_vs_m_initial/drill_321_bala.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_e_vs_a/drill_eae_001_paso.mp3",
+      "duration_s": 1.115,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_f_vs_b/drill_fv_001_boca.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_a/drill_ssh_001_dia.mp3",
+      "duration_s": 1.115,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_b/drill_chdj_001_dias.mp3",
+      "duration_s": 1.254,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_c/drill_201_fume.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_d/drill_221_bota.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_e/drill_261_bolo.mp3",
+      "duration_s": 1.115,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_f/drill_361_palos.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_g/drill_381_catas.mp3",
+      "duration_s": 1.254,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_h/drill_401_lema.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_i/drill_421_fibra.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_j/drill_441_domas.mp3",
+      "duration_s": 1.3,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_k/drill_461_mudas.mp3",
+      "duration_s": 1.393,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_generalization_l/drill_481_mesa.mp3",
+      "duration_s": 1.3,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_i_vs_e/drill_ii_001_peso.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_i_vs_e_medial/drill_341_pesa.mp3",
+      "duration_s": 1.068,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_m_vs_n_medial/drill_301_cama.mp3",
+      "duration_s": 1.161,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_s_vs_f/drill_sz_001_fuma.mp3",
+      "duration_s": 1.347,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_es_t_vs_d/drill_thth_001_dia.mp3",
+      "duration_s": 0.975,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_k_vs_g/drill_kg_001_cala.mp3",
+      "duration_s": 1.022,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_p_vs_b/drill_pb_001_bala.mp3",
+      "duration_s": 1.3,
+      "flagged": false
+    },
+    {
+      "storage_path": "spanish/drills/sergio/pack_t_vs_d/drill_td_001_dia.mp3",
+      "duration_s": 1.207,
+      "flagged": false
+    }
+  ],
+  "duration_thresholds": {
+    "min_seconds": 0.2,
+    "max_seconds": 1.6
+  },
+  "status": "ok"
+}

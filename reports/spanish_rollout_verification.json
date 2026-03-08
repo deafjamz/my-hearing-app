@@ -1,0 +1,29 @@
+{
+  "expected_counts": {
+    "sentences_es": 1000,
+    "conversations_es": 160,
+    "drills_es": 500,
+    "detection_es": 18,
+    "audio_sentences_es": 2000,
+    "audio_detection_es": 36,
+    "legacy_scenarios_es": 80,
+    "legacy_scenario_items_es": 640
+  },
+  "actual_counts": {
+    "sentences_es": 1000,
+    "conversations_es": 160,
+    "drills_es": 500,
+    "detection_es": 18,
+    "audio_sentences_es": 2000,
+    "audio_detection_es": 36,
+    "legacy_scenarios_es": 80,
+    "legacy_scenario_items_es": 640
+  },
+  "mismatches": {},
+  "preferred_language_column": {
+    "available": true,
+    "error": null
+  },
+  "blockers": [],
+  "status": "ok"
+}

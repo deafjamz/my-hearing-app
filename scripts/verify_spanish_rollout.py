@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -24,11 +25,12 @@ from supabase import Client, create_client
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_PATH = ROOT / "reports" / "spanish_rollout_verification.json"
 SCENARIO_REPORT_PATH = ROOT / "reports" / "spanish_scenarios_ingest_plan.json"
+SPANISH_SCENARIO_CATALOG_PATH = ROOT / "src" / "lib" / "spanishScenarioCatalog.ts"
 
 EXPECTED_COUNTS = {
     "sentences_es": 1000,
     "conversations_es": 160,
-    "drills_es": 492,
+    "drills_es": 500,
     "detection_es": 18,
     "audio_sentences_es": 2000,
     "audio_detection_es": 36,
@@ -59,8 +61,17 @@ def create_supabase_client() -> Client:
 
 
 def load_spanish_scenario_ids() -> list[str]:
-    report = json.loads(SCENARIO_REPORT_PATH.read_text(encoding="utf-8"))
-    return report["spanish_scenario_ids"]
+    if SCENARIO_REPORT_PATH.exists():
+        report = json.loads(SCENARIO_REPORT_PATH.read_text(encoding="utf-8"))
+        return report["spanish_scenario_ids"]
+
+    if SPANISH_SCENARIO_CATALOG_PATH.exists():
+        source = SPANISH_SCENARIO_CATALOG_PATH.read_text(encoding="utf-8")
+        return re.findall(r"'([0-9a-f-]{36})'", source)
+
+    raise FileNotFoundError(
+        "Missing reports/spanish_scenarios_ingest_plan.json and src/lib/spanishScenarioCatalog.ts"
+    )
 
 
 def check_preferred_language_column(client: Client) -> dict[str, Any]:

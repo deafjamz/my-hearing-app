@@ -1,0 +1,20 @@
+{
+  "stimuli_counts": {
+    "sentences": 1000,
+    "conversations": 160,
+    "drills": 500,
+    "detection": 18
+  },
+  "audio_asset_counts": {
+    "sentences": 2000,
+    "detection": 36
+  },
+  "derived_storage_only_counts": {
+    "conversations": 640,
+    "drills": 2000
+  },
+  "deferred": {
+    "scenario_rows": 640,
+    "reason": "Scenarios still need production schema/runtime alignment."
+  }
+}
