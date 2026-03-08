@@ -20,7 +20,7 @@ pack_es_s_vs_f,Fricative Contrast: /s/ vs /f/,place,20,0,20,0,0,approved,Pack ha
 pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_f_vs_v,Voicing: /f/ vs /v/,voicing,20,19,1,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-pack_k_vs_g,Voicing: /k/ vs /g/,voicing,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
+pack_k_vs_g,Voicing: /k/ vs /g/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_p_vs_b,Voicing: /p/ vs /b/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 pack_t_vs_d,Voicing: /t/ vs /d/,voicing,20,19,1,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",

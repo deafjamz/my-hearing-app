@@ -4,10 +4,11 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `434`
+- blocked drill rows: `414`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
+- `pack_k_vs_g` has now been rewritten as a Spanish-native reviewed pack
 
 ## Reading
 This is not a row-cleanup problem anymore.
