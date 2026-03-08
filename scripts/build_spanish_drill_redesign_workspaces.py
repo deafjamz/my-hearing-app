@@ -176,6 +176,18 @@ def main() -> None:
 
     df = pd.read_csv(template_path)
     backlog_rows: list[dict[str, object]] = []
+    backlog_fields = [
+        "source_pack_id",
+        "source_pack_name",
+        "row_count",
+        "proposed_pack_id",
+        "proposed_pack_name",
+        "proposed_target_phoneme_es",
+        "proposed_contrast_phoneme_es",
+        "clinical_goal",
+        "workspace_file",
+        "status",
+    ]
 
     for pack_id, spec in REDESIGN_SPECS.items():
         pack_df = df[df["drill_pack_id"] == pack_id].copy()
@@ -224,9 +236,10 @@ def main() -> None:
         })
 
     with backlog_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(backlog_rows[0].keys()))
+        writer = csv.DictWriter(handle, fieldnames=backlog_fields)
         writer.writeheader()
-        writer.writerows(backlog_rows)
+        if backlog_rows:
+            writer.writerows(backlog_rows)
 
     print(f"Spanish drill redesign backlog written: {backlog_path}")
     print(f"Workspaces: {len(backlog_rows)}")

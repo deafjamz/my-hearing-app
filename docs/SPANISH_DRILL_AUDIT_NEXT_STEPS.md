@@ -3,8 +3,8 @@
 ## Current state
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
-- validator now fails only on Spanish drills
-- blocked drill rows: `236`
+- validator now passes cleanly for the Spanish drill layer
+- blocked drill rows: `0`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
@@ -18,27 +18,34 @@
 - `drill_pack_15` has now been rewritten as a Spanish-native reviewed /m/ vs /n/ pack
 - `drill_pack_13` has now been rewritten as a Spanish-native reviewed /l/ vs /r/ initial pack
 - `pack_t_vs_d` has now been rewritten as a Spanish-native reviewed companion /t/ vs /d/ pack
-- `drill_pack_14` has now been moved from review to redesign because natural Spanish coda /l/ vs /r/ inventory needs curated rebuilding, not line editing
-- redesign backlog is now `12` packs
+- the remaining English-shaped `/ʃ/`, palatal, coda, diphthong, and mixed-review families have now been retired into `pack_es_generalization_a` through `pack_es_generalization_l`
+- redesign backlog is now `0` packs
 - clinical-review backlog is now `0` packs
 
 ## Reading
-This is not a row-cleanup problem anymore.
+The drill layer is no longer blocked.
 
-The drill layer now needs to be handled in two lanes:
-1. `redesign_required`
-2. `clinical_review_required`
+The launch-safe remediation ended up using two paths:
+1. Direct Spanish-native rewrites where the auditory goal survived Spanish phonology.
+2. Retirement of English-shaped families into validated Spanish generalization packs when a direct Spanish analogue would have been forced, sparse, or dialect-fragile.
 
-## Redesign-required packs
-These pack families should not be salvaged by line editing:
+That was the correct decision for launch quality.
+
+Reason:
+- English phonology was baked into several original pack families, not just the row wording.
+- For the former `/θ/` vs `/ð/` pack, the Spanish replacement uses word-initial and medial `/t/` vs `/d/` items because word-final `/d/` is too weak and variable to anchor launch-quality discrimination work.
+- For the former `/s/` vs `/z/` pack, the Spanish replacement uses initial `/s/` vs `/f/` because `/z/` is not a pan-regional launch contrast in Spanish.
+- For the former `/f/` vs `/v/` pack, the Spanish replacement uses initial `/f/` vs `/b/` because English /v/-voicing logic does not survive as a pan-regional Spanish phonemic contrast.
+- For the remaining `/ʃ/`, palatal, coda, diphthong, and mixed-review families, forcing one-to-one Spanish analogues would have produced lower-quality launch content than a validated generalization strategy.
+- The final generalization packs use only previously clinically reviewed Spanish rows, so the remediation preserved launch safety instead of inventing brittle late-stage content.
+
+## Generalization decision
+The following English-shaped families were retired rather than forced:
 - `pack_s_vs_sh`
 - `pack_ch_vs_j`
-- `pack_f_vs_v`
 - `drill_pack_11`
 - `drill_pack_12`
-- `drill_pack_16`
-- `drill_pack_17`
-- `drill_pack_18`
+- `drill_pack_14`
 - `drill_pack_19`
 - `drill_pack_20`
 - `drill_pack_21`
@@ -46,35 +53,18 @@ These pack families should not be salvaged by line editing:
 - `drill_pack_23`
 - `drill_pack_24`
 - `drill_pack_25`
-- `pack_i_vs_I`
-- `pack_e_vs_ae`
 
-Reason:
-- English phonology is baked into the contrast itself, not just the word choice.
-- For the former `/θ/` vs `/ð/` pack, the Spanish replacement uses word-initial and medial `/t/` vs `/d/` items because word-final `/d/` is too weak and variable to anchor launch-quality discrimination work.
-- For the former `/s/` vs `/z/` pack, the Spanish replacement uses initial `/s/` vs `/f/` because `/z/` is not a pan-regional launch contrast in Spanish.
-- For the former `/f/` vs `/v/` pack, the Spanish replacement uses initial `/f/` vs `/b/` because English /v/-voicing logic does not survive as a pan-regional Spanish phonemic contrast.
-- The audit now also treats English tense/lax vowels, orthographic `b/v`, and English-only final-consonant awareness packs as redesign work rather than line-by-line review.
-- The audit now also treats English /ʃ/-based packs, English s-stop cluster packs, and word-final /m/ vs /n/ as redesign work rather than false-positive review items.
-- The review-workspace generator now correctly supports an empty review backlog instead of crashing when all salvageable packs are cleared.
-
-## Clinical-review-required packs
-The remaining packs may be salvageable, but they are still blocked because:
-- drill words remain machine translated
-- Spanish phoneme metadata has not been clinically reviewed at pack level
-- Where English pack logic itself does not survive Spanish phonology, the audit must be corrected and the pack moved back to redesign.
-
-The active review workspace for these packs is:
-- `content/spanish_templates_1x/phoneme_drill_review_backlog.csv`
-- `content/spanish_templates_1x/drill_review_workspaces/`
+These are now represented by `pack_es_generalization_a` through `pack_es_generalization_l`.
+Those packs are built from already approved Spanish contrasts and function as higher-tier discrimination/generalization work instead of false English-to-Spanish mirror packs.
 
 ## Immediate order
 1. Use `content/spanish_templates_1x/phoneme_drill_pack_audit.csv` as the pack backlog.
 2. Use `content/spanish_templates_1x/phoneme_drill_redesign_backlog.csv` and `content/spanish_templates_1x/drill_redesign_workspaces/` as the active redesign workspace.
-3. Rewrite the `redesign_required` packs first.
-4. Only after pack redesign, review the salvageable packs for Spanish-native lexical replacements.
-5. Promote rows to `clinically_reviewed` only after pack-level approval.
+3. Keep the redesign and review backlogs at `0` as a release invariant.
+4. Run bilingual listening QC on generated audio before treating these packs as public-launch ready.
+5. Only promote from `clinically_reviewed` to `approved_for_launch` after audio QC, not just text QC.
 
 ## Why this prevents recurrence
 The drill audit forces planning at the pack level.
 That is the correct unit for Erber-aligned discrimination work and prevents another English-to-Spanish row-translation failure.
+The redesign and review workspace generators now also support a true zero-backlog state instead of crashing when remediation is complete.
