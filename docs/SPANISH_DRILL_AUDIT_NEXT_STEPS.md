@@ -4,7 +4,7 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `276`
+- blocked drill rows: `256`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
@@ -13,11 +13,12 @@
 - `drill_pack_17` has now been replaced in-source by `pack_es_b_vs_m_initial`
 - `pack_e_vs_ae` has now been replaced in-source by `pack_es_e_vs_a`
 - `pack_i_vs_I` has now been replaced in-source by `pack_es_i_vs_e`
+- `drill_pack_16` has now been replaced in-source by `pack_es_m_vs_n_medial`
 - `drill_pack_15` has now been rewritten as a Spanish-native reviewed /m/ vs /n/ pack
 - `drill_pack_13` has now been rewritten as a Spanish-native reviewed /l/ vs /r/ initial pack
 - `pack_t_vs_d` has now been rewritten as a Spanish-native reviewed companion /t/ vs /d/ pack
 - `drill_pack_14` has now been moved from review to redesign because natural Spanish coda /l/ vs /r/ inventory needs curated rebuilding, not line editing
-- redesign backlog is now `14` packs
+- redesign backlog is now `13` packs
 - clinical-review backlog is now `0` packs
 
 ## Reading

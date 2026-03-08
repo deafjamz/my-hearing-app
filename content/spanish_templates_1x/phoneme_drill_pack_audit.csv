@@ -2,7 +2,6 @@ drill_pack_id,pack_name,contrast_type,row_count,machine_translated_rows,clinical
 drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,20,20,0,0,0,redesign_required,English initial /s/ vs /ʃ/ does not map to a pan-regional Spanish launch contrast,/s/ vs /tʃ/ or /s/ vs /x/
 drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,20,20,0,0,0,redesign_required,English final /s/ vs /ʃ/ does not map cleanly to a Spanish coda contrast,/l/ vs /r/ final or another Spanish-valid coda task
 drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,redesign_required,English final-liquid diphthong logic does not transfer cleanly to natural Spanish coda contrasts,curated /l/ vs /r/ final set only
-drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,20,20,0,0,0,redesign_required,Word-final /m/ versus /n/ is not a stable Spanish launch contrast,/m/ vs /n/ medial or /n/ vs /ɲ/
 drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,20,20,0,0,0,redesign_required,English /ɪ/ vs /iː/ tense/lax logic does not map to Spanish,/i/ vs /e/
 drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,20,19,0,0,1,redesign_required,English tense/lax back-vowel logic does not map to Spanish,/o/ vs /u/
 drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,20,19,0,0,1,redesign_required,English diphthong contrast does not transfer cleanly,/ai/ vs /ei/ or /ai/ vs /oi/
@@ -19,6 +18,7 @@ pack_es_b_vs_m_initial,Labial Contrast: /b/ vs /m/ Initial,manner,20,0,20,0,0,ap
 pack_es_e_vs_a,Vowel Contrast: /e/ vs /a/,height,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_i_vs_e,Vowel Contrast: /i/ vs /e/,height,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
+pack_es_m_vs_n_medial,Nasal Contrast: /m/ vs /n/ Medial,Nasal,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_s_vs_f,Fricative Contrast: /s/ vs /f/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_k_vs_g,Voicing: /k/ vs /g/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
