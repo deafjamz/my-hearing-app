@@ -26,6 +26,8 @@ REDESIGN_REQUIRED = {
     "drill_pack_21",
 }
 
+APPROVED_STATUSES = {"clinically_reviewed", "approved_for_launch"}
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build Spanish drill clinical-review workspaces")
@@ -46,6 +48,9 @@ def main() -> None:
     for pack_id, pack_df in df.groupby("drill_pack_id", dropna=False):
         pack_id = str(pack_id)
         if pack_id in REDESIGN_REQUIRED:
+            continue
+        statuses = set(pack_df["translation_status"].fillna(""))
+        if statuses and statuses.issubset(APPROVED_STATUSES):
             continue
 
         pack_name = str(pack_df["pack_name"].iloc[0])

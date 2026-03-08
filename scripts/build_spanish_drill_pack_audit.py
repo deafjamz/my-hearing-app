@@ -49,8 +49,17 @@ KNOWN_INVALID_PACKS = {
     },
 }
 
+APPROVED_STATUSES = {"clinically_reviewed", "approved_for_launch"}
 
-def classify_pack(pack_id: str) -> tuple[str, str, str]:
+
+def classify_pack(pack_id: str, status_counts: dict[str, int], row_count: int) -> tuple[str, str, str]:
+    approved_count = sum(status_counts.get(status, 0) for status in APPROVED_STATUSES)
+    if approved_count == row_count and status_counts.get("machine_translated", 0) == 0 and status_counts.get("needs_pack_redesign", 0) == 0:
+        return (
+            "approved",
+            "Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.",
+            "",
+        )
     if pack_id in KNOWN_INVALID_PACKS:
         item = KNOWN_INVALID_PACKS[pack_id]
         return item["recommended_action"], item["reason"], item["proposed_replacement"]
@@ -78,8 +87,8 @@ def main() -> None:
         pack_id = str(pack_id)
         pack_name = str(group["pack_name"].iloc[0])
         contrast_type = str(group["contrast_type"].iloc[0])
-        recommended_action, reason, proposed_replacement = classify_pack(pack_id)
         status_counts = group["translation_status"].fillna("").value_counts().to_dict()
+        recommended_action, reason, proposed_replacement = classify_pack(pack_id, status_counts, int(len(group)))
 
         rows.append({
             "drill_pack_id": pack_id,
@@ -88,6 +97,7 @@ def main() -> None:
             "row_count": int(len(group)),
             "machine_translated_rows": int(status_counts.get("machine_translated", 0)),
             "clinically_reviewed_rows": int(status_counts.get("clinically_reviewed", 0)),
+            "approved_for_launch_rows": int(status_counts.get("approved_for_launch", 0)),
             "needs_pack_redesign_rows": int(status_counts.get("needs_pack_redesign", 0)),
             "recommended_action": recommended_action,
             "reason": reason,
