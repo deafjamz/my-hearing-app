@@ -1,0 +1,17 @@
+{
+  "packet_path": "/private/tmp/main-sync/reports/spanish_listening_qc_packet.csv",
+  "row_count": 82,
+  "phase_counts": {
+    "detection": 18,
+    "sentence": 20,
+    "conversation": 7,
+    "drill": 25,
+    "scenario": 12
+  },
+  "voices": {
+    "male": "sergio",
+    "female": "roma",
+    "combo": "sergio_roma"
+  },
+  "status": "ready_for_human_review"
+}

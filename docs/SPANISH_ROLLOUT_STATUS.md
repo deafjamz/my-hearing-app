@@ -17,10 +17,12 @@ Verified and updated on March 7, 2026 after Spanish drill remediation, audio ref
    - `36` live `audio_assets` rows now exist for `spanish/detection/%`.
    - the repo now contains a dedicated Spanish detection path instead of reusing English `word_pairs`.
 
-3. QC workflow: automated generation and storage validation complete.
+3. QC workflow: automated generation and storage validation complete, human review packet ready.
    - Spanish drill audio was fully regenerated after remediation
    - automated drill storage and duration audit passed at `2000 / 2000` files with `0` sampled duration flags
-   - human bilingual listening review is still recommended before broad external exposure
+   - deterministic human bilingual listening packet generated at `reports/spanish_listening_qc_packet.csv`
+   - current launch-readiness status is recorded in `reports/spanish_launch_readiness.json`
+   - human bilingual listening review is still the final gate before broad external exposure
 
 4. Runtime and instrumentation: deployed and production-wired.
    - language-aware sentence, conversation, and drill fetching is implemented in repo.
@@ -118,7 +120,7 @@ Verification artifact:
 - `scripts/verify_spanish_rollout.py`
 
 ## Next Actions
-1. Run targeted human bilingual listening QC on the refreshed Spanish drill corpus.
+1. Run targeted human bilingual listening QC using `reports/spanish_listening_qc_packet.csv` and `docs/SPANISH_LISTENING_QC_PROTOCOL.md`.
 2. Keep repo-level validation blocking any future Spanish audio generation or ingest.
 3. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
 4. Add post-launch Spanish analytics slices that isolate completion, repeat rate, and error clusters from English.

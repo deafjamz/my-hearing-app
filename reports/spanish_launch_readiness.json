@@ -1,0 +1,45 @@
+{
+  "automated_gates": {
+    "rollout_verification": true,
+    "drill_audio_audit": true,
+    "drill_template_fully_approved": true,
+    "supabase_drill_count": true
+  },
+  "manual_gate": {
+    "human_listening_qc": "pending_review",
+    "required_for_broad_launch": true
+  },
+  "drill_status_counts": {
+    "approved_for_launch": 500
+  },
+  "qc_progress": {
+    "packet_exists": true,
+    "summary_exists": true,
+    "reviewed_rows": 0,
+    "pass_rows": 0,
+    "flag_rows": 0,
+    "pending_rows": 82,
+    "total_rows": 82,
+    "status": "pending_review"
+  },
+  "live_counts": {
+    "sentences_es": 1000,
+    "conversations_es": 160,
+    "drills_es": 500,
+    "detection_es": 18,
+    "audio_sentences_es": 2000,
+    "audio_detection_es": 36,
+    "legacy_scenarios_es": 80,
+    "legacy_scenario_items_es": 640
+  },
+  "storage_audit": {
+    "expected_file_count": 2000,
+    "existing_file_count": 2000,
+    "sampled_file_count": 50,
+    "sampled_duration_flags": 0
+  },
+  "status": "ready_pending_human_qc",
+  "blockers": [
+    "Human bilingual listening QC is not yet complete and clean."
+  ]
+}

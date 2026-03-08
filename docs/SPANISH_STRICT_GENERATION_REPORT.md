@@ -49,6 +49,7 @@ Execution metadata:
 Important note:
 - `reports/spanish_generation_results.json` captures the final resumable drill chunk (`1950` jobs) after an earlier bounded validation run (`50` jobs)
 - the storage audit is the canonical proof that all `2000` drill audio files exist post-remediation
+- the human-review packet now lives at `reports/spanish_listening_qc_packet.csv`
 
 ## Strict Mode Rules
 Strict mode behavior in `scripts/generate_spanish_launch_audio.py`:
@@ -152,21 +153,25 @@ The current Spanish launch pack is materially stronger than the earlier translat
 ## Recommended Next Steps
 Priority order should stay clinical-first.
 
-1. Run clinician or bilingual reviewer QC on a sample across all four generated phases.
+1. Run clinician or bilingual reviewer QC on `reports/spanish_listening_qc_packet.csv`.
    Focus on intelligibility, regional neutrality, foil plausibility, and drill naturalness.
 
-2. Add launch instrumentation for Spanish usage separately from English.
+2. Track launch status via `reports/spanish_launch_readiness.json` until listening QC is complete and clean.
+
+3. Add launch instrumentation for Spanish usage separately from English.
    Track start rate, completion rate, repeat rate, and error clusters by phase so weak Spanish content becomes visible quickly.
 
-3. Prioritize remaining ElevenLabs credits for clinically meaningful Spanish expansion before novelty features.
+4. Prioritize remaining ElevenLabs credits for clinically meaningful Spanish expansion before novelty features.
    Best likely uses are detection content, reviewed replacement drills, and additional comprehension scenarios in high-transfer contexts.
 
-4. Decide whether Spanish scenarios should remain on legacy scenario tables or move into the modern `stimuli_catalog` path.
+5. Decide whether Spanish scenarios should remain on legacy scenario tables or move into the modern `stimuli_catalog` path.
 
 ## Files To Reference
 - `docs/SPANISH_ERBER_LAUNCH_NOTES.md`
 - `content/spanish_templates_1x/spanish_execution_manifest.json`
 - `reports/spanish_drill_audio_audit.json`
+- `reports/spanish_listening_qc_packet.csv`
+- `reports/spanish_launch_readiness.json`
 - `reports/spanish_voice_benchmark_deep.md`
 - `reports/spanish_generation_results.json`
 - `reports/spanish_ingest_plan.json`
