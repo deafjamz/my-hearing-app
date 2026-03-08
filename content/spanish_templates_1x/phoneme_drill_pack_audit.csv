@@ -1,6 +1,7 @@
 drill_pack_id,pack_name,contrast_type,row_count,machine_translated_rows,clinically_reviewed_rows,approved_for_launch_rows,needs_pack_redesign_rows,recommended_action,reason,proposed_replacement
 drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,20,20,0,0,0,redesign_required,English initial /s/ vs /ʃ/ does not map to a pan-regional Spanish launch contrast,/s/ vs /tʃ/ or /s/ vs /x/
 drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,20,20,0,0,0,redesign_required,English final /s/ vs /ʃ/ does not map cleanly to a Spanish coda contrast,/l/ vs /r/ final or another Spanish-valid coda task
+drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,redesign_required,English final-liquid diphthong logic does not transfer cleanly to natural Spanish coda contrasts,curated /l/ vs /r/ final set only
 drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,20,20,0,0,0,redesign_required,Word-final /m/ versus /n/ is not a stable Spanish launch contrast,/m/ vs /n/ medial or /n/ vs /ɲ/
 drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,20,20,0,0,0,redesign_required,Orthographic b/v does not create a Spanish phonemic contrast,/b/ vs /m/ or retire pack
 drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,20,20,0,0,0,redesign_required,English /ɪ/ vs /iː/ tense/lax logic does not map to Spanish,/i/ vs /e/
@@ -16,11 +17,10 @@ pack_e_vs_ae,Vowels: /E/ vs /ae/,height,20,20,0,0,0,redesign_required,English /�
 pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,20,20,0,0,0,redesign_required,English /i/ vs /ɪ/ contrast does not map to Spanish vowel inventory,/i/ vs /e/
 pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,20,20,0,0,0,redesign_required,/s/ vs /ʃ/ is not a pan-regional launch contrast in Spanish,/s/ vs /tʃ/ or /s/ vs /x/
 drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
-drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_f_vs_b,Fricative Contrast: /f/ vs /b/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_s_vs_f,Fricative Contrast: /s/ vs /f/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_k_vs_g,Voicing: /k/ vs /g/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_p_vs_b,Voicing: /p/ vs /b/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
-pack_t_vs_d,Voicing: /t/ vs /d/,voicing,20,19,1,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
+pack_t_vs_d,Voicing: /t/ vs /d/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,

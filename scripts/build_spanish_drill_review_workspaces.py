@@ -25,6 +25,7 @@ REDESIGN_REQUIRED = {
     "pack_f_vs_v",
     "drill_pack_11",
     "drill_pack_12",
+    "drill_pack_14",
     "drill_pack_16",
     "drill_pack_17",
     "drill_pack_18",
@@ -57,6 +58,16 @@ def main() -> None:
 
     df = pd.read_csv(template_path)
     backlog_rows: list[dict[str, object]] = []
+    backlog_fields = [
+        "source_pack_id",
+        "source_pack_name",
+        "contrast_type",
+        "row_count",
+        "current_machine_translated_rows",
+        "current_clinically_reviewed_rows",
+        "workspace_file",
+        "status",
+    ]
 
     for pack_id, pack_df in df.groupby("drill_pack_id", dropna=False):
         pack_id = str(pack_id)
@@ -116,9 +127,10 @@ def main() -> None:
         })
 
     with backlog_path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(backlog_rows[0].keys()))
+        writer = csv.DictWriter(handle, fieldnames=backlog_fields)
         writer.writeheader()
-        writer.writerows(backlog_rows)
+        if backlog_rows:
+            writer.writerows(backlog_rows)
 
     print(f"Spanish drill review backlog written: {backlog_path}")
     print(f"Workspaces: {len(backlog_rows)}")

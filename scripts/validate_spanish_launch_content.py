@@ -28,6 +28,7 @@ KNOWN_ENGLISH_SHAPED_PACKS = {
     "pack_f_vs_v",
     "drill_pack_11",
     "drill_pack_12",
+    "drill_pack_14",
     "drill_pack_17",
     "drill_pack_18",
     "drill_pack_19",

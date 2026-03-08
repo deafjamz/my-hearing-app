@@ -4,7 +4,7 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `375`
+- blocked drill rows: `336`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
@@ -12,8 +12,10 @@
 - `pack_f_vs_v` has now been replaced in-source by `pack_es_f_vs_b`
 - `drill_pack_15` has now been rewritten as a Spanish-native reviewed /m/ vs /n/ pack
 - `drill_pack_13` has now been rewritten as a Spanish-native reviewed /l/ vs /r/ initial pack
-- redesign backlog is now `16` packs after correcting additional under-called English-only contrasts
-- clinical-review backlog is now `2` packs
+- `pack_t_vs_d` has now been rewritten as a Spanish-native reviewed companion /t/ vs /d/ pack
+- `drill_pack_14` has now been moved from review to redesign because natural Spanish coda /l/ vs /r/ inventory needs curated rebuilding, not line editing
+- redesign backlog is now `17` packs
+- clinical-review backlog is now `0` packs
 
 ## Reading
 This is not a row-cleanup problem anymore.
@@ -49,6 +51,7 @@ Reason:
 - For the former `/f/` vs `/v/` pack, the Spanish replacement uses initial `/f/` vs `/b/` because English /v/-voicing logic does not survive as a pan-regional Spanish phonemic contrast.
 - The audit now also treats English tense/lax vowels, orthographic `b/v`, and English-only final-consonant awareness packs as redesign work rather than line-by-line review.
 - The audit now also treats English /ʃ/-based packs, English s-stop cluster packs, and word-final /m/ vs /n/ as redesign work rather than false-positive review items.
+- The review-workspace generator now correctly supports an empty review backlog instead of crashing when all salvageable packs are cleared.
 
 ## Clinical-review-required packs
 The remaining packs may be salvageable, but they are still blocked because:

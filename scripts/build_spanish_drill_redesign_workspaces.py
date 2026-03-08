@@ -74,6 +74,13 @@ REDESIGN_SPECS = {
         "proposed_contrast_phoneme_es": "/r/",
         "clinical_goal": "replace English final /s/ vs /ʃ/ with a Spanish-valid coda contrast",
     },
+    "drill_pack_14": {
+        "proposed_pack_id": "pack_es_l_vs_r_final_curated",
+        "proposed_pack_name": "Liquid Contrast: /l/ vs /r/ Final Curated",
+        "proposed_target_phoneme_es": "/l/",
+        "proposed_contrast_phoneme_es": "/r/",
+        "clinical_goal": "rebuild the final-liquid pack only from natural Spanish coda /l/ versus /r/ items",
+    },
     "drill_pack_16": {
         "proposed_pack_id": "pack_es_m_vs_n_medial",
         "proposed_pack_name": "Nasal Contrast: /m/ vs /n/ Medial",

@@ -57,6 +57,11 @@ KNOWN_INVALID_PACKS = {
         "reason": "English final /s/ vs /ʃ/ does not map cleanly to a Spanish coda contrast",
         "proposed_replacement": "/l/ vs /r/ final or another Spanish-valid coda task",
     },
+    "drill_pack_14": {
+        "recommended_action": "redesign_required",
+        "reason": "English final-liquid diphthong logic does not transfer cleanly to natural Spanish coda contrasts",
+        "proposed_replacement": "curated /l/ vs /r/ final set only",
+    },
     "drill_pack_16": {
         "recommended_action": "redesign_required",
         "reason": "Word-final /m/ versus /n/ is not a stable Spanish launch contrast",
