@@ -12,6 +12,7 @@ What remains is human bilingual review of whether the generated Spanish actually
 
 ## Files
 - packet: `reports/spanish_listening_qc_packet.csv`
+- browser review surface: `reports/spanish_listening_qc_packet.html`
 - packet summary: `reports/spanish_listening_qc_summary.json`
 - launch readiness: `reports/spanish_launch_readiness.json`
 

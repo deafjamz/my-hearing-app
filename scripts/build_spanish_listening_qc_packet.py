@@ -5,6 +5,7 @@ Build a deterministic Spanish listening-QC packet for launch review.
 Outputs:
 - reports/spanish_listening_qc_packet.csv
 - reports/spanish_listening_qc_summary.json
+- reports/spanish_listening_qc_packet.html
 
 The packet is intentionally review-ready rather than exhaustive. It samples the
 current launch corpus across Erber-relevant activity types so a bilingual
@@ -26,6 +27,7 @@ CONTENT_DIR = ROOT / "content" / "spanish_templates_1x"
 REPORT_DIR = ROOT / "reports"
 PACKET_PATH = REPORT_DIR / "spanish_listening_qc_packet.csv"
 SUMMARY_PATH = REPORT_DIR / "spanish_listening_qc_summary.json"
+HTML_PATH = REPORT_DIR / "spanish_listening_qc_packet.html"
 MANIFEST_PATH = CONTENT_DIR / "spanish_execution_manifest.json"
 SCENARIOS_CSV = CONTENT_DIR / "scenarios_es_launch_template.csv"
 SCENARIO_ITEMS_CSV = CONTENT_DIR / "scenario_items_es_launch_template.csv"
@@ -432,6 +434,244 @@ def write_packet(packet: list[dict[str, str]], summary: dict[str, object]) -> No
         writer.writeheader()
         writer.writerows(packet)
     SUMMARY_PATH.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    HTML_PATH.write_text(build_html(packet, summary), encoding="utf-8")
+
+
+def build_audio_cell(label: str, url: str) -> str:
+    if not url:
+        return ""
+    return (
+        f'<div class="audio-item"><div class="audio-label">{label}</div>'
+        f'<audio controls preload="none" src="{url}"></audio></div>'
+    )
+
+
+def html_escape(value: str) -> str:
+    return (
+        value.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def build_html(packet: list[dict[str, str]], summary: dict[str, object]) -> str:
+    rows_html: list[str] = []
+    for row in packet:
+        audio_blocks = "".join([
+            build_audio_cell("Audio 1", row["audio_url_1"]),
+            build_audio_cell("Audio 2", row["audio_url_2"]),
+            build_audio_cell("Audio 3", row["audio_url_3"]),
+            build_audio_cell("Audio 4", row["audio_url_4"]),
+        ])
+        rows_html.append(
+            "<tr>"
+            f'<td>{html_escape(row["phase"])}</td>'
+            f'<td>{html_escape(row["review_id"])}</td>'
+            f'<td>{html_escape(row["sample_group"])}</td>'
+            f'<td>{html_escape(row["difficulty"])}</td>'
+            f'<td><div class="text-primary">{html_escape(row["text_primary"])}</div>'
+            f'<div class="text-secondary">{html_escape(row["text_secondary"])}</div></td>'
+            f'<td>{html_escape(row["clinical_focus"])}</td>'
+            f'<td>{html_escape(row["review_questions"])}</td>'
+            f'<td class="audio-cell">{audio_blocks}</td>'
+            "</tr>"
+        )
+
+    summary_lines = "".join(
+        f'<span class="pill">{html_escape(phase)}: {count}</span>'
+        for phase, count in summary["phase_counts"].items()
+    )
+
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spanish Listening QC Packet</title>
+  <style>
+    :root {{
+      --bg: #f5f1e8;
+      --paper: #fffdf8;
+      --ink: #1e1d1a;
+      --muted: #6b665a;
+      --line: #d8cfbf;
+      --accent: #0d6e6e;
+      --accent-soft: #d8ece8;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+      background:
+        radial-gradient(circle at top left, #efe2c6 0, transparent 28%),
+        linear-gradient(180deg, #f7f2e8 0%, #efe7d8 100%);
+      color: var(--ink);
+    }}
+    .wrap {{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }}
+    .hero {{
+      background: rgba(255, 253, 248, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 18px 40px rgba(63, 46, 21, 0.08);
+      margin-bottom: 24px;
+    }}
+    h1 {{
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.05;
+    }}
+    p {{
+      margin: 0 0 12px;
+      color: var(--muted);
+      max-width: 900px;
+    }}
+    .pill-row {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }}
+    .pill {{
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }}
+    .table-shell {{
+      background: rgba(255, 253, 248, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(63, 46, 21, 0.08);
+    }}
+    .toolbar {{
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #f7f1e6;
+    }}
+    .toolbar input {{
+      width: 280px;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: white;
+    }}
+    table {{
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }}
+    th, td {{
+      vertical-align: top;
+      padding: 14px;
+      border-bottom: 1px solid #eee3d0;
+    }}
+    th {{
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: #fbf7ef;
+      text-align: left;
+    }}
+    tr.hidden {{
+      display: none;
+    }}
+    .text-primary {{
+      font-weight: 700;
+      margin-bottom: 4px;
+    }}
+    .text-secondary {{
+      color: var(--muted);
+      font-size: 14px;
+    }}
+    .audio-cell {{
+      min-width: 320px;
+    }}
+    .audio-item {{
+      margin-bottom: 10px;
+    }}
+    .audio-label {{
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }}
+    audio {{
+      width: 100%;
+      height: 32px;
+    }}
+    @media (max-width: 900px) {{
+      .wrap {{ padding: 18px 12px 40px; }}
+      h1 {{ font-size: 28px; }}
+      .table-shell {{ overflow-x: auto; }}
+      table {{ min-width: 1200px; }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Spanish Listening QC Packet</h1>
+      <p>
+        Launch status is operationally strong and clinically pending. Automated gates are already green.
+        This packet is the human bilingual review surface for the remaining launch decision.
+      </p>
+      <p>
+        Rows: {summary["row_count"]}. Voices: Sergio and Roma. Review protocol: <code>docs/SPANISH_LISTENING_QC_PROTOCOL.md</code>
+      </p>
+      <div class="pill-row">{summary_lines}</div>
+    </section>
+    <section class="table-shell">
+      <div class="toolbar">
+        <label for="filter">Filter</label>
+        <input id="filter" type="text" placeholder="phase, id, text, pack, category">
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Review ID</th>
+            <th>Group</th>
+            <th>Difficulty</th>
+            <th>Text</th>
+            <th>Clinical Focus</th>
+            <th>Review Question</th>
+            <th>Audio</th>
+          </tr>
+        </thead>
+        <tbody id="packet-body">
+          {''.join(rows_html)}
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script>
+    const filter = document.getElementById('filter');
+    const rows = Array.from(document.querySelectorAll('#packet-body tr'));
+    filter.addEventListener('input', () => {{
+      const needle = filter.value.trim().toLowerCase();
+      rows.forEach((row) => {{
+        const match = row.textContent.toLowerCase().includes(needle);
+        row.classList.toggle('hidden', Boolean(needle) && !match);
+      }});
+    }});
+  </script>
+</body>
+</html>"""
 
 
 def main() -> None:
