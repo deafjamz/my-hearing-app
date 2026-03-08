@@ -22,6 +22,11 @@ KNOWN_INVALID_PACKS = {
         "reason": "/s/ vs /z/ is not pan-regional Spanish phonology",
         "proposed_replacement": "/s/ vs /f/ or /s/ vs /x/",
     },
+    "pack_s_vs_sh": {
+        "recommended_action": "redesign_required",
+        "reason": "/s/ vs /ʃ/ is not a pan-regional launch contrast in Spanish",
+        "proposed_replacement": "/s/ vs /tʃ/ or /s/ vs /x/",
+    },
     "pack_th_voiced_unvoiced": {
         "recommended_action": "redesign_required",
         "reason": "English dental-fricative voicing contrast does not transfer pan-regionally",
@@ -41,6 +46,21 @@ KNOWN_INVALID_PACKS = {
         "recommended_action": "redesign_required",
         "reason": "Orthographic b/v does not create a Spanish phonemic contrast",
         "proposed_replacement": "/b/ vs /m/ or retire pack",
+    },
+    "drill_pack_11": {
+        "recommended_action": "redesign_required",
+        "reason": "English initial /s/ vs /ʃ/ does not map to a pan-regional Spanish launch contrast",
+        "proposed_replacement": "/s/ vs /tʃ/ or /s/ vs /x/",
+    },
+    "drill_pack_12": {
+        "recommended_action": "redesign_required",
+        "reason": "English final /s/ vs /ʃ/ does not map cleanly to a Spanish coda contrast",
+        "proposed_replacement": "/l/ vs /r/ final or another Spanish-valid coda task",
+    },
+    "drill_pack_16": {
+        "recommended_action": "redesign_required",
+        "reason": "Word-final /m/ versus /n/ is not a stable Spanish launch contrast",
+        "proposed_replacement": "/m/ vs /n/ medial or /n/ vs /ɲ/",
     },
     "drill_pack_18": {
         "recommended_action": "redesign_required",
@@ -67,10 +87,20 @@ KNOWN_INVALID_PACKS = {
         "reason": "English /dʒ/ vs /ʒ/ affricate/fricative logic does not transfer cleanly to Spanish",
         "proposed_replacement": "retire or replace with a Spanish palatal contrast",
     },
+    "drill_pack_23": {
+        "recommended_action": "redesign_required",
+        "reason": "English s-stop cluster voicing logic does not transfer to Spanish onset phonotactics",
+        "proposed_replacement": "/pl/ vs /pr/ or another Spanish-valid cluster contrast",
+    },
     "drill_pack_24": {
         "recommended_action": "redesign_required",
         "reason": "English final /t/ versus null awareness is not a stable Spanish launch contrast",
         "proposed_replacement": "/s/ vs null or another Spanish-final awareness task",
+    },
+    "drill_pack_25": {
+        "recommended_action": "redesign_required",
+        "reason": "Mixed hardest-pair inventory still contains multiple English-only contrasts",
+        "proposed_replacement": "retire and rebuild from validated Spanish advanced packs",
     },
     "pack_i_vs_I": {
         "recommended_action": "redesign_required",

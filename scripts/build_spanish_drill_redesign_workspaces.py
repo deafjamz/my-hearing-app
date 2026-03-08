@@ -25,6 +25,13 @@ REDESIGN_SPECS = {
         "proposed_contrast_phoneme_es": "/f/",
         "clinical_goal": "high-salience fricative distinction with pan-regional Spanish targets",
     },
+    "pack_s_vs_sh": {
+        "proposed_pack_id": "pack_es_s_vs_tch",
+        "proposed_pack_name": "Fricative/Affricate: /s/ vs /tʃ/",
+        "proposed_target_phoneme_es": "/s/",
+        "proposed_contrast_phoneme_es": "/tʃ/",
+        "clinical_goal": "replace non-panregional /ʃ/ with a Spanish-valid high-frequency contrast",
+    },
     "pack_th_voiced_unvoiced": {
         "proposed_pack_id": "pack_es_t_vs_d",
         "proposed_pack_name": "Stop Voicing: /t/ vs /d/",
@@ -52,6 +59,27 @@ REDESIGN_SPECS = {
         "proposed_target_phoneme_es": "/b/",
         "proposed_contrast_phoneme_es": "/m/",
         "clinical_goal": "replace orthographic b/v with a real Spanish labial contrast",
+    },
+    "drill_pack_11": {
+        "proposed_pack_id": "pack_es_s_vs_tch_initial",
+        "proposed_pack_name": "Fricative/Affricate: /s/ vs /tʃ/ Initial",
+        "proposed_target_phoneme_es": "/s/",
+        "proposed_contrast_phoneme_es": "/tʃ/",
+        "clinical_goal": "replace English /s/ vs /ʃ/ with a Spanish-valid initial contrast",
+    },
+    "drill_pack_12": {
+        "proposed_pack_id": "pack_es_l_vs_r_final",
+        "proposed_pack_name": "Liquid Contrast: /l/ vs /r/ Final",
+        "proposed_target_phoneme_es": "/l/",
+        "proposed_contrast_phoneme_es": "/r/",
+        "clinical_goal": "replace English final /s/ vs /ʃ/ with a Spanish-valid coda contrast",
+    },
+    "drill_pack_16": {
+        "proposed_pack_id": "pack_es_m_vs_n_medial",
+        "proposed_pack_name": "Nasal Contrast: /m/ vs /n/ Medial",
+        "proposed_target_phoneme_es": "/m/",
+        "proposed_contrast_phoneme_es": "/n/",
+        "clinical_goal": "retain nasal place discrimination with a stable Spanish medial contrast",
     },
     "drill_pack_18": {
         "proposed_pack_id": "pack_es_i_vs_e_medial",
@@ -88,12 +116,26 @@ REDESIGN_SPECS = {
         "proposed_contrast_phoneme_es": "/tʃ/",
         "clinical_goal": "replace English affricate/fricative logic with a Spanish-valid palatal contrast",
     },
+    "drill_pack_23": {
+        "proposed_pack_id": "pack_es_pl_vs_pr_initial",
+        "proposed_pack_name": "Cluster Contrast: /pl/ vs /pr/ Initial",
+        "proposed_target_phoneme_es": "/pl/",
+        "proposed_contrast_phoneme_es": "/pr/",
+        "clinical_goal": "replace English s-stop clusters with a Spanish-valid onset cluster contrast",
+    },
     "drill_pack_24": {
         "proposed_pack_id": "pack_es_final_s_vs_null",
         "proposed_pack_name": "Final Awareness: /s/ vs null",
         "proposed_target_phoneme_es": "/s/",
         "proposed_contrast_phoneme_es": "null",
         "clinical_goal": "replace English final /t/ deletion awareness with a Spanish-final contrast",
+    },
+    "drill_pack_25": {
+        "proposed_pack_id": "pack_es_advanced_mix",
+        "proposed_pack_name": "Advanced Spanish Contrast Mix",
+        "proposed_target_phoneme_es": "multiple",
+        "proposed_contrast_phoneme_es": "multiple",
+        "clinical_goal": "rebuild the hardest-pairs block only from validated Spanish-native contrast families",
     },
     "pack_i_vs_I": {
         "proposed_pack_id": "pack_es_i_vs_e",
