@@ -4,8 +4,9 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `473`
+- blocked drill rows: `454`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
+- `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 
 ## Reading
 This is not a row-cleanup problem anymore.
@@ -16,7 +17,6 @@ The drill layer now needs to be handled in two lanes:
 
 ## Redesign-required packs
 These pack families should not be salvaged by line editing:
-- `pack_s_vs_z`
 - `pack_ch_vs_j`
 - `drill_pack_19`
 - `drill_pack_20`
@@ -25,6 +25,7 @@ These pack families should not be salvaged by line editing:
 Reason:
 - English phonology is baked into the contrast itself, not just the word choice.
 - For the former `/θ/` vs `/ð/` pack, the Spanish replacement uses word-initial and medial `/t/` vs `/d/` items because word-final `/d/` is too weak and variable to anchor launch-quality discrimination work.
+- For the former `/s/` vs `/z/` pack, the Spanish replacement uses initial `/s/` vs `/f/` because `/z/` is not a pan-regional launch contrast in Spanish.
 
 ## Clinical-review-required packs
 The remaining packs may be salvageable, but they are still blocked because:
