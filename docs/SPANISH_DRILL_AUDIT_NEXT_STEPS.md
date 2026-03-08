@@ -4,12 +4,13 @@
 - comprehension rewrite queue is now `0`
 - conversation rewrite queue is now `0`
 - validator now fails only on Spanish drills
-- blocked drill rows: `414`
+- blocked drill rows: `395`
 - `pack_th_voiced_unvoiced` has now been replaced in-source by `pack_es_t_vs_d`
 - `pack_s_vs_z` has now been replaced in-source by `pack_es_s_vs_f`
 - `pack_p_vs_b` has now been rewritten as a Spanish-native reviewed pack
 - `pack_k_vs_g` has now been rewritten as a Spanish-native reviewed pack
-- redesign backlog has expanded to `11` packs after correcting under-called English-only contrasts
+- `pack_f_vs_v` has now been replaced in-source by `pack_es_f_vs_b`
+- redesign backlog is now `10` packs after correcting under-called English-only contrasts and clearing the /f/ vs /b/ replacement
 
 ## Reading
 This is not a row-cleanup problem anymore.
@@ -36,6 +37,7 @@ Reason:
 - English phonology is baked into the contrast itself, not just the word choice.
 - For the former `/θ/` vs `/ð/` pack, the Spanish replacement uses word-initial and medial `/t/` vs `/d/` items because word-final `/d/` is too weak and variable to anchor launch-quality discrimination work.
 - For the former `/s/` vs `/z/` pack, the Spanish replacement uses initial `/s/` vs `/f/` because `/z/` is not a pan-regional launch contrast in Spanish.
+- For the former `/f/` vs `/v/` pack, the Spanish replacement uses initial `/f/` vs `/b/` because English /v/-voicing logic does not survive as a pan-regional Spanish phonemic contrast.
 - The audit now also treats English tense/lax vowels, orthographic `b/v`, and English-only final-consonant awareness packs as redesign work rather than line-by-line review.
 
 ## Clinical-review-required packs
