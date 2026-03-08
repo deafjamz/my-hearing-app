@@ -39,6 +39,27 @@ REDESIGN_SPECS = {
         "proposed_contrast_phoneme_es": "/ʝ/",
         "clinical_goal": "Spanish-native affricate versus palatal contrast",
     },
+    "pack_f_vs_v": {
+        "proposed_pack_id": "pack_es_f_vs_b",
+        "proposed_pack_name": "Fricative Contrast: /f/ vs /b/",
+        "proposed_target_phoneme_es": "/f/",
+        "proposed_contrast_phoneme_es": "/b/",
+        "clinical_goal": "replace English /f/ vs /v/ with a Spanish-native labial contrast",
+    },
+    "drill_pack_17": {
+        "proposed_pack_id": "pack_es_b_vs_m_initial",
+        "proposed_pack_name": "Labial Contrast: /b/ vs /m/ Initial",
+        "proposed_target_phoneme_es": "/b/",
+        "proposed_contrast_phoneme_es": "/m/",
+        "clinical_goal": "replace orthographic b/v with a real Spanish labial contrast",
+    },
+    "drill_pack_18": {
+        "proposed_pack_id": "pack_es_i_vs_e_medial",
+        "proposed_pack_name": "Vowel Contrast: /i/ vs /e/ Medial",
+        "proposed_target_phoneme_es": "/i/",
+        "proposed_contrast_phoneme_es": "/e/",
+        "clinical_goal": "replace English tense/lax front-vowel logic with a Spanish vowel contrast",
+    },
     "drill_pack_19": {
         "proposed_pack_id": "pack_es_o_vs_u_medial",
         "proposed_pack_name": "Vowel Contrast: /o/ vs /u/ Medial",
@@ -59,6 +80,34 @@ REDESIGN_SPECS = {
         "proposed_target_phoneme_es": "/tʃ/",
         "proposed_contrast_phoneme_es": "/s/",
         "clinical_goal": "retain burst-vs-frication discrimination with pan-regional fricative target",
+    },
+    "drill_pack_22": {
+        "proposed_pack_id": "pack_es_palatal_redesign",
+        "proposed_pack_name": "Palatal Contrast Redesign",
+        "proposed_target_phoneme_es": "/ʝ/",
+        "proposed_contrast_phoneme_es": "/tʃ/",
+        "clinical_goal": "replace English affricate/fricative logic with a Spanish-valid palatal contrast",
+    },
+    "drill_pack_24": {
+        "proposed_pack_id": "pack_es_final_s_vs_null",
+        "proposed_pack_name": "Final Awareness: /s/ vs null",
+        "proposed_target_phoneme_es": "/s/",
+        "proposed_contrast_phoneme_es": "null",
+        "clinical_goal": "replace English final /t/ deletion awareness with a Spanish-final contrast",
+    },
+    "pack_i_vs_I": {
+        "proposed_pack_id": "pack_es_i_vs_e",
+        "proposed_pack_name": "Vowel Contrast: /i/ vs /e/",
+        "proposed_target_phoneme_es": "/i/",
+        "proposed_contrast_phoneme_es": "/e/",
+        "clinical_goal": "replace English tense/lax high-front vowel logic with a Spanish vowel contrast",
+    },
+    "pack_e_vs_ae": {
+        "proposed_pack_id": "pack_es_e_vs_a",
+        "proposed_pack_name": "Vowel Contrast: /e/ vs /a/",
+        "proposed_target_phoneme_es": "/e/",
+        "proposed_contrast_phoneme_es": "/a/",
+        "clinical_goal": "replace English mid-front/low-front vowel logic with a Spanish vowel contrast",
     },
 }
 

@@ -21,9 +21,16 @@ REDESIGN_REQUIRED = {
     "pack_s_vs_z",
     "pack_th_voiced_unvoiced",
     "pack_ch_vs_j",
+    "pack_f_vs_v",
+    "drill_pack_17",
+    "drill_pack_18",
     "drill_pack_19",
     "drill_pack_20",
     "drill_pack_21",
+    "drill_pack_22",
+    "drill_pack_24",
+    "pack_e_vs_ae",
+    "pack_i_vs_I",
 }
 
 APPROVED_STATUSES = {"clinically_reviewed", "approved_for_launch"}

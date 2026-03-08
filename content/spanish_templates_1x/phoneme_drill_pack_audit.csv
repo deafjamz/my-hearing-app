@@ -1,25 +1,25 @@
 drill_pack_id,pack_name,contrast_type,row_count,machine_translated_rows,clinically_reviewed_rows,approved_for_launch_rows,needs_pack_redesign_rows,recommended_action,reason,proposed_replacement
+drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,20,20,0,0,0,redesign_required,Orthographic b/v does not create a Spanish phonemic contrast,/b/ vs /m/ or retire pack
+drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,20,20,0,0,0,redesign_required,English /ɪ/ vs /iː/ tense/lax logic does not map to Spanish,/i/ vs /e/
 drill_pack_19,Vowel Height Back: /ʊ/ vs /uː/ Medial,Vowel Height,20,19,0,0,1,redesign_required,English tense/lax back-vowel logic does not map to Spanish,/o/ vs /u/
 drill_pack_20,Diphthong Contrasts: /aɪ/ vs /ɔɪ/ Medial,Diphthong,20,19,0,0,1,redesign_required,English diphthong contrast does not transfer cleanly,/ai/ vs /ei/ or /ai/ vs /oi/
 drill_pack_21,Affricate/Fricative: /tʃ/ vs /ʃ/ Initial,Affricate,20,19,0,0,1,redesign_required,/tʃ/ vs /ʃ/ is not pan-regional enough for launch,/tʃ/ vs /s/ or /tʃ/ vs /ʝ/
+drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,20,20,0,0,0,redesign_required,English /dʒ/ vs /ʒ/ affricate/fricative logic does not transfer cleanly to Spanish,retire or replace with a Spanish palatal contrast
+drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,20,20,0,0,0,redesign_required,English final /t/ versus null awareness is not a stable Spanish launch contrast,/s/ vs null or another Spanish-final awareness task
 pack_ch_vs_j,Voicing: /tʃ/ vs /dʒ/,voicing,20,19,0,0,1,redesign_required,/tʃ/ vs /dʒ/ is not the right Spanish counterpart,/tʃ/ vs /ʝ/
+pack_e_vs_ae,Vowels: /E/ vs /ae/,height,20,20,0,0,0,redesign_required,English /ɛ/ vs /æ/ contrast does not map to Spanish vowel inventory,/e/ vs /a/
+pack_f_vs_v,Voicing: /f/ vs /v/,voicing,20,19,0,0,1,redesign_required,English /f/ vs /v/ voicing does not map to a pan-regional Spanish phonemic contrast,/f/ vs /b/
+pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,20,20,0,0,0,redesign_required,English /i/ vs /ɪ/ contrast does not map to Spanish vowel inventory,/i/ vs /e/
 drill_pack_11,Fricative Place: /s/ vs /ʃ/ Initial,Fricative,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_12,Fricative Place: /s/ vs /ʃ/ Final,Fricative,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_13,Liquid Contrasts: /l/ vs /r/ Initial,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_14,Liquid Contrasts: /l/ vs /r/ Final,Liquid,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_15,Nasal Place: /m/ vs /n/ Initial,Nasal,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_16,Nasal Place: /m/ vs /n/ Final,Nasal,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-drill_pack_17,Stop Manner: /b/ vs /v/ Initial,Consonant Manner,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-drill_pack_18,Vowel Height Front: /ɪ/ vs /iː/ Medial,Vowel Height,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-drill_pack_22,Affricate/Fricative: /dʒ/ vs /ʒ/ Mixed,Affricate,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_23,Voicing Clusters: Initial,Cluster,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-drill_pack_24,Final Consonant Awareness: /t/ vs null Final,Consonant Manner,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 drill_pack_25,Mixed Review: Hardest Pairs,Fricative,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-pack_e_vs_ae,Vowels: /E/ vs /ae/,height,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 pack_es_s_vs_f,Fricative Contrast: /s/ vs /f/,place,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_es_t_vs_d,Stop Voicing: /t/ vs /d/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
-pack_f_vs_v,Voicing: /f/ vs /v/,voicing,20,19,1,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
-pack_i_vs_I,Vowels: /i/ vs /I/,tenseness,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",
 pack_k_vs_g,Voicing: /k/ vs /g/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_p_vs_b,Voicing: /p/ vs /b/,voicing,20,0,20,0,0,approved,Pack has a fully reviewed Spanish-native lexical set and is ready for downstream audio/QC work.,
 pack_s_vs_sh,Sibilants: /s/ vs /ʃ/,place,20,20,0,0,0,clinical_review_required,"Pack may be clinically salvageable, but machine-translated drill words are not launch-safe.",

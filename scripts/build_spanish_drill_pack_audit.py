@@ -32,6 +32,21 @@ KNOWN_INVALID_PACKS = {
         "reason": "/tʃ/ vs /dʒ/ is not the right Spanish counterpart",
         "proposed_replacement": "/tʃ/ vs /ʝ/",
     },
+    "pack_f_vs_v": {
+        "recommended_action": "redesign_required",
+        "reason": "English /f/ vs /v/ voicing does not map to a pan-regional Spanish phonemic contrast",
+        "proposed_replacement": "/f/ vs /b/",
+    },
+    "drill_pack_17": {
+        "recommended_action": "redesign_required",
+        "reason": "Orthographic b/v does not create a Spanish phonemic contrast",
+        "proposed_replacement": "/b/ vs /m/ or retire pack",
+    },
+    "drill_pack_18": {
+        "recommended_action": "redesign_required",
+        "reason": "English /ɪ/ vs /iː/ tense/lax logic does not map to Spanish",
+        "proposed_replacement": "/i/ vs /e/",
+    },
     "drill_pack_19": {
         "recommended_action": "redesign_required",
         "reason": "English tense/lax back-vowel logic does not map to Spanish",
@@ -46,6 +61,26 @@ KNOWN_INVALID_PACKS = {
         "recommended_action": "redesign_required",
         "reason": "/tʃ/ vs /ʃ/ is not pan-regional enough for launch",
         "proposed_replacement": "/tʃ/ vs /s/ or /tʃ/ vs /ʝ/",
+    },
+    "drill_pack_22": {
+        "recommended_action": "redesign_required",
+        "reason": "English /dʒ/ vs /ʒ/ affricate/fricative logic does not transfer cleanly to Spanish",
+        "proposed_replacement": "retire or replace with a Spanish palatal contrast",
+    },
+    "drill_pack_24": {
+        "recommended_action": "redesign_required",
+        "reason": "English final /t/ versus null awareness is not a stable Spanish launch contrast",
+        "proposed_replacement": "/s/ vs null or another Spanish-final awareness task",
+    },
+    "pack_i_vs_I": {
+        "recommended_action": "redesign_required",
+        "reason": "English /i/ vs /ɪ/ contrast does not map to Spanish vowel inventory",
+        "proposed_replacement": "/i/ vs /e/",
+    },
+    "pack_e_vs_ae": {
+        "recommended_action": "redesign_required",
+        "reason": "English /ɛ/ vs /æ/ contrast does not map to Spanish vowel inventory",
+        "proposed_replacement": "/e/ vs /a/",
     },
 }
 
