@@ -3,7 +3,7 @@
 ## Purpose
 This document records what is currently true across the repo, live Supabase, and deployed app state after the Spanish launch-content work.
 
-Verified and updated on March 7, 2026 after Spanish drill remediation, audio refresh, live Supabase apply, and rollout re-verification on `main`.
+Verified and updated on March 8, 2026 after Spanish drill remediation, audio refresh, live Supabase apply, rollout re-verification, and launch-surface gating on `main`.
 
 ## Step Status
 1. Drill remediation: complete for the current launch corpus.
@@ -24,12 +24,15 @@ Verified and updated on March 7, 2026 after Spanish drill remediation, audio ref
    - current launch-readiness status is recorded in `reports/spanish_launch_readiness.json`
    - human bilingual listening review is still the final gate before broad external exposure
 
-4. Runtime and instrumentation: deployed and production-wired.
+4. Runtime, instrumentation, and launch-surface gating: deployed and production-wired.
    - language-aware sentence, conversation, and drill fetching is implemented in repo.
    - English fallback was preserved for legacy rows with null `content_language`.
    - sentence fetching now normalizes both `clinical_metadata` and legacy `training_metadata`.
    - progress metadata now carries `contentLanguage` for sentence, conversation, drill, detection, and scenario sessions.
    - Spanish scenarios are routable through the deployed legacy `scenarios/scenario_items` path.
+   - first-visit onboarding can now select Spanish before the first session.
+   - Spanish users no longer see English-only launch blockers in the shared activity hub.
+   - dashboard recommendations and today-plan generation now use the selected language instead of mixed-language history.
 
 5. Credit allocation guidance: updated.
    - drill remediation and launch-safe drill audio are complete for the current corpus
@@ -118,9 +121,11 @@ What is still staged:
 Verification artifact:
 - `reports/spanish_rollout_verification.json`
 - `scripts/verify_spanish_rollout.py`
+- `docs/SPANISH_LAUNCH_PRODUCT_AUDIT.md`
 
 ## Next Actions
-1. Run targeted human bilingual listening QC using `reports/spanish_listening_qc_packet.csv` and `docs/SPANISH_LISTENING_QC_PROTOCOL.md`.
-2. Keep repo-level validation blocking any future Spanish audio generation or ingest.
-3. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
-4. Add post-launch Spanish analytics slices that isolate completion, repeat rate, and error clusters from English.
+1. Run targeted human bilingual listening QC using `reports/spanish_listening_qc_packet.csv`, `reports/spanish_listening_qc_packet.html`, and `docs/SPANISH_LISTENING_QC_PROTOCOL.md`.
+2. Decide whether to ship Spanish launch with the current scoped activity set or expand into Spanish placement / stories / word-pair tracks before wider promotion.
+3. Keep repo-level validation blocking any future Spanish audio generation or ingest.
+4. Decide whether Spanish scenarios should move to the modern `stimuli_catalog` path or stay on `scenarios/scenario_items` with explicit language columns.
+5. Add post-launch Spanish analytics slices that isolate completion, repeat rate, and error clusters from English.

@@ -8,6 +8,12 @@ import { WelcomeScreen } from '@/components/WelcomeScreen';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { TodaysPracticeCard } from '@/components/TodaysPracticeCard';
 import { useTodaysPractice } from '@/hooks/useTodaysPractice';
+import { normalizeTrainingLanguage } from '@/lib/trainingLanguage';
+import {
+  isActivitySupportedInLanguage,
+  shouldUsePlacementAssessment,
+  type LaunchActivityId,
+} from '@/lib/languageLaunchSupport';
 
 interface Activity {
   id: string;
@@ -21,9 +27,10 @@ interface Activity {
 }
 
 export function ActivityList() {
-  const { user, hasAccess, loading: authLoading } = useUser();
+  const { user, hasAccess, loading: authLoading, preferredLanguage, setPreferredLanguage } = useUser();
   const navigate = useNavigate();
   const { plan: todaysPlan, loading: planLoading } = useTodaysPractice();
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
   const [upsellTier, setUpsellTier] = useState<string | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showWelcome, setShowWelcome] = useState(() => {
@@ -43,10 +50,12 @@ export function ActivityList() {
       <>
         <WelcomeScreen
           isAuthenticated={!!user}
+          preferredLanguage={contentLanguage}
+          onSelectLanguage={setPreferredLanguage}
           onSignIn={() => setShowAuthModal(true)}
           onStart={() => {
             localStorage.setItem('soundsteps_welcomed', 'true');
-            navigate('/placement');
+            navigate(shouldUsePlacementAssessment(contentLanguage) ? '/placement' : '/practice/detection');
           }}
           onSkip={() => {
             localStorage.setItem('soundsteps_welcomed', 'true');
@@ -245,7 +254,9 @@ export function ActivityList() {
           Getting Started
         </h2>
         <div className="space-y-3">
-          {onrampActivities.map((activity) => renderCard(activity, true))}
+          {onrampActivities
+            .filter((activity) => isActivitySupportedInLanguage(activity.id as LaunchActivityId, contentLanguage))
+            .map((activity) => renderCard(activity, true))}
         </div>
       </div>
 
@@ -254,7 +265,9 @@ export function ActivityList() {
         All Activities
       </h2>
       <div className="space-y-3">
-        {activities.map((activity) => renderCard(activity, false))}
+        {activities
+          .filter((activity) => isActivitySupportedInLanguage(activity.id as LaunchActivityId, contentLanguage))
+          .map((activity) => renderCard(activity, false))}
       </div>
 
       {/* Upsell Toast — auto-dismisses after 3s */}

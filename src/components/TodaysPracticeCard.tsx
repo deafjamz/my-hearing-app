@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { startTodaysPlan } from '@/hooks/useTodaysPlan';
 import type { TodaysPlan } from '@/hooks/useTodaysPractice';
 import { Button } from '@/components/primitives';
+import { useUser } from '@/store/UserContext';
+import { shouldUsePlacementAssessment } from '@/lib/languageLaunchSupport';
 
 interface TodaysPracticeCardProps {
   plan: TodaysPlan | null;
@@ -13,6 +15,7 @@ interface TodaysPracticeCardProps {
 export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
   const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
+  const { preferredLanguage } = useUser();
 
   if (loading || !plan) return null;
 
@@ -58,8 +61,9 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
   // State 3 — New user (no Erber data — steps default to detection)
   const isNewUser = todayTrials === 0 && yesterdayAccuracy === null && streakDays === 0;
   const hasPlacement = !!localStorage.getItem('soundsteps_placement');
+  const usesPlacement = shouldUsePlacementAssessment(preferredLanguage);
 
-  if (isNewUser && !hasPlacement) {
+  if (isNewUser && (!hasPlacement || !usesPlacement)) {
     return (
       <motion.div
         initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
@@ -67,18 +71,22 @@ export function TodaysPracticeCard({ plan, loading }: TodaysPracticeCardProps) {
         transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
         className="bg-slate-900 border border-slate-800 rounded-3xl p-6 mb-8"
       >
-        <h2 className="text-xl font-bold text-white mb-2">Let's Get Started</h2>
+        <h2 className="text-xl font-bold text-white mb-2">
+          {preferredLanguage === 'es' ? 'Spanish Foundation Ready' : "Let's Get Started"}
+        </h2>
         <p className="text-slate-400 text-sm mb-5">
-          A quick listening check to personalize your training.
+          {preferredLanguage === 'es'
+            ? 'Spanish launch starts with core listening practice instead of the English listening check.'
+            : 'A quick listening check to personalize your training.'}
         </p>
 
         <Button
           size="lg"
-          onClick={() => navigate('/placement')}
+          onClick={() => navigate(preferredLanguage === 'es' ? '/practice/detection' : '/placement')}
           className="shadow-lg rounded-2xl flex items-center justify-center gap-2"
         >
           <Play size={20} fill="currentColor" />
-          Start Listening Check
+          {preferredLanguage === 'es' ? 'Start Spanish Practice' : 'Start Listening Check'}
         </Button>
       </motion.div>
     );

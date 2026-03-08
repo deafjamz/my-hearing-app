@@ -113,7 +113,7 @@ export function Settings() {
             }`}
           >
             <div className="font-bold text-slate-900 dark:text-white">Spanish</div>
-            <div className="text-xs text-slate-500 font-medium">Launch corpus in progress</div>
+            <div className="text-xs text-slate-500 font-medium">Launch-ready core corpus</div>
           </button>
         </div>
         <div

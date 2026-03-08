@@ -2,9 +2,8 @@
 
 ## Status
 - Decision executed: Spanish launch corpus generated at **1:1 ratio** with **2 voices**.
-- Generation mode executed in **strict clinical mode** and then refined after drill remediation:
-  - included: sentences, conversations, scenarios, launch-safe drills
-  - excluded from launch audio: drill rows marked `needs_pack_redesign`
+- Generation mode executed in **strict clinical mode** and then refined after full drill remediation:
+  - included: sentences, conversations, scenarios, and the full remediated drill layer
 - Live Supabase accounting now exists for Spanish:
   - `stimuli_catalog`: sentences, conversations, drills, detection
   - `audio_assets`: sentence and detection audio
@@ -14,6 +13,7 @@
 - `profiles.preferred_language` is now live in the production database
 - Completion report: `docs/SPANISH_STRICT_GENERATION_REPORT.md`
 - Rollout verifier: `scripts/verify_spanish_rollout.py`
+- Launch-surface audit: `docs/SPANISH_LAUNCH_PRODUCT_AUDIT.md`
 
 ## Decision
 - Execute Spanish at **1:1 corpus ratio** with **2 voices** (1 male, 1 female).
@@ -38,15 +38,15 @@ Selection intent:
 
 ## Erber Mapping (Launch)
 - **Detection (L1):** Content block designed, generated, ingested, and wired in repo.
-- **Discrimination (L2):** Phoneme drills and minimal-pair contrasts remain core, with off-brand English carryovers held back for pack redesign.
+- **Discrimination (L2):** Phoneme drills remain core after Spanish-native pack redesign.
 - **Identification (L3):** Word-level forced-choice logic and sentence-level prompts carry over from English structure.
 - **Comprehension (L4):** Sentences, conversations, and scenarios keep the largest share of launch audio.
 
 Launch implication:
 - Spanish now covers strong L2-L4 launch content in generated assets.
 - repo coverage now spans L1-L4 with the current launch corpus.
-- the missing production piece is frontend deployment, not corpus generation.
-- Spanish still is not fully complete as a clinical program because held drill packs need redesign and bilingual listening QC is still pending.
+- the remaining production piece is human bilingual listening QC, not corpus generation.
+- Spanish still is not fully complete as a clinical program because true Spanish placement and broader product localization are still pending.
 
 ## Cultural Adaptation Rules (Clinical-Safe)
 - Prefer high-frequency, pan-regional vocabulary; avoid slang-heavy regionalisms at launch.
@@ -74,14 +74,14 @@ Launch implication:
   - phoneme target integrity
   - foil validity
   - difficulty progression consistency
-- Treat `needs_pack_redesign` as a hold state, not as launch-ready content.
+- Treat pack-level redesign as mandatory when a contrast does not survive Spanish adaptation cleanly.
 
 ## Spend Envelope (Current Month)
 - 1:1 two-voice projection with 15% retry headroom: **189,278 credits**
 - Monthly remaining after this plan (475,000 total): **285,722 credits**
 
 Actual execution note:
-- strict Spanish production completed without spending credits on pack-redesign rows
+- strict Spanish production was followed by full drill remediation and audio refresh
 - remaining monthly credits should be prioritized for clinically stronger additions, not filler content
 
 ## Source Artifacts
@@ -89,9 +89,9 @@ Actual execution note:
 - `content/spanish_templates_1x/spanish_execution_manifest.json`
 - `content/spanish_templates_1x/translation_summary.json`
 - `content/spanish_templates_1x/translation_cache_es.json`
-- `content/spanish_templates_1x/phoneme_drills_pack_redesign_queue.csv`
 - `reports/spanish_voice_benchmark_deep.md`
 - `reports/spanish_generation_results.json`
 - `reports/spanish_ingest_plan.json`
 - `docs/SPANISH_STRICT_GENERATION_REPORT.md`
 - `docs/SPANISH_ROLLOUT_STATUS.md`
+- `docs/SPANISH_LAUNCH_PRODUCT_AUDIT.md`

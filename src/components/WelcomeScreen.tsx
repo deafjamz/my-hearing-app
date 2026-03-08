@@ -12,6 +12,8 @@ interface WelcomeScreenProps {
   onSkip?: () => void;
   /** Whether the user is authenticated (determines which CTA to show) */
   isAuthenticated?: boolean;
+  preferredLanguage?: 'en' | 'es';
+  onSelectLanguage?: (language: 'en' | 'es') => void;
 }
 
 const VALUE_PROPS = [
@@ -38,7 +40,14 @@ const VALUE_PROPS = [
   },
 ];
 
-export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: WelcomeScreenProps) {
+export function WelcomeScreen({
+  onSignIn,
+  onStart,
+  onSkip,
+  isAuthenticated,
+  preferredLanguage = 'en',
+  onSelectLanguage,
+}: WelcomeScreenProps) {
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -90,6 +99,36 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
           transition={{ delay: prefersReducedMotion ? 0 : 0.35, duration: prefersReducedMotion ? 0 : 0.5 }}
           className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 mb-10 space-y-5"
         >
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 mb-3">
+              Training Language
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => { hapticSelection(); onSelectLanguage?.('en'); }}
+                className={`rounded-2xl border px-4 py-3 text-left transition-colors ${
+                  preferredLanguage === 'en'
+                    ? 'border-teal-500/60 bg-teal-500/10 text-white'
+                    : 'border-slate-800 bg-slate-950/50 text-slate-400'
+                }`}
+              >
+                <div className="font-semibold">English</div>
+                <div className="text-xs mt-1">Full launch surface</div>
+              </button>
+              <button
+                onClick={() => { hapticSelection(); onSelectLanguage?.('es'); }}
+                className={`rounded-2xl border px-4 py-3 text-left transition-colors ${
+                  preferredLanguage === 'es'
+                    ? 'border-teal-500/60 bg-teal-500/10 text-white'
+                    : 'border-slate-800 bg-slate-950/50 text-slate-400'
+                }`}
+              >
+                <div className="font-semibold">Español</div>
+                <div className="text-xs mt-1">Core launch activities</div>
+              </button>
+            </div>
+          </div>
+
           {VALUE_PROPS.map((prop) => (
             <div key={prop.title} className="flex items-start gap-4">
               <div className={`w-10 h-10 rounded-xl ${prop.iconBg} flex items-center justify-center flex-shrink-0`}>
@@ -118,10 +157,10 @@ export function WelcomeScreen({ onSignIn, onStart, onSkip, isAuthenticated }: We
                 onClick={() => { hapticSelection(); onStart?.(); }}
                 className="w-full bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-full py-5 shadow-[0_0_20px_rgba(0,143,134,0.3)] transition-colors cursor-pointer"
               >
-                Start Your First Exercise
+                {preferredLanguage === 'es' ? 'Start Spanish Practice' : 'Start Your First Exercise'}
               </motion.button>
               <p className="text-slate-500 text-sm text-center mt-3">
-                About 2 minutes
+                {preferredLanguage === 'es' ? 'Spanish launch starts with core listening practice' : 'About 2 minutes'}
               </p>
               <Button
                 variant="ghost"

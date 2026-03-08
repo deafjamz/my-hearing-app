@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { PhonemeMasteryData } from './usePhonemeAnalytics';
 import type { AnalyticsData } from './useAnalytics';
+import type { TrainingLanguage } from '@/lib/trainingLanguage';
 
 // --- Exported types ---
 
@@ -40,6 +41,7 @@ export function useRecommendations(
   phonemeData: PhonemeMasteryData | null,
   analyticsData: AnalyticsData | null,
   longitudinalData: LongitudinalDataForRecs | null,
+  language: TrainingLanguage = 'en',
 ): { recommendations: Recommendation[] } {
   const recommendations = useMemo(() => {
     const recs: Recommendation[] = [];
@@ -53,8 +55,8 @@ export function useRecommendations(
         type: 'phoneme',
         title: `Practice "${weakest.target}" vs "${weakest.contrast}"`,
         description: `You're getting this right ${weakest.accuracy}% of the time — a little extra practice will help!`,
-        actionPath: '/practice/rapid-fire',
-        actionLabel: 'Start Word Pairs',
+        actionPath: language === 'es' ? '/practice/drills' : '/practice/rapid-fire',
+        actionLabel: language === 'es' ? 'Open Drills' : 'Start Word Pairs',
         metric: weakest.accuracy,
       });
     }
@@ -62,16 +64,22 @@ export function useRecommendations(
     // 2. Erber level advancement
     if (longitudinalData?.erberJourney) {
       const journey = longitudinalData.erberJourney;
-      const levels = [
-        { key: 'detection', label: 'Sound Detection', next: 'Sound Awareness', nextPath: '/practice/sounds', data: journey.detection },
-        { key: 'discrimination', label: 'Word Pairs', next: 'Sound Contrast Drills', nextPath: '/practice/drills', data: journey.discrimination },
-        { key: 'identification', label: 'Identification', next: 'Conversations', nextPath: '/practice/conversations', data: journey.identification },
-      ] as const;
+      const levels = language === 'es'
+        ? [
+            { key: 'detection', label: 'Sound Detection', next: 'Sound Contrast Drills', nextPath: '/practice/drills', data: journey.detection },
+            { key: 'discrimination', label: 'Sound Contrast Drills', next: 'Sentences', nextPath: '/sentences', data: journey.discrimination },
+            { key: 'identification', label: 'Identification', next: 'Conversations', nextPath: '/practice/conversations', data: journey.identification },
+          ] as const
+        : [
+            { key: 'detection', label: 'Sound Detection', next: 'Sound Awareness', nextPath: '/practice/sounds', data: journey.detection },
+            { key: 'discrimination', label: 'Word Pairs', next: 'Sound Contrast Drills', nextPath: '/practice/drills', data: journey.discrimination },
+            { key: 'identification', label: 'Identification', next: 'Conversations', nextPath: '/practice/conversations', data: journey.identification },
+          ] as const;
 
-      for (const level of levels) {
+      for (const [index, level] of levels.entries()) {
         if (level.data.mastered && !recs.some(r => r.type === 'erber_level')) {
           // Check if next level is NOT mastered
-          const nextLevelKey = levels[levels.indexOf(level) + 1]?.key;
+          const nextLevelKey = levels[index + 1]?.key;
           const nextLevel = nextLevelKey
             ? journey[nextLevelKey as keyof typeof journey]
             : journey.comprehension;
@@ -115,7 +123,7 @@ export function useRecommendations(
     }
 
     // 4. Noise readiness (quiet >=85%, noise not tried or <70%)
-    if (analyticsData?.noiseComparison) {
+    if (language === 'en' && analyticsData?.noiseComparison) {
       const { quiet, noise } = analyticsData.noiseComparison;
       if (quiet.trials >= 20 && quiet.accuracy >= 85) {
         if (noise.trials < 5) {
@@ -233,7 +241,7 @@ export function useRecommendations(
     return recs
       .sort((a, b) => a.priority - b.priority)
       .slice(0, MAX_RECS);
-  }, [phonemeData, analyticsData, longitudinalData]);
+  }, [phonemeData, analyticsData, longitudinalData, language]);
 
   return { recommendations };
 }

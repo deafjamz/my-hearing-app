@@ -10,17 +10,21 @@ import { useRecommendations } from '@/hooks/useRecommendations';
 import { RecommendationCard, ConsistencyStreakCard } from '@/components/analytics';
 import { useState, useEffect } from 'react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { useUser } from '@/store/UserContext';
+import { normalizeTrainingLanguage } from '@/lib/trainingLanguage';
 
 /**
  * Dashboard - Stats overview (accessible from Progress or direct URL)
  * Not the default landing — Practice Hub is.
  */
 export function Dashboard() {
+  const { preferredLanguage } = useUser();
+  const contentLanguage = normalizeTrainingLanguage(preferredLanguage);
   const { stats, loading } = useProgressData();
-  const { data: phonemeData } = usePhonemeAnalytics();
-  const { data: analyticsData } = useAnalytics();
-  const { data: longitudinalData } = useLongitudinalAnalytics();
-  const { recommendations } = useRecommendations(phonemeData, analyticsData, longitudinalData);
+  const { data: phonemeData } = usePhonemeAnalytics(contentLanguage);
+  const { data: analyticsData } = useAnalytics(30, contentLanguage);
+  const { data: longitudinalData } = useLongitudinalAnalytics(contentLanguage);
+  const { recommendations } = useRecommendations(phonemeData, analyticsData, longitudinalData, contentLanguage);
   const prefersReducedMotion = useReducedMotion();
   const [dailySteps, setDailySteps] = useState(0);
 
@@ -225,7 +229,9 @@ export function Dashboard() {
                   Begin Practice
                 </p>
                 <p className="text-sm text-slate-400">
-                  Jump into word pairs, sentences, or stories
+                  {contentLanguage === 'es'
+                    ? 'Jump into Spanish core listening practice'
+                    : 'Jump into word pairs, sentences, or stories'}
                 </p>
               </div>
 

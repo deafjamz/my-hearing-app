@@ -7,6 +7,8 @@ import { useProgressData } from './useProgressData';
 import { useUser } from '@/store/UserContext';
 import { format } from 'date-fns';
 import type { PlanStep } from './useTodaysPlan';
+import { normalizeTrainingLanguage } from '@/lib/trainingLanguage';
+import { isActivitySupportedInLanguage, type LaunchActivityId } from '@/lib/languageLaunchSupport';
 
 // --- Types ---
 
@@ -53,11 +55,12 @@ const DAILY_GOAL = 20;
 // --- Hook ---
 
 export function useTodaysPractice(): { plan: TodaysPlan | null; loading: boolean } {
-  const { hasAccess } = useUser();
-  const { data: longitudinal, loading: longLoading } = useLongitudinalAnalytics();
-  const { data: phonemeData, loading: phonemeLoading } = usePhonemeAnalytics();
-  const { data: analyticsData, loading: analyticsLoading } = useAnalytics();
-  const { recommendations } = useRecommendations(phonemeData, analyticsData, longitudinal);
+  const { hasAccess, preferredLanguage } = useUser();
+  const language = normalizeTrainingLanguage(preferredLanguage);
+  const { data: longitudinal, loading: longLoading } = useLongitudinalAnalytics(language);
+  const { data: phonemeData, loading: phonemeLoading } = usePhonemeAnalytics(language);
+  const { data: analyticsData, loading: analyticsLoading } = useAnalytics(30, language);
+  const { recommendations } = useRecommendations(phonemeData, analyticsData, longitudinal, language);
   const { stats, loading: statsLoading } = useProgressData();
 
   const loading = longLoading || phonemeLoading || analyticsLoading || statsLoading;
@@ -84,16 +87,16 @@ export function useTodaysPractice(): { plan: TodaysPlan | null; loading: boolean
 
     // --- Determine working Erber level ---
     const erber = longitudinal?.erberJourney;
-    const workingLevel = getWorkingLevel(erber);
+    const workingLevel = getWorkingLevel(erber, language);
 
     // --- Build 2-step plan ---
-    const step1 = pickActivity(workingLevel, hasAccess, recommendations);
+    const step1 = pickActivity(workingLevel, hasAccess, recommendations, language);
     const stretchLevel = getStretchLevel(workingLevel);
-    let step2 = pickActivity(stretchLevel, hasAccess, recommendations, step1.activityId);
+    let step2 = pickActivity(stretchLevel, hasAccess, recommendations, language, step1.activityId);
 
     // If stretch couldn't find anything different, pick alternate at working level
     if (step2.activityId === step1.activityId) {
-      step2 = pickAlternate(workingLevel, hasAccess, step1.activityId);
+      step2 = pickAlternate(workingLevel, hasAccess, language, step1.activityId);
     }
 
     const steps: PlanStep[] = [
@@ -102,16 +105,16 @@ export function useTodaysPractice(): { plan: TodaysPlan | null; loading: boolean
     ];
 
     return { steps, todayTrials, dailyGoalMet, streakDays, yesterdayAccuracy };
-  }, [loading, longitudinal, stats, hasAccess, recommendations]);
+  }, [loading, longitudinal, stats, hasAccess, recommendations, language]);
 
   return { plan, loading };
 }
 
 // --- Helpers ---
 
-function getWorkingLevel(erber: ErberJourney | undefined): string {
+function getWorkingLevel(erber: ErberJourney | undefined, language: 'en' | 'es'): string {
   // Before checking Erber journey, check placement assessment result
-  const placementRaw = localStorage.getItem('soundsteps_placement');
+  const placementRaw = language === 'en' ? localStorage.getItem('soundsteps_placement') : null;
   if (placementRaw && !erber) {
     try {
       const placement = JSON.parse(placementRaw);
@@ -142,9 +145,11 @@ function pickActivity(
   level: string,
   hasAccess: (tier: 'Standard' | 'Premium') => boolean,
   recommendations: { actionPath?: string }[],
+  language: 'en' | 'es',
   excludeId?: string,
 ): ActivityOption {
-  const options = LEVEL_ACTIVITIES[level] || LEVEL_ACTIVITIES.detection;
+  const options = (LEVEL_ACTIVITIES[level] || LEVEL_ACTIVITIES.detection)
+    .filter((option) => isActivitySupportedInLanguage(option.activityId as LaunchActivityId, language));
 
   // Filter to accessible activities
   const accessible = options.filter(o => {
@@ -171,9 +176,11 @@ function pickActivity(
 function pickAlternate(
   level: string,
   hasAccess: (tier: 'Standard' | 'Premium') => boolean,
+  language: 'en' | 'es',
   excludeId: string,
 ): ActivityOption {
-  const options = LEVEL_ACTIVITIES[level] || LEVEL_ACTIVITIES.detection;
+  const options = (LEVEL_ACTIVITIES[level] || LEVEL_ACTIVITIES.detection)
+    .filter((option) => isActivitySupportedInLanguage(option.activityId as LaunchActivityId, language));
   const accessible = options.filter(o => {
     if (o.requiredTier && !hasAccess(o.requiredTier)) return false;
     if (o.activityId === excludeId) return false;
@@ -186,7 +193,8 @@ function pickAlternate(
   const idx = ERBER_LEVELS.indexOf(level as typeof ERBER_LEVELS[number]);
   if (idx > 0) {
     const lowerLevel = ERBER_LEVELS[idx - 1];
-    const lowerOptions = LEVEL_ACTIVITIES[lowerLevel] || [];
+    const lowerOptions = (LEVEL_ACTIVITIES[lowerLevel] || [])
+      .filter((option) => isActivitySupportedInLanguage(option.activityId as LaunchActivityId, language));
     const lowerAccessible = lowerOptions.filter(o => {
       if (o.requiredTier && !hasAccess(o.requiredTier)) return false;
       if (o.activityId === excludeId) return false;
